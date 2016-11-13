@@ -8,7 +8,7 @@ package authoring_interfaces;
  *
  */
 
-public interface Terrain {
+public interface ITerrain {
 
 	/**
 	 * Determines the name of the terrain.
@@ -36,5 +36,4 @@ public interface Terrain {
 	public int getColor();
 	
 
-	
 }
