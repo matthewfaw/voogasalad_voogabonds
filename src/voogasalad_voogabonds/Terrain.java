@@ -36,5 +36,4 @@ public interface Terrain {
 	public int getColor();
 	
 
-	
 }
