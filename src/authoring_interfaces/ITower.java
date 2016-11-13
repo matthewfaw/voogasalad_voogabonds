@@ -5,7 +5,7 @@ package authoring_interfaces;
  * This interface is responsible for providing the controller access to the tower's traits entered in by the user.
  */
 
-public interface Tower {
+public interface ITower {
 
 	/**
 	 * Gets the name of the tower.

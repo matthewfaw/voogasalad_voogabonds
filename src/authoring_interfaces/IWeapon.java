@@ -5,7 +5,7 @@ package authoring_interfaces;
  * This interface is responsible for providing the controller with access to traits of the weapon.
  */
 
-public interface Weapon {
+public interface IWeapon {
 
 	/**
 	 * Gets the name of the weapon.

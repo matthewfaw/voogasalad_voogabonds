@@ -5,7 +5,7 @@ package authoring_interfaces;
  * @author Niklas Sjoquist
  *
  */
-public interface Machine {
+public interface IMachine {
 
     /**
      * Gets the name of an enemy.
@@ -22,7 +22,7 @@ public interface Machine {
      * Gets the weapon of the machine. 
      * This object will be used to attack other machines, i.e., enemies or towers.
      */
-    public Weapon getWeapon();
+    public IWeapon getWeapon();
 
     /**
      * Gets the type of the machine. 

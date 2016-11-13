@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
  * @author Christopher Lu
  * 
  */
-public interface Enemy {
+public interface IEnemy {
 
         /**
          * Gets the speed of an enemy. 
