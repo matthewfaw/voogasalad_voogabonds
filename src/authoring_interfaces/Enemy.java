@@ -1,4 +1,4 @@
-package voogasalad_voogabonds;
+package authoring_interfaces;
 
 import javafx.geometry.Point2D;
 
