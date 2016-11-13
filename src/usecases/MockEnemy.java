@@ -1,5 +1,6 @@
-package authoring_interfaces;
+package usecases;
 
+import authoring_interfaces.IEnemy;
 import javafx.geometry.Point2D;
 
 public class MockEnemy implements IEnemy {
