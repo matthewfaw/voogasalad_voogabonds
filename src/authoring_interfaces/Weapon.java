@@ -1,4 +1,4 @@
-package voogasalad_voogabonds;
+package authoring_interfaces;
 
 /**
  * @author Christopher Lu

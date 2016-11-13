@@ -1,4 +1,4 @@
-package voogasalad_voogabonds;
+package authoring_interfaces;
 
 /**
  * This interface is responsible for setting up the battlefield terrain, assuming that we will be using a grid.
