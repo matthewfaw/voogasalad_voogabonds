@@ -1,5 +1,7 @@
 package authoring_interfaces;
 
+import javafx.geometry.Point2D;
+
 /**
  * This interface is responsible for setting up the battlefield terrain, assuming that we will be using a grid.
  * I believe that Terrain should be the individual cells in the ovverall grid so the user can set the overall environment to greater precision.
@@ -16,14 +18,9 @@ public interface ITerrain {
 	public int getName();
 	
 	/**
-	 * Determines the x dimensions of the terrain.
+	 * Determines the shape and dimensions of the terrain.
 	 */
-	public int getXSize();
-	
-	/**
-	 * Determines the y dimensions of the terrain.
-	 */
-	public int getYSize();
+	public Point2D[] getVertices();
 	
 	/**
 	 * Type of terrain determines how fast an enemy can move across it.
