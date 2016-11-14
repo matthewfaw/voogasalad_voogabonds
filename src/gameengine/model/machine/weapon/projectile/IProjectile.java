@@ -1,4 +1,6 @@
-package gameengine.projectile;
+package gameengine.model.machine.weapon.projectile;
+import gameengine.model.machine.Machine;
+import utility.Point;
 
 public interface IProjectile {
 	public Point advance(); // returns the point that the projectile advanced to

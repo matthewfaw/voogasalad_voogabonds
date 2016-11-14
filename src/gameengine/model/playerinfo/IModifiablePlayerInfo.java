@@ -1,4 +1,4 @@
-package gameengine.playerinfo;
+package gameengine.model.playerinfo;
 
 public interface IModifiablePlayerInfo {
 	public void updateLivesRemaining(int deltaLives);
