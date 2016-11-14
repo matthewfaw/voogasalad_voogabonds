@@ -1,7 +1,7 @@
 package usecases;
 
 import java.util.Map;
-import authoring_interfaces.IWave;
+import authoring.authoring_interfaces.IWave;
 
 public class MockWave implements IWave {
     private int myWaveNumber;

@@ -1,4 +1,4 @@
-package engine.model.machine.projectile;
+package engine.model.machine.weapon.projectile;
 
 public class Projectile {
 

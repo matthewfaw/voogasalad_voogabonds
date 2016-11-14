@@ -1,6 +1,6 @@
 package usecases;
 
-import authoring_interfaces.IWeapon;
+import authoring.authoring_interfaces.IWeapon;
 
 public class MockWeapon implements IWeapon {
     private String myName;
