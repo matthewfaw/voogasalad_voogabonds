@@ -4,11 +4,24 @@ import authoring_interfaces.IEnemy;
 import javafx.geometry.Point2D;
 
 public class MockEnemy implements IEnemy {
+	private String myName;
+	private double mySpeed;
+	
+	public MockEnemy(String name){
+		myName = name;
+	}
+	
+	public void setSpeed(double speed){
+		mySpeed = speed;
+	}
+	
+	public String getName(){
+		return myName;
+	}
 
 	@Override
 	public double getSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mySpeed;
 	}
 
 	@Override
