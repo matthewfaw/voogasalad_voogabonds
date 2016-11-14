@@ -1,4 +1,4 @@
-package authoring_interfaces;
+package authoring.authoring_interfaces;
 
 import java.util.Map;
 
