@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-	
- <classpath>
- 	<classpathentry kind="src" path="src"/>
- 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
- 	<classpathentry kind="output" path="bin"/>
- </classpath>
-=======
 
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
->>>>>>> 50263f5d02cd74f7a75fb907d15a089308ba81a8
