@@ -19,6 +19,18 @@ Make a Game out of Making a Game
 
 # Game Player
 
+**Grayson**
+*First Sprint*
+Basic controls, Map area
+*Second Sprint*
+Advanced controls, different types
+**Guhan**
+*First Sprint*
+Display for tower options, statistics, setting up observables
+*Second Sprint*
+Adding more functionality to all of those
+
+
 # Game Engine
 
 # Overall High Level Plan
