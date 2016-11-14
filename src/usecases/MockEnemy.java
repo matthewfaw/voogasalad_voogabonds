@@ -35,5 +35,9 @@ public class MockEnemy implements IEnemy {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public boolean atEnd(){
+            return false; 
+	}
 
 }
