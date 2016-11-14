@@ -1,4 +1,4 @@
-package gameengine.model.resourcestore;
+package engine.model.resourcestore;
 
 public interface IModifiableStore {
 

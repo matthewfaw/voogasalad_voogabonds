@@ -1,4 +1,4 @@
-package gameengine.model.machine;
+package engine.model.machine;
 
 public interface IViewableMachine {
 

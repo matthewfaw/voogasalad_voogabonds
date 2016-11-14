@@ -1,5 +1,5 @@
-package gameengine.model.machine.weapon.projectile;
-import gameengine.model.machine.Machine;
+package engine.model.machine.weapon.projectile;
+import engine.model.machine.Machine;
 import utility.Point;
 
 public interface IProjectile {
