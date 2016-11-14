@@ -1,11 +1,10 @@
 package usecases;
 
 public class DefineEnemySpeed {
-	private MockEnemy myEnemy;
 	
-	public void defineEnemySpeed(String name, double speed){
-		myEnemy = new MockEnemy(name);
-		myEnemy.setSpeed(speed);
+	public DefineEnemySpeed(String name, double speed){
+		MockEnemy enemy = new MockEnemy(name);
+		enemy.setSpeed(speed);
 	}
 
 }
