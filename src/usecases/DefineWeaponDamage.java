@@ -10,10 +10,11 @@ package usecases;
  * 
  */
 public class DefineWeaponDamage {
+    private MockWeapon myWeapon;
 
     public DefineWeaponDamage(double damage) {
-        MockWeapon weapon = new MockWeapon("Gun");
-        weapon.setDamage(damage);
+        myWeapon = new MockWeapon("Gun");
+        myWeapon.setDamage(damage);
     }
     
 }
