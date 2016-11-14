@@ -16,21 +16,21 @@ The goal of this project is to develop a flexible, extendable, and user friendly
 ### Project Structure
 
 
-####GameData package
+#### GameData package
 
 
 
 
-####Utility package
+#### Utility package
 	Point.class
 	
-####Authoring package
+#### Authoring package
 	Model package
 		IAuthor.interface
 	View package
 	Controller package
 		Router.class
-####Game Engine package
+#### Game Engine package
 	Model package
 		Machine package
 			IViewableMachine.interface
@@ -61,7 +61,7 @@ The goal of this project is to develop a flexible, extendable, and user friendly
 
 
 
-####GamePlayer package
+#### GamePlayer package
 	View package
 		MapView Package
 			DisplayMap.class
@@ -86,8 +86,8 @@ The goal of this project is to develop a flexible, extendable, and user friendly
 		
 
 
-###UML Diagram
-![UML Diagram](https://git.cs.duke.edu/CompSci308_2016Fall/voogasalad_voogabonds/raw/86e1104bc093d949f2fb02b847a3b2590702a873/resources/backend_images/gameengine_uml_1024.JPG).
+### UML Diagram
+![UML Diagram](https://git.cs.duke.edu/CompSci308_2016Fall/voogasalad_voogabonds/blob/master/resources/backend_images/gameengine_uml_1024.jpg).
 
 
 
