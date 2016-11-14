@@ -11,7 +11,11 @@ The goal of this project is to develop a flexible, extendable, and user friendly
 
 
 ## Overview
+
+
 ### Project Structure
+
+
 ####GameData package
 
 
@@ -72,10 +76,14 @@ The goal of this project is to develop a flexible, extendable, and user friendly
 	Controller package
 		Menus Package
 			StartMenu.class
-			Controls.class
+			SelectControls.class
 			PauseMenu.class
 		LoadGame Package
 			SelectFile.class
+	Utility Package
+		DefineControls.class
+		Menu.class
+		
 
 
 ###UML Diagram
