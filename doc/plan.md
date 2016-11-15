@@ -3,7 +3,8 @@
 ## Authoring -> Tripp & Phil
 * Tripp - Tower, Weapon, Projectile, Map Data
 * Phil - Enemy, Wave, Player Data, Map Data
-##Game Engine -> Owen, Alan, Matt, Weston
+
+## Game Engine -> Owen, Alan, Matt, Weston
 * Owen - Player store
 * Alan - Tower/enemies
 * Matt - Map/Environment
