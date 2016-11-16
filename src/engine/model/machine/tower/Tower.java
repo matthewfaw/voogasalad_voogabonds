@@ -5,14 +5,14 @@ import engine.model.resourcestore.IMoney;
 
 public class Tower extends Machine{
 	
-	private int sellPrice;
+	private IMoney sellPrice;
 	private IMoney upgradeCost;
 	
 	public IMoney getUpgradeCost() {
 		return upgradeCost;
 	}
 	
-	public int getSellPrice() {
+	public IMoney getSellPrice() {
 		return sellPrice;
 	}
 	
