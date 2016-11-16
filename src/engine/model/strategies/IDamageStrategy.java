@@ -1,5 +1,6 @@
 package engine.model.strategies;
 
+import utility.Damage;
 import utility.Point;
 
 public interface IDamageStrategy {

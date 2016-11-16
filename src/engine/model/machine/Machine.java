@@ -1,7 +1,7 @@
 package engine.model.machine;
 
 import engine.model.playerinfo.IModifiablePlayerInfo;
-import engine.model.strategies.Damage;
+import utility.Damage;
 import utility.Point;
 
 public abstract class Machine implements IViewableMachine {

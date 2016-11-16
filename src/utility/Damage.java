@@ -1,4 +1,4 @@
-package engine.model.strategies;
+package utility;
 
 public class Damage {
 	double myDamage;

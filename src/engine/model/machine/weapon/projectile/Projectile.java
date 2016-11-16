@@ -5,6 +5,7 @@ import java.util.List;
 
 import engine.model.machine.Machine;
 import javafx.util.Pair;
+import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
 
