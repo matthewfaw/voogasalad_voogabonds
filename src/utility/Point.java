@@ -1,11 +1,13 @@
 package utility;
 
+import java.util.List;
+
 /**
  * A class that represents 2 and 3D points, as well as supporting some math between them. (Distance calculations, vector math, etc.)
  * @author Weston
  *
  */
-public class Point {
+public class Point implements IShape {
 	private double myX;
 	private double myY;
 	private double myZ;
@@ -141,6 +143,29 @@ public class Point {
 		return Math.sqrt(this.dot(this));
 	}
 	
+	/**
+	 * Treats all points as 2D points.
+	 * TODO: Test this algorithm.
+	 * @param pts
+	 * @return
+	 */
+	public int windingNumber(List<Point> pts) {
+		double result = 0;
+		Point difference = subtract(pts.get(0));
+		double last = Math.atan(difference.myY/difference.myX);
+		
+		for (Point p: pts) {
+			difference = subtract(p);
+			result += Math.atan(difference.myY/difference.myX) - last;
+			last = Math.atan(difference.myY/difference.myX);
+		}
+		
+		difference = subtract(pts.get(0));
+		result += Math.atan(difference.myY/difference.myX) - last;
+		
+		return (int) result;
+	}
+	
 	public double getX(){
 		return myX;
 	}
@@ -159,5 +184,56 @@ public class Point {
 	}
 	public void setZ(Number n){
 		myZ= n.doubleValue();
+	}
+	
+	public double getLength(){
+		return 0;
+	}
+	
+	public double getArea(){
+		return 0;
+	}
+
+	@Override
+	public double getDistanceTo(Point p) {
+		return euclideanDistance(p);
+	}
+
+	@Override
+	public double getDistanceTo(IShape s) {
+		return s.getDistanceTo(this);
+	}
+
+	@Override
+	public boolean contains(Point p) {
+		return equals(p);
+	}
+
+	@Override
+	public boolean contains(IShape s) {
+		if (s instanceof Point) {
+			return contains((Point) s);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean overlaps(IShape s) {
+		return false;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Point) {
+			return equals((Point) o);
+		}
+		return false;
+	}
+	
+	private boolean equals(Point p) {
+		return
+				myX == p.myX &&
+				myY == p.myY &&
+				myZ == p.myZ;
 	}
 }
