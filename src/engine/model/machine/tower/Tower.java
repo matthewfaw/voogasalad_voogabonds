@@ -10,4 +10,13 @@ public class Tower extends Machine{
 	public IMoney getUpgradeCost() {
 		return upgradeCost;
 	}
+	
+	/**
+	 * Upgrades this tower to the
+	 * @param newTower
+	 * Replaces all fields of this tower with newTower
+	 */
+	public void upgrade(ITowerUpgradeStore towerUpgradeStore) {
+		
+	}
 }
