@@ -1,12 +1,13 @@
 package engine.model.machine.tower;
 
 import engine.model.machine.Machine;
+import engine.model.resourcestore.IMoney;
 
 public class Tower extends Machine{
 	
-	private int upgradeCost;
+	private IMoney upgradeCost;
 	
-	public int getUpgradeCost() {
+	public IMoney getUpgradeCost() {
 		return upgradeCost;
 	}
 }
