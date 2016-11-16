@@ -1,4 +1,4 @@
-package authoring_interfaces;
+package authoring.authoring_interfaces;
 
 /**
  * @author Christopher LU
@@ -6,16 +6,6 @@ package authoring_interfaces;
  */
 
 public interface ITower {
-
-	/**
-	 * Gets the name of the tower.
-	 */
-	public String getName();
-	
-	/**
-	 * Gets the health that this tower currently has.
-	 */
-	public double getHealth();
 	
 	/**
 	 * Gets the price of the tower.
@@ -41,19 +31,4 @@ public interface ITower {
 	 * Gets the price per upgrade of the tower.
 	 */
 	public double getUpgradeCost();
-	
-	/**
-	 * Gets the type of the tower. Some towers can be obstacles? Some can't be?
-	 */
-	public String getType();
-	
-	/**
-	 * Gets the image via image path of the tower.
-	 */
-	public String getImage();
-	
-	/**
-	 * Gets the sound via sound path of the tower.
-	 */
-	public String getSound();
 }

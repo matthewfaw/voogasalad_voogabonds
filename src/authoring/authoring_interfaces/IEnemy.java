@@ -1,4 +1,4 @@
-package authoring_interfaces;
+package authoring.authoring_interfaces;
 
 import javafx.geometry.Point2D;
 

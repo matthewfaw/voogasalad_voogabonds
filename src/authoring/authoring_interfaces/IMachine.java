@@ -1,4 +1,4 @@
-package authoring_interfaces;
+package authoring.authoring_interfaces;
 
 /**
  * Represents any machine that can be created in the game, such as towers and enemies, and provides controller access to common instance variables. 

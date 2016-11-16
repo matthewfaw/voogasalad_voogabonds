@@ -1,14 +1,27 @@
 package usecases;
 
-import authoring_interfaces.IEnemy;
+import authoring.authoring_interfaces.IEnemy;
 import javafx.geometry.Point2D;
 
 public class MockEnemy implements IEnemy {
+	private String myName;
+	private double mySpeed;
+	
+	public MockEnemy(String name){
+		myName = name;
+	}
+	
+	public void setSpeed(double speed){
+		mySpeed = speed;
+	}
+	
+	public String getName(){
+		return myName;
+	}
 
 	@Override
 	public double getSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mySpeed;
 	}
 
 	@Override
@@ -21,6 +34,10 @@ public class MockEnemy implements IEnemy {
 	public Point2D getEndPoint() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public boolean atEnd(){
+            return false; 
 	}
 
 }
