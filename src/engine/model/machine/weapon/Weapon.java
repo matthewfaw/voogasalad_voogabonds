@@ -1,23 +1,31 @@
 package engine.model.machine.weapon;
 
 import java.util.List;
-import java.util.Map;
 
+import authoring.model.ProjectileData;
+import authoring.model.WeaponData;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.projectile.IProjectile;
 import engine.model.machine.weapon.projectile.Projectile;
+import engine.model.machine.weapon.projectile.ProjectileFactory;
 import engine.model.strategies.ITargetStrategy;
 import utility.Point;
 
 public class Weapon implements IWeapon {
+	ProjectileFactory myProjectileFactory;
 	ProjectileData myProjectileData;
 	ITargetStrategy myTargetStrategy;
 	int myFireRate;
 	int myTimeToFire;
 	double myRange;
 	
-	public Weapon(WeaponData data, Map<String, ProjectileData> projectiles) {
+	public Weapon(WeaponData data, ProjectileFactory projFactory) {
+		myRange = data.getRange();
+		myFireRate = data.getFireRate();
+		myTimeToFire = 0;
 		
+		myProjectileFactory = projFactory;
+		
+		//TODO: Init strategies
 	}
 
 	@Override
