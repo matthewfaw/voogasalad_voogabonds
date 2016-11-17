@@ -20,6 +20,29 @@ public class EnemyData {
 	public void setWeaponName(String weaponName) {
 		this.weaponName = weaponName;
 	}
-	
+	public int getKillReward(){
+		return killReward;
+	}
+	public void setKillReward(int killReward){
+		this.killReward = killReward;
+	}
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+	public void setMaxHealth(int maxHealth){
+		this.maxHealth = maxHealth;
+	}
+	public String getImagePath(){
+		return imagePath;
+	}
+	public void setImagePath(String imagePath){
+		this.imagePath = imagePath;
+	}
+	public int getCollisionRadius(){
+		return collisionRadius;
+	}
+	public void setCollisionRadius(int collisionRadius){
+		this.collisionRadius = collisionRadius;
+	}
 	
 }
