@@ -26,12 +26,12 @@ public class MainMenu {
 
 	private Scene scene;
 	private Stage stage;
-	private StageController controller;
+	private MainInitalizer controller;
 	private BorderPane pane;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
-	public MainMenu(StageController c, Stage s) {
+	public MainMenu(MainInitalizer c, Stage s) {
 		this.stage = s;
 		this.controller = c;
 		this.pane = new BorderPane();

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * Initializes the VOOGASalad application to the Main Menu. Also responsible for switching to the in game scene.
  */
 
-public class StageController {
+public class MainInitalizer {
 	
 	private Stage stage;
 	private int screenWidth;
@@ -23,7 +23,7 @@ public class StageController {
 	private Scene scene;
 	private BorderPane root;
 
-	public StageController(Stage s) throws IOException {
+	public MainInitalizer(Stage s) throws IOException {
 		this.stage = s;
 		root = new BorderPane();
 		setUpScreenResolution();
