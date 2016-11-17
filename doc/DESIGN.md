@@ -87,7 +87,7 @@ The goal of this project is to develop a flexible, extendable, and user friendly
 
 
 ### UML Diagram
-![UML Diagram](https://git.cs.duke.edu/CompSci308_2016Fall/voogasalad_voogabonds/blob/master/resources/backend_images/gameengine_uml_1024.jpg).
+![UML Diagram](https://git.cs.duke.edu/CompSci308_2016Fall/voogasalad_voogabonds/raw/22dcba49be98b1fdc692f07b7805391592f2a0d1/resources/backend_images/gameengine_uml_1024.jpg).
 
 
 
