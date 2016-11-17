@@ -29,5 +29,4 @@ public class TopMenuBar {
 		topContainer.getChildren().add(topMenu);
 		root.setTop(topContainer);
 	}
-	
 }

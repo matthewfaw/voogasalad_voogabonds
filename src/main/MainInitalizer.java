@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import authoring.view.menus.TopMenuBar;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -56,7 +57,12 @@ public class MainInitalizer {
 		return title;
 	}
 	
+	public Scene getScene() {
+		return scene;
+	}
+	
 	public void initSim() {
+		TopMenuBar menuBar = new TopMenuBar(root);
 		stage.setScene(scene);
 	}
 	
