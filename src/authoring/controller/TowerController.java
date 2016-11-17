@@ -13,7 +13,7 @@ public class TowerController {
 		return myTowerDataMap;
 	}
 	
-	public void createTowerData(FrontEndTower tower){
+	public void createTowerData(String tower){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
@@ -25,7 +25,7 @@ public class TowerController {
 	}
 	
 	
-	public TowerData updateTowerData(String originalName, FrontEndTower updatedTower){
+	public void updateTowerData(String originalName, String updatedTower){
 		//Find old enemyData in map
 		//create new EnemyData Object from FrontEndEnemy
 	}

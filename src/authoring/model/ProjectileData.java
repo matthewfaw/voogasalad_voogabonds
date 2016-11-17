@@ -8,8 +8,8 @@ public class ProjectileData {
 	private int maxRange;
 	private int areaOfEffectRadius;
 	private String imagePath;
-	private DamageStrategy damage;
-	private MovementStrategy movement;
+	private String damage;
+	private String movement;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -43,19 +43,19 @@ public class ProjectileData {
 		return imagePath;
 	}
 	
-	public void setDamageStrategy(DamageStrategy damage){
+	public void setDamageStrategy(String damage){
 		this.damage = damage;
 	}
 	
-	public DamageStrategy getDamageStrategy(){
+	public String getDamageStrategy(){
 		return damage;
 	}
 	
-	public void setMovementStrategy(MovementStrategy movement){
+	public void setMovementStrategy(String movement){
 		this.movement = movement;
 	}
 	
-	public MovementStrategy getMovementStrategy(){
+	public String getMovementStrategy(){
 		return movement;
 	}
 }
