@@ -1,6 +1,7 @@
 package authoring.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class TowerData {
 
@@ -9,12 +10,12 @@ public class TowerData {
 	private int buyPrice;
 	private int sellPrice;
 	private int maxHealth;
-	private List<Entry<String, Integer>> upgrades;
+	private List<Map<String, Integer>> upgrades;
 	private String imagePath;
-	private List<Terrain> traversableTerrain;
+	private List<String> traversableTerrain;
 	private int collisionRadius;
-	private List<Point> initialLocations;
-	private MovementStrategy movement;
+	private List<Map<Integer, Integer>> initialLocations;
+	private String movement;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -56,11 +57,11 @@ public class TowerData {
 		return maxHealth;
 	}
 	
-	public void setUpgrades(List<Entry<String, Integer>> upgrades){
+	public void setUpgrades(List<Map<String, Integer>> upgrades){
 		this.upgrades = upgrades;
 	}
 	
-	public List<Entry<String, Integer>> getUpgrades(){
+	public List<Map<String, Integer>> getUpgrades(){
 		return upgrades;
 	}
 	
@@ -72,11 +73,11 @@ public class TowerData {
 		return imagePath;
 	}
 	
-	public void setTraversableTerrain(List<Terrain> traversableTerrain){
+	public void setTraversableTerrain(List<String> traversableTerrain){
 		this.traversableTerrain = traversableTerrain;
 	}
 	
-	public List<Terrain> getTraversableTerrain(){
+	public List<String> getTraversableTerrain(){
 		return traversableTerrain;
 	}
 	
@@ -88,19 +89,19 @@ public class TowerData {
 		return collisionRadius;
 	}
 	
-	public void setInitialLocations(List<Point> initialLocations){
+	public void setInitialLocations(List<Map<Integer, Integer>> initialLocations){
 		this.initialLocations = initialLocations;
 	}
 	
-	public List<Point> getInitialLocations(){
+	public List<Map<Integer, Integer>> getInitialLocations(){
 		return initialLocations;
 	}
 	
-	public void setMovementStrategy(MovementStrategy movement){
+	public void setMovementStrategy(String movement){
 		this.movement = movement;
 	}
 	
-	public MovementStrategy getMovementStrategy(){
+	public String getMovementStrategy(){
 		return movement;
 	}
 }

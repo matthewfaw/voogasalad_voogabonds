@@ -13,7 +13,7 @@ public class ProjectileController {
 		return myProjectileDataMap;
 	}
 	
-	public void createProjectileData(FrontEndProjectile projectile){
+	public void createProjectileData(String projectile){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
@@ -25,7 +25,7 @@ public class ProjectileController {
 	}
 	
 	
-	public ProjectileData updateTowerData(String originalName, FrontEndProjectile updatedEnemy){
+	public void updateTowerData(String originalName, String updatedProjectile){
 		//Find old enemyData in map
 		//create new EnemyData Object from FrontEndEnemy
 	}

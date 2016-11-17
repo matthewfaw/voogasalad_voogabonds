@@ -14,7 +14,7 @@ public class WeaponController {
 		return myWeaponDataMap;
 	}
 	
-	public void createTowerData(FrontEndWeapon weapon){
+	public void createTowerData(String weapon){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
@@ -26,7 +26,7 @@ public class WeaponController {
 	}
 	
 	
-	public WeaponData updateWeaponData(String originalName, FrontEndWeapon updatedWeapon){
+	public void updateWeaponData(String originalName, String updatedWeapon){
 		//Find old enemyData in map
 		//create new EnemyData Object from FrontEndEnemy
 	}
