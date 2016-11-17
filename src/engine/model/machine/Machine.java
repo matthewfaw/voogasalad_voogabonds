@@ -6,6 +6,7 @@ import utility.Point;
 public abstract class Machine implements IViewableMachine {
 
 	private IModifiablePlayerInfo myModifiablePlayerInfo;
+	private IHealth health;
 	
 	@Override
 	public String getImagePath() {
@@ -23,6 +24,10 @@ public abstract class Machine implements IViewableMachine {
 	public Point getLocation() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public IHealth getHealth() {
+		return health;
 	}
 	
 	public IModifiablePlayerInfo getModifiablePlayerInfo() {
