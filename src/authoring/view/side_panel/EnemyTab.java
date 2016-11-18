@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import authoring.view.buttons.FrontEndEnemy;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

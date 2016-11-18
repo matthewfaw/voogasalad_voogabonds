@@ -1,4 +1,4 @@
-package authoring.view.buttons;
+package authoring.view.side_panel;
 
 import authoring.authoring_interfaces.IEnemy;
 import authoring.authoring_interfaces.IMachine;
