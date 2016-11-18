@@ -66,7 +66,7 @@ public class EnemyTab extends Tab {
 		Button addEnemy = new Button(myResources.getString("AddEnemy"));
 		addEnemy.setOnAction(addEnemyHandler());
 		enemyButtons.getChildren().addAll(addEnemy);
-		enemyArea.getChildren().addAll(enemyButtons, availableEnemies);
+		enemyArea.getChildren().addAll(availableEnemies, enemyButtons);
 		enemyTab.setContent(enemyArea);
 	}
 	
