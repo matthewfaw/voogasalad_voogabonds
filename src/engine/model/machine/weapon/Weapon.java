@@ -12,8 +12,8 @@ import utility.Point;
 
 public class Weapon implements IWeapon {
 	ProjectileFactory myProjectileFactory;
-	ProjectileData myProjectileData;
 	ITargetStrategy myTargetStrategy;
+	String myProjectile;
 	int myFireRate;
 	int myTimeToFire;
 	double myRange;
@@ -34,7 +34,7 @@ public class Weapon implements IWeapon {
 			
 			Machine target = myTargetStrategy.target(targets, heading, position);
 			
-			new Projectile(myProjectileData, target, heading, position);
+			myProjectileFactory.newProjectile(myProjectile, target, this);
 			
 			myTimeToFire = myFireRate;
 		} else {

@@ -19,8 +19,10 @@ public class Projectile implements IProjectile, IViewable {
 	Observer<IViewable> myObserver;
 	ProjectileOwner myOwner;
 	
-	IMovementStrategy myMovement;
-	IDamageStrategy myDamage;
+	IMovementStrategy myMovementCalc;
+	double mySpeed;
+	IDamageStrategy myDamageCalc;
+	double myDamage;
 	int myMaxRange;
 	int myAoERadius;
 	Machine myTarget;
@@ -29,30 +31,31 @@ public class Projectile implements IProjectile, IViewable {
 	double myHeading;
 	Point myLocation;
 
-	public Projectile(ProjectileData data, Machine target, double heading, Point position) {
-	}
-
-	public Projectile(ProjectileData data, Machine target, Observer<IViewable> observer,
-			ProjectileOwner owner, double heading, Point position) {
+	public Projectile(ProjectileData data, Machine target, ProjectileOwner owner, Observer<IViewable> observer,
+			double heading, Point position) {
 		
 		myLocation = position;
 		myHeading = heading;
+		mySpeed = data.getSpeed();
 		myTraveled = 0;
 		myTarget = target;
 		
 		myImagePath = data.getImagePath();
 		myMaxRange = data.getMaxRange();
 		myAoERadius = data.getAreaOfEffectRadius();
+		myDamage = data.getDamage();
 		
 		/*
 		myMovement = StrategyFactory.movementStrategy(data.getMovementStrategy());
 		myDamage = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		*/
+		
+		notifyListenersAdd();
 	}
 
 	@Override
 	public Point advance() {
-		Pair<Double, Point> nextMove = myMovement.nextMove(this);
+		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this);
 		
 		myTraveled += myLocation.euclideanDistance(nextMove.getValue());
 		myHeading = nextMove.getKey();
@@ -77,7 +80,7 @@ public class Projectile implements IProjectile, IViewable {
 	}
 
 	private void hitTarget() {
-		myTarget.takeDamage(myDamage.getTargetDamage());
+		myTarget.takeDamage(myDamageCalc.getTargetDamage());
 		explode();
 	}
 	
@@ -86,7 +89,7 @@ public class Projectile implements IProjectile, IViewable {
 		//TODO: Get all Machines in AoE Range
 		
 		for (Machine m: targets) {
-			Damage toDeal = myDamage.getAoEDamage(this, myTarget.getLocation());
+			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getLocation());
 			m.takeDamage(toDeal);
 		}
 		notifyListenersRemove();

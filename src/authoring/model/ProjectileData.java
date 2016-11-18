@@ -10,6 +10,8 @@ public class ProjectileData {
 	private String imagePath;
 	private String damage;
 	private String movement;
+	private int speed;
+	private int damageMultiplier;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -57,5 +59,13 @@ public class ProjectileData {
 	
 	public String getMovementStrategy(){
 		return movement;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+	
+	public double getDamage() {
+		return damageMultiplier;
 	}
 }

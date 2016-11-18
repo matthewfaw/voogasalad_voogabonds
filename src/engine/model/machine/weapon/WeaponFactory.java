@@ -10,9 +10,6 @@ import engine.model.machine.weapon.projectile.ProjectileFactory;
 import engine.model.machine.weapon.projectile.ProjectileOwner;
 
 public class WeaponFactory {
-	Observer<IViewable> myViewObserver;
-	ProjectileOwner myProjectileOwner;
-	Map<String, ProjectileData> myProjectiles;
 	ProjectileFactory myProjectileFactory;
 	
 	public WeaponFactory(

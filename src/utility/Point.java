@@ -54,9 +54,10 @@ public class Point implements IShape {
 	
 	/**
 	 * Constructs a point at the origin
+	 * @param point 
 	 */
-	public Point(){
-		this(0, 0, 0);
+	public Point(Point p){
+		this(p.myX, p.myY, p.myZ);
 	}
 	
 	/**
@@ -166,6 +167,16 @@ public class Point implements IShape {
 		return (int) result;
 	}
 	
+	public double towards(Point p) {
+		Point vector = this.subtract(p);
+		
+		return Math.toDegrees(Math.atan(vector.myY/vector.myX));
+	}
+	
+	public Point moveAlongHeading(double distance, double heading) {
+		return new Point(myX + Math.cos(Math.toDegrees(heading)), myY + Math.sin(Math.toDegrees(heading)), myZ);
+	}
+	
 	public double getX(){
 		return myX;
 	}
@@ -186,13 +197,6 @@ public class Point implements IShape {
 		myZ= n.doubleValue();
 	}
 	
-	public double getLength(){
-		return 0;
-	}
-	
-	public double getArea(){
-		return 0;
-	}
 
 	@Override
 	public double getDistanceTo(Point p) {
@@ -236,4 +240,16 @@ public class Point implements IShape {
 				myY == p.myY &&
 				myZ == p.myZ;
 	}
+
+	@Override
+	public Point closestTo(Point p) {
+		return new Point(this);
+	}
+
+	@Override
+	public Point closestTo(IShape s) {
+		return new Point(this);
+	}
+	
+	
 }

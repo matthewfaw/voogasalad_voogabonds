@@ -1,5 +1,8 @@
 package engine.model.machine.weapon.projectile;
 
-public interface ProjectileOwner {
+import utility.Point;
 
+public interface ProjectileOwner {
+	abstract public double getHeading();
+	abstract public Point getLocation();
 }

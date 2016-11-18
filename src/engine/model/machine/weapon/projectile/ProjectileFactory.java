@@ -6,7 +6,6 @@ import authoring.model.ProjectileData;
 import engine.IViewable;
 import engine.Observer;
 import engine.model.machine.Machine;
-import utility.Point;
 
 public class ProjectileFactory {
 	Observer<IViewable> myViewObserver;
@@ -24,9 +23,9 @@ public class ProjectileFactory {
 		
 	}
 
-	public Projectile newProjectile(String name, Machine target, double heading, Point start) {
+	public Projectile newProjectile(String name, Machine target, ProjectileOwner owner) {
 		if (myProjectiles.containsKey(name))
-			return new Projectile(myProjectiles.get(name), target, myViewObserver, myProjectileOwner, heading, start);
+			return new Projectile(myProjectiles.get(name), target, owner, myViewObserver, owner.getHeading(), owner.getLocation());
 		else
 			throw new UnsupportedOperationException("No projectile called: " + name);
 	}
