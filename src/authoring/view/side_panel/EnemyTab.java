@@ -169,6 +169,12 @@ public class EnemyTab extends Tab {
 					return;
 				}
 				FrontEndEnemy enemy = new FrontEndEnemy(speed, spawn, end, name, health, type, image);
+				if (!(mySoundField.getCharacters().toString().equals(myResources.getString("DefaultSound")))){
+					String sound = mySoundField.getCharacters().toString();
+					enemy.setSound(sound);
+				}
+				// TODO: set up weapon for enemy
+				// TODO: send enemy to backend
 				myEnemyWindow.close();
 			}
 		});
