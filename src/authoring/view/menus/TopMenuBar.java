@@ -17,18 +17,15 @@ import main.MainInitalizer;
 
 public class TopMenuBar {
 	
-	private HBox topContainer;
 	private MenuBar topMenu;
 	
 	public TopMenuBar(BorderPane root) {
-		topContainer = new HBox(10);
 		topMenu = new MenuBar();
 		Menu fileMenu = new FileMenu(topMenu);
 		Menu editMenu = new EditMenu(topMenu);
 		Menu personalizeMenu = new PersonalizeMenu(topMenu);
 		Menu playMenu = new PlayMenu(topMenu);
 		topMenu.getMenus().addAll(fileMenu, editMenu, personalizeMenu, playMenu);
-		topContainer.getChildren().add(topMenu);
-		root.setTop(topContainer);
+		root.setTop(topMenu);
 	}
 }

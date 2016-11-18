@@ -1,20 +1,23 @@
-#Backend
-##Authoring -> Tripp & Phil
+# Backend
+
+## Authoring -> Tripp & Phil
 * Tripp - Tower, Weapon, Projectile, Map Data
 * Phil - Enemy, Wave, Player Data, Map Data
-##Game Engine -> Owen, Alan, Matt, Weston
+
+## Game Engine -> Owen, Alan, Matt, Weston
 * Owen - Player store
 * Alan - Tower/enemies
 * Matt - Map/Environment
 * Weston - Weapon/Projectiles
 	
 	
-#Front end
+# Front end
 
-##Game Player
+## Game Player
 * Guhan - Display for tower options,statistics,setting up observables
 * Grayson - Utility (using any controller), Gameplay map area
-##Authoring
+
+## Authoring
 **Christopher Lu**
 *First Sprint*
 Overall basic layout of authoring environment, main menu, map
