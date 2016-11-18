@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.view.menus.TopMenuBar;
+import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -63,6 +64,7 @@ public class MainInitalizer {
 	
 	public void initSim() {
 		TopMenuBar menuBar = new TopMenuBar(root);
+		InfoTabs infoTab = new InfoTabs(root);
 		stage.setScene(scene);
 	}
 	
