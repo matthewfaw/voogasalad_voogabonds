@@ -10,6 +10,7 @@ public class SerializeJSON {
 	public void Serialize(){
 
 		gson = new Gson();
+		
 			
 	}
 }
