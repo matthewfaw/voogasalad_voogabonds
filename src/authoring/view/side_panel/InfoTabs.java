@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -21,6 +22,7 @@ public class InfoTabs {
 	public InfoTabs(BorderPane root) {
 		screenInfo();
 		infoTab = new TabPane();
+		infoTab.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		Tab towerTab = new TowerTab(infoTab);
 		Tab enemyTab = new EnemyTab(infoTab);
 		Tab waveTab = new WaveLevelTab(infoTab);
