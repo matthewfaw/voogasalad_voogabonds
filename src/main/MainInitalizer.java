@@ -4,12 +4,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import authoring.view.buttons.CreateEnemyButton;
 import authoring.view.menus.TopMenuBar;
 import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -66,9 +64,6 @@ public class MainInitalizer {
 	
 	public void initSim() {
 		TopMenuBar menuBar = new TopMenuBar(root);
-//		VBox left = new VBox();
-//		new CreateEnemyButton(left);
-//		root.setLeft(left);
 		InfoTabs infoTab = new InfoTabs(root);
 		stage.setScene(scene);
 	}
