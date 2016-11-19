@@ -3,6 +3,7 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -47,11 +48,14 @@ public class EnemyTab extends Tab {
 	private TextField myImageField;
 	private TextField mySoundField;
 	private Stage myEnemyWindow;
+	private VBox myContent;
+	private HashMap<String, FrontEndEnemy> myEnemyMap;
 	
 	public EnemyTab(TabPane pane) {
 		screenInfo();
-		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
-		this.enemyTab = new Tab(myResources.getString("Enemies"));
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
+		enemyTab = new Tab(myResources.getString("Enemies"));
+		myEnemyMap = new HashMap<String, FrontEndEnemy>();
 		enemyTabOptions(enemyTab);
 		pane.getTabs().add(enemyTab);
 	}
@@ -60,6 +64,8 @@ public class EnemyTab extends Tab {
 		VBox enemyArea = new VBox(screenHeight*0.01);
 		enemyArea.setMaxHeight(screenHeight*0.88);
 		ScrollPane availableEnemies = new ScrollPane();
+		myContent = new VBox();
+		availableEnemies.setContent(myContent);
 		availableEnemies.setPrefSize(screenWidth/5, screenHeight);
 		HBox enemyButtons = new HBox(screenWidth*0.05);
 		enemyButtons.setPadding(new Insets(0.01*screenHeight, screenWidth*0.01, 0.01*screenHeight, screenWidth*0.01));
@@ -79,46 +85,59 @@ public class EnemyTab extends Tab {
 	private EventHandler<ActionEvent> addEnemyHandler(){
 		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				myEnemyWindow = new Stage();
-				myEnemyWindow.initModality(Modality.APPLICATION_MODAL);
-				VBox root = new VBox();
-				setUpEnemyScreen(root);
-				Scene scene = new Scene(root, SIZE, SIZE);
-				myEnemyWindow.setTitle(myResources.getString("AddEnemy"));
-				myEnemyWindow.setScene(scene);
-				myEnemyWindow.show();
+				createEnemyWindow(myResources.getString("DefaultName"), myResources.getString("DefaultType"), 
+						myResources.getString("DefaultHealth"), myResources.getString("DefaultSpeed"), 
+						myResources.getString("DefaultSpawn"), myResources.getString("DefaultEnd"), 
+						myResources.getString("DefaultImage"), myResources.getString("DefaultSound"));
 			}
 		};
 		return handler;
 	}
 	
-	private void setUpEnemyScreen(VBox root){
-		myNameField = setUpBasicUserInput(root, "EnterName", "DefaultName");
-		myTypeField = setUpBasicUserInput(root, "EnterType", "DefaultType");
-		myHealthField = setUpBasicUserInput(root, "EnterHealth", "DefaultHealth");
-		mySpeedField = setUpBasicUserInput(root, "EnterSpeed", "DefaultSpeed");
-		mySpawnField = setUpBasicUserInput(root, "EnterSpawn", "DefaultSpawn");
-		myEndField = setUpBasicUserInput(root, "EnterEnd", "DefaultEnd");
-		setUpImage(root);
-		setUpSound(root);
+
+	private void createEnemyWindow(String nameVal, String typeVal, String healthVal, String speedVal, 
+			String spawnVal, String endVal, String imageVal, String soundVal) {
+		myEnemyWindow = new Stage();
+		myEnemyWindow.initModality(Modality.APPLICATION_MODAL);
+		VBox root = new VBox();
+		setUpEnemyScreen(root, nameVal, typeVal, healthVal, speedVal, spawnVal, endVal, imageVal, soundVal);
+		Scene scene = new Scene(root, SIZE, SIZE);
+		myEnemyWindow.setTitle(myResources.getString("AddEnemy"));
+		myEnemyWindow.setScene(scene);
+		myEnemyWindow.show();
+	}
+	
+	private void setUpEnemyScreen(VBox root, String nameVal, String typeVal, String healthVal, 
+			String speedVal, String spawnVal, String endVal, String imageVal, String soundVal){
+		myNameField = setUpBasicUserInput(root, "EnterName", nameVal);
+		myTypeField = setUpBasicUserInput(root, "EnterType", typeVal);
+		myHealthField = setUpBasicUserInput(root, "EnterHealth", healthVal);
+		mySpeedField = setUpBasicUserInput(root, "EnterSpeed", speedVal);
+		mySpawnField = setUpBasicUserInput(root, "EnterSpawn", spawnVal);
+		myEndField = setUpBasicUserInput(root, "EnterEnd", endVal);
+		setUpImage(root, imageVal);
+		setUpSound(root, soundVal);
 		setUpWeapon(root);
 		setUpFinishButton(root);
 	}
 	
 	private TextField setUpBasicUserInput(VBox root, String enterText, String defaultValue){
 		Text text = new Text(myResources.getString(enterText));
-		TextField textField = new TextField(myResources.getString(defaultValue));
+		TextField textField = new TextField(defaultValue);
 		root.getChildren().addAll(text, textField);
 		return textField;
 	}
 	
-	private void setUpImage(VBox root) {
-		myImageField = setUpBasicUserInput(root, "EnterImage", "DefaultImage");
+	private void setUpImage(VBox root, String value) {
+		myImageField = setUpBasicUserInput(root, "EnterImage", value);
 		setUpBrowseButton(root, myImageField, "PNG", "*.png");
 	}
 	
-	private void setUpSound(VBox root) {
-		mySoundField = setUpBasicUserInput(root, "EnterSound", "DefaultSound");
+	private void setUpSound(VBox root, String value) {
+		if (value == null)
+			mySoundField = setUpBasicUserInput(root, "EnterSound", "DefaultSound");
+		else
+			mySoundField = setUpBasicUserInput(root, "EnterSound", value);
 		setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
 	}
 	
@@ -164,11 +183,20 @@ public class EnemyTab extends Tab {
 					return;
 				}
 				String image = myImageField.getCharacters().toString();
-				if (image.equals(myResources.getString("DefaultImage"))){
+				if (!(image.substring(image.length() - 4).equals(".png"))){
 					showError(myResources.getString("NoImageInput"));
 					return;
 				}
 				FrontEndEnemy enemy = new FrontEndEnemy(speed, spawn, end, name, health, type, image);
+				String sound = mySoundField.getCharacters().toString();
+				if (sound.substring(sound.length() - 4).equals(".wav")){
+					enemy.setSound(sound);
+				}
+				removeButtonDuplicates(name);
+				addButtonToDisplay(name);
+				myEnemyMap.put(name, enemy);
+				// TODO: set up weapon for enemy
+				// TODO: send enemy to backend
 				myEnemyWindow.close();
 			}
 		});
@@ -196,4 +224,37 @@ public class EnemyTab extends Tab {
         alert.setContentText(message);
         alert.showAndWait();
     }
+	
+	private void removeButtonDuplicates(String s) {
+		for (int i = 0; i < myContent.getChildren().size(); i++) {
+			Button button = (Button) (myContent.getChildren().get(i));
+			if (button.getText().equals(s)) {
+				myContent.getChildren().remove(i);
+				i--;
+			}
+		}
+	}
+	
+	private void addButtonToDisplay(String text) {
+		Button button = new Button(text);
+		button.setMinWidth(myContent.getMinWidth());
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event){
+				FrontEndEnemy enemy = myEnemyMap.get(text);
+				createEnemyWindow(enemy.getName(), enemy.getType(), String.valueOf(enemy.getHealth()), 
+						String.valueOf(enemy.getSpeed()), point2DToString(enemy.getSpawnPoint()), 
+						point2DToString(enemy.getEndPoint()), enemy.getImage(), enemy.getSound());
+			}
+		});
+		myContent.getChildren().add(button);
+	}
+	
+	private String point2DToString(Point2D point){
+		StringBuilder sb = new StringBuilder("(");
+		sb.append(point.getX());
+		sb.append(", ");
+		sb.append(point.getY());
+		sb.append(")");
+		return sb.toString();
+	}
 }

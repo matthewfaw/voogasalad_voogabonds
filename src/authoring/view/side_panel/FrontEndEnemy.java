@@ -27,6 +27,10 @@ public class FrontEndEnemy implements IEnemy, IMachine{
 		myType = type;
 		myImage = image;
 	}
+	
+	public void setSound(String sound){
+		mySound = sound;
+	}
 
 	@Override
 	public double getSpeed() {
