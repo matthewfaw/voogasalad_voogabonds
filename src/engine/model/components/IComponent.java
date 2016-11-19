@@ -1,5 +1,7 @@
 package engine.model.components;
 
+import engine.model.entities.IEntity;
+
 /**
  * An interface to capture the commonalities of all components.
  * 
@@ -12,5 +14,10 @@ package engine.model.components;
  *
  */
 public interface IComponent {
-
+	/**
+	 * Gets the Entity object which owns this component
+	 * Assumes that component is owned by a entity
+	 * @return
+	 */
+	public IEntity getEntity();
 }

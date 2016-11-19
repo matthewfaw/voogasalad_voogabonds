@@ -24,12 +24,6 @@ public interface IEntity {
 	 * @return Unique object ID
 	 */
 	public int getId();
-	/**
-	 * A method to get the valid terrains on which an entity may be placed
-	 * This assumes that every entity may be placed on a location
-	 * @return list of terrains on which the entity may be placed
-	 */
-	public List<Terrain> getValidTerrains();
 
 	/**
 	 * Add a component to an entity
@@ -37,11 +31,4 @@ public interface IEntity {
 	 * @param aComponent
 	 */
 	public void addComponent(IComponent aComponent);
-	/**
-	 * A method to set the current location of an entity on the map
-	 * Assumes that all entities can be placed on the map
-	 * 
-	 * @param aLocation to place the entity
-	 */
-	public void setLocation(Point aLocation);
 }

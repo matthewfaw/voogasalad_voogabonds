@@ -1,5 +1,6 @@
 package engine.model.game_environment;
 
+import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
@@ -25,15 +26,16 @@ public class MapMediator {
 	 * @param aValidTerrainList: a list of terrains the object can be placed on
 	 * @return true if the entity was placed, false otherwise
 	 */
-	public boolean attemptToPlaceEntity(Point aLocation, IEntity aEntity)
+	public boolean attemptToPlaceEntity(Point aLocation, PhysicalComponent aPhysicalComponent)
 	{
-		if (myTerrainMap.hasTerrain(aEntity.getValidTerrains(), aLocation)) {
-			aEntity.setLocation(aLocation);
-			accept(aEntity, aLocation);
+		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
+			aPhysicalComponent.setLocation(aLocation);
+			accept(aPhysicalComponent.getEntity(), aLocation);
 			return true;
 		}
 		return false;
 	}
+
 	/**
 	 * Accepts entity to be tracked by map
 	 * @param aEntityToTrack

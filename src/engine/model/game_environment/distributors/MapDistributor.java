@@ -1,5 +1,8 @@
 package engine.model.game_environment.distributors;
 
+import engine.model.components.ComponentFactory;
+import engine.model.components.PhysicalComponent;
+import engine.model.components.PhysicalComponentData;
 import engine.model.entities.EntityData;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -15,6 +18,8 @@ import utility.Point;
 public class MapDistributor implements IDistributor {
 	private MapMediator myMapMediator;
 	private EntityFactory myEntityFactory;
+	private ComponentFactory myComponentFactory;
+
 	
 	public MapDistributor(MapMediator aMapMediator)
 	{
@@ -27,14 +32,17 @@ public class MapDistributor implements IDistributor {
 	 * is valid
 	 */
 	@Override
-	public boolean distribute(EntityData aEntityData, Point aLocation)
+	public boolean distribute(EntityData aEntityData, PhysicalComponentData aPhysicalComponentData, Point aLocation)
 	{
 		//TODO: possibly check if machine can be placed before constructing the object?
 		//1: construct object 
 		//2: determine if the object can be placed on the map
 		//3: distribute object to the map, if it can be placed there
-		IEntity machine = myEntityFactory.constructEntity(aEntityData);
-		return myMapMediator.attemptToPlaceEntity(aLocation, machine);
+		IEntity entity = myEntityFactory.constructEntity(aEntityData);
+		PhysicalComponent physicalComponent = new PhysicalComponent(aPhysicalComponentData);
+		entity.addComponent(physicalComponent);
+		
+		return myMapMediator.attemptToPlaceEntity(aLocation, physicalComponent);
 	}
 
 }
