@@ -3,14 +3,18 @@ package engine.model.game_environment.terrain;
 import java.util.List;
 
 import engine.model.entities.IEntity;
+import engine.model.game_environment.paths.PathManager;
 import utility.Point;
 
 public class TerrainMap {
+	private TerrainMapFactory  myMapFactory; 
+	
 	private Terrain[][] myMap;
 	
-	public TerrainMap(int aWidth, int aHeight)
+	public TerrainMap(TerrainMapData aTerrainMapData)
 	{
-		myMap = new Terrain[aWidth][aHeight];
+		myMapFactory = new TerrainMapFactory();
+		myMap = myMapFactory.constructTerrainMap(aTerrainMapData);
 	}
 	
 	/**

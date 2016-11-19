@@ -2,13 +2,17 @@ package engine.model.game_environment;
 
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
+import engine.model.game_environment.paths.PathFactory;
+import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
 
 public class MapMediator {
+	private PathFactory myPathFactory;
 	
 	private TerrainMap myTerrainMap;
 	private EntityManager myEntityManager;
+	private PathManager myPathManager;
 	
 	//TODO: Change this constructor so that it hides away the terrain map
 	// so constructor could take in terrain map data instead of terrain map
@@ -17,6 +21,7 @@ public class MapMediator {
 	{
 		myTerrainMap = aTerrainMap;
 		myEntityManager = new EntityManager();
+		myPathManager = myPathFactory.constructPaths(myTerrainMap);
 	}
 	
 	/**
