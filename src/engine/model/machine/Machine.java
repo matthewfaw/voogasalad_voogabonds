@@ -1,10 +1,11 @@
 package engine.model.machine;
 
+import engine.model.IEntity;
 import engine.model.playerinfo.IModifiablePlayerInfo;
 import utility.Damage;
 import utility.Point;
 
-public abstract class Machine implements IViewableMachine {
+public abstract class Machine implements IViewableMachine, IEntity {
 
 	private IModifiablePlayerInfo myModifiablePlayerInfo;
 	
