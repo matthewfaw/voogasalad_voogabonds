@@ -1,4 +1,4 @@
-package authoring.view.side_panel;
+package authoring.view.objects;
 
 import authoring.authoring_interfaces.IEnemy;
 import authoring.authoring_interfaces.IMachine;
