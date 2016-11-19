@@ -47,6 +47,7 @@ public class EnemyTab extends Tab {
 	private TextField myImageField;
 	private TextField mySoundField;
 	private Stage myEnemyWindow;
+	private VBox myContent;
 	
 	public EnemyTab(TabPane pane) {
 		screenInfo();
@@ -60,6 +61,8 @@ public class EnemyTab extends Tab {
 		VBox enemyArea = new VBox(screenHeight*0.01);
 		enemyArea.setMaxHeight(screenHeight*0.88);
 		ScrollPane availableEnemies = new ScrollPane();
+		myContent = new VBox();
+		availableEnemies.setContent(myContent);
 		availableEnemies.setPrefSize(screenWidth/5, screenHeight);
 		HBox enemyButtons = new HBox(screenWidth*0.05);
 		enemyButtons.setPadding(new Insets(0.01*screenHeight, screenWidth*0.01, 0.01*screenHeight, screenWidth*0.01));
@@ -173,6 +176,8 @@ public class EnemyTab extends Tab {
 					String sound = mySoundField.getCharacters().toString();
 					enemy.setSound(sound);
 				}
+				removeButtonDuplicates(name);
+				addButtonToDisplay(name);
 				// TODO: set up weapon for enemy
 				// TODO: send enemy to backend
 				myEnemyWindow.close();
@@ -202,4 +207,21 @@ public class EnemyTab extends Tab {
         alert.setContentText(message);
         alert.showAndWait();
     }
+	
+	private void removeButtonDuplicates(String s) {
+		for (int i = 0; i < myContent.getChildren().size(); i++) {
+			Button button = (Button) (myContent.getChildren().get(i));
+			if (button.getText().equals(s)) {
+				myContent.getChildren().remove(i);
+				i--;
+			}
+		}
+	}
+	
+	private void addButtonToDisplay(String text) {
+		Button button = new Button(text);
+		button.setMinWidth(myContent.getMinWidth());
+		//TODO: set up edit enemy
+		myContent.getChildren().add(button);
+	}
 }
