@@ -1,6 +1,5 @@
 package engine.model.game_environment.distributors;
 
-import engine.model.components.ComponentFactory;
 import engine.model.components.PhysicalComponent;
 import engine.model.components.PhysicalComponentData;
 import engine.model.entities.EntityData;
@@ -18,8 +17,6 @@ import utility.Point;
 public class MapDistributor implements IDistributor {
 	private MapMediator myMapMediator;
 	private EntityFactory myEntityFactory;
-	private ComponentFactory myComponentFactory;
-
 	
 	public MapDistributor(MapMediator aMapMediator)
 	{

@@ -6,6 +6,13 @@ import engine.model.entities.IEntity;
 import utility.Point;
 
 public class TerrainMap {
+	private Terrain[][] myMap;
+	
+	public TerrainMap(int aWidth, int aHeight)
+	{
+		myMap = new Terrain[aWidth][aHeight];
+	}
+	
 	/**
 	 * A method to determine if the location on the map has one of the requested Terrains
 	 * @param aValidTerrainList: valid terrains
