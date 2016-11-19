@@ -54,9 +54,14 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		myOwner = owner;
 		
 		/*
-		myMovement = StrategyFactory.movementStrategy(data.getMovementStrategy());
+		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
 		myDamage = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		*/
+		
+		//TODO: Use StrategyFactory for Strategy assignment
+		myMovementCalc = new GreedyMovementStrategy();
+		myDamageCalc = new ConstantDamageStrategy();
+		
 		
 		notifyListenersAdd();
 	}
