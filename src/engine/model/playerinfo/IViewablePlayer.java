@@ -1,6 +1,6 @@
 package engine.model.playerinfo;
 
-public interface IViewablePlayerInfo {
+public interface IViewablePlayer {
 	public int getLivesRemaining();
 	public int getAvailableFunds();
 }

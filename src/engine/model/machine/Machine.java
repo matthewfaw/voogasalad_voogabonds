@@ -1,12 +1,12 @@
 package engine.model.machine;
 
-import engine.model.playerinfo.IModifiablePlayerInfo;
+import engine.model.playerinfo.IModifiablePlayer;
 import utility.Damage;
 import utility.Point;
 
 public abstract class Machine implements IViewableMachine {
 
-	private IModifiablePlayerInfo myModifiablePlayerInfo;
+	private IModifiablePlayer myModifiablePlayerInfo;
 	private IHealth health;
 	
 	@Override
@@ -35,7 +35,7 @@ public abstract class Machine implements IViewableMachine {
 		return getLocation().euclideanDistance(p); //Minus collision Radius
 	}
 	
-	public IModifiablePlayerInfo getModifiablePlayerInfo() {
+	public IModifiablePlayer getModifiablePlayerInfo() {
 		return myModifiablePlayerInfo;
 	}
 
