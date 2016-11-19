@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import authoring.controller.EnemyDataController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -50,12 +51,14 @@ public class EnemyTab extends Tab {
 	private Stage myEnemyWindow;
 	private VBox myContent;
 	private HashMap<String, FrontEndEnemy> myEnemyMap;
+	private EnemyDataController myController;
 	
 	public EnemyTab(TabPane pane) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myEnemyMap = new HashMap<String, FrontEndEnemy>();
+		myController = new EnemyDataController();
 		enemyTabOptions(enemyTab);
 		pane.getTabs().add(enemyTab);
 	}
@@ -135,7 +138,7 @@ public class EnemyTab extends Tab {
 	
 	private void setUpSound(VBox root, String value) {
 		if (value == null)
-			mySoundField = setUpBasicUserInput(root, "EnterSound", "DefaultSound");
+			mySoundField = setUpBasicUserInput(root, "EnterSound", myResources.getString("DefaultSound"));
 		else
 			mySoundField = setUpBasicUserInput(root, "EnterSound", value);
 		setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
@@ -196,7 +199,7 @@ public class EnemyTab extends Tab {
 				addButtonToDisplay(name);
 				myEnemyMap.put(name, enemy);
 				// TODO: set up weapon for enemy
-				// TODO: send enemy to backend
+				myController.createEnemyData(enemy);
 				myEnemyWindow.close();
 			}
 		});
