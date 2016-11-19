@@ -3,6 +3,7 @@ package engine.model;
 import java.util.List;
 
 import engine.model.game_environment.terrain.Terrain;
+import utility.Point;
 
 /**
  * an interface to capture the commonalities among each object that can be added
@@ -30,9 +31,16 @@ public interface IEntity {
 	public List<Terrain> getValidTerrains();
 
 	/**
-	 * 
+	 * Add a component to an entity
+	 * This is how entities are given new functionality
 	 * @param aComponent
 	 */
 	public void addComponent(IComponent aComponent);
+	/**
+	 * A method to set the current location of an entity on the map
+	 * Assumes that all entities can be placed on the map
+	 * 
+	 * @param aLocation to place the entity
+	 */
 	public void setLocation(Point aLocation);
 }

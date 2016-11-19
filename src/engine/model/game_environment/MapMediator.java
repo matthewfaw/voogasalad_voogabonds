@@ -1,10 +1,7 @@
 package engine.model.game_environment;
 
-import java.util.List;
-
 import engine.model.IEntity;
 import engine.model.game_environment.entities.EntityManager;
-import engine.model.game_environment.terrain.Terrain;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
 
@@ -12,6 +9,15 @@ public class MapMediator {
 	
 	private TerrainMap myTerrainMap;
 	private EntityManager myEntityManager;
+	
+	//TODO: Change this constructor so that it hides away the terrain map
+	// so constructor could take in terrain map data instead of terrain map
+	// this makes the ownership model more explicit
+	public MapMediator(TerrainMap aTerrainMap)
+	{
+		myTerrainMap = aTerrainMap;
+		myEntityManager = new EntityManager();
+	}
 	
 	/**
 	 * Determines if an object can be placed on the map at the requested location
@@ -35,6 +41,6 @@ public class MapMediator {
 	 */
 	private void accept(IEntity aEntityToTrack, Point aLocation)
 	{
-		myEntityManager.trackEntity(aEntityToTrack)
+		myEntityManager.trackEntity(aEntityToTrack);
 	}
 }
