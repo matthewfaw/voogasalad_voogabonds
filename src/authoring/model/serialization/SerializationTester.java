@@ -1,18 +1,17 @@
 package authoring.model.serialization;
 
-import authoring.model.TowerData;
-
 public class SerializationTester {
 	
 	private String fileName;
+	private String fileLoc = "src/resources/";
 	
-	public void Tester(){
+	public void Tester(Object obj){
 
 		SerializeJSON ser = new SerializeJSON();
 		// We should make a user prompt for when they want to save a game file, which will be set as fileName
-		ser.SerializeToFile(new TowerData(), fileName);
+		ser.SerializeToFile(obj, fileName);
 		DeserializeJSON des = new DeserializeJSON();
-		des.Deserialize("src/resources/SavedConfig.txt");
+		des.Deserialize(fileLoc + fileName);
 		
 	}
 	
