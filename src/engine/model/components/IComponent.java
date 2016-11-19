@@ -1,4 +1,4 @@
-package engine.model;
+package engine.model.components;
 
 /**
  * An interface to capture the commonalities of all components.

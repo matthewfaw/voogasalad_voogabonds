@@ -1,7 +1,8 @@
-package engine.model;
+package engine.model.entities;
 
 import java.util.List;
 
+import engine.model.components.IComponent;
 import engine.model.game_environment.terrain.Terrain;
 import utility.Point;
 

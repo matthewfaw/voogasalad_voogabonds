@@ -1,6 +1,6 @@
 package engine.model.machine;
 
-import engine.model.IEntity;
+import engine.model.entities.IEntity;
 import engine.model.playerinfo.IModifiablePlayerInfo;
 import utility.Damage;
 import utility.Point;

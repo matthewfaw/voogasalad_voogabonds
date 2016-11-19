@@ -1,4 +1,4 @@
-package engine.model;
+package engine.model.systems;
 
 /**
  * An interface to capture the commonalities between all systems 

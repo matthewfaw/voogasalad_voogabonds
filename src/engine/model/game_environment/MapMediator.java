@@ -1,7 +1,6 @@
 package engine.model.game_environment;
 
-import engine.model.IEntity;
-import engine.model.game_environment.entities.EntityManager;
+import engine.model.entities.IEntity;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
 

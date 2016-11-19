@@ -1,13 +1,13 @@
-package engine.model.game_environment.entities;
+package engine.model.game_environment;
 
 import java.util.ArrayList;
 
-import engine.model.IEntity;
+import engine.model.entities.IEntity;
 
-public class EntityManager {
+class EntityManager {
 	private ArrayList<IEntity> myEntities;
 
-	public EntityManager()
+	EntityManager()
 	{
 		myEntities = new ArrayList<IEntity>();
 	}
@@ -16,7 +16,7 @@ public class EntityManager {
 	 * Adds the entity to the list of entities to track
 	 * @param aEntityToTrack
 	 */
-	public void trackEntity(IEntity aEntityToTrack)
+	void trackEntity(IEntity aEntityToTrack)
 	{
 		myEntities.add(aEntityToTrack);
 	}

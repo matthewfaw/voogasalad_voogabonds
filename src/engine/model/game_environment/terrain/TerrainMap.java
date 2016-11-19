@@ -2,7 +2,7 @@ package engine.model.game_environment.terrain;
 
 import java.util.List;
 
-import engine.model.IEntity;
+import engine.model.entities.IEntity;
 import utility.Point;
 
 public class TerrainMap {
