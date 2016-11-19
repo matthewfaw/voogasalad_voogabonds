@@ -1,4 +1,4 @@
-package authoring.view.side_panel;
+package authoring.view.objects;
 
 import authoring.authoring_interfaces.IEnemy;
 import authoring.authoring_interfaces.IMachine;
@@ -26,6 +26,10 @@ public class FrontEndEnemy implements IEnemy, IMachine{
 		myHealth = health;
 		myType = type;
 		myImage = image;
+	}
+	
+	public void setSound(String sound){
+		mySound = sound;
 	}
 
 	@Override
