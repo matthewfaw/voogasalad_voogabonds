@@ -1,6 +1,5 @@
 package authoring.view.input_menus;
 
-import java.io.File;
 import java.util.ResourceBundle;
 
 import authoring.controller.EnemyDataController;
@@ -15,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,11 +31,13 @@ public class EnemyMenu {
 	private Stage myEnemyWindow;
 	private EnemyDataController myController;
 	private EnemyTab myTab;
+	private MenuHelper myHelper;
 	
 	public EnemyMenu(ResourceBundle resources, EnemyTab tab){
 		myResources = resources;
 		myTab = tab;
 		myController = new EnemyDataController();
+		myHelper = new MenuHelper(myResources);
 	}
 	
 	public void createEnemyWindow(String nameVal, String typeVal, String healthVal, String speedVal, 
@@ -54,51 +54,30 @@ public class EnemyMenu {
 	
 	private void setUpEnemyScreen(VBox root, String nameVal, String typeVal, String healthVal, 
 			String speedVal, String spawnVal, String endVal, String imageVal, String soundVal){
-		myNameField = setUpBasicUserInput(root, "EnterName", nameVal);
-		myTypeField = setUpBasicUserInput(root, "EnterType", typeVal);
-		myHealthField = setUpBasicUserInput(root, "EnterHealth", healthVal);
-		mySpeedField = setUpBasicUserInput(root, "EnterSpeed", speedVal);
-		mySpawnField = setUpBasicUserInput(root, "EnterSpawn", spawnVal);
-		myEndField = setUpBasicUserInput(root, "EnterEnd", endVal);
+		myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
+		myTypeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterType"), typeVal);
+		myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
+		mySpeedField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSpeed"), speedVal);
+		mySpawnField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSpawn"), spawnVal);
+		myEndField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterEnd"), endVal);
 		setUpImage(root, imageVal);
 		setUpSound(root, soundVal);
 		setUpWeapon(root);
 		setUpFinishButton(root);
 	}
 	
-	private TextField setUpBasicUserInput(VBox root, String enterText, String defaultValue){
-		Text text = new Text(myResources.getString(enterText));
-		TextField textField = new TextField(defaultValue);
-		root.getChildren().addAll(text, textField);
-		return textField;
-	}
-	
 	private void setUpImage(VBox root, String value) {
-		myImageField = setUpBasicUserInput(root, "EnterImage", value);
-		setUpBrowseButton(root, myImageField, "PNG", "*.png");
+		myImageField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterImage"), value);
+		myHelper.setUpBrowseButton(root, myImageField, "PNG", "*.png");
 	}
 	
 	private void setUpSound(VBox root, String value) {
 		if (value == null)
-			mySoundField = setUpBasicUserInput(root, "EnterSound", myResources.getString("DefaultSound"));
+			mySoundField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSound"), 
+					myResources.getString("DefaultSound"));
 		else
-			mySoundField = setUpBasicUserInput(root, "EnterSound", value);
-		setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
-	}
-	
-	private void setUpBrowseButton(VBox root, TextField field, String extensionName, String extension){
-		Button browseButton = new Button(myResources.getString("Browse"));
-		browseButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event){
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(extensionName, extension));
-				File file = fileChooser.showOpenDialog(new Stage());
-				if (file != null){
-					field.setText(file.getPath());
-				}
-			}
-		});
-		root.getChildren().add(browseButton);
+			mySoundField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSound"), value);
+		myHelper.setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
 	}
 
 	private void setUpWeapon(VBox root) {
