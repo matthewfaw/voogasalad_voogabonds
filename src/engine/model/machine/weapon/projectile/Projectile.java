@@ -7,36 +7,42 @@ import authoring.model.ProjectileData;
 import engine.IViewable;
 import engine.Observer;
 import engine.model.machine.Machine;
+import engine.model.machine.weapon.DamageInfo;
+import engine.model.machine.weapon.IKillerOwner;
 import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
 
-public class Projectile implements IProjectile, IViewable {
-	private static final double COLLISION_RADIUS = Math.exp(-6);
+public class Projectile implements IProjectile, IViewable, IMovable {
+	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	String myImagePath;
 	Observer<IViewable> myObserver;
-	ProjectileOwner myOwner;
+	IKillerOwner myOwner;
+	Machine myTarget;
 	
 	IMovementStrategy myMovementCalc;
 	double mySpeed;
-	IDamageStrategy myDamageCalc;
-	double myDamage;
-	int myMaxRange;
-	int myAoERadius;
-	Machine myTarget;
+	double myTurnSpeed;
 	
 	double myTraveled;
 	double myHeading;
 	Point myLocation;
+	
+	IDamageStrategy myDamageCalc;
+	double myDamage;
+	int myMaxRange;
+	int myAoERadius;
 
-	public Projectile(ProjectileData data, Machine target, ProjectileOwner owner, Observer<IViewable> observer,
+
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, Observer<IViewable> observer,
 			double heading, Point position) {
 		
 		myLocation = position;
 		myHeading = heading;
 		mySpeed = data.getSpeed();
+		myTurnSpeed = data.getTurnSpeed();
 		myTraveled = 0;
 		myTarget = target;
 		
@@ -44,6 +50,8 @@ public class Projectile implements IProjectile, IViewable {
 		myMaxRange = data.getMaxRange();
 		myAoERadius = data.getAreaOfEffectRadius();
 		myDamage = data.getDamage();
+		
+		myOwner = owner;
 		
 		/*
 		myMovement = StrategyFactory.movementStrategy(data.getMovementStrategy());
@@ -63,7 +71,7 @@ public class Projectile implements IProjectile, IViewable {
 		
 		notifyListenersUpdate();
 		
-		if (myTarget.getDistanceTo(myLocation) <= COLLISION_RADIUS) {
+		if (myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
 			hitTarget();
 		} else if (myTraveled >= myMaxRange) {
 			explode();
@@ -88,11 +96,15 @@ public class Projectile implements IProjectile, IViewable {
 		List<Machine> targets = new ArrayList<Machine>();
 		//TODO: Get all Machines in AoE Range
 		
+		DamageInfo result = new DamageInfo();
+		
 		for (Machine m: targets) {
 			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getLocation());
-			m.takeDamage(toDeal);
+			result = result.add(m.takeDamage(toDeal));
 		}
 		notifyListenersRemove();
+		myOwner.notifyDestroy(result);
+		
 	}
 	
 	private void notifyListenersAdd() {
@@ -124,10 +136,25 @@ public class Projectile implements IProjectile, IViewable {
 	public String getImagePath() {
 		return myImagePath;
 	}
- 
 
+	@Override
+	public Point getLocation() {
+		return myLocation;
+	}
 
-	
-	
+	@Override
+	public Point getGoal() {
+		return myTarget.getLocation();
+	}
+
+	@Override
+	public double getTurnSpeed() {
+		return myTurnSpeed;
+	}
+
+	@Override
+	public double getMoveSpeed() {
+		return mySpeed;
+	}	
 
 }

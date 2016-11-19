@@ -1,5 +1,6 @@
 package engine.model.machine;
 
+import engine.model.machine.weapon.DamageInfo;
 import engine.model.playerinfo.IModifiablePlayerInfo;
 import utility.Damage;
 import utility.Point;
@@ -34,8 +35,6 @@ public abstract class Machine implements IViewableMachine {
 		return myModifiablePlayerInfo;
 	}
 
-	public void takeDamage(Damage toDeal) {
-		// TODO Auto-generated method stub
-	}
+	abstract public DamageInfo takeDamage(Damage toDeal);
 
 }

@@ -21,7 +21,7 @@ public class WeaponFactory {
 		
 	}
 
-	public Weapon newWeapon(WeaponData data) {
-		return new Weapon(data, myProjectileFactory);
+	public Weapon newWeapon(WeaponData data, IKillerOwner owner) {
+		return new Weapon(data, owner, myProjectileFactory);
 	}
 }
