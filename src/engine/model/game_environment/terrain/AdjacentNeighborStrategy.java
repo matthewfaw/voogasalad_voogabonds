@@ -7,11 +7,11 @@ import utility.Index;
 
 public class AdjacentNeighborStrategy implements INeighborStrategy<Terrain> {
 	
-	private TerrainMap myMap;
+	private TerrainMap myTerrainMap;
 	
 	public AdjacentNeighborStrategy(TerrainMap aTerrainMap)
 	{
-		myMap = aTerrainMap;
+		myTerrainMap = aTerrainMap;
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class AdjacentNeighborStrategy implements INeighborStrategy<Terrain> {
 		List<Terrain> neighbors = new ArrayList<Terrain>();
 
 		for (Index index: getNeighborIndices(aTerrainNode.getIndexInMap())) {
-			neighbors.add(myMap.getTerrain(index));
+			neighbors.add(myTerrainMap.getTerrain(index));
 		}
 
 		return neighbors;
@@ -32,13 +32,13 @@ public class AdjacentNeighborStrategy implements INeighborStrategy<Terrain> {
 		int x = aIndex.getX();
 		int y = aIndex.getY();
 		
-		if (x+1 < myMap.getHeight()) {
+		if (x+1 < myTerrainMap.getHeight()) {
 			neighborIndices.add(new Index(x+1, y));
 		}
 		if (x-1 > 0) {
 			neighborIndices.add(new Index(x-1, y));
 		}
-		if (y+1 < myMap.getWidth()) {
+		if (y+1 < myTerrainMap.getWidth()) {
 			neighborIndices.add(new Index(x, y+1));
 		}
 		if (y-1 > 0) {

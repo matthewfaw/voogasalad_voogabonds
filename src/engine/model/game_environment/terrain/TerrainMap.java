@@ -6,7 +6,7 @@ import utility.Index;
 import utility.Point;
 
 public class TerrainMap {
-	private TerrainMapFactory  myMapFactory; 
+	private TerrainGridFactory  myMapFactory; 
 	
 	private Terrain[][] myMap;
 
@@ -18,12 +18,13 @@ public class TerrainMap {
 	
 	private INeighborStrategy<Terrain> myNeighborStrategy;
 	
-	public TerrainMap(TerrainMapData aTerrainMapData, INeighborStrategy<Terrain> aNeighborStrategy)
+	public TerrainMap(TerrainMapData aTerrainMapData)
 	{
-		myMapFactory = new TerrainMapFactory();
+		myMapFactory = new TerrainGridFactory();
 		myMap = myMapFactory.constructTerrainMap(aTerrainMapData);
 		
-		myNeighborStrategy = aNeighborStrategy;
+		//TODO: Change this to be constructed in a factory, perhaps
+		myNeighborStrategy = new AdjacentNeighborStrategy(this);
 	}
 	
 	/**
@@ -44,6 +45,13 @@ public class TerrainMap {
 	 */
 	public boolean hasTerrain(List<Terrain> aValidTerrainList, Point aLocation)
 	{
+		Terrain terrain = getTerrain(aLocation);
+		aValidTerrainList.forEach(t -> terrain.getTerrainType().equals(t.getTerrainType()));
+		for (Terrain t: aValidTerrainList) {
+			if (terrain.getTerrainType().equals(t.getTerrainType())) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -51,17 +59,19 @@ public class TerrainMap {
 	 * A method to get the source of the map--the location where all enemies spawn
 	 * @return
 	 */
+	@Deprecated
 	public Terrain getSource()
 	{
-		return null;
+		return myMap[0][0];
 	}
 	/**
 	 * A method to get the sink of the map-- the location where all enemies complete
 	 * @return
 	 */
+	@Deprecated
 	public Terrain getDestination()
 	{
-		return null;
+		return myMap[1][1];
 	}
 	/**
 	 * A method to get the terrain object corresponding to the requested location on the map

@@ -4,6 +4,12 @@ import java.util.List;
 
 import utility.Index;
 
+/**
+ * The strategy for finding neighbors in some collection of data 
+ * @author matthewfaw
+ *
+ * @param <A>
+ */
 public interface INeighborStrategy<A> {
 	/**
 	 * Given a terrain object in the map, determines the neighboring cells
