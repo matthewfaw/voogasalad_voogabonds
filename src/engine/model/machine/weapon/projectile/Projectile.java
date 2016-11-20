@@ -141,7 +141,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	}
 	
 	private void notifyListenersAdd() {
-		myObserver.add((IViewable) this);
+		myObserver.add(this);
 		
 	}
 
