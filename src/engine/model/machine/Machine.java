@@ -1,13 +1,15 @@
 package engine.model.machine;
 
 import engine.model.entities.IEntity;
-import engine.model.playerinfo.IModifiablePlayerInfo;
+
+import engine.model.playerinfo.IModifiablePlayer;
 import utility.Damage;
 import utility.Point;
 
 public abstract class Machine implements IViewableMachine, IEntity {
 
-	private IModifiablePlayerInfo myModifiablePlayerInfo;
+	private IModifiablePlayer myModifiablePlayer;
+	private IHealth health;
 	
 	@Override
 	public String getImagePath() {
@@ -26,12 +28,16 @@ public abstract class Machine implements IViewableMachine, IEntity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public IHealth getHealth() {
+		return health;
+	}
 	
 	public double getDistanceTo(Point p) {
 		return getLocation().euclideanDistance(p); //Minus collision Radius
 	}
 	
-	public IModifiablePlayerInfo getModifiablePlayerInfo() {
+	public IModifiablePlayer getModifiablePlayerInfo() {
 		return myModifiablePlayerInfo;
 	}
 
