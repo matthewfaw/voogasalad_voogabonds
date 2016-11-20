@@ -4,7 +4,7 @@ import java.util.AbstractMap;
 
 import authoring.model.TowerData;
 
-public class TowerController {
+public class TowerDataController {
 
 	private AbstractMap<String, TowerData> myTowerDataMap;
 
