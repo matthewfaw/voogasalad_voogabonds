@@ -1,7 +1,7 @@
 package authoring.controller;
 import authoring.model.PlayerData;
 
-public class PlayerDataController implements IDataController{
+public class PlayerDataController implements{
 	private PlayerData myPlayerData;
 	
 	/**
@@ -15,7 +15,7 @@ public class PlayerDataController implements IDataController{
 		try{
 			
 		}catch(Exception e){
-			
+			//Call front-end method here for error
 		}
 	}
 	
@@ -24,7 +24,7 @@ public class PlayerDataController implements IDataController{
 	}
 	
 	/**
-	 * Method from IDataController interface
+	 * Might try to abstract this out to an interface
 	 */
 	public void finalizeData() throws Exception{
 		if (myPlayerData.getStartingCash() == 0){

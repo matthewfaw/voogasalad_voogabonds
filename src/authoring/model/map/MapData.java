@@ -39,10 +39,10 @@ public class MapData {
 	
 	private void validatePoint(Point p, String type) throws Exception{
 		if (p.getX() >= numXCells || p.getX() < 0){
-			throw new Exception("X location of " + type + "point not valid.");
+			throw new Exception("X location of " + type + " point not valid.");
 		}
 		if (p.getY() >= numYCells || p.getY() < 0){
-			throw new Exception("Y location of " + type + "point not valid.");
+			throw new Exception("Y location of " + type + " point not valid.");
 		}
 	}
 }
