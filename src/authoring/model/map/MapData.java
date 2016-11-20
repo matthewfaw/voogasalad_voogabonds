@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class MapData {
 	private int numXCells;
 	private int numYCells;
+	private ArrayList<Point> spawnPoints;
+	private ArrayList<Point> sinkPoints;
 	private ArrayList<TerrainData> terrainList;
 	
 	public void setNumXCells(int x) throws Exception{
@@ -20,13 +22,27 @@ public class MapData {
 		}
 	}
 	
+	public void addSpawnPoint(Point newSpawnPoint) throws Exception{
+		validatePoint(newSpawnPoint, "spawn");
+		spawnPoints.add(newSpawnPoint);
+	}
+	
+	public void addSinkPoint(Point newSinkPoint) throws Exception{
+		validatePoint(newSinkPoint, "sink");
+		sinkPoints.add(newSinkPoint);
+	}
+	
 	public void addTerrainData(TerrainData terrain) throws Exception{
-		if (terrain.getLocation().getX() < 0 || terrain.getLocation().getX() > numXCells){
-			throw new Exception("X location of terrain is not valid.");
-		}
-		if (terrain.getLocation().getY() < 0 || terrain.getLocation().getY() > numYCells){
-			throw new Exception("Y location of terrain is not valid.");
-		}
+		validatePoint(terrain.getLocation(), "terrain");
 		terrainList.add(terrain);
+	}
+	
+	private void validatePoint(Point p, String type) throws Exception{
+		if (p.getX() >= numXCells || p.getX() < 0){
+			throw new Exception("X location of " + type + "point not valid.");
+		}
+		if (p.getY() >= numYCells || p.getY() < 0){
+			throw new Exception("Y location of " + type + "point not valid.");
+		}
 	}
 }
