@@ -14,7 +14,6 @@ public class SerializeJSON {
 		//overly verbose for now, but easily changeable later, for whether we want a JsonElement or String
 		gson = new Gson();
 		String json = gson.toJson(obj);
-		System.out.println(json);
 		JsonElement a = gson.toJsonTree(obj);
 		System.out.println(a);
 		return a.toString();
