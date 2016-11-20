@@ -52,17 +52,17 @@ public class TowerColumn implements IGUIPiece {
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("cow.png"));
-	    //Image image = new Image(
-	    //getClass().getResourceAsStream("warn.png")
-	    //);
-	    Tooltip myTooltip =new Tooltip();
-	    myTooltip.setGraphic(new ImageView(image));
+	    //Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("cow.png"));
+	    ////Image image = new Image(
+	    ////getClass().getResourceAsStream("warn.png")
+	    ////);
+	    //Tooltip myTooltip =new Tooltip();
+	    //myTooltip.setGraphic(new ImageView(image));
 	    	     
 	    ListView<String> towerInfo=new ListView<String>();
 	    ObservableList<String> items =FXCollections.observableArrayList("Monkey", "AOE", "Freeze", "Fly");
 	    towerInfo.setItems(items);
-	    towerInfo.setTooltip(myTooltip);
+	    //towerInfo.setTooltip(myTooltip);
 	    towerInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent me) {
 	            //TODO:
