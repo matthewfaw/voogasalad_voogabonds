@@ -7,7 +7,7 @@ import authoring.model.WeaponData;
 import engine.IViewable;
 import engine.Observer;
 import engine.model.machine.weapon.projectile.ProjectileFactory;
-import engine.model.machine.weapon.projectile.ProjectileOwner;
+//import engine.model.machine.weapon.projectile.ProjectileOwner;
 
 public class WeaponFactory {
 	ProjectileFactory myProjectileFactory;

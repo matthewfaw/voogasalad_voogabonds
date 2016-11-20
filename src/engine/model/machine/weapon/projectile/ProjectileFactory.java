@@ -7,6 +7,7 @@ import engine.IViewable;
 import engine.Observer;
 import engine.model.machine.Machine;
 import engine.model.machine.weapon.IKillerOwner;
+import engine.model.machine.weapon.ProjectileOwner;
 
 public class ProjectileFactory {
 	Observer<IViewable> myViewObserver;
