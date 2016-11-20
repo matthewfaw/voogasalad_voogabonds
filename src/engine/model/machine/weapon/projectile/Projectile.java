@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoring.model.ProjectileData;
 import engine.IViewable;
-import engine.Observer;
 import engine.model.machine.Machine;
 import engine.model.machine.weapon.DamageInfo;
 import engine.model.machine.weapon.IKillerOwner;
@@ -22,7 +21,6 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	String myImagePath;
-	Observer<IViewable> myObserver;
 	IKillerOwner myOwner;
 	Machine myTarget;
 	
@@ -39,7 +37,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	int myAoERadius;
 
 
-	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, Observer<IViewable> observer) {
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner) {
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
@@ -56,7 +54,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		myAoERadius = data.getAreaOfEffectRadius();
 		myDamage = data.getDamage();		
 		
-		notifyListenersAdd();
+//		notifyListenersAdd();
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		myHeading = nextMove.getKey();
 		myLocation = nextMove.getValue();
 		
-		notifyListenersUpdate();
+//		notifyListenersUpdate();
 		
 		if (myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
 			hitTarget();
@@ -135,24 +133,8 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getLocation());
 			result = result.add(m.takeDamage(toDeal));
 		}
-		notifyListenersRemove();
+//		notifyListenersRemove();
 		myOwner.notifyDestroy(result);
 		
 	}
-	
-	private void notifyListenersAdd() {
-		myObserver.add(this);
-		
-	}
-
-	private void notifyListenersRemove() {
-		myObserver.remove((IViewable) this);
-		
-	}
-	
-	private void notifyListenersUpdate() {
-		myObserver.update((IViewable) this);
-		
-	}
-
 }
