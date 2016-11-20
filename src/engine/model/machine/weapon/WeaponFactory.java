@@ -7,17 +7,22 @@ import authoring.model.WeaponData;
 import engine.IViewable;
 import engine.Observer;
 import engine.model.machine.weapon.projectile.ProjectileFactory;
-//import engine.model.machine.weapon.projectile.ProjectileOwner;
 
+
+/**
+ * A class to crate new weapons without having to pass the same arguments many times.
+ * @author Weston
+ *
+ */
 public class WeaponFactory {
 	ProjectileFactory myProjectileFactory;
 	
 	public WeaponFactory(
 			Observer<IViewable> observer,
-			ProjectileOwner owner,
 			Map<String, ProjectileData> projMap) {
 		
-		myProjectileFactory = new ProjectileFactory(observer, owner, projMap);
+		//matthewfaw: commented the  following line so that project compiles
+		//myProjectileFactory = new ProjectileFactory(observer, projMap);
 		
 	}
 

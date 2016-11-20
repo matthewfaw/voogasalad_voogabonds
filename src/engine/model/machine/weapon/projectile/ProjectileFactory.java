@@ -9,25 +9,35 @@ import engine.model.machine.Machine;
 import engine.model.machine.weapon.IKillerOwner;
 import engine.model.machine.weapon.ProjectileOwner;
 
+/**
+ * A class to make projectiles and store everything that all the projectiles will have in common, so the common
+ * data won't need to be passed around. 
+ * @author Weston
+ *
+ */
 public class ProjectileFactory {
 	Observer<IViewable> myViewObserver;
-	ProjectileOwner myProjectileOwner;
 	Map<String, ProjectileData> myProjectiles;
 	
 	public ProjectileFactory(
 			Observer<IViewable> observer,
-			ProjectileOwner owner,
 			Map<String, ProjectileData> projMap) {
 		
 		myViewObserver = observer;
-		myProjectileOwner = owner;
 		myProjectiles = projMap;
 		
 	}
 
+	/**
+	 * Makes a projectile from the data for name, targeting target owned by owner.
+	 * @param name
+	 * @param target
+	 * @param owner
+	 * @return new Projectile
+	 */
 	public Projectile newProjectile(String name, Machine target, IKillerOwner owner) {
 		if (myProjectiles.containsKey(name))
-			return new Projectile(myProjectiles.get(name), target, owner, myViewObserver, owner.getHeading(), owner.getLocation());
+			return new Projectile(myProjectiles.get(name), target, owner, myViewObserver);
 		else
 			//TODO: ResourceFile error message
 			throw new UnsupportedOperationException("No projectile called: " + name);
