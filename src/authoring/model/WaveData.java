@@ -2,6 +2,11 @@ package authoring.model;
 
 public class WaveData {
 	/**
+	 * A string which represents the name of the wave. To be used for access in the map
+	 */
+	private String name;
+	
+	/**
 	 * A String corresponding to the enemy name, which should have an EnemyData map entry
 	 */
 	private String waveEnemy;
@@ -12,6 +17,11 @@ public class WaveData {
 	private double timeBetweenEnemy;
 	
 	/**
+	 * Time after the previous wave and before this one starts.
+	 */
+	private double timeBeforeWave;
+	
+	/**
 	 * Number of enemies in this wave.
 	 */
 	private int numEnemies;
@@ -20,6 +30,15 @@ public class WaveData {
 	 * A String corresponding to the spawn point name, which should have an entry in the map.
 	 */
 	private String spawnPointName;
+	
+	public String getName(){
+		return name;
+	}
+	public void setName(String name) throws Exception{
+		if (name == null || name.length() == 0){
+			throw new Exception("Wave name must be specified.");
+		}
+	}
 	
 	public String getWaveEnemy() {
 		return waveEnemy;
@@ -39,6 +58,16 @@ public class WaveData {
 			throw new Exception("Time between enemy cannot be a negative number.");
 		}
 		this.timeBetweenEnemy = timeBetweenEnemy;
+	}
+	
+	public double getTimeBeforeWave() {
+		return timeBeforeWave;
+	}
+	public void setTimeBeforeWave(double timeBeforeWave) throws Exception{
+		if (timeBeforeWave < 0){
+			throw new Exception("Time between waves cannot be a negative number.");
+		}
+		this.timeBeforeWave = timeBeforeWave;
 	}
 	
 	public int getNumEnemies(){

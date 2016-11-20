@@ -15,7 +15,11 @@ public class FrontEndWave implements IWave {
 		myEnemyNames = enemyNames;
 		myPattern = pattern;
 	}
-
+	
+	public String getName(){
+		return "";
+	}
+	
 	@Override
 	public int getWaveNumber() {
 		return myNumber;
