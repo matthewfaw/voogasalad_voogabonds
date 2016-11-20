@@ -18,7 +18,7 @@ public interface IWave {
 	 * Gives a map of enemy types such as "air" or "ground" as the keys with the number of each of those types as
 	 * the values which will be a wave that contains those values of air and ground units.
 	 */
-	public Map<String, Integer> getWaveEnemyTypes();
+	public Map<String, Integer> getWaveEnemyNames();
 	
 	/**
 	 * Gives the type of arrangement pattern the enemies will be in. For example, alternating, random, solid, etc.
