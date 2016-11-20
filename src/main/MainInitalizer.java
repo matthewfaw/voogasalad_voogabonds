@@ -4,7 +4,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import authoring.view.display.GameDisplay;
+import authoring.view.display.GridToolBar;
 import authoring.view.menus.TopMenuBar;
+import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -63,6 +66,9 @@ public class MainInitalizer {
 	
 	public void initSim() {
 		TopMenuBar menuBar = new TopMenuBar(root);
+		InfoTabs infoTab = new InfoTabs(root);
+		GameDisplay mapDisplay = new GameDisplay(root);
+
 		stage.setScene(scene);
 	}
 	
