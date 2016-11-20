@@ -1,0 +1,32 @@
+What about your API/design is intended to be flexible?
+	Use Strategy Design Pattern for user defined movement patterns
+	Map-based structure for object attributes.
+How is your API/design encapsulating your implementation decisions?
+	Observer-Observable pattern for keeping track of changes to Model objects
+	Model holds images for collision detection, so Front end just needs to display the scene the back end gives it
+How is your part linked to other parts of the project?
+	Towers hold weapons, projectiles interact with players and enemies
+	Engine passed data files from authoring environment, which Engine uses to make instances
+What exceptions (error cases) might occur in your part and how will you handle them (or not, by throwing)?
+	Trying to create Projectile that doesn't exist. Throwing because
+	No currently apparent reason for exceptions.
+Why do you think your API/design is good (also define what your measure of good is)?
+	Flexible in allowing many types of games in the genre without changes.
+	Implementation allows for some games even outside the genre.
+
+
+What feature/design problem are you most excited to work on?
+	Geometry support for regions of terrain/ unit footprints
+	Collision interaction logic
+What feature/design problem are you most worried about working on?
+	Movement Strategies beyond the greedy one.
+	Multiplayer/online extensions
+What is do you plan to implement this weekend?
+	I plan on implementing everything to finish basic implementation this weekend
+	Same
+Discuss the use cases/issues created for your pieces: are they descriptive, appropriate, and reasonably sized?
+	Use cases are fine, but none of them are specifically mine.
+	They're pretty general at this point, but otherwise good.
+Do you have use cases for errors that might occur?
+	None of the errors I have should ever occur, given the rest of the program functions as intended.
+	Can't think of a place engine would need to deal with errors.
