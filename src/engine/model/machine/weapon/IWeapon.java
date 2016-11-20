@@ -1,10 +1,14 @@
 package engine.model.machine.weapon;
 
+import java.util.List;
+
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.projectile.IProjectile;
 import utility.Point;
 
 public interface IWeapon {
-	public void fire(Machine target, double initialDirectionRadians, Point initialLocation);
-	public IProjectile getProjectile();
+	abstract public void fire(List<Machine> targets, double initialDirectionRadians, Point initialLocation);
+	abstract public double getKills();
+	abstract public double getEarnings();
+	abstract public double getDamage();
+	
 }
