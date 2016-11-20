@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
 import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
@@ -65,6 +66,7 @@ public class MainInitalizer {
 	public void initSim() {
 		TopMenuBar menuBar = new TopMenuBar(root);
 		InfoTabs infoTab = new InfoTabs(root);
+		GameDisplay mapDisplay = new GameDisplay(root);
 		stage.setScene(scene);
 	}
 	
