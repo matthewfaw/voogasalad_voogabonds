@@ -1,6 +1,5 @@
 package authoring.model;
 
-import java.util.List;
 
 public class ProjectileData {
 
@@ -12,6 +11,7 @@ public class ProjectileData {
 	private String movement;
 	private int speed;
 	private int damageMultiplier;
+	private int turnSpeed;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -67,5 +67,9 @@ public class ProjectileData {
 	
 	public double getDamage() {
 		return damageMultiplier;
+	}
+
+	public double getTurnSpeed() {
+		return turnSpeed;
 	}
 }

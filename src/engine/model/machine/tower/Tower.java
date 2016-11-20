@@ -3,6 +3,8 @@ package engine.model.machine.tower;
 import engine.model.machine.IPurchasable;
 import engine.model.machine.Machine;
 import engine.model.resourcestore.IMoney;
+import engine.model.machine.weapon.DamageInfo;
+import utility.Damage;
 
 public class Tower extends Machine implements IPurchasable{
 
@@ -25,4 +27,11 @@ public class Tower extends Machine implements IPurchasable{
 	public void upgrade(ITowerUpgradeStore towerUpgradeStore) {
 		
 	}
+
+	@Override
+	public DamageInfo takeDamage(Damage toDeal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

@@ -4,16 +4,16 @@ import engine.model.machine.weapon.projectile.Projectile;
 import utility.Damage;
 import utility.Point;
 
-public class ExponentialDamageStrategy implements IDamageStrategy {
+public class BinaryDamageStrategy implements IDamageStrategy {
 
 	@Override
 	public Damage getAoEDamage(Projectile missile, Point location) {
-		return new Damage(Math.exp(-(location.euclideanDistance(missile.getPosition()))));
+		return new Damage(0);
 	}
 
 	@Override
 	public Damage getTargetDamage() {
-		return new Damage(0);
+		return new Damage(1);
 	}
 
 }
