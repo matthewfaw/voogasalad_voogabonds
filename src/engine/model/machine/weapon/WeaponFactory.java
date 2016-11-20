@@ -7,6 +7,7 @@ import authoring.model.WeaponData;
 import engine.IViewable;
 import engine.model.machine.weapon.projectile.ProjectileFactory;
 
+
 /**
  * A class to crate new weapons without having to pass the same arguments many times.
  * @author Weston

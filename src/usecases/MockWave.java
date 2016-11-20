@@ -16,7 +16,7 @@ public class MockWave implements IWave {
     }
 
     @Override
-    public Map<String, Integer> getWaveEnemyTypes () {
+    public Map<String, Integer> getWaveEnemyNames () {
         return myWaveEnemyTypes;
     }
     

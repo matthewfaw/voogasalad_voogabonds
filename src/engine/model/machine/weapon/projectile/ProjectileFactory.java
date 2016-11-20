@@ -6,6 +6,7 @@ import authoring.model.ProjectileData;
 import engine.IViewable;
 import engine.model.machine.Machine;
 import engine.model.machine.weapon.IKillerOwner;
+import engine.model.machine.weapon.ProjectileOwner;
 
 /**
  * A class to make projectiles and store everything that all the projectiles will have in common, so the common

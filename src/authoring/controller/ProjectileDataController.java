@@ -4,12 +4,11 @@ import java.util.AbstractMap;
 
 import authoring.model.ProjectileData;
 
-public class ProjectileController {
+public class ProjectileDataController {
 
 	private AbstractMap<String, ProjectileData> myProjectileDataMap;
 
-	public AbstractMap finalizeProjectileDataMap(){
-		//TODO: Error checking to make sure that enemies at least exist
+	public AbstractMap getProjectileDataMap(){
 		return myProjectileDataMap;
 	}
 	
