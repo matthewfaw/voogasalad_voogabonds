@@ -1,12 +1,15 @@
 package authoring.model.serialization;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
+import authoring.model.ProjectileData;
 import authoring.model.TowerData;
+import authoring.model.WeaponData;
 import authoring.view.objects.FrontEndEnemy;
 
 public class SerializationTester {
@@ -14,8 +17,9 @@ public class SerializationTester {
 	private String fileName;
 	private String fileLoc = "src/resources/";
 	
+	@SuppressWarnings("unchecked")
 	public void Tester(Object obj){
-		fileName = "test.txt";
+//		fileName = "test.txt";
 		List<Map<Integer, Integer>> list = new ArrayList<Map<Integer, Integer>>();
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		map.put(100, 10);
@@ -33,11 +37,27 @@ public class SerializationTester {
 		
 		obj = tow;
 		SerializeJSON ser = new SerializeJSON();
-		// We should make a user prompt for when they want to save a game file, which will be set as fileName
-		ser.SerializeToFile(obj, fileName);
 		DeserializeJSON des = new DeserializeJSON();
-//		des.Deserialize(fileLoc + fileName);
-		System.out.println(des.Deserialize(fileLoc + fileName));
+		// We should make a user prompt for when they want to save a game file, which will be set as fileName
+		List<List<Object>> mySerializables = new ArrayList<List<Object>>();
+		List<TowerData> towerList = new ArrayList<TowerData>();
+		towerList.add(tow);
+		towerList.add(new TowerData());
+		List<WeaponData> weaponList = new ArrayList<WeaponData>();
+		weaponList.add(new WeaponData());
+		List<ProjectileData> projectileList = new ArrayList<ProjectileData>();
+		projectileList.add(new ProjectileData());
+		
+		mySerializables.addAll((Collection<? extends List<Object>>) towerList);
+		
+		mySerializables.addAll((Collection<? extends List<Object>>) weaponList);
+		
+		mySerializables.addAll((Collection<? extends List<Object>>) projectileList);
+		for (int i = 0; i<mySerializables.size(); i++){
+			ser.SerializeToFile(mySerializables.get(i), mySerializables.get(i)+"");
+			fileName = mySerializables.get(i)+"";
+			des.Deserialize(fileName);
+		}
 		
 	}
 	

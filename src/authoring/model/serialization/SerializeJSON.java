@@ -9,14 +9,14 @@ public class SerializeJSON {
 	
 	private Gson gson;
 	
-	public String Serialize(Object obj){
+	public JsonElement Serialize(Object obj){
 
 		//overly verbose for now, but easily changeable later, for whether we want a JsonElement or String
 		gson = new Gson();
-		String json = gson.toJson(obj);
-		JsonElement a = gson.toJsonTree(obj);
-		System.out.println(a);
-		return a.toString();
+		String jsonString = gson.toJson(obj);
+		JsonElement json = gson.toJsonTree(obj);
+		System.out.println(json);
+		return json;
 		
 			
 	}
@@ -25,7 +25,7 @@ public class SerializeJSON {
 		
 		String fileLoc = "src/resources/";
 		
-		String str = Serialize(obj);
+		String str = Serialize(obj).toString();
 		
 		try{
 			PrintWriter out = new PrintWriter(fileLoc+fileName);
