@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
  * 
  */
 
-public class StatisticsRow {
+public class StatisticsRow implements IGUIPiece {
 	
 	private HBox myStatisticsRow;
 	

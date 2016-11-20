@@ -10,6 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -24,7 +29,7 @@ import javafx.scene.text.Text;
  * 
  */
 
-public class TowerColumn {
+public class TowerColumn implements IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
@@ -47,27 +52,50 @@ public class TowerColumn {
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    //Image image = new Image(
-	    //getClass().getResourceAsStream("warn.png")
-	    //);
-	    //tooltip.setGraphic(new ImageView(image));
-	    
+	    //Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("cow.png"));
+	    ////Image image = new Image(
+	    ////getClass().getResourceAsStream("warn.png")
+	    ////);
+	    //Tooltip myTooltip =new Tooltip();
+	    //myTooltip.setGraphic(new ImageView(image));
+	    	     
 	    ListView<String> towerInfo=new ListView<String>();
 	    ObservableList<String> items =FXCollections.observableArrayList("Monkey", "AOE", "Freeze", "Fly");
 	    towerInfo.setItems(items);
-	    towerInfo.setTooltip(new Tooltip("Tooltip for Button"));
+	    //towerInfo.setTooltip(myTooltip);
 	    towerInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent me) {
-	            
+	            //TODO:
 	        }
 	    });
 	    
+	    ListView<String> resourceInfo=new ListView<String>();
+	    ObservableList<String> otheritems =FXCollections.observableArrayList("Bonus", "styf", "Fe", "Fly");
+	    resourceInfo.setItems(otheritems);
+	    resourceInfo.setTooltip(new Tooltip("Tooltip for Button"));
+	    resourceInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent me) {
+	            //TODO:
+	        }
+	    });
 	    
-	    vbox.getChildren().addAll(l,towerInfo);
+	    TabPane resourceTabs= new TabPane();
+	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
+	    resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
+	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+	    
+	    vbox.getChildren().addAll(l,resourceTabs);
 	    
 	    return vbox;
 	}
 	
+
+	private Tab buildTab(Node list, String title) {
+		Tab tab= new Tab();
+		tab.setText(title);
+		tab.setContent(list);
+		return tab;
+	}
 
 	public Node getView() {
 		return myTowerColumn;
