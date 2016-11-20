@@ -2,11 +2,10 @@ package authoring.view.display;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.ResourceBundle;
-
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 
 /**
  * @author Christopher Lu
@@ -16,6 +15,7 @@ import javafx.scene.layout.TilePane;
 
 public class GameDisplay {
 
+	private VBox terrainContainer;
 	private ScrollPane terrainArea;
 	private TilePane terrainGrid;
 	private GridToolBar toolBar;
@@ -28,12 +28,15 @@ public class GameDisplay {
 	
 	public GameDisplay(BorderPane root) {
 		setUpScreenResolution();
+		this.terrainContainer = new VBox();
 		this.terrainArea = new ScrollPane();
 		this.terrainGrid = new TilePane();
+		this.toolBar = new GridToolBar(terrainContainer);
 		terrainGrid.setPrefWidth(screenWidth*0.8);
 		terrainGrid.setMaxHeight(screenHeight*0.9);
 		terrainArea.setContent(terrainGrid);
-		root.setCenter(terrainArea);
+		terrainContainer.getChildren().add(terrainArea);
+		root.setCenter(terrainContainer);
 		columns = (int) (screenWidth*0.8/(DEFAULT_TILE_SIZE + GAP));
 		rows = (int) (screenHeight*0.88/(DEFAULT_TILE_SIZE + GAP));
 		populateGrid();
@@ -51,7 +54,7 @@ public class GameDisplay {
 		terrainGrid.setVgap(GAP);
 		for (int col = 0; col < columns; col++) {
 			for (int r = 0; r < rows; r++) {
-				TerrainCell cell = new TerrainCell();
+				TerrainCell cell = new TerrainCell(toolBar);
 				cell.setWidth(DEFAULT_TILE_SIZE);
 				cell.setHeight(DEFAULT_TILE_SIZE);
 				terrainGrid.getChildren().add(cell);
