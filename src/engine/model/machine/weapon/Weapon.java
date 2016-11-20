@@ -9,6 +9,11 @@ import engine.model.strategies.ITargetStrategy;
 import engine.model.strategies.StrategyFactory;
 import utility.Point;
 
+/**
+ * A class to create projectiles and keep track of their effects on enemies.
+ * @author Weston
+ *
+ */
 public class Weapon implements IWeapon, IKillerOwner {
 	IKillerOwner myMachine;
 	ProjectileFactory myProjectileFactory;

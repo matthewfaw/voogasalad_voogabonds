@@ -14,6 +14,10 @@ import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
 
+/**
+ * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
+ * @author Weston
+ */
 public class Projectile implements IProjectile, IViewable, IMovable {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -81,6 +85,41 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		return myTarget;
 	}
 
+	@Override
+	public double getHeading() {
+		return myHeading;
+	}
+
+	@Override
+	public Point getPosition() {
+		return myLocation;
+	}
+
+	@Override
+	public String getImagePath() {
+		return myImagePath;
+	}
+
+	@Override
+	public Point getLocation() {
+		return myLocation;
+	}
+
+	@Override
+	public Point getGoal() {
+		return myTarget.getLocation();
+	}
+
+	@Override
+	public double getTurnSpeed() {
+		return myTurnSpeed;
+	}
+
+	@Override
+	public double getMoveSpeed() {
+		return mySpeed;
+	}
+	
 	private void hitTarget() {
 		myTarget.takeDamage(myDamageCalc.getTargetDamage());
 		explode();
@@ -115,40 +154,5 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		myObserver.update((IViewable) this);
 		
 	}
-
-	@Override
-	public double getHeading() {
-		return myHeading;
-	}
-
-	@Override
-	public Point getPosition() {
-		return myLocation;
-	}
-
-	@Override
-	public String getImagePath() {
-		return myImagePath;
-	}
-
-	@Override
-	public Point getLocation() {
-		return myLocation;
-	}
-
-	@Override
-	public Point getGoal() {
-		return myTarget.getLocation();
-	}
-
-	@Override
-	public double getTurnSpeed() {
-		return myTurnSpeed;
-	}
-
-	@Override
-	public double getMoveSpeed() {
-		return mySpeed;
-	}	
 
 }
