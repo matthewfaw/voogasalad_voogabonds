@@ -2,15 +2,20 @@ package engine.model.machine.weapon;
 
 import java.util.List;
 
-import authoring.model.ProjectileData;
 import authoring.model.WeaponData;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.projectile.Projectile;
 import engine.model.machine.weapon.projectile.ProjectileFactory;
 import engine.model.strategies.ITargetStrategy;
+import engine.model.strategies.StrategyFactory;
 import utility.Point;
 
-public class Weapon implements IWeapon {
+/**
+ * A class to create projectiles and keep track of their effects on enemies.
+ * @author Weston
+ *
+ */
+public class Weapon implements IWeapon, IKillerOwner {
+	IKillerOwner myMachine;
 	ProjectileFactory myProjectileFactory;
 	ITargetStrategy myTargetStrategy;
 	String myProjectile;
@@ -18,14 +23,25 @@ public class Weapon implements IWeapon {
 	int myTimeToFire;
 	double myRange;
 	
-	public Weapon(WeaponData data, ProjectileFactory projFactory) {
+	double myCareerKills;
+	double myCareerDamage;
+	double myCareerEarnings;
+	
+	public Weapon(WeaponData data, IKillerOwner owner, ProjectileFactory projFactory) {
 		myRange = data.getRange();
 		myFireRate = data.getFireRate();
-		myTimeToFire = 0;
+		myProjectile = data.getProjectileName();
 		
+		myMachine = owner;
 		myProjectileFactory = projFactory;
 		
-		//TODO: Init strategies
+		//TODO: Get strategy name from data
+		myTargetStrategy = StrategyFactory.targetStrategy("");
+		
+		myCareerKills = 0;
+		myCareerDamage = 0;
+		myCareerEarnings = 0;
+		myTimeToFire = 0;
 	}
 
 	@Override
@@ -41,6 +57,40 @@ public class Weapon implements IWeapon {
 			myTimeToFire--;
 		}
 		
+	}
+
+	@Override
+	public DamageInfo notifyDestroy(DamageInfo dmg) {
+		myCareerKills += dmg.getKills();
+		myCareerDamage += dmg.getDamage();
+		myCareerEarnings += dmg.getMoney();
+		
+		return myMachine.notifyDestroy(dmg);
+	}
+
+	@Override
+	public double getHeading() {
+		return myMachine.getHeading();
+	}
+
+	@Override
+	public Point getLocation() {
+		return myMachine.getLocation();
+	}
+
+	@Override
+	public double getKills() {
+		return myCareerKills;
+	}
+
+	@Override
+	public double getEarnings() {
+		return myCareerEarnings;
+	}
+
+	@Override
+	public double getDamage() {
+		return myCareerDamage;
 	}
 	
 	
