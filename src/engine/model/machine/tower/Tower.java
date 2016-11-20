@@ -5,7 +5,7 @@ import engine.model.machine.Machine;
 import engine.model.resourcestore.IMoney;
 
 public class Tower extends Machine implements IPurchasable{
-	
+
 	private IMoney sellPrice;
 	private IMoney upgradeCost;
 	

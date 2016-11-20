@@ -9,6 +9,7 @@ import engine.model.machine.tower.Tower;
  */
 public interface IViewableStore {
 	public List<Tower> getAvailableTowers();
+	public List<Tower> getAffordableTowers();
 		
 	
 }

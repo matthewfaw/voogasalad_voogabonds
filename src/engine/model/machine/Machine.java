@@ -38,7 +38,7 @@ public abstract class Machine implements IViewableMachine, IEntity {
 	}
 	
 	public IModifiablePlayer getModifiablePlayerInfo() {
-		return myModifiablePlayerInfo;
+		return myModifiablePlayer;
 	}
 
 	public void takeDamage(Damage toDeal) {

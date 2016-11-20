@@ -44,10 +44,12 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 		setChanged();
 		notifyObservers(1);
 	}
+	
 	@Override
 	public int getLivesRemaining() {
 		return myLives;
 	}
+	
 	@Override
 	public int getAvailableFunds() {
 		return myFunds;

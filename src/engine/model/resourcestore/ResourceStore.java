@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * This class is the store that keep all available resources
+ * This class is the store that keeps all available resources
  * @author Owen Chung
  */
 public class ResourceStore implements IModifiableStore, IViewableStore, Observer{
@@ -27,6 +27,7 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 		myPlayer = storecustomer;
 		myPlayer.addObserver(this);
 	}
+	
 	private void initAffordableTowers(){
 		myAffordableTowers = FXCollections.observableArrayList();
 		for (Tower tower : myAvailableTowers){
@@ -56,13 +57,28 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 	public List<Tower> getAvailableTowers() {
 		return myAvailableTowers;
 	}
+	
+	@Override
+	public List<Tower> getAffordableTowers() {
+		return myAffordableTowers;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg.equals(1) && o.equals(myPlayer)){
 			updateAffordableTowers();
 		}
 		
-		
+	}
+	
+	@Override
+	public void addAvailableTowers(Tower toAdd){
+		myAvailableTowers.add(toAdd);
+	}
+	
+	@Override
+	public void removeAvailableTowers(Tower toRemove){
+		myAvailableTowers.remove(toRemove);
 	}
 
 
