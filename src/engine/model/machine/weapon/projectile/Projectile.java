@@ -25,7 +25,6 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	IMovementStrategy myMovementCalc;
 	double mySpeed;
 	double myTurnSpeed;
-	
 	double myTraveled;
 	double myHeading;
 	Point myLocation;
@@ -36,32 +35,22 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	int myAoERadius;
 
 
-	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, Observer<IViewable> observer,
-			double heading, Point position) {
-		
-		myLocation = position;
-		myHeading = heading;
-		mySpeed = data.getSpeed();
-		myTurnSpeed = data.getTurnSpeed();
-		myTraveled = 0;
-		myTarget = target;
-		
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, Observer<IViewable> observer) {
 		myImagePath = data.getImagePath();
-		myMaxRange = data.getMaxRange();
-		myAoERadius = data.getAreaOfEffectRadius();
-		myDamage = data.getDamage();
-		
+		myTarget = target;
 		myOwner = owner;
 		
-		/*
 		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
-		myDamage = StrategyFactory.damageStrategy(data.getDamageStrategy());
-		*/
-		
-		//TODO: Use StrategyFactory for Strategy assignment
-		myMovementCalc = new GreedyMovementStrategy();
-		myDamageCalc = new ConstantDamageStrategy();
-		
+		myLocation = myOwner.getLocation();
+		myHeading = myOwner.getHeading();
+		myTraveled = 0;
+		mySpeed = data.getSpeed();
+		myTurnSpeed = data.getTurnSpeed();
+
+		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
+		myMaxRange = data.getMaxRange();
+		myAoERadius = data.getAreaOfEffectRadius();
+		myDamage = data.getDamage();		
 		
 		notifyListenersAdd();
 	}
