@@ -2,7 +2,10 @@ package authoring.view.display;
 
 import java.util.ResourceBundle;
 
-import javafx.geometry.Point2D;
+
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -13,38 +16,62 @@ import javafx.scene.shape.Rectangle;
 public class TerrainCell extends Rectangle {
 
 	private String terrainType;
-	private String terrainColor;
-	private Point2D terrainCoords;
+	private Color terrainColor;
+	private GridToolBar toolBar;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
-	public TerrainCell() {
+	public TerrainCell(GridToolBar tools) {
+		this.toolBar = tools;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainType = myResources.getString("DefaultTerrainType");
-		this.terrainColor = myResources.getString("DefaultTerrainColor");
+		this.terrainColor = Color.BLACK;
+		System.out.println(toolBar.getToggleStatus());
+		if (!toolBar.getToggleStatus()) {
+			this.setOnMouseClicked(new EventHandler<MouseEvent>()
+		       {
+		           @Override
+		           public void handle(MouseEvent t) {
+		               terrainColor = toolBar.getSelectedColor();
+		               terrainType = toolBar.getSelectedTerrain();
+		               System.out.println("Color is now " + terrainColor);
+		               System.out.println("Terrain is now " + terrainType);
+		           }
+		       });
+			}
+//		cellHandler();
 	}
 
+//	private void cellHandler() {
+//		if (toolBar.getToggleStatus()) {
+//		this.setOnMouseClicked(new EventHandler<MouseEvent>()
+//	       {
+//	           @Override
+//	           public void handle(MouseEvent t) {
+//	               terrainColor = toolBar.getSelectedColor();
+//	               terrainType = toolBar.getSelectedTerrain();
+//	               System.out.println("Color is now " + terrainColor);
+//	               System.out.println("Terrain is now " + terrainType);
+//	           }
+//	       });
+//		}
+//
+//	}
+	
 	public String getType() {
 		return terrainType;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return terrainColor;
 	}
 	
-	public String setType(String newType) {
+	public void setType(String newType) {
 		terrainType = newType;
-		return terrainType;
 	}
 	
-	public String setColor(String newColor) {
+	public void setColor(Color newColor) {
 		terrainColor = newColor;
-		return terrainColor;
-	}
-	
-	public Point2D setPosition(int x, int y) {
-		terrainCoords = new Point2D((double) x, (double) y);
-		return terrainCoords;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.AbstractMap;
 import authoring.model.EnemyData;
 import authoring.model.WeaponData;
 
-public class WeaponController {
+public class WeaponDataController {
 
 	private AbstractMap<String, WeaponData> myWeaponDataMap;
 
