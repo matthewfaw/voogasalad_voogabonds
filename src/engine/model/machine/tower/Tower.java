@@ -12,6 +12,7 @@ public class Tower extends Machine implements IPurchasable{
 	public Tower(Tower basetower){
 		myBaseTower = basetower;
 	}
+	// this information should be stored in the upgradestore, controller just need to query it
 	/*
 	public IMoney getUpgradeCost() {
 		return upgradeCost;
