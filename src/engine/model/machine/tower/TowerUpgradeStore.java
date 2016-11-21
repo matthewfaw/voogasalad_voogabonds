@@ -36,8 +36,8 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 		// not a base tower
 		return -1;
 	}
-	
+	// TODO 
 	public List<Tower> getPossibleUpgrades(Tower tower){
-		
+		return null;
 	}
 }

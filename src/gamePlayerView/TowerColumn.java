@@ -52,25 +52,22 @@ public class TowerColumn implements IGUIPiece {
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    //Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("cow.png"));
-	    ////Image image = new Image(
-	    ////getClass().getResourceAsStream("warn.png")
-	    ////);
-	    //Tooltip myTooltip =new Tooltip();
-	    //myTooltip.setGraphic(new ImageView(image));
-	    	     
-	    ListView<String> towerInfo=new ListView<String>();
-	    ObservableList<String> items =FXCollections.observableArrayList("Monkey", "AOE", "Freeze", "Fly");
+	    
+	    ListView<Button> towerInfo= new ListView<Button>();
+	    ObservableList<Button> items =FXCollections.observableArrayList();
+	    
+	    Image imagecow = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cow.png"));
+	    Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
+	    Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
+	    
+	    items.add(makeTowerButton("Basic", new ImageView(imagecow)));
+	    items.add(makeTowerButton("Sniper",new ImageView(imagecookie)));
+	    items.add(makeTowerButton("Bomber",new ImageView(imageboss)));
 	    towerInfo.setItems(items);
-	    //towerInfo.setTooltip(myTooltip);
-	    towerInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	            //TODO:
-	        }
-	    });
+	    
 	    
 	    ListView<String> resourceInfo=new ListView<String>();
-	    ObservableList<String> otheritems =FXCollections.observableArrayList("Bonus", "styf", "Fe", "Fly");
+	    ObservableList<String> otheritems =FXCollections.observableArrayList("Extra Gold", "Other crap", "Fe", "Fly");
 	    resourceInfo.setItems(otheritems);
 	    resourceInfo.setTooltip(new Tooltip("Tooltip for Button"));
 	    resourceInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -82,6 +79,7 @@ public class TowerColumn implements IGUIPiece {
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
 	    resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
+	    //resourceTabs.getTabs().add(buildTab(resourcebuttonInfo,"Buttondemo"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
 	    vbox.getChildren().addAll(l,resourceTabs);
@@ -90,7 +88,26 @@ public class TowerColumn implements IGUIPiece {
 	}
 	
 
+	private Button makeTowerButton(String string, ImageView imageView) {
+		Button b =new Button(string,imageView);
+		b.setOnMouseEntered(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent me) {
+	        	Tooltip t= new Tooltip("Towers");
+		        Tooltip.install(b, t);
+	        }    
+	    });
+		
+		b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent me) {
+	        	//TODO:
+	        }    
+	    });
+		
+		return b;
+	}
+
 	private Tab buildTab(Node list, String title) {
+		//System.out.println("Hishihs");
 		Tab tab= new Tab();
 		tab.setText(title);
 		tab.setContent(list);

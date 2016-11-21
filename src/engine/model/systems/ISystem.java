@@ -1,5 +1,7 @@
 package engine.model.systems;
 
+import engine.model.components.IComponent;
+
 /**
  * An interface to capture the commonalities between all systems 
  * 
@@ -10,5 +12,9 @@ package engine.model.systems;
  *
  */
 public interface ISystem {
-
+//	/**
+//	 * Adds aComonent to be registered with the system
+//	 * @param aComponent
+//	 */
+//	public void register(IComponent aComponent);
 }

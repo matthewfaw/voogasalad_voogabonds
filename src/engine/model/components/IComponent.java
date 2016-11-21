@@ -1,5 +1,6 @@
 package engine.model.components;
 
+import engine.IObservable;
 import engine.model.entities.IEntity;
 
 /**
@@ -13,7 +14,7 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public interface IComponent {
+public interface IComponent extends IObservable<IComponent> {
 	/**
 	 * Gets the Entity object which owns this component
 	 * Assumes that component is owned by a entity

@@ -4,7 +4,7 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.entities.IEntity;
+import engine.model.components.MoveableComponent;
 
 /**
  * A system to manage collision detection in the game
@@ -18,45 +18,57 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class CollisionDetection implements ISystem, IObserver, IObservable {
-	private List<IEntity> myEntities;
+public class CollisionDetection implements ISystem, IObserver<MoveableComponent>, IObservable<ISystem> {
+	private List<MoveableComponent> myMoveableComponents;
 	
-	private List<IObserver> myObservers;
+	private List<IObserver<ISystem>> myObservers;
 	
 	public CollisionDetection()
 	{
 	}
 
-	//************************************Observer interface****************************//
-	@Override
-	public void update(IEntity aObjectToUpdate) {
-		// Check all Entities to see if any are intersecting with the current object
-		for (IEntity entity: myEntities) {
-			if (intersects(aObjectToUpdate, entity)) {
-				notifyObservers();
-			}
-		}
-	}
 	/**
 	 * A method to determine if a and b intersect
 	 * @param a
 	 * @param b
 	 * @return
 	 */
-	private boolean intersects(IEntity a, IEntity b)
+	private boolean intersects(MoveableComponent a, MoveableComponent b)
 	{
 		//TODO: check for collision
 		return false;
 	}
 
+	//************************************Observer interface****************************//
+	@Override
+	public void update(MoveableComponent aChangedObject) {
+		// Check all Entities to see if any are intersecting with the current object
+		for (MoveableComponent component: myMoveableComponents) {
+			if (intersects(aChangedObject, component)) {
+				notifyObservers();
+			}
+		}
+	}
+
+	//TODO: maybe add these to the Observer interface... not sure if this makes sense tho
+	public void addComponent(MoveableComponent aNewComponent)
+	{
+		myMoveableComponents.add(aNewComponent);
+	}
+
+	public void removeComponent(MoveableComponent aNewComponent)
+	{
+		myMoveableComponents.remove(aNewComponent);
+	}
+
 	//************************************Observable interface****************************//
 	@Override
-	public void attach(IObserver aObserver) {
+	public void attach(IObserver<ISystem> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver aObserver) {
+	public void detach(IObserver<ISystem> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -67,7 +79,7 @@ public class CollisionDetection implements ISystem, IObserver, IObservable {
 	@Override
 	public void notifyObservers() {
 		//XXX: not sure how I feel about passing null here
-		myObservers.forEach(observer -> observer.update(null));
+		myObservers.forEach(observer -> observer.update(this));
 	}
 
 }

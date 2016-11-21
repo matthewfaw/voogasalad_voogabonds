@@ -72,13 +72,13 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 	}
 	
 	@Override
-	public void addAvailableTowers(Tower toAdd){
-		myAvailableTowers.add(toAdd);
+	public void addBaseTowers(Tower toAdd){
+		myBaseTowers.add(toAdd);
 	}
 	
 	@Override
-	public void removeAvailableTowers(Tower toRemove){
-		myAvailableTowers.remove(toRemove);
+	public void removeBaseTowers(Tower toRemove){
+		myBaseTowers.remove(toRemove);
 	}
 
 

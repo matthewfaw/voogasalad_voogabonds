@@ -11,26 +11,21 @@ import javafx.geometry.Point2D;
  */
 
 public interface ITerrain {
-
-	/**
-	 * Determines the name of the terrain.
-	 */
-	public int getName();
 	
 	/**
-	 * Determines the shape and dimensions of the terrain.
+	 * Determines the position of the terrain.
 	 */
-	public Point2D[] getVertices();
+	public Point2D getPosition();
 	
 	/**
 	 * Type of terrain determines how fast an enemy can move across it.
 	 */
-	public int getType();
+	public String getType();
 	
 	/**
 	 * Determines the terrain's color.
 	 */
-	public int getColor();
+	public String getColor();
 	
 
 }
