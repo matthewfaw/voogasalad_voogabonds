@@ -2,6 +2,7 @@ package authoring.view.input_menus;
 
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
+import authoring.model.TowerData;
 import authoring.view.objects.FrontEndEnemy;
 import authoring.view.objects.FrontEndTower;
 import authoring.view.side_panel.TowerTab;
@@ -110,6 +111,12 @@ public class TowerMenu {
                                 return;
                         }
                         FrontEndTower tower = new FrontEndTower(name, type, health, cost, size, image);
+                        TowerData towerDat = new TowerData();
+                        towerDat.setName(name);
+//                        towerDat.setMaxHealth(health);
+//                        towerDat.setBuyPrice(cost);
+//                        towerDat.setCollisionRadius(size);
+//                        towerDat.setMovementStrategy("");
                         String sound = mySoundField.getCharacters().toString();
                         if (sound.substring(sound.length() - 4).equals(".wav")){
                                 tower.setSound(sound);
@@ -118,12 +125,11 @@ public class TowerMenu {
                         myTab.addButtonToDisplay(name);
                         myTab.addTower(name);
                         // TODO: set up weapon for enemy
-                        myController.createTowerData(tower);
+                        myController.createTowerData(name, towerDat);
                         myTowerWindow.close();
                 }
         });
         root.getChildren().add(finishButton);
     }
     
-
 }
