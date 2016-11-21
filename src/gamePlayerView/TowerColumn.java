@@ -16,7 +16,10 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -33,6 +36,8 @@ public class TowerColumn implements IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
+	private ListView<Button> towerInfo;
+	private Button towerToBeDragged;
 	
 	public TowerColumn(){
 		myTowerColumn= buildVBox();
@@ -52,19 +57,32 @@ public class TowerColumn implements IGUIPiece {
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    
-	    ListView<Button> towerInfo= new ListView<Button>();
+	    towerInfo= new ListView<Button>();
 	    ObservableList<Button> items =FXCollections.observableArrayList();
-	    
 	    Image imagecow = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cow.png"));
-	    Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
-	    Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
+            Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
+            Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
+            
+            items.add(makeTowerButton("Basic", new ImageView(imagecow)));
+            items.add(makeTowerButton("Sniper",new ImageView(imagecookie)));
+            items.add(makeTowerButton("Bomber",new ImageView(imageboss)));
+            towerInfo.setItems(items);
 	    
-	    items.add(makeTowerButton("Basic", new ImageView(imagecow)));
-	    items.add(makeTowerButton("Sniper",new ImageView(imagecookie)));
-	    items.add(makeTowerButton("Bomber",new ImageView(imageboss)));
-	    towerInfo.setItems(items);
-	    
+	    towerInfo.setOnDragDetected(new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent event) {
+                    /* drag was detected, start a drag-and-drop gesture*/
+                    /* allow any transfer mode */
+                    Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
+                    /* Put a string on a dragboard */
+                    ClipboardContent content = new ClipboardContent();
+                    towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
+                    content.putString(towerToBeDragged.toString());
+                    System.out.println(towerToBeDragged);
+                    System.out.println("drag start");
+                    db.setContent(content);
+                    event.consume();
+                }  
+            });
 	    
 	    ListView<String> resourceInfo=new ListView<String>();
 	    ObservableList<String> otheritems =FXCollections.observableArrayList("Extra Gold", "Other crap", "Fe", "Fly");
