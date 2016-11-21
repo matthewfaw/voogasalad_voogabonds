@@ -56,9 +56,17 @@ public class SerializationTester {
 		for (int i = 0; i<mySerializables.size(); i++){
 			ser.SerializeToFile(mySerializables.get(i), mySerializables.get(i)+"");
 			fileName = mySerializables.get(i)+"";
-			des.Deserialize(fileName);
+//			des.DeserializeFromFile(fileName);
 		}
-		
+
+//		SerializeJSON ser = new SerializeJSON();
+//		DeserializeJSON des = new DeserializeJSON();
+//		ser.SerializeToFile(new TowerData(), "Test.txt");
+//		Object obj = des.DeserializeFromFile("Test.txt", TowerData.class);
+//		System.out.println("TESTING");
+//		System.out.println(obj.toString());
+//		TowerData d =  (TowerData) obj;
+//		System.out.println(d.getBuyPrice());
 	}
 	
 	public String getFileName(){
