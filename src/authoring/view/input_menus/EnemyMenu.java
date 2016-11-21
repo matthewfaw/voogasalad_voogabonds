@@ -2,12 +2,10 @@ package authoring.view.input_menus;
 
 import java.util.ResourceBundle;
 
-import authoring.controller.EnemyDataController;
-import authoring.view.objects.FrontEndEnemy;
+import authoring.model.EnemyData;
 import authoring.view.side_panel.EnemyTab;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -18,66 +16,56 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class EnemyMenu {
-	private static final int SIZE = 500;
+	private static final int SIZE = 350;
 	
-	private ResourceBundle myResources;private TextField myNameField;
-	private TextField myTypeField;
+	private ResourceBundle myResources;
+	private TextField myNameField;
 	private TextField myHealthField;
 	private TextField mySpeedField;
-	private TextField mySpawnField;
-	private TextField myEndField;
 	private TextField myImageField;
-	private TextField mySoundField;
+	private TextField myCollisionRadiusField;
+	private TextField myKillRewardField;
 	private Stage myEnemyWindow;
-	private EnemyDataController myController;
 	private EnemyTab myTab;
 	private MenuHelper myHelper;
+	private boolean myIsDefault;
 	
 	public EnemyMenu(ResourceBundle resources, EnemyTab tab){
 		myResources = resources;
 		myTab = tab;
-		myController = new EnemyDataController();
 		myHelper = new MenuHelper(myResources);
 	}
 	
-	public void createEnemyWindow(String nameVal, String typeVal, String healthVal, String speedVal, 
-			String spawnVal, String endVal, String imageVal, String soundVal) {
+	public void createEnemyWindow(String nameVal, String healthVal, String speedVal, 
+			String collisionRadiusVal, String killRewardVal, String imageVal, boolean isDefault) {
+		myIsDefault = isDefault;
 		myEnemyWindow = new Stage();
 		myEnemyWindow.initModality(Modality.APPLICATION_MODAL);
 		VBox root = new VBox();
-		setUpEnemyScreen(root, nameVal, typeVal, healthVal, speedVal, spawnVal, endVal, imageVal, soundVal);
+		setUpEnemyScreen(root, nameVal, healthVal, speedVal, collisionRadiusVal, killRewardVal, imageVal);
 		Scene scene = new Scene(root, SIZE, SIZE);
 		myEnemyWindow.setTitle(myResources.getString("AddEnemy"));
 		myEnemyWindow.setScene(scene);
 		myEnemyWindow.show();
 	}
 	
-	private void setUpEnemyScreen(VBox root, String nameVal, String typeVal, String healthVal, 
-			String speedVal, String spawnVal, String endVal, String imageVal, String soundVal){
+	private void setUpEnemyScreen(VBox root, String nameVal, String healthVal, String speedVal, 
+			String collisionRadiusVal, String killRewardVal, String imageVal){
 		myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
-		myTypeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterType"), typeVal);
 		myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
 		mySpeedField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSpeed"), speedVal);
-		mySpawnField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSpawn"), spawnVal);
-		myEndField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterEnd"), endVal);
+		myCollisionRadiusField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterCollisionRadius"), 
+				collisionRadiusVal);
+		myKillRewardField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterKillReward"), 
+				killRewardVal);
 		setUpImage(root, imageVal);
-		setUpSound(root, soundVal);
 		setUpWeapon(root);
-		setUpFinishButton(root);
+		setUpFinishButton(root, nameVal);
 	}
 	
 	private void setUpImage(VBox root, String value) {
 		myImageField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterImage"), value);
 		myHelper.setUpBrowseButton(root, myImageField, "PNG", "*.png");
-	}
-	
-	private void setUpSound(VBox root, String value) {
-		if (value == null)
-			mySoundField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSound"), 
-					myResources.getString("DefaultSound"));
-		else
-			mySoundField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSound"), value);
-		myHelper.setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
 	}
 
 	private void setUpWeapon(VBox root) {
@@ -86,59 +74,57 @@ public class EnemyMenu {
 		root.getChildren().addAll(weaponText, weaponBox);
 	}
 	
-	private void setUpFinishButton(VBox root){
+	private void setUpFinishButton(VBox root, String originalName){
 		Button finishButton = new Button(myResources.getString("Finish"));
 		finishButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				String name = myNameField.getCharacters().toString();
-				String type = myTypeField.getCharacters().toString();
-				double health = 0;
-				double speed = 0;
+				int health = 0;
+				int speed = 0;
+				int collisionRadius = 0;
+				int killReward = 0;
 				try {
-					health = Double.parseDouble(myHealthField.getCharacters().toString());
-					speed = Double.parseDouble(mySpeedField.getCharacters().toString());
+					health = Integer.parseInt(myHealthField.getCharacters().toString());
+					speed = Integer.parseInt(mySpeedField.getCharacters().toString());
+					collisionRadius = Integer.parseInt(myCollisionRadiusField.getCharacters().toString());
+					killReward = Integer.parseInt(myKillRewardField.getCharacters().toString());
 				} catch(Exception e) {
-					myTab.showError(myResources.getString("BadDoubleInput"));
-					return;
-				}
-				Point2D spawn = convertStringToPoint(mySpawnField.getCharacters().toString());
-				Point2D end = convertStringToPoint(myEndField.getCharacters().toString());
-				if (spawn == null || end == null){
+					myHelper.showError(myResources.getString("BadIntInput"));
 					return;
 				}
 				String image = myImageField.getCharacters().toString();
-				if (!(image.substring(image.length() - 4).equals(".png"))){
-					myTab.showError(myResources.getString("NoImageInput"));
-					return;
-				}
-				FrontEndEnemy enemy = new FrontEndEnemy(speed, spawn, end, name, health, type, image);
-				String sound = mySoundField.getCharacters().toString();
-				if (sound.substring(sound.length() - 4).equals(".wav")){
-					enemy.setSound(sound);
-				}
 				myTab.removeButtonDuplicates(name);
 				myTab.addButtonToDisplay(name);
-				myTab.getEnemyMap().put(name, enemy);
+				myTab.getEnemies().add(name);
+				EnemyData enemy = createEnemyData(name, health, speed, collisionRadius, killReward, image);
+				if (enemy == null){
+					return;
+				}
 				// TODO: set up weapon for enemy
-				myController.createEnemyData(enemy);
+				if (myIsDefault)
+					myTab.getController().createEnemyData(enemy);
+				else
+					myTab.getController().updateEnemyData(originalName, enemy);
 				myEnemyWindow.close();
+			}
+
+			private EnemyData createEnemyData(String name, int health, int speed, int collisionRadius, 
+					int killReward, String image) {
+				EnemyData enemy = new EnemyData();
+				try {
+					enemy.setName(name);
+					enemy.setMaxHealth(health);
+					enemy.setSpeed(speed);
+					enemy.setCollisionRadius(collisionRadius);
+					enemy.setKillReward(killReward);
+					enemy.setImagePath(image);
+				} catch(Exception e){
+					myHelper.showError(e.getMessage());
+					return null;
+				}
+				return enemy;
 			}
 		});
 		root.getChildren().add(finishButton);
-	}
-	
-	private Point2D convertStringToPoint(String pointStr){
-    	String noParenth = pointStr.substring(1, pointStr.length() - 1);
-		String[] temp = noParenth.split(",");
-		double x = 0;
-		double y = 0;
-		try {
-			x = Double.parseDouble(temp[0]);
-			y = Double.parseDouble(temp[1].trim());
-		} catch (Exception e){
-			myTab.showError(myResources.getString("BadPointInput"));
-			return null;
-		}
-		return new Point2D(x, y);
 	}
 }
