@@ -2,9 +2,10 @@ package authoring.view.display;
 
 import java.util.ResourceBundle;
 
-
 import javafx.event.EventHandler;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -16,32 +17,63 @@ import javafx.scene.shape.Rectangle;
 public class TerrainCell extends Rectangle {
 
 	private String terrainType;
-	private Color terrainColor;
 	private GridToolBar toolBar;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private int rowLocation;
+	private int colLocation;
+	private TilePane tileGrid;
+	private ScrollPane terrainArea;
 	
-	public TerrainCell(GridToolBar tools) {
+	public TerrainCell(ScrollPane area, TilePane pane, GridToolBar tools, int row, int column) {
 		this.toolBar = tools;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainType = myResources.getString("DefaultTerrainType");
-		this.terrainColor = Color.BLACK;
+		this.rowLocation = row;
+		this.colLocation = column;
+		this.tileGrid = pane;
+		this.terrainArea = area;
+		clickEvent();
+	}
+	
+	private void clickEvent() {
+		this.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent> () {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (toolBar.getToggleStatus()) {
+					setFill(toolBar.getSelectedColor());
+					setType(toolBar.getSelectedTerrain());
+					setWidth(50);
+					setHeight(50);
+				}
+			}
+		});
 	}
 	
 	public String getType() {
 		return terrainType;
 	}
-
-	public Color getColor() {
-		return terrainColor;
+	
+	public int getRow() {
+		return rowLocation;
+	}
+	
+	public int getColumn() {
+		return colLocation;
 	}
 	
 	public void setType(String newType) {
 		terrainType = newType;
 	}
 	
-	public void setColor(Color newColor) {
-		terrainColor = newColor;
-	}
-
+//	@Override
+//	public void setFill(Color newColor) {
+//		if (newColor.equals(null)) {
+//			newColor = Color.BLACK;
+//		}
+//		System.out.println("ColorChooser: " + newColor);
+//		terrainColor = newColor;
+//		System.out.println(terrainColor);
+//	}
+	
 }
