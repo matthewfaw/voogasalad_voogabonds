@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -41,5 +43,12 @@ public class MenuHelper {
 		});
 		root.getChildren().add(browseButton);
 	}
+	
+	public void showError (String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(myResources.getString("ErrorTitle"));
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

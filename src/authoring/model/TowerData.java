@@ -1,5 +1,6 @@
 package authoring.model;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,10 @@ public class TowerData {
 	private List<Map<Integer, Integer>> initialLocations;
 	private String movement;
 	
-	public void setName(String name) {
+	public void setName(String name) throws Exception {
+		if (name == null || name.length() == 0){
+			throw new Exception("Must enter a valid name.");
+		}
 		this.name = name;
 	}
 	
@@ -25,7 +29,10 @@ public class TowerData {
 		return name;
 	}
 	
-	public void setWeaponName(String weaponName){
+	public void setWeaponName(String weaponName) throws Exception{
+		if (weaponName == null || weaponName.length() == 0){
+			throw new Exception("Must enter a valid name.");
+		}
 		this.weaponName = weaponName;
 	}
 	
@@ -33,7 +40,10 @@ public class TowerData {
 		return weaponName;
 	}
 	
-	public void setBuyPrice(int buyPrice){
+	public void setBuyPrice(int buyPrice) throws Exception{
+		if (buyPrice < 0){
+			throw new Exception("Price cannot be negative.");
+		}
 		this.buyPrice = buyPrice;
 	}
 	
@@ -41,7 +51,10 @@ public class TowerData {
 		return buyPrice;
 	}
 	
-	public void setSellPrice(int sellPrice){
+	public void setSellPrice(int sellPrice) throws Exception{
+		if (sellPrice < 0){
+			throw new Exception("Price cannot be negative.");
+		}
 		this.sellPrice = sellPrice;
 	}
 	
@@ -49,7 +62,10 @@ public class TowerData {
 		return sellPrice;
 	}
 	
-	public void setMaxHealth(int maxHealth){
+	public void setMaxHealth(int maxHealth) throws Exception{
+		if (maxHealth <= 0){
+			throw new Exception("Health cannot be less than or equal to zero.");
+		}
 		this.maxHealth = maxHealth;
 	}
 	
@@ -65,7 +81,10 @@ public class TowerData {
 		return upgrades;
 	}
 	
-	public void setImagePath(String imagePath){
+	public void setImagePath(String imagePath) throws Exception{
+		if (!imagePath.endsWith(".png") || !(new File(imagePath).exists())){
+			throw new Exception("Image file is invalid.");
+		}
 		this.imagePath = imagePath;
 	}
 	
@@ -81,7 +100,10 @@ public class TowerData {
 		return traversableTerrain;
 	}
 	
-	public void setCollisionRadius(int collisionRadius){
+	public void setCollisionRadius(int collisionRadius) throws Exception{
+		if (collisionRadius < 0){
+			throw new Exception("Collision Radius cannot be negative.");
+		}
 		this.collisionRadius = collisionRadius;
 	}
 	

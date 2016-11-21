@@ -12,7 +12,7 @@ public class EnemyDataController {
 		return myEnemyDataMap;
 	}
 	
-	public void createEnemyData(FrontEndEnemy enemy){
+	public void createEnemyData(EnemyData enemy){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
@@ -24,7 +24,7 @@ public class EnemyDataController {
 	}
 	
 	
-	public void updateEnemyData(String originalName, String updatedEnemy){
+	public void updateEnemyData(String originalName, EnemyData updatedEnemy){
 		//Find old enemyData in map
 		//create new EnemyData Object from FrontEndEnemy
 	}

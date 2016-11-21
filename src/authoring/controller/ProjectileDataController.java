@@ -12,10 +12,11 @@ public class ProjectileDataController {
 		return myProjectileDataMap;
 	}
 	
-	public void createProjectileData(String projectile){
+	public void createProjectileData(String projectileName, ProjectileData projectileData){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
+		myProjectileDataMap.put(projectileName, projectileData);
 	}
 	
 	

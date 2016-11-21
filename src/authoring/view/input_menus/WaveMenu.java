@@ -1,6 +1,7 @@
 package authoring.view.input_menus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import authoring.view.side_panel.EnemyTab;
@@ -22,6 +23,7 @@ public class WaveMenu {
 	private TextField myNumberField;
 	private EnemyTab myEnemyTab;
 	private ArrayList<TextField> myEnemyFields;
+	private HashMap<String, Integer> myEnemyTotals;
 	
 	public WaveMenu(ResourceBundle resources, WaveLevelTab tab, EnemyTab enemyTab){
 		myResources = resources;
@@ -29,6 +31,7 @@ public class WaveMenu {
 		myHelper = new MenuHelper(myResources);
 		myEnemyTab = enemyTab;
 		myEnemyFields = new ArrayList<TextField>();
+		myEnemyTotals = new HashMap<String, Integer>();
 	}
 	
 	public void createWaveWindow(String numberVal){
@@ -49,8 +52,13 @@ public class WaveMenu {
 	}
 
 	private void setUpWaveEnemies(VBox root) {
-		for (String enemyName: myEnemyTab.getEnemyMap().keySet()){
-			myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, "0"));
+		for (String enemyName: myEnemyTab.getEnemies()){
+			if (myEnemyTotals.get(enemyName) == null)
+				myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, 
+						myResources.getString("DefaultEnemyValue")));
+			else
+				myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, 
+						String.valueOf((int) myEnemyTotals.get(enemyName))));
 		}
 	}
 

@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.view.display.GameDisplay;
-import authoring.view.display.GridToolBar;
 import authoring.view.menus.TopMenuBar;
 import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
@@ -68,7 +67,6 @@ public class MainInitalizer {
 		TopMenuBar menuBar = new TopMenuBar(root);
 		InfoTabs infoTab = new InfoTabs(root);
 		GameDisplay mapDisplay = new GameDisplay(root);
-
 		stage.setScene(scene);
 	}
 	

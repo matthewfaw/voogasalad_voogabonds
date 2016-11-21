@@ -14,10 +14,11 @@ public class WeaponDataController {
 		return myWeaponDataMap;
 	}
 	
-	public void createTowerData(String weapon){
+	public void createWeaponData(String weaponName, WeaponData weaponData){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
+		myWeaponDataMap.put(weaponName, weaponData);
 	}
 	
 	

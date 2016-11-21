@@ -12,7 +12,7 @@ public class WaveDataController {
 	 */
 	private LinkedHashMap<String, WaveData> myWaveMap;
 	
-	public void createNewWave(FrontEndWave wave){
+	public void createNewWave(String name, WaveData wave){
 		try{
 			//Create WaveData object here
 			//Add to wave
