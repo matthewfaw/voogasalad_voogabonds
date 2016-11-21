@@ -1,5 +1,6 @@
 package player.map;
 
+import gamePlayerView.MapDisplay;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,7 +14,7 @@ public class MapMain extends Application{
     @Override
     public void start (Stage primaryStage) throws Exception {
         md1 = new MapDisplay();
-        md1.init(primaryStage);
+        md1.init();
     }
     
     

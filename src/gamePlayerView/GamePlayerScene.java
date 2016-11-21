@@ -29,6 +29,10 @@ public class GamePlayerScene {
 		s.show();
 	}
 	
+	private void updateScene(){
+	    
+	}
+	
 }
 
 
