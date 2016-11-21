@@ -7,7 +7,10 @@ public class WeaponData {
 	private double range;
 	private int fireRate;
 	
-	public void setName(String name) {
+	public void setName(String name) throws Exception {
+		if (name == null || name.length() == 0){
+			throw new Exception("Name must be a valid string.");
+		}
 		this.name = name;
 	}
 	
@@ -15,7 +18,10 @@ public class WeaponData {
 		return name;
 	}
 	
-	public void setProjectileName(String projectileName){
+	public void setProjectileName(String projectileName) throws Exception{
+		if (projectileName == null || projectileName.length() == 0){
+			throw new Exception("Name must be a valid string.");
+		}
 		this.projectileName = projectileName;
 	}
 	
@@ -23,7 +29,10 @@ public class WeaponData {
 		return projectileName;
 	}
 	
-	public void setRange(int range){
+	public void setRange(int range) throws Exception{
+		if (range < 0){
+			throw new Exception("Range cannot be a negative number.");
+		}
 		this.range = range;
 	}
 	
@@ -31,7 +40,10 @@ public class WeaponData {
 		return range;
 	}
 	
-	public void setFireRate(int fireRate){
+	public void setFireRate(int fireRate) throws Exception{
+		if (fireRate < 0){
+			throw new Exception("Fire Rate cannot be a negative number.");
+		}
 		this.fireRate = fireRate;
 	}
 	

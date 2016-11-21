@@ -10,6 +10,13 @@ public class MapData {
 	private HashSet<Point> sinkPoints;
 	private HashSet<TerrainData> terrainList;
 	
+	public MapData()
+	{
+		spawnPoints = new HashSet<Point>();
+		sinkPoints = new HashSet<Point>();
+		terrainList = new HashSet<TerrainData>();
+	}
+	
 	public void setNumXCells(int x) throws Exception{
 		if (x <= 0){
 			throw new Exception("The map must be wider than 0 cells.");
@@ -24,6 +31,7 @@ public class MapData {
 		if (y <= 0){
 			throw new Exception("The map must be taller than 0 cells.");
 		}
+		this.numYCells = y;
 	}
 	public int getNumYCells(){
 		return numYCells;

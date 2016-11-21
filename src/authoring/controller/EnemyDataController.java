@@ -1,7 +1,5 @@
 package authoring.controller;
 import authoring.model.EnemyData;
-import authoring.view.objects.FrontEndEnemy;
-
 import java.util.AbstractMap;
 
 public class EnemyDataController {
@@ -12,21 +10,17 @@ public class EnemyDataController {
 		return myEnemyDataMap;
 	}
 	
-	public void createEnemyData(FrontEndEnemy enemy){
-		//Parse the FrontEndEnemy object
-		//Error check
-		//Add it to map
+	public void createEnemyData(EnemyData enemy){
+		myEnemyDataMap.put(enemy.getName(), enemy);
 	}
-	
 	
 	public EnemyData getEnemyData(String enemyName){
 		return myEnemyDataMap.get(enemyName);
 	}
 	
-	
-	public void updateEnemyData(String originalName, String updatedEnemy){
-		//Find old enemyData in map
-		//create new EnemyData Object from FrontEndEnemy
+	public void updateEnemyData(String originalName, EnemyData updatedEnemy){
+		myEnemyDataMap.remove(originalName);
+		createEnemyData(updatedEnemy);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package authoring.model;
 
+import java.io.File;
 
 public class ProjectileData {
 
@@ -13,7 +14,10 @@ public class ProjectileData {
 	private int damageMultiplier;
 	private int turnSpeed;
 	
-	public void setName(String name) {
+	public void setName(String name) throws Exception {
+		if (name == null || name.length() == 0){
+			throw new Exception("Name must be a valid string.");
+		}
 		this.name = name;
 	}
 	
@@ -21,7 +25,10 @@ public class ProjectileData {
 		return name;
 	}
 	
-	public void setMaxRange(int maxRange){
+	public void setMaxRange(int maxRange) throws Exception{
+		if (maxRange < 0){
+			throw new Exception("Range cannot be a negative number.");
+		}
 		this.maxRange = maxRange;
 	}
 	
@@ -29,7 +36,10 @@ public class ProjectileData {
 		return maxRange;
 	}
 	
-	public void setAreaOfEffectRadius(int AOERadius){
+	public void setAreaOfEffectRadius(int AOERadius) throws Exception{
+		if (AOERadius < 0){
+			throw new Exception("Area of Effect Radius cannot be a negative number.");
+		}
 		this.areaOfEffectRadius = AOERadius;
 	}
 	
@@ -37,7 +47,10 @@ public class ProjectileData {
 		return areaOfEffectRadius;
 	}
 	
-	public void setImagePath(String imagePath){
+	public void setImagePath(String imagePath) throws Exception{
+		if (!imagePath.endsWith(".png") || !(new File(imagePath).exists())){
+			throw new Exception("Image file is invalid.");
+		}
 		this.imagePath = imagePath;
 	}
 	

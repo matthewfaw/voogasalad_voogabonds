@@ -5,7 +5,6 @@ import java.util.Map;
 import authoring.model.ProjectileData;
 import authoring.model.WeaponData;
 import engine.IViewable;
-import engine.Observer;
 import engine.model.machine.weapon.projectile.ProjectileFactory;
 
 
@@ -17,13 +16,8 @@ import engine.model.machine.weapon.projectile.ProjectileFactory;
 public class WeaponFactory {
 	ProjectileFactory myProjectileFactory;
 	
-	public WeaponFactory(
-			Observer<IViewable> observer,
-			Map<String, ProjectileData> projMap) {
-		
-		//matthewfaw: commented the  following line so that project compiles
-		//myProjectileFactory = new ProjectileFactory(observer, projMap);
-		
+	public WeaponFactory(Map<String, ProjectileData> projMap) {
+		myProjectileFactory = new ProjectileFactory(projMap);
 	}
 
 	public Weapon newWeapon(WeaponData data, IKillerOwner owner) {
