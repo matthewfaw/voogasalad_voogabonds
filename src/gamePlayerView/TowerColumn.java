@@ -37,7 +37,6 @@ public class TowerColumn implements IGUIPiece {
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
 	private ListView<ImageView> towerInfo;
-	private ImageView towerToBeDragged;
 	
 	public TowerColumn(){
 		myTowerColumn= buildVBox();
@@ -49,7 +48,7 @@ public class TowerColumn implements IGUIPiece {
 	private VBox buildVBox() {
 		VBox vbox = new VBox();
 		vbox.setPrefWidth(200);
-		vbox.setPrefHeight(700);
+		vbox.setPrefHeight(600);
 	    vbox.setPadding(new Insets(10));
 	    vbox.setSpacing(8);
 	    vbox.setStyle("-fx-background-color: #778899;");
@@ -81,7 +80,7 @@ public class TowerColumn implements IGUIPiece {
                 public void handle(MouseEvent event) {
                     Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
                     ClipboardContent content = new ClipboardContent();
-                    towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
+                    ImageView towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
                     content.putImage(towerToBeDragged.getImage());
                     db.setContent(content);
                     event.consume();
