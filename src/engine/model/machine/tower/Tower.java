@@ -19,6 +19,10 @@ public class Tower extends Machine implements IPurchasable, ITower{
 	}
 	*/
 	
+	public Tower(int initialHealth) {
+		super(initialHealth);
+	}
+
 	/**
 	 * Upgrades this tower to the
 	 * @param newTower

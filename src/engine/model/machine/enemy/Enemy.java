@@ -7,6 +7,11 @@ import engine.model.resourcestore.IMoney;
 import utility.Damage;
 
 public class Enemy extends Machine implements IEnemy {
+	
+	public Enemy(int initialHealth) {
+		super(initialHealth);
+	}
+
 	private IMoney killValue;
 	
 
