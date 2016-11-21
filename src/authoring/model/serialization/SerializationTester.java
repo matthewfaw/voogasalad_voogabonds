@@ -18,7 +18,7 @@ public class SerializationTester {
 	private String fileLoc = "src/resources/";
 	
 	@SuppressWarnings("unchecked")
-	public void Tester(Object obj){
+	public void Tester(Object obj) throws Exception{
 //		fileName = "test.txt";
 		List<Map<Integer, Integer>> list = new ArrayList<Map<Integer, Integer>>();
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
