@@ -10,7 +10,6 @@ import javafx.geometry.Point2D;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
-import authoring.view.objects.FrontEndEnemy;
 
 public class SerializationTester {
 	

@@ -2,16 +2,16 @@ package authoring.view.side_panel;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring.controller.EnemyDataController;
+import authoring.model.EnemyData;
 import authoring.view.input_menus.EnemyMenu;
-import authoring.view.objects.FrontEndEnemy;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -34,15 +34,17 @@ public class EnemyTab extends Tab {
 	private int screenWidth;
 	private int screenHeight;
 	private VBox myContent;
-	private HashMap<String, FrontEndEnemy> myEnemyMap;
+	private ArrayList<String> myEnemies;
 	private EnemyMenu myMenu;
+	private EnemyDataController myController;
 	
 	public EnemyTab(TabPane pane) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
-		myEnemyMap = new HashMap<String, FrontEndEnemy>();
+		myEnemies = new ArrayList<String>();
 		myMenu = new EnemyMenu(myResources, this);
+		myController = new EnemyDataController();
 		enemyTabOptions(enemyTab);
 		pane.getTabs().add(enemyTab);
 	}
@@ -73,21 +75,14 @@ public class EnemyTab extends Tab {
 		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				myMenu.createEnemyWindow(myResources.getString("DefaultName"), 
-						myResources.getString("DefaultType"), myResources.getString("DefaultHealth"), 
-						myResources.getString("DefaultSpeed"), myResources.getString("DefaultSpawn"), 
-						myResources.getString("DefaultEnd"), myResources.getString("DefaultImage"), 
-						myResources.getString("DefaultSound"));
+						myResources.getString("DefaultHealth"), myResources.getString("DefaultSpeed"), 
+						myResources.getString("DefaultCollisionRadius"), 
+						myResources.getString("DefaultKillReward"), myResources.getString("DefaultImage"),
+						true);
 			}
 		};
 		return handler;
 	}
-	
-	public void showError (String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(myResources.getString("ErrorTitle"));
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 	
 	public void removeButtonDuplicates(String s) {
 		for (int i = 0; i < myContent.getChildren().size(); i++) {
@@ -104,25 +99,20 @@ public class EnemyTab extends Tab {
 		button.setMinWidth(myContent.getMinWidth());
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				FrontEndEnemy enemy = myEnemyMap.get(text);
-				myMenu.createEnemyWindow(enemy.getName(), enemy.getType(), String.valueOf(enemy.getHealth()), 
-						String.valueOf(enemy.getSpeed()), point2DToString(enemy.getSpawnPoint()), 
-						point2DToString(enemy.getEndPoint()), enemy.getImage(), enemy.getSound());
+				EnemyData enemy = myController.getEnemyData(text);
+				myMenu.createEnemyWindow(enemy.getName(), String.valueOf(enemy.getMaxHealth()), 
+						String.valueOf(enemy.getSpeed()), String.valueOf(enemy.getCollisionRadius()), 
+						String.valueOf(enemy.getKillReward()), enemy.getImagePath(), false);
 			}
 		});
 		myContent.getChildren().add(button);
 	}
 	
-	private String point2DToString(Point2D point){
-		StringBuilder sb = new StringBuilder("(");
-		sb.append(point.getX());
-		sb.append(", ");
-		sb.append(point.getY());
-		sb.append(")");
-		return sb.toString();
+	public List<String> getEnemies(){
+		return myEnemies;
 	}
 	
-	public Map<String, FrontEndEnemy> getEnemyMap(){
-		return myEnemyMap;
+	public EnemyDataController getController(){
+		return myController;
 	}
 }
