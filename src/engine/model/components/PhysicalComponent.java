@@ -1,14 +1,16 @@
 package engine.model.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import engine.IObservable;
 import engine.IObserver;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.terrain.Terrain;
 import utility.Point;
 
-public class PhysicalComponent implements IComponent, IObservable {
+public class PhysicalComponent implements IComponent {
+	private List<IObserver<IComponent>> myObservers;
+
 	private List<Terrain> myValidTerrains;
 	private Point myLocation;
 	
@@ -17,6 +19,7 @@ public class PhysicalComponent implements IComponent, IObservable {
 	public PhysicalComponent(PhysicalComponentData aPhysicalComponentData)
 	{
 		//TODO
+		myObservers = new ArrayList<IObserver<IComponent>>();
 	}
 	PhysicalComponent(IEntity aEntity, List<Terrain> aValidTerrainList, Point aLocation)
 	{
@@ -57,21 +60,18 @@ public class PhysicalComponent implements IComponent, IObservable {
 
 	//********************IObservable interface***********//
 	@Override
-	public void attach(IObserver aObserver) {
-		// TODO Auto-generated method stub
-		
+	public void attach(IObserver<IComponent> aObserver) {
+		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver aObserver) {
-		// TODO Auto-generated method stub
-		
+	public void detach(IObserver<IComponent> aObserver) {
+		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
+		myObservers.forEach(o -> o.update(this));
 	}
 
 	//*******************IComponent interface***********//
