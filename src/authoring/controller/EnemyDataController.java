@@ -1,6 +1,5 @@
 package authoring.controller;
 import authoring.model.EnemyData;
-import authoring.view.objects.FrontEndEnemy;
 
 import java.util.AbstractMap;
 

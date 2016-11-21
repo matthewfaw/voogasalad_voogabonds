@@ -25,7 +25,7 @@ public class InfoTabs {
 		infoTab.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		Tab towerTab = new TowerTab(infoTab);
 		Tab enemyTab = new EnemyTab(infoTab);
-		Tab waveTab = new WaveLevelTab(infoTab, (EnemyTab) enemyTab);
+		Tab waveTab = new WaveLevelTab(infoTab);
 		Tab gameTab = new GameTab(infoTab);
 		infoTab.setPrefSize(screenWidth/5, screenHeight);
 		root.setLeft(infoTab);

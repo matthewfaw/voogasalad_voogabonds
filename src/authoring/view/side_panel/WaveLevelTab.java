@@ -24,11 +24,11 @@ public class WaveLevelTab extends Tab  {
 	private int screenHeight;
 	private WaveMenu myMenu;
 	
-	public WaveLevelTab(TabPane pane, EnemyTab enemyTab) {
+	public WaveLevelTab(TabPane pane) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		waveTab = new Tab(myResources.getString("Waves"));
-		myMenu = new WaveMenu(myResources, this, enemyTab);
+		myMenu = new WaveMenu(myResources, this);
 		waveTabOptions(waveTab);
 		pane.getTabs().add(waveTab);
 	}
@@ -56,7 +56,9 @@ public class WaveLevelTab extends Tab  {
 	private EventHandler<ActionEvent> addWaveHandler(){
 		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				myMenu.createWaveWindow(myResources.getString("DefaultNumber"));
+				myMenu.createWaveWindow(myResources.getString("DefaultWaveName"), 
+						myResources.getString("DefaultTimeBetween"), myResources.getString("DefaultTimeFor"),
+						myResources.getString("DefaultNumber"), true);
 			}
 		};
 		return handler;

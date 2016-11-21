@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import authoring.view.side_panel.EnemyTab;
 import authoring.view.side_panel.WaveLevelTab;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -20,46 +19,42 @@ public class WaveMenu {
 	private WaveLevelTab myTab;
 	private Stage myWaveWindow;
 	private MenuHelper myHelper;
+	private TextField myNameField;
+	private TextField myTimeBetweenField;
+	private TextField myTimeForField;
 	private TextField myNumberField;
-	private EnemyTab myEnemyTab;
-	private ArrayList<TextField> myEnemyFields;
-	private HashMap<String, Integer> myEnemyTotals;
+	private TextField mySpawnField;
+	private boolean myIsDefault;
 	
-	public WaveMenu(ResourceBundle resources, WaveLevelTab tab, EnemyTab enemyTab){
+	public WaveMenu(ResourceBundle resources, WaveLevelTab tab){
 		myResources = resources;
 		myTab = tab;
 		myHelper = new MenuHelper(myResources);
-		myEnemyTab = enemyTab;
-		myEnemyFields = new ArrayList<TextField>();
-		myEnemyTotals = new HashMap<String, Integer>();
 	}
 	
-	public void createWaveWindow(String numberVal){
+	public void createWaveWindow(String nameVal, String timeBetweenVal, String timeForVal, String numberVal,
+			boolean isDefault){
+		myIsDefault = isDefault;
 		myWaveWindow = new Stage();
 		myWaveWindow.initModality(Modality.APPLICATION_MODAL);
 		VBox root = new VBox();
-		setUpWaveScreen(root, numberVal);
-		ScrollPane pane = new ScrollPane(root);
-		Scene scene = new Scene(pane, SIZE, SIZE);
+		setUpWaveScreen(root, nameVal, timeBetweenVal, timeForVal, numberVal);
+		Scene scene = new Scene(root, SIZE, SIZE);
 		myWaveWindow.setTitle(myResources.getString("AddWave"));
 		myWaveWindow.setScene(scene);
 		myWaveWindow.show();
 	}
 
-	private void setUpWaveScreen(VBox root, String numberVal) {
+	private void setUpWaveScreen(VBox root, String nameVal, String timeBetweenVal, String timeForVal, 
+			String numberVal) {
+		myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
+		myTimeBetweenField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterTimeBetween"),
+				timeBetweenVal);
+		myTimeForField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterTimeFor"), 
+				timeForVal);
 		myNumberField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterNumber"), numberVal);
-		setUpWaveEnemies(root);
 	}
 
-	private void setUpWaveEnemies(VBox root) {
-		for (String enemyName: myEnemyTab.getEnemies()){
-			if (myEnemyTotals.get(enemyName) == null)
-				myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, 
-						myResources.getString("DefaultEnemyValue")));
-			else
-				myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, 
-						String.valueOf((int) myEnemyTotals.get(enemyName))));
-		}
-	}
+
 
 }
