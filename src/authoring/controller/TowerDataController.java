@@ -4,19 +4,19 @@ import java.util.AbstractMap;
 
 import authoring.model.TowerData;
 
-public class TowerController {
+public class TowerDataController {
 
 	private AbstractMap<String, TowerData> myTowerDataMap;
 
 	public AbstractMap finalizeTowerDataMap(){
-		//TODO: Error checking to make sure that enemies at least exist
 		return myTowerDataMap;
 	}
 	
-	public void createTowerData(String tower){
+	public void createTowerData(String towerName, TowerData towerData){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
+		myTowerDataMap.put(towerName, towerData);
 	}
 	
 	
