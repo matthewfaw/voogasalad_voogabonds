@@ -1,30 +1,21 @@
 package engine.model.playerinfo;
 
 import java.util.Observable;
-
-/*
-import java.util.List;
 import engine.model.resourcestore.IMoney;
- */
+ 
 
 
 public class Player extends Observable implements IViewablePlayer, IModifiablePlayer{
 	private int myID;
 	private int myLives;
-	private int myFunds;
-	/* TODO: Implement IMoney Interface
-	  private List<IMoney> myFunds;
+	private IMoney myMoney;
 	
-	  public Player(int ID, int initLives, List<IMoney> startingfunds){
-		
-	}
-	 */
-	
-	public Player(int ID, int initLives, int startingfunds){
+	public Player(int ID, int initLives, IMoney startingMoney) {
 		myID = ID;
 		myLives = initLives;
-		myFunds = startingfunds;
+		myMoney = startingMoney;
 	}
+	 
 	/**
 	 * 0 corresponds to live change
 	 */
@@ -39,8 +30,8 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	 * 1 corresponds to funds change
 	 */
 	@Override
-	public void updateAvailableFunds(int deltaFunds) {
-		myFunds = myFunds + deltaFunds;
+	public void updateAvailableMoney(int deltaValue) {
+		myMoney.updateValue(deltaValue);
 		setChanged();
 		notifyObservers(1);
 	}
@@ -51,7 +42,11 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	}
 	
 	@Override
-	public int getAvailableFunds() {
-		return myFunds;
+	public IMoney getAvailableMoney() {
+		return myMoney;
+	}
+	@Override
+	public int getID(){
+		return myID;
 	}
 }

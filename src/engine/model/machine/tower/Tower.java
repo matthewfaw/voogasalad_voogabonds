@@ -7,11 +7,6 @@ import engine.model.machine.weapon.DamageInfo;
 import utility.Damage;
 
 public class Tower extends Machine implements IPurchasable{
-	private Tower myBaseTower;
-	
-	public Tower(Tower basetower){
-		myBaseTower = basetower;
-	}
 	// this information should be stored in the upgradestore, controller just need to query it
 	/*
 	public IMoney getUpgradeCost() {
@@ -30,6 +25,8 @@ public class Tower extends Machine implements IPurchasable{
 	 * Replaces all fields of this tower with newTower
 	 */
 	/*
+	 * when the user upgrade, the upgradestore will take care of it. 
+	 * tower just needs to offer an interface for the UpgradeStore to update the parameters 
 	public void upgrade(ITowerUpgradeStore towerUpgradeStore) {
 		
 	}

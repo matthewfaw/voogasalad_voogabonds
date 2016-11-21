@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
+import engine.model.resourcestore.IMoney;
 /**
- * Tower Upgrade Store
+ * Tower Upgrade Store that stores the hierarchies among towers
  * @author Owen Chung
  *
  */
@@ -27,14 +29,14 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 			Stack<TowerNode> stack = new Stack<TowerNode>();
 			List<TowerNode> visitedList = new ArrayList<TowerNode>();
 			stack.push(basenode);
-			while(!stack.isEmpty()){
+			while(!stack.isEmpty()) {
 				TowerNode current = stack.pop();
-				if (visitedList.contains(current)){
+				if (visitedList.contains(current)) {
 					continue;
 				}
 				visitedList.add(current);
 				myTowerNodeMap.put(current.getID(), current);
-				for (TowerNode childnode : current.getChildren()){
+				for (TowerNode childnode : current.getChildren()) {
 					stack.push(childnode);
 				}
 			}
@@ -46,9 +48,9 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	 * @return
 	 */
 	
-	private List<Tower> getTowerfromNode(List<TowerNode> nodes){
+	private List<Tower> getTowerfromNode(List<TowerNode> nodes) {
 		List<Tower> ret = new ArrayList<Tower>();
-		for (TowerNode node : nodes){
+		for (TowerNode node : nodes) {
 			ret.add(node.getID());
 		}
 		return ret;
@@ -62,21 +64,21 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 		return getTowerfromNode(myBaseTowers);
 	}
 	/**
-	 * return the price of a tower if it's a base tower, otherwise return -1
+	 * return the price of a tower if it's a base tower, otherwise return null
 	 * @param tower
 	 * @return
 	 */
-	public int getPrice(Tower tower){
-		for (TowerNode towernode : myBaseTowers){
-			if (towernode.getID().equals(tower)){
+	public IMoney getPrice(Tower tower) {
+		for (TowerNode towernode : myBaseTowers) {
+			if (towernode.getID().equals(tower)) {
 				return towernode.getPrice();
 			}
 		}
 		// not a base tower
-		return -1;
+		return null;
 	}
 	
-	public List<Tower> getPossibleUpgrades(Tower tower){
+	public List<Tower> getPossibleUpgrades(Tower tower) {
 		TowerNode towernode = myTowerNodeMap.get(tower);
 		return getTowerfromNode(towernode.getChildren());
 	}
