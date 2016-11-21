@@ -21,7 +21,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage s) throws Exception {
 		GamePlayerScene gamePlayerScene = new GamePlayerScene();
-		//System.out.println("dcc");
     	gamePlayerScene.init(s);
 	}
 
