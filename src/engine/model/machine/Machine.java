@@ -8,10 +8,14 @@ import engine.model.machine.weapon.DamageInfo;
 import utility.Damage;
 import utility.Point;
 
-public abstract class Machine implements IViewable, IViewableMachine, IEntity {
+public abstract class Machine implements IViewable, IViewableMachine, IModifiableMachine, IEntity {
 
 	private IModifiablePlayer myModifiablePlayer;
 	private IHealth health;
+	
+	public Machine (int initialHealth) {
+		health = new Health(initialHealth);
+	}
 	
 	@Override
 	public String getImagePath() {
@@ -33,6 +37,11 @@ public abstract class Machine implements IViewable, IViewableMachine, IEntity {
 	@Override
 	public IHealth getHealth() {
 		return health;
+	}
+	
+	@Override
+	public void modifyHealth(IHealth deltaHealth) {
+		health.updateHealth(deltaHealth);
 	}
 	
 	public double getDistanceTo(Point p) {
