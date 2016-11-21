@@ -68,7 +68,6 @@ public class MainInitalizer {
 		TopMenuBar menuBar = new TopMenuBar(root);
 		InfoTabs infoTab = new InfoTabs(root);
 		GameDisplay mapDisplay = new GameDisplay(root);
-
 		stage.setScene(scene);
 	}
 	

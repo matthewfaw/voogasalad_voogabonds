@@ -1,7 +1,6 @@
 package authoring.model;
 
 import java.io.File;
-import java.util.List;
 
 public class ProjectileData {
 
@@ -11,6 +10,9 @@ public class ProjectileData {
 	private String imagePath;
 	private String damage;
 	private String movement;
+	private int speed;
+	private int damageMultiplier;
+	private int turnSpeed;
 	
 	public void setName(String name) throws Exception {
 		if (name == null || name.length() == 0){
@@ -70,5 +72,17 @@ public class ProjectileData {
 	
 	public String getMovementStrategy(){
 		return movement;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+	
+	public double getDamage() {
+		return damageMultiplier;
+	}
+
+	public double getTurnSpeed() {
+		return turnSpeed;
 	}
 }

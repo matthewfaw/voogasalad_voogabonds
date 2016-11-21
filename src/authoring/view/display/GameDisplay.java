@@ -2,7 +2,10 @@ package authoring.view.display;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
+import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -40,6 +43,7 @@ public class GameDisplay {
 		columns = (int) (screenWidth*0.8/(DEFAULT_TILE_SIZE + GAP));
 		rows = (int) (screenHeight*0.88/(DEFAULT_TILE_SIZE + GAP));
 		populateGrid();
+		clickEvent();
 	}
 	
 	private void setUpScreenResolution() {
@@ -60,6 +64,33 @@ public class GameDisplay {
 				terrainGrid.getChildren().add(cell);
 			}
 		}
+	}
+	
+	private void clickEvent() {
+		TerrainCell cell = new TerrainCell(toolBar);
+		terrainArea.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent> () {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (mouseEvent.getTarget().getClass().equals(cell.getClass())) {
+					if (toolBar.getToggleStatus()) {
+//						terrainArea.setContent(null);
+						TerrainCell c = (TerrainCell) mouseEvent.getTarget();
+						c.setColor(toolBar.getSelectedColor());
+						c.setType(toolBar.getSelectedTerrain());
+						c.setWidth(DEFAULT_TILE_SIZE);
+						c.setHeight(DEFAULT_TILE_SIZE);
+						terrainGrid.getChildren().remove(mouseEvent.getTarget());
+						System.out.println("Removed");
+						System.out.println("Width: " + c.getWidth());
+						System.out.println("Height: " + c.getHeight());
+						System.out.println("Color: " + c.getColor());
+						System.out.println("Type: " + c.getType());
+						terrainGrid.getChildren().add(c);
+						terrainArea.setContent(terrainGrid);
+					}
+				}
+			}
+		});
 	}
 
 	public void setCols(int numCols) {
