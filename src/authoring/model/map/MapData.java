@@ -2,6 +2,7 @@ package authoring.model.map;
 import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
 
 public class MapData {
 	private int numXCells;
@@ -9,6 +10,7 @@ public class MapData {
 	private HashSet<Point> spawnPoints;
 	private HashSet<Point> sinkPoints;
 	private HashSet<TerrainData> terrainList;
+	private ArrayList<String> validTerrain;
 	
 	public void setNumXCells(int x) throws Exception{
 		if (x <= 0){
