@@ -3,6 +3,7 @@ package authoring.controller;
 import java.util.AbstractMap;
 
 import authoring.model.TowerData;
+import authoring.view.objects.FrontEndTower;
 
 public class TowerDataController {
 
@@ -13,7 +14,7 @@ public class TowerDataController {
 		return myTowerDataMap;
 	}
 	
-	public void createTowerData(String tower){
+	public void createTowerData(FrontEndTower tower){
 		//Parse the FrontEndEnemy object
 		//Error check
 		//Add it to map
