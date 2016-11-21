@@ -24,9 +24,7 @@ public class WeaponTab extends Tab {
     private int screenHeight;
     private WeaponMenu myMenu;
     
-    
-    // Expect WeaponDataController
-    
+    // Expect WeaponDataController, ProjectileDataController
     public WeaponTab(TabPane pane) {
         screenInfo();
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
@@ -49,18 +47,17 @@ public class WeaponTab extends Tab {
         weaponArea.getChildren().addAll(currentWeapons, weaponButtons);
         weaponTab.setContent(weaponArea);
     }
-    
+
     private EventHandler<ActionEvent> addWeaponHandler(){
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent event){
-                        // TODO: update create window method
-                        myMenu.createWeaponMenu(myResources.getString("DefaultWeaponName"), myResources.getString("DefaultProjectile"),
-                                                myResources.getString("DefaultRange"), myResources.getString("DefaultRate"));
-                }
+            public void handle(ActionEvent event){
+                myMenu.createWeaponMenu(myResources.getString("DefaultWeaponName"), myResources.getString("DefaultProjectile"),
+                                        myResources.getString("DefaultRange"), myResources.getString("DefaultRate"));
+            }
         };
         return handler;
-}
-    
+    }
+
     private void screenInfo() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = (int) screenSize.getWidth();

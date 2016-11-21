@@ -2,6 +2,7 @@ package authoring.view.input_menus;
 
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
+import authoring.controller.WeaponDataController;
 import authoring.view.side_panel.TowerTab;
 import authoring.view.side_panel.WeaponTab;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ public class WeaponMenu {
     
     private ResourceBundle myResources;
     private WeaponTab myTab;
-    //private WeaponDataController myController;
+    private WeaponDataController myController;
     private MenuHelper myHelper;
     private Stage myWeaponWindow;
     private TextField myNameField;
@@ -26,7 +27,7 @@ public class WeaponMenu {
     public WeaponMenu(ResourceBundle resources, WeaponTab tab) {
         myResources = resources;
         myTab = tab;
-        //myController = new TowerDataController();
+        myController = new WeaponDataController();
         myHelper = new MenuHelper(myResources);
     }
     
