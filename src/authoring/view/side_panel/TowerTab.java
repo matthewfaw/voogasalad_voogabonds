@@ -104,10 +104,10 @@ public class TowerTab extends Tab {
 	private EventHandler<ActionEvent> addTowerHandler(){
             EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event){
-                        myMenu.createTowerMenu(myResources.getString("DefaultTowerName"), myResources.getString("DefaultType"), 
+                        myMenu.createTowerMenu(myResources.getString("DefaultTowerName"), 
                                                myResources.getString("DefaultHealth"), myResources.getString("DefaultBuyPrice"), 
                                                myResources.getString("DefaultSellPrice"), myResources.getString("DefaultSize"), 
-                                               myResources.getString("DefaultImage"), myResources.getString("DefaultSound"));
+                                               myResources.getString("DefaultImage"));
                     }
             };
             return handler;

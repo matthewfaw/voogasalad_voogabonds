@@ -43,12 +43,12 @@ public class MenuHelper {
 		});
 		root.getChildren().add(browseButton);
 	}
-	
+
 	public void showError (String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(myResources.getString("ErrorTitle"));
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+	    Alert alert = new Alert(AlertType.ERROR);
+	    alert.setTitle(myResources.getString("ErrorTitle"));
+	    alert.setContentText(message);
+	    alert.showAndWait();
+	}
 
 }

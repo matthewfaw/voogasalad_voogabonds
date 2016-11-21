@@ -46,18 +46,18 @@ public class TowerMenu {
         myHelper = new MenuHelper(myResources);
     }
     
-    public void createTowerMenu(String nameVal, String typeVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal, String soundVal) {
+    public void createTowerMenu(String nameVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal) {
         myTowerWindow = new Stage();
         myTowerWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
-        setUpTowerScreen(root, nameVal, typeVal, healthVal, buyVal, sellVal, sizeVal, imageVal, soundVal);
+        setUpTowerScreen(root, nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal);
         Scene scene = new Scene(root, SIZE, SIZE);
         myTowerWindow.setTitle(myResources.getString("AddTower"));
         myTowerWindow.setScene(scene);
         myTowerWindow.show();
     }
     
-    private void setUpTowerScreen(VBox root, String nameVal, String typeVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal, String soundVal) {
+    private void setUpTowerScreen(VBox root, String nameVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal) {
         myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
         //myTypeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterType"), typeVal);
         myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
