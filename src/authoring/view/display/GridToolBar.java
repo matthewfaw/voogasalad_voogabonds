@@ -103,6 +103,7 @@ public class GridToolBar {
 		});
 	}
 	
+	
 	public boolean getToggleStatus() {
 		return toggleStatus;
 	}
