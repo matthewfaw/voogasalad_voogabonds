@@ -36,7 +36,7 @@ public class BuildGUI {
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
-	        borderpane.setCenter(myMap.getView());
+	    borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
 		return borderpane;
 	}
