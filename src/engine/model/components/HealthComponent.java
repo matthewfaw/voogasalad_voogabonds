@@ -4,16 +4,16 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.model.entities.IEntity;
 
-public class HealthComponent implements IComponent {
+public class HealthComponent implements IComponent, IObservable<HealthComponent> {
 
 	@Override
-	public void attach(IObserver<IComponent> aObserver) {
+	public void attach(IObserver<HealthComponent> aObserver) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void detach(IObserver<IComponent> aObserver) {
+	public void detach(IObserver<HealthComponent> aObserver) {
 		// TODO Auto-generated method stub
 		
 	}

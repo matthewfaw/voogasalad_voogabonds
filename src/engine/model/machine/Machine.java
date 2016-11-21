@@ -1,14 +1,11 @@
 package engine.model.machine;
 
-import engine.model.components.IComponent;
-import engine.model.entities.IEntity;
-
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.machine.weapon.DamageInfo;
 import utility.Damage;
 import utility.Point;
 
-public abstract class Machine implements IViewableMachine, IEntity {
+public abstract class Machine implements IViewableMachine {
 
 	private IModifiablePlayer myModifiablePlayer;
 	private IHealth health;
@@ -45,15 +42,4 @@ public abstract class Machine implements IViewableMachine, IEntity {
 
 	abstract public DamageInfo takeDamage(Damage toDeal);
 
-	@Deprecated
-	public int getId()
-	{
-		return 0;
-	}
-
-	@Deprecated
-	public void addComponent(IComponent aComponent)
-	{
-		
-	}
 }

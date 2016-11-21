@@ -1,18 +1,19 @@
 package engine.model.components;
 
+import engine.IObservable;
 import engine.IObserver;
 import engine.model.entities.IEntity;
 
-public class PurchasableComponent implements IComponent {
+public class PurchasableComponent implements IComponent, IObservable<PurchasableComponent>  {
 
 	@Override
-	public void attach(IObserver<IComponent> aObserver) {
+	public void attach(IObserver<PurchasableComponent> aObserver) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void detach(IObserver<IComponent> aObserver) {
+	public void detach(IObserver<PurchasableComponent> aObserver) {
 		// TODO Auto-generated method stub
 		
 	}
