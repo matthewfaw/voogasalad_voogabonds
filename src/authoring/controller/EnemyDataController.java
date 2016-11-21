@@ -7,7 +7,7 @@ import javafx.collections.ObservableMap;
 import java.util.List;
 
 
-public class EnemyDataController implements IObservableController{
+public class EnemyDataController{
 	private ObservableMap<String, EnemyData> myEnemyDataMap = FXCollections.observableHashMap();
 	
 	public ObservableMap finalizeEnemyDataMap(){

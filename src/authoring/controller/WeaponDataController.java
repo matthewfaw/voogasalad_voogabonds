@@ -4,12 +4,15 @@ import java.util.AbstractMap;
 
 import authoring.model.EnemyData;
 import authoring.model.WeaponData;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 
 public class WeaponDataController {
 
-	private AbstractMap<String, WeaponData> myWeaponDataMap;
+	private ObservableMap<String, WeaponData> myWeaponDataMap = FXCollections.observableHashMap();
 
-	public AbstractMap finalizeWeaponDataMap(){
+	public ObservableMap<String, WeaponData> finalizeWeaponDataMap(){
 		//TODO: Error checking to make sure that enemies at least exist
 		return myWeaponDataMap;
 	}
@@ -25,5 +28,9 @@ public class WeaponDataController {
 	public void updateWeaponData(String originalName, WeaponData updatedWeapon){
 		myWeaponDataMap.remove(originalName);
 		createWeaponData(updatedWeapon);
+	}
+	
+	public void addControllerListener(MapChangeListener<String, Object> listener){
+		myWeaponDataMap.addListener(listener);
 	}
 }
