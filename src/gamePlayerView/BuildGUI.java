@@ -30,7 +30,7 @@ public class BuildGUI {
 	}
 	
 	public BorderPane setScreen(){
-	        myMap = new MapDisplay();
+	    myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
 		BorderPane borderpane=new BorderPane();

@@ -1,5 +1,7 @@
 package gamePlayerView;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Tooltip;
@@ -28,7 +31,7 @@ import javafx.scene.text.Text;
 
 
 /**
- * @author Guhan Muruganandam
+ * @author Guhan Muruganandam & Grayson Wise
  * 
  */
 
@@ -38,6 +41,7 @@ public class TowerColumn implements IGUIPiece {
 	private VBox myTowerColumn;
 	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
+	private TextArea towerDataDisplay= new TextArea();
 	
 	public TowerColumn(){
 		myTowerColumn= buildVBox();
@@ -65,28 +69,17 @@ public class TowerColumn implements IGUIPiece {
 	    imgV1.setImage(imagecow);
 	    items.add(imgV1);
 	    ImageView imgV2 = new ImageView();
-            Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
-            imgV2.setImage(imagecookie);
-            items.add(imgV2);
-            ImageView imgV3 = new ImageView();
-            Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
-            imgV3.setImage(imageboss);
-            items.add(imgV3);
-            Tooltip t = new Tooltip("Tower");
-            Tooltip.install(imgV3, t);
-
-            towerInfo.setItems(items);
-	    
-	    towerInfo.setOnDragDetected(new EventHandler<MouseEvent>(){
-                public void handle(MouseEvent event) {
-                    Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
-                    ClipboardContent content = new ClipboardContent();
-                    towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
-                    content.putImage(towerToBeDragged.getImage());
-                    db.setContent(content);
-                    event.consume();
-                }  
-            });
+        Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
+        imgV2.setImage(imagecookie);
+        items.add(imgV2);
+        ImageView imgV3 = new ImageView();
+        Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
+        imgV3.setImage(imageboss);
+        items.add(imgV3);
+            
+        towerInfo.setItems(items);
+        setDragFunctionality();
+        setPopulateFunctionality();
 	    
 	    ListView<String> resourceInfo=new ListView<String>();
 	    ObservableList<String> otheritems =FXCollections.observableArrayList("Extra Gold", "Other crap", "Fe", "Fly");
@@ -101,14 +94,39 @@ public class TowerColumn implements IGUIPiece {
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
 	    resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
-	    //resourceTabs.getTabs().add(buildTab(resourcebuttonInfo,"Buttondemo"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
-	    vbox.getChildren().addAll(l,resourceTabs);
+	    vbox.getChildren().addAll(l,resourceTabs,towerDataDisplay);
 	    
 	    return vbox;
 	}
-	
+
+	private void setPopulateFunctionality() {
+		towerInfo.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            public void handle(MouseEvent event) {
+                ImageView towerChosen = towerInfo.getSelectionModel().getSelectedItem();
+                PopulateTowerDataDisplay("BOOM");
+            }  
+        });
+	}
+
+	private void setDragFunctionality() {
+		towerInfo.setOnDragDetected(new EventHandler<MouseEvent>(){
+            public void handle(MouseEvent event) {
+                Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+                towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
+                content.putImage(towerToBeDragged.getImage());
+                db.setContent(content);
+                event.consume();
+            }  
+        });
+	}
+
+	private void PopulateTowerDataDisplay(String s) {
+		String info= new String(s);
+		towerDataDisplay.setText(info);
+	}
 
 	private Button makeTowerImage(String string, ImageView imageView) {
 		Button b =new Button(string,imageView);
