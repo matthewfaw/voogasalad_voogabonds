@@ -13,8 +13,6 @@ public class TowerDataController {
 		return myTowerDataMap;
 	}
 	
-	
-	//public void createTowerData(FrontEndTower tower){
 	public void createTowerData(String towerName, TowerData towerData){
 		//Parse the FrontEndEnemy object
 		//Error check
