@@ -29,16 +29,13 @@ public class StatisticsRow implements IGUIPiece {
 	private HBox buildHBox() {
 		HBox hbox = new HBox();
 		hbox.setPrefWidth(800);
-		hbox.setMaxHeight(100);
+		hbox.setPrefHeight(100);
 	    hbox.setPadding(new Insets(10, 0,10, 0));
 	    hbox.setSpacing(10);
 	    hbox.setStyle("-fx-background-color: #336699;");
 
-	    Button buttonPlay = new Button("Play");
-	    buttonPlay.setPrefSize(100, 20);
-
-	    Button buttonPause = new Button("Pause");
-	    buttonPause.setPrefSize(100, 20);
+	    Button buttonPlay = makeButton("Play");
+	    Button buttonPause = makeButton("Pause");
 	    
 	    VBox labelBox= produceLabels();
 	    VBox textAreaBox= produceTextArea();
@@ -56,6 +53,13 @@ public class StatisticsRow implements IGUIPiece {
 	    return hbox;
 	}
 	
+	private Button makeButton(String string) {
+		Button b= new Button(string);
+		b.setPrefSize(100, 20);
+		//b.setStyle(Styles.green);
+		return b;
+	}
+
 	private VBox makeTowerOptionBox() {
 		VBox vbox = new VBox();
 		vbox.setSpacing(10);
