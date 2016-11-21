@@ -4,9 +4,7 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.components.IComponent;
 import engine.model.components.MoveableComponent;
-import engine.model.entities.IEntity;
 
 /**
  * A system to manage collision detection in the game

@@ -3,12 +3,7 @@ package engine.model.components;
 import engine.IObserver;
 import engine.model.entities.IEntity;
 
-/**
- * A component that defines an entities ability to move
- * @author matthewfaw
- *
- */
-public class MoveableComponent implements IComponent {
+public class PurchasableComponent implements IComponent {
 
 	@Override
 	public void attach(IObserver<IComponent> aObserver) {

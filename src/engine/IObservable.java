@@ -5,6 +5,7 @@ package engine;
  * 
  * @author matthewfaw
  *
+ *@param A: The class that determines what is being observed
  */
 public interface IObservable<A> {
 	/**
