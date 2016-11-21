@@ -14,6 +14,10 @@ import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
 
+/**
+ * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
+ * @author Weston
+ */
 public class Projectile implements IProjectile, IViewable, IMovable {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -25,7 +29,6 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	IMovementStrategy myMovementCalc;
 	double mySpeed;
 	double myTurnSpeed;
-	
 	double myTraveled;
 	double myHeading;
 	Point myLocation;
@@ -36,32 +39,22 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	int myAoERadius;
 
 
-	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, Observer<IViewable> observer,
-			double heading, Point position) {
-		
-		myLocation = position;
-		myHeading = heading;
-		mySpeed = data.getSpeed();
-		myTurnSpeed = data.getTurnSpeed();
-		myTraveled = 0;
-		myTarget = target;
-		
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, Observer<IViewable> observer) {
 		myImagePath = data.getImagePath();
-		myMaxRange = data.getMaxRange();
-		myAoERadius = data.getAreaOfEffectRadius();
-		myDamage = data.getDamage();
-		
+		myTarget = target;
 		myOwner = owner;
 		
-		/*
 		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
-		myDamage = StrategyFactory.damageStrategy(data.getDamageStrategy());
-		*/
-		
-		//TODO: Use StrategyFactory for Strategy assignment
-		myMovementCalc = new GreedyMovementStrategy();
-		myDamageCalc = new ConstantDamageStrategy();
-		
+		myLocation = myOwner.getLocation();
+		myHeading = myOwner.getHeading();
+		myTraveled = 0;
+		mySpeed = data.getSpeed();
+		myTurnSpeed = data.getTurnSpeed();
+
+		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
+		myMaxRange = data.getMaxRange();
+		myAoERadius = data.getAreaOfEffectRadius();
+		myDamage = data.getDamage();		
 		
 		notifyListenersAdd();
 	}
@@ -90,41 +83,6 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	@Override
 	public Machine getTargetMachine() {
 		return myTarget;
-	}
-
-	private void hitTarget() {
-		myTarget.takeDamage(myDamageCalc.getTargetDamage());
-		explode();
-	}
-	
-	private void explode() {
-		List<Machine> targets = new ArrayList<Machine>();
-		//TODO: Get all Machines in AoE Range
-		
-		DamageInfo result = new DamageInfo();
-		
-		for (Machine m: targets) {
-			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getLocation());
-			result = result.add(m.takeDamage(toDeal));
-		}
-		notifyListenersRemove();
-		myOwner.notifyDestroy(result);
-		
-	}
-	
-	private void notifyListenersAdd() {
-		myObserver.add((IViewable) this);
-		
-	}
-
-	private void notifyListenersRemove() {
-		myObserver.remove((IViewable) this);
-		
-	}
-	
-	private void notifyListenersUpdate() {
-		myObserver.update((IViewable) this);
-		
 	}
 
 	@Override
@@ -160,6 +118,41 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	@Override
 	public double getMoveSpeed() {
 		return mySpeed;
-	}	
+	}
+	
+	private void hitTarget() {
+		myTarget.takeDamage(myDamageCalc.getTargetDamage());
+		explode();
+	}
+	
+	private void explode() {
+		List<Machine> targets = new ArrayList<Machine>();
+		//TODO: Get all Machines in AoE Range
+		
+		DamageInfo result = new DamageInfo();
+		
+		for (Machine m: targets) {
+			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getLocation());
+			result = result.add(m.takeDamage(toDeal));
+		}
+		notifyListenersRemove();
+		myOwner.notifyDestroy(result);
+		
+	}
+	
+	private void notifyListenersAdd() {
+		myObserver.add((IViewable) this);
+		
+	}
+
+	private void notifyListenersRemove() {
+		myObserver.remove((IViewable) this);
+		
+	}
+	
+	private void notifyListenersUpdate() {
+		myObserver.update((IViewable) this);
+		
+	}
 
 }

@@ -1,15 +1,42 @@
 package authoring.model.serialization;
 
 
-//import com.google.gson.*;
+import java.io.PrintWriter;
+
+import com.google.gson.*;
 
 public class SerializeJSON {
 	
-//	private Gson gson;
+	private Gson gson;
 	
-	public void Serialize(){
+	public JsonElement Serialize(Object obj){
 
-//		gson = new Gson();
+		//overly verbose for now, but easily changeable later, for whether we want a JsonElement or String
+		gson = new Gson();
+		String jsonString = gson.toJson(obj);
+		JsonElement json = gson.toJsonTree(obj);
+		System.out.println(json);
+		return json;
+		
 			
 	}
+	
+	public void SerializeToFile(Object obj, String fileName){
+		
+		String fileLoc = "src/resources/";
+		
+		String str = Serialize(obj).toString();
+		
+		try{
+			PrintWriter out = new PrintWriter(fileLoc+fileName);
+			out.println(str);
+			out.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+
 }

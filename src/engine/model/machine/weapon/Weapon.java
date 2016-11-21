@@ -6,8 +6,14 @@ import authoring.model.WeaponData;
 import engine.model.machine.Machine;
 import engine.model.machine.weapon.projectile.ProjectileFactory;
 import engine.model.strategies.ITargetStrategy;
+import engine.model.strategies.StrategyFactory;
 import utility.Point;
 
+/**
+ * A class to create projectiles and keep track of their effects on enemies.
+ * @author Weston
+ *
+ */
 public class Weapon implements IWeapon, IKillerOwner {
 	IKillerOwner myMachine;
 	ProjectileFactory myProjectileFactory;
@@ -24,13 +30,18 @@ public class Weapon implements IWeapon, IKillerOwner {
 	public Weapon(WeaponData data, IKillerOwner owner, ProjectileFactory projFactory) {
 		myRange = data.getRange();
 		myFireRate = data.getFireRate();
-		myTimeToFire = 0;
+		myProjectile = data.getProjectileName();
 		
 		myMachine = owner;
-		
 		myProjectileFactory = projFactory;
 		
-		//TODO: Init strategies
+		//TODO: Get strategy name from data
+		myTargetStrategy = StrategyFactory.targetStrategy("");
+		
+		myCareerKills = 0;
+		myCareerDamage = 0;
+		myCareerEarnings = 0;
+		myTimeToFire = 0;
 	}
 
 	@Override
