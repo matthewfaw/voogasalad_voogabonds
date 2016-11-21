@@ -16,13 +16,13 @@ import javafx.collections.ObservableList;
  */
 public class ResourceStore implements IModifiableStore, IViewableStore, Observer{
 	private TowerUpgradeStore myUpgradeStore;
-	private ObservableList<Tower> myAvailableTowers;
+	private ObservableList<Tower> myBaseTowers;
 	private ObservableList<Tower> myAffordableTowers;
 	private Player myPlayer;
 	
 	public ResourceStore(Player storecustomer){
 		myUpgradeStore = new TowerUpgradeStore();
-		myAvailableTowers = FXCollections.observableArrayList(myUpgradeStore.getAvailableTowers());
+		myBaseTowers = FXCollections.observableArrayList(myUpgradeStore.getBaseTowers());
 		initAffordableTowers();
 		myPlayer = storecustomer;
 		myPlayer.addObserver(this);
@@ -30,7 +30,7 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 	
 	private void initAffordableTowers(){
 		myAffordableTowers = FXCollections.observableArrayList();
-		for (Tower tower : myAvailableTowers){
+		for (Tower tower : myBaseTowers){
 			if (myUpgradeStore.getPrice(tower) <= myPlayer.getAvailableFunds()){
 				myAffordableTowers.add(tower);
 			}
@@ -38,7 +38,7 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 	}
 	
 	private void updateAffordableTowers() {
-		for (Tower tower : myAvailableTowers){
+		for (Tower tower : myBaseTowers){
 			if (myUpgradeStore.getPrice(tower) <= myPlayer.getAvailableFunds() && !myAffordableTowers.contains(tower)){
 				myAffordableTowers.add(tower);
 			}
@@ -55,7 +55,7 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 
 	@Override
 	public List<Tower> getAvailableTowers() {
-		return myAvailableTowers;
+		return myBaseTowers;
 	}
 	
 	@Override
