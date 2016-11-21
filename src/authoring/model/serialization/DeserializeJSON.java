@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import authoring.model.TowerData;
+
 import com.google.gson.Gson;
 
 public class DeserializeJSON {
@@ -13,7 +15,7 @@ public class DeserializeJSON {
 	private String fileText;
 	String fileLoc = "src/resources/";
 
-	public Object Deserialize(String filepath){
+	public Object DeserializeFromFile(String filepath, Class cls){
 		
 		try {
 			scanner = new Scanner( new File(fileLoc+filepath) );
@@ -26,8 +28,7 @@ public class DeserializeJSON {
 		
 		gson = new Gson();
 		
-		System.out.println(gson.fromJson(fileText, fileText.getClass().getGenericSuperclass()));
-		return (gson.fromJson(fileText, fileText.getClass().getGenericSuperclass()));
+		return (gson.fromJson(fileText, cls));
 		
 	}
 

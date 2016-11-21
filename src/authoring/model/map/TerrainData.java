@@ -20,7 +20,19 @@ public class TerrainData {
 		return type;
 	}
 	
-	public Point getLocation(){
+	public Point getLoc(){
 		return loc;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		if (!(o instanceof TerrainData)){
+			return false;
+		}
+		TerrainData td = (TerrainData) o;
+		return td.type.equals(this.type) && (td.getLoc().getX() == loc.getX()) && (td.getLoc().getY() == loc.getY());
 	}
 }
