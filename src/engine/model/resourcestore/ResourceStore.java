@@ -14,13 +14,13 @@ import javafx.collections.ObservableList;
  * This class is the store that keeps all available resources
  * @author Owen Chung
  */
-public class ResourceStore implements IModifiableStore, IViewableStore, Observer{
+public class ResourceStore implements IModifiableStore, IViewableStore, Observer {
 	private TowerUpgradeStore myUpgradeStore;
 	private ObservableList<Tower> myBaseTowers;
 	private ObservableList<Tower> myAffordableTowers;
 	private Player myPlayer;
 	
-	public ResourceStore(Player storecustomer){
+	public ResourceStore(Player storecustomer) {
 		myUpgradeStore = new TowerUpgradeStore();
 		myBaseTowers = FXCollections.observableArrayList(myUpgradeStore.getBaseTowers());
 		initAffordableTowers();
@@ -28,29 +28,33 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 		myPlayer.addObserver(this);
 	}
 	
-	private void initAffordableTowers(){
+	private void initAffordableTowers() {
 		myAffordableTowers = FXCollections.observableArrayList();
-		for (Tower tower : myBaseTowers){
-			if (myUpgradeStore.getPrice(tower) <= myPlayer.getAvailableFunds()){
+		for (Tower tower : myBaseTowers) {
+			if (!myPlayer.getAvailableMoney().isLessThan(myUpgradeStore.getPrice(tower)) ) {
 				myAffordableTowers.add(tower);
 			}
 		}
 	}
 	
 	private void updateAffordableTowers() {
-		for (Tower tower : myBaseTowers){
-			if (myUpgradeStore.getPrice(tower) <= myPlayer.getAvailableFunds() && !myAffordableTowers.contains(tower)){
-				myAffordableTowers.add(tower);
+		for (Tower tower : myBaseTowers) {
+			if (myPlayer.getAvailableMoney().isLessThan(myUpgradeStore.getPrice(tower))) {
+				if (myAffordableTowers.contains(tower)){
+					myAffordableTowers.remove(tower);
+				}	
 			}
-			else if (myUpgradeStore.getPrice(tower) > myPlayer.getAvailableFunds() && myAffordableTowers.contains(tower)){
-				myAffordableTowers.remove(tower);
+			else {
+				if (!myAffordableTowers.contains(tower)){
+					myAffordableTowers.add(tower);
+				}
 			}
 		}
 	}
 	
 	@Override
-	public void updatePlayerMoney(int deltaFunds) {
-		myPlayer.updateAvailableFunds(deltaFunds);
+	public void updatePlayerMoney(int deltaMoney) {
+		myPlayer.updateAvailableMoney(deltaMoney);
 	}
 
 	@Override
@@ -65,19 +69,19 @@ public class ResourceStore implements IModifiableStore, IViewableStore, Observer
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg.equals(1) && o.equals(myPlayer)){
+		if (arg.equals(1) && o.equals(myPlayer)) {
 			updateAffordableTowers();
 		}
 		
 	}
 	
 	@Override
-	public void addBaseTowers(Tower toAdd){
+	public void addBaseTowers(Tower toAdd) {
 		myBaseTowers.add(toAdd);
 	}
 	
 	@Override
-	public void removeBaseTowers(Tower toRemove){
+	public void removeBaseTowers(Tower toRemove) {
 		myBaseTowers.remove(toRemove);
 	}
 

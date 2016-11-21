@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import engine.model.resourcestore.IMoney;
+
 public class TowerNode {
 	private Tower myTowerId;
-	private int myPrice;
-	private int mySellPrice;
+	private IMoney myPrice;
+	private IMoney mySellPrice;
 	private TowerNode myParent;
 	private List<TowerNode> myChildren = new ArrayList<TowerNode>();
-	private Map<TowerNode, Integer> myUpgradeCostMap = new HashMap<TowerNode, Integer>();
+	private Map<TowerNode, IMoney> myUpgradeCostMap = new HashMap<TowerNode, IMoney>();
 	
 	public TowerNode(Tower id, TowerNode parent){
 		myTowerId = id;
@@ -30,7 +32,7 @@ public class TowerNode {
 		return myTowerId;
 	}
 	
-	public int getPrice(){
+	public IMoney getPrice(){
 		return myPrice;
 	}
 	

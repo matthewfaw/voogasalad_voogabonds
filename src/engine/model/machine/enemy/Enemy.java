@@ -8,6 +8,7 @@ import utility.Damage;
 
 public class Enemy extends Machine implements IEnemy {
 	private IMoney killValue;
+	
 
 	@Override
 	public DamageInfo takeDamage(Damage toDeal) {
