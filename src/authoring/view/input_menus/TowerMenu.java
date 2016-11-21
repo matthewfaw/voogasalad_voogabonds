@@ -111,13 +111,13 @@ public class TowerMenu {
                                 myTab.showError(myResources.getString("BadDoubleInput"));
                                 return;
                         }
+                        String weapon = myWeaponChoice.getValue();
                         String image = myImageField.getCharacters().toString();
-                        if (!(image.substring(image.length() - 4).equals(".png"))){
-                                myTab.showError(myResources.getString("NoImageInput"));
-                                return;
-                        }
                         
-                        TowerData tower = createTowerData(name, health, buyPrice, sellPrice, size, myWeaponChoice.getValue(), image);
+                        TowerData tower = createTowerData(name, health, buyPrice, sellPrice, size, weapon, image);
+                        if (tower == null) {
+                            return;
+                        }
                         
 //                        String sound = mySoundField.getCharacters().toString();
 //                        if (sound.substring(sound.length() - 4).equals(".wav")){
@@ -148,6 +148,7 @@ public class TowerMenu {
             towerDat.setImagePath(imagePath);
         } catch (Exception e) {
             myTab.showError(e.getMessage());
+            return null;
         }
         
         return towerDat;
