@@ -28,8 +28,8 @@ public class StatisticsRow implements IGUIPiece {
 	 */
 	private HBox buildHBox() {
 		HBox hbox = new HBox();
-		hbox.setPrefWidth(800);
-		hbox.setPrefHeight(100);
+		hbox.setPrefWidth(900);
+		hbox.setMaxHeight(100);
 	    hbox.setPadding(new Insets(10, 0,10, 0));
 	    hbox.setSpacing(10);
 	    hbox.setStyle("-fx-background-color: #336699;");

@@ -24,7 +24,7 @@ public class BuildGUI {
 
 	public Scene build(Stage stage) {
 		Group gameplayer =new Group();
-		myScene = new Scene(gameplayer, 800, 800);
+		myScene = new Scene(gameplayer, 900, 700);
 		gameplayer.getChildren().add(setScreen());
 		return myScene;
 	}
@@ -34,11 +34,10 @@ public class BuildGUI {
 		myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
 		BorderPane borderpane=new BorderPane();
-		borderpane.setCenter(myMap.getView());
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
+	        borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
-		//borderpane.setCenter(myGridView.getView());
 		return borderpane;
 	}
 }

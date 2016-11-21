@@ -42,6 +42,7 @@ public class TowerColumn implements IGUIPiece {
 	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
 	private TextArea towerDataDisplay= new TextArea();
+
 	
 	public TowerColumn(){
 		myTowerColumn= buildVBox();
@@ -53,7 +54,7 @@ public class TowerColumn implements IGUIPiece {
 	private VBox buildVBox() {
 		VBox vbox = new VBox();
 		vbox.setPrefWidth(200);
-		vbox.setPrefHeight(700);
+		vbox.setPrefHeight(600);
 	    vbox.setPadding(new Insets(10));
 	    vbox.setSpacing(8);
 	    vbox.setStyle("-fx-background-color: #778899;");
