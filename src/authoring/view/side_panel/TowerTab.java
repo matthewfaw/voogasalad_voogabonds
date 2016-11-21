@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.view.input_menus.TowerMenu;
-import authoring.view.objects.FrontEndEnemy;
-import authoring.view.objects.FrontEndTower;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -73,7 +71,6 @@ public class TowerTab extends Tab {
             button.setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event){
                         // TODO: edit existing towers
-                        FrontEndTower tower;
                         /*
                         if (myTowers.contains(text)) {
                             // get information from Controller

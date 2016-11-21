@@ -3,8 +3,6 @@ package authoring.view.input_menus;
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
 import authoring.model.TowerData;
-import authoring.view.objects.FrontEndEnemy;
-import authoring.view.objects.FrontEndTower;
 import authoring.view.side_panel.TowerTab;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -108,7 +106,7 @@ public class TowerMenu {
                                 sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
                                 size = Integer.parseInt(mySizeField.getCharacters().toString());
                         } catch(Exception e) {
-                                myTab.showError(myResources.getString("BadDoubleInput"));
+                                myHelper.showError(myResources.getString("BadDoubleInput"));
                                 return;
                         }
                         String weapon = myWeaponChoice.getValue();
@@ -116,7 +114,7 @@ public class TowerMenu {
                         
                         TowerData tower = createTowerData(name, health, buyPrice, sellPrice, size, weapon, image);
                         if (tower == null) {
-                            return;
+                            return; // keeps window open
                         }
                         
 //                        String sound = mySoundField.getCharacters().toString();
@@ -147,7 +145,7 @@ public class TowerMenu {
             towerDat.setWeaponName(weapon);
             towerDat.setImagePath(imagePath);
         } catch (Exception e) {
-            myTab.showError(e.getMessage());
+            myHelper.showError(e.getMessage());
             return null;
         }
         

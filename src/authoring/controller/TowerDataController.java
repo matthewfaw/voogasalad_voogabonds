@@ -3,7 +3,6 @@ package authoring.controller;
 import java.util.AbstractMap;
 
 import authoring.model.TowerData;
-import authoring.view.objects.FrontEndTower;
 
 public class TowerDataController {
 
