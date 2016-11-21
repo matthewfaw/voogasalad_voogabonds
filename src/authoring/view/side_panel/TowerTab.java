@@ -55,38 +55,6 @@ public class TowerTab extends Tab {
 	        alert.showAndWait();
 	}
 	
-	public void removeButtonDuplicates(String s) {
-            for (int i = 0; i < myContent.getChildren().size(); i++) {
-                    Button button = (Button) (myContent.getChildren().get(i));
-                    if (button.getText().equals(s)) {
-                            myContent.getChildren().remove(i);
-                            i--;
-                    }
-            }
-        }
-	
-	public void addButtonToDisplay(String text) {
-            Button button = new Button(text);
-            button.setMinWidth(myContent.getMinWidth());
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent event){
-                        // TODO: edit existing towers
-                        /*
-                        if (myTowers.contains(text)) {
-                            // get information from Controller
-                            //tower = new FrontEndTower();
-                        }*/
-                        
-                        /*
-                            FrontEndTower enemy = myEnemyMap.get(text);
-                            myMenu.createTowerWindow(enemy.getName(), enemy.getType(), String.valueOf(enemy.getHealth()), 
-                                            String.valueOf(enemy.getSpeed()), enemy.getImage(), enemy.getSound());
-                         */
-                    }
-            });
-            myContent.getChildren().add(button);
-        }
-	
 	private void towerTabOptions(Tab towerTab) {
 		VBox towerArea = new VBox(screenHeight*0.01);
 		towerArea.setMaxHeight(screenHeight*0.88);

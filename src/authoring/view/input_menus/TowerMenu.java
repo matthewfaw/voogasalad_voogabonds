@@ -122,11 +122,9 @@ public class TowerMenu {
 //                                tower.setSound(sound);
 //                        }
                         
-                        myTab.removeButtonDuplicates(name);
-                        myTab.addButtonToDisplay(name);
                         myTab.addTower(name);
 
-                        myController.createTowerData(name, tower);
+                        myController.createTowerData(tower);
                         myTowerWindow.close();
                 }
         });
