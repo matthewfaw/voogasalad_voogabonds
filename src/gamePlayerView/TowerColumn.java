@@ -97,6 +97,7 @@ public class TowerColumn implements IGUIPiece {
 	        }    
 	    });
 		
+		b.setStyle("-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );");
 		b.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent me) {
 	        	//TODO:
