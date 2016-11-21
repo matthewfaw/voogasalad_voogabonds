@@ -72,13 +72,8 @@ public class CollisionDetection implements ISystem, IObserver<MoveableComponent>
 		myObservers.remove(aObserver);
 	}
 
-	/**
-	 * This method currently assumes that passing null to the update method won't cause issues
-	 * We should probably check that this is ok...
-	 */
 	@Override
 	public void notifyObservers() {
-		//XXX: not sure how I feel about passing null here
 		myObservers.forEach(observer -> observer.update(this));
 	}
 

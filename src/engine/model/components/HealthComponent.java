@@ -4,8 +4,25 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.model.entities.IEntity;
 
-public class HealthComponent implements IComponent, IObservable<HealthComponent> {
+/**
+ * This class encapsulates the fields corresponding to any health data of an entity
+ * @author matthewfaw
+ *
+ */
+public class HealthComponent extends AbstractComponent implements IObservable<HealthComponent> {
+	private int myHealth;
 
+	public HealthComponent(IEntity aEntity) {
+		super(aEntity);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public int getHealth()
+	{
+		return myHealth;
+	}
+
+	//*************************Observable interface*******************//
 	@Override
 	public void attach(IObserver<HealthComponent> aObserver) {
 		// TODO Auto-generated method stub
@@ -23,11 +40,4 @@ public class HealthComponent implements IComponent, IObservable<HealthComponent>
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public IEntity getEntity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

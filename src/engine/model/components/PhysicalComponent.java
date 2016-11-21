@@ -9,22 +9,17 @@ import engine.model.entities.IEntity;
 import engine.model.game_environment.terrain.Terrain;
 import utility.Point;
 
-public class PhysicalComponent implements IComponent, IObservable<PhysicalComponent> {
+public class PhysicalComponent extends AbstractComponent implements IObservable<PhysicalComponent> {
 	private List<IObserver<PhysicalComponent>> myObservers;
 
 	private List<Terrain> myValidTerrains;
 	private Point myLocation;
 	
-	private IEntity myEntity;
-	
-	public PhysicalComponent(PhysicalComponentData aPhysicalComponentData)
+	public PhysicalComponent(IEntity aEntity, PhysicalComponentData aPhysicalComponentData, List<Terrain> aValidTerrainList, Point aLocation)
 	{
+		super(aEntity);
 		//TODO
 		myObservers = new ArrayList<IObserver<PhysicalComponent>>();
-	}
-	PhysicalComponent(IEntity aEntity, List<Terrain> aValidTerrainList, Point aLocation)
-	{
-		myEntity = aEntity;
 
 		myValidTerrains = aValidTerrainList;
 		myLocation = aLocation;
@@ -73,11 +68,5 @@ public class PhysicalComponent implements IComponent, IObservable<PhysicalCompon
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(o -> o.update(this));
-	}
-
-	//*******************IComponent interface***********//
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
 	}
 }

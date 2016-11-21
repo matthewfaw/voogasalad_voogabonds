@@ -9,7 +9,12 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class MoveableComponent implements IComponent, IObservable<MoveableComponent>  {
+public class MoveableComponent extends AbstractComponent implements IObservable<MoveableComponent>  {
+
+	public MoveableComponent(IEntity aEntity) {
+		super(aEntity);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void attach(IObserver<MoveableComponent> aObserver) {
@@ -27,12 +32,6 @@ public class MoveableComponent implements IComponent, IObservable<MoveableCompon
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public IEntity getEntity() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

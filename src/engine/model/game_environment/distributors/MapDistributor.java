@@ -36,10 +36,12 @@ public class MapDistributor implements IDistributor {
 		//2: determine if the object can be placed on the map
 		//3: distribute object to the map, if it can be placed there
 		IEntity entity = myEntityFactory.constructEntity(aEntityData);
-		PhysicalComponent physicalComponent = new PhysicalComponent(aPhysicalComponentData);
-		entity.addComponent(physicalComponent);
+		//TODO: add this back when it compiles
+//		PhysicalComponent physicalComponent = new PhysicalComponent(aPhysicalComponentData);
+//		entity.addComponent(physicalComponent);
 		
-		return myMapMediator.attemptToPlaceEntity(aLocation, physicalComponent);
+//		return myMapMediator.attemptToPlaceEntity(aLocation, physicalComponent);
+		return false;
 	}
 
 }
