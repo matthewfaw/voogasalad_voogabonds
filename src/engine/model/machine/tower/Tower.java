@@ -25,8 +25,8 @@ public class Tower extends Machine implements IPurchasable{
 	 * Replaces all fields of this tower with newTower
 	 */
 	/*
-	 * when the user upgrade, the upgradestore will take care of it. 
-	 * tower just needs to offer an interface for the UpgradeStore to update the parameters 
+	 //OWEN: when the user upgrade, the upgradestore will take care of it. 
+	 // tower just needs to offer an interface for the UpgradeStore to update the parameters 
 	public void upgrade(ITowerUpgradeStore towerUpgradeStore) {
 		
 	}
