@@ -12,21 +12,16 @@ public class TowerDataController {
 		return myTowerDataMap;
 	}
 	
-	public void createTowerData(String towerName, TowerData towerData){
-		//Parse the FrontEndEnemy object
-		//Error check
-		//Add it to map
-		myTowerDataMap.put(towerName, towerData);
+	public void createTowerData(TowerData towerData){
+		myTowerDataMap.put(towerData.getName(), towerData);
 	}
-	
 	
 	public TowerData getTowerData(String towerName){
 		return myTowerDataMap.get(towerName);
 	}
 	
-	
-	public void updateTowerData(String originalName, String updatedTower){
-		//Find old enemyData in map
-		//create new EnemyData Object from FrontEndEnemy
+	public void updateTowerData(String originalName, TowerData updatedTower){
+		myTowerDataMap.remove(originalName);
+		createTowerData(updatedTower);
 	}
 }

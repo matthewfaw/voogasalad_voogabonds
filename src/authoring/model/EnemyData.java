@@ -7,6 +7,7 @@ public class EnemyData {
 	private int killReward;
 	private int maxHealth;
 	private int collisionRadius;
+	private int speed;
 	
 	public String getName() {
 		return name;
@@ -43,6 +44,12 @@ public class EnemyData {
 	}
 	public void setCollisionRadius(int collisionRadius){
 		this.collisionRadius = collisionRadius;
+	}
+	public int getSpeed(){
+		return speed;
+	}
+	public void setSpeed(int speed){
+		this.speed = speed;
 	}
 	
 }

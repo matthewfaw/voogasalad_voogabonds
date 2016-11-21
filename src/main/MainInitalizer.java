@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.view.display.GameDisplay;
-import authoring.view.display.GridToolBar;
 import authoring.view.menus.TopMenuBar;
 import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
