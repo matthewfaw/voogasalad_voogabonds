@@ -1,5 +1,9 @@
 package authoring.model;
 
+/**
+ * Class representing the overall information for a player.
+ * @author philipfoo
+ */
 public class PlayerData {
 	private int startingLives;
 	private int startingCash;

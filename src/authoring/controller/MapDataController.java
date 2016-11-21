@@ -3,6 +3,12 @@ import authoring.model.map.*;
 import java.awt.Point;
 import java.util.Set;
 
+/**
+ * MapDataController doesn't expect a FrontEndMap like the rest of the controller classes.
+ * Instead set the x and y dimensions, and then add spawn/sink points through the below functions.
+ * @author philipfoo
+ *
+ */
 public class MapDataController {
 	private MapData myMapData;
 	
