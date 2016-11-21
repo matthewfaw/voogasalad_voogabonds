@@ -3,9 +3,14 @@ package authoring.view.input_menus;
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
 import authoring.controller.WeaponDataController;
+import authoring.model.TowerData;
+import authoring.model.WeaponData;
 import authoring.view.side_panel.TowerTab;
 import authoring.view.side_panel.WeaponTab;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -53,6 +58,52 @@ public class WeaponMenu {
         myProjectileNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterProjectile"), projectileVal);
         myRangeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterRange"), rangeVal);
         myRateField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterFireRate"), rateVal);
+        
+        setUpFinishButton(root);
+    }
+    
+    private void setUpFinishButton(VBox root) {
+        Button finishButton = new Button(myResources.getString("Finish"));
+        finishButton.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent event){
+                        String name = myNameField.getCharacters().toString();
+                        String projectile = myProjectileNameField.getCharacters().toString();
+                        int range = 1;
+                        int rate = 1;
+                        try {
+                                range = Integer.parseInt(myRangeField.getCharacters().toString());
+                                rate = Integer.parseInt(myRateField.getCharacters().toString());
+                        } catch(Exception e) {
+                                myHelper.showError(myResources.getString("BadDoubleInput"));
+                                return;
+                        }
+                        
+                        WeaponData weapon = createWeaponData(name, projectile, range, rate);
+                        if (weapon == null) {
+                            return; // keeps window open
+                        }
+
+                        myController.createWeaponData(weapon);
+                        myWeaponWindow.close();
+                }
+        });
+        root.getChildren().add(finishButton);
+    }
+    
+    private WeaponData createWeaponData(String name, String projectile, int range, int fireRate) {
+        WeaponData weapon = new WeaponData();
+        
+        try {
+            weapon.setName(name);
+            weapon.setProjectileName(projectile);
+            weapon.setRange(range);
+            weapon.setFireRate(fireRate);
+        } catch (Exception e) {
+            myHelper.showError(e.getMessage());
+            return null;
+        }
+        
+        return weapon;
     }
 
 }
