@@ -31,12 +31,15 @@ public class TowerMenu {
     private MenuHelper myHelper;
     private Stage myTowerWindow;
     private TextField myNameField;
-    private TextField myTypeField;
+    private TextField myTypeField; // X
     private TextField myHealthField;
-    private TextField myCostField;
+    private TextField myBuyPriceField;
+    private TextField mySellPriceField;
     private TextField mySizeField;
     private TextField myImageField;
-    private TextField mySoundField;
+    private TextField mySoundField; // X
+    private ComboBox<String> myWeaponChoice;
+    //private ComboBox<String> myMovementChoice;
     
     public TowerMenu(ResourceBundle resources, TowerTab tab) {
         myResources = resources;
@@ -45,26 +48,27 @@ public class TowerMenu {
         myHelper = new MenuHelper(myResources);
     }
     
-    public void createTowerMenu(String nameVal, String typeVal, String healthVal, String costVal, String sizeVal, String imageVal, String soundVal) {
+    public void createTowerMenu(String nameVal, String typeVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal, String soundVal) {
         myTowerWindow = new Stage();
         myTowerWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
-        setUpTowerScreen(root, nameVal, typeVal, healthVal, costVal, sizeVal, imageVal, soundVal);
+        setUpTowerScreen(root, nameVal, typeVal, healthVal, buyVal, sellVal, sizeVal, imageVal, soundVal);
         Scene scene = new Scene(root, SIZE, SIZE);
         myTowerWindow.setTitle(myResources.getString("AddTower"));
         myTowerWindow.setScene(scene);
         myTowerWindow.show();
     }
     
-    private void setUpTowerScreen(VBox root, String nameVal, String typeVal, String healthVal, String costVal, String sizeVal, String imageVal, String soundVal) {
+    private void setUpTowerScreen(VBox root, String nameVal, String typeVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal, String soundVal) {
         myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
-        myTypeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterType"), typeVal);
+        //myTypeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterType"), typeVal);
         myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
-        myCostField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterCost"), costVal);
+        myBuyPriceField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterBuyPrice"), buyVal);
+        mySellPriceField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSellPrice"), sellVal);
         mySizeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSize"), sizeVal);
         setUpImage(root, imageVal);
-        setUpSound(root, soundVal);
-        setUpWeapon(root);
+        //setUpSound(root, soundVal);
+        myWeaponChoice = setUpWeapon(root);
         setUpFinishButton(root);
     }
     
@@ -82,10 +86,11 @@ public class TowerMenu {
         myHelper.setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
     }
     
-    private void setUpWeapon(VBox root) {
+    private ComboBox<String> setUpWeapon(VBox root) {
         Text weaponText = new Text(myResources.getString("SelectWeapon"));
         ComboBox<String> weaponBox = new ComboBox<String>();
         root.getChildren().addAll(weaponText, weaponBox);
+        return weaponBox;
     }
     
     private void setUpFinishButton(VBox root){
@@ -93,14 +98,15 @@ public class TowerMenu {
         finishButton.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event){
                         String name = myNameField.getCharacters().toString();
-                        String type = myTypeField.getCharacters().toString();
-                        double health = 0;
-                        double cost = 0;
-                        double size = 0;
+                        //String type = myTypeField.getCharacters().toString();
+                        int health = 0;
+                        int buyPrice = 0; int sellPrice = 0;
+                        int size = 1;
                         try {
-                                health = Double.parseDouble(myHealthField.getCharacters().toString());
-                                cost = Double.parseDouble(myCostField.getCharacters().toString());
-                                size = Double.parseDouble(mySizeField.getCharacters().toString());
+                                health = Integer.parseInt(myHealthField.getCharacters().toString());
+                                buyPrice = Integer.parseInt(myBuyPriceField.getCharacters().toString());
+                                sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
+                                size = Integer.parseInt(mySizeField.getCharacters().toString());
                         } catch(Exception e) {
                                 myTab.showError(myResources.getString("BadDoubleInput"));
                                 return;
@@ -110,26 +116,41 @@ public class TowerMenu {
                                 myTab.showError(myResources.getString("NoImageInput"));
                                 return;
                         }
-                        FrontEndTower tower = new FrontEndTower(name, type, health, cost, size, image);
-                        TowerData towerDat = new TowerData();
-                        towerDat.setName(name);
-//                        towerDat.setMaxHealth(health);
-//                        towerDat.setBuyPrice(cost);
-//                        towerDat.setCollisionRadius(size);
-//                        towerDat.setMovementStrategy("");
-                        String sound = mySoundField.getCharacters().toString();
-                        if (sound.substring(sound.length() - 4).equals(".wav")){
-                                tower.setSound(sound);
-                        }
+                        
+                        TowerData tower = createTowerData(name, health, buyPrice, sellPrice, size, myWeaponChoice.getValue(), image);
+                        
+//                        String sound = mySoundField.getCharacters().toString();
+//                        if (sound.substring(sound.length() - 4).equals(".wav")){
+//                                tower.setSound(sound);
+//                        }
+                        
                         myTab.removeButtonDuplicates(name);
                         myTab.addButtonToDisplay(name);
                         myTab.addTower(name);
-                        // TODO: set up weapon for enemy
-                        myController.createTowerData(name, towerDat);
+
+                        myController.createTowerData(name, tower);
                         myTowerWindow.close();
                 }
         });
         root.getChildren().add(finishButton);
+    }
+    
+    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String weapon, String imagePath) {
+        TowerData towerDat = new TowerData();
+        
+        try {
+            towerDat.setName(name);
+            towerDat.setMaxHealth(health);
+            towerDat.setBuyPrice(buyPrice);
+            towerDat.setSellPrice(sellPrice);
+            towerDat.setCollisionRadius(size);
+            towerDat.setWeaponName(weapon);
+            towerDat.setImagePath(imagePath);
+        } catch (Exception e) {
+            myTab.showError(e.getMessage());
+        }
+        
+        return towerDat;
     }
     
 }
