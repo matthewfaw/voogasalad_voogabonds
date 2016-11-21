@@ -36,8 +36,8 @@ public class TowerColumn implements IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
-	private ListView<Button> towerInfo;
-	private Button towerToBeDragged;
+	private ListView<ImageView> towerInfo;
+	private ImageView towerToBeDragged;
 	
 	public TowerColumn(){
 		myTowerColumn= buildVBox();
@@ -57,28 +57,32 @@ public class TowerColumn implements IGUIPiece {
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    towerInfo= new ListView<Button>();
-	    ObservableList<Button> items =FXCollections.observableArrayList();
+	    towerInfo= new ListView<ImageView>();
+	    
+	    ObservableList<ImageView> items =FXCollections.observableArrayList();
+	    ImageView imgV1 = new ImageView();
 	    Image imagecow = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cow.png"));
+	    imgV1.setImage(imagecow);
+	    items.add(imgV1);
+	    ImageView imgV2 = new ImageView();
             Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
+            imgV2.setImage(imagecookie);
+            items.add(imgV2);
+            ImageView imgV3 = new ImageView();
             Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
-            
-            items.add(makeTowerButton("Basic", new ImageView(imagecow)));
-            items.add(makeTowerButton("Sniper",new ImageView(imagecookie)));
-            items.add(makeTowerButton("Bomber",new ImageView(imageboss)));
+            imgV3.setImage(imageboss);
+            items.add(imgV3);
+            Tooltip t = new Tooltip("Tower");
+            Tooltip.install(imgV3, t);
+
             towerInfo.setItems(items);
 	    
 	    towerInfo.setOnDragDetected(new EventHandler<MouseEvent>(){
                 public void handle(MouseEvent event) {
-                    /* drag was detected, start a drag-and-drop gesture*/
-                    /* allow any transfer mode */
                     Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
-                    /* Put a string on a dragboard */
                     ClipboardContent content = new ClipboardContent();
                     towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
-                    content.putString(towerToBeDragged.toString());
-                    System.out.println(towerToBeDragged);
-                    System.out.println("drag start");
+                    content.putImage(towerToBeDragged.getImage());
                     db.setContent(content);
                     event.consume();
                 }  
@@ -106,7 +110,7 @@ public class TowerColumn implements IGUIPiece {
 	}
 	
 
-	private Button makeTowerButton(String string, ImageView imageView) {
+	private Button makeTowerImage(String string, ImageView imageView) {
 		Button b =new Button(string,imageView);
 		b.setOnMouseEntered(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent me) {

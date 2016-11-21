@@ -66,8 +66,6 @@ public class MapDisplay {
         myScene.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-               System.out.println("dragging");
-
                event.consume();
             }
         });
@@ -80,12 +78,12 @@ public class MapDisplay {
         
         myScene.setOnDragExited(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                System.out.println("exited");
-                ImageView source2 = new ImageView();
-                source2.setX(event.getX());
-                source2.setY(event.getY());
-                source2.setImage(event.getDragboard().getImage());
-                myRoot.getChildren().add(source2);
+                ImageView source = new ImageView();
+                
+                source.setImage(event.getDragboard().getImage());
+                source.setX(event.getX()-source.getImage().getWidth()/2);
+                source.setY(event.getY()-source.getImage().getHeight()/2);
+                myRoot.getChildren().add(source);
                 event.consume();
             }
         });
