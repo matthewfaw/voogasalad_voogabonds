@@ -1,23 +1,22 @@
 package engine;
 
-import engine.model.entities.IEntity;
-
 /**
  * 
  * An interface used to define 
  * a method for updating the object when a particular object being observed 
  * has changed state
  * 
- * @author matthewfaw 
+ * @author Weston Carvalho and Matthew Faw 
  * 
+ * @param A: the type of object that has been updated
  */
-public interface IObserver {
+public interface IObserver<A> {
 	/**
 	 * A method to update a subscriber of a change that has occurred
 	 * in a specific publisher
 	 * 
-	 * @param toUpdate: the object which has changed
+	 * @param aObjectToUpdate: the object which has changed
 	 */
-	abstract public void update(IEntity aObjectToUpdate);
-
+	public void update(A aChangedObject);
+	
 }
