@@ -6,7 +6,7 @@ import engine.model.resourcestore.IMoney;
 import engine.model.machine.weapon.DamageInfo;
 import utility.Damage;
 
-public class Tower extends Machine implements IPurchasable{
+public class Tower extends Machine implements IPurchasable, ITower{
 	// this information should be stored in the upgradestore, controller just need to query it
 	/*
 	public IMoney getUpgradeCost() {
@@ -36,6 +36,24 @@ public class Tower extends Machine implements IPurchasable{
 	public DamageInfo takeDamage(Damage toDeal) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public IMoney getUpgradeCost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IMoney getSellPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void upgrade(ITowerUpgradeStore towerUpgradeStore) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
