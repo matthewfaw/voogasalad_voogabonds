@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import authoring.model.serialization.DeserializeJSON;
-import authoring.model.serialization.SerializeJSON;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

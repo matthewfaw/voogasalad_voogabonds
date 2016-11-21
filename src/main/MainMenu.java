@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +44,7 @@ public class MainMenu {
 		this.scene = new Scene(pane, init.getScreenWidth()/2, init.getScreenHeight()/2);
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.tabContainer = new TabPane();
+		tabContainer.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		this.newTab = new NewGameTab(tabContainer);
 		this.loadTab = new LoadGameTab(tabContainer);
 	}
