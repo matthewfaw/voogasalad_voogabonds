@@ -111,6 +111,12 @@ public class MapData {
 		validTerrain.add(s);
 	}
 	
+	public void removeValidTerrain(String s) throws Exception{
+		if (validTerrain.contains(s)){
+			validTerrain.remove(s);
+		}
+	}
+	
 	public ObservableSet<String> getValidTerrain(){
 		return validTerrain;
 	}
