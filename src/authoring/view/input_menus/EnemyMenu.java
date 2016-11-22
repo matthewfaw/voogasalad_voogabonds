@@ -40,12 +40,14 @@ public class EnemyMenu {
 	}
 	
 	public void createEnemyWindow(String nameVal, String healthVal, String speedVal, 
-			String collisionRadiusVal, String killRewardVal, String imageVal, boolean isDefault) {
+			String collisionRadiusVal, String killRewardVal, String imageVal, String weaponVal, 
+			boolean isDefault) {
 		myIsDefault = isDefault;
 		myEnemyWindow = new Stage();
 		myEnemyWindow.initModality(Modality.APPLICATION_MODAL);
 		VBox root = new VBox();
-		setUpEnemyScreen(root, nameVal, healthVal, speedVal, collisionRadiusVal, killRewardVal, imageVal);
+		setUpEnemyScreen(root, nameVal, healthVal, speedVal, collisionRadiusVal, killRewardVal, imageVal,
+				weaponVal);
 		Scene scene = new Scene(root, SIZE, SIZE);
 		myEnemyWindow.setTitle(myResources.getString("AddEnemy"));
 		myEnemyWindow.setScene(scene);
@@ -53,7 +55,7 @@ public class EnemyMenu {
 	}
 	
 	private void setUpEnemyScreen(VBox root, String nameVal, String healthVal, String speedVal, 
-			String collisionRadiusVal, String killRewardVal, String imageVal){
+			String collisionRadiusVal, String killRewardVal, String imageVal, String weaponVal){
 		myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
 		myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
 		mySpeedField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSpeed"), speedVal);
@@ -62,21 +64,14 @@ public class EnemyMenu {
 		myKillRewardField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterKillReward"), 
 				killRewardVal);
 		setUpImage(root, imageVal);
-		setUpWeapon(root);
+		myWeaponBox = myHelper.setUpComboBoxUserInput(root, myResources.getString("SelectWeapon"), 
+				weaponVal, myTab.getWeapons());
 		setUpFinishButton(root, nameVal);
 	}
 	
 	private void setUpImage(VBox root, String value) {
 		myImageField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterImage"), value);
 		myHelper.setUpBrowseButton(root, myImageField, "PNG", "*.png");
-	}
-
-	private void setUpWeapon(VBox root) {
-		Text weaponText = new Text(myResources.getString("SelectWeapon"));
-		myWeaponBox = new ComboBox<String>();
-		ObservableList<String> list = FXCollections.observableList(myTab.getWeapons());
-		myWeaponBox.setItems(list);
-		root.getChildren().addAll(weaponText, myWeaponBox);
 	}
 	
 	private void setUpFinishButton(VBox root, String originalName){
@@ -101,7 +96,6 @@ public class EnemyMenu {
 				String weapon = myWeaponBox.getValue();
 				myTab.removeButtonDuplicates(name);
 				myTab.addButtonToDisplay(name);
-				myTab.getEnemies().add(name);
 				EnemyData enemy = createEnemyData(name, health, speed, collisionRadius, killReward, image,
 						weapon);
 				if (enemy == null){
@@ -113,26 +107,26 @@ public class EnemyMenu {
 					myTab.getController().updateEnemyData(originalName, enemy);
 				myEnemyWindow.close();
 			}
-
-			private EnemyData createEnemyData(String name, int health, int speed, int collisionRadius, 
-					int killReward, String image, String weapon) {
-				EnemyData enemy = new EnemyData();
-				try {
-					enemy.setName(name);
-					enemy.setMaxHealth(health);
-					enemy.setSpeed(speed);
-					enemy.setCollisionRadius(collisionRadius);
-					enemy.setKillReward(killReward);
-					enemy.setImagePath(image);
-					if (weapon != null)
-						enemy.setWeaponName(weapon);
-				} catch(Exception e){
-					myHelper.showError(e.getMessage());
-					return null;
-				}
-				return enemy;
-			}
 		});
 		root.getChildren().add(finishButton);
+	}
+	
+	private EnemyData createEnemyData(String name, int health, int speed, int collisionRadius, 
+			int killReward, String image, String weapon) {
+		EnemyData enemy = new EnemyData();
+		try {
+			enemy.setName(name);
+			enemy.setMaxHealth(health);
+			enemy.setSpeed(speed);
+			enemy.setCollisionRadius(collisionRadius);
+			enemy.setKillReward(killReward);
+			enemy.setImagePath(image);
+			if (weapon != null)
+				enemy.setWeaponName(weapon);
+		} catch(Exception e){
+			myHelper.showError(e.getMessage());
+			return null;
+		}
+		return enemy;
 	}
 }
