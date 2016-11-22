@@ -54,10 +54,15 @@ public class TerrainCell extends Rectangle {
 						setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
 						setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
 					}
-					if (toolBar.getSpawnStatus()) {
-						setWidth(TerrainCell.this.getWidth()/2);
-						setHeight(TerrainCell.this.getHeight()/2);
-						setFill(Paint.valueOf("Red"));
+					else if (toolBar.getSpawnStatus()) {
+						setWidth(Integer.parseInt(myResources.getString("DefaultSpawnCellWidth")));
+						setHeight(Integer.parseInt(myResources.getString("DefaultSpawnCellHeight")));
+						setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+					}
+					else if (toolBar.getSinkStatus()) {
+						setWidth(Integer.parseInt(myResources.getString("DefaultSinkCellWidth")));
+						setHeight(Integer.parseInt(myResources.getString("DefaultSinkCellHeight")));
+						setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
 					}
 				}
 				else {

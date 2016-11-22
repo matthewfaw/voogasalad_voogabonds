@@ -35,6 +35,7 @@ public class GridToolBar {
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private boolean toggleStatus;
 	private boolean spawnStatus;
+	private boolean sinkStatus;
 	private Color selectedColor;
 	private String selectedTerrain;
 	private Image mouseCursor;
@@ -58,17 +59,21 @@ public class GridToolBar {
 	private void createToolBar() {
 		ToggleGroup toggles = new ToggleGroup();
 		ToggleGroup spawns = new ToggleGroup();
+		ToggleGroup sinks = new ToggleGroup();
 		ToggleButton drawMode = new ToggleButton(myResources.getString("DrawMode"));
 		drawMode.setToggleGroup(toggles);
+		toggleHandler(toggles);
 		ToggleButton setSpawnPoint = new ToggleButton(myResources.getString("SpawnPoint"));
 		setSpawnPoint.setToggleGroup(spawns);
-		toggleHandler(toggles);
 		spawnHandler(spawns);
+		ToggleButton setSinkPoint = new ToggleButton(myResources.getString("SinkPoint"));
+		setSinkPoint.setToggleGroup(sinks);
+		sinkHandler(sinks);
 		ColorPicker colorChooser = new ColorPicker();
 		colorHandler(colorChooser);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
 		terrainHandler(terrainChooser);
-		toolBar.getChildren().addAll(setSpawnPoint, drawMode, colorChooser, terrainChooser);
+		toolBar.getChildren().addAll(setSinkPoint, setSpawnPoint, drawMode, colorChooser, terrainChooser);
 	}
 	
 	/**
@@ -112,6 +117,22 @@ public class GridToolBar {
 		});
 	}
 	
+	private void sinkHandler(ToggleGroup sinks) {
+		sinks.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+		    public void changed(ObservableValue<? extends Toggle> ov,
+		        Toggle toggle, Toggle new_toggle) {		 
+		    	if (new_toggle == null) {
+		    		sinkStatus = false;
+		    		scene.setCursor(Cursor.DEFAULT);
+		        }
+		        else {
+		        	sinkStatus = true;
+		        	scene.setCursor(Cursor.CROSSHAIR); 
+		        }
+		    }
+		});
+	}
+	
 	/**
 	 * Sets selectedColor to the color chosen by the user when using the Color Picker from the toolbar.
 	 * @param colors
@@ -146,6 +167,10 @@ public class GridToolBar {
 		return toggleStatus;
 	}
 	
+	public  boolean getSinkStatus() {
+		return sinkStatus;
+	}
+		
 	public Color getSelectedColor() {
 		return selectedColor;
 	}
