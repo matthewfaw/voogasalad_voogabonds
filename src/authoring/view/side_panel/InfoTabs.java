@@ -28,8 +28,8 @@ public class InfoTabs {
 		//Change to take in a controller as a second parameter please:
 		//Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
 		Tab towerTab = new TowerTab(infoTab);
-		Tab enemyTab = new EnemyTab(infoTab);
-		Tab waveTab = new WaveLevelTab(infoTab, (EnemyTab) enemyTab);
+		Tab enemyTab = new EnemyTab(infoTab, r.getEnemyDataController());
+		Tab waveTab = new WaveLevelTab(infoTab, r.getWaveDataController());
 		Tab gameTab = new GameTab(infoTab);
 		Tab weaponTab = new WeaponTab(infoTab);
 		infoTab.setPrefSize(screenWidth/5, screenHeight);
