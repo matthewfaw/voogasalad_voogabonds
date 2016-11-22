@@ -34,6 +34,7 @@ public class GridToolBar {
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private boolean toggleStatus;
+	private boolean spawnStatus;
 	private Color selectedColor;
 	private String selectedTerrain;
 	private Image mouseCursor;
@@ -56,14 +57,18 @@ public class GridToolBar {
 	
 	private void createToolBar() {
 		ToggleGroup toggles = new ToggleGroup();
+		ToggleGroup spawns = new ToggleGroup();
 		ToggleButton drawMode = new ToggleButton(myResources.getString("DrawMode"));
 		drawMode.setToggleGroup(toggles);
+		ToggleButton setSpawnPoint = new ToggleButton(myResources.getString("SpawnPoint"));
+		setSpawnPoint.setToggleGroup(spawns);
 		toggleHandler(toggles);
+		spawnHandler(spawns);
 		ColorPicker colorChooser = new ColorPicker();
 		colorHandler(colorChooser);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
 		terrainHandler(terrainChooser);
-		toolBar.getChildren().addAll(drawMode, colorChooser, terrainChooser);
+		toolBar.getChildren().addAll(setSpawnPoint, drawMode, colorChooser, terrainChooser);
 	}
 	
 	/**
@@ -87,6 +92,22 @@ public class GridToolBar {
 		    	else {
 			        scene.setCursor(new ImageCursor(mouseCursor)); 
 		    	}
+		    }
+		});
+	}
+	
+	private void spawnHandler(ToggleGroup spawns) {
+		spawns.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+		    public void changed(ObservableValue<? extends Toggle> ov,
+		        Toggle toggle, Toggle new_toggle) {		 
+		    	if (new_toggle == null) {
+		    		spawnStatus = false;
+		    		scene.setCursor(Cursor.DEFAULT);
+		        }
+		        else {
+		        	spawnStatus = true;
+		        	scene.setCursor(Cursor.CROSSHAIR); 
+		        }
 		    }
 		});
 	}
@@ -117,6 +138,9 @@ public class GridToolBar {
 		});
 	}
 	
+	public boolean getSpawnStatus() {
+		return spawnStatus;
+	}
 	
 	public boolean getToggleStatus() {
 		return toggleStatus;
