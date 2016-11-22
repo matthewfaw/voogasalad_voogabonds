@@ -57,7 +57,7 @@ public class GameDisplay {
 		terrainGrid.setVgap(GAP);
 		for (int col = 0; col < columns; col++) {
 			for (int r = 0; r < rows; r++) {
-				TerrainCell cell = new TerrainCell(terrainArea, terrainGrid, toolBar, col, r);
+				TerrainCell cell = new TerrainCell(toolBar, col, r);
 				cell.setWidth(DEFAULT_TILE_SIZE);
 				cell.setHeight(DEFAULT_TILE_SIZE);
 				terrainGrid.getChildren().add(cell);

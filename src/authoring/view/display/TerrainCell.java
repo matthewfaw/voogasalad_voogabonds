@@ -3,10 +3,7 @@ package authoring.view.display;
 import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -22,22 +19,29 @@ public class TerrainCell extends Rectangle {
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private int rowLocation;
 	private int colLocation;
-	private TilePane tileGrid;
-	private ScrollPane terrainArea;
 	
-	public TerrainCell(ScrollPane area, TilePane pane, GridToolBar tools, int row, int column) {
+	public TerrainCell(GridToolBar tools, int row, int column) {	
 		this.toolBar = tools;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainType = myResources.getString("DefaultTerrainType");
 		this.rowLocation = row;
 		this.colLocation = column;
-		this.tileGrid = pane;
-		this.terrainArea = area;
 		clickEvent();
 	}
 	
 	private void clickEvent() {
 		this.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent> () {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (toolBar.getToggleStatus()) {
+					setFill(toolBar.getSelectedColor());
+					setType(toolBar.getSelectedTerrain());
+					setWidth(50);
+					setHeight(50);
+				}
+			}
+		});
+		this.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent> () {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				if (toolBar.getToggleStatus()) {
@@ -65,15 +69,5 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType) {
 		terrainType = newType;
 	}
-	
-//	@Override
-//	public void setFill(Color newColor) {
-//		if (newColor.equals(null)) {
-//			newColor = Color.BLACK;
-//		}
-//		System.out.println("ColorChooser: " + newColor);
-//		terrainColor = newColor;
-//		System.out.println(terrainColor);
-//	}
 	
 }
