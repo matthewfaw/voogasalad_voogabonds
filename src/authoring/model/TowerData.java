@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import utility.Point;
+
 public class TowerData {
 
 	private String name;
@@ -15,7 +17,7 @@ public class TowerData {
 	private String imagePath;
 	private List<String> traversableTerrain;
 	private int collisionRadius;
-	private List<Map<Integer, Integer>> initialLocations;
+	private Point initialLocations;
 	private String movement;
 	
 	public void setName(String name) throws Exception {
@@ -111,11 +113,11 @@ public class TowerData {
 		return collisionRadius;
 	}
 	
-	public void setInitialLocations(List<Map<Integer, Integer>> initialLocations){
+	public void setInitialLocations(Point initialLocations){
 		this.initialLocations = initialLocations;
 	}
 	
-	public List<Map<Integer, Integer>> getInitialLocations(){
+	public Point getInitialLocations(){
 		return initialLocations;
 	}
 	

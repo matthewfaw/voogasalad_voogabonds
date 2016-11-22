@@ -9,11 +9,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
+import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,12 +29,14 @@ import javafx.scene.paint.Color;
 
 public class GridToolBar {
 
+	private Scene scene;
 	private HBox toolBar;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private boolean toggleStatus;
 	private Color selectedColor;
 	private String selectedTerrain;
+	private Image mouseCursor;
 	private ObservableList<String> terrainOptions = 
 			FXCollections.observableArrayList (
 					"Ground",
@@ -39,7 +45,8 @@ public class GridToolBar {
 					"Acid"
 					);
 	
-	public GridToolBar(VBox box) {
+	public GridToolBar(VBox box, Scene sc) {
+		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
 		createToolBar();
@@ -66,13 +73,20 @@ public class GridToolBar {
 	private void toggleHandler(ToggleGroup drawMode)  {
 		drawMode.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
-		        Toggle toggle, Toggle new_toggle) {
-		            if (new_toggle == null) {
-		                toggleStatus = false;
-		            }
-		            else {
-		               toggleStatus = true;
-		            }
+		        Toggle toggle, Toggle new_toggle) {		 
+		    	mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
+		    	if (new_toggle == null) {
+		            toggleStatus = false;
+		        }
+		        else {
+		            toggleStatus = true;
+		        }
+		    	if (!toggleStatus) {
+		    		scene.setCursor(Cursor.DEFAULT);
+		    	}
+		    	else {
+			        scene.setCursor(new ImageCursor(mouseCursor)); 
+		    	}
 		    }
 		});
 	}

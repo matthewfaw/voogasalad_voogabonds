@@ -36,8 +36,7 @@ public class TerrainCell extends Rectangle {
 				if (toolBar.getToggleStatus()) {
 					setFill(toolBar.getSelectedColor());
 					setType(toolBar.getSelectedTerrain());
-					setWidth(50);
-					setHeight(50);
+
 				}
 			}
 		});
