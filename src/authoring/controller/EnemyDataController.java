@@ -28,7 +28,7 @@ public class EnemyDataController{
 		createEnemyData(updatedEnemy);
 	}
 	
-	public void addControllerListener(MapChangeListener<String, Object> listener){
+	public void addControllerListener(MapChangeListener<String, EnemyData> listener){
 		myEnemyDataMap.addListener(listener);
 	}
 }

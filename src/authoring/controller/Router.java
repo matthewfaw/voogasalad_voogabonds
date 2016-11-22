@@ -18,6 +18,13 @@ public class Router {
 		 * TOWER TAB WILL NEED TO LISTEN TO: WEAPON (MapChangeListener), TERRAIN (SetChangeListener)
 		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
 		 */
+		
+		//Listeners for WaveLevelTab
+		edc.addControllerListener(wTab.createEnemyListener());
+		mdc.addSpawnPointListener(wTab.createSpawnPointListener());
+		
+		//Listeners for 
+		
 	}
 	
 	public EnemyDataController getEnemyDataController(){
