@@ -1,19 +1,20 @@
-package engine.model.strategies;
+package engine.model.strategies.damage;
 
 import engine.model.machine.weapon.projectile.Projectile;
+import engine.model.strategies.IDamageStrategy;
 import utility.Damage;
 import utility.Point;
 
-public class ConstantDamageStrategy implements IDamageStrategy {
+public class BinaryDamageStrategy implements IDamageStrategy {
 
 	@Override
 	public Damage getAoEDamage(Projectile missile, Point location) {
-		return new Damage(1);
+		return new Damage(0);
 	}
 
 	@Override
 	public Damage getTargetDamage() {
-		return new Damage(0);
+		return new Damage(1);
 	}
 
 }
