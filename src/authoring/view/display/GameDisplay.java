@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -18,6 +19,7 @@ import javafx.scene.layout.VBox;
 
 public class GameDisplay {
 
+	private Scene scene;
 	private VBox terrainContainer;
 	private ScrollPane terrainArea;
 	private TilePane terrainGrid;
@@ -29,12 +31,13 @@ public class GameDisplay {
 	private int screenWidth;
 	private int screenHeight;
 	
-	public GameDisplay(BorderPane root) {
+	public GameDisplay(BorderPane root, Scene s) {
 		setUpScreenResolution();
+		this.scene = s;
 		this.terrainContainer = new VBox();
 		this.terrainArea = new ScrollPane();
 		this.terrainGrid = new TilePane();
-		this.toolBar = new GridToolBar(terrainContainer);
+		this.toolBar = new GridToolBar(terrainContainer, scene);
 		terrainGrid.setPrefWidth(screenWidth*0.8);
 		terrainGrid.setMaxHeight(screenHeight*0.9);
 		terrainArea.setContent(terrainGrid);
