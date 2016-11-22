@@ -48,11 +48,11 @@ public class TerrainCell extends Rectangle {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-					System.out.println(cellName);
 					if (toolBar.getToggleStatus()) {
 						setFill(toolBar.getSelectedColor());
 						setType(toolBar.getSelectedTerrain());
-	
+						setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
+						setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
 					}
 					if (toolBar.getSpawnStatus()) {
 						setWidth(TerrainCell.this.getWidth()/2);
