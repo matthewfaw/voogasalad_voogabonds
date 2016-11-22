@@ -118,6 +118,10 @@ public class EnemyTab extends Tab {
 		return myWeapons;
 	}
 	
+	public ArrayList<String> getTerrains(){
+		return myTerrains;
+	}
+	
 	public MapChangeListener<String, EnemyData> createWeaponListener(){
 		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
 			@Override
