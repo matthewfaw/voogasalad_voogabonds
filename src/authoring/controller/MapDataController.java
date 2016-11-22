@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  */
 public class MapDataController {
-	private MapData myMapData;
+	private MapData myMapData = new MapData();
 	
 	/**
 	 * Functions for grid dimensions
@@ -87,5 +87,8 @@ public class MapDataController {
 	}
 	public Set<TerrainData> getTerrainList(){
 		return myMapData.getTerrainList();
+	}
+	public void addTerrainListener(SetChangeListener<String> listener){
+		myMapData.addValidTerrainListener(listener);
 	}
 }

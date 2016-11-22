@@ -30,7 +30,7 @@ public class WeaponDataController {
 		createWeaponData(updatedWeapon);
 	}
 	
-	public void addControllerListener(MapChangeListener<String, Object> listener){
+	public void addControllerListener(MapChangeListener<String, WeaponData> listener){
 		myWeaponDataMap.addListener(listener);
 	}
 }

@@ -1,12 +1,13 @@
 package authoring.controller;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 
 import authoring.model.TowerData;
 
 public class TowerDataController {
 
-	private AbstractMap<String, TowerData> myTowerDataMap;
+	private AbstractMap<String, TowerData> myTowerDataMap = new HashMap<String, TowerData>();
 
 	public AbstractMap finalizeTowerDataMap(){
 		return myTowerDataMap;

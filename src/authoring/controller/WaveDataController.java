@@ -9,7 +9,7 @@ public class WaveDataController {
 	 * relative to what comes before them. As a result, we need to make sure that
 	 * waves are in the map in the order in which they were created.
 	 */
-	private LinkedHashMap<String, WaveData> myWaveMap;
+	private LinkedHashMap<String, WaveData> myWaveMap = new LinkedHashMap<String, WaveData>();
 	
 	public void createNewWave(String name, WaveData wave){
 		try{
