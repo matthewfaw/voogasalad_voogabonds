@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import authoring.controller.WaveDataController;
+import authoring.model.EnemyData;
 import authoring.model.WaveData;
 import authoring.view.input_menus.WaveMenu;
 import javafx.collections.MapChangeListener;
@@ -31,6 +32,7 @@ public class WaveLevelTab extends Tab  {
 	private WaveDataController myController;
 	private ArrayList<String> myEnemies;
 	private ArrayList<String> mySpawnPoints;
+	private VBox myContent;
 	
 	public WaveLevelTab(TabPane pane, WaveDataController controller) {
 		screenInfo();
@@ -48,6 +50,8 @@ public class WaveLevelTab extends Tab  {
 		VBox waveArea = new VBox(screenHeight*0.01);
 		waveArea.setMaxHeight(screenHeight*0.88);
 		ScrollPane currentWaves = new ScrollPane();
+		myContent = new VBox();
+		currentWaves.setContent(myContent);
 		currentWaves.setPrefSize(screenWidth/5, screenHeight);
 		HBox waveButtons = new HBox(screenWidth*0.05);
 		waveButtons.setPadding(new Insets(0.01*screenHeight, screenWidth*0.01, 0.01*screenHeight, screenWidth*0.01));
@@ -69,10 +73,34 @@ public class WaveLevelTab extends Tab  {
 			public void handle(ActionEvent event){
 				myMenu.createWaveWindow(myResources.getString("DefaultWaveName"), 
 						myResources.getString("DefaultTimeBetween"), myResources.getString("DefaultTimeFor"),
-						myResources.getString("DefaultNumber"), true);
+						myResources.getString("DefaultNumber"), null, null, true);
 			}
 		};
 		return handler;
+	}
+	
+	public void removeButtonDuplicates(String s) {
+		for (int i = 0; i < myContent.getChildren().size(); i++) {
+			Button button = (Button) (myContent.getChildren().get(i));
+			if (button.getText().equals(s)) {
+				myContent.getChildren().remove(i);
+				i--;
+			}
+		}
+	}
+	
+	public void addButtonToDisplay(String text) {
+		Button button = new Button(text);
+		button.setMinWidth(myContent.getMinWidth());
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event){
+				WaveData wave = myController.getWaveData(text);
+				myMenu.createWaveWindow(wave.getName(), String.valueOf(wave.getTimeBetweenEnemy()), 
+						String.valueOf(wave.getTimeForWave()), String.valueOf(wave.getNumEnemies()), 
+						wave.getWaveEnemy(), wave.getSpawnPointName(), false);
+			}
+		});
+		myContent.getChildren().add(button);
 	}
 	
 	public WaveDataController getController(){

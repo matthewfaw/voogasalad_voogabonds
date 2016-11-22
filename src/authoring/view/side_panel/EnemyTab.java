@@ -3,9 +3,7 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 
 import authoring.controller.EnemyDataController;
 import authoring.model.EnemyData;
@@ -35,7 +33,6 @@ public class EnemyTab extends Tab {
 	private int screenWidth;
 	private int screenHeight;
 	private VBox myContent;
-	private ArrayList<String> myEnemies;
 	private EnemyMenu myMenu;
 	private EnemyDataController myController;
 	private ArrayList<String> myWeapons;
@@ -45,7 +42,6 @@ public class EnemyTab extends Tab {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
-		myEnemies = new ArrayList<String>();
 		myWeapons = new ArrayList<String>();
 		myTerrains = new ArrayList<String>();
 		myController = controller;
@@ -83,7 +79,7 @@ public class EnemyTab extends Tab {
 						myResources.getString("DefaultHealth"), myResources.getString("DefaultSpeed"), 
 						myResources.getString("DefaultCollisionRadius"), 
 						myResources.getString("DefaultKillReward"), myResources.getString("DefaultImage"),
-						true);
+						null, true);
 			}
 		};
 		return handler;
@@ -107,14 +103,11 @@ public class EnemyTab extends Tab {
 				EnemyData enemy = myController.getEnemyData(text);
 				myMenu.createEnemyWindow(enemy.getName(), String.valueOf(enemy.getMaxHealth()), 
 						String.valueOf(enemy.getSpeed()), String.valueOf(enemy.getCollisionRadius()), 
-						String.valueOf(enemy.getKillReward()), enemy.getImagePath(), false);
+						String.valueOf(enemy.getKillReward()), enemy.getImagePath(), enemy.getWeaponName(), 
+						false);
 			}
 		});
 		myContent.getChildren().add(button);
-	}
-	
-	public List<String> getEnemies(){
-		return myEnemies;
 	}
 	
 	public EnemyDataController getController(){
