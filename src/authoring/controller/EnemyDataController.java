@@ -10,7 +10,7 @@ import java.util.List;
 public class EnemyDataController{
 	private ObservableMap<String, EnemyData> myEnemyDataMap = FXCollections.observableHashMap();
 	
-	public ObservableMap finalizeEnemyDataMap(){
+	public ObservableMap<String, EnemyData> finalizeEnemyDataMap(){
 		//TODO: Error checking to make sure that enemies at least exist
 		return myEnemyDataMap;
 	}
