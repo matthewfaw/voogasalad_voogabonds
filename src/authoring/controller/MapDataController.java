@@ -88,6 +88,16 @@ public class MapDataController {
 	public Set<TerrainData> getTerrainList(){
 		return myMapData.getTerrainList();
 	}
+
+	/**
+	 * Functions for adding valid terrain
+	 */
+	public void addValidTerrain(String s) throws Exception{
+		myMapData.addValidTerrain(s);
+	}
+	public void removeValidTerrain(String s) throws Exception{
+		myMapData.removeValidTerrain(s);
+	}
 	public void addTerrainListener(SetChangeListener<String> listener){
 		myMapData.addValidTerrainListener(listener);
 	}
