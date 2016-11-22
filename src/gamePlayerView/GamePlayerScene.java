@@ -1,5 +1,8 @@
 package gamePlayerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.WavesBox;
@@ -24,7 +27,7 @@ public class GamePlayerScene {
 	}
 
 	public void init(Stage s) {
-		BuildGUI gui=new BuildGUI();
+		gui=new BuildGUI();
 		Scene myScene=gui.build(s);
 		setScene(s,myScene);
 	}
@@ -45,7 +48,19 @@ public class GamePlayerScene {
 	public WavesBox getWaves() {
 		return gui.getWaves();
 	}
-	
+	/*
+	public List<ICashAcceptor> getCashAcceptors()
+	{
+		List<ICashAcceptor> acceptors = new ArrayList<ICashAcceptor>();
+		acceptors.add(gui.getCash());
+		return acceptors;
+	}
+	public List<IResourceStoreAcceptor> getResourceStoreAcceptors()
+	{
+		//TODO:
+		// get all frontend components that need info from the resource store (available towers, ect)
+	}
+	*/
 }
 
 

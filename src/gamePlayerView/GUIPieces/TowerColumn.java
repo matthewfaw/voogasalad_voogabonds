@@ -35,7 +35,7 @@ import javafx.scene.text.Text;
  * 
  */
 
-public class TowerColumn implements IGUIPiece {
+public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
@@ -159,4 +159,21 @@ public class TowerColumn implements IGUIPiece {
 	public Node getView() {
 		return myTowerColumn;
 	}
+	/*
+	 * 
+	 * @Override // for the IResourceStoreAcceptor interface 
+	 * void acceptResourceStore(IViewableResourceStore aResourceStore)
+	 * {
+	 * 		aResourceStore.attach(this);
+	 * }
+	 * 
+	 * @Override // for the IObserver interface
+	 * void update(...)
+	 * {
+	 * 		refresh the list view
+	 * }
+	 * 
+	 * 
+	 * 
+	 */
 }
