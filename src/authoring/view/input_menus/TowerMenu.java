@@ -126,7 +126,8 @@ public class TowerMenu {
                         myTab.addButtonToDisplay(name);
                         myTab.addTower(name);
 
-                        myController.createTowerData(name, tower);
+                        //matthewfaw: commenting out to remove compilation error
+                        //myController.createTowerData(name, tower);
                         myTowerWindow.close();
                 }
         });
