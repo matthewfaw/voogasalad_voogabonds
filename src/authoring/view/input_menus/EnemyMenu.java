@@ -48,13 +48,17 @@ public class EnemyMenu {
 	
 	public void createEnemyWindow(String nameVal, String healthVal, String speedVal, 
 			String collisionRadiusVal, String killRewardVal, String imageVal, String weaponVal, 
-			boolean isDefault) {
+			List<String> terrainVals, boolean isDefault) {
+		if (myTab.getTerrains().size() == 0){
+			myHelper.showError(myResources.getString("NoTerrainsCreated"));
+			return;
+		}
 		myIsDefault = isDefault;
 		myEnemyWindow = new Stage();
 		myEnemyWindow.initModality(Modality.APPLICATION_MODAL);
 		VBox root = new VBox();
 		setUpEnemyScreen(root, nameVal, healthVal, speedVal, collisionRadiusVal, killRewardVal, imageVal,
-				weaponVal);
+				weaponVal, terrainVals);
 		Scene scene = new Scene(root, SIZE, SIZE);
 		myEnemyWindow.setTitle(myResources.getString("AddEnemy"));
 		myEnemyWindow.setScene(scene);
@@ -62,7 +66,8 @@ public class EnemyMenu {
 	}
 	
 	private void setUpEnemyScreen(VBox root, String nameVal, String healthVal, String speedVal, 
-			String collisionRadiusVal, String killRewardVal, String imageVal, String weaponVal){
+			String collisionRadiusVal, String killRewardVal, String imageVal, String weaponVal,
+			List<String> terrainVals){
 		myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
 		myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
 		mySpeedField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSpeed"), speedVal);
@@ -71,7 +76,7 @@ public class EnemyMenu {
 		myKillRewardField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterKillReward"), 
 				killRewardVal);
 		setUpImage(root, imageVal);
-		setUpTerrains(root);
+		setUpTerrains(root, terrainVals);
 		myWeaponBox = myHelper.setUpComboBoxUserInput(root, myResources.getString("SelectWeapon"), 
 				weaponVal, myTab.getWeapons());
 		setUpFinishButton(root, nameVal);
@@ -82,15 +87,11 @@ public class EnemyMenu {
 		myHelper.setUpBrowseButton(root, myImageField, "PNG", "*.png");
 	}
 	
-	private void setUpTerrains(VBox root){
+	private void setUpTerrains(VBox root, List<String> values){
 		myTerrainButton = new MenuButton(myResources.getString("SelectTerrains"));
-		ArrayList<String> temp = new ArrayList<String>();
-		temp.add("a");
-		temp.add("b");
-		temp.add("c");
-		for (String terrain: temp){
-//		for (String terrain: myTab.getTerrains()){
+		for (String terrain: myTab.getTerrains()){
 			CheckBox checkBox = new CheckBox(terrain);
+			checkBox.setSelected(values.contains(terrain));
 			CustomMenuItem custom = new CustomMenuItem(checkBox);
 			myTerrainButton.getItems().add(custom);
 		}
@@ -156,6 +157,7 @@ public class EnemyMenu {
 			enemy.setCollisionRadius(collisionRadius);
 			enemy.setKillReward(killReward);
 			enemy.setImagePath(image);
+			enemy.setTerrainList(terrainList);
 			if (weapon != null)
 				enemy.setWeaponName(weapon);
 		} catch(Exception e){
