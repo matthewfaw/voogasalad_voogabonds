@@ -17,8 +17,14 @@ import javafx.scene.text.Font;
 public class StatisticsRow implements IGUIPiece {
 	
 	private HBox myStatisticsRow;
+	private CashBox myCashBox;
+	private LivesBox myLivesBox;
+	private WavesBox myWavesBox;
 	
 	public StatisticsRow(){
+		myCashBox=new CashBox();
+		myLivesBox=new LivesBox();
+		myWavesBox =new WavesBox();
 		myStatisticsRow= buildHBox();
 		myStatisticsRow.setPrefHeight(110);
 	}
@@ -48,7 +54,7 @@ public class StatisticsRow implements IGUIPiece {
 		waveoutput.setMaxWidth(5);
 		waveoutput.setMaxHeight(2);
 	    
-	    hbox.getChildren().addAll(buttonPlay, buttonPause,labelBox,textAreaBox,TowerOptionBox,SpeedBox,waveLabel,waveoutput);
+	    hbox.getChildren().addAll(buttonPlay, buttonPause,myCashBox.getView(),myLivesBox.getView(),myWavesBox.getView(),TowerOptionBox,SpeedBox);
 
 	    return hbox;
 	}
@@ -112,8 +118,13 @@ public class StatisticsRow implements IGUIPiece {
 		return l;
 	}
 	
+	
 	public Node getView() {
 		return myStatisticsRow;
+	}
+
+	public CashBox getCash() {
+		return myCashBox;
 	}
 
 }

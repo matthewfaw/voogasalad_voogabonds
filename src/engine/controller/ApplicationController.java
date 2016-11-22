@@ -15,6 +15,21 @@ public class ApplicationController {
 	 */
 	public void init()
 	{
+		/*
+		 * AppScene scene  = new AppScene()
+		 * 
+		 * myRouter = new Router(appScene)
+		 * 
+		 * void  createNewEnemy()
+		 * {
+		 * 		Enemy enemy = new Enemy();
+		 * 		myRouter.distributeEnemy(enemy);
+		 * }
+		 * 
+		 */
+		
+		
+		
 		DeserializeJSON derp = new DeserializeJSON(); 
 		
 		TowerData data = (TowerData)derp.DeserializeFromFile("towers/ActualTower", TowerData.class);
