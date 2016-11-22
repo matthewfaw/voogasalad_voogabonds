@@ -2,6 +2,7 @@ package engine.model.game_environment.terrain;
 
 import java.util.List;
 
+import authoring.model.map.MapData;
 import utility.Index;
 import utility.Point;
 
@@ -18,7 +19,7 @@ public class TerrainMap {
 	
 	private INeighborStrategy<Terrain> myNeighborStrategy;
 	
-	public TerrainMap(TerrainMapData aTerrainMapData)
+	public TerrainMap(MapData aTerrainMapData)
 	{
 		myMapFactory = new TerrainGridFactory();
 		myMap = myMapFactory.constructTerrainMap(aTerrainMapData);

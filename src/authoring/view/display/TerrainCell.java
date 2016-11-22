@@ -26,37 +26,7 @@ public class TerrainCell extends Rectangle {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainType = myResources.getString("DefaultTerrainType");
 		this.terrainColor = Color.BLACK;
-		System.out.println(toolBar.getToggleStatus());
-		if (!toolBar.getToggleStatus()) {
-			this.setOnMouseClicked(new EventHandler<MouseEvent>()
-		       {
-		           @Override
-		           public void handle(MouseEvent t) {
-		               terrainColor = toolBar.getSelectedColor();
-		               terrainType = toolBar.getSelectedTerrain();
-		               System.out.println("Color is now " + terrainColor);
-		               System.out.println("Terrain is now " + terrainType);
-		           }
-		       });
-			}
-//		cellHandler();
 	}
-
-//	private void cellHandler() {
-//		if (toolBar.getToggleStatus()) {
-//		this.setOnMouseClicked(new EventHandler<MouseEvent>()
-//	       {
-//	           @Override
-//	           public void handle(MouseEvent t) {
-//	               terrainColor = toolBar.getSelectedColor();
-//	               terrainType = toolBar.getSelectedTerrain();
-//	               System.out.println("Color is now " + terrainColor);
-//	               System.out.println("Terrain is now " + terrainType);
-//	           }
-//	       });
-//		}
-//
-//	}
 	
 	public String getType() {
 		return terrainType;

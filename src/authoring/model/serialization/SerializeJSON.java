@@ -23,7 +23,7 @@ public class SerializeJSON {
 	
 	public void SerializeToFile(Object obj, String fileName){
 		
-		String fileLoc = "src/resources/";
+		String fileLoc = "src/SerializedFiles/";
 		
 		String str = Serialize(obj).toString();
 		

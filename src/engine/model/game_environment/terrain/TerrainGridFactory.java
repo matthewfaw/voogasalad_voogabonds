@@ -1,5 +1,7 @@
 package engine.model.game_environment.terrain;
 
+import authoring.model.map.MapData;
+
 public class TerrainGridFactory {
 	public TerrainGridFactory()
 	{
@@ -7,7 +9,7 @@ public class TerrainGridFactory {
 	
 	//TODO: Add the real implementation of this--just for testing purposes
 	@Deprecated
-	public Terrain[][] constructTerrainMap(TerrainMapData aTerrainMapData)
+	public Terrain[][] constructTerrainMap(MapData aTerrainMapData)
 	{
 		Terrain[][] terrain = new Terrain[2][2];
 		terrain[0][0] = new Terrain(0,0,"grass");

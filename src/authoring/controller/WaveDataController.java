@@ -1,7 +1,6 @@
 package authoring.controller;
 import java.util.LinkedHashMap;
 import authoring.model.WaveData;
-import authoring.view.objects.FrontEndWave;
 
 public class WaveDataController {
 	/**
@@ -12,7 +11,7 @@ public class WaveDataController {
 	 */
 	private LinkedHashMap<String, WaveData> myWaveMap;
 	
-	public void createNewWave(FrontEndWave wave){
+	public void createNewWave(String name, WaveData wave){
 		try{
 			//Create WaveData object here
 			//Add to wave
@@ -34,7 +33,7 @@ public class WaveDataController {
 	 * @param wave
 	 * @param originalName
 	 */
-	public void updateWave(FrontEndWave wave, String originalName){
+	public void updateWave(WaveData wave, String originalName){
 		if (originalName.equals(wave.getName())){
 			//Find original WaveData object, simply update it
 		}else{

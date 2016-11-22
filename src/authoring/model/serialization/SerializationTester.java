@@ -10,15 +10,14 @@ import javafx.geometry.Point2D;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
-import authoring.view.objects.FrontEndEnemy;
 
 public class SerializationTester {
 	
 	private String fileName;
-	private String fileLoc = "src/resources/";
+	private String fileLoc = "src/SerializedFiles/";
 	
 	@SuppressWarnings("unchecked")
-	public void Tester(Object obj){
+	public void Tester(Object obj) throws Exception{
 //		fileName = "test.txt";
 		List<Map<Integer, Integer>> list = new ArrayList<Map<Integer, Integer>>();
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -28,7 +27,7 @@ public class SerializationTester {
 		TowerData tow = new TowerData();
 		tow.setBuyPrice(40);
 		tow.setCollisionRadius(2);
-		tow.setImagePath("imagepath");
+		tow.setImagePath("src/resources/boss.png");
 		tow.setInitialLocations(list);
 		tow.setMaxHealth(1000);
 		tow.setMovementStrategy("fast as fuck");
@@ -53,8 +52,14 @@ public class SerializationTester {
 		mySerializables.addAll((Collection<? extends List<Object>>) weaponList);
 		
 		mySerializables.addAll((Collection<? extends List<Object>>) projectileList);
+		
+		List<String> li = new ArrayList<String>();
+		li.add("ActualTower");
+		li.add("EmptyTower");
+		li.add("EmptyWeapon");
+		li.add("EmptyProjectile");
 		for (int i = 0; i<mySerializables.size(); i++){
-			ser.SerializeToFile(mySerializables.get(i), mySerializables.get(i)+"");
+			ser.SerializeToFile(mySerializables.get(i), li.get(i));// mySerializables.get(i)+"");
 			fileName = mySerializables.get(i)+"";
 //			des.DeserializeFromFile(fileName);
 		}
