@@ -1,4 +1,4 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import engine.IObservable;
 import engine.IObserver;
@@ -7,10 +7,14 @@ import engine.IObserver;
  * @author Guhan Muruganandam
  */
 
-public class CashBox extends InfoBox implements IObserver {
+/**
+ * UI feature for Lives text box and Label
+ */
+
+public class LivesBox extends InfoBox implements IObserver {
 	
-	public CashBox(){
-		myDisplay=makeDisplay("Cash: ");
+	public LivesBox(){
+		myDisplay=makeDisplay("Lives: ");
 	}
 
 	public void giveObject(IObservable aObservable) {

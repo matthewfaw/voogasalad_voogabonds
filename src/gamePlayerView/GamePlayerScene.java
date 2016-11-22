@@ -1,5 +1,8 @@
 package gamePlayerView;
 
+import gamePlayerView.GUIPieces.CashBox;
+import gamePlayerView.GUIPieces.LivesBox;
+import gamePlayerView.GUIPieces.WavesBox;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
