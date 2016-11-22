@@ -17,13 +17,19 @@ public class EnemyData {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(String name) throws Exception{
+		if (name == null || name.length() == 0){
+			throw new Exception("Enemy must have a name.");
+		}
 		this.name = name;
 	}
 	public String getWeaponName() {
 		return weaponName;
 	}
-	public void setWeaponName(String weaponName) {
+	public void setWeaponName(String weaponName) throws Exception{
+		if (weaponName == null || weaponName.length() == 0){
+			throw new Exception("Enemy must reference a valid weapon name.");
+		}
 		this.weaponName = weaponName;
 	}
 	public int getKillReward(){
@@ -47,13 +53,19 @@ public class EnemyData {
 	public int getCollisionRadius(){
 		return collisionRadius;
 	}
-	public void setCollisionRadius(int collisionRadius){
+	public void setCollisionRadius(int collisionRadius) throws Exception{
+		if (collisionRadius < 0){
+			throw new Exception("Collision radius cannot be negative.");
+		}
 		this.collisionRadius = collisionRadius;
 	}
 	public int getSpeed(){
 		return speed;
 	}
-	public void setSpeed(int speed){
+	public void setSpeed(int speed) throws Exception{
+		if (speed < 0){
+			throw new Exception("Enemy cannot have negative speed.");
+		}
 		this.speed = speed;
 	}
 	public void setTerrainList(List<TerrainData> terrainList){

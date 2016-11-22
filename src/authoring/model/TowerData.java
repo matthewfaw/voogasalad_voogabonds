@@ -33,7 +33,7 @@ public class TowerData {
 	
 	public void setWeaponName(String weaponName) throws Exception{
 		if (weaponName == null || weaponName.length() == 0){
-			throw new Exception("Must enter a valid name.");
+			throw new Exception("Must enter a valid weapon name.");
 		}
 		this.weaponName = weaponName;
 	}
