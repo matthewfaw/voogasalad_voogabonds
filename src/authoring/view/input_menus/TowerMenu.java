@@ -125,9 +125,9 @@ public class TowerMenu {
                         myTab.removeButtonDuplicates(name);
                         myTab.addButtonToDisplay(name);
                         myTab.addTower(name);
-                        
-                        //Commented so it will compile
-                       // myController.createTowerData(name, tower);
+
+                        //matthewfaw: commenting out to remove compilation error
+                        //myController.createTowerData(name, tower);
                         myTowerWindow.close();
                 }
         });

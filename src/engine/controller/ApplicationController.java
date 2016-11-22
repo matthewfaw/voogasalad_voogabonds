@@ -2,7 +2,6 @@ package engine.controller;
 
 import java.awt.Point;
 
-import authoring.controller.TowerDataController;
 import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
@@ -33,6 +32,9 @@ public class ApplicationController {
 		
 		DeserializeJSON derp = new DeserializeJSON(); 
 		
+		TowerData data = (TowerData)derp.DeserializeFromFile("towers/ActualTower", TowerData.class);
+		System.out.println(data.getBuyPrice());
+
 		SerializeJSON ser = new SerializeJSON();
 		
 		MapData md = new MapData();
