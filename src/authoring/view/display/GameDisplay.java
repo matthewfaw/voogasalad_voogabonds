@@ -63,9 +63,12 @@ public class GameDisplay {
 		terrainGrid.getChildren().clear();
 		terrainGrid.setHgap(GAP);
 		terrainGrid.setVgap(GAP);
+		terrainGrid.setPrefColumns(columns);
+		System.out.println(columns);
+		System.out.println(rows);
 		for (int col = 0; col < columns; col++) {
 			for (int r = 0; r < rows; r++) {
-				TerrainCell cell = new TerrainCell(toolBar, col, r);
+				TerrainCell cell = new TerrainCell(toolBar, r, col);
 				cell.setWidth(DEFAULT_TILE_SIZE);
 				cell.setHeight(DEFAULT_TILE_SIZE);
 				cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
