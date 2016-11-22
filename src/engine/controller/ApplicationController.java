@@ -1,6 +1,7 @@
 package engine.controller;
 
 import java.awt.Point;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,24 @@ import engine.model.game_environment.terrain.TerrainMap;
  *
  */
 public class ApplicationController {
+	private static final String GAME_DATA_PATH = "src/SerializedFiles";
+	//TODO: Move this to resource file
+	private static final String ENEMY_PATH = "/enemies";
+	private static final String MAP_PATH = "/map";
+	private static final String PLAYER_PATH = "/players";
+	private static final String PROJECTILE_PATH = "/proejctiles";
+	private static final String TOWER_PATH = "/towers";
+	private static final String WEAPON_PATH = "/weapons";
+	
+	private FileRetriever myFileRetriever;
+	private DeserializeJSON myJsonDeserializer;
+
+	public ApplicationController()
+	{
+		myFileRetriever = new FileRetriever(GAME_DATA_PATH);
+		myJsonDeserializer = new DeserializeJSON();
+	}
+	
 	/**
 	 * XXX: For testing purposes
 	 */
@@ -143,7 +162,9 @@ public class ApplicationController {
 	 */
 	private void constructMap()
 	{
-		
+		List<String> myMapFiles = myFileRetriever.getFileNames(MAP_PATH);
+		MapData mapData = (MapData) myJsonDeserializer.DeserializeFromFile(myMapFiles.get(0), MapData.class);
+		System.out.println(mapData.getSinkPoints());
 	}
 	/**
 	 * Helper method to create the backend resource store object
@@ -161,11 +182,12 @@ public class ApplicationController {
 	{
 		
 	}
-	/*
+	
 	public static void main(String[] args)
 	{
 		ApplicationController appcont = new ApplicationController();
-		appcont.init();
+//		appcont.init();
+		appcont.constructMap();
 	}
-	*/
+	
 }

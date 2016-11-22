@@ -28,17 +28,29 @@ public class FileRetriever {
 	 * @param aDirectory
 	 * @return
 	 */
-	public List<File> getFileNames(String aDirectory)
+	public List<String> getFileNames(String aDirectory)
 	{
 		File folder = new File(myDefaultPath + aDirectory);
 		File[] files = folder.listFiles();
-		ArrayList<File> filesInDirectory = new ArrayList<File>();
+		ArrayList<String> filesInDirectory = new ArrayList<String>();
 		for (File aFile: files){
 			if (aFile.isFile()) {
-				filesInDirectory.add(aFile);
+				String relativeFilePath = getRelativeFilePath(aFile);
+				filesInDirectory.add(relativeFilePath);
 			}
 		}
 		return filesInDirectory;
+	}
+	/**
+	 * A method to retrieve the file path relative to myDefaultPath 
+	 * (the path with which the object was constructed)
+	 * @param aFile
+	 * @return
+	 */
+	private String getRelativeFilePath(File aFile)
+	{
+		String absoluteFilePath = aFile.getAbsolutePath();
+		return absoluteFilePath.substring(absoluteFilePath.indexOf(myDefaultPath) + myDefaultPath.length() + 1);
 	}
 
 	/*
@@ -49,4 +61,5 @@ public class FileRetriever {
 		System.out.println(l);
 	}
 	*/
+	
 }
