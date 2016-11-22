@@ -1,10 +1,14 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import engine.IObservable;
 import engine.IObserver;
 
 /**
  * @author Guhan Muruganandam
+ */
+
+/**
+ * UI feature for Waves text box and Label
  */
 
 public class WavesBox extends InfoBox implements IObserver {

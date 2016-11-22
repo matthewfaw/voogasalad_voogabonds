@@ -1,6 +1,9 @@
 package gamePlayerView;
 
 import engine.IObservable;
+import gamePlayerView.GUIPieces.CashBox;
+import gamePlayerView.GUIPieces.LivesBox;
+import gamePlayerView.GUIPieces.WavesBox;
 import javafx.scene.layout.HBox;
 
 public class Router {

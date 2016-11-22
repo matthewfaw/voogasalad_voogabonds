@@ -1,5 +1,6 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
+import gamePlayerView.Styles;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -55,21 +56,19 @@ public class StatisticsRow implements IGUIPiece {
 	private Button makeButton(String string) {
 		Button b= new Button(string);
 		b.setPrefSize(100, 20);
-		//b.setStyle(Styles.green);
+		//b.setId(value);
+		b.setStyle("-fx-background-color: linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
 		return b;
 	}
 	
 	private VBox makeButtonSet(String s1,String s2) {
 		VBox vbox = new VBox();
 		vbox.setSpacing(10);
-		Button button1 = new Button(s1);
-	    button1.setPrefSize(100, 20);
-	    Button button2 = new Button(s2);
-	    button2.setPrefSize(100, 20);
+		Button button1 = makeButton(s1);
+	    Button button2 = makeButton(s2);
 	    vbox.getChildren().addAll(button1,button2);
 		return vbox;
 	}
-	
 	
 	public Node getView() {
 		return myStatisticsRow;

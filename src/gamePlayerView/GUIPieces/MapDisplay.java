@@ -1,4 +1,4 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 import java.awt.Dimension;
 import java.awt.List;
 import java.awt.MouseInfo;
