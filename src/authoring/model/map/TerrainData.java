@@ -1,5 +1,5 @@
 package authoring.model.map;
-import java.awt.Point;
+import utility.Point;
 
 /**
  * type: the 'type' of terrain this represents, e.g. 'water', 'air', 'ground'

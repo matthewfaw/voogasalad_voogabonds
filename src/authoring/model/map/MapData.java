@@ -1,18 +1,20 @@
 package authoring.model.map;
-import java.awt.Point;
+import utility.Point;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.SetChangeListener;
+import javafx.collections.MapChangeListener;
 
 
 public class MapData {
 	private int numXCells;
 	private int numYCells;
-	private ObservableSet<Point> spawnPoints = FXCollections.observableSet();
+	private ObservableMap<String, ArrayList<Point>> spawnPoints = FXCollections.observableHashMap();
 	private HashSet<Point> sinkPoints;
 	private HashSet<TerrainData> terrainList;
 	private ObservableSet<String> validTerrain = FXCollections.observableSet();
@@ -42,23 +44,25 @@ public class MapData {
 	/**
 	 * SPAWN POINT FUNCTIONS
 	 */
-	public void addSpawnPoint(Point newSpawnPoint) throws Exception{
-		validatePoint(newSpawnPoint, "spawn");
-		spawnPoints.add(newSpawnPoint);
+	public void addSpawnPoints(String name, ArrayList<Point> newSpawnPoints) throws Exception{
+		for (Point p: newSpawnPoints){
+			validatePoint(p, "spawn");
+		}
+		spawnPoints.put(name, newSpawnPoints);
 	}
 	
-	public void addSpawnPointListener(SetChangeListener<Point> listener){
+	public void addSpawnPointListener(MapChangeListener<String, ArrayList<Point>> listener){
 		spawnPoints.addListener(listener);
 	}
 	
-	public void removeSpawnPoint(Point p){
-		if (spawnPoints.contains(p)){
-			spawnPoints.remove(p);
+	public void removeSpawnPoints(String name){
+		if (spawnPoints.containsKey(name)){
+			spawnPoints.remove(name);
 		}
 	}
 	
-	public Set<Point> getSpawnPoints(){
-		return spawnPoints;
+	public ArrayList<Point> getSpawnPoints(String name){
+		return spawnPoints.get(name);
 	}
 	
 	/**
@@ -114,6 +118,7 @@ public class MapData {
 	public void addValidTerrainListener(SetChangeListener<String> listener){
 		validTerrain.addListener(listener);
 	}
+	
 	
 	private void validatePoint(Point p, String type) throws Exception{
 		if (p.getX() >= numXCells || p.getX() < 0){

@@ -9,6 +9,7 @@ import authoring.controller.WaveDataController;
 import authoring.model.EnemyData;
 import authoring.model.WaveData;
 import authoring.view.input_menus.WaveMenu;
+import utility.Point;
 import javafx.collections.MapChangeListener;
 import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
@@ -115,10 +116,10 @@ public class WaveLevelTab extends Tab  {
 		return mySpawnPoints;
 	}
 	
-	public MapChangeListener<String, WaveData> createEnemyListener(){
-		MapChangeListener<String, WaveData> listener = new MapChangeListener<String, WaveData>() {
+	public MapChangeListener<String, EnemyData> createEnemyListener(){
+		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
 			@Override
-			public void onChanged(MapChangeListener.Change<? extends String, ? extends WaveData> change) {
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends EnemyData> change) {
 				if (change.wasAdded()){
 					myEnemies.add(change.getKey());
 				}
@@ -130,15 +131,15 @@ public class WaveLevelTab extends Tab  {
 		return listener;
 	}
 	
-	public SetChangeListener<String> createSpawnPointListener(){
-		SetChangeListener<String> listener = new SetChangeListener<String>() {
+	public MapChangeListener<String, ArrayList<Point>> createSpawnPointListener(){
+		MapChangeListener<String, ArrayList<Point>> listener = new MapChangeListener<String, ArrayList<Point>>() {
 			@Override
-			public void onChanged(javafx.collections.SetChangeListener.Change<? extends String> change) {
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends ArrayList<Point>> change) {
 				if (change.wasAdded()){
-					mySpawnPoints.add(change.getElementAdded());
+					mySpawnPoints.add(change.getKey());
 				}
 				else if (change.wasRemoved()){
-					mySpawnPoints.remove(change.getElementRemoved());
+					mySpawnPoints.remove(change.getKey());
 				}
 			}
 		};
