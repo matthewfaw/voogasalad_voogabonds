@@ -11,6 +11,7 @@ import authoring.controller.EnemyDataController;
 import authoring.model.EnemyData;
 import authoring.view.input_menus.EnemyMenu;
 import javafx.collections.MapChangeListener;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,6 +39,7 @@ public class EnemyTab extends Tab {
 	private EnemyMenu myMenu;
 	private EnemyDataController myController;
 	private ArrayList<String> myWeapons;
+	private ArrayList<String> myTerrains;
 	
 	public EnemyTab(TabPane pane, EnemyDataController controller) {
 		screenInfo();
@@ -45,6 +47,7 @@ public class EnemyTab extends Tab {
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myEnemies = new ArrayList<String>();
 		myWeapons = new ArrayList<String>();
+		myTerrains = new ArrayList<String>();
 		myController = controller;
 		myMenu = new EnemyMenu(myResources, this);
 		enemyTabOptions(enemyTab);
@@ -131,6 +134,21 @@ public class EnemyTab extends Tab {
 				}
 				else if (change.wasRemoved()){
 					myWeapons.remove(change.getKey());
+				}
+			}
+		};
+		return listener;
+	}
+	
+	public SetChangeListener<String> createTerrainListener(){
+		SetChangeListener<String> listener = new SetChangeListener<String>() {
+			@Override
+			public void onChanged(SetChangeListener.Change<? extends String> change) {
+				if (change.wasAdded()){
+					myTerrains.add(change.getElementAdded());
+				}
+				else if (change.wasRemoved()){
+					myTerrains.remove(change.getElementRemoved());
 				}
 			}
 		};
