@@ -7,11 +7,23 @@ import engine.model.machine.weapon.DamageInfo;
 import engine.model.machine.weapon.Weapon;
 import utility.Damage;
 
+import java.util.List;
+
+import engine.model.game_environment.terrain.Terrain;
+
 public class Tower extends Machine implements IPurchasable{
 	private String myName;
 	private Weapon myWeapon;
 	private int myMaxHealth;
+	private List<Terrain> myPossibleTerrains;
 	
+	public Tower(String name, int maxhealth){
+		myName = name;
+		myMaxHealth = maxhealth;
+	}
+	public void setPossibleTerrains(List<Terrain> possibleterrains){
+		myPossibleTerrains = possibleterrains;
+	}
 	@Override
 	public DamageInfo takeDamage(Damage toDeal) {
 		// TODO Auto-generated method stub
