@@ -3,6 +3,7 @@ package gamePlayerView;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -36,8 +37,20 @@ public class BuildGUI {
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
-	        borderpane.setCenter(myMap.getView());
+	    borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
 		return borderpane;
+	}
+
+	public CashBox getCash() {
+		return myStatisticsRow.getCash();
+	}
+
+	public LivesBox getLives() {
+		return myStatisticsRow.getLives();
+	}
+	
+	public WavesBox getWaves() {
+		return myStatisticsRow.getWaves();
 	}
 }
