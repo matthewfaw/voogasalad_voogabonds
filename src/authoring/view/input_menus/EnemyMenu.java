@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 import authoring.model.EnemyData;
 import authoring.view.side_panel.EnemyTab;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -25,6 +27,7 @@ public class EnemyMenu {
 	private TextField myImageField;
 	private TextField myCollisionRadiusField;
 	private TextField myKillRewardField;
+	private ComboBox<String> myWeaponBox;
 	private Stage myEnemyWindow;
 	private EnemyTab myTab;
 	private MenuHelper myHelper;
@@ -70,8 +73,10 @@ public class EnemyMenu {
 
 	private void setUpWeapon(VBox root) {
 		Text weaponText = new Text(myResources.getString("SelectWeapon"));
-		ComboBox<String> weaponBox = new ComboBox<String>();
-		root.getChildren().addAll(weaponText, weaponBox);
+		myWeaponBox = new ComboBox<String>();
+		ObservableList<String> list = FXCollections.observableList(myTab.getWeapons());
+		myWeaponBox.setItems(list);
+		root.getChildren().addAll(weaponText, myWeaponBox);
 	}
 	
 	private void setUpFinishButton(VBox root, String originalName){
@@ -93,14 +98,15 @@ public class EnemyMenu {
 					return;
 				}
 				String image = myImageField.getCharacters().toString();
+				String weapon = myWeaponBox.getValue();
 				myTab.removeButtonDuplicates(name);
 				myTab.addButtonToDisplay(name);
 				myTab.getEnemies().add(name);
-				EnemyData enemy = createEnemyData(name, health, speed, collisionRadius, killReward, image);
+				EnemyData enemy = createEnemyData(name, health, speed, collisionRadius, killReward, image,
+						weapon);
 				if (enemy == null){
 					return;
 				}
-				// TODO: set up weapon for enemy
 				if (myIsDefault)
 					myTab.getController().createEnemyData(enemy);
 				else
@@ -109,7 +115,7 @@ public class EnemyMenu {
 			}
 
 			private EnemyData createEnemyData(String name, int health, int speed, int collisionRadius, 
-					int killReward, String image) {
+					int killReward, String image, String weapon) {
 				EnemyData enemy = new EnemyData();
 				try {
 					enemy.setName(name);
@@ -118,6 +124,8 @@ public class EnemyMenu {
 					enemy.setCollisionRadius(collisionRadius);
 					enemy.setKillReward(killReward);
 					enemy.setImagePath(image);
+					if (weapon != null)
+						enemy.setWeaponName(weapon);
 				} catch(Exception e){
 					myHelper.showError(e.getMessage());
 					return null;

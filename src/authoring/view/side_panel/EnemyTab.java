@@ -5,19 +5,19 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 import authoring.controller.EnemyDataController;
 import authoring.model.EnemyData;
 import authoring.view.input_menus.EnemyMenu;
+import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -37,14 +37,16 @@ public class EnemyTab extends Tab {
 	private ArrayList<String> myEnemies;
 	private EnemyMenu myMenu;
 	private EnemyDataController myController;
+	private ArrayList<String> myWeapons;
 	
-	public EnemyTab(TabPane pane) {
+	public EnemyTab(TabPane pane, EnemyDataController controller) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myEnemies = new ArrayList<String>();
+		myWeapons = new ArrayList<String>();
+		myController = controller;
 		myMenu = new EnemyMenu(myResources, this);
-		myController = new EnemyDataController();
 		enemyTabOptions(enemyTab);
 		pane.getTabs().add(enemyTab);
 	}
@@ -114,5 +116,24 @@ public class EnemyTab extends Tab {
 	
 	public EnemyDataController getController(){
 		return myController;
+	}
+	
+	public ArrayList<String> getWeapons(){
+		return myWeapons;
+	}
+	
+	public MapChangeListener<String, EnemyData> createWeaponListener(){
+		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
+			@Override
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends EnemyData> change) {
+				if (change.wasAdded()){
+					myWeapons.add(change.getKey());
+				}
+				else if (change.wasRemoved()){
+					myWeapons.remove(change.getKey());
+				}
+			}
+		};
+		return listener;
 	}
 }
