@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import engine.model.resourcestore.IMoney;
+import engine.model.resourcestore.Money;
 
 public class TowerNode {
 	private Tower myTowerId;
@@ -36,4 +37,15 @@ public class TowerNode {
 		return myPrice;
 	}
 	
+	public IMoney getSellPrice(){
+		return mySellPrice;
+	}
+
+	public void setSellPrice(int sellPrice) {
+		mySellPrice = new Money(sellPrice);
+	}
+	
+	public void setPrice(int price) {
+		myPrice = new Money(price);
+	}
 }

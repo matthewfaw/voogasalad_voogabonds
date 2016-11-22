@@ -1,4 +1,4 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import javafx.scene.Node;
 

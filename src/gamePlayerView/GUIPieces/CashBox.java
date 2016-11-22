@@ -1,12 +1,19 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import engine.IObservable;
 import engine.IObserver;
 
-public class WavesBox extends InfoBox implements IObserver {
+/**
+ * @author Guhan Muruganandam
+ */
+
+/**
+ * UI feature for Cash text box and Label
+ */
+public class CashBox extends InfoBox implements IObserver {
 	
-	public WavesBox(){
-		myDisplay=makeDisplay("Waves: ");
+	public CashBox(){
+		myDisplay=makeDisplay("Cash: ");
 	}
 
 	public void giveObject(IObservable aObservable) {

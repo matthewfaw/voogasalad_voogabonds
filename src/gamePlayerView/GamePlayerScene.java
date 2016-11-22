@@ -1,5 +1,8 @@
 package gamePlayerView;
 
+import gamePlayerView.GUIPieces.CashBox;
+import gamePlayerView.GUIPieces.LivesBox;
+import gamePlayerView.GUIPieces.WavesBox;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -33,6 +36,14 @@ public class GamePlayerScene {
 
 	public CashBox getCash() {
 		return gui.getCash();
+	}
+
+	public LivesBox getLives() {
+		return gui.getLives();
+	}
+
+	public WavesBox getWaves() {
+		return gui.getWaves();
 	}
 	
 }

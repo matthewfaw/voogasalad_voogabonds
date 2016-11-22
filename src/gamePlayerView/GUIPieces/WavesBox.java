@@ -1,12 +1,20 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import engine.IObservable;
 import engine.IObserver;
 
-public class LivesBox extends InfoBox implements IObserver {
+/**
+ * @author Guhan Muruganandam
+ */
+
+/**
+ * UI feature for Waves text box and Label
+ */
+
+public class WavesBox extends InfoBox implements IObserver {
 	
-	public LivesBox(){
-		myDisplay=makeDisplay("Lives: ");
+	public WavesBox(){
+		myDisplay=makeDisplay("Waves: ");
 	}
 
 	public void giveObject(IObservable aObservable) {

@@ -1,21 +1,24 @@
 package gamePlayerView;
 
+import gamePlayerView.GUIPieces.CashBox;
+import gamePlayerView.GUIPieces.LivesBox;
+import gamePlayerView.GUIPieces.MapDisplay;
+import gamePlayerView.GUIPieces.StatisticsRow;
+import gamePlayerView.GUIPieces.TowerColumn;
+import gamePlayerView.GUIPieces.WavesBox;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
  * @author Guhan Muruganandam
- * 
  */
 
 public class BuildGUI {
 	
 	private TowerColumn myTowerColumn;
 	private StatisticsRow myStatisticsRow;
-	private GridView myGridView;
 	private MapDisplay myMap;
 	private Scene myScene;
 	
@@ -44,5 +47,13 @@ public class BuildGUI {
 
 	public CashBox getCash() {
 		return myStatisticsRow.getCash();
+	}
+
+	public LivesBox getLives() {
+		return myStatisticsRow.getLives();
+	}
+	
+	public WavesBox getWaves() {
+		return myStatisticsRow.getWaves();
 	}
 }

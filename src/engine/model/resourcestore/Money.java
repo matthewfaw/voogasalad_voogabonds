@@ -4,6 +4,11 @@ public class Money implements IMoney, Comparable<Money>{
 	private int myValue;
 	
 	
+	public Money(int value) {
+		// TODO Auto-generated constructor stub
+		myValue = value;
+	}
+
 	@Override
 	public int getValue() {
 		return myValue;
