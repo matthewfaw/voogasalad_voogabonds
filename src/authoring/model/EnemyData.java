@@ -12,7 +12,7 @@ public class EnemyData {
 	private int maxHealth;
 	private int collisionRadius;
 	private int speed;
-	private List<TerrainData> terrainList;
+	private List<String> terrainList;
 	
 	public String getName() {
 		return name;
@@ -68,10 +68,10 @@ public class EnemyData {
 		}
 		this.speed = speed;
 	}
-	public void setTerrainList(List<TerrainData> terrainList){
+	public void setTerrainList(List<String> terrainList){
 		this.terrainList = terrainList;
 	}
-	public List<TerrainData> getTerrainList(){
+	public List<String> getTerrainList(){
 		return terrainList;
 	}
 	
