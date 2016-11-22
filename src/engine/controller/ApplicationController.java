@@ -9,6 +9,18 @@ import authoring.model.serialization.DeserializeJSON;
 import authoring.model.serialization.SerializeJSON;
 import engine.model.game_environment.terrain.TerrainMap;
 
+/**
+ * A main controller whose primary purpose is to
+ * create the frontend and backend objects and to manage 
+ * communication from frontend to backend
+ * 
+ * Communication from backend to frontend will be established
+ * by the Router object, and will be maintained using the 
+ * Observer/Observable pattern of communication
+ * 
+ * @author matthewfaw
+ *
+ */
 public class ApplicationController {
 	/**
 	 * XXX: For testing purposes
@@ -61,9 +73,35 @@ public class ApplicationController {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Helper method to create the backend map object
+	 * from the GameData file
+	 */
+	private void constructMap()
+	{
+		
+	}
+	/**
+	 * Helper method to create the backend resource store object
+	 * from the GameData file
+	 */
+	private void constructResourceStore()
+	{
+		
+	}
+	/**
+	 * Helper method to create the view object
+	 * from the GameData file
+	 */
+	private void constructGUI()
+	{
+		
+	}
+	/*
 	public static void main(String[] args)
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
 	}
+	*/
 }
