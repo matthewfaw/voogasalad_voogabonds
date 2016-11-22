@@ -3,6 +3,10 @@ package gamePlayerView;
 import engine.IObservable;
 import engine.IObserver;
 
+/**
+ * @author Guhan Muruganandam
+ */
+
 public class WavesBox extends InfoBox implements IObserver {
 	
 	public WavesBox(){

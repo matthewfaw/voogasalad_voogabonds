@@ -45,4 +45,12 @@ public class BuildGUI {
 	public CashBox getCash() {
 		return myStatisticsRow.getCash();
 	}
+
+	public LivesBox getLives() {
+		return myStatisticsRow.getLives();
+	}
+	
+	public WavesBox getWaves() {
+		return myStatisticsRow.getWaves();
+	}
 }

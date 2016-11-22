@@ -34,6 +34,14 @@ public class GamePlayerScene {
 	public CashBox getCash() {
 		return gui.getCash();
 	}
+
+	public LivesBox getLives() {
+		return gui.getLives();
+	}
+
+	public WavesBox getWaves() {
+		return gui.getWaves();
+	}
 	
 }
 
