@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,6 +48,7 @@ public class TerrainCell extends Rectangle {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+					System.out.println(cellName);
 					if (toolBar.getToggleStatus()) {
 						setFill(toolBar.getSelectedColor());
 						setType(toolBar.getSelectedTerrain());
@@ -79,6 +81,7 @@ public class TerrainCell extends Rectangle {
 		VBox spawnBox = new VBox(screenHeight*0.01);
 		TextField setPointName = new TextField();
 		Button confirmName = new Button(myResources.getString("ApplyChanges"));
+		spawnNameHandler(spawnStage, setPointName, confirmName);
 		spawnBox.getChildren().addAll(setPointName, confirmName);
 		Scene spawnNameScene = new Scene(spawnBox, screenWidth*0.2, screenHeight*0.08);
 		spawnStage.setTitle(myResources.getString("SetSpawnName"));
@@ -86,6 +89,17 @@ public class TerrainCell extends Rectangle {
 		spawnStage.show();
 	}
 		
+	private void spawnNameHandler(Stage s, TextField text, Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				String name = text.getText();
+				TerrainCell.this.setName(name);
+				s.close();
+			}
+		});
+	}
+	
 	private void setUpScreenResolution() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = (int) screenSize.getWidth();
@@ -110,6 +124,10 @@ public class TerrainCell extends Rectangle {
 	
 	public void setType(String newType) {
 		terrainType = newType;
+	}
+	
+	public void setName(String newName) {
+		cellName = newName;
 	}
 	
 }
