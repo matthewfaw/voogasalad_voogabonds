@@ -3,6 +3,7 @@ package gamePlayerView;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -39,5 +40,9 @@ public class BuildGUI {
 	    borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
 		return borderpane;
+	}
+
+	public CashBox getCash() {
+		return myStatisticsRow.getCash();
 	}
 }

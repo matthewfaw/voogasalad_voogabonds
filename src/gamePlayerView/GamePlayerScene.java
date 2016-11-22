@@ -1,6 +1,7 @@
 package gamePlayerView;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 public class GamePlayerScene {
 	
 	private Stage myStage;
+	private BuildGUI gui;
 	
 	public GamePlayerScene(){
 		//myStage=stage;
@@ -27,6 +29,10 @@ public class GamePlayerScene {
 	private void setScene(Stage s, Scene scene) { ///public or private
 		s.setScene(scene);
 		s.show();
+	}
+
+	public CashBox getCash() {
+		return gui.getCash();
 	}
 	
 }
