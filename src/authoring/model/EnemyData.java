@@ -1,5 +1,9 @@
 package authoring.model;
 
+import java.util.List;
+
+import authoring.model.map.TerrainData;
+
 public class EnemyData {
 	private String name;
 	private String weaponName;
@@ -8,6 +12,7 @@ public class EnemyData {
 	private int maxHealth;
 	private int collisionRadius;
 	private int speed;
+	private List<TerrainData> terrainList;
 	
 	public String getName() {
 		return name;
@@ -50,6 +55,12 @@ public class EnemyData {
 	}
 	public void setSpeed(int speed){
 		this.speed = speed;
+	}
+	public void setTerrainList(List<TerrainData> terrainList){
+		this.terrainList = terrainList;
+	}
+	public List<TerrainData> getTerrainList(){
+		return terrainList;
 	}
 	
 }
