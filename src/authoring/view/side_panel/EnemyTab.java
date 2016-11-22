@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import authoring.controller.EnemyDataController;
 import authoring.model.EnemyData;
+import authoring.model.WeaponData;
 import authoring.view.input_menus.EnemyMenu;
 import javafx.collections.MapChangeListener;
 import javafx.collections.SetChangeListener;
@@ -121,11 +122,11 @@ public class EnemyTab extends Tab {
 	public ArrayList<String> getTerrains(){
 		return myTerrains;
 	}
-	
-	public MapChangeListener<String, EnemyData> createWeaponListener(){
-		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
+
+	public MapChangeListener<String, WeaponData> createWeaponListener(){
+		MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
 			@Override
-			public void onChanged(MapChangeListener.Change<? extends String, ? extends EnemyData> change) {
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
 				if (change.wasAdded()){
 					myWeapons.add(change.getKey());
 				}

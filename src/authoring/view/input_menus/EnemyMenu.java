@@ -126,13 +126,13 @@ public class EnemyMenu {
 					}
 				}
 				if (terrainList.size() == 0){
-					myHelper.showError("NoTerrainInput");
+					myHelper.showError(myResources.getString("NoTerrainInput"));
 					return;
 				}
 				myTab.removeButtonDuplicates(name);
 				myTab.addButtonToDisplay(name);
 				EnemyData enemy = createEnemyData(name, health, speed, collisionRadius, killReward, image,
-						weapon);
+						weapon, terrainList);
 				if (enemy == null){
 					return;
 				}
@@ -147,7 +147,7 @@ public class EnemyMenu {
 	}
 	
 	private EnemyData createEnemyData(String name, int health, int speed, int collisionRadius, 
-			int killReward, String image, String weapon) {
+			int killReward, String image, String weapon, List<String> terrainList) {
 		EnemyData enemy = new EnemyData();
 		try {
 			enemy.setName(name);

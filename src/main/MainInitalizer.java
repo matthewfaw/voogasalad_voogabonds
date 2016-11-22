@@ -66,7 +66,7 @@ public class MainInitalizer {
 	public void initSim() {
 		TopMenuBar menuBar = new TopMenuBar(root);
 		InfoTabs infoTab = new InfoTabs(root);
-		GameDisplay mapDisplay = new GameDisplay(root);
+		GameDisplay mapDisplay = new GameDisplay(root, scene);
 		stage.setScene(scene);
 	}
 	
