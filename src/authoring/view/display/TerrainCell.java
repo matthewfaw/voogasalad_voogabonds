@@ -60,6 +60,7 @@ public class TerrainCell extends Rectangle {
 						setWidth(Integer.parseInt(myResources.getString("DefaultSpawnCellWidth")));
 						setHeight(Integer.parseInt(myResources.getString("DefaultSpawnCellHeight")));
 						setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+						createSpawnNameWindow();
 					}
 					else if (toolBar.getSinkStatus()) {
 						setWidth(Integer.parseInt(myResources.getString("DefaultSinkCellWidth")));
@@ -68,7 +69,7 @@ public class TerrainCell extends Rectangle {
 					}
 				}
 				else {
-					createSpawnNameWindow();
+//					createSpawnNameWindow();
 					}
 				}
 		});

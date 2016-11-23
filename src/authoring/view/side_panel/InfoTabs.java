@@ -31,7 +31,7 @@ public class InfoTabs {
 		Tab enemyTab = new EnemyTab(infoTab, r.getEnemyDataController());
 		Tab waveTab = new WaveLevelTab(infoTab, r.getWaveDataController());
 		Tab gameTab = new GameTab(infoTab);
-		Tab weaponTab = new WeaponTab(infoTab);
+		Tab weaponTab = new WeaponTab(infoTab, r.getWeaponDataController());
 		r.link((TowerTab) towerTab, (EnemyTab) enemyTab, (WaveLevelTab) waveTab, (GameTab) gameTab);
 		infoTab.setPrefSize(screenWidth/5, screenHeight);
 		root.setLeft(infoTab);
