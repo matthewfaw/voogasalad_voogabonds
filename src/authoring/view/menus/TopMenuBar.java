@@ -23,7 +23,7 @@ public class TopMenuBar {
 		topMenu = new MenuBar();
 		Menu fileMenu = new FileMenu(topMenu);
 		Menu editMenu = new EditMenu(topMenu);
-		Menu personalizeMenu = new PersonalizeMenu(topMenu);
+		Menu personalizeMenu = new PersonalizeMenu(topMenu, root);
 		Menu playMenu = new PlayMenu(topMenu);
 		topMenu.getMenus().addAll(fileMenu, editMenu, personalizeMenu, playMenu);
 		root.setTop(topMenu);
