@@ -1,4 +1,4 @@
-package engine.model;
+package engine.model.collision_detection;
 
 import utility.Point;
 
