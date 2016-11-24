@@ -6,7 +6,6 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.model.systems.ISystem;
 
-
 /**
  * All objects must be subscribed as ICollidable
  * NOT IObservables
@@ -14,12 +13,14 @@ import engine.model.systems.ISystem;
  */
 public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, IObservable<ISystem>{
 	
+	ICollisionHandler collisionHandler;
 	List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
 		//TODO: initialize with all observers
+		//TODO: initialize collision handler
 	}
 
 	/**
@@ -54,6 +55,7 @@ public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, 
 		for(ICollidable observable: myCollidables) {
 			if (intersects(movedObservable, observable)) {
 				// notify collision detection strategy
+				collisionHandler.handleCollision(movedObservable, observable);
 			}
 		}
 	}
