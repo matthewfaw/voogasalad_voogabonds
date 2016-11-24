@@ -1,6 +1,5 @@
 package engine.model;
 
-import engine.IObservable;
 import utility.Point;
 
 public interface ICollidable{
