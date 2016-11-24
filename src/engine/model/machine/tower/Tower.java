@@ -3,8 +3,8 @@ package engine.model.machine.tower;
 import engine.model.machine.IPurchasable;
 import engine.model.machine.Machine;
 import engine.model.resourcestore.IMoney;
-import engine.model.machine.weapon.DamageInfo;
-import engine.model.machine.weapon.Weapon;
+import engine.model.weapons.DamageInfo;
+import engine.model.weapons.Weapon;
 import utility.Damage;
 
 import java.util.List;

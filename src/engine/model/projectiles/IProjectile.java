@@ -1,4 +1,4 @@
-package engine.model.machine.weapon.projectile;
+package engine.model.projectiles;
 import engine.model.machine.Machine;
 import utility.Point;
 

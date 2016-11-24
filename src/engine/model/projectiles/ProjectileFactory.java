@@ -1,12 +1,12 @@
-package engine.model.machine.weapon.projectile;
+package engine.model.projectiles;
 
 import java.util.Map;
 
 import authoring.model.ProjectileData;
 import engine.IViewable;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.IKillerOwner;
-import engine.model.machine.weapon.ProjectileOwner;
+import engine.model.weapons.IKillerOwner;
+import engine.model.weapons.ProjectileOwner;
 
 /**
  * A class to make projectiles and store everything that all the projectiles will have in common, so the common

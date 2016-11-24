@@ -1,6 +1,6 @@
 package authoring.model;
 
-public class WaveData {
+public class WaveData implements IReadableData {
 	/**
 	 * A string which represents the name of the wave. To be used for access in the map
 	 */
@@ -31,6 +31,7 @@ public class WaveData {
 	 */
 	private String spawnPointName;
 	
+	@Override
 	public String getName(){
 		return name;
 	}

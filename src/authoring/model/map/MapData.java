@@ -3,7 +3,10 @@ import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MapData {
+import authoring.model.IReadableData;
+
+public class MapData implements IReadableData {
+	private String myName;
 	private int numXCells;
 	private int numYCells;
 	private HashSet<Point> spawnPoints;
@@ -15,6 +18,12 @@ public class MapData {
 		spawnPoints = new HashSet<Point>();
 		sinkPoints = new HashSet<Point>();
 		terrainList = new HashSet<TerrainData>();
+	}
+	
+	@Override
+	public String getName()
+	{
+		return myName;
 	}
 	
 	public void setNumXCells(int x) throws Exception{

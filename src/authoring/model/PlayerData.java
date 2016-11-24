@@ -1,10 +1,17 @@
 package authoring.model;
 
-public class PlayerData {
+public class PlayerData implements IReadableData {
+	private String myName;
 	private int startingLives;
 	private int startingCash;
 	private String winStrategyName;
 	private String loseStrategyName;
+	
+	@Override
+	public String getName()
+	{
+		return myName;
+	}
 	
 	public int getStartingLives() {
 		return startingLives;

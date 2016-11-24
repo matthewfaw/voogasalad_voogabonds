@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public class TowerData {
+public class TowerData implements IReadableData {
 
 	private String name;
 	private String weaponName;
@@ -25,6 +25,7 @@ public class TowerData {
 		this.name = name;
 	}
 	
+	@Override
 	public String getName(){
 		return name;
 	}

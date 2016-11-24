@@ -1,4 +1,4 @@
-package engine.model.machine.weapon;
+package engine.model.weapons;
 
 /**
  * A class to more easily pass around the information that results from a projectile exploding.

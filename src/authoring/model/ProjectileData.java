@@ -2,7 +2,7 @@ package authoring.model;
 
 import java.io.File;
 
-public class ProjectileData {
+public class ProjectileData implements IReadableData {
 
 	private String name;
 	private int maxRange;
@@ -21,6 +21,7 @@ public class ProjectileData {
 		this.name = name;
 	}
 	
+	@Override
 	public String getName(){
 		return name;
 	}

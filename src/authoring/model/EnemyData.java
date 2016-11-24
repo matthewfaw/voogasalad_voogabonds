@@ -1,6 +1,6 @@
 package authoring.model;
 
-public class EnemyData {
+public class EnemyData implements IReadableData {
 	private String name;
 	private String weaponName;
 	private String imagePath;
@@ -9,6 +9,7 @@ public class EnemyData {
 	private int collisionRadius;
 	private int speed;
 	
+	@Override
 	public String getName() {
 		return name;
 	}

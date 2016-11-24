@@ -1,13 +1,15 @@
 package authoring.model.map;
 import java.awt.Point;
 
+import authoring.model.IReadableData;
+
 /**
  * type: the 'type' of terrain this represents, e.g. 'water', 'air', 'ground'
  * loc: Point with x and y coordinates 
  * @author philipfoo
  *
  */
-public class TerrainData {
+public class TerrainData implements IReadableData {
 	private String type;
 	private Point loc;
 	
@@ -16,7 +18,9 @@ public class TerrainData {
 		this.loc = new Point(x, y);
 	}
 	
-	public String getType(){
+	@Override
+	public String getName()
+	{
 		return type;
 	}
 	

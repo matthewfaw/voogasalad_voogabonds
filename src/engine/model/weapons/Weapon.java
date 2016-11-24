@@ -1,10 +1,10 @@
-package engine.model.machine.weapon;
+package engine.model.weapons;
 
 import java.util.List;
 
 import authoring.model.WeaponData;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.projectile.ProjectileFactory;
+import engine.model.projectiles.ProjectileFactory;
 import engine.model.strategies.ITargetStrategy;
 import engine.model.strategies.StrategyFactory;
 import utility.Point;

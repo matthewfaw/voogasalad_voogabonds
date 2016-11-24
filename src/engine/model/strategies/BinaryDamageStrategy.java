@@ -1,6 +1,6 @@
 package engine.model.strategies;
 
-import engine.model.machine.weapon.projectile.Projectile;
+import engine.model.projectiles.Projectile;
 import utility.Damage;
 import utility.Point;
 

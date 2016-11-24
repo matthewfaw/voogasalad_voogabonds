@@ -1,9 +1,9 @@
-package engine.model.machine.weapon;
+package engine.model.weapons;
 import java.util.List;
 
 import engine.model.machine.IHealth;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.projectile.IProjectile;
+import engine.model.projectiles.IProjectile;
 import utility.Point;
 /**
  * The interface that a Weapon exposes to it's tower.

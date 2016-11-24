@@ -1,11 +1,11 @@
-package engine.model.machine.weapon;
+package engine.model.weapons;
 
 import java.util.Map;
 
 import authoring.model.ProjectileData;
 import authoring.model.WeaponData;
 import engine.IViewable;
-import engine.model.machine.weapon.projectile.ProjectileFactory;
+import engine.model.projectiles.ProjectileFactory;
 
 
 /**

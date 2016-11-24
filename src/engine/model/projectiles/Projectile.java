@@ -1,4 +1,4 @@
-package engine.model.machine.weapon.projectile;
+package engine.model.projectiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import authoring.model.ProjectileData;
 import engine.IViewable;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.DamageInfo;
-import engine.model.machine.weapon.IKillerOwner;
 import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
+import engine.model.weapons.DamageInfo;
+import engine.model.weapons.IKillerOwner;
 
 /**
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.

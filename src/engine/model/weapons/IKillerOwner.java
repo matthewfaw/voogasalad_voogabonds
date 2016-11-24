@@ -1,4 +1,4 @@
-package engine.model.machine.weapon;
+package engine.model.weapons;
 
 import utility.Point;
 

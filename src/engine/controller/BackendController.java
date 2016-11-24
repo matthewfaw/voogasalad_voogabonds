@@ -3,9 +3,13 @@ package engine.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.IReadableData;
+import authoring.model.ProjectileData;
 import authoring.model.TowerData;
+import authoring.model.WeaponData;
 import authoring.model.map.MapData;
 import authoring.model.serialization.DeserializeJSON;
+import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
@@ -23,27 +27,44 @@ public class BackendController {
 	
 	private FileRetriever myFileRetriever;
 	private DeserializeJSON myJsonDeserializer;
-	Router myRouter;
+	
+	private MapMediator myMapMediator;
+	private ResourceStore myResourceStore;
+	private DataStore<WeaponData> myWeaponDataStore;
+	private DataStore<ProjectileData> myProjectileDataStore;
+	private Router myRouter;
 	
 	BackendController(Router aRouter)
 	{
 		myRouter = aRouter;
 		myFileRetriever = new FileRetriever(GAME_DATA_PATH);
 		myJsonDeserializer = new DeserializeJSON();
+		
+		constructBackendObjects();
+	}
+	
+	/**
+	 * The primary dispatcher method for constructing objects from the GameDataFiles
+	 */
+	private void constructBackendObjects()
+	{
+		constructMap();
+		constructResourceStore();
+		constructWeaponDataStore();
+		constructProjectileDataStore();
 	}
 
 	/**
 	 * Helper method to create the backend map object
 	 * from the GameData file
+	 * 
+	 * Assumes that the only map data to use is the first one
 	 */
 	private void constructMap()
 	{
-		List<String> myMapFiles = myFileRetriever.getFileNames(MAP_PATH);
-		MapData mapData = (MapData) myJsonDeserializer.DeserializeFromFile(myMapFiles.get(0), MapData.class);
-		System.out.println(mapData.getSinkPoints());
-		
-		TerrainMap terrainMap = new TerrainMap(mapData);
-		MapMediator mapMediator = new MapMediator(terrainMap);
+		List<MapData> data = getData(MAP_PATH, MapData.class);
+		TerrainMap terrainMap = new TerrainMap(data.get(0));
+		myMapMediator = new MapMediator(terrainMap);
 	}
 	/**
 	 * Helper method to create the backend resource store object
@@ -52,14 +73,8 @@ public class BackendController {
 	 */
 	private void constructResourceStore()
 	{
-		List<String> myTowerFiles = myFileRetriever.getFileNames(TOWER_PATH);
-		List<TowerData> myTowerData = new ArrayList<TowerData>();
-		for (String file: myTowerFiles) {
-			TowerData data = (TowerData) myJsonDeserializer.DeserializeFromFile(file, TowerData.class);
-			myTowerData.add(data);
-		}
-		
-		ResourceStore myResourceStore = new ResourceStore(myTowerData);
+		List<TowerData> data = getData(TOWER_PATH, TowerData.class);
+		myResourceStore = new ResourceStore(data);
 	}
 	
 	/**
@@ -68,8 +83,36 @@ public class BackendController {
 	 */
 	private void constructWeaponDataStore()
 	{
-		List<String> myWeaponFiles = myFileRetriever.getFileNames(WEAPON_PATH);
-		List<String> myProjectileFiles = myFileRetriever.getFileNames(PROJECTILE_PATH);
-		//TODO: Construct the backend object
+		List<WeaponData> data = getData(WEAPON_PATH, WeaponData.class);
+		myWeaponDataStore = new DataStore<WeaponData>(data);
+	}
+	
+	/**
+	 * This method handles the construction of the object which manages all of the projectile
+	 * data
+	 */
+	private void constructProjectileDataStore()
+	{
+		List<ProjectileData> data = getData(PROJECTILE_PATH, ProjectileData.class);
+		myProjectileDataStore = new DataStore<ProjectileData>(data);
+	}
+	
+	/**
+	 * A templated method to get the list of GameData objects from the specified file path
+	 * This method assumes that all GameData in the file path is of the type aClass
+	 * TODO: Add error throwing here
+	 * @param aFilePath
+	 * @param aClass
+	 * @return
+	 */
+	private <T extends IReadableData> List<T> getData(String aFilePath, Class<? extends IReadableData> aClass)
+	{
+		List<String> files = myFileRetriever.getFileNames(aFilePath);
+		List<T> data = new ArrayList<T>();
+		for (String file: files) {
+			T entry = (T) myJsonDeserializer.DeserializeFromFile(file, aClass);
+			data.add(entry);
+		}
+		return data;
 	}
 }

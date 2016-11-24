@@ -2,8 +2,8 @@ package engine.model.machine.enemy;
 
 import engine.model.components.IComponent;
 import engine.model.machine.Machine;
-import engine.model.machine.weapon.DamageInfo;
 import engine.model.resourcestore.IMoney;
+import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
 public class Enemy extends Machine implements IEnemy {

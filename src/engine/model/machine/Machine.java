@@ -3,7 +3,7 @@ package engine.model.machine;
 import engine.model.components.IComponent;
 import engine.model.entities.IEntity;
 import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.machine.weapon.DamageInfo;
+import engine.model.weapons.DamageInfo;
 import utility.Damage;
 import utility.Point;
 
