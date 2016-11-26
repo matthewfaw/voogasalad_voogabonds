@@ -1,6 +1,7 @@
 package utility;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,8 @@ public class FileRetriever {
 	 */
 	public List<String> getFileNames(String aDirectory)
 	{
-		File folder = new File(myDefaultPath + aDirectory);
+		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
+		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
 		ArrayList<String> filesInDirectory = new ArrayList<String>();
 		for (File aFile: files){
@@ -50,7 +52,7 @@ public class FileRetriever {
 	private String getRelativeFilePath(File aFile)
 	{
 		String absoluteFilePath = aFile.getAbsolutePath();
-		return absoluteFilePath.substring(absoluteFilePath.indexOf(myDefaultPath) + myDefaultPath.length() + 1);
+		return absoluteFilePath.substring(absoluteFilePath.indexOf(myDefaultPath)/*+ myDefaultPath.length() + 1*/);
 	}
 
 	/*

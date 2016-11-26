@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.TowerData;
-import authoring.model.serialization.DeserializeJSON;
+import authoring.model.serialization.JSONDeserializer;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.tower.Tower;
 import engine.model.machine.tower.TowerNode;
@@ -12,8 +12,8 @@ import engine.model.machine.tower.TowerNode;
 public class TowerController {
 	
 	public void init() {
-		DeserializeJSON djson = new DeserializeJSON();
-		TowerData tdata = (TowerData) djson.DeserializeFromFile("towers/ActualTower", TowerData.class);
+		JSONDeserializer djson = new JSONDeserializer();
+		TowerData tdata = (TowerData) djson.deserializeFromFile("towers/ActualTower", TowerData.class);
 		List<String> terrainstrings = new ArrayList<String>();
 		terrainstrings.add("grass");
 		tdata.setTraversableTerrain(terrainstrings);

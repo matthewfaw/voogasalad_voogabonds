@@ -1,5 +1,8 @@
 package engine.controller;
 
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
 import gamePlayerView.GamePlayerScene;
 import gamePlayerView.Router;
 
@@ -16,10 +19,14 @@ import gamePlayerView.Router;
  *
  */
 public class ApplicationController {
-	BackendController myBackendController;
+	private static final String GAME_OPTIONS_PATH = "resources/game_options/GamePaths";
+
+	private ResourceBundle myGameOptions;
+	private BackendController myBackendController;
 
 	public ApplicationController()
 	{
+		myGameOptions = PropertyResourceBundle.getBundle(GAME_OPTIONS_PATH);
 	}
 	
 	/**
@@ -48,7 +55,8 @@ public class ApplicationController {
 	 */
 	private void constructBackend(Router aRouter)
 	{
-		myBackendController = new BackendController(aRouter);
+		//TODO: Change this to make this dynamic--select different games
+		myBackendController = new BackendController(myGameOptions.getString("DefaultGame"), aRouter);
 	}
 	
 	public static void main(String[] args)

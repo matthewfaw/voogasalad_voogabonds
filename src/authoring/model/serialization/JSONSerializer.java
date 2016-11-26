@@ -5,11 +5,12 @@ import java.io.PrintWriter;
 
 import com.google.gson.*;
 
-public class SerializeJSON {
+public class JSONSerializer {
+	private static final String DEFAULT_FILE_LOCATION = "scr/SerializedFiles";
 	
 	private Gson gson;
 	
-	public JsonElement Serialize(Object obj){
+	public JsonElement serialize(Object obj){
 
 		//overly verbose for now, but easily changeable later, for whether we want a JsonElement or String
 		gson = new Gson();
@@ -21,14 +22,12 @@ public class SerializeJSON {
 			
 	}
 	
-	public void SerializeToFile(Object obj, String fileName){
+	public void serializeToFile(Object obj, String fileName){
 		
-		String fileLoc = "src/SerializedFiles/";
-		
-		String str = Serialize(obj).toString();
+		String str = serialize(obj).toString();
 		
 		try{
-			PrintWriter out = new PrintWriter(fileLoc+fileName);
+			PrintWriter out = new PrintWriter(DEFAULT_FILE_LOCATION+fileName);
 			out.println(str);
 			out.close();
 		}

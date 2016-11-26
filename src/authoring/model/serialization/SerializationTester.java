@@ -35,8 +35,8 @@ public class SerializationTester {
 		tow.setSellPrice(100);
 		
 		obj = tow;
-		SerializeJSON ser = new SerializeJSON();
-		DeserializeJSON des = new DeserializeJSON();
+		JSONSerializer ser = new JSONSerializer();
+		JSONDeserializer des = new JSONDeserializer();
 		// We should make a user prompt for when they want to save a game file, which will be set as fileName
 		List<List<Object>> mySerializables = new ArrayList<List<Object>>();
 		List<TowerData> towerList = new ArrayList<TowerData>();
@@ -59,7 +59,7 @@ public class SerializationTester {
 		li.add("EmptyWeapon");
 		li.add("EmptyProjectile");
 		for (int i = 0; i<mySerializables.size(); i++){
-			ser.SerializeToFile(mySerializables.get(i), li.get(i));// mySerializables.get(i)+"");
+			ser.serializeToFile(mySerializables.get(i), li.get(i));// mySerializables.get(i)+"");
 			fileName = mySerializables.get(i)+"";
 //			des.DeserializeFromFile(fileName);
 		}

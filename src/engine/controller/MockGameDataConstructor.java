@@ -13,8 +13,8 @@ import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
-import authoring.model.serialization.DeserializeJSON;
-import authoring.model.serialization.SerializeJSON;
+import authoring.model.serialization.JSONDeserializer;
+import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
 import engine.model.game_environment.terrain.TerrainMap;
 
@@ -31,12 +31,12 @@ class MockGameDataConstructor {
 	
 	void constructMockData() throws SerializationException
 	{
-		DeserializeJSON derp = new DeserializeJSON(); 
+		JSONDeserializer derp = new JSONDeserializer(); 
 		
 //		TowerData data = (TowerData)derp.DeserializeFromFile("towers/ActualTower", TowerData.class);
 //		System.out.println(data.getBuyPrice());
 
-		SerializeJSON ser = new SerializeJSON();
+		JSONSerializer ser = new JSONSerializer();
 		
 		try {
 			
@@ -102,14 +102,14 @@ class MockGameDataConstructor {
 			md.addSpawnPoint(new Point(0,0));
 			md.addSinkPoint(new Point(1,1));
 			
-			ser.SerializeToFile(md, "map/"+md.getClass().getSimpleName());
-			ser.SerializeToFile(terrain1,"terrain/"+terrain1.getClass().getSimpleName()+"1");
-			ser.SerializeToFile(terrain2, "terrain/"+terrain2.getClass().getSimpleName()+"2");
-			ser.SerializeToFile(tow, "towers/"+tow.getClass().getSimpleName());
-			ser.SerializeToFile(ed, "enemies/"+ed.getClass().getSimpleName());
-			ser.SerializeToFile(wd, "weapon/"+wd.getClass().getSimpleName());
-			ser.SerializeToFile(pd, "projectiles/"+pd.getClass().getSimpleName());
-			ser.SerializeToFile(pdd, "players/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(md, "map/"+md.getClass().getSimpleName());
+			ser.serializeToFile(terrain1,"terrain/"+terrain1.getClass().getSimpleName()+"1");
+			ser.serializeToFile(terrain2, "terrain/"+terrain2.getClass().getSimpleName()+"2");
+			ser.serializeToFile(tow, "towers/"+tow.getClass().getSimpleName());
+			ser.serializeToFile(ed, "enemies/"+ed.getClass().getSimpleName());
+			ser.serializeToFile(wd, "weapon/"+wd.getClass().getSimpleName());
+			ser.serializeToFile(pd, "projectiles/"+pd.getClass().getSimpleName());
+			ser.serializeToFile(pdd, "players/"+pdd.getClass().getSimpleName());
 			
 			
 			TerrainMap terrainMap = new TerrainMap(md);

@@ -2,6 +2,7 @@ package engine.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import authoring.model.EnemyData;
 import authoring.model.IReadableData;
@@ -9,7 +10,7 @@ import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
-import authoring.model.serialization.DeserializeJSON;
+import authoring.model.serialization.JSONDeserializer;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.terrain.TerrainMap;
@@ -17,34 +18,46 @@ import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.Router;
 import utility.FileRetriever;
 
+/**
+ * The primary gateway into the game engine
+ * The purpose of this class is to manage constructing
+ * all relevant data structures pertaining to the game engine
+ * 
+ * TODO: This class is getting large
+ * We may consider further dividing it's responsibilities
+ * to make it more maintainable
+ * 
+ * @author matthewfaw
+ *
+ */
 public class BackendController {
-	private static final String GAME_DATA_PATH = "src/SerializedFiles";
-	//TODO: Move this to resource file
-	private static final String ENEMY_PATH = "/enemies";
-	private static final String MAP_PATH = "/map";
-	private static final String PLAYER_PATH = "/players";
-	private static final String PROJECTILE_PATH = "/projectiles";
-	private static final String TOWER_PATH = "/towers";
-	private static final String WEAPON_PATH = "/weapons";
-	
+	private static final String GAME_DATA_PATH = "resources/game_data_relative_paths/relative_paths";
+
+	//Utilities
+	private ResourceBundle myGameDataRelativePaths;
 	private FileRetriever myFileRetriever;
-	private DeserializeJSON myJsonDeserializer;
+	private JSONDeserializer myJsonDeserializer;
 	
+	//Primary backend objects
 	private MapMediator myMapMediator;
 	private ResourceStore myResourceStore;
+
+	//Data relevant to constructing objects
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
 	private DataStore<EnemyData> myEnemyDataStore;
 	
+	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private WaveController myWaveController;
 	private Router myRouter;
 	
-	BackendController(Router aRouter)
+	BackendController(String aGameDataPath, Router aRouter)
 	{
 		myRouter = aRouter;
-		myFileRetriever = new FileRetriever(GAME_DATA_PATH);
-		myJsonDeserializer = new DeserializeJSON();
+		myGameDataRelativePaths = ResourceBundle.getBundle(GAME_DATA_PATH);
+		myFileRetriever = new FileRetriever(aGameDataPath);
+		myJsonDeserializer = new JSONDeserializer();
 
 		myTimelineController = new TimelineController();
 		
@@ -79,7 +92,7 @@ public class BackendController {
 	 */
 	private void constructMap()
 	{
-		List<MapData> data = getData(MAP_PATH, MapData.class);
+		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
 		TerrainMap terrainMap = new TerrainMap(data.get(0));
 		myMapMediator = new MapMediator(terrainMap);
 	}
@@ -90,7 +103,7 @@ public class BackendController {
 	 */
 	private void constructResourceStore()
 	{
-		List<TowerData> data = getData(TOWER_PATH, TowerData.class);
+		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
 		myResourceStore = new ResourceStore(data);
 	}
 	
@@ -100,7 +113,7 @@ public class BackendController {
 	 */
 	private void constructWeaponDataStore()
 	{
-		List<WeaponData> data = getData(WEAPON_PATH, WeaponData.class);
+		List<WeaponData> data = getData(myGameDataRelativePaths.getString("WeaponPath"), WeaponData.class);
 		myWeaponDataStore = new DataStore<WeaponData>(data);
 	}
 	
@@ -110,12 +123,16 @@ public class BackendController {
 	 */
 	private void constructProjectileDataStore()
 	{
-		List<ProjectileData> data = getData(PROJECTILE_PATH, ProjectileData.class);
+		List<ProjectileData> data = getData(myGameDataRelativePaths.getString("ProjectilePath"), ProjectileData.class);
 		myProjectileDataStore = new DataStore<ProjectileData>(data);
 	}
+	/**
+	 * This method handles the construction of the object which manages all of the enemy
+	 * data
+	 */
 	private void constructEnemyDataStore()
 	{
-		List<EnemyData> data = getData(ENEMY_PATH, EnemyData.class);
+		List<EnemyData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
 		myEnemyDataStore = new DataStore<EnemyData>(data);
 	}
 	
@@ -132,15 +149,17 @@ public class BackendController {
 		List<String> files = myFileRetriever.getFileNames(aFilePath);
 		List<T> data = new ArrayList<T>();
 		for (String file: files) {
-			T entry = (T) myJsonDeserializer.DeserializeFromFile(file, aClass);
+			T entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
 			data.add(entry);
 		}
 		return data;
 	}
 	
+	/*
 	public static void main(String[] args)
 	{
-		BackendController controller = new BackendController(null);
+		BackendController controller = new BackendController("SerializedFiles/default_game",null);
 		controller.getClass();
 	}
+	*/
 }
