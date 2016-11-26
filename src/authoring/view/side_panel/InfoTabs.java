@@ -27,7 +27,7 @@ public class InfoTabs {
 		Router r = new Router();
 		//Change to take in a controller as a second parameter please:
 		//Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
-		Tab towerTab = new TowerTab(infoTab);
+		Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
 		Tab enemyTab = new EnemyTab(infoTab, r.getEnemyDataController());
 		Tab waveTab = new WaveLevelTab(infoTab, r.getWaveDataController());
 		Tab gameTab = new GameTab(infoTab);
