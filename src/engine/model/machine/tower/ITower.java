@@ -1,5 +1,6 @@
 package engine.model.machine.tower;
 
+import engine.model.machine.IHealth;
 import engine.model.resourcestore.IMoney;
 /**
  * Core interface for tower behaviors

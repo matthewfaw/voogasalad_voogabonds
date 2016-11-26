@@ -105,7 +105,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 
 	@Override
 	public Point getGoal() {
-		return myTarget.getLocation();
+		return myTarget.getPosition();
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		DamageInfo result = new DamageInfo();
 		
 		for (Machine m: targets) {
-			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getLocation());
+			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition());
 			result = result.add(m.takeDamage(toDeal));
 		}
 //		notifyListenersRemove();

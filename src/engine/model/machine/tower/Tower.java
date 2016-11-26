@@ -14,10 +14,12 @@ import engine.model.game_environment.terrain.Terrain;
 public class Tower extends Machine implements IPurchasable{
 	private String myName;
 	private Weapon myWeapon;
+	//matthewfaw: is this necessary? doesn't machine already keep track of this?
 	private int myMaxHealth;
 	private List<Terrain> myPossibleTerrains;
 	
 	public Tower(String name, int maxhealth){
+		super(maxhealth);
 		myName = name;
 		myMaxHealth = maxhealth;
 	}
@@ -29,30 +31,4 @@ public class Tower extends Machine implements IPurchasable{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	// this information should be stored in the upgradestore, controller just need to query it
-		/*
-		public IMoney getUpgradeCost() {
-			return upgradeCost;
-		}
-		
-		
-		public IMoney getSellPrice() {
-			return sellPrice;
-		}
-		*/
-		
-		/**
-		 * Upgrades this tower to the
-		 * @param newTower
-		 * Replaces all fields of this tower with newTower
-		 */
-		/*
-		 //OWEN: when the user upgrade, the upgradestore will take care of it. 
-		 // tower just needs to offer an interface for the UpgradeStore to update the parameters 
-		public void upgrade(ITowerUpgradeStore towerUpgradeStore) {
-			
-		}
-		*/
 }
