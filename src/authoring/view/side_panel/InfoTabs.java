@@ -3,11 +3,13 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 import authoring.controller.Router;
+import authoring.view.display.GameDisplay;
 
 /**
  * @author Christopher Lu
@@ -19,12 +21,15 @@ public class InfoTabs {
 	private TabPane infoTab;
 	private int screenWidth;
 	private int screenHeight;
+	private Scene scene;
 	
-	public InfoTabs(BorderPane root) {
+	public InfoTabs(BorderPane root, Scene scene) {
 		screenInfo();
+		this.scene = scene;
 		infoTab = new TabPane();
 		infoTab.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		Router r = new Router();
+		GameDisplay mapDisplay = new GameDisplay(root, scene, r.getMapDataController());
 		//Change to take in a controller as a second parameter please:
 		//Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
 		Tab towerTab = new TowerTab(infoTab);

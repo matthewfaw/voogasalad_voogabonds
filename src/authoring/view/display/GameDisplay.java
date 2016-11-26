@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataController;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -21,7 +22,6 @@ import javafx.scene.paint.Paint;
 
 public class GameDisplay {
 
-	private Scene scene;
 	private VBox terrainContainer;
 	private ScrollPane terrainArea;
 	private TilePane terrainGrid;
@@ -34,15 +34,18 @@ public class GameDisplay {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private MapDataController controller;
+	private Scene scene;
 	
-	public GameDisplay(BorderPane root, Scene s) {
+	public GameDisplay(BorderPane root, Scene scene, MapDataController controller) {
 		setUpScreenResolution();
+		this.scene = scene;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
-		this.scene = s;
 		this.terrainContainer = new VBox();
 		this.terrainArea = new ScrollPane();
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene);
+		this.controller = new MapDataController();
 		terrainGrid.setPrefWidth(screenWidth*0.8);
 		terrainGrid.setMaxHeight(screenHeight*0.9);
 		terrainArea.setContent(terrainGrid);
@@ -50,6 +53,11 @@ public class GameDisplay {
 		root.setCenter(terrainContainer);
 		columns = (int) (screenWidth*0.8/(DEFAULT_TILE_SIZE + GAP));
 		rows = (int) (screenHeight*0.88/(DEFAULT_TILE_SIZE + GAP));
+		this.controller.setDimensions(columns, rows);
+//		System.out.println("getX: " + controller.getX());
+//		System.out.println("columns: " + columns);
+//		System.out.println("getY: " + controller.getY());
+//		System.out.println("rows: " + rows);
 		populateGrid();
 	}
 	
@@ -66,7 +74,7 @@ public class GameDisplay {
 		terrainGrid.setPrefColumns(columns);
 		for (int r = 0; r < rows; r++) {
 			for (int col = 0; col < columns; col++) {
-				TerrainCell cell = new TerrainCell(toolBar, r, col);
+				TerrainCell cell = new TerrainCell(controller, toolBar, r, col);
 				cell.setWidth(DEFAULT_TILE_SIZE);
 				cell.setHeight(DEFAULT_TILE_SIZE);
 				cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
