@@ -3,6 +3,7 @@ package engine.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.EnemyData;
 import authoring.model.IReadableData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
@@ -22,7 +23,7 @@ public class BackendController {
 	private static final String ENEMY_PATH = "/enemies";
 	private static final String MAP_PATH = "/map";
 	private static final String PLAYER_PATH = "/players";
-	private static final String PROJECTILE_PATH = "/proejctiles";
+	private static final String PROJECTILE_PATH = "/projectiles";
 	private static final String TOWER_PATH = "/towers";
 	private static final String WEAPON_PATH = "/weapons";
 	
@@ -33,6 +34,7 @@ public class BackendController {
 	private ResourceStore myResourceStore;
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
+	private DataStore<EnemyData> myEnemyDataStore;
 	
 	private TimelineController myTimelineController;
 	private WaveController myWaveController;
@@ -66,6 +68,7 @@ public class BackendController {
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();
+		constructEnemyDataStore();
 	}
 
 	/**
@@ -110,6 +113,11 @@ public class BackendController {
 		List<ProjectileData> data = getData(PROJECTILE_PATH, ProjectileData.class);
 		myProjectileDataStore = new DataStore<ProjectileData>(data);
 	}
+	private void constructEnemyDataStore()
+	{
+		List<EnemyData> data = getData(ENEMY_PATH, EnemyData.class);
+		myEnemyDataStore = new DataStore<EnemyData>(data);
+	}
 	
 	/**
 	 * A templated method to get the list of GameData objects from the specified file path
@@ -128,5 +136,11 @@ public class BackendController {
 			data.add(entry);
 		}
 		return data;
+	}
+	
+	public static void main(String[] args)
+	{
+		BackendController controller = new BackendController(null);
+		controller.getClass();
 	}
 }

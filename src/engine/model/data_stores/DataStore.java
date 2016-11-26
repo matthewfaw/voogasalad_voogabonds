@@ -18,6 +18,7 @@ public class DataStore<T extends IReadableData> {
 
 	public DataStore(List<T> aWeaponDataList)
 	{
+		myWeaponData = new HashMap<String, T>();
 		aWeaponDataList.forEach(e -> myWeaponData.put(e.getName(), e));
 	}
 	

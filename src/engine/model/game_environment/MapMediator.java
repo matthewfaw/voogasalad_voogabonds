@@ -21,6 +21,7 @@ public class MapMediator {
 	{
 		myTerrainMap = aTerrainMap;
 		myEntityManager = new EntityManager();
+		myPathFactory = new PathFactory();
 		myPathManager = myPathFactory.constructPaths(myTerrainMap);
 	}
 	
