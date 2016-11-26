@@ -14,6 +14,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.Router;
+import utility.FileRetriever;
 
 public class BackendController {
 	private static final String GAME_DATA_PATH = "src/SerializedFiles";
@@ -32,6 +33,9 @@ public class BackendController {
 	private ResourceStore myResourceStore;
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
+	
+	private TimelineController myTimelineController;
+	private WaveController myWaveController;
 	private Router myRouter;
 	
 	BackendController(Router aRouter)
@@ -39,14 +43,24 @@ public class BackendController {
 		myRouter = aRouter;
 		myFileRetriever = new FileRetriever(GAME_DATA_PATH);
 		myJsonDeserializer = new DeserializeJSON();
+
+		myTimelineController = new TimelineController();
 		
-		constructBackendObjects();
+		constructStaticBackendObjects();
+		
+		constructDynamicBackendObjects();
+	}
+	
+	private void constructDynamicBackendObjects()
+	{
+		myWaveController = new WaveController();
+		myTimelineController.attach(myWaveController);
 	}
 	
 	/**
 	 * The primary dispatcher method for constructing objects from the GameDataFiles
 	 */
-	private void constructBackendObjects()
+	private void constructStaticBackendObjects()
 	{
 		constructMap();
 		constructResourceStore();
