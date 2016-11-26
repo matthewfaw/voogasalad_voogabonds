@@ -3,7 +3,10 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
-import authoring.view.input_menus.WaveMenu;
+
+import authoring.controller.WeaponDataController;
+import authoring.model.EnemyData;
+import authoring.model.WeaponData;
 import authoring.view.input_menus.WeaponMenu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,13 +26,16 @@ public class WeaponTab extends Tab {
     private int screenWidth;
     private int screenHeight;
     private WeaponMenu myMenu;
+    private WeaponDataController myController;
+    private VBox myContent;
     
-    // Expect WeaponDataController, ProjectileDataController
-    public WeaponTab(TabPane pane) {
+
+    public WeaponTab(TabPane pane, WeaponDataController controller) {
         screenInfo();
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
         weaponTab = new Tab(myResources.getString("Weapons"));
         myMenu = new WeaponMenu(myResources, this);
+        myController = controller;
         weaponTabOptions(weaponTab);
         pane.getTabs().add(weaponTab);
     }
@@ -38,6 +44,8 @@ public class WeaponTab extends Tab {
         VBox weaponArea = new VBox(screenHeight*0.01);
         weaponArea.setMaxHeight(screenHeight*0.88);
         ScrollPane currentWeapons = new ScrollPane();
+        myContent = new VBox();
+        currentWeapons.setContent(myContent);
         currentWeapons.setPrefSize(screenWidth/5, screenHeight);
         HBox weaponButtons = new HBox(screenWidth*0.05);
         weaponButtons.setPadding(new Insets(0.01*screenHeight, screenWidth*0.01, 0.01*screenHeight, screenWidth*0.01));
@@ -50,10 +58,11 @@ public class WeaponTab extends Tab {
 
     private EventHandler<ActionEvent> addWeaponHandler(){
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event){
-                myMenu.createWeaponMenu(myResources.getString("DefaultWeaponName"), myResources.getString("DefaultProjectile"),
-                                        myResources.getString("DefaultRange"), myResources.getString("DefaultRate"));
-            }
+                public void handle(ActionEvent event){
+                        // TODO: update create window method
+                        myMenu.createWeaponMenu(myResources.getString("DefaultWeaponName"), myResources.getString("DefaultProjectile"),
+                                                myResources.getString("DefaultRange"), myResources.getString("DefaultRate"), true);
+                }
         };
         return handler;
     }
@@ -63,5 +72,32 @@ public class WeaponTab extends Tab {
         screenWidth = (int) screenSize.getWidth();
         screenHeight = (int) screenSize.getHeight();
     }
+    
+    public WeaponDataController getController(){
+    	return myController;
+    }
+    
+    public void removeButtonDuplicates(String s) {
+		for (int i = 0; i < myContent.getChildren().size(); i++) {
+			Button button = (Button) (myContent.getChildren().get(i));
+			if (button.getText().equals(s)) {
+				myContent.getChildren().remove(i);
+				i--;
+			}
+		}
+	}
+	
+	public void addButtonToDisplay(String text) {
+		Button button = new Button(text);
+		button.setMinWidth(myContent.getMinWidth());
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event){
+				WeaponData weapon = myController.getWeaponData(text);
+				myMenu.createWeaponMenu(weapon.getName(), weapon.getProjectileName(), 
+						String.valueOf(weapon.getRange()), String.valueOf(weapon.getFireRate()), false);
+			}
+		});
+		myContent.getChildren().add(button);
+	}
     
 }

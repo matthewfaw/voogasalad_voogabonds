@@ -2,13 +2,16 @@ package authoring.view.display;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
 /**
  * @author Christopher Lu
@@ -18,6 +21,7 @@ import javafx.scene.layout.VBox;
 
 public class GameDisplay {
 
+	private Scene scene;
 	private VBox terrainContainer;
 	private ScrollPane terrainArea;
 	private TilePane terrainGrid;
@@ -28,13 +32,17 @@ public class GameDisplay {
 	private int rows; // Number of blocks in the vertical direction of the gridPane. Can be set by user.
 	private int screenWidth;
 	private int screenHeight;
+	private ResourceBundle myResources;
+	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
-	public GameDisplay(BorderPane root) {
+	public GameDisplay(BorderPane root, Scene s) {
 		setUpScreenResolution();
+		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
+		this.scene = s;
 		this.terrainContainer = new VBox();
 		this.terrainArea = new ScrollPane();
 		this.terrainGrid = new TilePane();
-		this.toolBar = new GridToolBar(terrainContainer);
+		this.toolBar = new GridToolBar(terrainContainer, scene);
 		terrainGrid.setPrefWidth(screenWidth*0.8);
 		terrainGrid.setMaxHeight(screenHeight*0.9);
 		terrainArea.setContent(terrainGrid);
@@ -55,11 +63,13 @@ public class GameDisplay {
 		terrainGrid.getChildren().clear();
 		terrainGrid.setHgap(GAP);
 		terrainGrid.setVgap(GAP);
-		for (int col = 0; col < columns; col++) {
-			for (int r = 0; r < rows; r++) {
-				TerrainCell cell = new TerrainCell(terrainArea, terrainGrid, toolBar, col, r);
+		terrainGrid.setPrefColumns(columns);
+		for (int r = 0; r < rows; r++) {
+			for (int col = 0; col < columns; col++) {
+				TerrainCell cell = new TerrainCell(toolBar, r, col);
 				cell.setWidth(DEFAULT_TILE_SIZE);
 				cell.setHeight(DEFAULT_TILE_SIZE);
+				cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
 				terrainGrid.getChildren().add(cell);
 			}
 		}

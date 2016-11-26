@@ -11,7 +11,19 @@ public class Router {
 	private WeaponDataController wedc = new WeaponDataController();
 	
 	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
+		/**
+		 * CONNECTIONS TO BE CREATED:
+		 * TOWER TAB WILL NEED TO LISTEN TO: WEAPON (MapChangeListener), TERRAIN (SetChangeListener)
+		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
+		 */
 		
+		//Listeners for WaveLevelTab
+		edc.addControllerListener(wTab.createEnemyListener());
+		mdc.addSpawnPointListener(wTab.createSpawnPointListener());
+		
+		//Listeners for EnemyTab
+		wedc.addControllerListener(eTab.createWeaponListener());
+		mdc.addTerrainListener(eTab.createTerrainListener());
 	}
 	
 	public EnemyDataController getEnemyDataController(){

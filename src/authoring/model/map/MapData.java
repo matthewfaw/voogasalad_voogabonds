@@ -1,17 +1,27 @@
 package authoring.model.map;
-import java.awt.Point;
+import utility.Point;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
+import javafx.collections.ObservableMap;
+import javafx.collections.SetChangeListener;
+import javafx.collections.MapChangeListener;
+
+
 public class MapData {
 	private int numXCells;
 	private int numYCells;
-	private HashSet<Point> spawnPoints;
+	private ObservableMap<String, ArrayList<Point>> spawnPoints = FXCollections.observableHashMap();
 	private HashSet<Point> sinkPoints;
 	private HashSet<TerrainData> terrainList;
-	private ArrayList<String> validTerrain;
+	private ObservableSet<String> validTerrain = FXCollections.observableSet();
 	
+	/**
+	 * MAP DIMENSION FUNCTIONS
+	 */
 	public void setNumXCells(int x) throws Exception{
 		if (x <= 0){
 			throw new Exception("The map must be wider than 0 cells.");
@@ -31,21 +41,33 @@ public class MapData {
 		return numYCells;
 	}
 	
-	public void addSpawnPoint(Point newSpawnPoint) throws Exception{
-		validatePoint(newSpawnPoint, "spawn");
-		spawnPoints.add(newSpawnPoint);
+	/**
+	 * SPAWN POINT FUNCTIONS
+	 */
+	public void addSpawnPoints(String name, ArrayList<Point> newSpawnPoints) throws Exception{
+		for (Point p: newSpawnPoints){
+			validatePoint(p, "spawn");
+		}
+		spawnPoints.put(name, newSpawnPoints);
 	}
 	
-	public void removeSpawnPoint(Point p){
-		if (spawnPoints.contains(p)){
-			spawnPoints.remove(p);
+	public void addSpawnPointListener(MapChangeListener<String, ArrayList<Point>> listener){
+		spawnPoints.addListener(listener);
+	}
+	
+	public void removeSpawnPoints(String name){
+		if (spawnPoints.containsKey(name)){
+			spawnPoints.remove(name);
 		}
 	}
 	
-	public Set<Point> getSpawnPoints(){
-		return spawnPoints;
+	public ArrayList<Point> getSpawnPoints(String name){
+		return spawnPoints.get(name);
 	}
 	
+	/**
+	 * SINK POINT FUNCTIONS
+	 */
 	public void addSinkPoint(Point newSinkPoint) throws Exception{
 		validatePoint(newSinkPoint, "sink");
 		sinkPoints.add(newSinkPoint);
@@ -61,11 +83,14 @@ public class MapData {
 		return sinkPoints;
 	}
 	
+	/**
+	 * TERRAIN DATA FUNCTIONS
+	 */
 	public void addTerrainData(TerrainData terrain) throws Exception{
 		validatePoint(terrain.getLoc(), "terrain");
 		terrainList.add(terrain);
 	}
-	
+
 	public void removeTerrainData(TerrainData terrain){
 		if (terrainList.contains(terrain)){
 			terrainList.remove(terrain);
@@ -75,6 +100,31 @@ public class MapData {
 	public Set<TerrainData> getTerrainList(){
 		return terrainList;
 	}
+	
+	/**
+	 * VALID TERRAIN FUNCTIONS
+	 */
+	public void addValidTerrain(String s) throws Exception{
+		if (s == null || s.length() == 0){
+			throw new Exception("No terrain specified.");
+		}
+		validTerrain.add(s);
+	}
+	
+	public void removeValidTerrain(String s) throws Exception{
+		if (validTerrain.contains(s)){
+			validTerrain.remove(s);
+		}
+	}
+	
+	public ObservableSet<String> getValidTerrain(){
+		return validTerrain;
+	}
+	
+	public void addValidTerrainListener(SetChangeListener<String> listener){
+		validTerrain.addListener(listener);
+	}
+	
 	
 	private void validatePoint(Point p, String type) throws Exception{
 		if (p.getX() >= numXCells || p.getX() < 0){
