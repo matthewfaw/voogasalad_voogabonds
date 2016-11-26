@@ -4,6 +4,10 @@ import engine.model.machine.weapon.projectile.IProjectile;
 
 public class CollisionHandler implements ICollisionHandler{
 
+	//matthewfaw: I'd prefer to avoid using instanceof here
+	// instead, you can have polymorphic methods to hide the details
+	// of what happens to a specific object when a collision occurs
+
 	/**
 	 * Handle collisions differently based on types that collided
 	 */
