@@ -41,6 +41,7 @@ public class ActiveWaveManager {
 	 * @param aTotalTimeElapsed
 	 * @return a map from enemy data to the spawn point corresponding to that enemy
 	 * 
+	 * IMPORTANT TODO: add support for frequency of spawning
 	 * TODO: This return type is kinda hacky... maybe make a custom class for this?
 	 */
 	public Map<EnemyData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
@@ -88,6 +89,10 @@ public class ActiveWaveManager {
 		}
 	}
 	
+	/**
+	 * A method to determine if we can set more waves as active
+	 * @return true if we can, false otherwise
+	 */
 	private boolean isTimeToAddMoreWaves()
 	{
 		return myCurrentTime > myTimeToAddMoreWaves;

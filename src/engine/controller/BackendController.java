@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import authoring.model.EnemyData;
 import authoring.model.IReadableData;
+import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
@@ -48,13 +49,14 @@ public class BackendController {
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
 	private DataStore<EnemyData> myEnemyDataStore;
+	private PlayerData myPlayerData;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private WaveController myWaveController;
 	private Router myRouter;
 	
-	BackendController(String aGameDataPath, Router aRouter)
+	public BackendController(String aGameDataPath, Router aRouter)
 	{
 		myRouter = aRouter;
 		myGameDataRelativePaths = ResourceBundle.getBundle(GAME_DATA_PATH);
@@ -66,6 +68,15 @@ public class BackendController {
 		constructStaticBackendObjects();
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
 		constructDynamicBackendObjects();
+	}
+	
+	/**
+	 * A method used to add a new player to the game
+	 */
+	public void addPlayer()
+	{
+		//TODO: set up the infrastructure for a player
+		// initially, let's assume there's only one player
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -142,6 +153,16 @@ public class BackendController {
 	{
 		List<EnemyData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
 		myEnemyDataStore = new DataStore<EnemyData>(data);
+	}
+	
+	/**
+	 * This method constructs the player data
+	 * Assumes there is exactly one player data specified
+	 */
+	private void constructPlayerData()
+	{
+		List<PlayerData> data = getData(myGameDataRelativePaths.getString("PlayerPath"), PlayerData.class);
+		myPlayerData = data.get(0);
 	}
 	
 	/**
