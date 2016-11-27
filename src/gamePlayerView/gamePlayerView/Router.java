@@ -2,14 +2,11 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.List;
 
+import authoring.model.map.MapData;
 import engine.IObservable;
-import gamePlayerView.GUIPieces.CashBox;
-import gamePlayerView.GUIPieces.LivesBox;
-import gamePlayerView.GUIPieces.WavesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
-import javafx.scene.layout.HBox;
 
 public class Router {
 	private GamePlayerScene  myGamePlayerScene;
@@ -27,6 +24,11 @@ public class Router {
 		//myLives=myGamePlayerScene.getLives();
 		//myWaves=myGamePlayerScene.getWaves();
 		//myFrontendEnemySources = myGamePlayerScene.getEnemySources();
+	}
+	
+	public void distributeMapData(MapData aMapData)
+	{
+		//TODO: distribute to all interested frontend objects
 	}
 	
 	public void distributeCash(IObservable aCash){
