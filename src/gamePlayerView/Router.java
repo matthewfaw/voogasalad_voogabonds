@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 public class Router {
 	private GamePlayerScene  myGamePlayerScene;
 	//TODO: Change these box objects to instead be acceptor interfaces
-//	private List<LivesBox> myLives; 
+	//private List<LivesBox> myLives; 
 	//private List<WavesBox> myWaves;
 	//List<IEnemySources> myFronetendEnemySources;
 	

@@ -5,8 +5,13 @@ import java.util.List;
 
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
+import gamePlayerView.GUIPieces.MapDisplay;
+import gamePlayerView.GUIPieces.StatisticsRow;
+import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.WavesBox;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -19,7 +24,10 @@ import javafx.stage.Stage;
 public class GamePlayerScene {
 	
 	private Stage myStage;
-	private BuildGUI gui;
+	private TowerColumn myTowerColumn;
+	private StatisticsRow myStatisticsRow;
+	private MapDisplay myMap;
+	private Scene myScene;
 	
 	public GamePlayerScene(){
 		//myStage=stage;
@@ -27,26 +35,13 @@ public class GamePlayerScene {
 	}
 
 	public void init(Stage s) {
-		gui=new BuildGUI();
-		Scene myScene=gui.build(s);
+		Scene myScene=build(s);
 		setScene(s,myScene);
 	}
 
 	private void setScene(Stage s, Scene scene) { ///public or private
 		s.setScene(scene);
 		s.show();
-	}
-
-	public CashBox getCash() {
-		return gui.getCash();
-	}
-
-	public LivesBox getLives() {
-		return gui.getLives();
-	}
-
-	public WavesBox getWaves() {
-		return gui.getWaves();
 	}
 	/*
 	public List<ICashAcceptor> getCashAcceptors()
@@ -61,6 +56,37 @@ public class GamePlayerScene {
 		// get all frontend components that need info from the resource store (available towers, ect)
 	}
 	*/
+
+	public Scene build(Stage stage) {
+		Group gameplayer =new Group();
+		myScene = new Scene(gameplayer, 900, 700);
+		gameplayer.getChildren().add(setScreen());
+		return myScene;
+	}
+	
+	public BorderPane setScreen(){
+	    myMap = new MapDisplay();
+		myTowerColumn   = new TowerColumn();
+		myStatisticsRow = new StatisticsRow();
+		BorderPane borderpane=new BorderPane();
+		borderpane.setRight(myTowerColumn.getView());
+		borderpane.setBottom(myStatisticsRow.getView());
+	    borderpane.setCenter(myMap.getView());
+		myMap.setupDragging(myScene);
+		return borderpane;
+	}
+	
+	public CashBox getCash() {
+		return myStatisticsRow.getCash();
+	}
+
+	public LivesBox getLives() {
+		return myStatisticsRow.getLives();
+	}
+
+	public WavesBox getWaves() {
+		return myStatisticsRow.getWaves();
+	}
 }
 
 
