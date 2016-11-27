@@ -1,4 +1,4 @@
-package gamePlayerView;
+package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,9 @@ import gamePlayerView.GUIPieces.MapDisplay;
 import gamePlayerView.GUIPieces.StatisticsRow;
 import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.WavesBox;
+import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -28,6 +31,9 @@ public class GamePlayerScene {
 	private StatisticsRow myStatisticsRow;
 	private MapDisplay myMap;
 	private Scene myScene;
+	private List<ICashAcceptor> myCash;
+	private List<ILivesAcceptor> myLives; 
+	private List<IWavesAcceptor> myWaves;
 	
 	public GamePlayerScene(){
 		//myStage=stage;
@@ -76,16 +82,22 @@ public class GamePlayerScene {
 		return borderpane;
 	}
 	
-	public CashBox getCash() {
-		return myStatisticsRow.getCash();
+	public List<ICashAcceptor> getCash() {
+		CashBox cashbox=myStatisticsRow.getCash();
+		myCash.add(cashbox);
+		return myCash;
 	}
 
-	public LivesBox getLives() {
-		return myStatisticsRow.getLives();
+	public List<ILivesAcceptor> getLives() {
+		LivesBox livesbox=myStatisticsRow.getLives();
+		myLives.add(livesbox);
+		return myLives;
 	}
 
-	public WavesBox getWaves() {
-		return myStatisticsRow.getWaves();
+	public List<IWavesAcceptor> getWaves() {
+		WavesBox wavesbox=myStatisticsRow.getWaves();
+		myWaves.add(wavesbox);
+		return myWaves;
 	}
 }
 

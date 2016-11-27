@@ -17,7 +17,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributors.MapDistributor;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
-import gamePlayerView.Router;
+import gamePlayerView.gamePlayerView.Router;
 import utility.FileRetriever;
 
 /**

@@ -1,5 +1,6 @@
 package gamePlayerView;
 
+import gamePlayerView.gamePlayerView.GamePlayerScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -3,8 +3,8 @@ package engine.controller;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-import gamePlayerView.GamePlayerScene;
-import gamePlayerView.Router;
+import gamePlayerView.gamePlayerView.GamePlayerScene;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * A main controller whose primary purpose is to

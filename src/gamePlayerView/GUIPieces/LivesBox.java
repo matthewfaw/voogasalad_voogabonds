@@ -2,6 +2,7 @@ package gamePlayerView.GUIPieces;
 
 import engine.IObservable;
 import engine.IObserver;
+import gamePlayerView.interfaces.ILivesAcceptor;
 
 /**
  * @author Guhan Muruganandam
@@ -11,13 +12,13 @@ import engine.IObserver;
  * UI feature for Lives text box and Label
  */
 
-public class LivesBox extends InfoBox implements IObserver {
+public class LivesBox extends InfoBox implements IObserver,ILivesAcceptor {
 	
 	public LivesBox(){
 		myDisplay=makeDisplay("Lives: ");
 	}
 
-	public void giveObject(IObservable aObservable) {
+	public void acceptLives(IObservable aObservable) {
 		aObservable.attach(this);
 	}
 

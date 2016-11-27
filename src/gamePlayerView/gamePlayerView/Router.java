@@ -1,4 +1,4 @@
-package gamePlayerView;
+package gamePlayerView.gamePlayerView;
 
 import java.util.List;
 
@@ -6,14 +6,18 @@ import engine.IObservable;
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.WavesBox;
+import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.layout.HBox;
 
 public class Router {
 	private GamePlayerScene  myGamePlayerScene;
 	//TODO: Change these box objects to instead be acceptor interfaces
-	//private List<LivesBox> myLives; 
-	//private List<WavesBox> myWaves;
-	//List<IEnemySources> myFronetendEnemySources;
+	private List<ICashAcceptor> myCash;
+	private List<ILivesAcceptor> myLives; 
+	private List<IWavesAcceptor> myWaves;
+	//List<IEnemySources> myFrontendEnemySources;
 	
 	
 	public Router(GamePlayerScene aGamePlayerScene)
@@ -26,13 +30,13 @@ public class Router {
 	}
 	
 	public void distributeCash(IObservable aCash){
-		//myCash.giveObject(aCash);
+		//myCash.acceptCash(aCash);
 	}
 	public void distributeLives(IObservable aLives){
-		//myLives.giveObject(aLives); //TODO set up link all the way to Statistics Row
+		//myLives.acceptLives(aLives); 
 	}
 	public void distributeWaves(IObservable aWaves){
-		//myWaves.giveObject(aWaves); //TODO set up link all the way to statistics row
+		//myWaves.acceptWaves(aWaves); 
 	}
 	
 	/**
