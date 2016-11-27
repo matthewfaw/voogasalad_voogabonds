@@ -55,7 +55,7 @@ public class TimelineController implements IObservable<TimelineController> {
 	{
 		return myTimeline.getTotalDuration().toMillis();
 	}
-
+	
 	//*********************Observable interface******************//
 	@Override
 	public void attach(IObserver<TimelineController> aObserver) {

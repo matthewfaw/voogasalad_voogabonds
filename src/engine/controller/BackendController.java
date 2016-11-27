@@ -13,6 +13,7 @@ import authoring.model.map.MapData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
+import engine.model.game_environment.distributors.MapDistributor;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.Router;
@@ -39,7 +40,8 @@ public class BackendController {
 	private JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-	private MapMediator myMapMediator;
+//	private MapMediator myMapMediator;
+	private MapDistributor myMapDistributor;
 	private ResourceStore myResourceStore;
 
 	//Data relevant to constructing objects
@@ -62,13 +64,17 @@ public class BackendController {
 		myTimelineController = new TimelineController();
 		
 		constructStaticBackendObjects();
-		
+		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
 		constructDynamicBackendObjects();
 	}
 	
+	//TODO: Update when WaveData is ready from Authoring
 	private void constructDynamicBackendObjects()
 	{
-		myWaveController = new WaveController();
+		List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
+		//XXX: This depends on the map distributor already being constructed
+		// we should refactor this to remove the depenency in calling
+		myWaveController = new WaveController(myMapDistributor, data.get(0), myEnemyDataStore);
 		myTimelineController.attach(myWaveController);
 	}
 	
@@ -94,7 +100,9 @@ public class BackendController {
 	{
 		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
 		TerrainMap terrainMap = new TerrainMap(data.get(0));
-		myMapMediator = new MapMediator(terrainMap);
+		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
+		MapMediator MapMediator = new MapMediator(terrainMap);
+		myMapDistributor = new MapDistributor(MapMediator);
 	}
 	/**
 	 * Helper method to create the backend resource store object

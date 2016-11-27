@@ -119,4 +119,8 @@ class MockGameDataConstructor {
 			throw new SerializationException("Could not serialize");
 		}
 	}
+	public static void main(String[] args)
+	{
+		JSONSerializer ser = new JSONSerializer();
+	}
 }

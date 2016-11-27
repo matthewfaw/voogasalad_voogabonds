@@ -1,5 +1,6 @@
 package engine.model.game_environment.distributors;
 
+import authoring.model.EnemyData;
 import engine.model.components.PhysicalComponent;
 import engine.model.components.PhysicalComponentData;
 import engine.model.entities.EntityData;
@@ -40,6 +41,17 @@ public class MapDistributor implements IDistributor {
 		entity.addComponent(physicalComponent);
 		
 		return myMapMediator.attemptToPlaceEntity(aLocation, physicalComponent);
+	}
+	
+	//TODO: add the implementation
+	//TODO: I'm imagining that EnemyData and TowerData are going to have similar interfaces, so we're probs
+	// gonna have to repeat this code--it'd be nice if we could add an interface around the Enemy/Tower data objects
+	// to get rid of this repeated code
+	public boolean distribute(EnemyData aEnemyData, String aSpawnPoint)
+	{
+		//TODO: Construct the enemy object
+		// return myMapMediator.attemptToPlaceEntity(aSpawnPoint, enemy);
+		throw new RuntimeException("Add implementation here");
 	}
 
 }

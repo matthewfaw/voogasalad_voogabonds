@@ -26,7 +26,7 @@ public class ApplicationController {
 
 	public ApplicationController()
 	{
-		myGameOptions = PropertyResourceBundle.getBundle(GAME_OPTIONS_PATH);
+		myGameOptions = ResourceBundle.getBundle(GAME_OPTIONS_PATH);
 	}
 	
 	/**

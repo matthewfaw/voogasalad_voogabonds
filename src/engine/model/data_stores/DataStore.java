@@ -22,7 +22,7 @@ public class DataStore<T extends IReadableData> {
 		aWeaponDataList.forEach(e -> myWeaponData.put(e.getName(), e));
 	}
 	
-	public T getWeaponData(String aWeaponName)
+	public T getData(String aWeaponName)
 	{
 		if (myWeaponData.containsKey(aWeaponName)) {
 			return myWeaponData.get(aWeaponName);
