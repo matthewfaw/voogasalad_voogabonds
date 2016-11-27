@@ -12,6 +12,8 @@ import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
 import authoring.model.serialization.JSONDeserializer;
+import engine.controller.waves.DummyWaveOperationData;
+import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributors.MapDistributor;
@@ -99,6 +101,7 @@ public class BackendController {
 		constructWeaponDataStore();
 		constructProjectileDataStore();
 		constructEnemyDataStore();
+		constructPlayerData();
 	}
 
 	/**
@@ -158,6 +161,8 @@ public class BackendController {
 	/**
 	 * This method constructs the player data
 	 * Assumes there is exactly one player data specified
+	 * 
+	 * TODO: Possibly change this to make it more flexible?
 	 */
 	private void constructPlayerData()
 	{

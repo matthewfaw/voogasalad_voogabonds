@@ -1,4 +1,4 @@
-package engine.controller;
+package engine.controller.waves;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -21,7 +21,7 @@ public class ActiveWaveManager {
 	private DummyWaveOperationData myWaveOperationData;
 	private DataStore<EnemyData> myEnemyDataStore;
 	
-	private LinkedHashMap<WaveData, Integer> myCurrentlyActiveWaves;
+	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
 	private double myCurrentTime;
 	private double myTimeToAddMoreWaves;
 	
@@ -30,7 +30,7 @@ public class ActiveWaveManager {
 		myWaveOperationData = aWaveOperationData;
 		myEnemyDataStore = aEnemyDataStore;
 
-		myCurrentlyActiveWaves = new LinkedHashMap<WaveData, Integer>();
+		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
 		
 		setCurrentTime(DEFAULT_START_TIME);
 		setNextRoundOfWaveDataAsActive();
@@ -56,13 +56,13 @@ public class ActiveWaveManager {
 		
 		//3. get all the enemies
 		Map<EnemyData, String> enemiesToConstruct = new HashMap<EnemyData, String>();
-		for (WaveData activeWave: myCurrentlyActiveWaves.keySet()) {
-			if (myCurrentlyActiveWaves.get(activeWave) > 0) {
+		for (WaveData activeWave: myUnreleasedEnemyCountForActiveWave.keySet()) {
+			if (myUnreleasedEnemyCountForActiveWave.get(activeWave) > 0) {
 				EnemyData enemy = myEnemyDataStore.getData(activeWave.getWaveEnemy());
 				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
-				myCurrentlyActiveWaves.put(activeWave, myCurrentlyActiveWaves.get(activeWave) - 1);
+				myUnreleasedEnemyCountForActiveWave.put(activeWave, myUnreleasedEnemyCountForActiveWave.get(activeWave) - 1);
 			} else {
-				myCurrentlyActiveWaves.remove(activeWave);
+				myUnreleasedEnemyCountForActiveWave.remove(activeWave);
 			}
 		}
 		
@@ -78,7 +78,7 @@ public class ActiveWaveManager {
 		while(true) {
 			WaveData waveData = myWaveOperationData.pop();
 			if (waveData != null) {
-				myCurrentlyActiveWaves.put(waveData, waveData.getNumEnemies());
+				myUnreleasedEnemyCountForActiveWave.put(waveData, waveData.getNumEnemies());
 				if (waveData.getTimeForWave() != 0) {
 					updateTimeOfNextTransition(waveData.getTimeForWave());
 					break;

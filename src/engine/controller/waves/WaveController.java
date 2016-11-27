@@ -1,16 +1,21 @@
-package engine.controller;
+package engine.controller.waves;
 
 import java.util.List;
 import java.util.Map;
 
 import authoring.model.EnemyData;
 import engine.IObserver;
+import engine.controller.TimelineController;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.distributors.MapDistributor;
 
 /**
  * A class to handle which wave the game is currently in,
  * and the game time of the simulation
+ * 
+ * This class depends on the ActiveWaveManager to determine which enemies should be constructed
+ * at a given clock tick
+ * It also depends on the MapDistributor 
  * 
  * @author matthewfaw
  *
