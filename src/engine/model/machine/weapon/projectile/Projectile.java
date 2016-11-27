@@ -30,6 +30,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	double myTraveled;
 	double myHeading;
 	Point myLocation;
+	double myRadius;
 	
 	IDamageStrategy myDamageCalc;
 	double myDamage;
@@ -48,6 +49,7 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 		myTraveled = 0;
 		mySpeed = data.getSpeed();
 		myTurnSpeed = data.getTurnSpeed();
+		myRadius = data.getCollisionRadius();
 
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
@@ -116,6 +118,11 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	@Override
 	public double getMoveSpeed() {
 		return mySpeed;
+	}
+	
+	@Override
+	public double getCollisionRadius() {
+		return myRadius;
 	}
 	
 	private void hitTarget() {

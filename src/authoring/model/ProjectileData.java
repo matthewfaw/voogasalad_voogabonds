@@ -13,6 +13,7 @@ public class ProjectileData {
 	private int speed;
 	private int damageMultiplier;
 	private int turnSpeed;
+	private double collisionRadius;
 	
 	public void setName(String name) throws Exception {
 		if (name == null || name.length() == 0){
@@ -84,5 +85,9 @@ public class ProjectileData {
 
 	public double getTurnSpeed() {
 		return turnSpeed;
+	}
+
+	public double getCollisionRadius() {
+		return collisionRadius;
 	}
 }
