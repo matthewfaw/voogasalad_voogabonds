@@ -13,7 +13,6 @@ public class Router {
 	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
 		/**
 		 * CONNECTIONS TO BE CREATED:
-		 * TOWER TAB WILL NEED TO LISTEN TO: WEAPON (MapChangeListener), TERRAIN (SetChangeListener)
 		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
 		 */
 		
@@ -24,6 +23,13 @@ public class Router {
 		//Listeners for EnemyTab
 		wedc.addControllerListener(eTab.createWeaponListener());
 		mdc.addTerrainListener(eTab.createTerrainListener());
+            
+                //TowerTab
+                wedc.addControllerListener(tTab.createWeaponListener());
+                mdc.addTerrainListener(tTab.createTerrainListener());
+		
+		//GameTab
+                
 	}
 	
 	public EnemyDataController getEnemyDataController(){

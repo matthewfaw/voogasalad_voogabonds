@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.TowerMenu;
+import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.SetChangeListener;
@@ -16,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -37,7 +39,8 @@ public class TowerTab extends Tab {
 	private VBox myContent;
 	private TowerMenu myMenu;
         private TowerDataController myController;
-	private List<String> myTowers, myWeapons, myTerrains;
+	private ObservableList<String> myTowers, myWeapons, myTerrains;
+	private ListView<String> towers;
 	
 	public TowerTab(TabPane pane, TowerDataController controller) {
 		screenInfo();
@@ -45,8 +48,17 @@ public class TowerTab extends Tab {
 		this.towerTab = new Tab(myResources.getString("Towers"));
 		myMenu = new TowerMenu(myResources,this);
 		myController = controller;
+		initializeLists();
 		towerTabOptions(towerTab);
 		pane.getTabs().add(towerTab);
+	}
+	
+	private void initializeLists() {
+	    myTowers = FXCollections.observableArrayList("TestTower");
+	    myWeapons = FXCollections.observableArrayList("TestWeapon");
+	    myTerrains = FXCollections.observableArrayList("Land","Water");
+	    towers = new ListView<String>(myTowers);
+	    // TODO: incorporate ListView of towers in ScrollPane availableTowers
 	}
 	
 	public void addTower(String name) {

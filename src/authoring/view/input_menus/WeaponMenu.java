@@ -49,19 +49,19 @@ public class WeaponMenu {
     	myWeaponWindow = new Stage();
         myWeaponWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
-        setUpTowerScreen(root, nameVal, projectileVal, rangeVal, rateVal);
+        setUpWeaponScreen(root, nameVal, projectileVal, rangeVal, rateVal);
         Scene scene = new Scene(root, SIZE, SIZE);
-        myWeaponWindow.setTitle(myResources.getString("AddTower"));
+        myWeaponWindow.setTitle(myResources.getString("AddWeapon"));
         myWeaponWindow.setScene(scene);
         myWeaponWindow.show();
     }
     
-    private void setUpTowerScreen(VBox root, String nameVal, String projectileVal, String rangeVal, String rateVal) {
+    private void setUpWeaponScreen(VBox root, String nameVal, String projectileVal, String rangeVal, String rateVal) {
         myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
         myProjectileNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterProjectile"), projectileVal);
         myRangeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterRange"), rangeVal);
         myRateField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterFireRate"), rateVal);
-/*<<<<<<< HEAD
+//<<<<<<< HEAD
         
         setUpFinishButton(root);
     }
@@ -108,9 +108,9 @@ public class WeaponMenu {
         }
         
         return weapon;
-=======*/
+/*=======
         setUpFinishButton(root, nameVal);
-//>>>>>>> 09e98a800e0a92a74998fe95628271d84112d131
+>>>>>>> 09e98a800e0a92a74998fe95628271d84112d131
     }
 
 	private void setUpFinishButton(VBox root, String originalName) {
@@ -156,7 +156,7 @@ public class WeaponMenu {
 			myHelper.showError(e.getMessage());
 			return null;
 		}
-		return weapon;
+		return weapon;*/
 	}
 
 }
