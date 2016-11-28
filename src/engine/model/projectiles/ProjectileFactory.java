@@ -5,6 +5,7 @@ import java.util.Map;
 import authoring.model.ProjectileData;
 import engine.model.machine.Machine;
 import engine.model.weapons.IKillerOwner;
+import utility.ResouceAccess;
 
 /**
  * A class to make projectiles and store everything that all the projectiles will have in common, so the common
@@ -13,6 +14,7 @@ import engine.model.weapons.IKillerOwner;
  *
  */
 public class ProjectileFactory {
+	private static final String NO_SUCH_PROJECTILE = "NoSuchProjectile";
 	Map<String, ProjectileData> myProjectiles;
 	
 	public ProjectileFactory(Map<String, ProjectileData> projMap) {
@@ -33,6 +35,6 @@ public class ProjectileFactory {
 			return new Projectile(myProjectiles.get(name), target, owner);
 		else
 			//TODO: ResourceFile error message
-			throw new UnsupportedOperationException("No projectile called: " + name);
+			throw new UnsupportedOperationException(ResouceAccess.getError(NO_SUCH_PROJECTILE) + name);
 	}
 }
