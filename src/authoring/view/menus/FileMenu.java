@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import main.MainInitalizer;
 import main.MainMenu;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -73,8 +74,8 @@ public class FileMenu extends Menu {
 	
 	private void performCloseProject(MenuItem closeProject) {
 		closeProject.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				//TODO: Implement code that closes project upon clicking Close button.
+			public void handle(ActionEvent e) {
+				Platform.exit();
 			}
 		});
 	}

@@ -65,7 +65,6 @@ public class MapDataController {
 		try{
 			myMapData.addSinkPoint(p);
 		}catch(Exception e){
-			//Call error handler
 		}
 	}
 	public void removeSinkPoint(Point p){
@@ -100,5 +99,8 @@ public class MapDataController {
 	}
 	public void addTerrainListener(SetChangeListener<String> listener){
 		myMapData.addValidTerrainListener(listener);
+	}
+	public MapData getMapData() {
+		return myMapData;
 	}
 }
