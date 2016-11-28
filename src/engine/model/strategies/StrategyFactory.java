@@ -1,5 +1,9 @@
 package engine.model.strategies;
 
+import engine.model.strategies.damage.ExponentialDamageStrategy;
+import engine.model.strategies.movement.GreedyMovementStrategy;
+import engine.model.strategies.target.BadTargetStrategy;
+
 /**
  * A class to pick the right strategy from a given Strategy name
  * @author Weston

@@ -126,7 +126,6 @@ public class TowerMenu {
 //                        }
                         
                         myTab.addTower(name);
-
                         myController.createTowerData(tower);
                         myTowerWindow.close();
                 }

@@ -2,7 +2,7 @@ package authoring.model;
 
 import java.io.File;
 
-public class ProjectileData {
+public class ProjectileData implements IReadableData {
 
 	private String name;
 	private int maxRange;
@@ -13,6 +13,7 @@ public class ProjectileData {
 	private int speed;
 	private int damageMultiplier;
 	private int turnSpeed;
+	private double collisionRadius;
 	
 	public void setName(String name) throws Exception {
 		if (name == null || name.length() == 0){
@@ -21,6 +22,7 @@ public class ProjectileData {
 		this.name = name;
 	}
 	
+	@Override
 	public String getName(){
 		return name;
 	}
@@ -84,5 +86,9 @@ public class ProjectileData {
 
 	public double getTurnSpeed() {
 		return turnSpeed;
+	}
+
+	public double getCollisionRadius() {
+		return collisionRadius;
 	}
 }

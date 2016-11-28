@@ -1,5 +1,9 @@
 package engine.model.resourcestore;
 
-public interface IModifiableStore {
+import engine.model.machine.tower.Tower;
 
+public interface IModifiableStore {
+	public void updatePlayerMoney(int deltaMoney); 
+	public void addBaseTowers(Tower toAdd);
+	public void removeBaseTowers(Tower toRemove);
 }

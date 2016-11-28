@@ -11,14 +11,31 @@ import javafx.collections.SetChangeListener;
 import javafx.collections.MapChangeListener;
 
 
-public class MapData {
+import authoring.model.IReadableData;
+
+public class MapData implements IReadableData {
+	private String myName;
 	private int numXCells;
 	private int numYCells;
 	private int cellSize;
-	private ObservableMap<String, ArrayList<Point>> spawnPoints = FXCollections.observableHashMap();
+	private ObservableMap<String, ArrayList<Point>> spawnPoints;
 	private HashSet<Point> sinkPoints = new HashSet<Point>();
 	private HashSet<TerrainData> terrainList;
-	private ObservableSet<String> validTerrain = FXCollections.observableSet();
+	private ObservableSet<String> validTerrain;
+	
+	public MapData()
+	{
+		spawnPoints = FXCollections.observableHashMap();
+		sinkPoints = new HashSet<Point>();
+		terrainList = new HashSet<TerrainData>();
+		validTerrain = FXCollections.observableSet();
+	}
+	
+	@Override
+	public String getName()
+	{
+		return myName;
+	}
 	
 	/**
 	 * MAP DIMENSION FUNCTIONS
