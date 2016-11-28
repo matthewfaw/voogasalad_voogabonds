@@ -15,6 +15,7 @@ import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -58,7 +59,7 @@ public class TowerTab extends Tab {
 	    myWeapons = FXCollections.observableArrayList("TestWeapon");
 	    myTerrains = FXCollections.observableArrayList("Land","Water");
 	    towers = new ListView<String>(myTowers);
-	    // TODO: incorporate ListView of towers in ScrollPane availableTowers
+	    towers.setOrientation(Orientation.VERTICAL);
 	}
 	
 	public void addTower(String name) {
@@ -75,14 +76,14 @@ public class TowerTab extends Tab {
 	private void towerTabOptions(Tab towerTab) {
 		VBox towerArea = new VBox(screenHeight*0.01);
 		towerArea.setMaxHeight(screenHeight*0.88);
-		ScrollPane availableTowers = new ScrollPane();
-		availableTowers.setPrefSize(screenWidth/5, screenHeight);
+		/*ScrollPane availableTowers = new ScrollPane();
+		availableTowers.setPrefSize(screenWidth/5, screenHeight);*/
 		HBox towerButtons = new HBox(screenWidth*0.05);
 		towerButtons.setPadding(new Insets(0.01*screenHeight, screenWidth*0.01, 0.01*screenHeight, screenWidth*0.01));
 		Button addTower = new Button(myResources.getString("AddTower"));
 		addTower.setOnAction(addTowerHandler());
 		towerButtons.getChildren().addAll(addTower);
-		towerArea.getChildren().addAll(availableTowers, towerButtons);
+		towerArea.getChildren().addAll(/*availableTowers,*/ towers, towerButtons);
 		towerTab.setContent(towerArea);
 	}
 	
