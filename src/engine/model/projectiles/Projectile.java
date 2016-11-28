@@ -84,7 +84,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 
 	@Override
 	public Point getGoal() {
-		return myTarget.getPosition();
+		return myTarget.onMap() ? myTarget.getPosition() : null;
 	}
 
 	@Override
