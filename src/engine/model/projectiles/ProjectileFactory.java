@@ -3,10 +3,8 @@ package engine.model.projectiles;
 import java.util.Map;
 
 import authoring.model.ProjectileData;
-import engine.IViewable;
 import engine.model.machine.Machine;
 import engine.model.weapons.IKillerOwner;
-import engine.model.weapons.ProjectileOwner;
 
 /**
  * A class to make projectiles and store everything that all the projectiles will have in common, so the common
