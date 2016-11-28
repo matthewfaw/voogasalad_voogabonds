@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
+import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.TowerMenu;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -60,6 +62,16 @@ public class TowerTab extends Tab {
 	    myTerrains = FXCollections.observableArrayList("Land","Water");
 	    towers = new ListView<String>(myTowers);
 	    towers.setOrientation(Orientation.VERTICAL);
+	    towers.setPrefSize(screenWidth/5, screenHeight);
+	    towers.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                        if (event.getClickCount() == 2 && towers.getSelectionModel().getSelectedItem()!=null) {
+                                TowerData td = myController.getTowerData(towers.getSelectionModel().getSelectedItem());
+                                // TODO: View/Edit Some Data
+                        }
+                }
+        });
 	}
 	
 	public void addTower(String name) {
