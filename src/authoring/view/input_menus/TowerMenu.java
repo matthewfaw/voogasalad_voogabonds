@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
 import authoring.model.TowerData;
 import authoring.view.side_panel.TowerTab;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -86,7 +88,8 @@ public class TowerMenu {
     
     private ComboBox<String> setUpWeapon(VBox root) {
         Text weaponText = new Text(myResources.getString("SelectWeapon"));
-        ComboBox<String> weaponBox = new ComboBox<String>();
+        ObservableList<String> weaponChoices = FXCollections.observableArrayList("Machine Gun", "Bomb", "Arrow");
+        ComboBox<String> weaponBox = new ComboBox<String>(weaponChoices);
         root.getChildren().addAll(weaponText, weaponBox);
         return weaponBox;
     }

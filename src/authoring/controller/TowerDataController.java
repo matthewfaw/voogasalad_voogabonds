@@ -1,15 +1,15 @@
 package authoring.controller;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-
 import authoring.model.TowerData;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 
 public class TowerDataController {
 
-	private AbstractMap<String, TowerData> myTowerDataMap = new HashMap<String, TowerData>();
+	private ObservableMap<String, TowerData> myTowerDataMap = FXCollections.observableHashMap();
 
-	public AbstractMap finalizeTowerDataMap(){
+	public ObservableMap<String, TowerData> finalizeTowerDataMap(){
 		return myTowerDataMap;
 	}
 	
@@ -25,4 +25,8 @@ public class TowerDataController {
 		myTowerDataMap.remove(originalName);
 		createTowerData(updatedTower);
 	}
+	
+	public void addControllerListener(MapChangeListener<String, TowerData> listener){
+                myTowerDataMap.addListener(listener);
+        }
 }
