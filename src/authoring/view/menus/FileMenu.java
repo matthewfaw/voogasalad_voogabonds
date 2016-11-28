@@ -106,7 +106,11 @@ public class FileMenu extends Menu {
 					File file = newGameSave.showSaveDialog(stage);
 					if (file != null) {
 						JSONSerializer json = new JSONSerializer();
-						json.serializeToFile(file, file.getAbsolutePath());
+						try {
+							json.serializeToFile(file, file.getAbsolutePath());
+						} catch (Exception e1) {
+							System.out.println("Unable to save current game state.");
+						}
 					}
 				}
 		});
