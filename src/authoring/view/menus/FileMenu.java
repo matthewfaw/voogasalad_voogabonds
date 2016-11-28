@@ -56,7 +56,6 @@ public class FileMenu extends Menu {
 					MainMenu newInstance = new MainMenu(new MainInitalizer(s), s);
 					newInstance.init();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 		});
