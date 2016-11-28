@@ -1,5 +1,6 @@
 package engine.model.weapons;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.WeaponData;
@@ -45,7 +46,10 @@ public class Weapon implements IWeapon, IKillerOwner {
 	}
 
 	@Override
-	public void fire(List<Machine> targets, double heading, Point position) {
+	public void fire(double heading, Point position) {
+		//TODO: Make targets contain all Enemy Machines within weapon's range
+		List<Machine> targets =  new ArrayList<Machine>();
+		
 		if (myTimeToFire <= 0 && targets.size() > 0){
 			
 			Machine target = myTargetStrategy.target(targets, heading, position);

@@ -7,6 +7,7 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
+import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Damage;
@@ -22,25 +23,29 @@ import engine.model.weapons.IKillerOwner;
 public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
-	String myImagePath;
-	IKillerOwner myOwner;
-	Machine myTarget;
+	private String myImagePath;
+	private IKillerOwner myOwner;
+	private Machine myTarget;
 	
-	IMovementStrategy myMovementCalc;
-	double mySpeed;
-	double myTurnSpeed;
-	double myTraveled;
-	double myHeading;
-	Point myLocation;
-	double myRadius;
+	private IMovementStrategy myMovementCalc;
+	private double mySpeed;
+	private double myTurnSpeed;
+	private double myTraveled;
+	
+	private double myHeading;
+	private Point myLocation;
+	private double myRadius;
 	
 	IDamageStrategy myDamageCalc;
 	double myDamage;
 	int myMaxRange;
 	int myAoERadius;
+	
+	List<Terrain> myValidTerrain;
 
 
-	public Projectile(ProjectileData data, Machine target, IKillerOwner owner) {
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
+		
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
@@ -52,13 +57,15 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		mySpeed = data.getSpeed();
 		myTurnSpeed = data.getTurnSpeed();
 		myRadius = data.getCollisionRadius();
+		
+		myValidTerrain = data.getValidTerrains();
 
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
 		myAoERadius = data.getAreaOfEffectRadius();
-		myDamage = data.getDamage();		
+		myDamage = data.getDamage();	
 		
-//		notifyListenersAdd();
+		time.attach(this);
 	}
 
 
@@ -146,5 +153,17 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 //		notifyListenersRemove();
 		myOwner.notifyDestroy(result);
 		
+	}
+
+
+	@Override
+	public List<Terrain> getValidTerrains() {
+		return myValidTerrain;
+	}
+
+
+	@Override
+	public void setLocation(Point aLocation) {
+		myLocation = aLocation;
 	}
 }
