@@ -22,17 +22,17 @@ import engine.model.weapons.IKillerOwner;
 public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
-	String myImagePath;
-	IKillerOwner myOwner;
-	Machine myTarget;
+	private String myImagePath;
+	private IKillerOwner myOwner;
+	private Machine myTarget;
 	
-	IMovementStrategy myMovementCalc;
-	double mySpeed;
-	double myTurnSpeed;
-	double myTraveled;
-	double myHeading;
-	Point myLocation;
-	double myRadius;
+	private IMovementStrategy myMovementCalc;
+	private double mySpeed;
+	private double myTurnSpeed;
+	private double myTraveled;
+	private double myHeading;
+	private Point myLocation;
+	private double myRadius;
 	
 	IDamageStrategy myDamageCalc;
 	double myDamage;
@@ -40,7 +40,8 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	int myAoERadius;
 
 
-	public Projectile(ProjectileData data, Machine target, IKillerOwner owner) {
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
+		
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
@@ -56,9 +57,9 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
 		myAoERadius = data.getAreaOfEffectRadius();
-		myDamage = data.getDamage();		
+		myDamage = data.getDamage();	
 		
-//		notifyListenersAdd();
+		time.attach(this);
 	}
 
 
