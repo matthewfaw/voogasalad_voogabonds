@@ -22,7 +22,7 @@ public class JSONSerializer {
 			
 	}
 	
-	public void serializeToFile(Object obj, String fileName){
+	public void serializeToFile(Object obj, String fileName) throws Exception{
 		
 		String str = serialize(obj).toString();
 		
@@ -32,7 +32,7 @@ public class JSONSerializer {
 			out.close();
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			throw new Exception("File was unable to be serialized correctly.");
 		}
 		
 	}

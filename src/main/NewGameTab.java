@@ -64,7 +64,10 @@ public class NewGameTab {
 						File file = newGameSave.showSaveDialog(stage);
 						if (file != null) {
 							JSONSerializer json = new JSONSerializer();
-							json.serializeToFile(file, gameName.getText());
+							try {
+								json.serializeToFile(file, gameName.getText());
+							} catch (Exception exception) {
+							}
 						}
 					}
 				});
