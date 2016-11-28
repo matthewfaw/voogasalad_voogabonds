@@ -2,7 +2,7 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import authoring.model.map.MapData;
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.MapDisplay;
@@ -40,7 +40,7 @@ public class GamePlayerScene {
 		//init();
 	}
 
-	public void init(Stage s) {
+	public void init(Stage s) throws Exception {
 		Scene myScene=build(s);
 		setScene(s,myScene);
 	}
@@ -63,21 +63,21 @@ public class GamePlayerScene {
 	}
 	*/
 
-	public Scene build(Stage stage) {
+	public Scene build(Stage stage) throws Exception {
 		Group gameplayer =new Group();
 		myScene = new Scene(gameplayer, 900, 700);
 		gameplayer.getChildren().add(setScreen());
 		return myScene;
 	}
 	
-	public BorderPane setScreen(){
-	    myMap = new MapDisplay();
+	public BorderPane setScreen() throws Exception{
+	        myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
-	    borderpane.setCenter(myMap.getView());
+		borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
 		return borderpane;
 	}
@@ -98,6 +98,10 @@ public class GamePlayerScene {
 		WavesBox wavesbox=myStatisticsRow.getWaves();
 		myWaves.add(wavesbox);
 		return myWaves;
+	}
+	
+	public void giveMapData(MapData aMapData){
+	        myMap.setMap(aMapData);
 	}
 }
 

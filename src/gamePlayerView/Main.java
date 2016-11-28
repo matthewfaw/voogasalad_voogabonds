@@ -21,8 +21,8 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage s) throws Exception {
-		GamePlayerScene gamePlayerScene = new GamePlayerScene(); 
-    	gamePlayerScene.init(s);
+	    GamePlayerScene gamePlayerScene = new GamePlayerScene(); 
+    	    gamePlayerScene.init(s);
     	//Router myRouter = new Router(gamePlayerScene);
   
 	}
