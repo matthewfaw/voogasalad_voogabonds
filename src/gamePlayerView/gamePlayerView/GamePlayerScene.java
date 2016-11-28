@@ -35,7 +35,7 @@ public class GamePlayerScene {
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
 	
-	public GamePlayerScene(Stage aStage){
+	public GamePlayerScene(Stage aStage) throws Exception{
 		//myStage=stage;
 		init(aStage);
 	}
