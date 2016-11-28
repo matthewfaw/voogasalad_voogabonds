@@ -1,22 +1,24 @@
 package engine.model.strategies.winlose;
 
-import java.util.Observable;
-
+import engine.IObservable;
 import engine.model.playerinfo.IModifiablePlayer;
 
-abstract public class AbstractWinStrategy extends AbstractWinLoseStrategy {
-	IModifiablePlayer myPlayer;
+abstract public class AbstractWinStrategy<A> extends AbstractWinLoseStrategy<A> {
 	
 	public AbstractWinStrategy(IModifiablePlayer player) {
 		super(player);
 	}
+	
+	public AbstractWinStrategy(IModifiablePlayer player, IObservable<A> toObserve) {
+		super(player, toObserve);
+	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		if (checkCondition(o, arg))
-			myPlayer.win();
+	public void update(A observed) {
+		if (checkCondition(observed))
+			for (IModifiablePlayer p: myPlayers)
+				p.win();
 	}
-	
 
-	abstract protected boolean checkCondition(Observable o, Object arg);
+	abstract protected boolean checkCondition(A observed);
 }
