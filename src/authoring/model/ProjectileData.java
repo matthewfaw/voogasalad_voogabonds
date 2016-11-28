@@ -1,6 +1,9 @@
 package authoring.model;
 
 import java.io.File;
+import java.util.List;
+
+import engine.model.game_environment.terrain.Terrain;
 
 public class ProjectileData implements IReadableData {
 
@@ -90,5 +93,10 @@ public class ProjectileData implements IReadableData {
 
 	public double getCollisionRadius() {
 		return collisionRadius;
+	}
+
+	public List<Terrain> getValidTerrains() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

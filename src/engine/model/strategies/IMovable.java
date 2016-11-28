@@ -2,7 +2,7 @@ package engine.model.strategies;
 
 import utility.Point;
 
-public interface IMovable {
+public interface IMovable extends IPhysical {
 
 	abstract public Point getLocation();
 	abstract public double getHeading();

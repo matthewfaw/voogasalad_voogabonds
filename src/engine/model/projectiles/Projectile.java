@@ -7,6 +7,7 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.TimelineController;
+import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Damage;
@@ -30,6 +31,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	private double mySpeed;
 	private double myTurnSpeed;
 	private double myTraveled;
+	
 	private double myHeading;
 	private Point myLocation;
 	private double myRadius;
@@ -38,6 +40,8 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	double myDamage;
 	int myMaxRange;
 	int myAoERadius;
+	
+	List<Terrain> myValidTerrain;
 
 
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
@@ -53,6 +57,8 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		mySpeed = data.getSpeed();
 		myTurnSpeed = data.getTurnSpeed();
 		myRadius = data.getCollisionRadius();
+		
+		myValidTerrain = data.getValidTerrains();
 
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
@@ -147,5 +153,17 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 //		notifyListenersRemove();
 		myOwner.notifyDestroy(result);
 		
+	}
+
+
+	@Override
+	public List<Terrain> getValidTerrains() {
+		return myValidTerrain;
+	}
+
+
+	@Override
+	public void setLocation(Point aLocation) {
+		myLocation = aLocation;
 	}
 }

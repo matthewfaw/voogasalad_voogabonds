@@ -6,6 +6,7 @@ import engine.model.resourcestore.IMoney;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.Weapon;
 import utility.Damage;
+import utility.Point;
 
 import java.util.List;
 
@@ -31,4 +32,5 @@ public class Tower extends Machine implements IPurchasable{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
