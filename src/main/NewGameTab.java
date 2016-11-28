@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import authoring.model.serialization.SerializeJSON;
+import authoring.model.serialization.JSONSerializer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -63,8 +63,8 @@ public class NewGameTab {
 						Stage stage = new Stage();
 						File file = newGameSave.showSaveDialog(stage);
 						if (file != null) {
-							SerializeJSON json = new SerializeJSON();
-							json.SerializeToFile(file, gameName.getText());
+							JSONSerializer json = new JSONSerializer();
+							json.serializeToFile(file, gameName.getText());
 						}
 					}
 				});

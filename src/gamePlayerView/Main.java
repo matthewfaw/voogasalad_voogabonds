@@ -1,5 +1,7 @@
 package gamePlayerView;
 
+import engine.controller.ApplicationController;
+import gamePlayerView.gamePlayerView.GamePlayerScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -20,9 +22,13 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage s) throws Exception {
-		GamePlayerScene gamePlayerScene = new GamePlayerScene();
-		//System.out.println("dcc");
-    	gamePlayerScene.init(s);
+		//TODO:
+		ApplicationController appController = new ApplicationController();
+		appController.init(s);
+//		GamePlayerScene gamePlayerScene = new GamePlayerScene(); 
+//    	gamePlayerScene.init(s);
+    	//Router myRouter = new Router(gamePlayerScene);
+  
 	}
 
 }

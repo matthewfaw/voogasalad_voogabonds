@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import authoring.model.serialization.DeserializeJSON;
+import authoring.model.serialization.JSONDeserializer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -61,8 +61,7 @@ public class LoadGameTab {
 						Stage stage = new Stage();
 						File file = loadGame.showOpenDialog(stage);
 						if (file != null) {
-							DeserializeJSON json = new DeserializeJSON();
-							json.DeserializeFromFile(file.getAbsolutePath(), file.getClass());
+							JSONDeserializer json = new JSONDeserializer();
 						}
 					}
 				});

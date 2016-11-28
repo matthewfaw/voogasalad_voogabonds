@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.*;
 
-import authoring.model.serialization.SerializeJSON;
+import authoring.model.serialization.JSONSerializer;
 import main.MainInitializer;
 import main.MainMenu;
 import javafx.application.Platform;
@@ -106,8 +106,8 @@ public class FileMenu extends Menu {
 					Stage stage = new Stage();
 					File file = newGameSave.showSaveDialog(stage);
 					if (file != null) {
-						SerializeJSON json = new SerializeJSON();
-						json.SerializeToFile(file, file.getAbsolutePath());
+						JSONSerializer json = new JSONSerializer();
+						json.serializeToFile(file, file.getAbsolutePath());
 					}
 				}
 		});

@@ -2,9 +2,8 @@ package authoring.model;
 
 import java.util.List;
 
-import authoring.model.map.TerrainData;
+public class EnemyData implements IReadableData {
 
-public class EnemyData {
 	private String name;
 	private String weaponName;
 	private String imagePath;
@@ -14,6 +13,7 @@ public class EnemyData {
 	private int speed;
 	private List<String> terrainList;
 	
+	@Override
 	public String getName() {
 		return name;
 	}
