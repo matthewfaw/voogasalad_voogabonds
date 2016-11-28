@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.ProjectileData;
+import engine.IObserver;
 import engine.IViewable;
+import engine.controller.TimelineController;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Damage;
@@ -17,7 +19,7 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IProjectile, IViewable, IMovable {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	String myImagePath;
@@ -59,31 +61,6 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 //		notifyListenersAdd();
 	}
 
-	@Override
-	public Point advance() {
-		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this);
-		
-		myTraveled += myLocation.euclideanDistance(nextMove.getValue());
-		myHeading = nextMove.getKey();
-		myLocation = nextMove.getValue();
-		
-//		notifyListenersUpdate();
-		
-		if (myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
-			hitTarget();
-		} else if (myTraveled >= myMaxRange) {
-			explode();
-		}
-		
-		return myLocation;
-	}
-	
-
-
-	@Override
-	public Machine getTargetMachine() {
-		return myTarget;
-	}
 
 	@Override
 	public double getHeading() {
@@ -123,6 +100,32 @@ public class Projectile implements IProjectile, IViewable, IMovable {
 	@Override
 	public double getCollisionRadius() {
 		return myRadius;
+	}
+
+	@Override
+	public void update(TimelineController aChangedObject) {
+		advance();
+		
+		//TODO: Remove if goes too far off map
+		
+	}
+	
+	private Point advance() {
+		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this);
+		
+		myTraveled += myLocation.euclideanDistance(nextMove.getValue());
+		myHeading = nextMove.getKey();
+		myLocation = nextMove.getValue();
+		
+//		notifyListenersUpdate();
+		
+		if (myTarget.onMap() && myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
+			hitTarget();
+		} else if (myTraveled >= myMaxRange) {
+			explode();
+		}
+		
+		return myLocation;
 	}
 	
 	private void hitTarget() {

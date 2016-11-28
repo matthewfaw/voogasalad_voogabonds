@@ -65,4 +65,8 @@ public abstract class Machine implements IViewable, IViewableMachine, IModifiabl
 	{
 		
 	}
+
+	public boolean onMap() {
+		return true;
+	}
 }
