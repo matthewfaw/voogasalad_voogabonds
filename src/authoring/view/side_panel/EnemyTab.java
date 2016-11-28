@@ -3,6 +3,7 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import authoring.controller.EnemyDataController;
@@ -44,7 +45,7 @@ public class EnemyTab extends Tab {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myWeapons = new ArrayList<String>();
-		myTerrains = new ArrayList<String>();
+		myTerrains = new ArrayList<String>(Arrays.asList("Ground","Ice","Water","Air"));
 		myController = controller;
 		myMenu = new EnemyMenu(myResources, this);
 		enemyTabOptions(enemyTab);
