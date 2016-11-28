@@ -14,6 +14,7 @@ import javafx.collections.MapChangeListener;
 public class MapData {
 	private int numXCells;
 	private int numYCells;
+	private int cellSize;
 	private ObservableMap<String, ArrayList<Point>> spawnPoints = FXCollections.observableHashMap();
 	private HashSet<Point> sinkPoints = new HashSet<Point>();
 	private HashSet<TerrainData> terrainList;
@@ -31,6 +32,17 @@ public class MapData {
 	}
 	public int getNumXCells(){
 		return numXCells;
+	}
+	
+	public void cellSize(int cellSize) throws Exception{
+		if (cellSize<=0){
+			throw new Exception("The size of cells must be greater than 0 pixels.");
+		}
+		this.cellSize = cellSize;
+	}
+	
+	public int getCellSize(){
+		return cellSize;
 	}
 	
 	public void setNumYCells(int y) throws Exception{
