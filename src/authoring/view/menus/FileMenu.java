@@ -1,12 +1,20 @@
 package authoring.view.menus;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
+import javax.swing.*;
+
+import main.MainInitalizer;
+import main.MainMenu;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 /**
  * @author Christopher Lu
@@ -43,7 +51,13 @@ public class FileMenu extends Menu {
 	private void performNewProject(MenuItem newProject) {
 		newProject.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
-				//TODO: Implement code that opens up a new project upon clicking New button.
+				try {
+					Stage s = new Stage();
+					MainMenu newInstance = new MainMenu(new MainInitalizer(s), s);
+					newInstance.init();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -51,15 +65,17 @@ public class FileMenu extends Menu {
 	private void performOpenProject(MenuItem openProject) {
 		openProject.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
-				//TODO: Implement code that opens up a pre-existing project upon clicking Open button.
+				//this does not work.
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setCurrentDirectory(null);
 			}
 		});
 	}
 	
 	private void performCloseProject(MenuItem closeProject) {
 		closeProject.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				//TODO: Implement code that closes project upon clicking Close button.
+			public void handle(ActionEvent e) {
+				Platform.exit();
 			}
 		});
 	}

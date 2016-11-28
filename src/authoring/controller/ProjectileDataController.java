@@ -1,12 +1,13 @@
 package authoring.controller;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 
 import authoring.model.ProjectileData;
 
 public class ProjectileDataController {
 
-	private AbstractMap<String, ProjectileData> myProjectileDataMap;
+	private AbstractMap<String, ProjectileData> myProjectileDataMap = new HashMap<String, ProjectileData>();
 
 	public AbstractMap getProjectileDataMap(){
 		return myProjectileDataMap;

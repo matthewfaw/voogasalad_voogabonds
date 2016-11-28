@@ -1,6 +1,9 @@
 package authoring.model;
 
+import java.util.List;
+
 public class EnemyData implements IReadableData {
+
 	private String name;
 	private String weaponName;
 	private String imagePath;
@@ -8,18 +11,25 @@ public class EnemyData implements IReadableData {
 	private int maxHealth;
 	private int collisionRadius;
 	private int speed;
+	private List<String> terrainList;
 	
 	@Override
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(String name) throws Exception{
+		if (name == null || name.length() == 0){
+			throw new Exception("Enemy must have a name.");
+		}
 		this.name = name;
 	}
 	public String getWeaponName() {
 		return weaponName;
 	}
-	public void setWeaponName(String weaponName) {
+	public void setWeaponName(String weaponName) throws Exception{
+		if (weaponName == null || weaponName.length() == 0){
+			throw new Exception("Enemy must reference a valid weapon name.");
+		}
 		this.weaponName = weaponName;
 	}
 	public int getKillReward(){
@@ -43,14 +53,26 @@ public class EnemyData implements IReadableData {
 	public int getCollisionRadius(){
 		return collisionRadius;
 	}
-	public void setCollisionRadius(int collisionRadius){
+	public void setCollisionRadius(int collisionRadius) throws Exception{
+		if (collisionRadius < 0){
+			throw new Exception("Collision radius cannot be negative.");
+		}
 		this.collisionRadius = collisionRadius;
 	}
 	public int getSpeed(){
 		return speed;
 	}
-	public void setSpeed(int speed){
+	public void setSpeed(int speed) throws Exception{
+		if (speed < 0){
+			throw new Exception("Enemy cannot have negative speed.");
+		}
 		this.speed = speed;
+	}
+	public void setTerrainList(List<String> terrainList){
+		this.terrainList = terrainList;
+	}
+	public List<String> getTerrainList(){
+		return terrainList;
 	}
 	
 }
