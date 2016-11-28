@@ -1,11 +1,18 @@
 package engine.model.machine;
 
 import engine.IViewable;
-/**
- * Viewable machines
- * TODO: This interface is a duplicate of the more inclusively named "IViewable". Do we need both of them?
- *
- */
+import utility.Point;
+
+
 public interface IViewableMachine extends IViewable {
-	public IHealth getHealth();
+	abstract public double getHealth();
+	
+	@Override
+	abstract public double getHeading();
+	@Override
+	abstract public String getImagePath();
+	@Override
+	abstract public double getSize();
+	@Override
+	abstract public Point getPosition();
 }

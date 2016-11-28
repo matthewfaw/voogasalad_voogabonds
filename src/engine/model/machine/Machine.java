@@ -2,72 +2,96 @@ package engine.model.machine;
 
 import java.util.List;
 
-import engine.IViewable;
-import engine.model.components.IComponent;
-import engine.model.entities.IEntity;
+import engine.IObserver;
+import engine.controller.timeline.TimelineController;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
 import engine.model.weapons.DamageInfo;
+import engine.model.weapons.IWeapon;
 import utility.Damage;
 import utility.Point;
 
-public abstract class Machine implements IViewable, IViewableMachine, IModifiableMachine, IEntity, IMovable {
+abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController> {
 
 	private IModifiablePlayer myModifiablePlayer;
-	private IHealth health;
+	private Health myHealth;
+	private double myHeading;
+	private Point myPosition;
+	private double myTurnSpeed;
+	private double myMoveSpeed;
+	private double myCollisionRadius;
+	private List<Terrain> myValidTerrains;
+	private IWeapon myWeapon;
+	private String myName;
 	
-	public Machine (int initialHealth) {
-		health = new Health(initialHealth);
+	public Machine () {
+		
 	}
 	
+	public Machine(String name, int maxHealth) {
+		myName = name;
+		myHealth = new Health(maxHealth);
+	}
+	
+	public String getName() {
+		return myName;
+	}
+	
+	@Deprecated
+	public void setPossibleTerrains(List<Terrain> l) {
+		myValidTerrains = l;
+	}
+
+	@Override
+	public void update(TimelineController time) {
+		move();
+		myWeapon.fire(myHeading, myPosition);
+	}
+	
+	private void move() {
+		//TODO: Move with movement strategy
+	}
+
 	@Override
 	public String getImagePath() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public double getHeading() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myHeading;
 	}
 
+
 	@Override
-	public Point getPosition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public IHealth getHealth() {
-		return health;
+	public double getHealth() {
+		return myHealth.getHealth();
 	}
 	
 	@Override
-	public void modifyHealth(IHealth deltaHealth) {
-		health.updateHealth(deltaHealth);
+	public DamageInfo takeDamage(Damage dmg) {
+		double dmgTaken = myHealth.takeDamage(dmg);
+		
+		int unitsKilled = 0;
+		int moneyEarned = 0;
+		
+		if (myHealth.getHealth() <= 0){
+			unitsKilled++;
+			moneyEarned = die();
+		}
+		
+		return new DamageInfo(dmgTaken, unitsKilled, moneyEarned);
 	}
 	
+	abstract protected int die();
+
 	public double getDistanceTo(Point p) {
-		return getPosition().euclideanDistance(p); //Minus collision Radius
+		return getPosition().euclideanDistance(p) - myCollisionRadius;
 	}
 	
 	public IModifiablePlayer getModifiablePlayerInfo() {
 		return myModifiablePlayer;
-	}
-
-	abstract public DamageInfo takeDamage(Damage toDeal);
-
-	@Deprecated
-	public int getId()
-	{
-		return 0;
-	}
-
-	@Deprecated
-	public void addComponent(IComponent aComponent)
-	{
-		
 	}
 
 	public boolean onMap() {
@@ -75,39 +99,41 @@ public abstract class Machine implements IViewable, IViewableMachine, IModifiabl
 	}
 	
 	@Override
-	public Point getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+	public Point getPosition() {
+		return myPosition;
 	}
+	
 	@Override
 	public Point getGoal() {
 		return null;
 	}
 	@Override
 	public double getTurnSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myTurnSpeed;
 	}
 	@Override
 	public double getMoveSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myMoveSpeed;
 	}
 	@Override
 	public double getCollisionRadius() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myCollisionRadius;
 	}
 	
 	@Override
 	public List<Terrain> getValidTerrains() {
-		// TODO Auto-generated method stub
-		return null;
+		return myValidTerrains;
 	}
-	
+
 	@Override
-	public void setLocation(Point aLocation) {
-		// TODO Auto-generated method stub
+	public void setPosition(Point p) {
+		myPosition = p;
 	}
+
+	@Override
+	public double getSize() {
+		return myCollisionRadius;
+	}
+
 	
 }
