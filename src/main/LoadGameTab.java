@@ -62,7 +62,7 @@ public class LoadGameTab {
 						File file = loadGame.showOpenDialog(stage);
 						if (file != null) {
 							DeserializeJSON json = new DeserializeJSON();
-//							json.deserializeFromFile(file.getAbsolutePath(), )
+							json.DeserializeFromFile(file.getAbsolutePath(), file.getClass());
 						}
 					}
 				});
