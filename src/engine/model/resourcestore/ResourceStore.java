@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.TowerData;
-import engine.IObserver;
 import engine.model.machine.tower.Tower;
 import engine.model.machine.tower.TowerUpgradeStore;
 import engine.model.playerinfo.Player;
@@ -43,6 +42,7 @@ public class ResourceStore implements IModifiableStore, IViewableStore/*, What i
 	//XXX matthewfaw: Affordable towers aren't a property of the Resource store
 	// This is player specific
 	// This should be moved elsewhere
+	@Deprecated
 	private void updateAffordableTowers() {
 		for (Tower tower : myBaseTowers) {
 			if (myPlayer.getAvailableMoney().isLessThan(myUpgradeStore.getPrice(tower))) {

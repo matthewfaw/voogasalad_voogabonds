@@ -2,7 +2,7 @@ package engine.model.weapons;
 
 /**
  * A class to more easily pass around the information that results from a projectile exploding.
- * The class could be replaced by a struct with litle change in functionality.
+ * The class could be replaced by a struct with little change in functionality.
  * @author Weston
  *
  */

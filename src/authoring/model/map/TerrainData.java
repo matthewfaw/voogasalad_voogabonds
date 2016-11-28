@@ -1,5 +1,5 @@
 package authoring.model.map;
-import java.awt.Point;
+import utility.Point;
 
 import authoring.model.IReadableData;
 

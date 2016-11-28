@@ -1,10 +1,10 @@
 package engine.controller;
 
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
+import javafx.stage.Stage;
 
 /**
  * A main controller whose primary purpose is to
@@ -32,9 +32,9 @@ public class ApplicationController {
 	/**
 	 * A method to be called to initialize the frontend and backend
 	 */
-	public void init()
+	public void init(Stage aStage)
 	{
-		GamePlayerScene scene = constructGUI();
+		GamePlayerScene scene = constructGUI(aStage);
 		Router router = new Router(scene);
 		constructBackend(router);
 	}
@@ -42,9 +42,9 @@ public class ApplicationController {
 	 * Helper method to create the view object
 	 * from the GameData file
 	 */
-	private GamePlayerScene constructGUI()
+	private GamePlayerScene constructGUI(Stage aStage)
 	{
-		GamePlayerScene scene = new GamePlayerScene();
+		GamePlayerScene scene = new GamePlayerScene(aStage);
 		return scene;
 	}
 	/**
@@ -59,11 +59,13 @@ public class ApplicationController {
 		myBackendController = new BackendController(myGameOptions.getString("DefaultGame"), aRouter);
 	}
 	
+	/*
 	public static void main(String[] args)
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
 //		appcont.constructMap();
 	}
+	*/
 	
 }

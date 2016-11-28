@@ -1,6 +1,6 @@
 package engine.controller;
 
-import java.awt.Point;
+import utility.Point;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -49,11 +49,9 @@ class MockGameDataConstructor {
 			tow.setBuyPrice(40);
 			tow.setCollisionRadius(2);
 			tow.setImagePath("src/resources/boss.png");
-			List<Map<Integer, Integer>> list = new ArrayList<Map<Integer, Integer>>();
-			Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-			map.put(100, 10);
-			map.put(20, 50);
-			list.add(map);
+			List<Point> list = new ArrayList<Point>();
+			list.add(new Point(100, 100));
+			list.add(new Point(20, 50));
 			tow.setInitialLocations(list);
 			tow.setMaxHealth(1000);
 			tow.setMovementStrategy("fast as fuck");
@@ -99,8 +97,8 @@ class MockGameDataConstructor {
 			md.setNumYCells(2);
 			md.addTerrainData(terrain1);
 			md.addTerrainData(terrain2);
-			md.addSpawnPoint(new Point(0,0));
-			md.addSinkPoint(new Point(1,1));
+//			md.addSpawnPoint(new Point(0,0));
+//			md.addSinkPoint(new Point(1,1));
 			
 			ser.serializeToFile(md, "map/"+md.getClass().getSimpleName());
 			ser.serializeToFile(terrain1,"terrain/"+terrain1.getClass().getSimpleName()+"1");

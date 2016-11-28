@@ -1,10 +1,7 @@
 package engine.model.entities;
 
-import java.util.List;
-
 import engine.model.components.IComponent;
-import engine.model.game_environment.terrain.Terrain;
-import utility.Point;
+
 
 /**
  * an interface to capture the commonalities among each object that can be added

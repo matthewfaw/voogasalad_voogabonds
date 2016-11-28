@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import utility.Point;
 import javafx.geometry.Point2D;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
@@ -28,7 +29,7 @@ public class SerializationTester {
 		tow.setBuyPrice(40);
 		tow.setCollisionRadius(2);
 		tow.setImagePath("src/resources/boss.png");
-		tow.setInitialLocations(list);
+//		tow.setInitialLocations(new Point(2.0, 4.0));
 		tow.setMaxHealth(1000);
 		tow.setMovementStrategy("fast as fuck");
 		tow.setName("tower 1");

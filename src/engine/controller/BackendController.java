@@ -12,6 +12,7 @@ import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
 import authoring.model.serialization.JSONDeserializer;
+import engine.controller.timeline.TimelineController;
 import engine.controller.waves.DummyWaveOperationData;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
@@ -113,10 +114,16 @@ public class BackendController {
 	private void constructMap()
 	{
 		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
-		TerrainMap terrainMap = new TerrainMap(data.get(0));
+		MapData mapData = data.get(0);
+		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 		MapMediator MapMediator = new MapMediator(terrainMap);
+
+		//distribute to backend
 		myMapDistributor = new MapDistributor(MapMediator);
+		
+		//distribute to frontend
+		myRouter.distributeMapData(mapData);
 	}
 	/**
 	 * Helper method to create the backend resource store object

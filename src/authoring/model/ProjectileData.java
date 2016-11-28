@@ -1,6 +1,9 @@
 package authoring.model;
 
 import java.io.File;
+import java.util.List;
+
+import engine.model.game_environment.terrain.Terrain;
 
 public class ProjectileData implements IReadableData {
 
@@ -13,6 +16,7 @@ public class ProjectileData implements IReadableData {
 	private int speed;
 	private int damageMultiplier;
 	private int turnSpeed;
+	private double collisionRadius;
 	
 	public void setName(String name) throws Exception {
 		if (name == null || name.length() == 0){
@@ -85,5 +89,14 @@ public class ProjectileData implements IReadableData {
 
 	public double getTurnSpeed() {
 		return turnSpeed;
+	}
+
+	public double getCollisionRadius() {
+		return collisionRadius;
+	}
+
+	public List<Terrain> getValidTerrains() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

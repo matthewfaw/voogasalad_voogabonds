@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import authoring.model.IReadableData;
-import authoring.model.WeaponData;
 
 /**
  * A class that encapulates the data for all available objects of type T

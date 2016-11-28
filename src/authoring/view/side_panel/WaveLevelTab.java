@@ -2,9 +2,16 @@ package authoring.view.side_panel;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import authoring.controller.WaveDataController;
+import authoring.model.EnemyData;
+import authoring.model.WaveData;
 import authoring.view.input_menus.WaveMenu;
+import utility.Point;
+import javafx.collections.MapChangeListener;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,12 +30,19 @@ public class WaveLevelTab extends Tab  {
 	private int screenWidth;
 	private int screenHeight;
 	private WaveMenu myMenu;
+	private WaveDataController myController;
+	private ArrayList<String> myEnemies;
+	private ArrayList<String> mySpawnPoints;
+	private VBox myContent;
 	
-	public WaveLevelTab(TabPane pane, EnemyTab enemyTab) {
+	public WaveLevelTab(TabPane pane, WaveDataController controller) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		waveTab = new Tab(myResources.getString("Waves"));
-		myMenu = new WaveMenu(myResources, this, enemyTab);
+		myMenu = new WaveMenu(myResources, this);
+		myController = controller;
+		myEnemies = new ArrayList<String>();
+		mySpawnPoints = new ArrayList<String>();
 		waveTabOptions(waveTab);
 		pane.getTabs().add(waveTab);
 	}
@@ -37,6 +51,8 @@ public class WaveLevelTab extends Tab  {
 		VBox waveArea = new VBox(screenHeight*0.01);
 		waveArea.setMaxHeight(screenHeight*0.88);
 		ScrollPane currentWaves = new ScrollPane();
+		myContent = new VBox();
+		currentWaves.setContent(myContent);
 		currentWaves.setPrefSize(screenWidth/5, screenHeight);
 		HBox waveButtons = new HBox(screenWidth*0.05);
 		waveButtons.setPadding(new Insets(0.01*screenHeight, screenWidth*0.01, 0.01*screenHeight, screenWidth*0.01));
@@ -56,10 +72,78 @@ public class WaveLevelTab extends Tab  {
 	private EventHandler<ActionEvent> addWaveHandler(){
 		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				myMenu.createWaveWindow(myResources.getString("DefaultNumber"));
+				myMenu.createWaveWindow(myResources.getString("DefaultWaveName"), 
+						myResources.getString("DefaultTimeBetween"), myResources.getString("DefaultTimeFor"),
+						myResources.getString("DefaultNumber"), null, null, true);
 			}
 		};
 		return handler;
+	}
+	
+	public void removeButtonDuplicates(String s) {
+		for (int i = 0; i < myContent.getChildren().size(); i++) {
+			Button button = (Button) (myContent.getChildren().get(i));
+			if (button.getText().equals(s)) {
+				myContent.getChildren().remove(i);
+				i--;
+			}
+		}
+	}
+	
+	public void addButtonToDisplay(String text) {
+		Button button = new Button(text);
+		button.setMinWidth(myContent.getMinWidth());
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event){
+				WaveData wave = myController.getWaveData(text);
+				myMenu.createWaveWindow(wave.getName(), String.valueOf(wave.getTimeBetweenEnemy()), 
+						String.valueOf(wave.getTimeForWave()), String.valueOf(wave.getNumEnemies()), 
+						wave.getWaveEnemy(), wave.getSpawnPointName(), false);
+			}
+		});
+		myContent.getChildren().add(button);
+	}
+	
+	public WaveDataController getController(){
+		return myController;
+	}
+	
+	public ArrayList<String> getEnemies(){
+		return myEnemies;
+	}
+	
+	public ArrayList<String> getSpawnPoints(){
+		return mySpawnPoints;
+	}
+	
+	public MapChangeListener<String, EnemyData> createEnemyListener(){
+		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
+			@Override
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends EnemyData> change) {
+				if (change.wasAdded()){
+					myEnemies.add(change.getKey());
+				}
+				else if (change.wasRemoved()){
+					myEnemies.remove(change.getKey());
+				}
+			}
+		};
+		return listener;
+	}
+	
+	public MapChangeListener<String, ArrayList<Point>> createSpawnPointListener(){
+		MapChangeListener<String, ArrayList<Point>> listener = new MapChangeListener<String, ArrayList<Point>>() {
+			@Override
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends ArrayList<Point>> change) {
+				if (change.wasAdded()){
+					mySpawnPoints.add(change.getKey());
+				}
+				else if (change.wasRemoved()){
+					mySpawnPoints.remove(change.getKey());
+				}
+			}
+		};
+		return listener;
 	}
 	
 }
