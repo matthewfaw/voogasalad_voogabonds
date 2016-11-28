@@ -33,7 +33,7 @@ import javafx.scene.layout.VBox;
  * Implements the tab that allows user to add, delete, or edit preexisting towers.
  */
 
-public class TowerTab extends Tab {
+public class TowerTab extends AbstractInfoTab {
 
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -57,8 +57,8 @@ public class TowerTab extends Tab {
 	}
 	
 	private void initializeLists() {
-	    myTowers = FXCollections.observableArrayList("TestTower");
-	    myWeapons = FXCollections.observableArrayList("TestWeapon");
+	    myTowers = FXCollections.observableArrayList();
+	    myWeapons = FXCollections.observableArrayList();
 	    myTerrains = FXCollections.observableArrayList("Land","Water");
 	    towers = new ListView<String>(myTowers);
 	    towers.setOrientation(Orientation.VERTICAL);
@@ -70,7 +70,7 @@ public class TowerTab extends Tab {
                                 TowerData td = myController.getTowerData(towers.getSelectionModel().getSelectedItem());
                                 // "" are added to convert ints to Strings
                                 String sizeVal = "1";
-                                String nameVal, imageVal, healthVal, buyVal, sellVal;
+                                String nameVal, imageVal, healthVal, buyVal, sellVal, weaponVal;
                                 // Clean up
                                 try {
                                     nameVal = td.getName();
@@ -97,9 +97,13 @@ public class TowerTab extends Tab {
                                 } catch (NullPointerException e) {
                                     sellVal = "null";
                                 }
+                                try {
+                                    weaponVal = td.getWeaponName();
+                                } catch (NullPointerException e) {
+                                    weaponVal = "null";
+                                }
                                 
-                                
-                                myMenu.createTowerMenu(nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal);
+                                myMenu.createTowerMenu(nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal, weaponVal);
                         }
                 }
         });
@@ -144,7 +148,7 @@ public class TowerTab extends Tab {
                         myMenu.createTowerMenu(myResources.getString("DefaultTowerName"), 
                                                myResources.getString("DefaultHealth"), myResources.getString("DefaultBuyPrice"), 
                                                myResources.getString("DefaultSellPrice"), myResources.getString("DefaultSize"), 
-                                               myResources.getString("DefaultImage"));
+                                               myResources.getString("DefaultImage"), myResources.getString("DefaultWeapon"));
                     }
             };
             return handler;
@@ -185,5 +189,11 @@ public class TowerTab extends Tab {
 		screenWidth = (int) screenSize.getWidth();
 		screenHeight = (int) screenSize.getHeight();
 	}
+
+    @Override
+    public ObservableList<String> getTerrains () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 	
 }
