@@ -1,6 +1,5 @@
 package engine.model.components;
 
-import engine.IObservable;
 import engine.IObserver;
 import engine.model.entities.IEntity;
 

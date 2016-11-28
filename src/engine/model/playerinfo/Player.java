@@ -12,6 +12,7 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
+	
 	private IWinLoseStrategy myWinCon;
 	private IWinLoseStrategy myLoseCon;
 	
