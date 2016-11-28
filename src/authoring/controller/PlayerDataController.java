@@ -2,7 +2,7 @@ package authoring.controller;
 import authoring.model.PlayerData;
 
 public class PlayerDataController{
-	private PlayerData myPlayerData;
+	private PlayerData myPlayerData = new PlayerData();
 	
 	/**
 	 * Method expects a FrontEndPlayer, and will use PlayerData's setters

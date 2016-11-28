@@ -1,13 +1,14 @@
 package authoring.view.input_menus;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import authoring.view.side_panel.EnemyTab;
+import authoring.model.WaveData;
 import authoring.view.side_panel.WaveLevelTab;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -20,46 +21,113 @@ public class WaveMenu {
 	private WaveLevelTab myTab;
 	private Stage myWaveWindow;
 	private MenuHelper myHelper;
+	private TextField myNameField;
+	private TextField myTimeBetweenField;
+	private TextField myTimeForField;
 	private TextField myNumberField;
-	private EnemyTab myEnemyTab;
-	private ArrayList<TextField> myEnemyFields;
-	private HashMap<String, Integer> myEnemyTotals;
+	private ComboBox<String> myEnemyBox;
+	private ComboBox<String> mySpawnBox;
+	private boolean myIsDefault;
 	
-	public WaveMenu(ResourceBundle resources, WaveLevelTab tab, EnemyTab enemyTab){
+	public WaveMenu(ResourceBundle resources, WaveLevelTab tab){
 		myResources = resources;
 		myTab = tab;
 		myHelper = new MenuHelper(myResources);
-		myEnemyTab = enemyTab;
-		myEnemyFields = new ArrayList<TextField>();
-		myEnemyTotals = new HashMap<String, Integer>();
 	}
 	
-	public void createWaveWindow(String numberVal){
+	public void createWaveWindow(String nameVal, String timeBetweenVal, String timeForVal, String numberVal,
+			String enemyVal, String spawnVal, boolean isDefault){
+		if (myTab.getEnemies().size() == 0){
+			myHelper.showError(myResources.getString("NoEnemiesError"));
+			return;
+		}
+		if (myTab.getSpawnPoints().size() == 0){
+			myHelper.showError(myResources.getString("NoSpawnPointsError"));
+			return;
+		}
+		myIsDefault = isDefault;
 		myWaveWindow = new Stage();
 		myWaveWindow.initModality(Modality.APPLICATION_MODAL);
 		VBox root = new VBox();
-		setUpWaveScreen(root, numberVal);
-		ScrollPane pane = new ScrollPane(root);
-		Scene scene = new Scene(pane, SIZE, SIZE);
+		setUpWaveScreen(root, nameVal, timeBetweenVal, timeForVal, numberVal, enemyVal, spawnVal);
+		Scene scene = new Scene(root, SIZE, SIZE);
 		myWaveWindow.setTitle(myResources.getString("AddWave"));
 		myWaveWindow.setScene(scene);
 		myWaveWindow.show();
 	}
 
-	private void setUpWaveScreen(VBox root, String numberVal) {
+	private void setUpWaveScreen(VBox root, String nameVal, String timeBetweenVal, String timeForVal, 
+			String numberVal, String enemyVal, String spawnVal) {
+		myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
+		myTimeBetweenField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterTimeBetween"),
+				timeBetweenVal);
+		myTimeForField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterTimeFor"), 
+				timeForVal);
 		myNumberField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterNumber"), numberVal);
-		setUpWaveEnemies(root);
-	}
-
-	private void setUpWaveEnemies(VBox root) {
-		for (String enemyName: myEnemyTab.getEnemies()){
-			if (myEnemyTotals.get(enemyName) == null)
-				myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, 
-						myResources.getString("DefaultEnemyValue")));
-			else
-				myEnemyFields.add(myHelper.setUpBasicUserInput(root, enemyName, 
-						String.valueOf((int) myEnemyTotals.get(enemyName))));
+		if (myIsDefault) {
+			myEnemyBox = myHelper.setUpComboBoxUserInput(root, myResources.getString("EnterEnemyName"), 
+					myTab.getEnemies().get(0), myTab.getEnemies());
+			mySpawnBox = myHelper.setUpComboBoxUserInput(root, myResources.getString("EnterSpawnPoint"),
+					myTab.getSpawnPoints().get(0), myTab.getSpawnPoints());
 		}
+		else {
+			myEnemyBox = myHelper.setUpComboBoxUserInput(root, myResources.getString("EnterEnemyName"), 
+					enemyVal, myTab.getEnemies());
+			mySpawnBox = myHelper.setUpComboBoxUserInput(root, myResources.getString("EnterSpawnPoint"),
+					spawnVal, myTab.getSpawnPoints());
+		}
+		setUpFinishButton(root, nameVal);
 	}
 
+	private void setUpFinishButton(VBox root, String originalName) {
+		Button finishButton = new Button(myResources.getString("Finish"));
+		finishButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event){
+				String name = myNameField.getCharacters().toString();
+				double timeBetween = 0;
+				double timeFor = 0;
+				int number = 0;
+				try {
+					timeBetween = Double.parseDouble(myTimeBetweenField.getCharacters().toString());
+					timeFor = Double.parseDouble(myTimeForField.getCharacters().toString());
+					number = Integer.parseInt(myNumberField.getCharacters().toString());
+				} catch(Exception e){
+					myHelper.showError(myResources.getString("BadIntInput"));
+					return;
+				}
+				String enemy = myEnemyBox.getValue();
+				String spawn = mySpawnBox.getValue();
+				WaveData wave = createWaveData(name, timeBetween, timeFor, number, enemy, spawn);
+				if (wave == null){
+					return;
+				}
+				myTab.removeButtonDuplicates(name);
+				myTab.addButtonToDisplay(name);
+				if (myIsDefault){
+					myTab.getController().createNewWave(name, wave);
+				}
+				else {
+					myTab.getController().updateWave(wave, originalName);
+				}
+			}
+		});
+		root.getChildren().add(finishButton);
+	}
+	
+	private WaveData createWaveData(String name, double timeBetween, double timeFor, int number, 
+			String enemy, String spawn){
+		WaveData wave = new WaveData();
+		try {
+			wave.setName(name);
+			wave.setTimeBetweenEnemy(timeBetween);
+			wave.setTimeForWave(timeFor);
+			wave.setNumEnemies(number);
+			wave.setWaveEnemy(enemy);
+			wave.setSpawnPointName(spawn);
+		} catch(Exception e) {
+			myHelper.showError(e.getMessage());
+			return null;
+		}
+		return wave;
+	}
 }

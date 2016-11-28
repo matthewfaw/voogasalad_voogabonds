@@ -1,10 +1,20 @@
 package authoring.controller;
 import authoring.model.map.*;
-import java.awt.Point;
-import java.util.Set;
+import javafx.collections.SetChangeListener;
+import javafx.collections.MapChangeListener;
 
+import utility.Point;
+import java.util.Set;
+import java.util.ArrayList;
+
+/**
+ * MapDataController doesn't expect a FrontEndMap like the rest of the controller classes.
+ * Instead set the x and y dimensions, and then add spawn/sink points through the below functions.
+ * @author philipfoo
+ *
+ */
 public class MapDataController {
-	private MapData myMapData;
+	private MapData myMapData = new MapData();
 	
 	/**
 	 * Functions for grid dimensions
@@ -34,15 +44,18 @@ public class MapDataController {
 	/**
 	 * Functions for spawn points
 	 */
-	public void addSpawnPoint(Point p){
+	public void addSpawnPoints(String name, ArrayList<Point> list){
 		try{
-			myMapData.addSpawnPoint(p);
+			myMapData.addSpawnPoints(name, list);
 		}catch(Exception e){
 			///Call error handler
 		}
 	}
-	public void removeSpawnPoint(Point p){
-		myMapData.removeSpawnPoint(p);
+	public void removeSpawnPoints(String name){
+		myMapData.removeSpawnPoints(name);
+	}
+	public void addSpawnPointListener(MapChangeListener<String, ArrayList<Point>> listener){
+		myMapData.addSpawnPointListener(listener);
 	}
 	
 	/**
@@ -52,7 +65,6 @@ public class MapDataController {
 		try{
 			myMapData.addSinkPoint(p);
 		}catch(Exception e){
-			//Call error handler
 		}
 	}
 	public void removeSinkPoint(Point p){
@@ -74,5 +86,21 @@ public class MapDataController {
 	}
 	public Set<TerrainData> getTerrainList(){
 		return myMapData.getTerrainList();
+	}
+
+	/**
+	 * Functions for adding valid terrain
+	 */
+	public void addValidTerrain(String s) throws Exception{
+		myMapData.addValidTerrain(s);
+	}
+	public void removeValidTerrain(String s) throws Exception{
+		myMapData.removeValidTerrain(s);
+	}
+	public void addTerrainListener(SetChangeListener<String> listener){
+		myMapData.addValidTerrainListener(listener);
+	}
+	public MapData getMapData() {
+		return myMapData;
 	}
 }
