@@ -6,7 +6,7 @@ import java.util.List;
 import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
-import engine.controller.TimelineController;
+import engine.controller.timeline.TimelineController;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Damage;

@@ -12,6 +12,7 @@ import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
 import authoring.model.serialization.JSONDeserializer;
+import engine.controller.timeline.TimelineController;
 import engine.controller.waves.DummyWaveOperationData;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;

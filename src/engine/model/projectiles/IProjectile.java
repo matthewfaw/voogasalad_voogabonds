@@ -1,6 +1,6 @@
 package engine.model.projectiles;
 import engine.IObserver;
-import engine.controller.TimelineController;
+import engine.controller.timeline.TimelineController;
 import engine.model.machine.Machine;
 import utility.Point;
 
