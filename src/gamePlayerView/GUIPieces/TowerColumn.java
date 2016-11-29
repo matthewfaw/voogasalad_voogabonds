@@ -1,9 +1,15 @@
+
 package gamePlayerView.GUIPieces;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import authoring.model.TowerData;
+import engine.IObserver;
+import engine.model.playerinfo.IViewablePlayer;
+import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -34,14 +40,15 @@ import javafx.scene.text.Text;
  * @author Guhan Muruganandam & Grayson Wise
  * 
  */
-
-public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
+public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>, IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
-	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
-	private TextArea towerDataDisplay= new TextArea();
+	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
+	private TextArea towerDataDisplay;
+	private ListView<ImageView> towerInfo;
+	//private VBox myColumn;
 
 	
 	public TowerColumn(){
@@ -52,71 +59,89 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	 * Builds object that will actually be returned
 	 */
 	private VBox buildVBox() {
+		
 		VBox vbox = new VBox();
 		vbox.setPrefWidth(200);
 		vbox.setPrefHeight(600);
 	    vbox.setPadding(new Insets(10));
 	    vbox.setSpacing(8);
+	    //TODO:Export CSS to other part
 	    vbox.setStyle("-fx-background-color: #778899;");
 	    
-	    Label l = new Label("TOWERS");
-	    l.setFont(new Font("Cambria",18));
+	    towerDataDisplay= new TextArea();
+	    towerInfo=new ListView<ImageView>(); 
+	    //populatetowerInfo(availableTowers,towerDataDisplay);
 	    
-	    towerInfo= new ListView<ImageView>();
-	    
-	    ObservableList<ImageView> items =FXCollections.observableArrayList();
-	    ImageView imgV1 = new ImageView();
-	    Image imagecow = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cow.png"));
-	    imgV1.setImage(imagecow);
-	    items.add(imgV1);
-	    ImageView imgV2 = new ImageView();
-        Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
-        imgV2.setImage(imagecookie);
-        items.add(imgV2);
-        ImageView imgV3 = new ImageView();
-        Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
-        imgV3.setImage(imageboss);
-        items.add(imgV3);
-            
-        towerInfo.setItems(items);
-        setDragFunctionality();
-        setPopulateFunctionality();
-	    
-	    ListView<String> resourceInfo=new ListView<String>();
-	    ObservableList<String> otheritems =FXCollections.observableArrayList("Extra Gold", "Other crap", "Fe", "Fly");
-	    resourceInfo.setItems(otheritems);
-	    resourceInfo.setTooltip(new Tooltip("Tooltip for Button"));
-	    resourceInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	            //TODO:
-	        }
-	    });
-	    
+	    Label heading = new Label("TOWERS");
+	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
-	    resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
-	    vbox.getChildren().addAll(l,resourceTabs,towerDataDisplay);
+	    vbox.getChildren().addAll(heading,resourceTabs,towerDataDisplay);
 	    
 	    return vbox;
 	}
-
-	private void setPopulateFunctionality() {
-		towerInfo.setOnMouseClicked(new EventHandler<MouseEvent>(){
+	/*
+	 * Creates ListView for the selected towerData
+	 */
+	private void populateTowerInfo(IViewablePlayer aPlayer) {
+		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
+		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
+		
+		ObservableList<ImageView> items =FXCollections.observableArrayList();
+		towerSettings.clear();
+		for(TowerData t : affordableTowers){
+			ImageView towerPicture = new ImageView();
+			String imagePath = t.getImagePath();
+			//TODO: make this cleaner--hard coded now
+			if (imagePath.substring(0, 4).equals("src/")) {
+				imagePath = imagePath.substring(4);
+			}
+			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath)); //THIS IS IFFY. COME BACK TO THIS
+			towerPicture.setImage(towerImage);
+			//towerSettings.put(towerPicture,t);
+			items.add(towerPicture);
+		}
+        towerInfo.setItems(items);
+        setDragFunctionality(towerInfo);
+        setPopulateFunctionality(towerInfo,towerDataDisplay);
+        myTowerColumn.getChildren().clear();
+        
+        Label heading = new Label("TOWERS");
+	    heading.setFont(new Font("Cambria",18));
+	    TabPane resourceTabs= new TabPane();
+	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
+	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        
+	    myTowerColumn.getChildren().addAll(heading,resourceTabs,towerDataDisplay);
+	}
+	/*
+	 * Sets Mouse Click event for List View
+	 */
+	private void setPopulateFunctionality(ListView<ImageView> towerSet, TextArea towerDataDisplay) {
+		towerSet.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
-                ImageView towerChosen = towerInfo.getSelectionModel().getSelectedItem();
-                PopulateTowerDataDisplay("BOOM");
+                ImageView towerChosen = towerSet.getSelectionModel().getSelectedItem();
+                //TowerData tower=towerSettings.get(towerChosen);
+                //PopulateTowerDataDisplay(tower);
             }  
         });
 	}
-
-	private void setDragFunctionality() {
-		towerInfo.setOnDragDetected(new EventHandler<MouseEvent>(){
+	/*
+	 * Allows Text Area to display attributes based on the Tower selected in the ListView
+	 */
+	private void PopulateTowerDataDisplay(TowerData tower,TextArea towerDataDisplay) {
+		String info= new String(tower.getName());
+		towerDataDisplay.setText(info);
+	}
+	
+	private void setDragFunctionality(ListView<ImageView> towerSet) {
+		towerSet.setOnDragDetected(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
-                Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
+                Dragboard db = towerSet.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
-                towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
+                towerToBeDragged = towerSet.getSelectionModel().getSelectedItem();
                 content.putImage(towerToBeDragged.getImage());
                 db.setContent(content);
                 event.consume();
@@ -124,32 +149,7 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
         });
 	}
 
-	private void PopulateTowerDataDisplay(String s) {
-		String info= new String(s);
-		towerDataDisplay.setText(info);
-	}
-
-	private Button makeTowerImage(String string, ImageView imageView) {
-		Button b =new Button(string,imageView);
-		b.setOnMouseEntered(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	        	Tooltip t= new Tooltip("Towers");
-		        Tooltip.install(b, t);
-	        }    
-	    });
-		
-		b.setStyle("-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );");
-		b.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	        	//TODO:
-	        }    
-	    });
-		
-		return b;
-	}
-
 	private Tab buildTab(Node list, String title) {
-		//System.out.println("Hishihs");
 		Tab tab= new Tab();
 		tab.setText(title);
 		tab.setContent(list);
@@ -159,6 +159,17 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	public Node getView() {
 		return myTowerColumn;
 	}
+	
+	public void acceptResources(IViewablePlayer aPlayer) {
+		aPlayer.attach(this);
+		update(aPlayer);
+	}
+
+	@Override
+	public void update(IViewablePlayer aChangedObject) {
+		populateTowerInfo(aChangedObject);
+	}
+	
 	/*
 	 * 
 	 * @Override // for the IResourceStoreAcceptor interface 
@@ -176,4 +187,30 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	 * 
 	 * 
 	 */
+	
+	//MIGHT NEED LATER
+	/*public IResourceAcceptor getResources() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+	
+	
+	/*private Button makeTowerImage(String string, ImageView imageView) {
+	Button b =new Button(string,imageView);
+	b.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        public void handle(MouseEvent me) {
+        	Tooltip t= new Tooltip("Towers");
+	        Tooltip.install(b, t);
+        }    
+    });
+	
+	b.setStyle("-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );");
+	b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        public void handle(MouseEvent me) {
+        	//TODO:
+        }    
+    });
+	
+	return b;
+}*/
 }

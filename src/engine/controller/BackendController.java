@@ -44,7 +44,6 @@ public class BackendController {
 	private JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-//	private MapMediator myMapMediator;
 	private MapDistributor myMapDistributor;
 	private ResourceStore myResourceStore;
 
@@ -56,6 +55,7 @@ public class BackendController {
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
+	private PlayerController myPlayerController;
 	private WaveController myWaveController;
 	private Router myRouter;
 	
@@ -67,19 +67,13 @@ public class BackendController {
 		myJsonDeserializer = new JSONDeserializer();
 
 		myTimelineController = new TimelineController();
+		myPlayerController = new PlayerController(myRouter);
 		
-		//constructStaticBackendObjects();
+		constructStaticBackendObjects();
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-		//constructDynamicBackendObjects();
-	}
-	
-	/**
-	 * A method used to add a new player to the game
-	 */
-	public void addPlayer()
-	{
-		//TODO: set up the infrastructure for a player
-		// initially, let's assume there's only one player
+//		constructDynamicBackendObjects();
+		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -97,7 +91,7 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructMap();
+//		constructMap();
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();
@@ -134,7 +128,6 @@ public class BackendController {
 	{
 		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
 		myResourceStore = new ResourceStore(data);
-		myRouter.distributeResourceStore(myResourceStore);
 	}
 	
 	/**
@@ -191,8 +184,13 @@ public class BackendController {
 		List<String> files = myFileRetriever.getFileNames(aFilePath);
 		List<T> data = new ArrayList<T>();
 		for (String file: files) {
-			T entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
-			data.add(entry);
+			T entry;
+			try {
+				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
+				data.add(entry);
+			} catch (Exception e) {
+				System.out.print("err");
+			}
 		}
 		return data;
 	}

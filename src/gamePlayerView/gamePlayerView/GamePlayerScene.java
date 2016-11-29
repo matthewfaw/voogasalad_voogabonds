@@ -11,6 +11,7 @@ import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.WavesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IResourceAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -34,9 +35,15 @@ public class GamePlayerScene {
 	private List<ICashAcceptor> myCash;
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
+	private List<IResourceAcceptor> myResources;
 	
 	public GamePlayerScene(Stage aStage) throws Exception{
 		//myStage=stage;
+		myCash = new ArrayList<ICashAcceptor>();
+		myLives = new ArrayList<ILivesAcceptor>();
+		myWaves = new ArrayList<IWavesAcceptor>();
+		myResources = new ArrayList<IResourceAcceptor>();
+
 		init(aStage);
 	}
 
@@ -71,9 +78,12 @@ public class GamePlayerScene {
 	}
 	
 	public BorderPane setScreen() throws Exception{
-	        myMap = new MapDisplay();
+	    myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
+		myCash.add(myStatisticsRow.getCash());
+		myLives.add(myStatisticsRow.getLives());
+		myResources.add(myTowerColumn);
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
@@ -83,26 +93,31 @@ public class GamePlayerScene {
 	}
 	
 	public List<ICashAcceptor> getCash() {
-		CashBox cashbox=myStatisticsRow.getCash();
-		myCash.add(cashbox);
 		return myCash;
 	}
 
 	public List<ILivesAcceptor> getLives() {
-		LivesBox livesbox=myStatisticsRow.getLives();
-		myLives.add(livesbox);
 		return myLives;
 	}
 
 	public List<IWavesAcceptor> getWaves() {
-		WavesBox wavesbox=myStatisticsRow.getWaves();
-		myWaves.add(wavesbox);
 		return myWaves;
 	}
 	
 	public void giveMapData(MapData aMapData){
 	        myMap.setMap(aMapData);
 	}
+
+	public List<IResourceAcceptor> getResources() {
+		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
+		return myResources;
+	}
+
+	/*public List<IResourceAcceptor> getResourceStoreAcceptors() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+	
 }
 
 

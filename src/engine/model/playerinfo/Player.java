@@ -1,31 +1,49 @@
 package engine.model.playerinfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import authoring.model.PlayerData;
 import authoring.model.TowerData;
+import engine.IObservable;
+import engine.IObserver;
 import engine.model.resourcestore.IMoney;
+import engine.model.resourcestore.Money;
+import engine.model.resourcestore.ResourceStore;
 import engine.model.strategies.winlose.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
  
 
-
-public class Player extends Observable implements IViewablePlayer, IModifiablePlayer {
+//TODO: Implement all unimplemented methods
+public class Player implements IViewablePlayer, IModifiablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
 	
+	private List<ResourceStore> myResourceStores;
+	
 	private IWinLoseStrategy myWinCon;
 	private IWinLoseStrategy myLoseCon;
 	
-	public Player(int ID, int initLives, IMoney startingMoney) {
+	private List<IObserver<IViewablePlayer>> myObservers;
+	
+	public Player(PlayerData aPlayerData)
+	{
+		//TODO: Create Unique ID?
+		this(0,aPlayerData.getStartingLives(), new Money(aPlayerData.getStartingCash()));
+	}
+	private Player(int ID, int initLives, IMoney startingMoney) {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
 		
 		myLoseCon = new NeverLoseStrategy(this);
 		myWinCon = new NeverWinStrategy(this);
+		
+		myResourceStores = new ArrayList<ResourceStore>();
+		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
 	}
 	 
 	/**
@@ -34,9 +52,7 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	@Override
 	public void updateLivesRemaining(int deltaLives) {
 		myLives = myLives + deltaLives;
-		setChanged();
-		notifyObservers(0);
-		
+		notifyObservers();
 	}
 	/**
 	 * 1 corresponds to funds change
@@ -44,9 +60,7 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
-		setChanged();
-		notifyObservers(1);
-		
+		notifyObservers();
 	}
 	
 	@Override
@@ -79,13 +93,46 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 
 	@Override
 	public List<TowerData> getAvailableTowers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<TowerData> towerList = new ArrayList<TowerData>();
+		for (ResourceStore resourceStore: myResourceStores) {
+			towerList.addAll(resourceStore.getAvailableTowers());
+		}
+		return towerList;
 	}
 
 	@Override
 	public List<TowerData> getAffordableTowers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<TowerData> towerList = new ArrayList<TowerData>();
+		for (TowerData towerData: getAvailableTowers()) {
+			if (this.getAvailableMoney() > towerData.getBuyPrice()) {
+				towerList.add(towerData);
+			}
+		}
+		return towerList;
+	}
+
+	@Override
+	public void addResourceStore(ResourceStore aResourceStore) {
+		myResourceStores.add(aResourceStore);
+		notifyObservers();
+	}
+
+	@Override
+	public void removeResourceStore(ResourceStore aResourceStore) {
+		myResourceStores.remove(aResourceStore);
+	}
+
+	//**********************Observable interface******************//
+	@Override
+	public void attach(IObserver<IViewablePlayer> aObserver) {
+		myObservers.add(aObserver);
+	}
+	@Override
+	public void detach(IObserver<IViewablePlayer> aObserver) {
+		myObservers.remove(aObserver);
+	}
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
 	}
 }
