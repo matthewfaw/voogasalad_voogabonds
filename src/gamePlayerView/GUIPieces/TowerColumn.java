@@ -46,20 +46,20 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	private VBox myTowerColumn;
 	private ImageView towerToBeDragged;
 	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
+	private TextArea towerDataDisplay;
+	private ListView<ImageView> towerInfo;
+	//private VBox myColumn;
 
 	
-	public TowerColumn(IViewablePlayer aPlayer){
-		myTowerColumn= buildVBox(aPlayer);
+	public TowerColumn(){
+		myTowerColumn= buildVBox();
 	}
 	
 	/**
 	 * Builds object that will actually be returned
-	 * @param aPlayer 
 	 */
-	private VBox buildVBox(IViewablePlayer aPlayer) {
+	private VBox buildVBox() {
 		
-		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
-		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
 		VBox vbox = new VBox();
 		vbox.setPrefWidth(200);
 		vbox.setPrefHeight(600);
@@ -68,12 +68,12 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	    //TODO:Export CSS to other part
 	    vbox.setStyle("-fx-background-color: #778899;");
 	    
+	    towerDataDisplay= new TextArea();
+	    towerInfo=new ListView<ImageView>(); 
+	    //populatetowerInfo(availableTowers,towerDataDisplay);
+	    
 	    Label heading = new Label("TOWERS");
 	    heading.setFont(new Font("Cambria",18));
-	    
-	    TextArea towerDataDisplay= new TextArea();
-	    ListView<ImageView> towerInfo= populatetowerInfo(availableTowers,towerDataDisplay);
-	    
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
@@ -85,21 +85,31 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	/*
 	 * Creates ListView for the selected towerData
 	 */
-	private ListView<ImageView> populatetowerInfo(List<TowerData> towers, TextArea towerDataDisplay) {
+	private void populatetowerInfo(IViewablePlayer aPlayer) {
+		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
+		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
+		
 		ObservableList<ImageView> items =FXCollections.observableArrayList();
-		ListView<ImageView> towerSet= new ListView<ImageView>();
 		towerSettings.clear();
-		for(TowerData t : towers){
+		for(TowerData t : affordableTowers){
 			ImageView towerPicture = new ImageView();
 			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(/*t.getImagePath())*/ "resources/cow.png")); //THIS IS IFFY. COME BACK TO THIS
 			towerPicture.setImage(towerImage);
 			//towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
-        towerSet.setItems(items);
-        setDragFunctionality(towerSet);
-        setPopulateFunctionality(towerSet,towerDataDisplay);
-		return towerSet;
+        towerInfo.setItems(items);
+        setDragFunctionality(towerInfo);
+        setPopulateFunctionality(towerInfo,towerDataDisplay);
+        myTowerColumn.getChildren().clear();
+        
+        Label heading = new Label("TOWERS");
+	    heading.setFont(new Font("Cambria",18));
+	    TabPane resourceTabs= new TabPane();
+	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
+	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        
+	    myTowerColumn.getChildren().addAll(heading,resourceTabs,towerDataDisplay);
 	}
 	/*
 	 * Sets Mouse Click event for List View
@@ -151,7 +161,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 
 	@Override
 	public void update(IViewablePlayer aChangedObject) {
-		myTowerColumn=buildVBox(aChangedObject);
+		populatetowerInfo(aChangedObject);
 	}
 	
 	/*

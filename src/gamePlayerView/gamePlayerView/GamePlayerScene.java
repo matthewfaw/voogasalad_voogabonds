@@ -79,11 +79,13 @@ public class GamePlayerScene {
 	
 	public BorderPane setScreen() throws Exception{
 	    myMap = new MapDisplay();
-		myTowerColumn = new TowerColumn();
-		myResources.add(myTowerColumn);
+		myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
+		myCash.add(myStatisticsRow.getCash());
+		myLives.add(myStatisticsRow.getLives());
+		myResources.add(myTowerColumn);
 		BorderPane borderpane=new BorderPane();
-		//borderpane.setRight(myTowerColumn.getView());
+		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
 		borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
@@ -91,20 +93,14 @@ public class GamePlayerScene {
 	}
 	
 	public List<ICashAcceptor> getCash() {
-		CashBox cashbox=myStatisticsRow.getCash();
-		myCash.add(cashbox);
 		return myCash;
 	}
 
 	public List<ILivesAcceptor> getLives() {
-		LivesBox livesbox=myStatisticsRow.getLives();
-		myLives.add(livesbox);
 		return myLives;
 	}
 
 	public List<IWavesAcceptor> getWaves() {
-		WavesBox wavesbox=myStatisticsRow.getWaves();
-		myWaves.add(wavesbox);
 		return myWaves;
 	}
 	
