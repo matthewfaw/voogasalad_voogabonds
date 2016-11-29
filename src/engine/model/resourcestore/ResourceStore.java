@@ -22,7 +22,7 @@ public class ResourceStore implements IModifiableStore, IViewableStore/*, What i
 		//This needs to be completely changed. The data needs to come from the
 		// tower data list
 		myUpgradeStore = new TowerUpgradeStore(aTowerInfoList);
-		//myBaseTowers = myUpgradeStore.getBaseTowers();
+		myBaseTowers = myUpgradeStore.getBaseTowersData();
 		initAffordableTowers();
 	}
 	
@@ -79,20 +79,5 @@ public class ResourceStore implements IModifiableStore, IViewableStore/*, What i
 	public void removeBaseTowers(Tower toRemove) {
 		myBaseTowers.remove(toRemove);
 	}
-
-	/* TODO matthewfaw: This should probably be moved elsewhere
-	@Override
-	public void update(Observable o, Object arg) {
-		if (arg.equals(1) && o.equals(myPlayer)) {
-			updateAffordableTowers();
-		}
-		
-	}
-	@Override
-	public void update(Object aChangedObject) {
-		// TODO Auto-generated method stub
-		
-	}
-	*/
 
 }

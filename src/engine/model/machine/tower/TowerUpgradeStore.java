@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
@@ -16,7 +17,7 @@ import engine.model.resourcestore.IMoney;
 
 
 public class TowerUpgradeStore implements ITowerUpgradeStore {
-	private List<TowerNode> myBaseTowers;
+	private ArrayList<TowerNode> myBaseTowers;
 	private Map<String, TowerNode> myConstructedTowerNodes;
 	
 	public TowerUpgradeStore(List<TowerData> aTowerInfoList) {
@@ -64,26 +65,15 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	}
 
 	/**
-	 * get the TowerID given a list of TowerNodes
-	 * @param nodes
-	 * @return
+	 * get all of the base towers data in the game
 	 */
-	private List<Tower> getTowerfromNode(List<TowerNode> nodes) {
-		List<Tower> ret = new ArrayList<Tower>();
-		for (TowerNode node : nodes) {
-//			ret.add(node.getID());
-		}
-		return ret;
-	}
-	
-	/**
-	 * get all of the base towers in the game
-	 */
-	public List<Tower> getBaseTowers() {
-		return getTowerfromNode(myBaseTowers);
+	@Override
+	public List<TowerData> getBaseTowersData() {
+		return convertTowerNodesToTowerData(myBaseTowers);
 	}
 
 	/**
+	 * TODO
 	 * return the price of a tower if it's a base tower, otherwise return null
 	 * @param tower
 	 * @return
@@ -97,11 +87,20 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 		// not a base tower
 		return null;
 	}
-	/*
-	public List<Tower> getPossibleUpgrades(Tower tower) {
-		TowerNode towernode = myTowerNodeMap.get(tower);
-//		return getTowerfromNode(towernode.getChildren());
+	public List<TowerData> getPossibleUpgrades(TowerData tower) 
+	{
+		List<TowerNode> upgradeNodes = myConstructedTowerNodes.get(tower.getName()).getUpgradeTos();
+		return convertTowerNodesToTowerData(upgradeNodes);
 	}
-	*/
+	
+	/**
+	 * A helper method to convert a list of TowerNodes to a list of TowerData
+	 * @param aTowerNodes
+	 * @return corresponding list of tower data
+	 */
+	private List<TowerData> convertTowerNodesToTowerData(List<TowerNode> aTowerNodes)
+	{
+		return aTowerNodes.stream().map(towerNode -> towerNode.getTowerData()).collect(Collectors.toList());
+	}
 
 }
