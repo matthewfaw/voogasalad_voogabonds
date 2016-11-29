@@ -45,7 +45,7 @@ public class GameDisplay {
 		this.terrainArea = new ScrollPane();
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene);
-		this.controller = new MapDataController();
+		this.controller = controller;
 		terrainGrid.setPrefWidth(screenWidth*0.8);
 		terrainGrid.setMaxHeight(screenHeight*0.9);
 		terrainArea.setContent(terrainGrid);
