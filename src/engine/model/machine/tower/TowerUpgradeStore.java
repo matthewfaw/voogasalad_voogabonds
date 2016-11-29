@@ -12,7 +12,7 @@ import engine.model.resourcestore.IMoney;
 
 /**
  * Tower Upgrade Store that stores the hierarchies among towers
- * @author Owen Chung
+ * @author Owen Chung and matthewfaw
  */
 
 
