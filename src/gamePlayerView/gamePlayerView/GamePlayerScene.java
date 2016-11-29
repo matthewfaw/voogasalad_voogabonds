@@ -44,8 +44,6 @@ public class GamePlayerScene {
 		myWaves = new ArrayList<IWavesAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
 
-		myResources.add(myTowerColumn);
-
 		init(aStage);
 	}
 
@@ -81,7 +79,8 @@ public class GamePlayerScene {
 	
 	public BorderPane setScreen() throws Exception{
 	    myMap = new MapDisplay();
-		//myTowerColumn   = new TowerColumn();
+		myTowerColumn = new TowerColumn();
+		myResources.add(myTowerColumn);
 		myStatisticsRow = new StatisticsRow();
 		BorderPane borderpane=new BorderPane();
 		//borderpane.setRight(myTowerColumn.getView());
