@@ -17,16 +17,16 @@ public class Router {
 		 */
 		
 		//Listeners for WaveLevelTab
-		edc.addControllerListener(wTab.createEnemyListener());
-		mdc.addSpawnPointListener(wTab.createSpawnPointListener());
+		edc.attach(wTab); //Enemy data listener
+		mdc.attach(wTab); //Spawn point listener
 		
 		//Listeners for EnemyTab
-		wedc.addControllerListener(eTab.createWeaponListener());
-		mdc.addTerrainListener(eTab.createTerrainListener());
+		mdc.attach(eTab); //Terrain listener
+		wedc.attach(eTab); //Weapon listener
 
         //TowerTab
-        wedc.addControllerListener(tTab.createWeaponListener());
-        mdc.addTerrainListener(tTab.createTerrainListener());
+		wedc.attach(tTab); //Weapon listener
+		mdc.attach(tTab); //Terrain listener
 		
 		//GameTab
 
