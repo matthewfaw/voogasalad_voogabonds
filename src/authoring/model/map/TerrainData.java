@@ -11,11 +11,17 @@ import authoring.model.IReadableData;
  */
 public class TerrainData implements IReadableData {
 	private String type;
+	private String color;
 	private Point loc;
 	
-	public TerrainData(String type, int x, int y){
+	public TerrainData(String type, String color, int x, int y){
 		this.type = type;
+		this.color = color;
 		this.loc = new Point(x, y);
+	}
+	
+	public TerrainData(String type, int x, int y){
+		this(type, null, x, y);
 	}
 	
 	@Override
@@ -24,9 +30,15 @@ public class TerrainData implements IReadableData {
 		return type;
 	}
 	
+	public String getColor()
+	{
+		return color;
+	}
+	
 	public Point getLoc(){
 		return loc;
 	}
+	
 	
 	@Override
 	public boolean equals(Object o){
