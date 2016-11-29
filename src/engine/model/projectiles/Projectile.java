@@ -161,6 +161,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	@Override
 	public void collideInto(ICollidable unmovedCollidable) {
 		unmovedCollidable.takeDamage(new Damage(myDamage));
+		explode();
 	}
 	@Override
 	public DamageInfo takeDamage(Damage damageDealt) {
