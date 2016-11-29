@@ -67,9 +67,7 @@ public class FileMenu extends Menu {
 	private void performOpenProject(MenuItem openProject) {
 		openProject.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
-				//this does not work.
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setCurrentDirectory(null);
+				//TODO: Deserialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 			}
 		});
 	}
@@ -86,10 +84,7 @@ public class FileMenu extends Menu {
 		saveProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
-//				if (file != null) {
-//					SerializeJSON json = new SerializeJSON();
-//					json.SerializeToFile(file, file.getAbsolutePath());
-//				}
+				//TODO: Serialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 			}
 		});
 	}
@@ -107,7 +102,7 @@ public class FileMenu extends Menu {
 					File file = newGameSave.showSaveDialog(stage);
 					if (file != null) {
 						JSONSerializer json = new JSONSerializer();
-						json.serializeToFile(file, file.getAbsolutePath());
+						//TODO: Serialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 					}
 				}
 		});

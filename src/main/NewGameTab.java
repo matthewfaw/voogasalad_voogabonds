@@ -45,16 +45,13 @@ public class NewGameTab {
 	private void populateTab() {
 		VBox newGameOptions = new VBox(screenHeight*0.1);
 		newGameOptions.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
-		TextField newGameName = new TextField();
-		newGameName.setPromptText(myResources.getString("NewGameName"));
-		newGameName.setPrefColumnCount((int) (screenWidth*0.1));
 		Button chooseSavePath = new Button(myResources.getString("SavePath"));
-		saveHandler(chooseSavePath, newGameName);
-		newGameOptions.getChildren().addAll(newGameName, chooseSavePath);
+		saveHandler(chooseSavePath);
+		newGameOptions.getChildren().addAll(chooseSavePath);
 		newGame.setContent(newGameOptions);
 	}
 	
-	private void saveHandler(Button button, TextField gameName) {
+	private void saveHandler(Button button) {
 		button.setOnAction(
 				new EventHandler<ActionEvent>() {
 					@Override
@@ -62,10 +59,8 @@ public class NewGameTab {
 						FileChooser newGameSave = new FileChooser();
 						Stage stage = new Stage();
 						File file = newGameSave.showSaveDialog(stage);
-						if (file != null) {
-							JSONSerializer json = new JSONSerializer();
-							json.serializeToFile(file, gameName.getText());
-						}
+						System.out.println("Name of File: " + file.getName() + " Path of File: " + file.getAbsolutePath());
+						//TODO: Need to implement some sort of FileInputStream here?
 					}
 				});
 	}
