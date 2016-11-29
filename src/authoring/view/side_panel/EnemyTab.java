@@ -3,6 +3,7 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import authoring.controller.EnemyDataController;
@@ -44,7 +45,7 @@ public class EnemyTab extends Tab {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myWeapons = new ArrayList<String>();
-		myTerrains = new ArrayList<String>();
+		myTerrains = new ArrayList<String>(Arrays.asList("Ground","Ice","Water","Air"));
 		myController = controller;
 		myMenu = new EnemyMenu(myResources, this);
 		enemyTabOptions(enemyTab);
@@ -80,7 +81,7 @@ public class EnemyTab extends Tab {
 						myResources.getString("DefaultHealth"), myResources.getString("DefaultSpeed"), 
 						myResources.getString("DefaultCollisionRadius"), 
 						myResources.getString("DefaultKillReward"), myResources.getString("DefaultImage"),
-						null, true);
+						null, new ArrayList<String>(), true);
 			}
 		};
 		return handler;
@@ -105,7 +106,7 @@ public class EnemyTab extends Tab {
 				myMenu.createEnemyWindow(enemy.getName(), String.valueOf(enemy.getMaxHealth()), 
 						String.valueOf(enemy.getSpeed()), String.valueOf(enemy.getCollisionRadius()), 
 						String.valueOf(enemy.getKillReward()), enemy.getImagePath(), enemy.getWeaponName(), 
-						false);
+						enemy.getTerrainList(), false);
 			}
 		});
 		myContent.getChildren().add(button);
@@ -119,6 +120,10 @@ public class EnemyTab extends Tab {
 		return myWeapons;
 	}
 	
+	public ArrayList<String> getTerrains(){
+		return myTerrains;
+	}
+
 	public MapChangeListener<String, WeaponData> createWeaponListener(){
 		MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
 			@Override

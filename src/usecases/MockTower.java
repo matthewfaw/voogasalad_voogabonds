@@ -1,11 +1,11 @@
 package usecases;
 
 import authoring.authoring_interfaces.ITower;
-import engine.model.playerinfo.IModifiablePlayerInfo;
+import engine.model.playerinfo.IModifiablePlayer;
 
 public class MockTower implements ITower {
 	
-	private IModifiablePlayerInfo myModifiablePlayerInfo;
+	private IModifiablePlayer myModifiablePlayerInfo;
 	private int upgradeCost;
 	
 	public boolean upgrade() {
@@ -43,7 +43,7 @@ public class MockTower implements ITower {
 		return 0;
 	}
 
-	public IModifiablePlayerInfo getModifiablePlayerInfo() {
+	public IModifiablePlayer getModifiablePlayerInfo() {
 		return myModifiablePlayerInfo;
 	}
 

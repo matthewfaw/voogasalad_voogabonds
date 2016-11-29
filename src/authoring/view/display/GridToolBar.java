@@ -51,6 +51,7 @@ public class GridToolBar {
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
+		selectedColor = Color.WHITE;
 		createToolBar();
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
@@ -58,17 +59,15 @@ public class GridToolBar {
 	
 	private void createToolBar() {
 		ToggleGroup toggles = new ToggleGroup();
-		ToggleGroup spawns = new ToggleGroup();
-		ToggleGroup sinks = new ToggleGroup();
 		ToggleButton drawMode = new ToggleButton(myResources.getString("DrawMode"));
 		drawMode.setToggleGroup(toggles);
-		toggleHandler(toggles);
+		toggleHandler(toggles, drawMode);
 		ToggleButton setSpawnPoint = new ToggleButton(myResources.getString("SpawnPoint"));
-		setSpawnPoint.setToggleGroup(spawns);
-		spawnHandler(spawns);
+		setSpawnPoint.setToggleGroup(toggles);
+		spawnHandler(toggles, setSpawnPoint);
 		ToggleButton setSinkPoint = new ToggleButton(myResources.getString("SinkPoint"));
-		setSinkPoint.setToggleGroup(sinks);
-		sinkHandler(sinks);
+		setSinkPoint.setToggleGroup(toggles);
+		sinkHandler(toggles, setSinkPoint);
 		ColorPicker colorChooser = new ColorPicker();
 		colorHandler(colorChooser);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
@@ -80,8 +79,8 @@ public class GridToolBar {
 	 * Sets toggleStatus to true if the draw mode toggle button is selected, or false if not.
 	 * @param drawMode
 	 */
-	private void toggleHandler(ToggleGroup drawMode)  {
-		drawMode.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+	private void toggleHandler(ToggleGroup drawGroup, ToggleButton drawMode)  {
+		drawGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
@@ -89,7 +88,11 @@ public class GridToolBar {
 		            toggleStatus = false;
 		        }
 		        else {
-		            toggleStatus = true;
+		        	if (drawGroup.getSelectedToggle().equals(drawMode)) {
+			            toggleStatus = true;
+			            spawnStatus = false;
+			            sinkStatus = false;
+		        	}
 		        }
 		    	if (!toggleStatus) {
 		    		scene.setCursor(Cursor.DEFAULT);
@@ -101,8 +104,8 @@ public class GridToolBar {
 		});
 	}
 	
-	private void spawnHandler(ToggleGroup spawns) {
-		spawns.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+	private void spawnHandler(ToggleGroup spawnGroup, ToggleButton spawnMode) {
+		spawnGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
@@ -110,15 +113,19 @@ public class GridToolBar {
 		    		scene.setCursor(Cursor.DEFAULT);
 		        }
 		        else {
-		        	spawnStatus = true;
-		        	scene.setCursor(Cursor.CROSSHAIR); 
+		        	if (spawnGroup.getSelectedToggle().equals(spawnMode)) {
+			        	toggleStatus = false;
+			        	spawnStatus = true;
+			        	sinkStatus = false;
+			        	scene.setCursor(Cursor.CROSSHAIR); 
+		        	}
 		        }
 		    }
 		});
 	}
 	
-	private void sinkHandler(ToggleGroup sinks) {
-		sinks.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+	private void sinkHandler(ToggleGroup sinksGroup, ToggleButton sinkMode) {
+		sinksGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
@@ -126,8 +133,12 @@ public class GridToolBar {
 		    		scene.setCursor(Cursor.DEFAULT);
 		        }
 		        else {
-		        	sinkStatus = true;
-		        	scene.setCursor(Cursor.CROSSHAIR); 
+		        	if (sinksGroup.getSelectedToggle().equals(sinkMode)) {
+			        	toggleStatus = false;
+			        	spawnStatus = false;
+			        	sinkStatus = true;
+			        	scene.setCursor(Cursor.CROSSHAIR); 
+		        	}
 		        }
 		    }
 		});

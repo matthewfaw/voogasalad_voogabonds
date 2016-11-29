@@ -6,13 +6,16 @@ import java.util.ResourceBundle;
 
 import javax.swing.*;
 
-import main.MainInitalizer;
+import authoring.model.serialization.JSONSerializer;
+import main.MainInitializer;
 import main.MainMenu;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -52,10 +55,9 @@ public class FileMenu extends Menu {
 			public void handle(ActionEvent t) {
 				try {
 					Stage s = new Stage();
-					MainMenu newInstance = new MainMenu(new MainInitalizer(s), s);
+					MainMenu newInstance = new MainMenu(new MainInitializer(s), s);
 					newInstance.init();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 		});
@@ -73,25 +75,44 @@ public class FileMenu extends Menu {
 	
 	private void performCloseProject(MenuItem closeProject) {
 		closeProject.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				//TODO: Implement code that closes project upon clicking Close button.
+			public void handle(ActionEvent e) {
+				Platform.exit();
 			}
 		});
 	}
 	
 	private void performSaveProject(MenuItem saveProject) {
 		saveProject.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
 			public void handle(ActionEvent t) {
-				//TODO: Implement code that saves current project upon clicking Save button.
+//				if (file != null) {
+//					SerializeJSON json = new SerializeJSON();
+//					json.SerializeToFile(file, file.getAbsolutePath());
+//				}
 			}
 		});
 	}
 	
 	private void performSaveAs(MenuItem saveAs) {
 		saveAs.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent t) {
-				//TODO: Implement code that saves project with specified name upon clicking Close button. Use a fileChooser.
-			}
+				@Override
+				public void handle(final ActionEvent e) {
+					FileChooser newGameSave = new FileChooser();
+					newGameSave.setTitle("Save As");
+					newGameSave.setInitialDirectory(
+					           new File(System.getProperty("user.home"))
+					       ); 
+					Stage stage = new Stage();
+					File file = newGameSave.showSaveDialog(stage);
+					if (file != null) {
+						JSONSerializer json = new JSONSerializer();
+						try {
+							json.serializeToFile(file, file.getAbsolutePath());
+						} catch (Exception e1) {
+							System.out.println("Unable to save current game state.");
+						}
+					}
+				}
 		});
 	}
 	

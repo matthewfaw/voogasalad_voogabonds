@@ -1,11 +1,11 @@
 package authoring.model;
 
+public class WaveData implements IReadableData {
 /**
  * WaveData represents all the information needed for one wave of enemies at a time.
  * A game will have multiple Waves, and as a result, multiple WaveDatas.
  * @author philipfoo
  */
-public class WaveData {
 	/**
 	 * A string which represents the name of the wave. To be used for access in the map
 	 */
@@ -17,12 +17,12 @@ public class WaveData {
 	private String waveEnemy;
 	
 	/**
-	 * Time between each enemy (so they don't all show up at once).
+	 * Time between each enemy (so they don't all show up at once) in milliseconds.
 	 */
 	private double timeBetweenEnemy;
 	
 	/**
-	 * How long this wave is supposed to last, the amount of time before the next wave.
+	 * How long this wave is supposed to last, the amount of time before the next wave, in seconds.
 	 */
 	private double timeForWave;
 	
@@ -36,6 +36,7 @@ public class WaveData {
 	 */
 	private String spawnPointName;
 	
+	@Override
 	public String getName(){
 		return name;
 	}

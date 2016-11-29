@@ -11,13 +11,31 @@ import javafx.collections.SetChangeListener;
 import javafx.collections.MapChangeListener;
 
 
-public class MapData {
+import authoring.model.IReadableData;
+
+public class MapData implements IReadableData {
+	private String myName;
 	private int numXCells;
 	private int numYCells;
-	private ObservableMap<String, ArrayList<Point>> spawnPoints = FXCollections.observableHashMap();
-	private HashSet<Point> sinkPoints;
+	private int cellSize;
+	private ObservableMap<String, ArrayList<Point>> spawnPoints;
+	private HashSet<Point> sinkPoints = new HashSet<Point>();
 	private HashSet<TerrainData> terrainList;
-	private ObservableSet<String> validTerrain = FXCollections.observableSet();
+	private ObservableSet<String> validTerrain;
+	
+	public MapData()
+	{
+		spawnPoints = FXCollections.observableHashMap();
+		sinkPoints = new HashSet<Point>();
+		terrainList = new HashSet<TerrainData>();
+		validTerrain = FXCollections.observableSet();
+	}
+	
+	@Override
+	public String getName()
+	{
+		return myName;
+	}
 	
 	/**
 	 * MAP DIMENSION FUNCTIONS
@@ -27,15 +45,29 @@ public class MapData {
 			throw new Exception("The map must be wider than 0 cells.");
 		}
 		this.numXCells = x;
+		System.out.println("Total XCells: " + this.numXCells);
 	}
 	public int getNumXCells(){
 		return numXCells;
+	}
+	
+	public void cellSize(int cellSize) throws Exception{
+		if (cellSize<=0){
+			throw new Exception("The size of cells must be greater than 0 pixels.");
+		}
+		this.cellSize = cellSize;
+	}
+	
+	public int getCellSize(){
+		return cellSize;
 	}
 	
 	public void setNumYCells(int y) throws Exception{
 		if (y <= 0){
 			throw new Exception("The map must be taller than 0 cells.");
 		}
+		this.numYCells = y;
+		System.out.println("Total YCells: " + this.numYCells);
 	}
 	public int getNumYCells(){
 		return numYCells;
@@ -49,6 +81,7 @@ public class MapData {
 			validatePoint(p, "spawn");
 		}
 		spawnPoints.put(name, newSpawnPoints);
+		System.out.println("Added Spawn Point " + name);
 	}
 	
 	public void addSpawnPointListener(MapChangeListener<String, ArrayList<Point>> listener){
@@ -58,6 +91,7 @@ public class MapData {
 	public void removeSpawnPoints(String name){
 		if (spawnPoints.containsKey(name)){
 			spawnPoints.remove(name);
+			System.out.println("Removed Spawn Point " + name);
 		}
 	}
 	
@@ -71,11 +105,13 @@ public class MapData {
 	public void addSinkPoint(Point newSinkPoint) throws Exception{
 		validatePoint(newSinkPoint, "sink");
 		sinkPoints.add(newSinkPoint);
+		System.out.println("Added Sink Point " + newSinkPoint.toString());
 	}
 	
 	public void removeSinkPoint(Point p){
 		if (sinkPoints.contains(p)){
 			sinkPoints.remove(p);
+			System.out.println("Removed Sink Point " + p.toString());
 		}
 	}
 	
@@ -109,6 +145,7 @@ public class MapData {
 			throw new Exception("No terrain specified.");
 		}
 		validTerrain.add(s);
+		System.out.println("Added Terrain: " + s);
 	}
 	
 	public void removeValidTerrain(String s) throws Exception{

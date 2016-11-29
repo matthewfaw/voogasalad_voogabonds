@@ -1,28 +1,44 @@
 package authoring.model.map;
 import utility.Point;
 
+import authoring.model.IReadableData;
+
 /**
  * type: the 'type' of terrain this represents, e.g. 'water', 'air', 'ground'
  * loc: Point with x and y coordinates 
  * @author philipfoo
  *
  */
-public class TerrainData {
+public class TerrainData implements IReadableData {
 	private String type;
+	private String color;
 	private Point loc;
 	
-	public TerrainData(String type, int x, int y){
+	public TerrainData(String type, String color, int x, int y){
 		this.type = type;
+		this.color = color;
 		this.loc = new Point(x, y);
 	}
 	
-	public String getType(){
+	public TerrainData(String type, int x, int y){
+		this(type, null, x, y);
+	}
+	
+	@Override
+	public String getName()
+	{
 		return type;
+	}
+	
+	public String getColor()
+	{
+		return color;
 	}
 	
 	public Point getLoc(){
 		return loc;
 	}
+	
 	
 	@Override
 	public boolean equals(Object o){

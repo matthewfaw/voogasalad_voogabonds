@@ -1,6 +1,6 @@
 package authoring.model;
 
-public class WeaponData {
+public class WeaponData implements IReadableData {
 
 	private String name;
 	private String projectileName;
@@ -14,6 +14,7 @@ public class WeaponData {
 		this.name = name;
 	}
 	
+	@Override 
 	public String getName(){
 		return name;
 	}

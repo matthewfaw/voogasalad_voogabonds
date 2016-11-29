@@ -10,4 +10,5 @@ public interface IMovable {
 
 	abstract public double getTurnSpeed();
 	abstract public double getMoveSpeed();
+	double getCollisionRadius();
 }
