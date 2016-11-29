@@ -1,20 +1,24 @@
 package engine.model.playerinfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
 import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
+import engine.model.resourcestore.ResourceStore;
 import engine.model.strategies.winlose.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
  
 
-
+//TODO: Implement all unimplemented methods
 public class Player extends Observable implements IViewablePlayer, IModifiablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
+	
+	private List<ResourceStore> myResourceStores;
 	
 	private IWinLoseStrategy myWinCon;
 	private IWinLoseStrategy myLoseCon;
@@ -26,6 +30,8 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 		
 		myLoseCon = new NeverLoseStrategy(this);
 		myWinCon = new NeverWinStrategy(this);
+		
+		myResourceStores = new ArrayList<ResourceStore>();
 	}
 	 
 	/**
@@ -79,13 +85,31 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 
 	@Override
 	public List<TowerData> getAvailableTowers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<TowerData> towerList = new ArrayList<TowerData>();
+		for (ResourceStore resourceStore: myResourceStores) {
+			towerList.addAll(resourceStore.getAvailableTowers());
+		}
+		return towerList;
 	}
 
 	@Override
 	public List<TowerData> getAffordableTowers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<TowerData> towerList = new ArrayList<TowerData>();
+		for (TowerData towerData: getAvailableTowers()) {
+			if (this.getAvailableMoney() > towerData.getBuyPrice()) {
+				towerList.add(towerData);
+			}
+		}
+		return towerList;
+	}
+
+	@Override
+	public void addResourceStore(ResourceStore aResourceStore) {
+		myResourceStores.add(aResourceStore);
+	}
+
+	@Override
+	public void removeResourceStore(ResourceStore aResourceStore) {
+		myResourceStores.remove(aResourceStore);
 	}
 }
