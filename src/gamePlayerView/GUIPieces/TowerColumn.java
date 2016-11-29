@@ -44,7 +44,6 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
-	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
 	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
 
@@ -73,7 +72,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	    heading.setFont(new Font("Cambria",18));
 	    
 	    TextArea towerDataDisplay= new TextArea();
-	    towerInfo= populatetowerInfo(availableTowers,towerDataDisplay);
+	    ListView<ImageView> towerInfo= populatetowerInfo(availableTowers,towerDataDisplay);
 	    
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
