@@ -2,12 +2,14 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.List;
 
+import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import engine.IObservable;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IResourceAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
 
 public class Router {
@@ -16,15 +18,17 @@ public class Router {
 	private List<ICashAcceptor> myCash;
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
+	private List<IResourceAcceptor> myResources;
 	//List<IEnemySources> myFrontendEnemySources;
 	
 	
 	public Router(GamePlayerScene aGamePlayerScene)
 	{
 		myGamePlayerScene  = aGamePlayerScene;
-		//myCash=myGamePlayerScene.getCash();
-		//myLives=myGamePlayerScene.getLives();
-		//myWaves=myGamePlayerScene.getWaves();
+		myCash=myGamePlayerScene.getCash();
+		myLives=myGamePlayerScene.getLives();
+		myWaves=myGamePlayerScene.getWaves();
+		myResources=myGamePlayerScene.getResources();
 		//myFrontendEnemySources = myGamePlayerScene.getEnemySources();
 	}
 	
@@ -35,12 +39,34 @@ public class Router {
 	
 	public void distributePlayer(IViewablePlayer aPlayer)
 	{
-		//This is where you'll get player specific info such as money and lives
+		//This is where you'll get player specific info such as money and lives and Tower Data
+		distributeCash(aPlayer);
+		distributeLives(aPlayer);
+		distributeResourceStore(aPlayer);
+		
 	}
 	
 	//TODO:
-//	public void distributeGameState()
+//	public void distributeGameState() //Will have wave stuff
 	
+	private void distributeResourceStore(IViewablePlayer aPlayer) {
+		for(IResourceAcceptor r : myResources){
+			r.acceptResources(aPlayer);
+		}
+	}
+
+	private void distributeLives(IViewablePlayer aPlayer) {
+		for(ILivesAcceptor l : myLives){
+			l.acceptLives(aPlayer);
+		}
+	}
+
+	private void distributeCash(IViewablePlayer aPlayer) {
+		for(ICashAcceptor c : myCash){
+			c.acceptCash(aPlayer);
+		}
+	}
+
 	public void distributeMapData(MapData aMapData)
 	{
 		//TODO: distribute to all interested frontend objects

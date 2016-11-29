@@ -11,6 +11,7 @@ import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.WavesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IResourceAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -34,6 +35,7 @@ public class GamePlayerScene {
 	private List<ICashAcceptor> myCash;
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
+	private List<IResourceAcceptor> myResources;
 	
 	public GamePlayerScene(Stage aStage) throws Exception{
 		//myStage=stage;
@@ -102,6 +104,12 @@ public class GamePlayerScene {
 	
 	public void giveMapData(MapData aMapData){
 	        myMap.setMap(aMapData);
+	}
+
+	public List<IResourceAcceptor> getResources() {
+		//TODO;Refactor later to seperate the Resource object from tower column. Not doingnow to screw with Grayson's stuff
+		myResources.add(myTowerColumn);
+		return null;
 	}
 
 	/*public List<IResourceAcceptor> getResourceStoreAcceptors() {
