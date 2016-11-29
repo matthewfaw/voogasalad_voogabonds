@@ -68,9 +68,9 @@ public class BackendController {
 
 		myTimelineController = new TimelineController();
 		
-		constructStaticBackendObjects();
+		//constructStaticBackendObjects();
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-		constructDynamicBackendObjects();
+		//constructDynamicBackendObjects();
 	}
 	
 	/**
@@ -134,6 +134,7 @@ public class BackendController {
 	{
 		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
 		myResourceStore = new ResourceStore(data);
+		myRouter.distributeResourceStore(myResourceStore);
 	}
 	
 	/**

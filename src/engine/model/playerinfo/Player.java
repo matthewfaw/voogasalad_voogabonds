@@ -1,6 +1,9 @@
 package engine.model.playerinfo;
 
+import java.util.List;
 import java.util.Observable;
+
+import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
 import engine.model.strategies.winlose.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
@@ -52,8 +55,8 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	}
 	
 	@Override
-	public IMoney getAvailableMoney() {
-		return myMoney;
+	public int getAvailableMoney() {
+		return myMoney.getValue();
 	}
 	@Override
 	public int getID(){
@@ -72,5 +75,17 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 		// TODO Auto-generated method stub
 		//Presumably delete anything that belongs to you and tell anyone who cares that you lost
 		
+	}
+
+	@Override
+	public List<TowerData> getAvailableTowers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TowerData> getAffordableTowers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
