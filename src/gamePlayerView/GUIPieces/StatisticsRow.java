@@ -85,5 +85,4 @@ public class StatisticsRow implements IGUIPiece {
 	public WavesBox getWaves() {
 		return myWavesBox;
 	}
-
 }

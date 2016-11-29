@@ -107,7 +107,7 @@ public class GamePlayerScene {
 	public void giveMapData(MapData aMapData){
 	        myMap.setMap(aMapData);
 	}
-
+	
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
 		return myResources;
