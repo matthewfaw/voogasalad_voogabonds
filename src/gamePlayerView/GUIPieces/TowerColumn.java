@@ -85,7 +85,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	/*
 	 * Creates ListView for the selected towerData
 	 */
-	private void populatetowerInfo(IViewablePlayer aPlayer) {
+	private void populateTowerInfo(IViewablePlayer aPlayer) {
 		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
 		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
 		
@@ -93,7 +93,12 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		towerSettings.clear();
 		for(TowerData t : affordableTowers){
 			ImageView towerPicture = new ImageView();
-			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(/*t.getImagePath())*/ "resources/cow.png")); //THIS IS IFFY. COME BACK TO THIS
+			String imagePath = t.getImagePath();
+			//TODO: make this cleaner--hard coded now
+			if (imagePath.substring(0, 4).equals("src/")) {
+				imagePath = imagePath.substring(4);
+			}
+			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath)); //THIS IS IFFY. COME BACK TO THIS
 			towerPicture.setImage(towerImage);
 			//towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
@@ -157,11 +162,12 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	
 	public void acceptResources(IViewablePlayer aPlayer) {
 		aPlayer.attach(this);
+		update(aPlayer);
 	}
 
 	@Override
 	public void update(IViewablePlayer aChangedObject) {
-		populatetowerInfo(aChangedObject);
+		populateTowerInfo(aChangedObject);
 	}
 	
 	/*

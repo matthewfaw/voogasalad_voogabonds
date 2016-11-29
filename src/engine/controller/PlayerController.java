@@ -5,6 +5,7 @@ import java.util.List;
 
 import authoring.model.PlayerData;
 import engine.model.playerinfo.Player;
+import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
 
 /**
@@ -36,5 +37,9 @@ public class PlayerController {
 		myPlayers.add(player);
 		myRouter.distributePlayer(player);
 	}
-
+	
+	public void addResourceStoreForAllPlayers(ResourceStore aResourceStore)
+	{
+		myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
+	}
 }

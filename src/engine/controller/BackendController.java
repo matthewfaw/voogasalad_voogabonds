@@ -73,6 +73,7 @@ public class BackendController {
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
 //		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -127,7 +128,6 @@ public class BackendController {
 	{
 		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
 		myResourceStore = new ResourceStore(data);
-		myRouter.distributeResourceStore(myResourceStore);
 	}
 	
 	/**

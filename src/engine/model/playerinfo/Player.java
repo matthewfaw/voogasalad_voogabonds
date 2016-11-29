@@ -114,6 +114,7 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 	@Override
 	public void addResourceStore(ResourceStore aResourceStore) {
 		myResourceStores.add(aResourceStore);
+		notifyObservers();
 	}
 
 	@Override
