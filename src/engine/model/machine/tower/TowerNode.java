@@ -1,51 +1,63 @@
 package engine.model.machine.tower;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
 
 public class TowerNode {
-	private Tower myTowerId;
-	private IMoney myPrice;
+	private String myName;
+	private IMoney myBuyPrice;
 	private IMoney mySellPrice;
-	private TowerNode myParent;
-	private List<TowerNode> myChildren = new ArrayList<TowerNode>();
+	private int myMaxHealth;
+	private List<TowerNode> myUpgradeFroms;
+	private List<TowerNode> myUpgradeTos;
 	private Map<TowerNode, IMoney> myUpgradeCostMap = new HashMap<TowerNode, IMoney>();
 	
-	public TowerNode(Tower id, TowerNode parent){
-		myTowerId = id;
-		myParent = parent;
+	public TowerNode(TowerData towerdata) {
+		initData(towerdata);
+		
 	}
 	
-	public List<TowerNode> getChildren(){
-		return myChildren;
-	}
-	
-	public TowerNode getParent(){
-		return myParent;
+	private void initData(TowerData towerdata) {
+		myName = towerdata.getName();
+		myBuyPrice = new Money(towerdata.getBuyPrice());
+		mySellPrice = new Money(towerdata.getSellPrice());
 	}
 
-	public Tower getID() {
-		return myTowerId;
+	public List<TowerNode> getUpgradeTos(){
+		return myUpgradeTos;
 	}
 	
-	public IMoney getPrice(){
-		return myPrice;
+	public List<TowerNode> getUpgradeFroms(){
+		return myUpgradeFroms;
+	}
+	
+	public String getName(){
+		return myName;
+	}
+	
+	public IMoney getBuyPrice(){
+		return myBuyPrice;
 	}
 	
 	public IMoney getSellPrice(){
 		return mySellPrice;
 	}
+	
+	public int getMaxHealth(){
+		return myMaxHealth;
+	}
 
+	
 	public void setSellPrice(int sellPrice) {
 		mySellPrice = new Money(sellPrice);
 	}
 	
 	public void setPrice(int price) {
-		myPrice = new Money(price);
+		myBuyPrice = new Money(price);
 	}
 }

@@ -6,20 +6,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
+
 /**
  * Tower Upgrade Store that stores the hierarchies among towers
  * @author Owen Chung
- *
  */
 
 
 public class TowerUpgradeStore implements ITowerUpgradeStore {
-	private List<TowerNode> myBaseTowers = new ArrayList<>();
-	private Map<Tower, TowerNode> myTowerNodeMap = new HashMap<Tower, TowerNode>();
-	public TowerUpgradeStore(){
+	private List<TowerNode> myBaseTowers;
+	private Map<TowerData, TowerNode> myTowerNodeMap = new HashMap<TowerData, TowerNode>();
+	
+	public TowerUpgradeStore(List<TowerData> aTowerInfoList) {
+		
 		constructTowerNodeMap();
 	}
+	
+	
 	/**
 	 * consturct TowerNodeMap that maps a Tower to its corresponding TowerNode
 	 * DFS using stack;
@@ -35,10 +40,10 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 					continue;
 				}
 				visitedList.add(current);
-				myTowerNodeMap.put(current.getID(), current);
-				for (TowerNode childnode : current.getChildren()) {
-					stack.push(childnode);
-				}
+//				myTowerNodeMap.put(current.getID(), current);
+//				for (TowerNode childnode : current.getChildren()) {
+//					stack.push(childnode);
+//				}
 			}
 		}
 	}
@@ -51,7 +56,7 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	private List<Tower> getTowerfromNode(List<TowerNode> nodes) {
 		List<Tower> ret = new ArrayList<Tower>();
 		for (TowerNode node : nodes) {
-			ret.add(node.getID());
+//			ret.add(node.getID());
 		}
 		return ret;
 	}
@@ -70,17 +75,18 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	 */
 	public IMoney getPrice(Tower tower) {
 		for (TowerNode towernode : myBaseTowers) {
-			if (towernode.getID().equals(tower)) {
-				return towernode.getPrice();
-			}
+//			if (towernode.getID().equals(tower)) {
+//				return towernode.getPrice();
+//			}
 		}
 		// not a base tower
 		return null;
 	}
-	
+	/*
 	public List<Tower> getPossibleUpgrades(Tower tower) {
 		TowerNode towernode = myTowerNodeMap.get(tower);
-		return getTowerfromNode(towernode.getChildren());
+//		return getTowerfromNode(towernode.getChildren());
 	}
+	*/
 
 }
