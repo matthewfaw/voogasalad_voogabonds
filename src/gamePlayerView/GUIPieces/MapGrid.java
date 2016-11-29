@@ -51,8 +51,10 @@ public class MapGrid extends Node{
         temp.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 ImageView source = new ImageView();
+                if(!isFull(temp)){
                 source.setImage(event.getDragboard().getImage());
                 findDropLocation(event.getX(), event.getY(), source);
+                }
                 event.consume();
             }
         });
@@ -67,6 +69,10 @@ public class MapGrid extends Node{
     
     public void setRoot(Pane myRoot){
         myPane = myRoot;
+    }
+    
+    private boolean isFull(Rectangle temp){
+        return (temp.getFill() != Color.AQUA);    
     }
    
     
@@ -91,8 +97,6 @@ public class MapGrid extends Node{
         source.setFitHeight(closest.getHeight());
         source.setFitWidth(closest.getWidth());
         myPane.getChildren().add(source);
-        //ANIMATION BY PIXEL SHOULD WORK:
-            //source.setX(source.getX()+20);
     }
     
     private double calculateDistance (double x, double y, double x2, double y2) {
