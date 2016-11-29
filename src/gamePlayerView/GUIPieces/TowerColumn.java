@@ -1,9 +1,15 @@
+
 package gamePlayerView.GUIPieces;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import authoring.model.TowerData;
+import engine.IObserver;
+import engine.model.playerinfo.IViewablePlayer;
+import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -34,67 +40,47 @@ import javafx.scene.text.Text;
  * @author Guhan Muruganandam & Grayson Wise
  * 
  */
-
-public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
+public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>, IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
 	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
 	private TextArea towerDataDisplay= new TextArea();
+	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
 
 	
-	public TowerColumn(){
-		myTowerColumn= buildVBox();
+	public TowerColumn(IViewablePlayer aPlayer){
+		myTowerColumn= buildVBox(aPlayer);
 	}
 	
 	/**
 	 * Builds object that will actually be returned
+	 * @param aPlayer 
 	 */
-	private VBox buildVBox() {
+	private VBox buildVBox(IViewablePlayer aPlayer) {
+		
+		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
+		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
+		
 		VBox vbox = new VBox();
 		vbox.setPrefWidth(200);
 		vbox.setPrefHeight(600);
 	    vbox.setPadding(new Insets(10));
 	    vbox.setSpacing(8);
+	    //TODO:Export CSS to other part
 	    vbox.setStyle("-fx-background-color: #778899;");
 	    
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    towerInfo= new ListView<ImageView>();
-	    
-	    ObservableList<ImageView> items =FXCollections.observableArrayList();
-	    ImageView imgV1 = new ImageView();
-	    Image imagecow = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cow.png"));
-	    imgV1.setImage(imagecow);
-	    items.add(imgV1);
-	    ImageView imgV2 = new ImageView();
-        Image imagecookie = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/cookie.png"));
-        imgV2.setImage(imagecookie);
-        items.add(imgV2);
-        ImageView imgV3 = new ImageView();
-        Image imageboss = new Image(this.getClass().getClassLoader().getResourceAsStream("resources/boss.png"));
-        imgV3.setImage(imageboss);
-        items.add(imgV3);
-            
-        towerInfo.setItems(items);
-        setDragFunctionality();
+	    towerInfo= populatetowerInfo(availableTowers);
+	    setDragFunctionality();
         setPopulateFunctionality();
-	    
-	    ListView<String> resourceInfo=new ListView<String>();
-	    ObservableList<String> otheritems =FXCollections.observableArrayList("Extra Gold", "Other crap", "Fe", "Fly");
-	    resourceInfo.setItems(otheritems);
-	    resourceInfo.setTooltip(new Tooltip("Tooltip for Button"));
-	    resourceInfo.setOnMouseEntered(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	            //TODO:
-	        }
-	    });
 	    
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
-	    resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
+	    //resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
 	    vbox.getChildren().addAll(l,resourceTabs,towerDataDisplay);
@@ -102,13 +88,34 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	    return vbox;
 	}
 
+	private ListView<ImageView> populatetowerInfo(List<TowerData> towers) {
+		ObservableList<ImageView> items =FXCollections.observableArrayList();
+		ListView<ImageView> towerSet= new ListView<ImageView>();
+		towerSettings.clear();
+		for(TowerData t : towers){
+			ImageView towerPicture = new ImageView();
+			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(/*t.getImagePath())*/ "resources/cow.png")); //THIS IS IFFY. COME BACK TO THIS
+			towerPicture.setImage(towerImage);
+			//towerSettings.put(towerPicture,t);
+			items.add(towerPicture);
+		}
+        towerSet.setItems(items);
+		return towerSet;
+	}
+
 	private void setPopulateFunctionality() {
 		towerInfo.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
                 ImageView towerChosen = towerInfo.getSelectionModel().getSelectedItem();
-                PopulateTowerDataDisplay("BOOM");
+                //TowerData tower=towerSettings.get(towerChosen);
+                //PopulateTowerDataDisplay(tower);
             }  
         });
+	}
+	
+	private void PopulateTowerDataDisplay(TowerData tower) {
+		String info= new String(tower.getName());
+		towerDataDisplay.setText(info);
 	}
 
 	private void setDragFunctionality() {
@@ -124,32 +131,7 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
         });
 	}
 
-	private void PopulateTowerDataDisplay(String s) {
-		String info= new String(s);
-		towerDataDisplay.setText(info);
-	}
-
-	private Button makeTowerImage(String string, ImageView imageView) {
-		Button b =new Button(string,imageView);
-		b.setOnMouseEntered(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	        	Tooltip t= new Tooltip("Towers");
-		        Tooltip.install(b, t);
-	        }    
-	    });
-		
-		b.setStyle("-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );");
-		b.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent me) {
-	        	//TODO:
-	        }    
-	    });
-		
-		return b;
-	}
-
 	private Tab buildTab(Node list, String title) {
-		//System.out.println("Hishihs");
 		Tab tab= new Tab();
 		tab.setText(title);
 		tab.setContent(list);
@@ -159,6 +141,16 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	public Node getView() {
 		return myTowerColumn;
 	}
+	
+	public void acceptResources(IViewablePlayer aPlayer) {
+		aPlayer.attach(this);
+	}
+
+	@Override
+	public void update(IViewablePlayer aChangedObject) {
+		myTowerColumn=buildVBox(aChangedObject);
+	}
+	
 	/*
 	 * 
 	 * @Override // for the IResourceStoreAcceptor interface 
@@ -176,4 +168,30 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	 * 
 	 * 
 	 */
+	
+	//MIGHT NEED LATER
+	/*public IResourceAcceptor getResources() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+	
+	
+	/*private Button makeTowerImage(String string, ImageView imageView) {
+	Button b =new Button(string,imageView);
+	b.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        public void handle(MouseEvent me) {
+        	Tooltip t= new Tooltip("Towers");
+	        Tooltip.install(b, t);
+        }    
+    });
+	
+	b.setStyle("-fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );");
+	b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        public void handle(MouseEvent me) {
+        	//TODO:
+        }    
+    });
+	
+	return b;
+}*/
 }

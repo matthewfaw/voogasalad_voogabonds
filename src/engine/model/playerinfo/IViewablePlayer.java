@@ -3,8 +3,9 @@ package engine.model.playerinfo;
 import java.util.List;
 
 import authoring.model.TowerData;
+import engine.IObservable;
 
-public interface IViewablePlayer {
+public interface IViewablePlayer extends IObservable<IViewablePlayer> {
 	/**
 	 * Get the number of remaining lives of an object
 	 * @return the number of lives a player has remaining
