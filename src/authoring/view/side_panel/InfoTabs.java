@@ -22,13 +22,14 @@ public class InfoTabs {
 	private int screenWidth;
 	private int screenHeight;
 	private Scene scene;
+	private static Router r;
 	
 	public InfoTabs(BorderPane root, Scene scene) {
 		screenInfo();
 		this.scene = scene;
 		infoTab = new TabPane();
 		infoTab.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		Router r = new Router();
+		r = new Router();
 		GameDisplay mapDisplay = new GameDisplay(root, scene, r.getMapDataController());
 		//Change to take in a controller as a second parameter please:
 		Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
@@ -45,6 +46,13 @@ public class InfoTabs {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = (int) screenSize.getWidth();
 		screenHeight = (int) screenSize.getHeight();
+	}
+	
+	// Tripp: I added this method and made Router a private instance variable. If this causes issues or is a major design flaw,
+	// we can change this, but this is just to get a basic implementation up and running.
+	// I made router static, but this is not the best case scenario and will change in Sprint 2.
+	public static Router getRouter(){
+		return r;
 	}
 	
 }

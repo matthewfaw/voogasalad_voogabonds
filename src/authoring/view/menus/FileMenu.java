@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.*;
 
+import authoring.model.serialization.GameStateSerializer;
 import authoring.model.serialization.JSONSerializer;
 import main.MainInitializer;
 import main.MainMenu;
@@ -104,14 +105,15 @@ public class FileMenu extends Menu {
 					       ); 
 					Stage stage = new Stage();
 					File file = newGameSave.showSaveDialog(stage);
-					if (file != null) {
-						JSONSerializer json = new JSONSerializer();
+//					if (file != null) {
+						GameStateSerializer gss = new GameStateSerializer();
 						try {
-							json.serializeToFile(file, file.getAbsolutePath());
+							//change "exampleGame to user input"
+							gss.saveGameState("exampleGame");
 						} catch (Exception e1) {
 							System.out.println("Unable to save current game state.");
 						}
-					}
+//					}
 				}
 		});
 	}
