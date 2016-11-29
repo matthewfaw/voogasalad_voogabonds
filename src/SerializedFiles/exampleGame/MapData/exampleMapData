@@ -1,1 +1,1 @@
-{"numXCells":0,"numYCells":0,"cellSize":0,"spawnPoints":{},"sinkPoints":[],"terrainList":[],"validTerrain":[]}
+{"numXCells":21,"numYCells":12,"cellSize":0,"spawnPoints":{},"sinkPoints":[],"terrainList":[],"validTerrain":{"Water":"0x001a80ff"}}
