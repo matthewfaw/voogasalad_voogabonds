@@ -1,6 +1,8 @@
 package gamePlayerView.GUIPieces;
 
+import java.util.ArrayList;
 import authoring.model.map.MapData;
+import engine.model.machine.IViewableMachine;
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import javafx.animation.Animation;
@@ -14,11 +16,19 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+
+/**
+ * 
+ * @author graysonwise
+ *
+ */
+
 public class MapDisplay implements IObserver<TimelineController> {
     
     private Pane myRoot;
     private Pane myPane;
     private MapGrid background;
+    private static boolean isPlaying;
     private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -27,12 +37,14 @@ public class MapDisplay implements IObserver<TimelineController> {
     //Set up map from backend
     //register as observer of timeline
     public MapDisplay() throws Exception{
+       
         myRoot = new Pane();
         myPane = new Pane();
         init();
+        isPlaying = false;
         MapData temp = new MapData();
-        temp.setNumXCells(10);
-        temp.setNumYCells(10);
+        temp.setNumXCells(14);
+        temp.setNumYCells(12);
         background = new MapGrid(temp.getNumXCells(), temp.getNumYCells());
         setMap(temp);
     }
@@ -94,18 +106,25 @@ public class MapDisplay implements IObserver<TimelineController> {
     public void step (double elapsedTime) {
         //game-specific definition of a step
         //bad guys move, etc...
-        //call every other classes step function
-        
-        
+        //call every other classes step function        
         
     }
     
+    public static void setPlaying(boolean val){
+        isPlaying = val;
+    }
+    
+    public static boolean isPlaying(){
+        return isPlaying;
+    }
     public Node getView() {
         return myRoot;
     }
 
-	@Override
-	public void update(TimelineController aChangedObject) {
-		//step
-	}
+    @Override
+    public void update(TimelineController aChangedObject) {
+        if(isPlaying){
+            aChangedObject.attach(this);
+        }
+    }
 }
