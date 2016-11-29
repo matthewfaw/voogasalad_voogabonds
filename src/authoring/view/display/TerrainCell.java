@@ -160,7 +160,8 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType) {
 		terrainType = newType;
 		try { 
-			controller.addValidTerrain(newType);
+			controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
+			setFill(toolBar.getSelectedColor());
 		} catch (Exception e) {
 			System.out.println(myResources.getString("TerrainError"));
 		}
