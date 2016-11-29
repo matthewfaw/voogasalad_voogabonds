@@ -165,15 +165,15 @@ public class TowerTab extends Tab {
 	    return listener;
 	}
 
-	public SetChangeListener<String> createTerrainListener(){
-	    SetChangeListener<String> listener = new SetChangeListener<String>() {
+	public MapChangeListener<String, String> createTerrainListener(){
+	    MapChangeListener<String, String> listener = new MapChangeListener<String, String>() {
 	        @Override
-	        public void onChanged(SetChangeListener.Change<? extends String> change) {
+	        public void onChanged(MapChangeListener.Change<? extends String, ? extends String> change) {
 	            if (change.wasAdded()){
-	                myTerrains.add(change.getElementAdded());
+	                myTerrains.add(change.getKey());
 	            }
 	            else if (change.wasRemoved()){
-	                myTerrains.remove(change.getElementRemoved());
+	                myTerrains.remove(change.getKey());
 	            }
 	        }
 	    };

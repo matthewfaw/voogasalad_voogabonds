@@ -4,24 +4,19 @@ import utility.Point;
 import authoring.model.IReadableData;
 
 /**
- * type: the 'type' of terrain this represents, e.g. 'water', 'air', 'ground'
- * loc: Point with x and y coordinates 
  * @author philipfoo
  *
  */
 public class TerrainData implements IReadableData {
+	/**
+	 * Will correspond to a type of "valid terrain" as defined by the author.
+	 */
 	private String type;
-	private String color;
 	private Point loc;
 	
-	public TerrainData(String type, String color, int x, int y){
-		this.type = type;
-		this.color = color;
-		this.loc = new Point(x, y);
-	}
-	
 	public TerrainData(String type, int x, int y){
-		this(type, null, x, y);
+		this.type = type;
+		this.loc = new Point(x, y);
 	}
 	
 	@Override
@@ -30,10 +25,6 @@ public class TerrainData implements IReadableData {
 		return type;
 	}
 	
-	public String getColor()
-	{
-		return color;
-	}
 	
 	public Point getLoc(){
 		return loc;

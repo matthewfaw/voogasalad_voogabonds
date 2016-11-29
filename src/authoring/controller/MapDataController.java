@@ -91,13 +91,13 @@ public class MapDataController {
 	/**
 	 * Functions for adding valid terrain
 	 */
-	public void addValidTerrain(String s) throws Exception{
-		myMapData.addValidTerrain(s);
+	public void addValidTerrain(String name, String color) throws Exception{
+		myMapData.addValidTerrain(name, color);
 	}
 	public void removeValidTerrain(String s) throws Exception{
 		myMapData.removeValidTerrain(s);
 	}
-	public void addTerrainListener(SetChangeListener<String> listener){
+	public void addTerrainListener(MapChangeListener<String, String> listener){
 		myMapData.addValidTerrainListener(listener);
 	}
 	public MapData getMapData() {
