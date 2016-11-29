@@ -1,6 +1,8 @@
 package authoring.model;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import utility.Point;
@@ -34,6 +36,13 @@ public class TowerData implements IReadableData {
 	private int collisionRadius;
 	private List<Point> initialLocations;
 	private String movement;
+	
+	public TowerData()
+	{
+		upgrades = new HashMap<String, Integer>();
+		traversableTerrain = new ArrayList<String>();
+		initialLocations = new ArrayList<Point>();
+	}
 	
 	public void setName(String name) throws Exception {
 		if (name == null || name.length() == 0){

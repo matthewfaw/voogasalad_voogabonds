@@ -21,6 +21,7 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	private Map<String, TowerNode> myConstructedTowerNodes;
 	
 	public TowerUpgradeStore(List<TowerData> aTowerInfoList) {
+		myBaseTowers = new ArrayList<TowerNode>();
 		myConstructedTowerNodes = new HashMap<String, TowerNode>();
 		Stack<TowerNode> towerNodes = constructNodes(aTowerInfoList);
 		connectNodes(towerNodes);
@@ -58,8 +59,11 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	{
 		while (!aTowerNodes.isEmpty()) {
 			TowerNode towerNode = aTowerNodes.pop();
-			for (String nodeName: towerNode.getTowerData().getUpgrades().keySet()) {
-				towerNode.addUpgradeTo(myConstructedTowerNodes.get(nodeName));
+			TowerData towerData = towerNode.getTowerData();
+			if (!towerData.getUpgrades().isEmpty()) {
+				for (String nodeName: towerData.getUpgrades().keySet()) {
+					towerNode.addUpgradeTo(myConstructedTowerNodes.get(nodeName));
+				}
 			}
 		}
 	}

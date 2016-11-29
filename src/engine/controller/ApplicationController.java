@@ -58,7 +58,7 @@ public class ApplicationController {
 	private void constructBackend(Router aRouter)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString("DefaultGame"), aRouter);
+		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
 	}
 	
 	/*

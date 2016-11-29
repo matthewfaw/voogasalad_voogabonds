@@ -39,6 +39,13 @@ public class GamePlayerScene {
 	
 	public GamePlayerScene(Stage aStage) throws Exception{
 		//myStage=stage;
+		myCash = new ArrayList<ICashAcceptor>();
+		myLives = new ArrayList<ILivesAcceptor>();
+		myWaves = new ArrayList<IWavesAcceptor>();
+		myResources = new ArrayList<IResourceAcceptor>();
+
+		myResources.add(myTowerColumn);
+
 		init(aStage);
 	}
 
@@ -108,8 +115,7 @@ public class GamePlayerScene {
 
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
-		//myResources.add(myTowerColumn);
-		return null;
+		return myResources;
 	}
 
 	/*public List<IResourceAcceptor> getResourceStoreAcceptors() {

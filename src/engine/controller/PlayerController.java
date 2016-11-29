@@ -1,5 +1,6 @@
 package engine.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.PlayerData;
@@ -18,6 +19,7 @@ public class PlayerController {
 	
 	public PlayerController(Router aRouter)
 	{
+		myPlayers = new ArrayList<Player>();
 		myRouter = aRouter;
 	}
 	

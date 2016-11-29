@@ -23,10 +23,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage s) throws Exception {
 		//TODO:
-//		ApplicationController appController = new ApplicationController();
-//		appController.init(s);
-		GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
-    	gamePlayerScene.init(s);
+		ApplicationController appController = new ApplicationController();
+		appController.init(s);
+//		GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
+//    	gamePlayerScene.init(s);
     	//Router myRouter = new Router(gamePlayerScene);
   
 	}

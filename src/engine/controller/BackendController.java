@@ -71,7 +71,7 @@ public class BackendController {
 		
 		constructStaticBackendObjects();
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-		constructDynamicBackendObjects();
+//		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 	}
 	
@@ -90,7 +90,7 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructMap();
+//		constructMap();
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();
@@ -189,6 +189,7 @@ public class BackendController {
 				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
 				data.add(entry);
 			} catch (Exception e) {
+				System.out.print("err");
 			}
 		}
 		return data;

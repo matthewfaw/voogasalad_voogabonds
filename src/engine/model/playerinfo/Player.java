@@ -9,6 +9,7 @@ import authoring.model.TowerData;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.resourcestore.IMoney;
+import engine.model.resourcestore.Money;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.strategies.winlose.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
@@ -30,7 +31,8 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 	
 	public Player(PlayerData aPlayerData)
 	{
-		
+		//TODO: Create Unique ID?
+		this(0,aPlayerData.getStartingLives(), new Money(aPlayerData.getStartingCash()));
 	}
 	private Player(int ID, int initLives, IMoney startingMoney) {
 		myID = ID;
@@ -41,6 +43,7 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 		myWinCon = new NeverWinStrategy(this);
 		
 		myResourceStores = new ArrayList<ResourceStore>();
+		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
 	}
 	 
 	/**
