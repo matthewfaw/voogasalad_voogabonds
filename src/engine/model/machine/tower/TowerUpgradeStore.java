@@ -57,7 +57,7 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	{
 		while (!aTowerNodes.isEmpty()) {
 			TowerNode towerNode = aTowerNodes.pop();
-			for (String nodeName: towerNode.getTowerData().getUpgradeTo().keySet()) {
+			for (String nodeName: towerNode.getTowerData().getUpgrades().keySet()) {
 				towerNode.addUpgradeTo(myConstructedTowerNodes.get(nodeName));
 			}
 		}

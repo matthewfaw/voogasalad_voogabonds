@@ -76,7 +76,7 @@ public class TowerNode {
 	public void addUpgradeTo(TowerNode aNode)
 	{
 		myUpgradeTos.add(aNode);
-		int upgradeCost = myTowerData.getUpgradeFrom().get(aNode.getName());
+		int upgradeCost = myTowerData.getUpgrades().get(aNode.getName());
 		myUpgradeCostMap.put(aNode, new Money(upgradeCost));
 		aNode.addUpgradeFrom(this);
 	}

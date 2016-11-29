@@ -184,8 +184,12 @@ public class BackendController {
 		List<String> files = myFileRetriever.getFileNames(aFilePath);
 		List<T> data = new ArrayList<T>();
 		for (String file: files) {
-			T entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
-			data.add(entry);
+			T entry;
+			try {
+				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
+				data.add(entry);
+			} catch (Exception e) {
+			}
 		}
 		return data;
 	}

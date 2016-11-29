@@ -1,12 +1,12 @@
 package authoring.model;
 
-public class PlayerData implements IReadableData {
-	private String myName;
-
 /**
  * Class representing the overall information for a player.
  * @author philipfoo
  */
+
+public class PlayerData implements IReadableData {
+	private String myName;
 
 	private int startingLives;
 	private int startingCash;

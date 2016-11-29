@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 public class MainMenu {
 	private Scene scene;
 	private Stage stage;
-	private MainInitalizer initializer;
+	private MainInitializer initializer;
 	private BorderPane pane;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -36,7 +36,7 @@ public class MainMenu {
 	private int screenWidth;
 	private int screenHeight;
 	
-	public MainMenu(MainInitalizer init, Stage s) {
+	public MainMenu(MainInitializer init, Stage s) {
 		setUpScreenResolution();
 		this.stage = s;
 		this.initializer = init;
@@ -47,10 +47,10 @@ public class MainMenu {
 		tabContainer.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		this.newTab = new NewGameTab(tabContainer);
 		this.loadTab = new LoadGameTab(tabContainer);
+		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
 	}
 	
 	public Scene init() {
-//		pane.getChildren().add(createBackgroundImage());
 		pane.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
 		pane.setTop(createText(myResources.getString("ApplicationTitle")));
 		pane.setCenter(tabContainer);
@@ -60,14 +60,6 @@ public class MainMenu {
 		pane.setBottom(b);
 		return scene;
 	}
-	
-//	private ImageView createBackgroundImage() {
-//		ImageView background = new ImageView(
-//				new Image(getClass().getClassLoader().getResourceAsStream("resources/MainMenu.jpg")));
-//		background.setX(0);
-//		background.setY(0);
-//		return background;
-//	}
 	
 	private Text createText(String desiredText) {
 		Text t = new Text(desiredText);
