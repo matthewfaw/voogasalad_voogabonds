@@ -7,11 +7,11 @@ package engine.model.weapons;
  *
  */
 public class DamageInfo {
-	private int myDamage;
+	private double myDamage;
 	private int myMoney;
 	private int myKills;
 	
-	public DamageInfo(int damageDealt, int moneyGained, int unitsKilled){
+	public DamageInfo(double damageDealt, int moneyGained, int unitsKilled){
 		myDamage = damageDealt;
 		myMoney = moneyGained;
 		myKills = unitsKilled;
@@ -22,7 +22,7 @@ public class DamageInfo {
 	}
 
 	public int getDamage(){
-		return myDamage;
+		return (int) myDamage;
 	}
 	public int getMoney(){
 		return myMoney;

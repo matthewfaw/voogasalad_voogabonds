@@ -56,7 +56,7 @@ public class MapMediator {
 	public boolean attemptToPlaceEntity(Point aLocation, IPhysical aPhysicalComponent)
 	{
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
-			aPhysicalComponent.setLocation(aLocation);
+			aPhysicalComponent.setPosition(aLocation);
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
@@ -73,7 +73,7 @@ public class MapMediator {
 	}
 
 	private boolean isInRadius(IPhysical e, Point p, double radius) {
-		return e.getLocation().euclideanDistance(p) - e.getCollisionRadius() - radius >= 0;
+		return e.getPosition().euclideanDistance(p) - e.getCollisionRadius() - radius >= 0;
 	}
 
 	private boolean isEnemy(IPhysical e) {
