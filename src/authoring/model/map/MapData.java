@@ -18,17 +18,37 @@ public class MapData implements IReadableData {
 	private int numXCells;
 	private int numYCells;
 	private int cellSize;
+	
+	/**
+	 * Each group of spawn points will have a name. A map is necessary because
+	 * a wave must specify a spawn point which its enemies will start from.
+	 */
 	private ObservableMap<String, ArrayList<Point>> spawnPoints;
+	
+	/**
+	 * Set of points that enemies will try to reach.
+	 */
 	private HashSet<Point> sinkPoints = new HashSet<Point>();
+	
+	/**
+	 * Set defines the geography of the entire map. This set will contain a list of
+	 * TerrainDatas, which can be used to populate the entire map. Should contain
+	 * a minimum of numXCells x numYCells TerrainData elements.
+	 */
 	private HashSet<TerrainData> terrainList;
-	private ObservableSet<String> validTerrain;
+	
+	/**
+	 * Map of possible terrains that might exist, as created by the user.
+	 * The key will be the name of the terrain, and the value will be how its displayed (currently color in HEX).
+	 */
+	private ObservableMap<String, String> validTerrain;
 	
 	public MapData()
 	{
-		spawnPoints = FXCollections.observableHashMap();
-		sinkPoints = new HashSet<Point>();
-		terrainList = new HashSet<TerrainData>();
-		validTerrain = FXCollections.observableSet();
+		this.spawnPoints = FXCollections.observableHashMap();
+		this.sinkPoints = new HashSet<Point>();
+		this.terrainList = new HashSet<TerrainData>();
+		this.validTerrain = FXCollections.observableHashMap();
 	}
 	
 	@Override
@@ -140,25 +160,25 @@ public class MapData implements IReadableData {
 	/**
 	 * VALID TERRAIN FUNCTIONS
 	 */
-	public void addValidTerrain(String s) throws Exception{
-		if (s == null || s.length() == 0){
+	public void addValidTerrain(String name, String color) throws Exception{
+		if (name == null || name.length() == 0){
 			throw new Exception("No terrain specified.");
 		}
-		validTerrain.add(s);
-		System.out.println("Added Terrain: " + s);
+		validTerrain.put(name, color);
+		System.out.println("Added Terrain: " + name);
 	}
 	
-	public void removeValidTerrain(String s) throws Exception{
-		if (validTerrain.contains(s)){
-			validTerrain.remove(s);
+	public void removeValidTerrain(String name) throws Exception{
+		if (validTerrain.containsKey(name)){
+			validTerrain.remove(name);
 		}
 	}
 	
-	public ObservableSet<String> getValidTerrain(){
+	public ObservableMap<String, String> getValidTerrain(){
 		return validTerrain;
 	}
 	
-	public void addValidTerrainListener(SetChangeListener<String> listener){
+	public void addValidTerrainListener(MapChangeListener<String, String> listener){
 		validTerrain.addListener(listener);
 	}
 	
