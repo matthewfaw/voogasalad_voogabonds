@@ -141,6 +141,8 @@ public class Projectile extends Registerable implements IViewable, IMovable, IOb
 //		notifyListenersRemove();
 		myOwner.notifyDestroy(result);
 		
+		// remove references
+		deregister();
 	}
 	@Override
 	public List<Terrain> getValidTerrains() {
@@ -167,11 +169,5 @@ public class Projectile extends Registerable implements IViewable, IMovable, IOb
 	@Override
 	public void collideInto(ICollidable unmovedCollidable) {
 		explode();
-	}
-	
-	public void deregister() {
-		for(ISystem s: mySystems) {
-			s.deregister(this);
-		}
 	}
 }
