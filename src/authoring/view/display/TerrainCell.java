@@ -68,7 +68,7 @@ public class TerrainCell extends Rectangle {
 							}
 						}
 						setFill(toolBar.getSelectedColor());
-						setType(toolBar.getSelectedTerrain());
+						setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 						setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
 						setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
 					}
@@ -102,7 +102,7 @@ public class TerrainCell extends Rectangle {
 			public void handle(MouseEvent mouseEvent) {
 				if (toolBar.getToggleStatus()) {
 					setFill(toolBar.getSelectedColor());
-					setType(toolBar.getSelectedTerrain());
+					setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 				}
 			}
 		});
@@ -157,7 +157,7 @@ public class TerrainCell extends Rectangle {
 		return colLocation;
 	}
 	
-	public void setType(String newType) {
+	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
 			controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());

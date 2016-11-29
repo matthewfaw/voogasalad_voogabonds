@@ -27,7 +27,7 @@ public class TowerData implements IReadableData {
 	 * Map of towers which this particular tower can upgrade from. The Integer is the cost of updating
 	 * from the previous tower to this one.
 	 */
-	private Map<String, Integer> upgradeFrom;
+	private Map<String, Integer> upgrades;
 	
 	private String imagePath;
 	private List<String> traversableTerrain;
@@ -93,11 +93,11 @@ public class TowerData implements IReadableData {
 	
 	public void addUpgrades(String name, Integer upgradeCost){
 		//this.upgradeFrom = upgrades;
-		this.upgradeFrom.put(name, upgradeCost);
+		this.upgrades.put(name, upgradeCost);
 	}
 	
-	public Map<String, Integer> getUpgradeFrom(){
-		return upgradeFrom;
+	public Map<String, Integer> getUpgrades(){
+		return upgrades;
 	}
 	
 	public void setImagePath(String imagePath) throws Exception{
