@@ -1,25 +1,32 @@
 package engine.model.machine;
-
-public class Health implements IHealth{
-	private double health;
+import utility.Damage;
+public class Health {
+	private double myMaxHealth;
+	private double myCurrHealth;
+	
+	public Health(double initialHealth, double maxHealth) {
+		myCurrHealth = initialHealth;
+		myMaxHealth = maxHealth;
+	}
 	
 	public Health(double initialHealth) {
-		health = initialHealth;
+		this(initialHealth, initialHealth);
 	}
 	
-	@Override
 	public double getHealth() {
-		return health;
+		return myCurrHealth;
 	}
-
-	@Override
-	public void updateHealth(IHealth deltaHealth) {
-		health += deltaHealth.getHealth();
+	public double takeDamage(Damage dmg) {
+		double startingHealth = myCurrHealth;
+		myCurrHealth -= dmg.getDamage();
+		
+		if (myCurrHealth < 0) {
+			myCurrHealth = 0;
+		}
+		if (myCurrHealth > myMaxHealth) {
+			myCurrHealth = myMaxHealth;
+		}
+		
+		return myCurrHealth - startingHealth;
 	}
-
-	@Override
-	public void setHealthAsDamage() {
-		health *= -1;
-	}
-
 }

@@ -1,16 +1,11 @@
 package engine.model.projectiles;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
-import engine.model.collision_detection.IDamageDealer;
 import engine.model.game_environment.terrain.Terrain;
-import engine.model.machine.Health;
-import engine.model.machine.IHealth;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Damage;
@@ -18,12 +13,11 @@ import utility.Point;
 import engine.model.strategies.*;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
-
 /**
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, IDamageDealer {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	private String myImagePath;
@@ -37,16 +31,14 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	
 	private double myHeading;
 	private Point myLocation;
-	private double myRadius;
+	private double myCollisionRadius;
 	
 	IDamageStrategy myDamageCalc;
-	IHealth myDamage;
+	double myDamage;
 	int myMaxRange;
 	int myAoERadius;
 	
 	List<Terrain> myValidTerrain;
-
-
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
 		
 		myImagePath = data.getImagePath();
@@ -59,49 +51,36 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myTraveled = 0;
 		mySpeed = data.getSpeed();
 		myTurnSpeed = data.getTurnSpeed();
-		myRadius = data.getCollisionRadius();
+		myCollisionRadius = data.getCollisionRadius();
 		
 		myValidTerrain = data.getValidTerrains();
-
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
 		myAoERadius = data.getAreaOfEffectRadius();
-		myDamage = new Health(data.getDamage());	
+		myDamage = data.getDamage();	
 		
 		time.attach(this);
 	}
-
-
 	@Override
 	public double getHeading() {
 		return myHeading;
 	}
-
 	@Override
 	public Point getPosition() {
 		return myLocation;
 	}
-
 	@Override
 	public String getImagePath() {
 		return myImagePath;
 	}
-
-	@Override
-	public Point getLocation() {
-		return myLocation;
-	}
-
 	@Override
 	public Point getGoal() {
 		return myTarget.onMap() ? myTarget.getPosition() : null;
 	}
-
 	@Override
 	public double getTurnSpeed() {
 		return myTurnSpeed;
 	}
-
 	@Override
 	public double getMoveSpeed() {
 		return mySpeed;
@@ -109,9 +88,8 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	
 	@Override
 	public double getCollisionRadius() {
-		return myRadius;
+		return myCollisionRadius;
 	}
-
 	@Override
 	public void update(TimelineController aChangedObject) {
 		advance();
@@ -157,24 +135,16 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myOwner.notifyDestroy(result);
 		
 	}
-
-
 	@Override
 	public List<Terrain> getValidTerrains() {
 		return myValidTerrain;
 	}
-
-
 	@Override
-	public void setLocation(Point aLocation) {
+	public void setPosition(Point aLocation) {
 		myLocation = aLocation;
 	}
-
-	/**
-	 * IDamageDealer interface method
-	 */
 	@Override
-	public IHealth getDamageDealt() {
-		return myDamage;
+	public double getSize() {
+		return myCollisionRadius;
 	}
 }

@@ -1,29 +1,14 @@
 package engine.model.machine.enemy;
-
-import engine.model.collision_detection.ICollidable;
 import engine.model.machine.Machine;
 import engine.model.resourcestore.IMoney;
-import engine.model.weapons.DamageInfo;
-import utility.Damage;
-
-public class Enemy extends Machine implements IEnemy {
+public class Enemy extends Machine {
+	private IMoney myBounty;
 	
 	public Enemy(int initialHealth) {
-		super(initialHealth);
 	}
-
-	private IMoney killValue;
-	
-
 	@Override
-	public DamageInfo takeDamage(Damage toDeal) {
-		// TODO Auto-generated method stub
-		return null;
+	protected int die() {
+		//TODO: Delete self
+		return myBounty.getValue();
 	}
-
-	@Override
-	public IMoney getKillValue() {
-		return killValue;
-	}
-
 }

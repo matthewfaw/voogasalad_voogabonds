@@ -1,6 +1,5 @@
 package engine.model.collision_detection;
 
-import engine.model.machine.IHealth;
 
 /**
  * Interface for objects that deal damage.
@@ -8,5 +7,5 @@ import engine.model.machine.IHealth;
  *
  */
 public interface IDamageDealer {
-	public IHealth getDamageDealt();
+	public double getDamageDealt();
 }

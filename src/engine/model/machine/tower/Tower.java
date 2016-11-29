@@ -1,40 +1,40 @@
 package engine.model.machine.tower;
-
-import engine.model.machine.IHealth;
-import engine.model.machine.IPurchasable;
 import engine.model.machine.Machine;
-import engine.model.resourcestore.IMoney;
-import engine.model.weapons.DamageInfo;
-import engine.model.weapons.Weapon;
-import utility.Damage;
-import utility.Point;
-
-import java.util.List;
-
-import engine.model.collision_detection.ICollidable;
-import engine.model.collision_detection.IDamageTaker;
-import engine.model.game_environment.terrain.Terrain;
-
-public class Tower extends Machine implements IPurchasable{
-	private String myName;
-	private Weapon myWeapon;
-	//matthewfaw: is this necessary? doesn't machine already keep track of this?
-	private int myMaxHealth;
-	private List<Terrain> myPossibleTerrains;
+import java.util.Collection;
+import java.util.Map;
+public class Tower extends Machine implements ITower {
+	private Map<String, Integer> myUpgrades;
+	private int mySellPrice;
 	
-	public Tower(String name, int maxhealth){
-		super(maxhealth);
-		myName = name;
-		myMaxHealth = maxhealth;
+	public Tower(){
 	}
-	public void setPossibleTerrains(List<Terrain> possibleterrains){
-		myPossibleTerrains = possibleterrains;
+	public Tower(String name, int maxHealth) {
+		super(name, maxHealth);
 	}
 	@Override
-	public DamageInfo takeDamage(Damage toDeal) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getUpgradeCost(String s) {
+		return myUpgrades.containsKey(s) ? myUpgrades.get(s) : -1;
 	}
 	
-
+	@Override
+	public Collection<String> getUpgrades() {
+		return myUpgrades.keySet();
+	}
+	@Override
+	public int getSellPrice() {
+		return mySellPrice;
+	}
+	@Override
+	protected int die() {
+		//TODO: Delete self
+		return 0;
+	}
+	@Override
+	public void upgrade(String upgradeName, ITowerUpgradeStore towerUpgradeStore) {
+		//All TODO:
+		//Subtract money from player's wallet
+		//Change my sell price and upgrade map
+		//Call a superclass method that changes my Machine fields (weapon, health, etc
+		
+		}
 }

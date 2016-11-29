@@ -7,10 +7,10 @@ import utility.Point;
 
 public interface IPhysical {
 
-	abstract public Point getLocation();
+	abstract public Point getPosition();
 	abstract public double getHeading();
 	abstract public double getCollisionRadius();
 	abstract public List<Terrain> getValidTerrains();
-	public abstract void setLocation(Point aLocation);
+	abstract public void setPosition(Point p);
 	
 }

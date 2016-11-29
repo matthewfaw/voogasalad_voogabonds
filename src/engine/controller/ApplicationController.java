@@ -31,8 +31,9 @@ public class ApplicationController {
 	
 	/**
 	 * A method to be called to initialize the frontend and backend
+	 * @throws Exception 
 	 */
-	public void init(Stage aStage)
+	public void init(Stage aStage) throws Exception
 	{
 		GamePlayerScene scene = constructGUI(aStage);
 		Router router = new Router(scene);
@@ -41,8 +42,9 @@ public class ApplicationController {
 	/**
 	 * Helper method to create the view object
 	 * from the GameData file
+	 * @throws Exception 
 	 */
-	private GamePlayerScene constructGUI(Stage aStage)
+	private GamePlayerScene constructGUI(Stage aStage) throws Exception
 	{
 		GamePlayerScene scene = new GamePlayerScene(aStage);
 		return scene;
