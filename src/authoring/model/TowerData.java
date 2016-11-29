@@ -80,7 +80,7 @@ public class TowerData implements IReadableData {
 		this.upgradeFrom.put(name, upgradeCost);
 	}
 	
-	public Map<String, Integer> getUpgrades(){
+	public Map<String, Integer> getUpgradeFrom(){
 		return upgradeFrom;
 	}
 	
