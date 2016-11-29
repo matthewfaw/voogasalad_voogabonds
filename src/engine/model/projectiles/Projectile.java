@@ -5,6 +5,7 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
+import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
@@ -17,7 +18,7 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	private String myImagePath;
@@ -146,5 +147,24 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	@Override
 	public double getSize() {
 		return myCollisionRadius;
+	}
+	
+	/********** ICollidable Interface Methods ************/
+	@Override
+	public Point getLocation() {
+		return getPosition();
+	}
+	@Override
+	public double getRadius() {
+		return myCollisionRadius;
+	}
+	@Override
+	public void collideInto(ICollidable unmovedCollidable) {
+		unmovedCollidable.takeDamage(new Damage(myDamage));
+	}
+	@Override
+	public DamageInfo takeDamage(Damage damageDealt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

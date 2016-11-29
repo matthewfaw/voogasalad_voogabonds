@@ -2,6 +2,7 @@ package engine.model.machine;
 import java.util.List;
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
+import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
@@ -9,7 +10,7 @@ import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IWeapon;
 import utility.Damage;
 import utility.Point;
-abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController> {
+abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
 	private IModifiablePlayer myModifiablePlayer;
 	private Health myHealth;
 	private double myHeading;
@@ -60,20 +61,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		return myHealth.getHealth();
 	}
 	
-	@Override
-	public DamageInfo takeDamage(Damage dmg) {
-		double dmgTaken = myHealth.takeDamage(dmg);
-		
-		int unitsKilled = 0;
-		int moneyEarned = 0;
-		
-		if (myHealth.getHealth() <= 0){
-			unitsKilled++;
-			moneyEarned = die();
-		}
-		
-		return new DamageInfo(dmgTaken, unitsKilled, moneyEarned);
-	}
+	
 	
 	abstract protected int die();
 	public double getDistanceTo(Point p) {
@@ -120,6 +108,35 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public double getSize() {
 		return myCollisionRadius;
+	}
+	
+	
+	/********** ICollidable Interface Methods ************/
+	@Override
+	public Point getLocation() {
+		return getPosition();
+	}
+	@Override 
+	public double getRadius() {
+		return getCollisionRadius();
+	}
+	@Override
+	public void collideInto(ICollidable unmovedCollidable) {
+		//do nothing for now since machines will not deal dmg
+	}
+	@Override
+	public DamageInfo takeDamage(Damage dmg) {
+		double dmgTaken = myHealth.takeDamage(dmg);
+		
+		int unitsKilled = 0;
+		int moneyEarned = 0;
+		
+		if (myHealth.getHealth() <= 0){
+			unitsKilled++;
+			moneyEarned = die();
+		}
+		
+		return new DamageInfo(dmgTaken, unitsKilled, moneyEarned);
 	}
 	
 }
