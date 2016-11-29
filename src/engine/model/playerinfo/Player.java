@@ -2,11 +2,9 @@ package engine.model.playerinfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import authoring.model.PlayerData;
 import authoring.model.TowerData;
-import engine.IObservable;
 import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
@@ -39,6 +37,7 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 		myLives = initLives;
 		myMoney = startingMoney;
 		
+		//TODO: Get win and lose conditions from PlayerData
 		myLoseCon = new NeverLoseStrategy(this);
 		myWinCon = new NeverWinStrategy(this);
 		
@@ -110,6 +109,11 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 		}
 		return towerList;
 	}
+	
+	@Override
+	public boolean isAlly(IModifiablePlayer owner) {
+		return equals(owner);
+	}
 
 	@Override
 	public void addResourceStore(ResourceStore aResourceStore) {
@@ -135,4 +139,5 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
 	}
+
 }

@@ -7,8 +7,10 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
+import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
+import engine.model.playerinfo.IModifiablePlayer;
 import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
@@ -20,7 +22,7 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
+public class Projectile implements IViewable, IMovable, ICollidable, IObserver<TimelineController> {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	private String myImagePath;
@@ -110,7 +112,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		advance();
 		
 		//TODO: Remove if goes too far off map
-		
 	}
 	
 	private Point advance() {
@@ -123,7 +124,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 //		notifyListenersUpdate();
 		
 		if (myTarget.onMap() && myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
-			hitTarget();
+			hitUnit(myTarget);
 		} else if (myTraveled >= myMaxRange) {
 			explode();
 		}
@@ -131,8 +132,8 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		return myLocation;
 	}
 	
-	private void hitTarget() {
-		myTarget.takeDamage(myDamageCalc.getTargetDamage());
+	private void hitUnit(Machine hit) {
+		hit.takeDamage(myDamageCalc.getTargetDamage());
 		explode();
 	}
 	
@@ -143,7 +144,13 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		DamageInfo result = new DamageInfo();
 		
 		for (Machine m: targets) {
-			Damage toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition());
+
+			Damage toDeal;
+			if (getOwner().isAlly(m.getOwner()))
+				toDeal = myDamageCalc.getAoEAllyDamage(this, myTarget.getPosition());
+			else
+				toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition());
+			
 			result = result.add(m.takeDamage(toDeal));
 		}
 //		notifyListenersRemove();
@@ -167,4 +174,27 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	public double getSize() {
 		return myCollisionRadius;
 	}
+	
+	@Override
+	public IModifiablePlayer getOwner() {
+		return myOwner.getOwner();
+	}
+
+
+	@Override
+	public void collide(ICollidable unmoved) {
+		//This method is a bit of a mess; refactor?
+		if (getOwner().isAlly(myTarget.getOwner()))
+			if (getOwner().isAlly(unmoved.getOwner()))
+				//Projectile targets allies, unmoved is an ally
+				if (unmoved instanceof Machine)
+					hitUnit((Machine) unmoved);
+		else
+			if (!getOwner().isAlly(unmoved.getOwner()))
+				//Projectile targets enemies, unmoved is an enemy
+				if (unmoved instanceof Machine)
+					hitUnit((Machine) unmoved);
+		
+	}
+
 }

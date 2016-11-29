@@ -81,7 +81,10 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 			moneyEarned = die();
 		}
 		
-		return new DamageInfo(dmgTaken, unitsKilled, moneyEarned);
+		if (dmgTaken > 0)
+			return new DamageInfo(dmgTaken, 0, unitsKilled, moneyEarned);
+		else
+			return new DamageInfo(0, dmgTaken, unitsKilled, moneyEarned);
 	}
 	
 	abstract protected int die();
@@ -90,7 +93,8 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		return getPosition().euclideanDistance(p) - myCollisionRadius;
 	}
 	
-	public IModifiablePlayer getModifiablePlayerInfo() {
+	@Override
+	public IModifiablePlayer getOwner() {
 		return myModifiablePlayer;
 	}
 
