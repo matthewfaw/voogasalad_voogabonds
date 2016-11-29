@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import com.google.gson.*;
 
 public class JSONSerializer {
-	private static final String DEFAULT_FILE_LOCATION = "src/SerializedFiles";
+	private static final String DEFAULT_FILE_LOCATION = "src/SerializedFiles/";
 	
 	private Gson gson;
 	
