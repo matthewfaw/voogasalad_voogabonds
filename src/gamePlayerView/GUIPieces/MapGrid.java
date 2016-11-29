@@ -85,7 +85,6 @@ public class MapGrid extends Node{
         source.setX(closest.getX() + CELL_SIZE/2);
         source.setY(closest.getY() + CELL_SIZE/2);
         closest.setFill(new ImagePattern(source.getImage()));
-        
     }
     
     private double calculateDistance (double x, double y, double x2, double y2) {

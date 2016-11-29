@@ -4,6 +4,8 @@ import java.util.List;
 
 import authoring.model.map.MapData;
 import engine.IObservable;
+import engine.model.playerinfo.IViewablePlayer;
+import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
@@ -26,20 +28,24 @@ public class Router {
 		//myFrontendEnemySources = myGamePlayerScene.getEnemySources();
 	}
 	
+	public void distributeResourceStore(IViewableStore aResourceStore)
+	{
+		
+	}
+	
+	public void distributePlayer(IViewablePlayer aPlayer)
+	{
+		//This is where you'll get player specific info such as money and lives
+	}
+	
+	//TODO:
+//	public void distributeGameState()
+	
 	public void distributeMapData(MapData aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
 	}
 	
-	public void distributeCash(IObservable aCash){
-		//myCash.acceptCash(aCash);
-	}
-	public void distributeLives(IObservable aLives){
-		//myLives.acceptLives(aLives); 
-	}
-	public void distributeWaves(IObservable aWaves){
-		//myWaves.acceptWaves(aWaves); 
-	}
 	
 	/**
 	 * An example to follow for setting up the router
