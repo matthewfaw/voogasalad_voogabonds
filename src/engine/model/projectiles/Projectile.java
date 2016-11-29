@@ -34,7 +34,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	
 	private double myHeading;
 	private Point myLocation;
-	private double myRadius;
+	private double myCollisionRadius;
 	
 	IDamageStrategy myDamageCalc;
 	double myDamage;
@@ -56,7 +56,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myTraveled = 0;
 		mySpeed = data.getSpeed();
 		myTurnSpeed = data.getTurnSpeed();
-		myRadius = data.getCollisionRadius();
+		myCollisionRadius = data.getCollisionRadius();
 		
 		myValidTerrain = data.getValidTerrains();
 
@@ -84,10 +84,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		return myImagePath;
 	}
 
-	@Override
-	public Point getLocation() {
-		return myLocation;
-	}
 
 	@Override
 	public Point getGoal() {
@@ -106,7 +102,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	
 	@Override
 	public double getCollisionRadius() {
-		return myRadius;
+		return myCollisionRadius;
 	}
 
 	@Override
@@ -155,7 +151,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		
 	}
 
-
 	@Override
 	public List<Terrain> getValidTerrains() {
 		return myValidTerrain;
@@ -163,7 +158,13 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 
 
 	@Override
-	public void setLocation(Point aLocation) {
+	public void setPosition(Point aLocation) {
 		myLocation = aLocation;
+	}
+
+
+	@Override
+	public double getSize() {
+		return myCollisionRadius;
 	}
 }
