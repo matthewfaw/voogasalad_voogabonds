@@ -1,33 +1,34 @@
 package gamePlayerView.GUIPieces;
 
 import authoring.model.map.MapData;
+import engine.IObserver;
+import engine.controller.timeline.TimelineController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-public class MapDisplay {
+public class MapDisplay implements IObserver<TimelineController> {
     
-    private Group myRoot;
-    private Pane thing;
+    private Pane myRoot;
+    private Pane myPane;
     private MapGrid background;
     private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     
+	//TODO: matthewfaw
+    //Set up map from backend
+    //register as observer of timeline
     public MapDisplay() throws Exception{
-        
-        myRoot = new Group();
-        thing = new Pane();
+        myRoot = new Pane();
+        myPane = new Pane();
         init();
         MapData temp = new MapData();
         temp.setNumXCells(10);
@@ -41,11 +42,12 @@ public class MapDisplay {
         {
             for(int j = 0; j < background.getNumCols(); j++)
             {
-                thing.getChildren().add(background.fillCell(i, j));
+                myPane.getChildren().add(background.fillCell(i, j, aMapData));
             }
         }
         
-        myRoot.getChildren().add(thing);
+        myRoot.getChildren().add(myPane);
+        background.setRoot(myRoot);
     }
     
     public void init(){
@@ -72,21 +74,6 @@ public class MapDisplay {
             }
         });
         
-//        myScene.setOnDragExited(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                ImageView source = new ImageView();
-//                source.setImage(event.getDragboard().getImage());
-////                source.setX(event.getX()-source.getImage().getWidth()/2);
-////                source.setY(event.getY()-source.getImage().getHeight()/2);
-////                System.out.println("X and Y of dropped tower: " + source.getX() + ", " + source.getY());
-//                //TODO: add tower to list of towers
-//                //background.findDropLocation(event.getX(), event.getY(), source);
-//                //System.out.println("X and Y of dropped tower: " + source.getX() + ", " + source.getY());
-////                thing.getChildren().add(source);
-//                event.consume();
-//            }
-//        });
-        
         myScene.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event){
                 Dragboard db = event.getDragboard();
@@ -102,13 +89,23 @@ public class MapDisplay {
     }
 
 
+    //Use the update(TimelineController) method instead
+    @Deprecated 
     public void step (double elapsedTime) {
         //game-specific definition of a step
         //bad guys move, etc...
         //call every other classes step function
+        
+        
+        
     }
     
     public Node getView() {
         return myRoot;
     }
+
+	@Override
+	public void update(TimelineController aChangedObject) {
+		//step
+	}
 }
