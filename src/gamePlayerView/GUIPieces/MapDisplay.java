@@ -1,6 +1,8 @@
 package gamePlayerView.GUIPieces;
 
 import authoring.model.map.MapData;
+import engine.IObserver;
+import engine.controller.timeline.TimelineController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-public class MapDisplay {
+public class MapDisplay implements IObserver<TimelineController> {
     
     private Group myRoot;
     private Pane thing;
@@ -24,6 +26,9 @@ public class MapDisplay {
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     
+	//TODO: matthewfaw
+    //Set up map from backend
+    //register as observer of timeline
     public MapDisplay() throws Exception{
         
         myRoot = new Group();
@@ -102,6 +107,8 @@ public class MapDisplay {
     }
 
 
+    //Use the update(TimelineController) method instead
+    @Deprecated 
     public void step (double elapsedTime) {
         //game-specific definition of a step
         //bad guys move, etc...
@@ -111,4 +118,9 @@ public class MapDisplay {
     public Node getView() {
         return myRoot;
     }
+
+	@Override
+	public void update(TimelineController aChangedObject) {
+		//step
+	}
 }
