@@ -13,7 +13,10 @@ public class TowerController {
 	
 	public void init() {
 		JSONDeserializer djson = new JSONDeserializer();
-		TowerData tdata = (TowerData) djson.deserializeFromFile("towers/ActualTower", TowerData.class);
+		TowerData tdata;
+		try {
+			tdata = (TowerData) djson.deserializeFromFile("towers/ActualTower", TowerData.class);
+		
 		List<String> terrainstrings = new ArrayList<String>();
 		terrainstrings.add("grass");
 		tdata.setTraversableTerrain(terrainstrings);
@@ -26,6 +29,8 @@ public class TowerController {
 		TowerNode towernode = new TowerNode(tower, null);
 		towernode.setSellPrice(tdata.getSellPrice());
 		towernode.setPrice(tdata.getBuyPrice());
+		} catch (Exception e) {
+		}
 		
 		
 	}
