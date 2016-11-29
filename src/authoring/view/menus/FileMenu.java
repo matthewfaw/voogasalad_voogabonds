@@ -58,7 +58,6 @@ public class FileMenu extends Menu {
 					MainMenu newInstance = new MainMenu(new MainInitializer(s), s);
 					newInstance.init();
 				} catch (IOException e) {
-					e.printStackTrace();
 				}
 			}
 		});
@@ -102,7 +101,11 @@ public class FileMenu extends Menu {
 					File file = newGameSave.showSaveDialog(stage);
 					if (file != null) {
 						JSONSerializer json = new JSONSerializer();
-						//TODO: Serialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
+						try {
+							json.serializeToFile(file, file.getAbsolutePath());
+						} catch (Exception e1) {
+							System.out.println("Unable to save current game state.");
+						}
 					}
 				}
 		});

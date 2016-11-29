@@ -41,10 +41,10 @@ public class TowerMenu {
     private ComboBox<String> myWeaponChoice;
     //private ComboBox<String> myMovementChoice;
     
-    public TowerMenu(ResourceBundle resources, TowerTab tab) {
+    public TowerMenu(ResourceBundle resources, TowerTab tab, TowerDataController towerController) {
         myResources = resources;
         myTab = tab;
-        myController = new TowerDataController();
+        myController = towerController;
         myHelper = new MenuHelper(myResources);
     }
     

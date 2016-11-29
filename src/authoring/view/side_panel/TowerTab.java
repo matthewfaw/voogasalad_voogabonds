@@ -49,7 +49,7 @@ public class TowerTab extends Tab {
 		screenInfo();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.towerTab = new Tab(myResources.getString("Towers"));
-		myMenu = new TowerMenu(myResources,this);
+		myMenu = new TowerMenu(myResources,this,controller);
 		myController = controller;
 		initializeLists();
 		towerTabOptions(towerTab);
@@ -68,7 +68,38 @@ public class TowerTab extends Tab {
                 public void handle(MouseEvent event) {
                         if (event.getClickCount() == 2 && towers.getSelectionModel().getSelectedItem()!=null) {
                                 TowerData td = myController.getTowerData(towers.getSelectionModel().getSelectedItem());
-                                // TODO: View/Edit Some Data
+                                // "" are added to convert ints to Strings
+                                String sizeVal = "1";
+                                String nameVal, imageVal, healthVal, buyVal, sellVal;
+                                // Clean up
+                                try {
+                                    nameVal = td.getName();
+                                } catch (NullPointerException e) {
+                                    nameVal = "null";
+                                }
+                                try {
+                                    imageVal = td.getImagePath();
+                                } catch (NullPointerException e) {
+                                    imageVal = "null";
+                                }
+                                try {
+                                    healthVal = td.getMaxHealth()+"";
+                                } catch (NullPointerException e) {
+                                    healthVal = "null";
+                                }
+                                try {
+                                    buyVal = td.getBuyPrice()+"";
+                                } catch (NullPointerException e) {
+                                    buyVal = "null";
+                                }
+                                try {
+                                    sellVal = td.getSellPrice()+"";
+                                } catch (NullPointerException e) {
+                                    sellVal = "null";
+                                }
+                                
+                                
+                                myMenu.createTowerMenu(nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal);
                         }
                 }
         });
@@ -134,15 +165,15 @@ public class TowerTab extends Tab {
 	    return listener;
 	}
 
-	public SetChangeListener<String> createTerrainListener(){
-	    SetChangeListener<String> listener = new SetChangeListener<String>() {
+	public MapChangeListener<String, String> createTerrainListener(){
+	    MapChangeListener<String, String> listener = new MapChangeListener<String, String>() {
 	        @Override
-	        public void onChanged(SetChangeListener.Change<? extends String> change) {
+	        public void onChanged(MapChangeListener.Change<? extends String, ? extends String> change) {
 	            if (change.wasAdded()){
-	                myTerrains.add(change.getElementAdded());
+	                myTerrains.add(change.getKey());
 	            }
 	            else if (change.wasRemoved()){
-	                myTerrains.remove(change.getElementRemoved());
+	                myTerrains.remove(change.getKey());
 	            }
 	        }
 	    };

@@ -23,13 +23,13 @@ public class Router {
 		//Listeners for EnemyTab
 		wedc.addControllerListener(eTab.createWeaponListener());
 		mdc.addTerrainListener(eTab.createTerrainListener());
-            
-                //TowerTab
-                wedc.addControllerListener(tTab.createWeaponListener());
-                mdc.addTerrainListener(tTab.createTerrainListener());
+
+        //TowerTab
+        wedc.addControllerListener(tTab.createWeaponListener());
+        mdc.addTerrainListener(tTab.createTerrainListener());
 		
 		//GameTab
-                
+
 	}
 	
 	public EnemyDataController getEnemyDataController(){

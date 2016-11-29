@@ -59,8 +59,14 @@ public class NewGameTab {
 						FileChooser newGameSave = new FileChooser();
 						Stage stage = new Stage();
 						File file = newGameSave.showSaveDialog(stage);
-						System.out.println("Name of File: " + file.getName() + " Path of File: " + file.getAbsolutePath());
-						//TODO: Need to implement some sort of FileInputStream here?
+						if (file != null) {
+							JSONSerializer json = new JSONSerializer();
+							try {
+								json.serializeToFile(file, file.getName());
+							} catch (Exception exception) {
+								System.out.println("Cannot create new game.");
+							}
+						}
 					}
 				});
 	}
