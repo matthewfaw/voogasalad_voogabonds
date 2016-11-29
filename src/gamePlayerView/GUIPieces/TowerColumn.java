@@ -46,7 +46,6 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	private VBox myTowerColumn;
 	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
-	private TextArea towerDataDisplay= new TextArea();
 	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
 
 	
@@ -62,7 +61,6 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		
 		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
 		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
-		
 		VBox vbox = new VBox();
 		vbox.setPrefWidth(200);
 		vbox.setPrefHeight(600);
@@ -71,24 +69,24 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	    //TODO:Export CSS to other part
 	    vbox.setStyle("-fx-background-color: #778899;");
 	    
-	    Label l = new Label("TOWERS");
-	    l.setFont(new Font("Cambria",18));
+	    Label heading = new Label("TOWERS");
+	    heading.setFont(new Font("Cambria",18));
 	    
-	    towerInfo= populatetowerInfo(availableTowers);
-	    setDragFunctionality();
-        setPopulateFunctionality();
+	    TextArea towerDataDisplay= new TextArea();
+	    towerInfo= populatetowerInfo(availableTowers,towerDataDisplay);
 	    
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
-	    //resourceTabs.getTabs().add(buildTab(resourceInfo, "Resources"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
-	    vbox.getChildren().addAll(l,resourceTabs,towerDataDisplay);
+	    vbox.getChildren().addAll(heading,resourceTabs,towerDataDisplay);
 	    
 	    return vbox;
 	}
-
-	private ListView<ImageView> populatetowerInfo(List<TowerData> towers) {
+	/*
+	 * Creates ListView for the selected towerData
+	 */
+	private ListView<ImageView> populatetowerInfo(List<TowerData> towers, TextArea towerDataDisplay) {
 		ObservableList<ImageView> items =FXCollections.observableArrayList();
 		ListView<ImageView> towerSet= new ListView<ImageView>();
 		towerSettings.clear();
@@ -100,30 +98,36 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 			items.add(towerPicture);
 		}
         towerSet.setItems(items);
+        setDragFunctionality(towerSet);
+        setPopulateFunctionality(towerSet,towerDataDisplay);
 		return towerSet;
 	}
-
-	private void setPopulateFunctionality() {
-		towerInfo.setOnMouseClicked(new EventHandler<MouseEvent>(){
+	/*
+	 * Sets Mouse Click event for List View
+	 */
+	private void setPopulateFunctionality(ListView<ImageView> towerSet, TextArea towerDataDisplay) {
+		towerSet.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
-                ImageView towerChosen = towerInfo.getSelectionModel().getSelectedItem();
+                ImageView towerChosen = towerSet.getSelectionModel().getSelectedItem();
                 //TowerData tower=towerSettings.get(towerChosen);
                 //PopulateTowerDataDisplay(tower);
             }  
         });
 	}
-	
-	private void PopulateTowerDataDisplay(TowerData tower) {
+	/*
+	 * Allows Text Area to display attributes based on the Tower selected in the ListView
+	 */
+	private void PopulateTowerDataDisplay(TowerData tower,TextArea towerDataDisplay) {
 		String info= new String(tower.getName());
 		towerDataDisplay.setText(info);
 	}
-
-	private void setDragFunctionality() {
-		towerInfo.setOnDragDetected(new EventHandler<MouseEvent>(){
+	
+	private void setDragFunctionality(ListView<ImageView> towerSet) {
+		towerSet.setOnDragDetected(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
-                Dragboard db = towerInfo.startDragAndDrop(TransferMode.MOVE);
+                Dragboard db = towerSet.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
-                towerToBeDragged = towerInfo.getSelectionModel().getSelectedItem();
+                towerToBeDragged = towerSet.getSelectionModel().getSelectedItem();
                 content.putImage(towerToBeDragged.getImage());
                 db.setContent(content);
                 event.consume();
