@@ -192,16 +192,17 @@ public class MapDataController extends Controller implements IReadableData, IObs
 			throw new Exception("No terrain specified.");
 		}
 		validTerrain.put(name, color);
+		notifyObservers();
 		System.out.println("Added Terrain: " + name);
 	}
-	
 	public void removeValidTerrain(String name) throws Exception{
 		if (validTerrain.containsKey(name)){
 			validTerrain.remove(name);
+			notifyObservers();
 		}
 	}
 	
-	public HashMap<String, String> getValidTerrain(){
+	public HashMap<String, String> getValidTerrainMap(){
 		return validTerrain;
 	}
 	

@@ -24,15 +24,21 @@ public class WeaponDataController extends Controller implements IObservable<Cont
 	
 	public void createWeaponData(WeaponData weaponData){
 		myWeaponDataMap.put(weaponData.getName(), weaponData);
+		notifyObservers();
 	}
 	
 	public WeaponData getWeaponData(String weaponName){
 		return myWeaponDataMap.get(weaponName);
 	}
 	
+	public AbstractMap<String, WeaponData> getWeaponDataMap(){
+		return myWeaponDataMap;
+	}
+	
 	public void updateWeaponData(String originalName, WeaponData updatedWeapon){
 		myWeaponDataMap.remove(originalName);
 		createWeaponData(updatedWeapon);
+		notifyObservers();
 	}
 	
 	public void attach(IObserver<Controller> listener){
@@ -44,7 +50,7 @@ public class WeaponDataController extends Controller implements IObservable<Cont
 	}
 	
 	public void notifyObservers(){
-		for (IObserver observer: myListeners){
+		for (IObserver<Controller> observer: myListeners){
 			observer.update(this);
 		}
 	}
