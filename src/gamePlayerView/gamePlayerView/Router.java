@@ -67,6 +67,10 @@ public class Router {
 		//TODO: distribute to all interested frontend objects
 	}
 	
+	public void distributeMoveableComponent(IViewableMoveableComponent aComponent)
+	{
+		myGamePlayerScene.getMapDisplay().
+	}
 	
 	/**
 	 * An example to follow for setting up the router
