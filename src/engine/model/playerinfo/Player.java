@@ -6,6 +6,8 @@ import java.util.Observable;
 
 import authoring.model.PlayerData;
 import authoring.model.TowerData;
+import engine.IObservable;
+import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.strategies.winlose.IWinLoseStrategy;
@@ -14,7 +16,7 @@ import engine.model.strategies.winlose.NeverWinStrategy;
  
 
 //TODO: Implement all unimplemented methods
-public class Player extends Observable implements IViewablePlayer, IModifiablePlayer {
+public class Player implements IViewablePlayer, IModifiablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
@@ -23,6 +25,8 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	
 	private IWinLoseStrategy myWinCon;
 	private IWinLoseStrategy myLoseCon;
+	
+	private List<IObserver<IViewablePlayer>> myObservers;
 	
 	public Player(PlayerData aPlayerData)
 	{
@@ -45,9 +49,7 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	@Override
 	public void updateLivesRemaining(int deltaLives) {
 		myLives = myLives + deltaLives;
-		setChanged();
-		notifyObservers(0);
-		
+		notifyObservers();
 	}
 	/**
 	 * 1 corresponds to funds change
@@ -55,9 +57,7 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
-		setChanged();
-		notifyObservers(1);
-		
+		notifyObservers();
 	}
 	
 	@Override
@@ -116,5 +116,19 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	@Override
 	public void removeResourceStore(ResourceStore aResourceStore) {
 		myResourceStores.remove(aResourceStore);
+	}
+
+	//**********************Observable interface******************//
+	@Override
+	public void attach(IObserver<IViewablePlayer> aObserver) {
+		myObservers.add(aObserver);
+	}
+	@Override
+	public void detach(IObserver<IViewablePlayer> aObserver) {
+		myObservers.remove(aObserver);
+	}
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
 	}
 }
