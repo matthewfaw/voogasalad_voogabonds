@@ -44,6 +44,20 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		move();
 		myWeapon.fire(myHeading, myPosition);
 	}
+	@Override
+	public DamageInfo takeDamage(Damage dmg) {
+		double dmgTaken = myHealth.takeDamage(dmg);
+		
+		int unitsKilled = 0;
+		int moneyEarned = 0;
+		
+		if (myHealth.getHealth() <= 0){
+			unitsKilled++;
+			moneyEarned = die();
+		}
+		
+		return new DamageInfo(dmgTaken, unitsKilled, moneyEarned);
+	}
 	
 	private void move() {
 		//TODO: Move with movement strategy
@@ -123,20 +137,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void collideInto(ICollidable unmovedCollidable) {
 		//do nothing for now since machines will not deal dmg
-	}
-	@Override
-	public DamageInfo takeDamage(Damage dmg) {
-		double dmgTaken = myHealth.takeDamage(dmg);
-		
-		int unitsKilled = 0;
-		int moneyEarned = 0;
-		
-		if (myHealth.getHealth() <= 0){
-			unitsKilled++;
-			moneyEarned = die();
-		}
-		
-		return new DamageInfo(dmgTaken, unitsKilled, moneyEarned);
 	}
 	
 }
