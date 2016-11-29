@@ -137,7 +137,6 @@ public class EnemyTab extends Tab implements IObserver<Controller>{
 			}
 		}else if(c instanceof MapDataController){
 			myTerrains.clear();
-			System.out.println("Terrain added!");
 			for (String terrainName: ((MapDataController) c).getValidTerrainMap().keySet()){
 				myTerrains.add(terrainName);
 			}
