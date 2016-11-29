@@ -5,6 +5,7 @@ package engine.model.machine;
  *
  */
 public interface IHealth {
-	public int getHealth();
+	public double getHealth();
 	public void updateHealth(IHealth deltaHealth);
+	public void setHealthAsDamage(); //negates value of health
 }

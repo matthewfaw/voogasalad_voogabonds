@@ -7,7 +7,10 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
+import engine.model.collision_detection.IDamageDealer;
 import engine.model.game_environment.terrain.Terrain;
+import engine.model.machine.Health;
+import engine.model.machine.IHealth;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Damage;
@@ -20,7 +23,7 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController> {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, IDamageDealer {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	private String myImagePath;
@@ -37,7 +40,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	private double myRadius;
 	
 	IDamageStrategy myDamageCalc;
-	double myDamage;
+	IHealth myDamage;
 	int myMaxRange;
 	int myAoERadius;
 	
@@ -63,7 +66,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
 		myAoERadius = data.getAreaOfEffectRadius();
-		myDamage = data.getDamage();	
+		myDamage = new Health(data.getDamage());	
 		
 		time.attach(this);
 	}
@@ -165,5 +168,13 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	@Override
 	public void setLocation(Point aLocation) {
 		myLocation = aLocation;
+	}
+
+	/**
+	 * IDamageDealer interface method
+	 */
+	@Override
+	public IHealth getDamageDealt() {
+		return myDamage;
 	}
 }

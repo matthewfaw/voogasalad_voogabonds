@@ -7,7 +7,7 @@ public class CollisionHandler implements ICollisionHandler{
 	 */
 	@Override
 	public void handleCollision(ICollidable moved, ICollidable unmoved) {
-		moved.collideWith(unmoved);
+		moved.collideInto(unmoved);
 	}
 
 }

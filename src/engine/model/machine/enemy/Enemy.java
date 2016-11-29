@@ -1,5 +1,6 @@
 package engine.model.machine.enemy;
 
+import engine.model.collision_detection.ICollidable;
 import engine.model.machine.Machine;
 import engine.model.resourcestore.IMoney;
 import engine.model.weapons.DamageInfo;

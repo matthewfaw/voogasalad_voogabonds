@@ -3,6 +3,8 @@ package engine.model.machine;
 import java.util.List;
 
 import engine.IViewable;
+import engine.model.collision_detection.ICollidable;
+import engine.model.collision_detection.IDamageTaker;
 import engine.model.components.IComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.terrain.Terrain;
@@ -12,10 +14,12 @@ import engine.model.weapons.DamageInfo;
 import utility.Damage;
 import utility.Point;
 
-public abstract class Machine implements IViewable, IViewableMachine, IModifiableMachine, IEntity, IMovable {
+public abstract class Machine implements IViewable, IViewableMachine, IModifiableMachine, IEntity, IMovable, ICollidable, IDamageTaker {
 
 	private IModifiablePlayer myModifiablePlayer;
 	private IHealth health;
+	private int radius;
+	private Point location;
 	
 	public Machine (int initialHealth) {
 		health = new Health(initialHealth);
@@ -74,11 +78,7 @@ public abstract class Machine implements IViewable, IViewableMachine, IModifiabl
 		return true;
 	}
 	
-	@Override
-	public Point getLocation() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	@Override
 	public Point getGoal() {
 		return null;
@@ -110,4 +110,30 @@ public abstract class Machine implements IViewable, IViewableMachine, IModifiabl
 		// TODO Auto-generated method stub
 	}
 	
+	/********** ICollidable Interface **********/
+	@Override
+	public Point getLocation() {
+		// TODO Auto-generated method stub
+		return location;
+	}
+	
+	@Override 
+	public double getRadius() {
+		// TODO
+		return radius;
+	}
+	
+	@Override 
+	public void collideInto(ICollidable unmovedCollidable) {
+		// TODO
+	}
+	/*******************************************/
+	
+	@Override
+	public void takeDamage(IHealth damageTaken) {
+		// damageTaken is positive
+		// need to modify health with a negative value
+		damageTaken.setHealthAsDamage();
+		modifyHealth(damageTaken);
+	}
 }

@@ -1,5 +1,6 @@
 package engine.model.machine.tower;
 
+import engine.model.machine.IHealth;
 import engine.model.machine.IPurchasable;
 import engine.model.machine.Machine;
 import engine.model.resourcestore.IMoney;
@@ -10,6 +11,8 @@ import utility.Point;
 
 import java.util.List;
 
+import engine.model.collision_detection.ICollidable;
+import engine.model.collision_detection.IDamageTaker;
 import engine.model.game_environment.terrain.Terrain;
 
 public class Tower extends Machine implements IPurchasable{
@@ -32,5 +35,6 @@ public class Tower extends Machine implements IPurchasable{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 }
