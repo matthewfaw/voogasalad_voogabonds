@@ -1,6 +1,8 @@
 package gamePlayerView.GUIPieces;
 
+import java.util.ArrayList;
 import authoring.model.map.MapData;
+import engine.model.machine.IViewableMachine;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,7 +14,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-public class MapDisplay {
+public class MapDisplay{
     
     private Pane myRoot;
     private Pane myPane;
@@ -26,8 +28,8 @@ public class MapDisplay {
         myPane = new Pane();
         init();
         MapData temp = new MapData();
-        temp.setNumXCells(10);
-        temp.setNumYCells(10);
+        temp.setNumXCells(14);
+        temp.setNumYCells(12);
         background = new MapGrid(temp.getNumXCells(), temp.getNumYCells());
         setMap(temp);
     }
@@ -87,9 +89,7 @@ public class MapDisplay {
     public void step (double elapsedTime) {
         //game-specific definition of a step
         //bad guys move, etc...
-        //call every other classes step function
-        
-        
+        //call every other classes step function        
         
     }
     
