@@ -17,12 +17,12 @@ public class WaveData implements IReadableData {
 	private String waveEnemy;
 	
 	/**
-	 * Time between each enemy (so they don't all show up at once).
+	 * Time between each enemy (so they don't all show up at once) in milliseconds.
 	 */
 	private double timeBetweenEnemy;
 	
 	/**
-	 * How long this wave is supposed to last, the amount of time before the next wave.
+	 * How long this wave is supposed to last, the amount of time before the next wave, in seconds.
 	 */
 	private double timeForWave;
 	

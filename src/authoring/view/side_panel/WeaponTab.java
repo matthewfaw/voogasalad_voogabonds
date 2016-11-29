@@ -29,6 +29,7 @@ public class WeaponTab extends Tab {
     private WeaponDataController myController;
     private VBox myContent;
     
+
     public WeaponTab(TabPane pane, WeaponDataController controller) {
         screenInfo();
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
@@ -54,7 +55,7 @@ public class WeaponTab extends Tab {
         weaponArea.getChildren().addAll(currentWeapons, weaponButtons);
         weaponTab.setContent(weaponArea);
     }
-    
+
     private EventHandler<ActionEvent> addWeaponHandler(){
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event){
@@ -64,8 +65,8 @@ public class WeaponTab extends Tab {
                 }
         };
         return handler;
-}
-    
+    }
+
     private void screenInfo() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = (int) screenSize.getWidth();

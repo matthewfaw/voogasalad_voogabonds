@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 
-	private MainInitalizer controller;
+	private MainInitializer controller;
 	
 	@Override
 	public void start (Stage s) throws IOException {
-		controller = new MainInitalizer(s);
+		controller = new MainInitializer(s);
 		s.setTitle(controller.getTitle());
 	}
 	
