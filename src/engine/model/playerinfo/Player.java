@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import authoring.model.PlayerData;
 import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.ResourceStore;
@@ -23,7 +24,11 @@ public class Player extends Observable implements IViewablePlayer, IModifiablePl
 	private IWinLoseStrategy myWinCon;
 	private IWinLoseStrategy myLoseCon;
 	
-	public Player(int ID, int initLives, IMoney startingMoney) {
+	public Player(PlayerData aPlayerData)
+	{
+		
+	}
+	private Player(int ID, int initLives, IMoney startingMoney) {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
