@@ -5,6 +5,7 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
+import engine.model.collision_detection.ICollidable;
 import engine.model.components.MoveableComponent;
 
 /**
@@ -84,13 +85,13 @@ public class CollisionDetection implements ISystem, IObserver<MoveableComponent>
 	}
 
 	@Override
-	public void register(Registerable registerable) {
+	public void register(ICollidable collidable) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deregister(Registerable registerable) {
+	public void unregister(ICollidable collidable) {
 		// TODO Auto-generated method stub
 		
 	}

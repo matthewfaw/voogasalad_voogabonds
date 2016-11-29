@@ -17,11 +17,11 @@ public interface ISystem {
 	 * Adds aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void register(Registerable registerable);
+	public void register(ICollidable collidable);
 	
 	/**
 	 * Removes aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void deregister(Registerable registerable);
+	public void unregister(ICollidable collidable);
 }

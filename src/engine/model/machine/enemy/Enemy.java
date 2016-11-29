@@ -9,7 +9,7 @@ public class Enemy extends Machine {
 	@Override
 	protected int die() {
 		//TODO: Delete self
-		deregister();
+		unregister();
 		return myBounty.getValue();
 	}
 }

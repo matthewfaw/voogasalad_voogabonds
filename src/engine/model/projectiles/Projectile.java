@@ -142,7 +142,7 @@ public class Projectile extends Registerable implements IViewable, IMovable, IOb
 		myOwner.notifyDestroy(result);
 		
 		// remove references
-		deregister();
+		unregister();
 	}
 	@Override
 	public List<Terrain> getValidTerrains() {

@@ -64,6 +64,7 @@ public class CollisionDetectionTemp extends RegisterableSystem implements IObser
 	public void addComponent(ICollidable aNewComponent)
 	{
 		myCollidables.add(aNewComponent);
+		register(aNewComponent);
 	}
 
 	public void removeComponent(ICollidable aNewComponent)
