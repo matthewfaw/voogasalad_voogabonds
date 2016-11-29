@@ -137,7 +137,6 @@ public class WaveLevelTab extends Tab  {
 			public void onChanged(MapChangeListener.Change<? extends String, ? extends ArrayList<Point>> change) {
 				if (change.wasAdded()){
 					mySpawnPoints.add(change.getKey());
-					System.out.println("Hi spawn point added.");
 				}
 				else if (change.wasRemoved()){
 					mySpawnPoints.remove(change.getKey());
