@@ -46,7 +46,7 @@ public class Router {
 	 * @param aResourceStore
 	 */
 	/*
-	public void distributesResourceStore(IViewableResourceStore aResourceStore)
+	public void distributeResourceStore(IViewableResourceStore aResourceStore)
 	{
 		myGamePlayerScene.getResourceStoreAcceptors().forEach(acceptor -> acceptor.acceptResourceStore(aResourceStore));
 	}

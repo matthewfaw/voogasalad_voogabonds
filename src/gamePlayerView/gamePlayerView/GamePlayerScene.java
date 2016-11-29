@@ -103,6 +103,12 @@ public class GamePlayerScene {
 	public void giveMapData(MapData aMapData){
 	        myMap.setMap(aMapData);
 	}
+
+	/*public List<IResourceAcceptor> getResourceStoreAcceptors() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+	
 }
 
 

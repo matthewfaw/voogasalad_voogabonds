@@ -63,6 +63,7 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	    l.setFont(new Font("Cambria",18));
 	    
 	    towerInfo= new ListView<ImageView>();
+	    //towerInfo= populatetowerInfo();
 	    
 	    ObservableList<ImageView> items =FXCollections.observableArrayList();
 	    ImageView imgV1 = new ImageView();
@@ -100,6 +101,11 @@ public class TowerColumn implements /*, IResourceStoreAcceptor, */IGUIPiece {
 	    vbox.getChildren().addAll(l,resourceTabs,towerDataDisplay);
 	    
 	    return vbox;
+	}
+
+	private ListView<ImageView> populatetowerInfo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private void setPopulateFunctionality() {
