@@ -1,19 +1,17 @@
 package engine.model.machine;
-
 import java.util.List;
-
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
+import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.projectiles.Projectile;
 import engine.model.strategies.IMovable;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IWeapon;
 import utility.Damage;
 import utility.Point;
-
-abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController> {
-
+abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
 	private IModifiablePlayer myModifiablePlayer;
 	private Health myHealth;
 	private double myHeading;
@@ -42,7 +40,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public void setPossibleTerrains(List<Terrain> l) {
 		myValidTerrains = l;
 	}
-
 	@Override
 	public void update(TimelineController time) {
 		move();
@@ -52,18 +49,14 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	private void move() {
 		//TODO: Move with movement strategy
 	}
-
 	@Override
 	public String getImagePath() {
 		return null;
 	}
-
 	@Override
 	public double getHeading() {
 		return myHeading;
 	}
-
-
 	@Override
 	public double getHealth() {
 		return myHealth.getHealth();
@@ -86,9 +79,9 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		else
 			return new DamageInfo(0, dmgTaken, unitsKilled, moneyEarned);
 	}
+
 	
 	abstract protected int die();
-
 	public double getDistanceTo(Point p) {
 		return getPosition().euclideanDistance(p) - myCollisionRadius;
 	}
@@ -97,7 +90,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public IModifiablePlayer getOwner() {
 		return myModifiablePlayer;
 	}
-
 	public boolean onMap() {
 		return true;
 	}
@@ -128,16 +120,28 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public List<Terrain> getValidTerrains() {
 		return myValidTerrains;
 	}
-
 	@Override
 	public void setPosition(Point p) {
 		myPosition = p;
 	}
-
 	@Override
 	public double getSize() {
 		return myCollisionRadius;
 	}
-
+	
+	
+	/********** ICollidable Interface Methods ************/
+	@Override
+	public void collideInto(ICollidable movedCollidable) {
+		movedCollidable.collideInto(this);
+	}
+	@Override
+	public void collideInto(Machine unmovedCollidable) {
+		//do nothing for now since machines will not deal dmg
+	}
+	@Override
+	public void collideInto(Projectile unmovedCollidable) {
+		//do nothing for now since machines will not deal dmg
+	}
 	
 }
