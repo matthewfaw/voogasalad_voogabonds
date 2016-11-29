@@ -1,5 +1,6 @@
 package engine.model.machine.tower;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,23 +10,34 @@ import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
 
 public class TowerNode {
+	private TowerData myTowerData;
+
 	private String myName;
 	private IMoney myBuyPrice;
 	private IMoney mySellPrice;
 	private int myMaxHealth;
 	private List<TowerNode> myUpgradeFroms;
 	private List<TowerNode> myUpgradeTos;
-	private Map<TowerNode, IMoney> myUpgradeCostMap = new HashMap<TowerNode, IMoney>();
+	private Map<TowerNode, IMoney> myUpgradeCostMap;
 	
-	public TowerNode(TowerData towerdata) {
-		initData(towerdata);
+	public TowerNode(TowerData towerData) {
+		myTowerData = towerData;
+		initData(towerData);
 		
+		myUpgradeFroms = new ArrayList<TowerNode>();
+		myUpgradeTos = new ArrayList<TowerNode>();
+		myUpgradeCostMap = new HashMap<TowerNode, IMoney>();
 	}
 	
 	private void initData(TowerData towerdata) {
 		myName = towerdata.getName();
 		myBuyPrice = new Money(towerdata.getBuyPrice());
 		mySellPrice = new Money(towerdata.getSellPrice());
+	}
+	
+	public TowerData getTowerData()
+	{
+		return myTowerData;
 	}
 
 	public List<TowerNode> getUpgradeTos(){
@@ -59,5 +71,18 @@ public class TowerNode {
 	
 	public void setPrice(int price) {
 		myBuyPrice = new Money(price);
+	}
+	
+	public void addUpgradeTo(TowerNode aNode)
+	{
+		myUpgradeTos.add(aNode);
+		int upgradeCost = myTowerData.getUpgradeFrom().get(aNode.getName());
+		myUpgradeCostMap.put(aNode, new Money(upgradeCost));
+		aNode.addUpgradeFrom(this);
+	}
+
+	private void addUpgradeFrom(TowerNode aNode)
+	{
+		myUpgradeFroms.add(aNode);
 	}
 }
