@@ -73,7 +73,7 @@ public class GamePlayerScene {
 	}
 	
 	public BorderPane setScreen() throws Exception{
-	        myMap = new MapDisplay();
+	    myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
 		BorderPane borderpane=new BorderPane();
@@ -107,8 +107,8 @@ public class GamePlayerScene {
 	}
 
 	public List<IResourceAcceptor> getResources() {
-		//TODO;Refactor later to seperate the Resource object from tower column. Not doingnow to screw with Grayson's stuff
-		myResources.add(myTowerColumn);
+		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
+		//myResources.add(myTowerColumn);
 		return null;
 	}
 

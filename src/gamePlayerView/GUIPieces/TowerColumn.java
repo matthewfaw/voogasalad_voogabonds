@@ -1,3 +1,4 @@
+
 package gamePlayerView.GUIPieces;
 
 import java.util.HashMap;
@@ -39,7 +40,6 @@ import javafx.scene.text.Text;
  * @author Guhan Muruganandam & Grayson Wise
  * 
  */
-
 public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>, IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
@@ -47,15 +47,16 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	private ListView<ImageView> towerInfo;
 	private ImageView towerToBeDragged;
 	private TextArea towerDataDisplay= new TextArea();
+	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
 
 	
-	public TowerColumn(){
-		//myTowerColumn= buildVBox();
+	public TowerColumn(IViewablePlayer aPlayer){
+		myTowerColumn= buildVBox(aPlayer);
 	}
 	
 	/**
 	 * Builds object that will actually be returned
-	 * @param aChangedObject 
+	 * @param aPlayer 
 	 */
 	private VBox buildVBox(IViewablePlayer aPlayer) {
 		
@@ -73,7 +74,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	    Label l = new Label("TOWERS");
 	    l.setFont(new Font("Cambria",18));
 	    
-	    towerInfo= populatetowerInfo(affordableTowers);
+	    towerInfo= populatetowerInfo(availableTowers);
 	    setDragFunctionality();
         setPopulateFunctionality();
 	    
@@ -90,13 +91,14 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	private ListView<ImageView> populatetowerInfo(List<TowerData> towers) {
 		ObservableList<ImageView> items =FXCollections.observableArrayList();
 		ListView<ImageView> towerSet= new ListView<ImageView>();
+		towerSettings.clear();
 		for(TowerData t : towers){
 			ImageView towerPicture = new ImageView();
-			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(t.getImagePath())); //THIS IS IFFY. COME BACK TO THIS
+			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(/*t.getImagePath())*/ "resources/cow.png")); //THIS IS IFFY. COME BACK TO THIS
 			towerPicture.setImage(towerImage);
+			//towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
-            
         towerSet.setItems(items);
 		return towerSet;
 	}
@@ -105,9 +107,15 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		towerInfo.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
                 ImageView towerChosen = towerInfo.getSelectionModel().getSelectedItem();
-                PopulateTowerDataDisplay("BOOM");
+                //TowerData tower=towerSettings.get(towerChosen);
+                //PopulateTowerDataDisplay(tower);
             }  
         });
+	}
+	
+	private void PopulateTowerDataDisplay(TowerData tower) {
+		String info= new String(tower.getName());
+		towerDataDisplay.setText(info);
 	}
 
 	private void setDragFunctionality() {
@@ -121,11 +129,6 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
                 event.consume();
             }  
         });
-	}
-
-	private void PopulateTowerDataDisplay(String s) {
-		String info= new String(s);
-		towerDataDisplay.setText(info);
 	}
 
 	private Tab buildTab(Node list, String title) {
