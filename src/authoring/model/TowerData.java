@@ -12,7 +12,7 @@ public class TowerData implements IReadableData {
 	private int buyPrice;
 	private int sellPrice;
 	private int maxHealth;
-	private List<Map<String, Integer>> upgrades;
+	private Map<String, Integer> upgradeFrom;
 	private String imagePath;
 	private List<String> traversableTerrain;
 	private int collisionRadius;
@@ -75,12 +75,12 @@ public class TowerData implements IReadableData {
 		return maxHealth;
 	}
 	
-	public void setUpgrades(List<Map<String, Integer>> upgrades){
-		this.upgrades = upgrades;
+	public void addUpgradeFrom(String name, Integer upgradeCost){
+		this.upgradeFrom.put(name, upgradeCost);
 	}
 	
-	public List<Map<String, Integer>> getUpgrades(){
-		return upgrades;
+	public Map<String, Integer> getUpgradeFrom(){
+		return upgradeFrom;
 	}
 	
 	public void setImagePath(String imagePath) throws Exception{
