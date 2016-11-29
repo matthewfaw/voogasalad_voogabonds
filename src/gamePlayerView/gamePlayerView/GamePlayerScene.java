@@ -74,10 +74,10 @@ public class GamePlayerScene {
 	
 	public BorderPane setScreen() throws Exception{
 	    myMap = new MapDisplay();
-		myTowerColumn   = new TowerColumn();
+		//myTowerColumn   = new TowerColumn();
 		myStatisticsRow = new StatisticsRow();
 		BorderPane borderpane=new BorderPane();
-		borderpane.setRight(myTowerColumn.getView());
+		//borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
 		borderpane.setCenter(myMap.getView());
 		myMap.setupDragging(myScene);
