@@ -1,5 +1,6 @@
 package engine.model.projectiles;
 import java.util.ArrayList;
+
 import java.util.List;
 import authoring.model.ProjectileData;
 import engine.IObserver;
@@ -149,7 +150,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		return myCollisionRadius;
 	}
 	
-	/********** ICollidable Interface Methods ************/
+	//********** ICollidable Interface Methods ************//
 	@Override
 	public Point getLocation() {
 		return getPosition();

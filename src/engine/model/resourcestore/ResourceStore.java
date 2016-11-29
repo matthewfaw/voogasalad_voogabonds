@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.TowerData;
+import engine.model.collision_detection.ICollidable;
 import engine.model.machine.tower.Tower;
 import engine.model.machine.tower.TowerUpgradeStore;
 import engine.model.playerinfo.Player;
@@ -98,6 +99,5 @@ public class ResourceStore implements IModifiableStore, IViewableStore/*, What i
 		
 	}
 	*/
-
-
+	
 }

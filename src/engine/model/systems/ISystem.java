@@ -1,6 +1,7 @@
 package engine.model.systems;
 
 import engine.model.components.IComponent;
+import engine.model.strategies.IMovable;
 
 /**
  * An interface to capture the commonalities between all systems 
@@ -12,9 +13,15 @@ import engine.model.components.IComponent;
  *
  */
 public interface ISystem {
-//	/**
-//	 * Adds aComonent to be registered with the system
-//	 * @param aComponent
-//	 */
-//	public void register(IComponent aComponent);
+	/**
+	 * Adds aComonent to be registered with the system
+	 * @param aComponent
+	 */
+	public void register(IMovable movable);
+	
+	/**
+	 * Removes aComonent to be registered with the system
+	 * @param aComponent
+	 */
+	public void deregister(IMovable movable);
 }
