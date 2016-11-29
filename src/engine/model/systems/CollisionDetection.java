@@ -2,10 +2,10 @@ package engine.model.systems;
 
 import java.util.List;
 
+
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.MoveableComponent;
-import engine.model.strategies.IMovable;
 
 /**
  * A system to manage collision detection in the game
@@ -82,18 +82,15 @@ public class CollisionDetection implements ISystem, IObserver<MoveableComponent>
 		//XXX: not sure how I feel about passing null here
 		myObservers.forEach(observer -> observer.update(this));
 	}
-	
-	
-	
 
 	@Override
-	public void register(IMovable movable) {
+	public void register(Registerable registerable) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deregister(IMovable movable) {
+	public void deregister(Registerable registerable) {
 		// TODO Auto-generated method stub
 		
 	}

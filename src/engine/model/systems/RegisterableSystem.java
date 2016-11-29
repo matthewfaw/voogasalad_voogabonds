@@ -2,27 +2,23 @@ package engine.model.systems;
 
 import java.util.List;
 
-import engine.model.collision_detection.ICollidable;
-import engine.model.strategies.IMovable;
-
 /**
  * A system to handle movement of it's registered Elements
  * @author matthewfaw
  *
  */
-public class Movement implements ISystem {
-
+public class RegisterableSystem implements ISystem {
+	
+	List<Registerable> myRegisterables;
+	
 	@Override
 	public void register(Registerable registerable) {
-		// TODO Auto-generated method stub
-		
+		myRegisterables.add(registerable);
 	}
 
 	@Override
 	public void deregister(Registerable registerable) {
-		// TODO Auto-generated method stub
-		
+		myRegisterables.remove(registerable);
 	}
-	
 
 }

@@ -6,11 +6,13 @@ import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
+import engine.model.systems.ISystem;
+import engine.model.systems.Registerable;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IWeapon;
 import utility.Damage;
 import utility.Point;
-abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
+abstract public class Machine extends Registerable implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
 	private IModifiablePlayer myModifiablePlayer;
 	private Health myHealth;
 	private double myHeading;
@@ -21,6 +23,8 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	private List<Terrain> myValidTerrains;
 	private IWeapon myWeapon;
 	private String myName;
+	
+	List<ISystem> mySystems;
 	
 	public Machine () {
 		

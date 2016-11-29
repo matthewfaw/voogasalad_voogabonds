@@ -13,13 +13,15 @@ import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
+import engine.model.systems.ISystem;
+import engine.model.systems.Registerable;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
 /**
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable {
+public class Projectile extends Registerable implements IViewable, IMovable, IObserver<TimelineController>, ICollidable {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	private String myImagePath;
@@ -41,6 +43,9 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	int myAoERadius;
 	
 	List<Terrain> myValidTerrain;
+	
+	List<ISystem> mySystems;
+	
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
 		
 		myImagePath = data.getImagePath();
@@ -162,5 +167,11 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	@Override
 	public void collideInto(ICollidable unmovedCollidable) {
 		explode();
+	}
+	
+	public void deregister() {
+		for(ISystem s: mySystems) {
+			s.deregister(this);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 package engine.model.systems;
 
-import engine.model.components.IComponent;
+import engine.model.collision_detection.ICollidable;
 import engine.model.strategies.IMovable;
 
 /**
@@ -17,11 +17,11 @@ public interface ISystem {
 	 * Adds aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void register(IMovable movable);
+	public void register(Registerable registerable);
 	
 	/**
 	 * Removes aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void deregister(IMovable movable);
+	public void deregister(Registerable registerable);
 }

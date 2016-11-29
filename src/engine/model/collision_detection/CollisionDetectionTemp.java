@@ -2,18 +2,17 @@ package engine.model.collision_detection;
 
 import java.util.List;
 
-
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.strategies.IMovable;
 import engine.model.systems.ISystem;
+import engine.model.systems.RegisterableSystem;
 
 /**
  * All objects must be subscribed as ICollidable
  * NOT IObservables
  *
  */
-public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, IObservable<ISystem> {
+public class CollisionDetectionTemp extends RegisterableSystem implements IObserver<ICollidable>, IObservable<ISystem> {
 	
 	ICollisionHandler collisionHandler;
 	List<ICollidable> myCollidables;
@@ -87,20 +86,6 @@ public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, 
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		myObservers.forEach(observer -> observer.update(this));
-	}
-
-	//**************************System interface****************************//
-
-	@Override
-	public void register(IMovable movable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deregister(IMovable movable) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

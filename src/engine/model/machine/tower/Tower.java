@@ -36,5 +36,5 @@ public class Tower extends Machine implements ITower {
 		//Change my sell price and upgrade map
 		//Call a superclass method that changes my Machine fields (weapon, health, etc
 		
-		}
+	}
 }
