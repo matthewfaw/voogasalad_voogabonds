@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import utility.Point;
 
 /**
@@ -119,6 +120,17 @@ public class TerrainCell extends Rectangle {
 		spawnStage.setTitle(myResources.getString("SetSpawnName"));
 		spawnStage.setScene(spawnNameScene);
 		spawnStage.show();
+		spawnStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+		    	if (setPointName.getText().isEmpty()) {
+			        event.consume();
+				}
+		    	else {	
+					spawnStage.close();
+		    	}
+		    }
+		});
 	}
 	
 	private void spawnNameHandler(Stage s, TextField text, Button button) {
@@ -130,7 +142,6 @@ public class TerrainCell extends Rectangle {
 				ArrayList<Point> list = new ArrayList<Point>();
 				list.add(new Point((double) colLocation, (double) rowLocation));
 				controller.addSpawnPoints(name, list);
-				s.close();
 			}
 		});
 	}
@@ -160,7 +171,8 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
-			controller.addValidTerrain(newType, color);
+			controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
+			setFill(toolBar.getSelectedColor());
 		} catch (Exception e) {
 			System.out.println(myResources.getString("TerrainError"));
 		}
