@@ -120,11 +120,16 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	}
 	
 	private void hitUnit(Machine hit) {
-		hit.takeDamage(myDamageCalc.getTargetDamage());
-		explode();
+		DamageInfo result = new DamageInfo();
+		
+		result.add(hit.takeDamage(myDamageCalc.getTargetDamage()));
+		result.add(explode());
+		
+		myOwner.notifyDestroy(result);
+		getOwner().updateAvailableMoney(result.getMoney());
 	}
 	
-	private void explode() {
+	private DamageInfo explode() {
 		List<Machine> targets = new ArrayList<Machine>();
 		//TODO: Get all Machines in AoE Range
 		
@@ -140,8 +145,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 			
 			result = result.add(m.takeDamage(toDeal));
 		}
-//		notifyListenersRemove();
-		myOwner.notifyDestroy(result);
+		return result;
 		
 	}
 	@Override

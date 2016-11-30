@@ -13,7 +13,11 @@ public class Tower extends Machine implements ITower {
 	}
 	@Override
 	public int getUpgradeCost(String s) {
-		return myUpgrades.containsKey(s) ? myUpgrades.get(s) : -1;
+		if (myUpgrades.containsKey(s))
+			return  myUpgrades.get(s);
+		else
+			//TODO: Throw Error, so we can have negative upgrade costs
+			return -1;
 	}
 	
 	@Override
@@ -31,10 +35,23 @@ public class Tower extends Machine implements ITower {
 	}
 	@Override
 	public void upgrade(String upgradeName, ITowerUpgradeStore towerUpgradeStore) {
-		//All TODO:
-		//Subtract money from player's wallet
-		//Change my sell price and upgrade map
-		//Call a superclass method that changes my Machine fields (weapon, health, etc
-		
+
+		if (myUpgrades.containsKey(upgradeName)){
+			getOwner().updateAvailableMoney(-myUpgrades.get(upgradeName));
+			
+			//All TODO:
+			//Change my sell price and upgrade map
+			//Call a superclass method that changes my Machine fields (weapon, health, etc.)
+			
+		} else {
+			//TODO: Throw invalid upgrade error. 
 		}
+	}
+	
+	@Override
+	public void sell() {
+		getOwner().updateAvailableMoney(mySellPrice);
+		die();
+	}
+	
 }

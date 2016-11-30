@@ -1,5 +1,7 @@
 package engine.model.machine;
+
 import java.util.List;
+
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
@@ -11,6 +13,7 @@ import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IWeapon;
 import utility.Damage;
 import utility.Point;
+
 abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
 	private IModifiablePlayer myModifiablePlayer;
 	private Health myHealth;
@@ -82,6 +85,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	
 	abstract protected int die();
+	
 	public double getDistanceTo(Point p) {
 		return getPosition().euclideanDistance(p) - myCollisionRadius;
 	}
@@ -142,6 +146,8 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void collideInto(Projectile unmovedCollidable) {
 		//do nothing for now since machines will not deal dmg
+		//Should the Machine running into the projectile trigger an explode
+		//unmovedCollidable.collideInto(this);
 	}
 	
 }
