@@ -12,6 +12,8 @@ import engine.model.projectiles.Projectile;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.StrategyFactory;
+import engine.model.systems.IRegisterable;
+import engine.model.systems.ISystem;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
 import engine.model.weapons.IWeapon;
@@ -20,7 +22,7 @@ import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 
-abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IKillerOwner {
+abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IKillerOwner, IRegisterable {
 	private List<IObserver<IViewable>> myObservers;
 	private IModifiablePlayer myModifiablePlayer;
 	private WeaponFactory myArmory;
@@ -37,8 +39,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	private double myHeading;
 	private Point myPosition;
 
-
-
+	List<ISystem> mySystems;
 	
 	public Machine (TimelineController time, WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
 		myModifiablePlayer = owner;
@@ -216,4 +217,12 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		myMoveSpeed = upgradeData.getMoveSpeed();
 	}
 	
+	/********** IRegisterable Interface Methods ************/
+	@Override
+	public void unregisterMyself() {
+		for(ISystem s: mySystems) {
+			s.unregister(this);
+			mySystems.remove(s);
+		}
+	}
 }
