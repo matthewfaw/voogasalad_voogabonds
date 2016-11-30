@@ -20,6 +20,7 @@ public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, ILi
 
 	public void acceptLives(IViewablePlayer aPlayer) {
 		aPlayer.attach(this);
+		update(aPlayer);
 	}
 
 	@Override
