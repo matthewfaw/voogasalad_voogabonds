@@ -1,6 +1,7 @@
 package utility;
 
 import java.io.File;
+import java.net.FileNameMap;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,12 @@ import java.util.List;
  *
  */
 public class FileRetriever {
+	private static final char DEFAULT_PATH_SEPARATOR = '/';
 	private String myDefaultPath;
 
 	public FileRetriever(String aDefaultPath)
 	{
+		aDefaultPath = aDefaultPath.replace(DEFAULT_PATH_SEPARATOR,File.separatorChar);
 		myDefaultPath = aDefaultPath;
 	}
 	
@@ -31,6 +34,7 @@ public class FileRetriever {
 	 */
 	public List<String> getFileNames(String aDirectory)
 	{
+		aDirectory = aDirectory.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
 		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
 		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
