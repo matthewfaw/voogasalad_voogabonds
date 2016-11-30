@@ -3,16 +3,19 @@ import authoring.model.map.*;
 import authoring.model.IReadableData;
 import engine.IObservable;
 import engine.IObserver;
-
+import engine.model.game_environment.terrain.Terrain;
 import javafx.collections.SetChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import utility.Point;
+
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
+
+import com.sun.prism.paint.Color;
 
 /**
  * MapDataController doesn't expect a FrontEndMap like the rest of the controller classes.
@@ -26,6 +29,7 @@ public class MapDataController extends Controller implements IReadableData, IObs
 	private int numYCells;
 	private int cellSize;
 	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
+	private MapData myMapData = new MapData();
 	
 	/**
 	 * Each group of spawn points will have a name. A map is necessary because
@@ -223,6 +227,26 @@ public class MapDataController extends Controller implements IReadableData, IObs
 		for (IObserver<Controller> listener: myListeners){
 			listener.update(this);
 		}
+	}
+	
+	// TODO: make the methods we need more available in the MapData object itself so we don't need this here.
+	public MapData getMapData() throws Exception{
+		myMapData.setNumXCells(numXCells);
+		myMapData.setNumYCells(numYCells);
+		for (String spawnName : spawnPoints.keySet()){
+			myMapData.addSpawnPoints(spawnName, spawnPoints.get(spawnName));
+		}
+		for (Point p : sinkPoints){
+			myMapData.addSinkPoint(p);
+		}
+		for (TerrainData td : terrainList){
+			myMapData.addTerrainData(td);
+		}
+		System.out.println("before terrain");
+		for (String vt: validTerrain.keySet()){
+			myMapData.addValidTerrain(vt, "color");
+		}
+		return myMapData;
 	}
 	
 	
