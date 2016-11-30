@@ -1,6 +1,7 @@
 package authoring.model;
 
 import java.io.File;
+import java.util.List;
 
 public class ProjectileData implements IReadableData {
 
@@ -14,6 +15,7 @@ public class ProjectileData implements IReadableData {
 	private int damageMultiplier;
 	private int turnSpeed;
 	private double collisionRadius;
+	private List<String> myValidTerrains;
 	
 	public void setName(String name) throws Exception {
 		if (name == null || name.length() == 0){
@@ -90,5 +92,9 @@ public class ProjectileData implements IReadableData {
 
 	public double getCollisionRadius() {
 		return collisionRadius;
+	}
+
+	public List<String> getValidTerrains() {
+		return myValidTerrains;
 	}
 }

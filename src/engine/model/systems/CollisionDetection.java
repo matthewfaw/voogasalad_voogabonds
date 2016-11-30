@@ -2,8 +2,10 @@ package engine.model.systems;
 
 import java.util.List;
 
+
 import engine.IObservable;
 import engine.IObserver;
+import engine.model.collision_detection.ICollidable;
 import engine.model.components.MoveableComponent;
 
 /**
@@ -80,6 +82,18 @@ public class CollisionDetection implements ISystem, IObserver<MoveableComponent>
 	public void notifyObservers() {
 		//XXX: not sure how I feel about passing null here
 		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	@Override
+	public void register(IRegisterable collidable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unregister(IRegisterable collidable) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

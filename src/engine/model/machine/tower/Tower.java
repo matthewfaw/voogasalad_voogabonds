@@ -1,34 +1,36 @@
 package engine.model.machine.tower;
 
-import engine.model.machine.IPurchasable;
+import authoring.model.TowerData;
+import engine.controller.timeline.TimelineController;
 import engine.model.machine.Machine;
-import engine.model.resourcestore.IMoney;
-import engine.model.weapons.DamageInfo;
-import engine.model.weapons.Weapon;
-import utility.Damage;
+import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.weapons.WeaponFactory;
+import utility.Point;
 
-import java.util.List;
-
-import engine.model.game_environment.terrain.Terrain;
-
-public class Tower extends Machine implements IPurchasable{
-	private String myName;
-	private Weapon myWeapon;
-	//matthewfaw: is this necessary? doesn't machine already keep track of this?
-	private int myMaxHealth;
-	private List<Terrain> myPossibleTerrains;
+public class Tower extends Machine implements IUpgradable {
 	
-	public Tower(String name, int maxhealth){
-		super(maxhealth);
-		myName = name;
-		myMaxHealth = maxhealth;
+
+	public Tower(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, TowerData data,
+			Point initialPosition) {
+		super(time, armory, owner, data, initialPosition);
 	}
-	public void setPossibleTerrains(List<Terrain> possibleterrains){
-		myPossibleTerrains = possibleterrains;
-	}
+	
 	@Override
-	public DamageInfo takeDamage(Damage toDeal) {
-		// TODO Auto-generated method stub
+	protected int die() {
+		//TODO: Delete self
+		unregisterMyself();
+		return 0;
+	}
+	
+	@Override
+	public void upgrade(TowerData upgradeData) {
+		super.upgrade(upgradeData);
+	}
+	
+	@Override
+	public Point getGoal() {
+		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
 	}
+
 }

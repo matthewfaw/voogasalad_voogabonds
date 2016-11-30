@@ -1,8 +1,13 @@
 package engine.model.collision_detection;
 
-import utility.Point;
+import engine.model.machine.Machine;
+import engine.model.projectiles.Projectile;
+import engine.model.strategies.IPhysical;
 
-public interface ICollidable{
-	public Point getLocation();
-	public double getRadius();
+public interface ICollidable extends IPhysical {
+
+	public void collideInto(ICollidable movedCollidable);
+	public void collideInto(Machine unmovedCollidable);
+	public void collideInto(Projectile unmovedCollidable);
+
 }

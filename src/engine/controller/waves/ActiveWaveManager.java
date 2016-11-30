@@ -1,7 +1,9 @@
 package engine.controller.waves;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import authoring.model.EnemyData;
@@ -21,7 +23,8 @@ public class ActiveWaveManager {
 	private DummyWaveOperationData myWaveOperationData;
 	private DataStore<EnemyData> myEnemyDataStore;
 	
-	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
+//	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
+	private List<WaveState> myWaveStates;
 	private double myCurrentTime;
 	private double myTimeToAddMoreWaves;
 	
@@ -30,7 +33,8 @@ public class ActiveWaveManager {
 		myWaveOperationData = aWaveOperationData;
 		myEnemyDataStore = aEnemyDataStore;
 
-		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
+//		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
+		myWaveStates = new ArrayList<WaveState>();
 		
 		setCurrentTime(DEFAULT_START_TIME);
 		setNextRoundOfWaveDataAsActive();
@@ -41,7 +45,6 @@ public class ActiveWaveManager {
 	 * @param aTotalTimeElapsed
 	 * @return a map from enemy data to the spawn point corresponding to that enemy
 	 * 
-	 * IMPORTANT TODO: add support for frequency of spawning
 	 * TODO: This return type is kinda hacky... maybe make a custom class for this?
 	 */
 	public Map<EnemyData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
@@ -56,13 +59,12 @@ public class ActiveWaveManager {
 		
 		//3. get all the enemies
 		Map<EnemyData, String> enemiesToConstruct = new HashMap<EnemyData, String>();
-		for (WaveData activeWave: myUnreleasedEnemyCountForActiveWave.keySet()) {
-			if (myUnreleasedEnemyCountForActiveWave.get(activeWave) > 0) {
-				EnemyData enemy = myEnemyDataStore.getData(activeWave.getWaveEnemy());
+		for (WaveState activeWave: myWaveStates) {
+			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
+				EnemyData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
 				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
-				myUnreleasedEnemyCountForActiveWave.put(activeWave, myUnreleasedEnemyCountForActiveWave.get(activeWave) - 1);
 			} else {
-				myUnreleasedEnemyCountForActiveWave.remove(activeWave);
+				myWaveStates.remove(activeWave);
 			}
 		}
 		
@@ -78,7 +80,7 @@ public class ActiveWaveManager {
 		while(true) {
 			WaveData waveData = myWaveOperationData.pop();
 			if (waveData != null) {
-				myUnreleasedEnemyCountForActiveWave.put(waveData, waveData.getNumEnemies());
+				myWaveStates.add(new WaveState(waveData, myCurrentTime));
 				if (waveData.getTimeForWave() != 0) {
 					updateTimeOfNextTransition(waveData.getTimeForWave());
 					break;

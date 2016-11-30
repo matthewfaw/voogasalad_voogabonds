@@ -46,8 +46,4 @@ public abstract class InfoBox implements IGUIPiece {
 	public Node getView(){
 		return myDisplay;
 	}
-
-	//public abstract void giveObject(IObservable aCash);
-
-	public abstract void update(Object aChangedObject);
 }

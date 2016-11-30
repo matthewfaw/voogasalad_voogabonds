@@ -11,7 +11,9 @@ import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
+import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
+import engine.controller.timeline.TimelineController;
 import engine.controller.waves.DummyWaveOperationData;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
@@ -21,6 +23,7 @@ import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
 import utility.FileRetriever;
+import utility.Point;
 
 /**
  * The primary gateway into the game engine
@@ -43,7 +46,6 @@ public class BackendController {
 	private JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-//	private MapMediator myMapMediator;
 	private MapDistributor myMapDistributor;
 	private ResourceStore myResourceStore;
 
@@ -51,10 +53,12 @@ public class BackendController {
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
 	private DataStore<EnemyData> myEnemyDataStore;
+	private DataStore<TowerData> myTowerDataStore;
 	private PlayerData myPlayerData;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
+	private PlayerController myPlayerController;
 	private WaveController myWaveController;
 	private Router myRouter;
 	
@@ -66,19 +70,26 @@ public class BackendController {
 		myJsonDeserializer = new JSONDeserializer();
 
 		myTimelineController = new TimelineController();
+		myPlayerController = new PlayerController(myRouter);
 		
 		constructStaticBackendObjects();
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-		constructDynamicBackendObjects();
+//		constructDynamicBackendObjects();
+		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
+		
 	}
 	
+	//TODO
 	/**
-	 * A method used to add a new player to the game
+	 * Places the tower, if it can
+	 * @param aTowerName
+	 * @param aLocation
+	 * @return true if it is successfully placed, false otherwise
 	 */
-	public void addPlayer()
+	public boolean attemptToPlaceTower(String aTowerName, Point aLocation)
 	{
-		//TODO: set up the infrastructure for a player
-		// initially, let's assume there's only one player
+		return myMapDistributor.distribute(aTowerName, myPlayerController, aLocation);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -96,12 +107,12 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructMap();
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();
 		constructEnemyDataStore();
 		constructPlayerData();
+		constructMap();
 	}
 
 	/**
@@ -110,19 +121,32 @@ public class BackendController {
 	 * 
 	 * Assumes that the only map data to use is the first one
 	 */
+	@Deprecated // need to actually deserialize the object, but can't because they're using javafx rn
 	private void constructMap()
 	{
-		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
-		MapData mapData = data.get(0);
+		//TODO: Add these next lines back
+//		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
+//		MapData mapData = data.get(0);
+		//TODO: remove this map construction
+		MockGameDataConstructor m = new MockGameDataConstructor();
+		MapData mapData = m.getMockMapData();
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-		MapMediator MapMediator = new MapMediator(terrainMap);
+		MapMediator mapMediator = new MapMediator(terrainMap);
 
 		//distribute to backend
-		myMapDistributor = new MapDistributor(MapMediator);
+		myMapDistributor = new MapDistributor(
+				mapMediator,
+				myTowerDataStore,
+				myEnemyDataStore,
+				myWeaponDataStore,
+				myProjectileDataStore,
+				myTimelineController
+				);
 		
 		//distribute to frontend
 		myRouter.distributeMapData(mapData);
+		
 	}
 	/**
 	 * Helper method to create the backend resource store object
@@ -194,6 +218,8 @@ public class BackendController {
 				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
 				data.add(entry);
 			} catch (Exception e) {
+				//XXX: REMOVE PLS
+				e.printStackTrace();
 			}
 		}
 		return data;

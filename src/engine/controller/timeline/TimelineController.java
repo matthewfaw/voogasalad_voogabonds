@@ -1,12 +1,15 @@
-package engine.controller;
+package engine.controller.timeline;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
+import gamePlayerView.Resources;
 import javafx.animation.Animation.Status;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 /**
  * A class used to encapsulate the Timeline object
@@ -23,6 +26,9 @@ public class TimelineController implements IObservable<TimelineController> {
 	{
 		myTimeline = new Timeline();
 		myObservers = new ArrayList<IObserver<TimelineController>>();
+		
+		//TODO: maybe change this to another location?
+		myTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers()));
 	}
 	
 	/**

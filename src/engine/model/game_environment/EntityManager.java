@@ -1,6 +1,7 @@
 package engine.model.game_environment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import engine.model.entities.IEntity;
 
@@ -19,5 +20,9 @@ class EntityManager {
 	void trackEntity(IEntity aEntityToTrack)
 	{
 		myEntities.add(aEntityToTrack);
+	}
+	
+	public List<IEntity> getEntities() {
+		return myEntities;
 	}
 }

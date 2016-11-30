@@ -1,5 +1,9 @@
 package engine.model.machine;
 
+import engine.model.weapons.DamageInfo;
+import utility.Damage;
+
 public interface IModifiableMachine {
-	public void modifyHealth(IHealth deltaHealth);
+	abstract public double getHealth();
+	abstract public DamageInfo takeDamage(Damage dmg);
 }

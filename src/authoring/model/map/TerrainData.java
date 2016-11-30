@@ -13,10 +13,29 @@ public class TerrainData implements IReadableData {
 	 */
 	private String type;
 	private Point loc;
+	private String myColor;
+	private int mySize;
 	
-	public TerrainData(String type, int x, int y){
+	//TODO: add error checking for what the hex string looks like
+	public TerrainData(String type, int x, int y, int aSize, String aHexValue){
 		this.type = type;
 		this.loc = new Point(x, y);
+		mySize = aSize;
+		myColor = aHexValue;
+	}
+	
+	/**
+	 * Get the hex value associated with the terrain data
+	 * @return
+	 */
+	public String getColor()
+	{
+		return myColor;
+	}
+	
+	public int getSize()
+	{
+		return mySize;
 	}
 	
 	@Override

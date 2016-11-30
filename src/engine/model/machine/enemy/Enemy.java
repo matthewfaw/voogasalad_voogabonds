@@ -1,28 +1,30 @@
 package engine.model.machine.enemy;
 
+import authoring.model.EnemyData;
+import engine.controller.timeline.TimelineController;
 import engine.model.machine.Machine;
-import engine.model.resourcestore.IMoney;
-import engine.model.weapons.DamageInfo;
-import utility.Damage;
+import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.weapons.WeaponFactory;
+import utility.Point;
 
-public class Enemy extends Machine implements IEnemy {
+public class Enemy extends Machine {
+	private int myBounty;
 	
-	public Enemy(int initialHealth) {
-		super(initialHealth);
+	public Enemy(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, EnemyData data,
+			Point initialPosition) {
+		super(time, armory, owner, data, initialPosition);
+		myBounty = data.getKillReward();
 	}
-
-	private IMoney killValue;
 	
-
 	@Override
-	public DamageInfo takeDamage(Damage toDeal) {
-		// TODO Auto-generated method stub
+	protected int die() {
+		//TODO: Delete self
+		unregisterMyself();
+		return myBounty;
+	}
+	@Override
+	public Point getGoal() {
+		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
 	}
-
-	@Override
-	public IMoney getKillValue() {
-		return killValue;
-	}
-
 }

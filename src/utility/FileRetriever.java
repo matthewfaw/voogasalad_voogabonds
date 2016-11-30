@@ -13,10 +13,12 @@ import java.util.List;
  *
  */
 public class FileRetriever {
+	private static final char DEFAULT_PATH_SEPARATOR = '/';
 	private String myDefaultPath;
 
 	public FileRetriever(String aDefaultPath)
 	{
+//		aDefaultPath = aDefaultPath.replace(DEFAULT_PATH_SEPARATOR,File.separatorChar);
 		myDefaultPath = aDefaultPath;
 	}
 	
@@ -31,6 +33,7 @@ public class FileRetriever {
 	 */
 	public List<String> getFileNames(String aDirectory)
 	{
+//		aDirectory = aDirectory.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
 		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
 		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
@@ -52,7 +55,9 @@ public class FileRetriever {
 	private String getRelativeFilePath(File aFile)
 	{
 		String absoluteFilePath = aFile.getAbsolutePath();
-		return absoluteFilePath.substring(absoluteFilePath.indexOf(myDefaultPath)/*+ myDefaultPath.length() + 1*/);
+		String defaultPath = myDefaultPath.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
+		String relativeFilePath = absoluteFilePath.substring(absoluteFilePath.indexOf(defaultPath)/*+ myDefaultPath.length() + 1*/);
+		return relativeFilePath.replace(File.separatorChar, DEFAULT_PATH_SEPARATOR);
 	}
 
 	/*
