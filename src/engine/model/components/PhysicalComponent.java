@@ -5,13 +5,12 @@ import java.util.List;
 
 import engine.IObserver;
 import engine.model.entities.IEntity;
-import engine.model.game_environment.terrain.Terrain;
 import utility.Point;
 
 public class PhysicalComponent implements IComponent {
 	private List<IObserver<IComponent>> myObservers;
 
-	private List<Terrain> myValidTerrains;
+	private List<String> myValidTerrains;
 	private Point myLocation;
 	
 	private IEntity myEntity;
@@ -21,7 +20,7 @@ public class PhysicalComponent implements IComponent {
 		//TODO
 		myObservers = new ArrayList<IObserver<IComponent>>();
 	}
-	PhysicalComponent(IEntity aEntity, List<Terrain> aValidTerrainList, Point aLocation)
+	PhysicalComponent(IEntity aEntity, List<String> aValidTerrainList, Point aLocation)
 	{
 		myEntity = aEntity;
 
@@ -34,7 +33,7 @@ public class PhysicalComponent implements IComponent {
 	 * This assumes that every entity may be placed on a location
 	 * @return list of terrains on which the entity may be placed
 	 */
-	public List<Terrain> getValidTerrains()
+	public List<String> getValidTerrains()
 	{
 		return myValidTerrains;
 	}

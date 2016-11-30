@@ -20,6 +20,7 @@ public class CashBox extends InfoBox implements IObserver<IViewablePlayer>,ICash
 
 	public void acceptCash(IObservable<IViewablePlayer> aPlayer) {
 		aPlayer.attach(this);
+		//update(aPlayer);
 	}
 
 	@Override

@@ -21,5 +21,4 @@ public class ResourceStore implements /*IModifiableStore, */ IViewableStore {
 	public List<TowerData> getAvailableTowers() {
 		return myUpgradeStore.getBaseTowersData();
 	}
-	
 }

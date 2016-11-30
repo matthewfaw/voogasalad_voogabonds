@@ -1,6 +1,8 @@
 package engine.model.projectiles;
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 import authoring.model.ProjectileData;
 import engine.IObserver;
@@ -8,13 +10,14 @@ import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.MapMediator;
-import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
+import engine.model.systems.IRegisterable;
+import engine.model.systems.ISystem;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
 
@@ -22,8 +25,7 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-
-public class Projectile implements IViewable, IMovable, ICollidable, IObserver<TimelineController> {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable, ISystem, IRegisterable {
 
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -31,6 +33,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	
 	private String myImagePath;
 	private IKillerOwner myOwner;
+	private IModifiablePlayer myPlayer;
 	private Machine myTarget;
 	private MapMediator myMap;
 	
@@ -48,7 +51,12 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	private int myMaxRange;
 	private int myAoERadius;
 	
-	List<Terrain> myValidTerrain;
+	List<String> myValidTerrain;
+	
+	List<ISystem> mySystems;
+	
+	List<IRegisterable> myRegisterables;
+	
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time, MapMediator map) {
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
@@ -56,10 +64,11 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
+		myPlayer = myOwner.getOwner();
 		myMap = map;
 		
 		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
-		myLocation = myOwner.getLocation();
+		myLocation = myOwner.getPosition();
 		myHeading = myOwner.getHeading();
 		myTraveled = 0;
 		mySpeed = data.getSpeed();
@@ -108,8 +117,10 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		advance();
 		
 		//TODO: Remove if goes too far off map
-		if (false)
-			destroySelf();
+		if (false) {
+			// destroySelf();
+			unregisterMyself();
+		}
 	}
 	
 	private Point advance() {
@@ -153,13 +164,16 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 			
 			result = result.add(m.takeDamage(toDeal));
 		}
-		destroySelf();
+		// destroySelf();
+		// remove references
+		unregisterMyself();
 		return result;
+		
 		
 	}
 
 	@Override
-	public List<Terrain> getValidTerrains() {
+	public List<String> getValidTerrains() {
 		return myValidTerrain;
 	}
 	@Override
@@ -171,9 +185,10 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		return myCollisionRadius;
 	}
 	
+	//********** ICollidable Interface Methods ************//
 	@Override
 	public IModifiablePlayer getOwner() {
-		return myOwner.getOwner();
+		return myPlayer;
 	}
 
 
@@ -219,5 +234,23 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	private void destroySelf() {
 		// TODO Auto-generated method stub
 	}
+	
+	//********** ISystem Interface Methods ************//
+	@Override
+	public void register(IRegisterable registerable) {
+		myRegisterables.add(registerable);
+	}
+	@Override
+	public void unregister(IRegisterable registerable) {
+		myRegisterables.remove(registerable);
+	}
+	
+	//********** IRegisterable Interface Methods ************//
+	@Override
+	public void unregisterMyself() {
+		for(ISystem s: mySystems) {
+			s.unregister(this);
+			mySystems.remove(s);
+		}
+	}
 }
-

@@ -1,26 +1,35 @@
 package engine.model.collision_detection;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import engine.IObservable;
 import engine.IObserver;
+import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
 
 /**
  * All objects must be subscribed as ICollidable
- * NOT IObservables
+ * NOT IObservables.
  *
  */
-public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, IObservable<ISystem>{
+public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {
 	
-	ICollisionHandler collisionHandler;
-	List<ICollidable> myCollidables;
+	private ICollisionHandler collisionHandler;
+	private List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
+	private List<IRegisterable> myRegisterables;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
+		myCollidables = new ArrayList<ICollidable>();
 		//TODO: initialize with all observers
+		myObservers = new ArrayList<IObserver<ISystem>>();
 		//TODO: initialize collision handler
+		collisionHandler = new CollisionHandler();
+		// Init registerables
+		myRegisterables = new ArrayList<IRegisterable>();
 	}
 
 	/**
@@ -60,16 +69,6 @@ public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, 
 		}
 	}
 	
-	public void addComponent(ICollidable aNewComponent)
-	{
-		myCollidables.add(aNewComponent);
-	}
-
-	public void removeComponent(ICollidable aNewComponent)
-	{
-		myCollidables.remove(aNewComponent);
-	}
-	
 	//************************************Observable interface****************************//
 	@Override
 	public void attach(IObserver<ISystem> aObserver) {
@@ -85,6 +84,18 @@ public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, 
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	
+	//************************************ISystem interface****************************//
+	@Override
+	public void register(IRegisterable registerable) {
+		myRegisterables.add(registerable);
+	}
+
+	@Override
+	public void unregister(IRegisterable registerable) {
+		myRegisterables.remove(registerable);
 	}
 
 }

@@ -20,7 +20,7 @@ public class Router {
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
-	//List<IEnemySources> myFrontendEnemySources;
+	//List<ISprites> mySprites;
 	
 	
 	public Router(GamePlayerScene aGamePlayerScene)
@@ -30,7 +30,7 @@ public class Router {
 		myLives=myGamePlayerScene.getLives();
 		myWaves=myGamePlayerScene.getWaves();
 		myResources=myGamePlayerScene.getResources();
-		//myFrontendEnemySources = myGamePlayerScene.getEnemySources();
+		//mySprites = myGamePlayerScene.getSprites();
 	}
 	
 	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
@@ -62,6 +62,12 @@ public class Router {
 			c.acceptCash(aPlayer);
 		}
 	}
+	
+	//public void distributeSprite(//Something){
+	//	for(ISprite s : mySprites){
+			//s.acceptSprite(//Something);
+		//}		
+	//}
 
 	public void distributeMapData(MapData aMapData)
 	{

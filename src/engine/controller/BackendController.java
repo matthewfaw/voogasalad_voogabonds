@@ -53,6 +53,7 @@ public class BackendController {
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
 	private DataStore<EnemyData> myEnemyDataStore;
+	private DataStore<TowerData> myTowerDataStore;
 	private PlayerData myPlayerData;
 	
 	//Controllers to manage events
@@ -76,6 +77,7 @@ public class BackendController {
 //		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
+		
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -93,12 +95,12 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructMap();
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();
 		constructEnemyDataStore();
 		constructPlayerData();
+		constructMap();
 	}
 
 	/**
@@ -118,13 +120,21 @@ public class BackendController {
 		MapData mapData = m.getMockMapData();
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-		MapMediator MapMediator = new MapMediator(terrainMap);
+		MapMediator mapMediator = new MapMediator(terrainMap);
 
 		//distribute to backend
-		myMapDistributor = new MapDistributor(MapMediator);
+		myMapDistributor = new MapDistributor(
+				mapMediator,
+				myTowerDataStore,
+				myEnemyDataStore,
+				myWeaponDataStore,
+				myProjectileDataStore,
+				myTimelineController
+				);
 		
 		//distribute to frontend
 		myRouter.distributeMapData(mapData);
+		
 	}
 	/**
 	 * Helper method to create the backend resource store object
