@@ -1,5 +1,6 @@
 package engine.model.collision_detection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,15 +16,20 @@ import engine.model.systems.ISystem;
  */
 public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {
 	
-	ICollisionHandler collisionHandler;
-	List<ICollidable> myCollidables;
+	private ICollisionHandler collisionHandler;
+	private List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
-	List<IRegisterable> myRegisterables;
+	private List<IRegisterable> myRegisterables;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
+		myCollidables = new ArrayList<ICollidable>();
 		//TODO: initialize with all observers
+		myObservers = new ArrayList<IObserver<ISystem>>();
 		//TODO: initialize collision handler
+		collisionHandler = new CollisionHandler();
+		// Init registerables
+		myRegisterables = new ArrayList<IRegisterable>();
 	}
 
 	/**
