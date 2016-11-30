@@ -11,13 +11,12 @@ import utility.Point;
 public interface IWeapon {
 	
 	/**
-	 * If able, fires a projectile at a target in targets (which depends on the weapon's targeting strategy)
+	 * If able, fires a projectile at a target in range of it (which depends on the weapon's targeting strategy)
 	 * If not able, ticks down the amount of time until this weapon can fire again.
-	 * @param targets
 	 * @param initialDirectionRadians
 	 * @param initialLocation
 	 */
-	abstract public void fire(List<Machine> targets, double initialDirectionRadians, Point initialLocation);
+	abstract public void fire(double initialDirectionRadians, Point initialLocation);
 	
 	/**
 	 * @return total number of finishing blows this weapon has dealt

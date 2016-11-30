@@ -3,6 +3,7 @@ package engine.model.projectiles;
 import java.util.Map;
 
 import authoring.model.ProjectileData;
+import engine.controller.timeline.TimelineController;
 import engine.model.machine.Machine;
 import engine.model.weapons.IKillerOwner;
 import utility.ResouceAccess;
@@ -15,10 +16,11 @@ import utility.ResouceAccess;
  */
 public class ProjectileFactory {
 	private static final String NO_SUCH_PROJECTILE = "NoSuchProjectile";
-	Map<String, ProjectileData> myProjectiles;
+	private Map<String, ProjectileData> myProjectiles;
+	private TimelineController myTime;
 	
-	public ProjectileFactory(Map<String, ProjectileData> projMap) {
-		
+	public ProjectileFactory(Map<String, ProjectileData> projMap, TimelineController time) {
+		myTime = time;
 		myProjectiles = projMap;
 		
 	}
@@ -32,7 +34,7 @@ public class ProjectileFactory {
 	 */
 	public Projectile newProjectile(String name, Machine target, IKillerOwner owner) {
 		if (myProjectiles.containsKey(name))
-			return new Projectile(myProjectiles.get(name), target, owner);
+			return new Projectile(myProjectiles.get(name), target, owner, myTime);
 		else
 			//TODO: ResourceFile error message
 			throw new UnsupportedOperationException(ResouceAccess.getError(NO_SUCH_PROJECTILE) + name);
