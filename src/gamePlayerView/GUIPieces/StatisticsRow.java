@@ -1,5 +1,6 @@
 package gamePlayerView.GUIPieces;
 
+import engine.controller.ApplicationController;
 import gamePlayerView.Styles;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -44,9 +45,24 @@ public class StatisticsRow implements IGUIPiece {
 	    HBox InfoBoxes =new HBox();
 	    InfoBoxes.setSpacing(20);
 	    InfoBoxes.getChildren().addAll(myCashBox.getView(),myLivesBox.getView(),myWavesBox.getView());
-	    VBox PlayPauseBox= makeButtonSet("Play","Pause");
-	    VBox TowerOptionBox= makeButtonSet("Upgrade","Sell");
-	    VBox SpeedBox= makeButtonSet("Fast-Forward","Slow");
+	    
+	    Button playButton=makeButton("PLAY");
+	    playButton.setOnAction(e->ApplicationController.onPlayButtonPressed());
+	    Button pauseButton=makeButton("PAUSE");
+	    pauseButton.setOnAction(e->ApplicationController.onPauseButtonPressed());
+	    Button fastButton=makeButton("FAST FORWARD");
+	    fastButton.setOnAction(e->ApplicationController.onFastButtonPressed());
+	    Button slowButton=makeButton("SLOW");
+	    slowButton.setOnAction(e->ApplicationController.onSlowButtonPressed());
+	    //Will probably delete later
+	    Button upgradeButton=makeButton("UPGRADE");
+	    upgradeButton.setOnAction(e->ApplicationController.onUpgradeButtonPressed());
+	    Button sellButton=makeButton("SELL");
+	    sellButton.setOnAction(e->ApplicationController.onSellButtonPressed());
+	    
+	    VBox PlayPauseBox= makeButtonSet(playButton,pauseButton);
+	    VBox TowerOptionBox= makeButtonSet(upgradeButton,sellButton);
+	    VBox SpeedBox= makeButtonSet(fastButton,slowButton);
 	    
 	    hbox.getChildren().addAll(PlayPauseBox,InfoBoxes,TowerOptionBox,SpeedBox);
 
@@ -61,11 +77,9 @@ public class StatisticsRow implements IGUIPiece {
 		return b;
 	}
 	
-	private VBox makeButtonSet(String s1,String s2) {
+	private VBox makeButtonSet(Button button1,Button button2) {
 		VBox vbox = new VBox();
 		vbox.setSpacing(10);
-		Button button1 = makeButton(s1);
-	    Button button2 = makeButton(s2);
 	    vbox.getChildren().addAll(button1,button2);
 		return vbox;
 	}

@@ -66,6 +66,30 @@ public class ApplicationController {
 		//TODO: Change this to make this dynamic--select different games
 		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
 	}
+
+	public void onPlayButtonPressed() {
+		//AnimationController.play()
+	}
+
+	public void onPauseButtonPressed() {
+		//AnimationController.pause()
+	}
+
+	public void onFastButtonPressed() {
+		//AnimationController.fastForward()
+	}
+
+	public void onSlowButtonPressed() {
+		//AnimationController.slow()
+	}
+
+	public void onUpgradeButtonPressed() {
+		//
+	}
+
+	public void onSellButtonPressed() {
+		//
+	}
 	
 	/*
 	public static void main(String[] args)

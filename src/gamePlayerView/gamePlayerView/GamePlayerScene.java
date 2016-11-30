@@ -6,12 +6,14 @@ import authoring.model.map.MapData;
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.MapDisplay;
+import gamePlayerView.GUIPieces.MoveableComponentView;
 import gamePlayerView.GUIPieces.StatisticsRow;
 import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.WavesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
+import gamePlayerView.interfaces.ISprite;
 import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -36,6 +38,7 @@ public class GamePlayerScene {
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
+	//private List<MoveableComponentView> mySprites;
 	
 	public GamePlayerScene(Stage aStage) throws Exception{
 		//myStage=stage;
@@ -43,7 +46,7 @@ public class GamePlayerScene {
 		myLives = new ArrayList<ILivesAcceptor>();
 		myWaves = new ArrayList<IWavesAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
-
+		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
 
@@ -84,6 +87,7 @@ public class GamePlayerScene {
 		myCash.add(myStatisticsRow.getCash());
 		myLives.add(myStatisticsRow.getLives());
 		myResources.add(myTowerColumn);
+		//mySprites.add(myMap.getSprites());
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
@@ -117,11 +121,10 @@ public class GamePlayerScene {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
 		return myResources;
 	}
-
-	/*public List<IResourceAcceptor> getResourceStoreAcceptors() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	//TODO:Uncomment
+	//public List<ISprite> getSprites(){
+		//return mySprites;
+	//}
 	
 }
 
