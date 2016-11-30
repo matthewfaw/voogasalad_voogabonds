@@ -78,8 +78,8 @@ public class GamePlayerScene {
 	}
 	
 	public BorderPane setScreen() throws Exception{
-	    myMap = new MapDisplay(myAppController);
 		myTowerColumn   = new TowerColumn();
+	    myMap = new MapDisplay(myAppController);
 		myStatisticsRow = new StatisticsRow(myAppController);
 		myCash.add(myStatisticsRow.getCash());
 		myLives.add(myStatisticsRow.getLives());

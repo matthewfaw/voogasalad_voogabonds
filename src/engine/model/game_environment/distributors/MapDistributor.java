@@ -5,6 +5,7 @@ import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import engine.IObservable;
+import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.PhysicalComponent;
 import engine.model.components.PhysicalComponentData;
@@ -14,6 +15,8 @@ import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.MachineFactory;
+import engine.model.machine.tower.Tower;
+import engine.model.playerinfo.Player;
 import utility.Point;
 
 /**
@@ -45,6 +48,13 @@ public class MapDistributor implements IDistributor {
 				aProjectileDataStore,
 				aMapMediator
 				);
+	}
+	
+	public boolean distribute(String aTowerName, PlayerController aPlayerController, Point aLocation)
+	{
+//		Tower tower = myAnarchosyndacalistCommune.newTower(aTowerName, aPlayerController.getActivePlayer(), aLocation);
+//		return myMapMediator.attemptToPlaceEntity(aLocation, tower);
+		return true;
 	}
 
 	/**

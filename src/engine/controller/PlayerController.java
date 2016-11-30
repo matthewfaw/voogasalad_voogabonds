@@ -38,6 +38,12 @@ public class PlayerController {
 		myRouter.distributePlayer(player);
 	}
 	
+	@Deprecated //only temporary
+	public Player getActivePlayer()
+	{
+		return myPlayers.get(0);
+	}
+	
 	public void addResourceStoreForAllPlayers(ResourceStore aResourceStore)
 	{
 		myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
