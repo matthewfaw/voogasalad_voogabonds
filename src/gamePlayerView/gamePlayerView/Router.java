@@ -62,7 +62,7 @@ public class Router {
 			c.acceptCash(aPlayer);
 		}
 	}
-	
+	//TODO: What is the input argument for this?
 	//public void distributeSprite(//Something){
 	//	for(ISprite s : mySprites){
 			//s.acceptSprite(//Something);

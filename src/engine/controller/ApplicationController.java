@@ -50,7 +50,7 @@ public class ApplicationController {
 	 */
 	private GamePlayerScene constructGUI(Stage aStage) throws Exception
 	{
-		GamePlayerScene scene = new GamePlayerScene(aStage);
+		GamePlayerScene scene = new GamePlayerScene(aStage, this);
 		myAnimationTimelineController = new TimelineController();
 		myAnimationTimelineController.attach(scene.getMapDisplay());
 		return scene;
@@ -65,6 +65,30 @@ public class ApplicationController {
 	{
 		//TODO: Change this to make this dynamic--select different games
 		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
+	}
+
+	public void onPlayButtonPressed() {
+		//AnimationController.play()
+	}
+
+	public void onPauseButtonPressed() {
+		//AnimationController.pause()
+	}
+
+	public void onFastButtonPressed() {
+		//AnimationController.fastForward()
+	}
+
+	public void onSlowButtonPressed() {
+		//AnimationController.slow()
+	}
+
+	public void onUpgradeButtonPressed() {
+		//
+	}
+
+	public void onSellButtonPressed() {
+		//
 	}
 	
 	/*

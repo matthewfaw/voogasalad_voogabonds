@@ -1,5 +1,6 @@
 package gamePlayerView.GUIPieces;
 
+import engine.controller.ApplicationController;
 import gamePlayerView.Styles;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -16,13 +17,15 @@ import javafx.scene.text.Font;
  */
 
 public class StatisticsRow implements IGUIPiece {
+	private ApplicationController myAppController;
 	
 	private HBox myStatisticsRow;
 	private CashBox myCashBox;
 	private LivesBox myLivesBox;
 	private WavesBox myWavesBox;
 	
-	public StatisticsRow(){
+	public StatisticsRow(ApplicationController aAppController){
+    	myAppController = aAppController;
 		myCashBox=new CashBox();
 		myLivesBox=new LivesBox();
 		myWavesBox =new WavesBox();
@@ -44,9 +47,24 @@ public class StatisticsRow implements IGUIPiece {
 	    HBox InfoBoxes =new HBox();
 	    InfoBoxes.setSpacing(20);
 	    InfoBoxes.getChildren().addAll(myCashBox.getView(),myLivesBox.getView(),myWavesBox.getView());
-	    VBox PlayPauseBox= makeButtonSet("Play","Pause");
-	    VBox TowerOptionBox= makeButtonSet("Upgrade","Sell");
-	    VBox SpeedBox= makeButtonSet("Fast-Forward","Slow");
+	    
+	    Button playButton=makeButton("PLAY");
+	    playButton.setOnAction(e->myAppController.onPlayButtonPressed());
+	    Button pauseButton=makeButton("PAUSE");
+	    pauseButton.setOnAction(e->myAppController.onPauseButtonPressed());
+	    Button fastButton=makeButton("FAST FORWARD");
+	    fastButton.setOnAction(e->myAppController.onFastButtonPressed());
+	    Button slowButton=makeButton("SLOW");
+	    slowButton.setOnAction(e->myAppController.onSlowButtonPressed());
+	    //Will probably delete later
+	    Button upgradeButton=makeButton("UPGRADE");
+	    upgradeButton.setOnAction(e->myAppController.onUpgradeButtonPressed());
+	    Button sellButton=makeButton("SELL");
+	    sellButton.setOnAction(e->myAppController.onSellButtonPressed());
+	    
+	    VBox PlayPauseBox= makeButtonSet(playButton,pauseButton);
+	    VBox TowerOptionBox= makeButtonSet(upgradeButton,sellButton);
+	    VBox SpeedBox= makeButtonSet(fastButton,slowButton);
 	    
 	    hbox.getChildren().addAll(PlayPauseBox,InfoBoxes,TowerOptionBox,SpeedBox);
 
@@ -61,11 +79,9 @@ public class StatisticsRow implements IGUIPiece {
 		return b;
 	}
 	
-	private VBox makeButtonSet(String s1,String s2) {
+	private VBox makeButtonSet(Button button1,Button button2) {
 		VBox vbox = new VBox();
 		vbox.setSpacing(10);
-		Button button1 = makeButton(s1);
-	    Button button2 = makeButton(s2);
 	    vbox.getChildren().addAll(button1,button2);
 		return vbox;
 	}

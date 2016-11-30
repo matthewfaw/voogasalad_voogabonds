@@ -10,6 +10,7 @@ import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
+import engine.controller.ApplicationController;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -19,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MapGrid extends Node{
+	private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
     private Rectangle[][] actualGrid;
@@ -26,13 +28,14 @@ public class MapGrid extends Node{
     private ArrayList<MoveableComponentView> sprites;
     private int myCellSize;
     
-    public MapGrid(int rows, int cols, int aCellSize){
-       myPane = new Pane();
-       sprites = new ArrayList<MoveableComponentView>();
-       numColumns = cols;
-       numRows = rows;
-       myCellSize = aCellSize;
-       actualGrid = new Rectangle[numRows][numColumns];
+    public MapGrid(int rows, int cols, int aCellSize, ApplicationController aAppController){
+    	myAppController = aAppController;
+    	myPane = new Pane();
+    	sprites = new ArrayList<MoveableComponentView>();
+    	numColumns = cols;
+    	numRows = rows;
+    	myCellSize = aCellSize;
+    	actualGrid = new Rectangle[numRows][numColumns];
     }
     
     public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
@@ -95,7 +98,7 @@ public class MapGrid extends Node{
         source.setX(closest.getX());
         source.setY(closest.getY());
         System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
-        myApplicationController.onTowerDropped(source.)
+//        myAppController.onTowerDropped(source.)
         source.setFitHeight(closest.getHeight());
         source.setFitWidth(closest.getWidth());
         //sprites.add(source);
