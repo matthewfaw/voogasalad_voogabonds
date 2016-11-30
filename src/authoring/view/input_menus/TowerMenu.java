@@ -74,7 +74,7 @@ public class TowerMenu extends AbstractMenu {
         TowerData td = (TowerData) objectData;
         String weapon = td.getWeaponName();
         List<String> terrains = td.getTraversableTerrain();
-        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || setupMenuButton(root, terrains)) {
+        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || !setupMenuButton(root, terrains)) {
             return;
         }
         //// No MenuButtons currently
@@ -272,7 +272,8 @@ public class TowerMenu extends AbstractMenu {
         myPossibleTerrains = new MenuButton(getResources().getString("SelectTerrains"));
         for (String terrain: ((TowerTab)getTab()).getTerrains()){
                 CheckBox checkBox = new CheckBox(terrain);
-                checkBox.setSelected(checkedTerrains.contains(terrain));
+                if (checkedTerrains != null)
+                	checkBox.setSelected(checkedTerrains.contains(terrain));
                 CustomMenuItem custom = new CustomMenuItem(checkBox);
                 myPossibleTerrains.getItems().add(custom);
         }
