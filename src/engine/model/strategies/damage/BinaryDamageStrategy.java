@@ -8,13 +8,18 @@ import utility.Point;
 public class BinaryDamageStrategy implements IDamageStrategy {
 
 	@Override
-	public Damage getAoEDamage(Projectile missile, Point location) {
+	public Damage getAoEDamage(Projectile missile, Point location, double damage) {
+		return new Damage(0);
+	}
+	
+	@Override
+	public Damage getAoEAllyDamage(Projectile missile, Point location, double damage) {
 		return new Damage(0);
 	}
 
 	@Override
-	public Damage getTargetDamage() {
-		return new Damage(1);
+	public Damage getTargetDamage(double damage) {
+		return new Damage(damage);
 	}
 
 }

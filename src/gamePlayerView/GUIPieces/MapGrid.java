@@ -1,72 +1,104 @@
 package gamePlayerView.GUIPieces;
 
 import java.util.ArrayList;
+import java.util.Set;
+//import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;
 import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.javafx.jmx.MXNodeAlgorithm;
 import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
+
+import authoring.model.TowerData;
+import authoring.model.map.MapData;
+import authoring.model.map.TerrainData;
+import engine.controller.ApplicationController;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import utility.Point;
 
 public class MapGrid extends Node{
+	private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
-    private int myHeight;
-    private int myWidth;
-    public final int CELL_SIZE = 50;
-    private Rectangle[][] actualGrid; 
+    private Rectangle[][] actualGrid;
+    private Pane myPane;
+    private ArrayList<MoveableComponentView> sprites;
+    private int myCellSize;
     
-    public MapGrid(int rows, int cols){
-       numColumns = cols;
-       numRows = rows;
-       myHeight = CELL_SIZE;
-       myWidth = CELL_SIZE;
-       actualGrid = new Rectangle[numRows][numColumns];
+    //XXX: maybe remove this--just a quick fix
+    public MapGrid(int rows, int cols, int aCellSize, ApplicationController aAppController){
+    	myAppController = aAppController;
+    	myPane = new Pane();
+    	sprites = new ArrayList<MoveableComponentView>();
+    	numColumns = cols;
+    	numRows = rows;
+    	myCellSize = aCellSize;
+    	actualGrid = new Rectangle[numRows][numColumns];
     }
     
-//    public Rectangle drawGrid() {
-//        Rectangle toReturn = new Rectangle();
-//        for (int i = 0; i < numRows; i++) {
-//            for (int j = 0; j < numColumns; j++) {
-//                toReturn = fillCell(i, j);
-//            }
-//        }
-//        return toReturn;
-//    }
-    
-    public Rectangle fillCell(int row, int col) {
-        
-        Rectangle temp = new Rectangle();
-        temp.setFill(Color.AQUA);
-        temp.setStroke(Color.BLACK);
-        temp.setStrokeWidth(1);
-        temp.setHeight(myHeight);
-        temp.setWidth(myWidth);
-        temp.setX(row*CELL_SIZE);
-        temp.setY(col*CELL_SIZE);
-        temp.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                ImageView source = new ImageView();
-                source.setImage(event.getDragboard().getImage());
-                findDropLocation(event.getX(), event.getY(), source);
-                //temp.setFill(new ImagePattern(source.getImage()));
-                event.consume();
-                
-            }
-        });
-        
-        
-        actualGrid[row][col] = temp;
-        return actualGrid[row][col];
+    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
+
+    	Rectangle temp = new Rectangle();
+    	temp.setFill(Color.web(aHexValue));
+    	temp.setStroke(Color.BLACK);
+    	temp.setStrokeWidth(1);
+    	temp.setHeight(aCellSize);
+    	temp.setWidth(aCellSize);
+    	temp.setX(row*aCellSize);
+    	temp.setY(col*aCellSize);
+//    	loadTerrainData(temp, row, col, aMapData);
+
+    	temp.setOnDragDropped(new EventHandler<DragEvent>() {
+    		public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+//				TowerData data = myTowerColumn.getTowerData(db.getString());
+//				System.out.println(data.getBuyPrice());
+//    			if(!isFull(temp)){
+				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
+//    			}
+				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
+				//sprites.add(source);
+				//TODO: move this outside of this method--into the update method
+    			MoveableComponentView source = new MoveableComponentView();
+				source.setImage(db.getImage());
+				source.setX(closestRectangle.getX());
+				source.setY(closestRectangle.getY());
+				source.setFitHeight(closestRectangle.getHeight());
+				source.setFitWidth(closestRectangle.getWidth());
+				System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
+				myPane.getChildren().add(source);
+    			event.consume();
+    		}
+    	});
+
+    	actualGrid[row][col] = temp;
+    	return actualGrid[row][col];
     }
     
-    public void findDropLocation(double x, double y, ImageView source){
+    private void loadTerrainData(Rectangle temp, int row, int col, MapData aMapData){
+        //Set this up later
+    }
+    
+    public void setRoot(Pane myRoot){
+        myPane = myRoot;
+    }
+    
+    @Deprecated
+    private boolean isFull(Rectangle temp){
+        return (temp.getFill() != Color.AQUA);    
+    }
+   
+    
+    public Rectangle findDropLocation(double x, double y){
         Rectangle closest = new Rectangle();
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
@@ -82,14 +114,12 @@ public class MapGrid extends Node{
                 }
             }
         }
-        source.setX(closest.getX() + CELL_SIZE/2);
-        source.setY(closest.getY() + CELL_SIZE/2);
-        closest.setFill(new ImagePattern(source.getImage()));
-        
+        return closest;
     }
     
     private double calculateDistance (double x, double y, double x2, double y2) {
-        return Math.sqrt(Math.pow((x - (x2+CELL_SIZE/2)), 2) + Math.pow((y - (y2 + CELL_SIZE/2)), 2));
+        return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
+                         + Math.pow((y - (y2 + myCellSize/2)), 2));
     }
 
     public int getNumCols(){
@@ -101,11 +131,11 @@ public class MapGrid extends Node{
     }
     
     public int getHeight(){
-        return myHeight;
+        return myCellSize;
     }
     
     public int getWidth(){
-        return myWidth;
+        return myCellSize;
     }
 
     @Override

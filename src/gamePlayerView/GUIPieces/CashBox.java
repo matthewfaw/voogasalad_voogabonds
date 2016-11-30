@@ -2,6 +2,7 @@ package gamePlayerView.GUIPieces;
 
 import engine.IObservable;
 import engine.IObserver;
+import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.ICashAcceptor;
 
 /**
@@ -11,19 +12,19 @@ import gamePlayerView.interfaces.ICashAcceptor;
 /**
  * UI feature for Cash text box and Label
  */
-public class CashBox extends InfoBox implements IObserver,ICashAcceptor {
+public class CashBox extends InfoBox implements IObserver<IViewablePlayer>,ICashAcceptor {
 	
 	public CashBox(){
 		myDisplay=makeDisplay("Cash: ");
 	}
 
-	public void acceptCash(IObservable aObservable) {
-		aObservable.attach(this);
+	public void acceptCash(IObservable<IViewablePlayer> aPlayer) {
+		aPlayer.attach(this);
+		//update(aPlayer);
 	}
 
 	@Override
-	public void update(Object aChangedObject) {
-		myOutput.setText(aChangedObject.toString());
+	public void update(IViewablePlayer aChangedObject) {
+		myOutput.setText(Integer.toString(aChangedObject.getAvailableMoney()));
 	}
-
 }

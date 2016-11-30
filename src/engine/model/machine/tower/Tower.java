@@ -1,41 +1,36 @@
 package engine.model.machine.tower;
+
+import authoring.model.TowerData;
+import engine.controller.timeline.TimelineController;
 import engine.model.machine.Machine;
-import java.util.Collection;
-import java.util.Map;
-public class Tower extends Machine implements ITower {
-	private Map<String, Integer> myUpgrades;
-	private int mySellPrice;
+import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.weapons.WeaponFactory;
+import utility.Point;
+
+public class Tower extends Machine implements IUpgradable {
 	
-	public Tower(){
-	}
-	public Tower(String name, int maxHealth) {
-		super(name, maxHealth);
-	}
-	@Override
-	public int getUpgradeCost(String s) {
-		return myUpgrades.containsKey(s) ? myUpgrades.get(s) : -1;
+
+	public Tower(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, TowerData data,
+			Point initialPosition) {
+		super(time, armory, owner, data, initialPosition);
 	}
 	
-	@Override
-	public Collection<String> getUpgrades() {
-		return myUpgrades.keySet();
-	}
-	@Override
-	public int getSellPrice() {
-		return mySellPrice;
-	}
 	@Override
 	protected int die() {
 		//TODO: Delete self
 		unregisterMyself();
 		return 0;
 	}
+	
 	@Override
-	public void upgrade(String upgradeName, ITowerUpgradeStore towerUpgradeStore) {
-		//All TODO:
-		//Subtract money from player's wallet
-		//Change my sell price and upgrade map
-		//Call a superclass method that changes my Machine fields (weapon, health, etc
-		
+	public void upgrade(TowerData upgradeData) {
+		super.upgrade(upgradeData);
 	}
+	
+	@Override
+	public Point getGoal() {
+		//This is intended. (Contrast with projectile's getGoal() method.)
+		return null;
+	}
+
 }

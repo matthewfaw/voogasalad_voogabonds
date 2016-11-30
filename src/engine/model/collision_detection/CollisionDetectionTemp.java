@@ -1,5 +1,6 @@
 package engine.model.collision_detection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,15 +16,20 @@ import engine.model.systems.ISystem;
  */
 public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {
 	
-	ICollisionHandler collisionHandler;
-	List<ICollidable> myCollidables;
+	private ICollisionHandler collisionHandler;
+	private List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
-	List<IRegisterable> myRegisterables;
+	private List<IRegisterable> myRegisterables;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
+		myCollidables = new ArrayList<ICollidable>();
 		//TODO: initialize with all observers
+		myObservers = new ArrayList<IObserver<ISystem>>();
 		//TODO: initialize collision handler
+		collisionHandler = new CollisionHandler();
+		// Init registerables
+		myRegisterables = new ArrayList<IRegisterable>();
 	}
 
 	/**
@@ -33,13 +39,13 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 	 * @return
 	 */
 	private boolean intersects(ICollidable a, ICollidable b) {
-		double a_x = a.getLocation().getX();
-		double a_y = a.getLocation().getY();
-		double a_r = a.getRadius();
+		double a_x = a.getPosition().getX();
+		double a_y = a.getPosition().getY();
+		double a_r = a.getCollisionRadius();
 		
-		double b_x = b.getLocation().getX();
-		double b_y = b.getLocation().getY();
-		double b_r = b.getRadius();
+		double b_x = b.getPosition().getX();
+		double b_y = b.getPosition().getY();
+		double b_r = b.getCollisionRadius();
 		
 		return Math.pow(a_r - b_r, 2) <= 
 				Math.pow(a_x - b_x, 2) + 

@@ -3,19 +3,17 @@ package gamePlayerView.gamePlayerView;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.model.map.MapData;
-import gamePlayerView.GUIPieces.CashBox;
-import gamePlayerView.GUIPieces.LivesBox;
+import engine.controller.ApplicationController;
 import gamePlayerView.GUIPieces.MapDisplay;
 import gamePlayerView.GUIPieces.StatisticsRow;
 import gamePlayerView.GUIPieces.TowerColumn;
-import gamePlayerView.GUIPieces.WavesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IResourceAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -25,6 +23,7 @@ import javafx.stage.Stage;
  */
 
 public class GamePlayerScene {
+	private ApplicationController myAppController;
 	
 	private Stage myStage;
 	private TowerColumn myTowerColumn;
@@ -34,9 +33,17 @@ public class GamePlayerScene {
 	private List<ICashAcceptor> myCash;
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
+	private List<IResourceAcceptor> myResources;
+	//private List<MoveableComponentView> mySprites;
 	
-	public GamePlayerScene(Stage aStage) throws Exception{
+	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
 		//myStage=stage;
+    	myAppController = aAppController;
+		myCash = new ArrayList<ICashAcceptor>();
+		myLives = new ArrayList<ILivesAcceptor>();
+		myWaves = new ArrayList<IWavesAcceptor>();
+		myResources = new ArrayList<IResourceAcceptor>();
+		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
 
@@ -71,9 +78,13 @@ public class GamePlayerScene {
 	}
 	
 	public BorderPane setScreen() throws Exception{
-	        myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
-		myStatisticsRow = new StatisticsRow();
+	    myMap = new MapDisplay(myAppController);
+		myStatisticsRow = new StatisticsRow(myAppController);
+		myCash.add(myStatisticsRow.getCash());
+		myLives.add(myStatisticsRow.getLives());
+		myResources.add(myTowerColumn);
+		//mySprites.add(myMap.getSprites());
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
@@ -83,26 +94,35 @@ public class GamePlayerScene {
 	}
 	
 	public List<ICashAcceptor> getCash() {
-		CashBox cashbox=myStatisticsRow.getCash();
-		myCash.add(cashbox);
 		return myCash;
 	}
 
 	public List<ILivesAcceptor> getLives() {
-		LivesBox livesbox=myStatisticsRow.getLives();
-		myLives.add(livesbox);
 		return myLives;
 	}
 
 	public List<IWavesAcceptor> getWaves() {
-		WavesBox wavesbox=myStatisticsRow.getWaves();
-		myWaves.add(wavesbox);
 		return myWaves;
 	}
 	
 	public void giveMapData(MapData aMapData){
 	        myMap.setMap(aMapData);
 	}
+	
+	public MapDisplay getMapDisplay()
+	{
+		return myMap;
+	}
+
+	public List<IResourceAcceptor> getResources() {
+		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
+		return myResources;
+	}
+	//TODO:Uncomment
+	//public List<ISprite> getSprites(){
+		//return mySprites;
+	//}
+	
 }
 
 

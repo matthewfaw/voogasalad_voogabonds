@@ -1,7 +1,5 @@
 package engine.model.game_environment.terrain;
 
-import java.util.Comparator;
-
 import utility.Index;
 
 public class Terrain {

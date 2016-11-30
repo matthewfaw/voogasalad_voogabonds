@@ -1,14 +1,22 @@
 package engine.model.game_environment.distributors;
 
 import authoring.model.EnemyData;
+import authoring.model.ProjectileData;
+import authoring.model.TowerData;
+import authoring.model.WeaponData;
 import engine.IObservable;
+import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.PhysicalComponent;
 import engine.model.components.PhysicalComponentData;
+import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityData;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
+import engine.model.machine.MachineFactory;
+import engine.model.machine.tower.Tower;
+import engine.model.playerinfo.Player;
 import utility.Point;
 
 /**
@@ -20,11 +28,33 @@ import utility.Point;
 public class MapDistributor implements IDistributor {
 	private MapMediator myMapMediator;
 	private EntityFactory myEntityFactory;
+	private MachineFactory myAnarchosyndacalistCommune;
 	
-	public MapDistributor(MapMediator aMapMediator)
-	{
+	public MapDistributor(MapMediator aMapMediator,
+			DataStore<TowerData> aTowerDataStore,
+			DataStore<EnemyData> aEnemyDataStore,
+			DataStore<WeaponData> aWeaponDataStore,
+			DataStore<ProjectileData> aProjectileDataStore,
+			TimelineController aTimelineController
+			
+			) {
 		myMapMediator = aMapMediator;
 		myEntityFactory = new EntityFactory();
+		myAnarchosyndacalistCommune = new MachineFactory(
+				aTimelineController,
+				aTowerDataStore,
+				aEnemyDataStore,
+				aWeaponDataStore,
+				aProjectileDataStore,
+				aMapMediator
+				);
+	}
+	
+	public boolean distribute(String aTowerName, PlayerController aPlayerController, Point aLocation)
+	{
+//		Tower tower = myAnarchosyndacalistCommune.newTower(aTowerName, aPlayerController.getActivePlayer(), aLocation);
+//		return myMapMediator.attemptToPlaceEntity(aLocation, tower);
+		return true;
 	}
 
 	/**

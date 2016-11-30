@@ -1,10 +1,10 @@
 package engine.model.weapons;
 
-import java.util.Map;
-
 import authoring.model.ProjectileData;
 import authoring.model.WeaponData;
 import engine.controller.timeline.TimelineController;
+import engine.model.data_stores.DataStore;
+import engine.model.game_environment.MapMediator;
 import engine.model.projectiles.ProjectileFactory;
 
 /**
@@ -14,13 +14,17 @@ import engine.model.projectiles.ProjectileFactory;
  */
 public class WeaponFactory {
 	private ProjectileFactory myProjectileFactory;
-	private TimelineController myTime;
+	private DataStore<WeaponData> myWeapons;
+	private MapMediator myMap;
 	
-	public WeaponFactory(Map<String, ProjectileData> projMap) {
-		myProjectileFactory = new ProjectileFactory(projMap, myTime);
+	public WeaponFactory(DataStore<WeaponData> weapons, DataStore<ProjectileData> projMap, TimelineController time, MapMediator map) {
+		myMap = map;
+		myWeapons = weapons;
+		
+		myProjectileFactory = new ProjectileFactory(projMap, time, myMap);
 	}
 
-	public Weapon newWeapon(WeaponData data, IKillerOwner owner) {
-		return new Weapon(data, owner, myProjectileFactory);
+	public Weapon newWeapon(String name, IKillerOwner owner) {
+		return new Weapon(myWeapons.getData(name), owner, myProjectileFactory, myMap);
 	}
 }

@@ -1,0 +1,1 @@
+{"myBuyPrice":60,"mySellPrice":100,"myUpgrades":{},"myName":"tower 2","myImagePath":"src/resources/cow.png","myMoveStrategyName":"fast as all get out","myCollisionRadius":2.0,"myMoveSpeed":2.0,"myTurnSpeed":0.0,"myMaxHealth":1000.0,"myWeaponName":"weapon 1"}

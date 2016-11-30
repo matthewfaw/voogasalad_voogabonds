@@ -8,8 +8,8 @@ public class CollisionHandler implements ICollisionHandler{
 	 */
 	@Override
 	public void handleCollision(ICollidable moved, ICollidable unmoved) {
-		if (! (moved.getRadius() == 0 || unmoved.getRadius() == 0) ) {
-			moved.collideInto(unmoved);
+		if (! (moved.getCollisionRadius() == 0 || unmoved.getCollisionRadius() == 0) ) {
+			unmoved.collideInto(moved);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package gamePlayerView.interfaces;
 
 import engine.IObservable;
+import engine.model.playerinfo.IViewablePlayer;
 
 /**
  * Just a temporary interface for an example
@@ -24,6 +25,6 @@ public interface ICashAcceptor{
  /**
  * Allows router to establish connection between backend and frontend object 
  */
-	public void acceptCash(IObservable aObservable);
+	public void acceptCash(IObservable<IViewablePlayer> aPlayer);
 	
 }
