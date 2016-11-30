@@ -60,7 +60,7 @@ public class WeaponTab extends Tab {
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event){
                         // TODO: update create window method
-                        myMenu.createWeaponMenu(myResources.getString("DefaultWeaponName"), myResources.getString("DefaultProjectile"),
+                        myMenu.createWeaponMenu(myResources.getString("DefaultWeapon"), myResources.getString("DefaultProjectile"),
                                                 myResources.getString("DefaultRange"), myResources.getString("DefaultRate"), true);
                 }
         };
