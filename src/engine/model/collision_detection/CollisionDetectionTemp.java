@@ -2,21 +2,23 @@ package engine.model.collision_detection;
 
 import java.util.List;
 
+
 import engine.IObservable;
 import engine.IObserver;
+import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
-import engine.model.systems.RegisterableSystem;
 
 /**
  * All objects must be subscribed as ICollidable
  * NOT IObservables
  *
  */
-public class CollisionDetectionTemp extends RegisterableSystem implements IObserver<ICollidable>, IObservable<ISystem> {
+public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {
 	
 	ICollisionHandler collisionHandler;
 	List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
+	List<IRegisterable> myRegisterables;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
@@ -61,17 +63,6 @@ public class CollisionDetectionTemp extends RegisterableSystem implements IObser
 		}
 	}
 	
-	public void addComponent(ICollidable aNewComponent)
-	{
-		myCollidables.add(aNewComponent);
-		register(aNewComponent);
-	}
-
-	public void removeComponent(ICollidable aNewComponent)
-	{
-		myCollidables.remove(aNewComponent);
-	}
-	
 	//************************************Observable interface****************************//
 	@Override
 	public void attach(IObserver<ISystem> aObserver) {
@@ -87,6 +78,18 @@ public class CollisionDetectionTemp extends RegisterableSystem implements IObser
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	
+	//************************************ISystem interface****************************//
+	@Override
+	public void register(IRegisterable registerable) {
+		myRegisterables.add(registerable);
+	}
+
+	@Override
+	public void unregister(IRegisterable registerable) {
+		myRegisterables.remove(registerable);
 	}
 
 }

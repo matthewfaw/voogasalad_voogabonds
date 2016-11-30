@@ -1,8 +1,5 @@
 package engine.model.systems;
 
-import engine.model.collision_detection.ICollidable;
-import engine.model.strategies.IMovable;
-
 /**
  * An interface to capture the commonalities between all systems 
  * 
@@ -17,11 +14,11 @@ public interface ISystem {
 	 * Adds aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void register(ICollidable collidable);
+	public void register(IRegisterable registerable);
 	
 	/**
 	 * Removes aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void unregister(ICollidable collidable);
+	public void unregister(IRegisterable registerable);
 }

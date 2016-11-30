@@ -1,6 +1,7 @@
 package engine.model.projectiles;
 import java.util.ArrayList;
 
+
 import java.util.List;
 import authoring.model.ProjectileData;
 import engine.IObserver;
@@ -13,15 +14,15 @@ import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
+import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
-import engine.model.systems.Registerable;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
 /**
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile extends Registerable implements IViewable, IMovable, IObserver<TimelineController>, ICollidable {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable, ISystem, IRegisterable {
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
 	private String myImagePath;
@@ -45,6 +46,8 @@ public class Projectile extends Registerable implements IViewable, IMovable, IOb
 	List<Terrain> myValidTerrain;
 	
 	List<ISystem> mySystems;
+	
+	List<IRegisterable> myRegisterables;
 	
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
 		
@@ -142,7 +145,7 @@ public class Projectile extends Registerable implements IViewable, IMovable, IOb
 		myOwner.notifyDestroy(result);
 		
 		// remove references
-		unregister();
+		unregisterMyself();
 	}
 	@Override
 	public List<Terrain> getValidTerrains() {
@@ -169,5 +172,24 @@ public class Projectile extends Registerable implements IViewable, IMovable, IOb
 	@Override
 	public void collideInto(ICollidable unmovedCollidable) {
 		explode();
+	}
+	
+	//********** ISystem Interface Methods ************//
+	@Override
+	public void register(IRegisterable registerable) {
+		myRegisterables.add(registerable);
+	}
+	@Override
+	public void unregister(IRegisterable registerable) {
+		myRegisterables.remove(registerable);
+	}
+	
+	//********** IRegisterable Interface Methods ************//
+	@Override
+	public void unregisterMyself() {
+		for(ISystem s: mySystems) {
+			s.unregister(this);
+			mySystems.remove(s);
+		}
 	}
 }

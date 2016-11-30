@@ -27,7 +27,7 @@ public class Tower extends Machine implements ITower {
 	@Override
 	protected int die() {
 		//TODO: Delete self
-		unregister();
+		unregisterMyself();
 		return 0;
 	}
 	@Override

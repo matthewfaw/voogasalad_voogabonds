@@ -1,18 +1,19 @@
 package engine.model.machine;
 import java.util.List;
+
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
+import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
-import engine.model.systems.Registerable;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IWeapon;
 import utility.Damage;
 import utility.Point;
-abstract public class Machine extends Registerable implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
+abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IRegisterable {
 	private IModifiablePlayer myModifiablePlayer;
 	private Health myHealth;
 	private double myHeading;
@@ -143,4 +144,12 @@ abstract public class Machine extends Registerable implements IViewableMachine, 
 		//do nothing for now since machines will not deal dmg
 	}
 	
+	/********** IRegisterable Interface Methods ************/
+	@Override
+	public void unregisterMyself() {
+		for(ISystem s: mySystems) {
+			s.unregister(this);
+			mySystems.remove(s);
+		}
+	}
 }
