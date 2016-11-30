@@ -5,6 +5,7 @@ import java.util.Map;
 import authoring.model.ProjectileData;
 import authoring.model.WeaponData;
 import engine.controller.timeline.TimelineController;
+import engine.model.game_environment.MapMediator;
 import engine.model.projectiles.ProjectileFactory;
 
 /**
@@ -14,13 +15,13 @@ import engine.model.projectiles.ProjectileFactory;
  */
 public class WeaponFactory {
 	private ProjectileFactory myProjectileFactory;
-	private TimelineController myTime;
+	private MapMediator myMap;
 	
-	public WeaponFactory(Map<String, ProjectileData> projMap) {
-		myProjectileFactory = new ProjectileFactory(projMap, myTime);
+	public WeaponFactory(Map<String, ProjectileData> projMap, TimelineController time, MapMediator map) {
+		myProjectileFactory = new ProjectileFactory(projMap, time, myMap);
 	}
 
 	public Weapon newWeapon(WeaponData data, IKillerOwner owner) {
-		return new Weapon(data, owner, myProjectileFactory);
+		return new Weapon(data, owner, myProjectileFactory, myMap);
 	}
 }

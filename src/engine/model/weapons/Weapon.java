@@ -1,9 +1,9 @@
 package engine.model.weapons;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.WeaponData;
+import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.projectiles.ProjectileFactory;
@@ -17,19 +17,21 @@ import utility.Point;
  *
  */
 public class Weapon implements IWeapon, IKillerOwner {
-	IKillerOwner myMachine;
-	ProjectileFactory myProjectileFactory;
-	ITargetStrategy myTargetStrategy;
-	String myProjectile;
-	int myFireRate;
-	int myTimeToFire;
-	double myRange;
+	private IKillerOwner myMachine;
+	private MapMediator myMap;
 	
-	double myCareerKills;
-	double myCareerDamage;
-	double myCareerEarnings;
+	private ProjectileFactory myProjectileFactory;
+	private ITargetStrategy myTargetStrategy;
+	private String myProjectile;
+	private int myFireRate;
+	private int myTimeToFire;
+	private double myRange;
 	
-	public Weapon(WeaponData data, IKillerOwner owner, ProjectileFactory projFactory) {
+	private double myCareerKills;
+	private double myCareerDamage;
+	private double myCareerEarnings;
+	
+	public Weapon(WeaponData data, IKillerOwner owner, ProjectileFactory projFactory, MapMediator map) {
 		myRange = data.getRange();
 		myFireRate = data.getFireRate();
 		myProjectile = data.getProjectileName();
@@ -48,8 +50,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 
 	@Override
 	public void fire(double heading, Point position) {
-		//TODO: Make targets contain all Enemy Machines within weapon's range
-		List<Machine> targets =  new ArrayList<Machine>();
+		List<Machine> targets = myMap.withinRange(getLocation(), myRange);
 		
 		if (myTimeToFire <= 0 && targets.size() > 0){
 			

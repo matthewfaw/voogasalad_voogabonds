@@ -1,4 +1,5 @@
 package engine.model.projectiles;
+
 import java.util.ArrayList;
 import java.util.List;
 import authoring.model.ProjectileData;
@@ -6,6 +7,7 @@ import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
+import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
@@ -15,6 +17,7 @@ import utility.Point;
 import engine.model.strategies.*;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
+
 /**
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
@@ -29,6 +32,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	private String myImagePath;
 	private IKillerOwner myOwner;
 	private Machine myTarget;
+	private MapMediator myMap;
 	
 	private IMovementStrategy myMovementCalc;
 	private double mySpeed;
@@ -39,19 +43,20 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	private Point myLocation;
 	private double myCollisionRadius;
 	
-	IDamageStrategy myDamageCalc;
-	double myDamage;
-	int myMaxRange;
-	int myAoERadius;
+	private IDamageStrategy myDamageCalc;
+	private double myDamage;
+	private int myMaxRange;
+	private int myAoERadius;
 	
 	List<Terrain> myValidTerrain;
-	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
+	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time, MapMediator map) {
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
+		myMap = map;
 		
 		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
 		myLocation = myOwner.getLocation();
@@ -112,8 +117,6 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		myHeading = nextMove.getKey();
 		myLocation = nextMove.getValue();
 		
-//		notifyListenersUpdate();
-		
 		if (myTarget.onMap() && myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
 			hitUnit(myTarget);
 		} else if (myTraveled >= myMaxRange) {
@@ -126,7 +129,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	private void hitUnit(Machine hit) {
 		DamageInfo result = new DamageInfo();
 		
-		result.add(hit.takeDamage(myDamageCalc.getTargetDamage()));
+		result.add(hit.takeDamage(myDamageCalc.getTargetDamage(myDamage)));
 		result.add(explode());
 		
 		myOwner.notifyDestroy(result);
@@ -134,8 +137,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	}
 	
 	private DamageInfo explode() {
-		List<Machine> targets = new ArrayList<Machine>();
-		//TODO: Get all Machines in AoE Range
+		List<Machine> targets = myMap.withinRange(getPosition(), myAoERadius);
 		
 		DamageInfo result = new DamageInfo();
 		
@@ -143,9 +145,9 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 
 			Damage toDeal;
 			if (getOwner().isAlly(m.getOwner()))
-				toDeal = myDamageCalc.getAoEAllyDamage(this, myTarget.getPosition());
+				toDeal = myDamageCalc.getAoEAllyDamage(this, myTarget.getPosition(), myDamage);
 			else
-				toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition());
+				toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition(), myDamage);
 			
 			result = result.add(m.takeDamage(toDeal));
 		}

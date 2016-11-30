@@ -1,1 +1,1 @@
-{"numXCells":2,"numYCells":2,"cellSize":0,"spawnPoints":{},"sinkPoints":[],"terrainList":[{"type":"grass","loc":{"myX":0.0,"myY":0.0,"myZ":0.0}},{"type":"water","loc":{"myX":0.0,"myY":1.0,"myZ":0.0}}],"validTerrain":{}}
+{"numXCells":2,"numYCells":2,"cellSize":0,"spawnPoints":{},"sinkPoints":[],"terrainList":[{"type":"water","loc":{"myX":0.0,"myY":1.0,"myZ":0.0}},{"type":"grass","loc":{"myX":0.0,"myY":0.0,"myZ":0.0}}],"validTerrain":{}}
