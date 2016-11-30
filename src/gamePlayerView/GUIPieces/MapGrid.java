@@ -26,9 +26,11 @@ public class MapGrid extends Node{
     public final int CELL_SIZE = 50;
     private Rectangle[][] actualGrid;
     private Pane myPane;
+    private ArrayList<MoveableComponentView> sprites;
     
     public MapGrid(int rows, int cols){
-        myPane = new Pane();
+       myPane = new Pane();
+       sprites = new ArrayList<MoveableComponentView>();
        numColumns = cols;
        numRows = rows;
        myHeight = CELL_SIZE;
@@ -50,7 +52,7 @@ public class MapGrid extends Node{
         
         temp.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                ImageView source = new ImageView();
+                MoveableComponentView source = new MoveableComponentView();
                 if(!isFull(temp)){
                 source.setImage(event.getDragboard().getImage());
                 findDropLocation(event.getX(), event.getY(), source);
@@ -76,7 +78,7 @@ public class MapGrid extends Node{
     }
    
     
-    public void findDropLocation(double x, double y, ImageView source){
+    public void findDropLocation(double x, double y, MoveableComponentView source){
         Rectangle closest = new Rectangle();
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
@@ -94,8 +96,10 @@ public class MapGrid extends Node{
         }
         source.setX(closest.getX());
         source.setY(closest.getY());
+        System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
         source.setFitHeight(closest.getHeight());
         source.setFitWidth(closest.getWidth());
+        //sprites.add(source);
         myPane.getChildren().add(source);
     }
     

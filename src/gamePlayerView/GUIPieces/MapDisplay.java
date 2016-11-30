@@ -28,6 +28,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     private Pane myRoot;
     private Pane myPane;
     private MapGrid background;
+    private ArrayList<MoveableComponentView> sprites;
     private static boolean isPlaying;
     private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -37,7 +38,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     //Set up map from backend
     //register as observer of timeline
     public MapDisplay() throws Exception{
-       
+        sprites = new ArrayList<MoveableComponentView>();
         myRoot = new Pane();
         myPane = new Pane();
         init();
@@ -123,8 +124,6 @@ public class MapDisplay implements IObserver<TimelineController> {
 
     @Override
     public void update(TimelineController aChangedObject) {
-        if(isPlaying){
-            aChangedObject.attach(this);
-        }
+        
     }
 }
