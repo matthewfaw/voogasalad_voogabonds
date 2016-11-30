@@ -1,1 +1,1 @@
-{"Tower #1":{"name":"Tower #1","weaponName":"Bomb","buyPrice":10,"sellPrice":2,"maxHealth":100,"imagePath":"C:\\Users\\Tripp\\Pictures\\bouncy.png","collisionRadius":1}}
+{"Tower1":{"name":"Tower1","weaponName":"Bomb","buyPrice":10,"sellPrice":2,"maxHealth":100,"imagePath":"C:\\Users\\Tripp\\CS308workspace\\voogasalad_voogabonds\\src\\resources\\cookie.png","collisionRadius":1}}

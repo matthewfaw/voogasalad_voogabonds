@@ -67,10 +67,12 @@ public class GameStateSerializer {
 		}catch(Exception e){
 			System.out.println("Map fail");
 		}
-
-		//Need to update PlayerData for consistency
-		//			ser.serializeToFile(router.getPlayerDataController().finalizePlayerDataMap(), "exampleEnemyData");
-
+		try{
+			createNewDirectory("PlayerData", gameName);
+			ser.serializeToFile(router.getPlayerDataController().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"examplePlayerData");
+		}catch(Exception e){
+			System.out.println("Player fail");
+		}
 
 
 	}

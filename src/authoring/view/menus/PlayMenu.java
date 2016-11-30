@@ -1,5 +1,7 @@
 package authoring.view.menus;
 
+import gamePlayerView.Main;
+
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -7,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 /**
  * @author Christopher Lu
@@ -14,11 +17,11 @@ import javafx.scene.control.MenuItem;
  */
 
 public class PlayMenu extends Menu {
-	
+
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private Menu play;
-	
+
 	public PlayMenu(MenuBar bar) {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.play = new Menu(myResources.getString("PlayMenuLabel"));
@@ -35,24 +38,27 @@ public class PlayMenu extends Menu {
 		performReturnAuthoring(returnToAuthoring);
 		play.getItems().addAll(playStart, playHere, returnToAuthoring);
 	}
-	
+
 	private void performPlayStart(MenuItem playStart) {
 		playStart.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
 				//TODO: Implement code that plays the game from the start upon clicking the Play From Start button. This means starting the game from the beginning, before the 1st wave.
+				// We should consider a stage building factory.
+				createGamePlayerInstance();
 			}
 		});
 	}
-	
+
 	private void performPlayHere(MenuItem playHere) {
 		playHere.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
 				//TODO: Implement code that plays the game from the current state. The user may have clicked play from start earlier, got to wave 5, returned to authoring, 
 				// wants to continue playing from wave 5 onwards e.g. debugging.
+				createGamePlayerInstance();
 			}
 		});
 	}
-	
+
 	private void performReturnAuthoring(MenuItem returnToAuthoring) {
 		returnToAuthoring.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
@@ -61,4 +67,15 @@ public class PlayMenu extends Menu {
 		});
 	}
 	
+	private void createGamePlayerInstance(){
+		try{
+			Stage s = new Stage();
+			Main playInstance = new Main();
+			playInstance.start(s);
+		}
+		catch(Exception e){
+			System.out.println("Unable to start new game.");
+		}
+	}
+
 }
