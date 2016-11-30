@@ -2,6 +2,7 @@ package engine.controller;
 
 import java.util.ResourceBundle;
 
+import engine.controller.timeline.TimelineController;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ public class ApplicationController {
 
 	private ResourceBundle myGameOptions;
 	private BackendController myBackendController;
+	//XXX: maybe make a frontend controller, and move this there
+	private TimelineController myAnimationTimelineController;
 
 	public ApplicationController()
 	{
@@ -43,10 +46,13 @@ public class ApplicationController {
 	 * Helper method to create the view object
 	 * from the GameData file
 	 * @throws Exception 
+	 * TODO: Move to a frontend controller?
 	 */
 	private GamePlayerScene constructGUI(Stage aStage) throws Exception
 	{
 		GamePlayerScene scene = new GamePlayerScene(aStage);
+		myAnimationTimelineController = new TimelineController();
+		myAnimationTimelineController.attach(scene.getMapDisplay());
 		return scene;
 	}
 	/**
@@ -58,7 +64,7 @@ public class ApplicationController {
 	private void constructBackend(Router aRouter)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString("DefaultGame"), aRouter);
+		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
 	}
 	
 	/*

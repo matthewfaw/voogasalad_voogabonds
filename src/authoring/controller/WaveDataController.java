@@ -25,6 +25,10 @@ public class WaveDataController {
 		return myWaveMap.get(name);
 	}
 	
+	public LinkedHashMap<String, WaveData> finalizeWaveDataMap(){
+		return myWaveMap;
+	}
+	
 	/**
 	 * The function is this complex because it's impossible to update the key of a
 	 * LinkedHashMap (which is necessary if the name gets updated). As a result, 

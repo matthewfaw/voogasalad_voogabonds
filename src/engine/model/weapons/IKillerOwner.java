@@ -1,5 +1,6 @@
 package engine.model.weapons;
 
+import engine.model.playerinfo.IModifiablePlayer;
 import utility.Point;
 
 /**
@@ -12,5 +13,6 @@ public interface IKillerOwner {
 	
 	abstract public DamageInfo notifyDestroy(DamageInfo result);
 	abstract public double getHeading();
-	abstract public Point getLocation();
+	abstract public Point getPosition();
+	abstract public IModifiablePlayer getOwner();
 }

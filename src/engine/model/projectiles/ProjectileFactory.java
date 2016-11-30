@@ -1,9 +1,9 @@
 package engine.model.projectiles;
 
-import java.util.Map;
-
 import authoring.model.ProjectileData;
 import engine.controller.timeline.TimelineController;
+import engine.model.data_stores.DataStore;
+import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.weapons.IKillerOwner;
 import utility.ResouceAccess;
@@ -16,12 +16,14 @@ import utility.ResouceAccess;
  */
 public class ProjectileFactory {
 	private static final String NO_SUCH_PROJECTILE = "NoSuchProjectile";
-	private Map<String, ProjectileData> myProjectiles;
+	private DataStore<ProjectileData> myProjectiles;
 	private TimelineController myTime;
+	private MapMediator myMap;
 	
-	public ProjectileFactory(Map<String, ProjectileData> projMap, TimelineController time) {
+	public ProjectileFactory(DataStore<ProjectileData> projMap, TimelineController time, MapMediator map) {
 		myTime = time;
 		myProjectiles = projMap;
+		myMap = map;
 		
 	}
 
@@ -33,10 +35,9 @@ public class ProjectileFactory {
 	 * @return new Projectile
 	 */
 	public Projectile newProjectile(String name, Machine target, IKillerOwner owner) {
-		if (myProjectiles.containsKey(name))
-			return new Projectile(myProjectiles.get(name), target, owner, myTime);
+		if (myProjectiles.hasKey(name))
+			return new Projectile(myProjectiles.getData(name), target, owner, myTime, myMap);
 		else
-			//TODO: ResourceFile error message
 			throw new UnsupportedOperationException(ResouceAccess.getError(NO_SUCH_PROJECTILE) + name);
 	}
 }

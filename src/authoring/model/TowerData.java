@@ -1,131 +1,76 @@
 package authoring.model;
 
-import java.io.File;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import utility.Point;
 
-public class TowerData implements IReadableData {
+public class TowerData extends MachineData {
 
-	private String name;
-	private String weaponName;
-	private int buyPrice;
-	private int sellPrice;
-	private int maxHealth;
-	private List<Map<String, Integer>> upgrades;
-	private String imagePath;
-	private List<String> traversableTerrain;
-	private int collisionRadius;
-	private List<Point> initialLocations;
-	private String movement;
+	/**
+	 * Initial buying price for a tower. A positive number means this tower 
+	 * can be bought without upgrading (essentially is a root). If buyPrice is -1 this 
+	 *  means that this tower cannot be bought and must be upgraded to.
+	 */
+	private int myBuyPrice;
 	
-	public void setName(String name) throws Exception {
-		if (name == null || name.length() == 0){
-			throw new Exception("Must enter a valid name.");
-		}
-		this.name = name;
+	/**
+	 * Amount of money you get for selling.
+	 */
+	private int mySellPrice;
+	
+	/**
+	 * Map of towers which this particular tower can upgrade from. The Integer is the cost of updating
+	 * from the previous tower to this one.
+	 */
+	private Map<String, Integer> myUpgrades;
+	
+	public TowerData() {
+		myUpgrades = new HashMap<String, Integer>();
 	}
 	
-	@Override
-	public String getName(){
-		return name;
+	public void setBuyPrice(int buyPrice) {
+		myBuyPrice = buyPrice;
 	}
-	
-	public void setWeaponName(String weaponName) throws Exception{
-		if (weaponName == null || weaponName.length() == 0){
-			throw new Exception("Must enter a valid weapon name.");
-		}
-		this.weaponName = weaponName;
-	}
-	
-	public String getWeaponName(){
-		return weaponName;
-	}
-	
-	public void setBuyPrice(int buyPrice) throws Exception{
-		if (buyPrice < 0){
-			throw new Exception("Price cannot be negative.");
-		}
-		this.buyPrice = buyPrice;
-	}
-	
 	public int getBuyPrice(){
-		return buyPrice;
+		return myBuyPrice;
 	}
 	
-	public void setSellPrice(int sellPrice) throws Exception{
-		if (sellPrice < 0){
-			throw new Exception("Price cannot be negative.");
-		}
-		this.sellPrice = sellPrice;
+	public void setSellPrice(int sellPrice) {
+		mySellPrice = sellPrice;
 	}
-	
 	public int getSellPrice(){
-		return sellPrice;
+		return mySellPrice;
 	}
 	
-	public void setMaxHealth(int maxHealth) throws Exception{
-		if (maxHealth <= 0){
-			throw new Exception("Health cannot be less than or equal to zero.");
+	public void addUpgrades(String name, Integer upgradeCost){
+		//this.upgradeFrom = upgrades;
+		myUpgrades.put(name, upgradeCost);
+	}
+	
+	public Map<String, Integer> getUpgrades(){
+		return myUpgrades;
+	}
+	
+	/*
+	 * This doesn't work at the moment, partially because uninitialized doubles/ints default to 0.
+	 * 
+	 * 
+	public boolean allFieldsFilled() throws IllegalAccessException {
+		boolean result = true;
+		
+		for (Field f: getClass().getDeclaredFields()) {
+			if (f.get(this) == null) {
+				result = false;
+				break;
+			} else {
+				System.out.println("Here!");
+			}
+			System.out.println(f.get(this).toString());
 		}
-		this.maxHealth = maxHealth;
+		
+		return result;
+		
 	}
+	*/
 	
-	public int getMaxHealth(){
-		return maxHealth;
-	}
 	
-	public void setUpgrades(List<Map<String, Integer>> upgrades){
-		this.upgrades = upgrades;
-	}
-	
-	public List<Map<String, Integer>> getUpgrades(){
-		return upgrades;
-	}
-	
-	public void setImagePath(String imagePath) throws Exception{
-		if (!imagePath.endsWith(".png") || !(new File(imagePath).exists())){
-			throw new Exception("Image file is invalid.");
-		}
-		this.imagePath = imagePath;
-	}
-	
-	public String getImagePath(){
-		return imagePath;
-	}
-	
-	public void setTraversableTerrain(List<String> traversableTerrain){
-		this.traversableTerrain = traversableTerrain;
-	}
-	
-	public List<String> getTraversableTerrain(){
-		return traversableTerrain;
-	}
-	
-	public void setCollisionRadius(int collisionRadius) throws Exception{
-		if (collisionRadius < 0){
-			throw new Exception("Collision Radius cannot be negative.");
-		}
-		this.collisionRadius = collisionRadius;
-	}
-	
-	public int getCollisionRadius(){
-		return collisionRadius;
-	}
-	
-	public void setInitialLocations(List<Point> initialLocations){
-		this.initialLocations = initialLocations;
-	}
-	
-	public List<Point> getInitialLocations(){
-		return initialLocations;
-	}
-	
-	public void setMovementStrategy(String movement){
-		this.movement = movement;
-	}
-	
-	public String getMovementStrategy(){
-		return movement;
-	}
 }

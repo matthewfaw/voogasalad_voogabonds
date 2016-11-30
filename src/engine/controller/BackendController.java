@@ -44,7 +44,6 @@ public class BackendController {
 	private JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-//	private MapMediator myMapMediator;
 	private MapDistributor myMapDistributor;
 	private ResourceStore myResourceStore;
 
@@ -52,10 +51,12 @@ public class BackendController {
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
 	private DataStore<EnemyData> myEnemyDataStore;
+	private DataStore<TowerData> myTowerDataStore;
 	private PlayerData myPlayerData;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
+	private PlayerController myPlayerController;
 	private WaveController myWaveController;
 	private Router myRouter;
 	
@@ -67,19 +68,14 @@ public class BackendController {
 		myJsonDeserializer = new JSONDeserializer();
 
 		myTimelineController = new TimelineController();
+		myPlayerController = new PlayerController(myRouter);
 		
 		constructStaticBackendObjects();
 		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-		constructDynamicBackendObjects();
-	}
-	
-	/**
-	 * A method used to add a new player to the game
-	 */
-	public void addPlayer()
-	{
-		//TODO: set up the infrastructure for a player
-		// initially, let's assume there's only one player
+//		constructDynamicBackendObjects();
+		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
+		
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -97,12 +93,12 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructMap();
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();
 		constructEnemyDataStore();
 		constructPlayerData();
+		//constructMap();
 	}
 
 	/**
@@ -117,13 +113,21 @@ public class BackendController {
 		MapData mapData = data.get(0);
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-		MapMediator MapMediator = new MapMediator(terrainMap);
+		MapMediator mapMediator = new MapMediator(terrainMap);
 
 		//distribute to backend
-		myMapDistributor = new MapDistributor(MapMediator);
+		myMapDistributor = new MapDistributor(
+				mapMediator,
+				myTowerDataStore,
+				myEnemyDataStore,
+				myWeaponDataStore,
+				myProjectileDataStore,
+				myTimelineController
+				);
 		
 		//distribute to frontend
 		myRouter.distributeMapData(mapData);
+		
 	}
 	/**
 	 * Helper method to create the backend resource store object
@@ -190,8 +194,13 @@ public class BackendController {
 		List<String> files = myFileRetriever.getFileNames(aFilePath);
 		List<T> data = new ArrayList<T>();
 		for (String file: files) {
-			T entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
-			data.add(entry);
+			T entry;
+			try {
+				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
+				data.add(entry);
+			} catch (Exception e) {
+				System.out.print("err");
+			}
 		}
 		return data;
 	}

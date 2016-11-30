@@ -3,6 +3,7 @@ package authoring.view.side_panel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import authoring.controller.EnemyDataController;
@@ -44,7 +45,7 @@ public class EnemyTab extends Tab {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myWeapons = new ArrayList<String>();
-		myTerrains = new ArrayList<String>();
+		myTerrains = new ArrayList<String>(Arrays.asList("Ground","Ice","Water","Air"));
 		myController = controller;
 		myMenu = new EnemyMenu(myResources, this);
 		enemyTabOptions(enemyTab);
@@ -103,7 +104,7 @@ public class EnemyTab extends Tab {
 			public void handle(ActionEvent event){
 				EnemyData enemy = myController.getEnemyData(text);
 				myMenu.createEnemyWindow(enemy.getName(), String.valueOf(enemy.getMaxHealth()), 
-						String.valueOf(enemy.getSpeed()), String.valueOf(enemy.getCollisionRadius()), 
+						String.valueOf(enemy.getMoveSpeed()), String.valueOf(enemy.getCollisionRadius()), 
 						String.valueOf(enemy.getKillReward()), enemy.getImagePath(), enemy.getWeaponName(), 
 						enemy.getTerrainList(), false);
 			}
@@ -138,15 +139,15 @@ public class EnemyTab extends Tab {
 		return listener;
 	}
 	
-	public SetChangeListener<String> createTerrainListener(){
-		SetChangeListener<String> listener = new SetChangeListener<String>() {
+	public MapChangeListener<String, String> createTerrainListener(){
+		MapChangeListener<String, String> listener = new MapChangeListener<String, String>() {
 			@Override
-			public void onChanged(SetChangeListener.Change<? extends String> change) {
+			public void onChanged(MapChangeListener.Change<? extends String, ? extends String> change) {
 				if (change.wasAdded()){
-					myTerrains.add(change.getElementAdded());
+					myTerrains.add(change.getKey());
 				}
 				else if (change.wasRemoved()){
-					myTerrains.remove(change.getElementRemoved());
+					myTerrains.remove(change.getKey());
 				}
 			}
 		};

@@ -5,11 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import authoring.model.EnemyData;
+import authoring.model.ProjectileData;
+import authoring.model.TowerData;
+import authoring.model.WeaponData;
+import engine.controller.timeline.TimelineController;
 import engine.model.components.PhysicalComponent;
+import engine.model.data_stores.DataStore;
 import engine.model.game_environment.paths.PathFactory;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.machine.Machine;
+import engine.model.machine.MachineFactory;
 import engine.model.machine.enemy.Enemy;
 import engine.model.strategies.IPhysical;
 import utility.Point;
@@ -20,16 +27,17 @@ public class MapMediator {
 	private TerrainMap myTerrainMap;
 	private ArrayList<IPhysical> myEntityManager;
 	private PathManager myPathManager;
+	private MachineFactory myAnarchosyndacalistCommune;
 	
 	//TODO: Change this constructor so that it hides away the terrain map
 	// so constructor could take in terrain map data instead of terrain map
 	// this makes the ownership model more explicit
-	public MapMediator(TerrainMap aTerrainMap)
-	{
+	public MapMediator(TerrainMap aTerrainMap) {
 		myTerrainMap = aTerrainMap;
 		myEntityManager = new ArrayList<IPhysical>();
 		myPathFactory = new PathFactory();
 		myPathManager = myPathFactory.constructPaths(myTerrainMap);
+
 	}
 	
 	/**

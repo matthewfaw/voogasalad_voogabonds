@@ -2,7 +2,6 @@ package engine.model.strategies;
 
 import java.util.List;
 
-import engine.model.game_environment.terrain.Terrain;
 import utility.Point;
 
 public interface IMovable extends IPhysical {
@@ -18,7 +17,7 @@ public interface IMovable extends IPhysical {
 	@Override
 	abstract public double getHeading();
 	@Override
-	abstract public List<Terrain> getValidTerrains();
+	abstract public List<String> getValidTerrains();
 	@Override
 	abstract public void setPosition(Point p);
 	

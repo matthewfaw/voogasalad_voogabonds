@@ -1,11 +1,5 @@
 package engine.controller;
 
-import utility.Point;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
 import authoring.model.EnemyData;
 import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
@@ -49,12 +43,8 @@ class MockGameDataConstructor {
 			tow.setBuyPrice(40);
 			tow.setCollisionRadius(2);
 			tow.setImagePath("src/resources/boss.png");
-			List<Point> list = new ArrayList<Point>();
-			list.add(new Point(100, 100));
-			list.add(new Point(20, 50));
-			tow.setInitialLocations(list);
 			tow.setMaxHealth(1000);
-			tow.setMovementStrategy("fast as fuck");
+			tow.setMoveStrategyName("fast as fuck");
 			tow.setName("tower 1");
 			tow.setSellPrice(100);
 			
@@ -65,7 +55,7 @@ class MockGameDataConstructor {
 			ed.setKillReward(100);
 			ed.setMaxHealth(100);
 			ed.setName("enemy 1");
-			ed.setSpeed(10);
+			ed.setMoveSpeed(10);
 			ed.setWeaponName("weapon 1");
 			
 			// Weapon Data
@@ -100,14 +90,14 @@ class MockGameDataConstructor {
 //			md.addSpawnPoint(new Point(0,0));
 //			md.addSinkPoint(new Point(1,1));
 			
-			ser.serializeToFile(md, "map/"+md.getClass().getSimpleName());
-			ser.serializeToFile(terrain1,"terrain/"+terrain1.getClass().getSimpleName()+"1");
-			ser.serializeToFile(terrain2, "terrain/"+terrain2.getClass().getSimpleName()+"2");
-			ser.serializeToFile(tow, "towers/"+tow.getClass().getSimpleName());
-			ser.serializeToFile(ed, "enemies/"+ed.getClass().getSimpleName());
-			ser.serializeToFile(wd, "weapon/"+wd.getClass().getSimpleName());
-			ser.serializeToFile(pd, "projectiles/"+pd.getClass().getSimpleName());
-			ser.serializeToFile(pdd, "players/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
+			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
+			ser.serializeToFile(terrain2, "exampleGame/TerrainData/"+terrain2.getClass().getSimpleName()+"2");
+			ser.serializeToFile(tow, "exampleGame/TowerData/"+tow.getClass().getSimpleName());
+			ser.serializeToFile(ed, "exampleGame/EnemyData/"+ed.getClass().getSimpleName());
+			ser.serializeToFile(wd, "exampleGame/WeaponData/"+wd.getClass().getSimpleName());
+			ser.serializeToFile(pd, "exampleGame/ProjectileData/"+pd.getClass().getSimpleName());
+			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
 			
 			
 			TerrainMap terrainMap = new TerrainMap(md);
@@ -117,8 +107,10 @@ class MockGameDataConstructor {
 			throw new SerializationException("Could not serialize");
 		}
 	}
-	public static void main(String[] args)
+	public static void main(String[] args) throws SerializationException
 	{
 		JSONSerializer ser = new JSONSerializer();
+		MockGameDataConstructor m = new MockGameDataConstructor();
+		m.constructMockData();
 	}
 }

@@ -6,8 +6,8 @@ import utility.Point;
 
 public interface IDamageStrategy {
 
-	Damage getAoEDamage(Projectile missile, Point location);
-
-	Damage getTargetDamage();
+	abstract public Damage getAoEDamage(Projectile missile, Point location, double damage);
+	abstract public Damage getAoEAllyDamage(Projectile missile, Point location, double damage);
+	abstract public Damage getTargetDamage(double damage);
 
 }

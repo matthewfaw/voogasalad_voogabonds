@@ -8,12 +8,17 @@ import utility.Point;
 public class ConstantDamageStrategy implements IDamageStrategy {
 
 	@Override
-	public Damage getAoEDamage(Projectile missile, Point location) {
-		return new Damage(1);
+	public Damage getAoEDamage(Projectile missile, Point location, double damage) {
+		return new Damage(damage);
+	}
+	
+	@Override
+	public Damage getAoEAllyDamage(Projectile missile, Point location, double damage) {
+		return new Damage(0);
 	}
 
 	@Override
-	public Damage getTargetDamage() {
+	public Damage getTargetDamage(double damage) {
 		return new Damage(0);
 	}
 

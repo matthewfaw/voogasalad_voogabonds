@@ -15,18 +15,20 @@ import authoring.model.IReadableData;
 public class DataStore<T extends IReadableData> {
 	private HashMap<String, T> myWeaponData;
 
-	public DataStore(List<T> aWeaponDataList)
-	{
+	public DataStore(List<T> aWeaponDataList) {
 		myWeaponData = new HashMap<String, T>();
 		aWeaponDataList.forEach(e -> myWeaponData.put(e.getName(), e));
 	}
 	
-	public T getData(String aWeaponName)
-	{
+	public T getData(String aWeaponName) {
 		if (myWeaponData.containsKey(aWeaponName)) {
 			return myWeaponData.get(aWeaponName);
 		} else {
 			return null;
 		}
+	}
+	
+	public boolean hasKey(String aWeaponName) {
+		return myWeaponData.containsKey(aWeaponName);
 	}
 }

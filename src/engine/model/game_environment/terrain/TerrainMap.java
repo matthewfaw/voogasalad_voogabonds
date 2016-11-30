@@ -44,16 +44,12 @@ public class TerrainMap {
 	 * @param aLocation: location on the map
 	 * @return true if the location has one of the valid terrains
 	 */
-	public boolean hasTerrain(List<Terrain> aValidTerrainList, Point aLocation)
-	{
+	public boolean hasTerrain(List<String> list, Point aLocation) {
 		Terrain terrain = getTerrain(aLocation);
-		aValidTerrainList.forEach(t -> terrain.getTerrainType().equals(t.getTerrainType()));
-		for (Terrain t: aValidTerrainList) {
-			if (terrain.getTerrainType().equals(t.getTerrainType())) {
-				return true;
-			}
-		}
-		return false;
+		
+		return list.stream()
+				.map(t -> terrain.getTerrainType().equals(t))
+				.reduce(true, (a, b) -> a && b);
 	}
 	
 	/**

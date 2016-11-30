@@ -150,7 +150,7 @@ public class EnemyMenu {
 		try {
 			enemy.setName(name);
 			enemy.setMaxHealth(health);
-			enemy.setSpeed(speed);
+			enemy.setMoveSpeed(speed);
 			enemy.setCollisionRadius(collisionRadius);
 			enemy.setKillReward(killReward);
 			enemy.setImagePath(image);

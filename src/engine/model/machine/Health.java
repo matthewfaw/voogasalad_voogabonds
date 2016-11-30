@@ -13,9 +13,6 @@ public class Health {
 		this(initialHealth, initialHealth);
 	}
 	
-	public double getHealth() {
-		return myCurrHealth;
-	}
 	public double takeDamage(Damage dmg) {
 		double startingHealth = myCurrHealth;
 		myCurrHealth -= dmg.getDamage();
@@ -29,4 +26,17 @@ public class Health {
 		
 		return myCurrHealth - startingHealth;
 	}
+	
+	public double getHealth() {
+		return myCurrHealth;
+	}
+	
+	public void setMaxHealth(double m) {
+		myMaxHealth = m;
+		
+		if (myCurrHealth > myMaxHealth) {
+			myCurrHealth = myMaxHealth;
+		}
+	}
+	
 }
