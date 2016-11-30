@@ -29,7 +29,6 @@ public class MapDataController extends Controller implements IReadableData, IObs
 	private int numYCells;
 	private int cellSize;
 	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
-	private MapData myMapData = new MapData();
 	
 	/**
 	 * Each group of spawn points will have a name. A map is necessary because
@@ -229,25 +228,25 @@ public class MapDataController extends Controller implements IReadableData, IObs
 		}
 	}
 	
-	// TODO: make the methods we need more available in the MapData object itself so we don't need this here.
-	public MapData getMapData() throws Exception{
-		myMapData.setNumXCells(numXCells);
-		myMapData.setNumYCells(numYCells);
-		for (String spawnName : spawnPoints.keySet()){
-			myMapData.addSpawnPoints(spawnName, spawnPoints.get(spawnName));
-		}
-		for (Point p : sinkPoints){
-			myMapData.addSinkPoint(p);
-		}
-		for (TerrainData td : terrainList){
-			myMapData.addTerrainData(td);
-		}
-		System.out.println("before terrain");
-		for (String vt: validTerrain.keySet()){
-			myMapData.addValidTerrain(vt, "color");
-		}
-		return myMapData;
-	}
+//	// TODO: make the methods we need more available in the MapData object itself so we don't need this here.
+//	public MapData getMapData() throws Exception{
+//		myMapData.setNumXCells(numXCells);
+//		myMapData.setNumYCells(numYCells);
+//		for (String spawnName : spawnPoints.keySet()){
+//			myMapData.addSpawnPoints(spawnName, spawnPoints.get(spawnName));
+//		}
+//		for (Point p : sinkPoints){
+//			myMapData.addSinkPoint(p);
+//		}
+//		for (TerrainData td : terrainList){
+//			myMapData.addTerrainData(td);
+//		}
+//		System.out.println("before terrain");
+//		for (String vt: validTerrain.keySet()){
+//			myMapData.addValidTerrain(vt, "color");
+//		}
+//		return myMapData;
+//	}
 	
 	
 	
