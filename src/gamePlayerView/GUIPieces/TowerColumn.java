@@ -101,7 +101,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 			}
 			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath)); //THIS IS IFFY. COME BACK TO THIS
 			towerPicture.setImage(towerImage);
-			//towerSettings.put(towerPicture,t);
+			towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
         towerInfo.setItems(items);
@@ -124,8 +124,8 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		towerSet.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
                 ImageView towerChosen = towerSet.getSelectionModel().getSelectedItem();
-                //TowerData tower=towerSettings.get(towerChosen);
-                //PopulateTowerDataDisplay(tower);
+                TowerData tower=towerSettings.get(towerChosen);
+                PopulateTowerDataDisplay(tower,towerDataDisplay);
             }  
         });
 	}
@@ -133,8 +133,16 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	 * Allows Text Area to display attributes based on the Tower selected in the ListView
 	 */
 	private void PopulateTowerDataDisplay(TowerData tower,TextArea towerDataDisplay) {
-		String info= new String(tower.getName());
-		towerDataDisplay.setText(info);
+		towerDataDisplay.clear();
+		String namelabel=new String("TOWER NAME: ");
+		String name= new String(tower.getName());
+		String newline=new String("\n");
+		String costlabel=new String("COST: ");
+		String cost=new String(Integer.toString(tower.getBuyPrice()));
+		String weaponlabel=new String("WEAPON NAME: ");
+		String weapon= new String(tower.getWeaponName());
+		
+		towerDataDisplay.setText(namelabel+name+newline+costlabel+cost+newline+weaponlabel+weapon);
 	}
 	
 	private void setDragFunctionality(ListView<ImageView> towerSet) {

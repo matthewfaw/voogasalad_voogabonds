@@ -108,6 +108,8 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		advance();
 		
 		//TODO: Remove if goes too far off map
+		if (false)
+			destroySelf();
 	}
 	
 	private Point advance() {
@@ -151,9 +153,11 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 			
 			result = result.add(m.takeDamage(toDeal));
 		}
+		destroySelf();
 		return result;
 		
 	}
+
 	@Override
 	public List<Terrain> getValidTerrains() {
 		return myValidTerrain;
@@ -210,6 +214,10 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+	
+	private void destroySelf() {
+		// TODO Auto-generated method stub
 	}
 }
 
