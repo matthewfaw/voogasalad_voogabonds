@@ -47,7 +47,7 @@ public class EnemyTab extends Tab implements IObserver<Controller>{
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
 		myWeapons = new ArrayList<String>();
-		myTerrains = new ArrayList<String>(Arrays.asList("Ground","Ice","Water","Air"));
+		myTerrains = new ArrayList<String>();
 		myController = controller;
 		myMenu = new EnemyMenu(myResources, this);
 		enemyTabOptions(enemyTab);
