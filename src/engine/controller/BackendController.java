@@ -11,6 +11,7 @@ import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
+import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.DummyWaveOperationData;
@@ -22,6 +23,7 @@ import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
 import utility.FileRetriever;
+import utility.Point;
 
 /**
  * The primary gateway into the game engine
@@ -105,10 +107,15 @@ public class BackendController {
 	 * 
 	 * Assumes that the only map data to use is the first one
 	 */
+	@Deprecated // need to actually deserialize the object, but can't because they're using javafx rn
 	private void constructMap()
 	{
-		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
-		MapData mapData = data.get(0);
+		//TODO: Add these next lines back
+//		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
+//		MapData mapData = data.get(0);
+		//TODO: remove this map construction
+		MockGameDataConstructor m = new MockGameDataConstructor();
+		MapData mapData = m.getMockMapData();
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 		MapMediator MapMediator = new MapMediator(terrainMap);
@@ -189,7 +196,8 @@ public class BackendController {
 				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
 				data.add(entry);
 			} catch (Exception e) {
-				System.out.print("err");
+				//XXX: REMOVE PLS
+				e.printStackTrace();
 			}
 		}
 		return data;

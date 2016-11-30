@@ -21,20 +21,17 @@ import javafx.scene.shape.Rectangle;
 public class MapGrid extends Node{
     private int numColumns;
     private int numRows;
-    private int myHeight;
-    private int myWidth;
-    public final int CELL_SIZE = 50;
     private Rectangle[][] actualGrid;
     private Pane myPane;
     private ArrayList<MoveableComponentView> sprites;
+    private int myCellSize;
     
-    public MapGrid(int rows, int cols){
+    public MapGrid(int rows, int cols, int aCellSize){
        myPane = new Pane();
        sprites = new ArrayList<MoveableComponentView>();
        numColumns = cols;
        numRows = rows;
-       myHeight = CELL_SIZE;
-       myWidth = CELL_SIZE;
+       myCellSize = aCellSize;
        actualGrid = new Rectangle[numRows][numColumns];
     }
     
@@ -44,19 +41,19 @@ public class MapGrid extends Node{
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
-    	temp.setHeight(myHeight);
-    	temp.setWidth(myWidth);
-    	temp.setX(row*CELL_SIZE);
-    	temp.setY(col*CELL_SIZE);
+    	temp.setHeight(aCellSize);
+    	temp.setWidth(aCellSize);
+    	temp.setX(row*aCellSize);
+    	temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);
 
     	temp.setOnDragDropped(new EventHandler<DragEvent>() {
     		public void handle(DragEvent event) {
     			MoveableComponentView source = new MoveableComponentView();
-    			if(!isFull(temp)){
+//    			if(!isFull(temp)){
     				source.setImage(event.getDragboard().getImage());
     				findDropLocation(event.getX(), event.getY(), source);
-    			}
+//    			}
     			event.consume();
     		}
     	});
@@ -73,6 +70,7 @@ public class MapGrid extends Node{
         myPane = myRoot;
     }
     
+    @Deprecated
     private boolean isFull(Rectangle temp){
         return (temp.getFill() != Color.AQUA);    
     }
@@ -97,6 +95,7 @@ public class MapGrid extends Node{
         source.setX(closest.getX());
         source.setY(closest.getY());
         System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
+//        myApplicationController.onTowerDropped(source.)
         source.setFitHeight(closest.getHeight());
         source.setFitWidth(closest.getWidth());
         //sprites.add(source);
@@ -104,8 +103,8 @@ public class MapGrid extends Node{
     }
     
     private double calculateDistance (double x, double y, double x2, double y2) {
-        return Math.sqrt(Math.pow((x - (x2+CELL_SIZE/2)), 2)
-                         + Math.pow((y - (y2 + CELL_SIZE/2)), 2));
+        return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
+                         + Math.pow((y - (y2 + myCellSize/2)), 2));
     }
 
     public int getNumCols(){
@@ -117,11 +116,11 @@ public class MapGrid extends Node{
     }
     
     public int getHeight(){
-        return myHeight;
+        return myCellSize;
     }
     
     public int getWidth(){
-        return myWidth;
+        return myCellSize;
     }
 
     @Override

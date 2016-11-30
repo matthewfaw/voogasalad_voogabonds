@@ -47,7 +47,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     }
     
     public void setMap(MapData aMapData){
-        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells());
+        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize());
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
         	myPane.getChildren().add(background.fillCell((int)terrainData.getLoc().getX(), 
