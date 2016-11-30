@@ -88,7 +88,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	}
 	@Override
 	public Point getGoal() {
-		return myTarget.onMap() ? myTarget.getPosition() : null;
+		return myTarget == null ? null : myTarget.getPosition();
 	}
 	@Override
 	public double getTurnSpeed() {
@@ -117,7 +117,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		myHeading = nextMove.getKey();
 		myLocation = nextMove.getValue();
 		
-		if (myTarget.onMap() && myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
+		if (myTarget != null && myTarget.getDistanceTo(myLocation) <= COLLISION_ERROR_TOLERANCE) {
 			hitUnit(myTarget);
 		} else if (myTraveled >= myMaxRange) {
 			explode();
