@@ -24,6 +24,8 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
+	private List<IObserver<IViewable>> myObservers;
+	
 	private String myImagePath;
 	private IKillerOwner myOwner;
 	private Machine myTarget;
@@ -44,6 +46,8 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	
 	List<Terrain> myValidTerrain;
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time) {
+		
+		myObservers = new ArrayList<IObserver<IViewable>>();
 		
 		myImagePath = data.getImagePath();
 		myTarget = target;
@@ -191,6 +195,19 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	@Override
 	public void collideInto(Projectile unmovedCollidable) {
 		//Do nothing, probably
+	}
+	//***************Observable interface****************//
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
+		myObservers.add(aObserver);
+	}
+	@Override
+	public void detach(IObserver<IViewable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
 	}
 }
 

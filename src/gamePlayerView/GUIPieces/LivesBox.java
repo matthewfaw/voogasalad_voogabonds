@@ -1,5 +1,6 @@
 package gamePlayerView.GUIPieces;
 
+import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.ILivesAcceptor;
@@ -18,7 +19,8 @@ public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, ILi
 		myDisplay=makeDisplay("Lives: ");
 	}
 
-	public void acceptLives(IViewablePlayer aPlayer) {
+	@Override
+	public void acceptLives(IObservable<IViewablePlayer> aPlayer) {
 		aPlayer.attach(this);
 	}
 
