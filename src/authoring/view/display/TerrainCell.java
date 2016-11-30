@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import utility.ErrorBox;
 
 import authoring.controller.MapDataController;
 import javafx.event.ActionEvent;
@@ -60,19 +61,26 @@ public class TerrainCell extends Rectangle {
 			public void handle(MouseEvent mouseEvent) {
 				if (mouseEvent.getButton() == MouseButton.PRIMARY) {
 					if (toolBar.getToggleStatus()) {
-						if (TerrainCell.this.getHeight() != DEFAULT_TILE_SIZE || TerrainCell.this.getWidth() != DEFAULT_TILE_SIZE) {
-							if (TerrainCell.this.getFill().equals(Color.RED)) {
-								controller.removeSpawnPoints(cellName);
-							}
-							else {
-								controller.removeSinkPoint(point);
-							}
+						if (toolBar.getSelectedTerrain().equals(myResources.getString("DNE"))) {
+							ErrorBox.displayError("Please Choose a Valid Terrain to use.");
+							mouseEvent.consume();
 						}
-						setFill(toolBar.getSelectedColor());
-						setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
-						setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
-						setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
+						else {
+							if (TerrainCell.this.getHeight() != DEFAULT_TILE_SIZE || TerrainCell.this.getWidth() != DEFAULT_TILE_SIZE) {
+								if (TerrainCell.this.getFill().equals(Color.RED)) {
+									controller.removeSpawnPoints(cellName);
+								}
+								else {
+									controller.removeSinkPoint(point);
+								}
+							}
+							setFill(toolBar.getSelectedColor());
+							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
+							setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
+							setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
+						}
 					}
+				}
 					else if (toolBar.getSpawnStatus()) {
 						if (TerrainCell.this.getHeight() != DEFAULT_TILE_SIZE || TerrainCell.this.getWidth() != DEFAULT_TILE_SIZE) {
 							if (TerrainCell.this.getFill().equals(Color.GREEN)) {
@@ -96,16 +104,6 @@ public class TerrainCell extends Rectangle {
 						controller.addSinkPoint(point);
 					}
 				}
-			}
-		});
-		this.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent> () {
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-				if (toolBar.getToggleStatus()) {
-					setFill(toolBar.getSelectedColor());
-					setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
-				}
-			}
 		});
 	}
 	
@@ -174,7 +172,7 @@ public class TerrainCell extends Rectangle {
 			controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
 			setFill(toolBar.getSelectedColor());
 		} catch (Exception e) {
-			System.out.println(myResources.getString("TerrainError"));
+			ErrorBox.displayError(myResources.getString("TerrainError"));
 		}
 	}
 	

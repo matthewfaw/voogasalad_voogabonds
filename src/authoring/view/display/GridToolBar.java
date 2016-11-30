@@ -23,6 +23,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -61,6 +62,7 @@ public class GridToolBar {
 		this.toolBar = new HBox();
 		this.colorToTerrain = new HashMap<String, Color>();
 		selectedColor = Color.WHITE;
+		this.selectedTerrain = myResources.getString("DNE");
 		createToolBar();
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
@@ -96,7 +98,6 @@ public class GridToolBar {
 		drawGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
-		    	mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
 		    	if (new_toggle == null) {
 		            toggleStatus = false;
 		        }
@@ -105,13 +106,12 @@ public class GridToolBar {
 			            toggleStatus = true;
 			            spawnStatus = false;
 			            sinkStatus = false;
+			    		mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
+				        scene.setCursor(new ImageCursor(mouseCursor)); 
 		        	}
 		        }
 		    	if (!toggleStatus) {
 		    		scene.setCursor(Cursor.DEFAULT);
-		    	}
-		    	else {
-			        scene.setCursor(new ImageCursor(mouseCursor)); 
 		    	}
 		    }
 		});
@@ -165,7 +165,8 @@ public class GridToolBar {
 		terrains.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
-				if (terrains.getSelectionModel().getSelectedItem().equals(myResources.getString("DefaultTerrainOption"))) {
+				String selectedItem = terrains.getSelectionModel().getSelectedItem();
+				if (selectedItem.equals(myResources.getString("DefaultTerrainOption"))) {
 					Stage createTerrain = new Stage();
 					createTerrain.initModality(Modality.APPLICATION_MODAL);
 					HBox choiceArea = new HBox(screenWidth*0.01);
@@ -183,6 +184,7 @@ public class GridToolBar {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
 					selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 				}
+//				terrains.getSelectionModel().clearSelection();
 			}
 		});
 	}
