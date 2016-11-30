@@ -80,7 +80,6 @@ public class TerrainCell extends Rectangle {
 							setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
 						}
 					}
-				}
 					else if (toolBar.getSpawnStatus()) {
 						if (TerrainCell.this.getHeight() != DEFAULT_TILE_SIZE || TerrainCell.this.getWidth() != DEFAULT_TILE_SIZE) {
 							if (TerrainCell.this.getFill().equals(Color.GREEN)) {
@@ -104,6 +103,7 @@ public class TerrainCell extends Rectangle {
 						controller.addSinkPoint(point);
 					}
 				}
+			}
 		});
 	}
 	
@@ -140,6 +140,7 @@ public class TerrainCell extends Rectangle {
 				ArrayList<Point> list = new ArrayList<Point>();
 				list.add(new Point((double) colLocation, (double) rowLocation));
 				controller.addSpawnPoints(name, list);
+				s.close();
 			}
 		});
 	}

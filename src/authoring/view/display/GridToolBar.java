@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import utility.ErrorBox;
 
 /**
  * @author Christopher Lu
@@ -54,8 +56,9 @@ public class GridToolBar {
 			FXCollections.observableArrayList (
 					"Add Terrain..."
 					);
+	private MapDataController controller;
 	
-	public GridToolBar(VBox box, Scene sc) {
+	public GridToolBar(VBox box, Scene sc, MapDataController controller) {
 		setUpScreenResolution();
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
@@ -63,6 +66,7 @@ public class GridToolBar {
 		this.colorToTerrain = new HashMap<String, Color>();
 		selectedColor = Color.WHITE;
 		this.selectedTerrain = myResources.getString("DNE");
+		this.controller = controller;
 		createToolBar();
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
@@ -191,9 +195,14 @@ public class GridToolBar {
 	
 	private void confirmTerrainHandler(Stage createTerrain, TextField field, Button b, ColorPicker colors) {
 		b.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle (ActionEvent e) {
+			public void handle (ActionEvent event) {
 				terrainOptions.add(field.getText());
 				colorToTerrain.put(field.getText(), colors.getValue());
+				try {
+					controller.addValidTerrain(field.getText(), colors.getValue().toString());
+				} catch (Exception e) {
+					ErrorBox.displayError(myResources.getString("TerrainError"));
+				}
 				createTerrain.close();
 			}
 		});

@@ -1,0 +1,1 @@
+{"name":"Enemy 2","imagePath":"ENTER IMAGE PATH HERE","killReward":100,"maxHealth":100,"collisionRadius":10,"speed":1,"terrainList":["Water"]}
