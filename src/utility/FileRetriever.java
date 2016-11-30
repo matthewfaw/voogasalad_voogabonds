@@ -1,7 +1,6 @@
 package utility;
 
 import java.io.File;
-import java.net.FileNameMap;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class FileRetriever {
 
 	public FileRetriever(String aDefaultPath)
 	{
-		aDefaultPath = aDefaultPath.replace(DEFAULT_PATH_SEPARATOR,File.separatorChar);
+//		aDefaultPath = aDefaultPath.replace(DEFAULT_PATH_SEPARATOR,File.separatorChar);
 		myDefaultPath = aDefaultPath;
 	}
 	
@@ -34,7 +33,7 @@ public class FileRetriever {
 	 */
 	public List<String> getFileNames(String aDirectory)
 	{
-		aDirectory = aDirectory.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
+//		aDirectory = aDirectory.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
 		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
 		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
@@ -56,7 +55,8 @@ public class FileRetriever {
 	private String getRelativeFilePath(File aFile)
 	{
 		String absoluteFilePath = aFile.getAbsolutePath();
-		return absoluteFilePath.substring(absoluteFilePath.indexOf(myDefaultPath)/*+ myDefaultPath.length() + 1*/);
+		String defaultPath = myDefaultPath.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
+		return absoluteFilePath.substring(absoluteFilePath.indexOf(defaultPath)/*+ myDefaultPath.length() + 1*/);
 	}
 
 	/*
