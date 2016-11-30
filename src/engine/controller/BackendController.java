@@ -91,7 +91,7 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-//		constructMap();
+		constructMap();
 		constructResourceStore();
 		constructWeaponDataStore();
 		constructProjectileDataStore();

@@ -38,31 +38,31 @@ public class MapGrid extends Node{
        actualGrid = new Rectangle[numRows][numColumns];
     }
     
-    public Rectangle fillCell(int row, int col, MapData aMapData) {
-        
-        Rectangle temp = new Rectangle();
-        temp.setFill(Color.AQUA);
-        temp.setStroke(Color.BLACK);
-        temp.setStrokeWidth(1);
-        temp.setHeight(myHeight);
-        temp.setWidth(myWidth);
-        temp.setX(row*CELL_SIZE);
-        temp.setY(col*CELL_SIZE);
-        loadTerrainData(temp, row, col, aMapData);
-        
-        temp.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                MoveableComponentView source = new MoveableComponentView();
-                if(!isFull(temp)){
-                source.setImage(event.getDragboard().getImage());
-                findDropLocation(event.getX(), event.getY(), source);
-                }
-                event.consume();
-            }
-        });
-        
-        actualGrid[row][col] = temp;
-        return actualGrid[row][col];
+    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
+
+    	Rectangle temp = new Rectangle();
+    	temp.setFill(Color.web(aHexValue));
+    	temp.setStroke(Color.BLACK);
+    	temp.setStrokeWidth(1);
+    	temp.setHeight(myHeight);
+    	temp.setWidth(myWidth);
+    	temp.setX(row*CELL_SIZE);
+    	temp.setY(col*CELL_SIZE);
+//    	loadTerrainData(temp, row, col, aMapData);
+
+    	temp.setOnDragDropped(new EventHandler<DragEvent>() {
+    		public void handle(DragEvent event) {
+    			MoveableComponentView source = new MoveableComponentView();
+    			if(!isFull(temp)){
+    				source.setImage(event.getDragboard().getImage());
+    				findDropLocation(event.getX(), event.getY(), source);
+    			}
+    			event.consume();
+    		}
+    	});
+
+    	actualGrid[row][col] = temp;
+    	return actualGrid[row][col];
     }
     
     private void loadTerrainData(Rectangle temp, int row, int col, MapData aMapData){

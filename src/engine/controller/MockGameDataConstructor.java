@@ -35,8 +35,8 @@ class MockGameDataConstructor {
 		try {
 			
 			// Terrain Data 
-			TerrainData terrain1 = new TerrainData("grass", 0, 0);
-			TerrainData terrain2 = new TerrainData("water", 0, 1);
+			TerrainData terrain1 = new TerrainData("grass", 0, 0, 50, "0x008000");
+			TerrainData terrain2 = new TerrainData("water", 0, 1, 50, "0x0000ff");
 			// Tower Data
 			TowerData tow = new TowerData();
 			tow.setWeaponName("weapon 1");
