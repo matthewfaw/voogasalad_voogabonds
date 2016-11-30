@@ -159,13 +159,78 @@ public class TowerMenu extends AbstractMenu {
     
     @Override
     protected void setUpNewCreateScreen (VBox root) {
-        setUpTowerScreen(root, true);
+        setUpNewTowerScreen(root);
     }
 
     @Override
     protected void setUpNewUpdateScreen (VBox root, List<String> objectData) {
-        // TODO Auto-generated method stub
+        setUpEditTowerScreen(root, objectData);
+    }
+    
+    private void setUpNewTowerScreen(VBox root) {
+        // Try to set initial text in TextFields & Weapon ComboBox choices
+        if (!setupTextFields(root) || !setupCombo(root)) {
+            return;
+        }
+        //// No MenuButtons in a Tower menu, but these can be added by following setupTextFields/setupCombos
         
+        // Create finish button/action
+        Button done = new Button(getResources().getString("Finish"));
+        done.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                TowerData tower = buildTowerDataFromInput();
+                
+                if (tower == null) {
+                    return; // leave window open
+                }
+                
+                String name = tower.getName();
+                
+                // add Tower (tab passes data to controller and updates view)
+                try {
+                    getTab().addObject(name, tower);
+                } catch (Exception e) {
+                    getHelper().showError(e.getMessage());
+                    return;
+                }
+                getWindow().close();
+            }
+        });
+        root.getChildren().add(done);
+    }
+    
+    private void setUpEditTowerScreen(VBox root, List<String> objectData) {
+        int last = objectData.size()-1;
+        String weapon = objectData.get(last);
+        
+        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon)) {
+            return;
+        }
+        //// No MenuButtons currently
+        
+        // Create finish button/action
+        Button done = new Button(getResources().getString("Finish"));
+        done.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                TowerData tower = buildTowerDataFromInput();
+                
+                if (tower == null) {
+                    return; // leave window open
+                }
+                
+                String name = tower.getName();
+                
+                // update Tower (tab passes data to controller and updates view)
+                try {
+                    getTab().updateObject(name, tower);
+                } catch (Exception e) {
+                    getHelper().showError(getResources().getString("EditTowerError"));
+                    return; // leave window open
+                }
+                getWindow().close();
+            }
+        });
+        root.getChildren().add(done);
     }
     
     private boolean setupTextFields(VBox root) {
@@ -192,6 +257,21 @@ public class TowerMenu extends AbstractMenu {
         return true;
     }
     
+    private boolean setupTextFields(VBox root, List<String> objectData) {
+        try {
+            myNameField = this.setUpTextInput(root, getResources().getString("EnterName"), objectData.get(0));
+            myHealthField = this.setUpTextInput(root, getResources().getString("EnterHealth"), objectData.get(1));
+            myBuyPriceField = this.setUpTextInput(root, getResources().getString("EnterBuyPrice"), objectData.get(2));
+            mySellPriceField = this.setUpTextInput(root, getResources().getString("EnterSellPrice"), objectData.get(3));
+            mySizeField = this.setUpTextInput(root, getResources().getString("EnterSize"), objectData.get(4));
+            myImageField = this.setUpBrowseButton(root, getResources().getString("EnterImage"), objectData.get(5), "PNG", "*.png");
+            return true;
+        } catch (Exception e) {
+            getHelper().showError(getResources().getString("DataRetrieveError"));
+            return false;
+        }
+    }
+    
     private boolean setupCombo(VBox root) {
         List<ComboBox<String>> combos = this.getComboBoxes();
         
@@ -210,50 +290,18 @@ public class TowerMenu extends AbstractMenu {
         return true;
     }
     
-    private boolean setupTextFields(VBox root, List<String> textFields) {
-        return false;
-    }
-    
-    private boolean setupCombo(VBox root, String value) {
-        return false;
-    }
-    
-    private void setUpTowerScreen(VBox root, boolean isNewObject) {
-        // Try to set initial text in TextFields & Weapon ComboBox choices
-        if (isNewObject) {
-            // set up with default initial input fields
-            if (!setupTextFields(root) || !setupCombo(root)) {
-                return;
-            }
-        } else {
-            // TODO: set up with retrieved data
-            
+    private boolean setupCombo(VBox root, String weaponValue) {
+        if (weaponValue == null) {
+            return false;
         }
         
-        //// No MenuButtons in a Tower menu, but these can be added by following setupTextFields/setupCombos
+        // Fake initial values
+        ObservableList<String> weaponChoices = FXCollections.observableArrayList("Machine Gun", "Bomb", "Arrow");
         
-        // Create finish button
-        Button done = new Button(getResources().getString("Finish"));
-        done.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                TowerData tower = buildTowerDataFromInput();
-                
-                if (tower == null) {
-                    return; // leave window open
-                }
-                
-                String name = tower.getName();
-                
-                // add/update Tower (tab passes data to controller and updates view)
-                if (isNewObject) {
-                    getTab().addObject(name, tower);
-                } else {
-                    getTab().updateObject(name, tower);
-                }
-                getWindow().close();
-            }
-        });
-        root.getChildren().add(done);
+        String weapon = getResources().getString("SelectWeapon");
+        myWeaponChoice = this.setUpComboBox(root, weapon, weaponChoices, weaponValue);
+        
+        return true;
     }
     
     private TowerData buildTowerDataFromInput() {
@@ -293,7 +341,7 @@ public class TowerMenu extends AbstractMenu {
         
         System.out.println(image);
         
-        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), weapon, image);
+        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon);
         if (tower == null) {
             return null;
         }
@@ -322,7 +370,7 @@ public class TowerMenu extends AbstractMenu {
         return value == null ? -1 : value.intValue();
     }
     
-    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String weapon, String imagePath) {
+    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon) {
       TowerData towerDat = new TowerData();
       
       try {

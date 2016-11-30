@@ -23,66 +23,37 @@ import javafx.scene.layout.VBox;
 
 /**
  * @author Christopher Lu
+ * @modifier Niklas Sjoquist
  * Implements the tab that allows user to add, delete, or edit preexisting towers.
  */
 
 public class TowerTab extends AbstractInfoTab {
 
-	//private TowerMenu myMenu;
-        //private TowerDataController myTowerController;
-	private ObservableList<String> myTowers, myWeapons, myTerrains;
-	private ListView<String> towers;
-	
-	public TowerTab(TabPane pane, TowerDataController controller) {
-	    super(pane, controller);
-	}
-	
-	/**
-	 * Adds a new tower to the tab's list view
-	 * 
-	 * @param name of tower
-	 */
-	public void addTower(String name) {
-	        myTowers.add(name);
-	}
-	
-	/**
-	 * @return list of the names of the current towers
-	 */
-	public List<String> getTowers() {
-	    return myTowers;
-	}
-	
-	public MapChangeListener<String, WeaponData> createWeaponListener(){
-	    MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
-	        @Override
-	        public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
-	            if (change.wasAdded()){
-	                myWeapons.add(change.getKey());
-	            }
-	            else if (change.wasRemoved()){
-	                myWeapons.remove(change.getKey());
-	            }
-	        }
-	    };
-	    return listener;
-	}
+    //private TowerMenu myMenu;
+    //private TowerDataController myTowerController;
+    private ObservableList<String> myTowers, myWeapons, myTerrains;
+    private ListView<String> towers;
 
-	public SetChangeListener<String> createTerrainListener(){
-	    SetChangeListener<String> listener = new SetChangeListener<String>() {
-	        @Override
-	        public void onChanged(SetChangeListener.Change<? extends String> change) {
-	            if (change.wasAdded()){
-	                myTerrains.add(change.getElementAdded());
-	            }
-	            else if (change.wasRemoved()){
-	                myTerrains.remove(change.getElementRemoved());
-	            }
-	        }
-	    };
-	    return listener;
-	}
-	
+    public TowerTab(TabPane pane, TowerDataController controller) {
+        super(pane, controller);
+    }
+
+    /**
+     * Adds a new tower to the tab's list view
+     * 
+     * @param name of tower
+     */
+    public void addTower(String name) {
+        myTowers.add(name);
+    }
+
+    /**
+     * @return list of the names of the current towers
+     */
+    public List<String> getTowers() {
+        return myTowers;
+    }
+
     @Override
     protected String getTitle () {
         return getResources().getString("Towers");
@@ -98,10 +69,10 @@ public class TowerTab extends AbstractInfoTab {
         myTowers = FXCollections.observableArrayList();
         myWeapons = FXCollections.observableArrayList();
         myTerrains = FXCollections.observableArrayList("Land","Water");
-        
+
         return Arrays.asList(myTowers, myWeapons, myTerrains);
     }
-    
+
     /**
      * Extracts the necessary data from the TowerData object and returns it as a list of strings.
      * 
@@ -178,9 +149,9 @@ public class TowerTab extends AbstractInfoTab {
             getMenu().getHelper().showError(e.getMessage());
         }
     }
-    
+
     // Further Helpers
-    
+
     /**
      * Checks for null strings in the array and changes them to "null"
      */
@@ -198,7 +169,7 @@ public class TowerTab extends AbstractInfoTab {
         towers = initListView();
         content.getChildren().add(towers);
     }
-    
+
     private ListView<String> initListView() {
         // Initialize ListView of towers ObservableList
         ListView<String> lv = new ListView<String>(myTowers);
@@ -212,14 +183,44 @@ public class TowerTab extends AbstractInfoTab {
                 }
             }
         });
-        
+
         return lv;
     }
-    
+
     private void editTower(String tower) {
         TowerData td = ((TowerDataController)getController()).getTowerData(tower);
         List<String> towerData = extractTowerData(td);
         getMenu().createObjectMenu(false, towerData);
+    }
+
+    public MapChangeListener<String, WeaponData> createWeaponListener(){
+        MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
+            @Override
+            public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
+                if (change.wasAdded()){
+                    myWeapons.add(change.getKey());
+                }
+                else if (change.wasRemoved()){
+                    myWeapons.remove(change.getKey());
+                }
+            }
+        };
+        return listener;
+    }
+
+    public SetChangeListener<String> createTerrainListener(){
+        SetChangeListener<String> listener = new SetChangeListener<String>() {
+            @Override
+            public void onChanged(SetChangeListener.Change<? extends String> change) {
+                if (change.wasAdded()){
+                    myTerrains.add(change.getElementAdded());
+                }
+                else if (change.wasRemoved()){
+                    myTerrains.remove(change.getElementRemoved());
+                }
+            }
+        };
+        return listener;
     }
 
 }
