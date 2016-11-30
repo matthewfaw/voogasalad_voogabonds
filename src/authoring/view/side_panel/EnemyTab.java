@@ -104,7 +104,7 @@ public class EnemyTab extends Tab {
 			public void handle(ActionEvent event){
 				EnemyData enemy = myController.getEnemyData(text);
 				myMenu.createEnemyWindow(enemy.getName(), String.valueOf(enemy.getMaxHealth()), 
-						String.valueOf(enemy.getSpeed()), String.valueOf(enemy.getCollisionRadius()), 
+						String.valueOf(enemy.getMoveSpeed()), String.valueOf(enemy.getCollisionRadius()), 
 						String.valueOf(enemy.getKillReward()), enemy.getImagePath(), enemy.getWeaponName(), 
 						enemy.getTerrainList(), false);
 			}

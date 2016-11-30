@@ -13,6 +13,7 @@ abstract public class MachineData implements IReadableData {
 	private static final String EMPTY_NAME_ERROR = "EmptyName";
 	private static final String NEGATIVE_RADIUS_ERROR = "NegativeRadius";
 	private static final String NEGATIVE_HEALTH_ERROR = "NegativeHealth";
+	
 	private String myName;
 	private String myImagePath;
 	
@@ -104,5 +105,4 @@ abstract public class MachineData implements IReadableData {
 		return myValidTerrains;
 	}
 	
-
 }

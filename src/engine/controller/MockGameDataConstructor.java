@@ -1,11 +1,5 @@
 package engine.controller;
 
-import utility.Point;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
 import authoring.model.EnemyData;
 import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
@@ -49,12 +43,8 @@ class MockGameDataConstructor {
 			tow.setBuyPrice(40);
 			tow.setCollisionRadius(2);
 			tow.setImagePath("src/resources/boss.png");
-			List<Point> list = new ArrayList<Point>();
-			list.add(new Point(100, 100));
-			list.add(new Point(20, 50));
-			tow.setInitialLocations(list);
 			tow.setMaxHealth(1000);
-			tow.setMovementStrategy("fast as fuck");
+			tow.setMoveStrategyName("fast as fuck");
 			tow.setName("tower 1");
 			tow.setSellPrice(100);
 			
@@ -65,7 +55,7 @@ class MockGameDataConstructor {
 			ed.setKillReward(100);
 			ed.setMaxHealth(100);
 			ed.setName("enemy 1");
-			ed.setSpeed(10);
+			ed.setMoveSpeed(10);
 			ed.setWeaponName("weapon 1");
 			
 			// Weapon Data
