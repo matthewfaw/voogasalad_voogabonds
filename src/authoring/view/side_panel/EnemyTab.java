@@ -142,34 +142,4 @@ public class EnemyTab extends Tab implements IObserver<Controller>{
 			}
 		}
 	}
-	
-//	public MapChangeListener<String, WeaponData> createWeaponListener(){
-//		MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
-//			@Override
-//			public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
-//				if (change.wasAdded()){
-//					myWeapons.add(change.getKey());
-//				}
-//				else if (change.wasRemoved()){
-//					myWeapons.remove(change.getKey());
-//				}
-//			}
-//		};
-//		return listener;
-//	}
-//	
-//	public MapChangeListener<String, String> createTerrainListener(){
-//		MapChangeListener<String, String> listener = new MapChangeListener<String, String>() {
-//			@Override
-//			public void onChanged(MapChangeListener.Change<? extends String, ? extends String> change) {
-//				if (change.wasAdded()){
-//					myTerrains.add(change.getKey());
-//				}
-//				else if (change.wasRemoved()){
-//					myTerrains.remove(change.getKey());
-//				}
-//			}
-//		};
-//		return listener;
-//	}
 }
