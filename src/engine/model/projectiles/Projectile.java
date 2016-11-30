@@ -8,7 +8,6 @@ import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.MapMediator;
-import engine.model.game_environment.terrain.Terrain;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import javafx.util.Pair;
@@ -31,6 +30,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	
 	private String myImagePath;
 	private IKillerOwner myOwner;
+	private IModifiablePlayer myPlayer;
 	private Machine myTarget;
 	private MapMediator myMap;
 	
@@ -48,7 +48,8 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	private int myMaxRange;
 	private int myAoERadius;
 	
-	List<Terrain> myValidTerrain;
+	List<String> myValidTerrain;
+	
 	public Projectile(ProjectileData data, Machine target, IKillerOwner owner, TimelineController time, MapMediator map) {
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
@@ -56,10 +57,11 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
+		myPlayer = myOwner.getOwner();
 		myMap = map;
 		
 		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
-		myLocation = myOwner.getLocation();
+		myLocation = myOwner.getPosition();
 		myHeading = myOwner.getHeading();
 		myTraveled = 0;
 		mySpeed = data.getSpeed();
@@ -159,7 +161,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	}
 
 	@Override
-	public List<Terrain> getValidTerrains() {
+	public List<String> getValidTerrains() {
 		return myValidTerrain;
 	}
 	@Override
@@ -173,7 +175,7 @@ public class Projectile implements IViewable, IMovable, ICollidable, IObserver<T
 	
 	@Override
 	public IModifiablePlayer getOwner() {
-		return myOwner.getOwner();
+		return myPlayer;
 	}
 
 
