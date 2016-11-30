@@ -1,0 +1,1 @@
+{"Enemy1":{"name":"Enemy1","imagePath":"src/resources/cookie.png","killReward":100,"maxHealth":100,"collisionRadius":10,"speed":1,"terrainList":["fire","water"]}}

@@ -1,5 +1,7 @@
 package engine.controller;
 
+import java.util.ArrayList;
+
 import authoring.model.EnemyData;
 import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
@@ -11,6 +13,7 @@ import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
 import engine.model.game_environment.terrain.TerrainMap;
+import utility.Point;
 
 /**
  * A class to construct some mock game data for testing
@@ -87,8 +90,12 @@ class MockGameDataConstructor {
 			md.setNumYCells(2);
 			md.addTerrainData(terrain1);
 			md.addTerrainData(terrain2);
-//			md.addSpawnPoint(new Point(0,0));
-//			md.addSinkPoint(new Point(1,1));
+			ArrayList<Point> spawnPoints = new ArrayList<Point>();
+			spawnPoints.add(new Point(1, 1));
+			md.addSpawnPoints("spawnPoint", spawnPoints);
+			md.addSinkPoint(new Point(1, 0));
+			md.addValidTerrain(terrain1.getName(), "exampleColor 1");
+			md.addValidTerrain(terrain2.getName(), "exampleColor 2");
 			
 			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
 			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");

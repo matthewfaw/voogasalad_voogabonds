@@ -1,0 +1,1 @@
+{"numXCells":29,"numYCells":18,"cellSize":0,"spawnPoints":{"spawn2":[{"myX":4.0,"myY":3.0,"myZ":0.0}],"spawn1":[{"myX":1.0,"myY":1.0,"myZ":0.0}]},"sinkPoints":[{"myX":11.0,"myY":1.0,"myZ":0.0},{"myX":11.0,"myY":3.0,"myZ":0.0}],"terrainList":[],"validTerrain":{"fire":"color","water":"color"}}
