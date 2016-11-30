@@ -31,7 +31,7 @@ public class SerializationTester {
 		tow.setImagePath("src/resources/boss.png");
 //		tow.setInitialLocations(new Point(2.0, 4.0));
 		tow.setMaxHealth(1000);
-		tow.setMovementStrategy("fast as fuck");
+		tow.setMoveStrategyName("fast as fuck");
 		tow.setName("tower 1");
 		tow.setSellPrice(100);
 		

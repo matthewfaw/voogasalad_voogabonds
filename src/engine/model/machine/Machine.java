@@ -2,6 +2,7 @@ package engine.model.machine;
 
 import java.util.List;
 
+import authoring.model.MachineData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
@@ -10,8 +11,10 @@ import engine.model.game_environment.terrain.Terrain;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.projectiles.Projectile;
 import engine.model.strategies.IMovable;
+import engine.model.strategies.IMovementStrategy;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IWeapon;
+import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 
@@ -27,6 +30,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	private List<Terrain> myValidTerrains;
 	private IWeapon myWeapon;
 	private String myName;
+	private IMovementStrategy myMoveCalc;
 	
 	public Machine () {
 		
@@ -45,6 +49,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public void setPossibleTerrains(List<Terrain> l) {
 		myValidTerrains = l;
 	}
+	
 	@Override
 	public void update(TimelineController time) {
 		move();
@@ -53,8 +58,11 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	
 	@Deprecated //TODO
 	private void move() {
-		//TODO: Move with movement strategy
+		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
+		myPosition = nextMove.getValue();
+		myHeading = nextMove.getKey();
 	}
+	
 	@Override
 	@Deprecated //TODO
 	public String getImagePath() {
@@ -109,11 +117,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		return myPosition;
 	}
 	
-	@Override
-	@Deprecated //TODO
-	public Point getGoal() {
-		return null;
-	}
 	@Override
 	public double getTurnSpeed() {
 		return myTurnSpeed;
@@ -172,6 +175,20 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		//do nothing for now since machines will not deal dmg
 		//Should the Machine running into the projectile trigger an explode
 		//unmovedCollidable.collideInto(this);
+	}
+
+	protected void upgrade(MachineData upgradeData) {
+		myName = upgradeData.getName();
+		myHealth.setMaxHealth(upgradeData.getMaxHealth());
+		myCollisionRadius = upgradeData.getCollisionRadius();
+		
+		//TODO: Finish this.
+		
+		/*
+		myValidTerrains = ;
+		myWeapon = ;
+		*/
+
 	}
 	
 }
