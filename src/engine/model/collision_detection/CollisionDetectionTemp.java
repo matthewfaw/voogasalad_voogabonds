@@ -10,7 +10,7 @@ import engine.model.systems.ISystem;
 
 /**
  * All objects must be subscribed as ICollidable
- * NOT IObservables
+ * NOT IObservables.
  *
  */
 public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {

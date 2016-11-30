@@ -8,6 +8,11 @@ package engine.model.systems;
  * and performs global actions on every Entity that possesses a Component of the same aspect as that System."
  * @author matthewfaw
  *
+ *
+ * Alan - 11/30
+ * Currently, able to register and unregister IRegisterable objects.
+ * Classes should be ISystems if they hold references to IRegisterables.
+ *
  */
 public interface ISystem {
 	/**
