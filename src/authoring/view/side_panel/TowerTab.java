@@ -1,5 +1,6 @@
 package authoring.view.side_panel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -82,70 +83,25 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     protected List<ObservableList<String>> defineObservableLists () {
         myTowers = FXCollections.observableArrayList();
         myWeapons = FXCollections.observableArrayList();
-        myTerrains = FXCollections.observableArrayList("Land","Water");
+        myTerrains = FXCollections.observableArrayList();
 
         return Arrays.asList(myTowers, myWeapons, myTerrains);
     }
 
-    /**
-     * Extracts the necessary data from the TowerData object and returns it as a list of strings.
-     * 
-     * @return List of Strings defined as follows:
-     * index    |   data
-     * =====================
-     *   0      |   name
-     *   1      |   health
-     *   2      |   buyPrice
-     *   3      |   sellPrice
-     *   4      |   imagePath
-     *   5      |   weapon
-     */
-    private List<String> extractTowerData(TowerData td) {
-        // TODO: currently always has size = 1
-        String sizeVal = "1"; 
-        String nameVal, imageVal, healthVal, buyVal, sellVal, weaponVal;
-        // TODO: cleanup using modifyNulls?
-        try {
-            nameVal = td.getName();
-        } catch (NullPointerException e) {
-            nameVal = "null";
-        }
-        try {
-            imageVal = td.getImagePath();
-        } catch (NullPointerException e) {
-            imageVal = "null";
-        }
-        try {
-            healthVal = td.getMaxHealth()+"";
-        } catch (NullPointerException e) {
-            healthVal = "null";
-        }
-        try {
-            buyVal = td.getBuyPrice()+"";
-        } catch (NullPointerException e) {
-            buyVal = "null";
-        }
-        try {
-            sellVal = td.getSellPrice()+"";
-        } catch (NullPointerException e) {
-            sellVal = "null";
-        }
-        try {
-            weaponVal = td.getWeaponName();
-        } catch (NullPointerException e) {
-            weaponVal = "null";
-        }
-
-        List<String> inputDefaults = Arrays.asList(nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal, weaponVal);
-        return inputDefaults;
-    }
-
     @Override
-    protected List<String> generateInputDefaults () {
-        return Arrays.asList(getResources().getString("DefaultTowerName"), 
-                             getResources().getString("DefaultHealth"), getResources().getString("DefaultBuyPrice"), 
-                             getResources().getString("DefaultSellPrice"), getResources().getString("DefaultSize"), 
-                             getResources().getString("DefaultImage"), getResources().getString("DefaultWeapon"));
+    protected IReadableData generateDefaultData () {
+        TowerData defaultTower = new TowerData();
+        try {
+            defaultTower.setName(getResources().getString("DefaultTowerName"));
+            defaultTower.setMaxHealth(Integer.parseInt(getResources().getString("DefaultBuyPrice")));
+            defaultTower.setBuyPrice(Integer.parseInt(getResources().getString("DefaultBuyPrice")));
+            defaultTower.setSellPrice(Integer.parseInt(getResources().getString("DefaultSellPrice")));
+            defaultTower.setImagePath(getResources().getString("DefaultImage"));
+            defaultTower.setWeaponName(getResources().getString("DefaultWeapon"));
+            return defaultTower;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -203,8 +159,7 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
 
     private void editTower(String tower) {
         TowerData td = ((TowerDataController)getController()).getTowerData(tower);
-        List<String> towerData = extractTowerData(td);
-        getMenu().createObjectMenu(false, towerData);
+        getMenu().createObjectMenu(td);
     }
 
     /**
