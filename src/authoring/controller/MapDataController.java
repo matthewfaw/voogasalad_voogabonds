@@ -1,11 +1,18 @@
 package authoring.controller;
 import authoring.model.map.*;
-import javafx.collections.SetChangeListener;
-import javafx.collections.MapChangeListener;
+import authoring.model.IReadableData;
+import engine.IObservable;
+import engine.IObserver;
 
+import javafx.collections.SetChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 import utility.Point;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HashMap;
 
 /**
  * MapDataController doesn't expect a FrontEndMap like the rest of the controller classes.
@@ -13,94 +20,219 @@ import java.util.ArrayList;
  * @author philipfoo
  *
  */
-public class MapDataController {
-	private MapData myMapData = new MapData();
+public class MapDataController extends Controller implements IReadableData, IObservable<Controller>{
+	private String myName;
+	private int numXCells;
+	private int numYCells;
+	private int cellSize;
+	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
 	
 	/**
-	 * Functions for grid dimensions
+	 * Each group of spawn points will have a name. A map is necessary because
+	 * a wave must specify a spawn point which its enemies will start from.
 	 */
+	private HashMap<String, ArrayList<Point>> spawnPoints;
 	
 	/**
-	 * Method used to create the overall size of the grid. If x = 20, y = 20,
-	 * then the grid will contain 400 'cells'.
-	 * @param x - width of the grid
-	 * @param y - height of the grid
+	 * Set of points that enemies will try to reach.
+	 */
+	private HashSet<Point> sinkPoints = new HashSet<Point>();
+	
+	/**
+	 * Set defines the geography of the entire map. This set will contain a list of
+	 * TerrainDatas, which can be used to populate the entire map. Should contain
+	 * a minimum of numXCells x numYCells TerrainData elements.
+	 */
+	private HashSet<TerrainData> terrainList;
+	
+	/**
+	 * Map of possible terrains that might exist, as created by the user.
+	 * The key will be the name of the terrain, and the value will be how its displayed (currently color in HEX).
+	 */
+	private HashMap<String, String> validTerrain;
+	
+	public MapDataController(){
+		this.spawnPoints = new HashMap<String, ArrayList<Point>>();
+		this.sinkPoints = new HashSet<Point>();
+		this.terrainList = new HashSet<TerrainData>();
+		this.validTerrain = new HashMap<String, String>();
+	}
+	
+	@Override
+	public String getName()
+	{
+		return myName;
+	}
+	
+	/**
+	 * MAP DIMENSION FUNCTIONS
 	 */
 	public void setDimensions(int x, int y){
 		try{
-			myMapData.setNumXCells(x);
-			myMapData.setNumYCells(y);
+			setNumXCells(x);
+			setNumYCells(y);
 		}catch(Exception e){
 			//Show error to front-end here
 		}
 	}
-	public int getX(){
-		return myMapData.getNumXCells();
+	
+	private void setNumXCells(int x) throws Exception{
+		if (x <= 0){
+			throw new Exception("The map must be wider than 0 cells.");
+		}
+		this.numXCells = x;
+		System.out.println("Total XCells: " + this.numXCells);
 	}
-	public int getY(){
-		return myMapData.getNumYCells();
+	public int getNumXCells(){
+		return numXCells;
+	}
+	
+	private void cellSize(int cellSize) throws Exception{
+		if (cellSize<=0){
+			throw new Exception("The size of cells must be greater than 0 pixels.");
+		}
+		this.cellSize = cellSize;
+	}
+	
+	public int getCellSize(){
+		return cellSize;
+	}
+	
+	private void setNumYCells(int y) throws Exception{
+		if (y <= 0){
+			throw new Exception("The map must be taller than 0 cells.");
+		}
+		this.numYCells = y;
+		System.out.println("Total YCells: " + this.numYCells);
+	}
+	public int getNumYCells(){
+		return numYCells;
 	}
 	
 	/**
-	 * Functions for spawn points
+	 * SPAWN POINT FUNCTIONS
 	 */
-	public void addSpawnPoints(String name, ArrayList<Point> list){
+	public void addSpawnPoints(String name, ArrayList<Point> newSpawnPoints){
 		try{
-			myMapData.addSpawnPoints(name, list);
+			for (Point p: newSpawnPoints){
+				validatePoint(p, "spawn");
+			}
 		}catch(Exception e){
-			///Call error handler
+			//Show error to front-end here
 		}
+		spawnPoints.put(name, newSpawnPoints);
+		notifyObservers();
+		System.out.println("Added Spawn Point " + name);
 	}
+	
+	
 	public void removeSpawnPoints(String name){
-		myMapData.removeSpawnPoints(name);
+		if (spawnPoints.containsKey(name)){
+			spawnPoints.remove(name);
+			notifyObservers();
+			System.out.println("Removed Spawn Point " + name);
+		}
 	}
-	public void addSpawnPointListener(MapChangeListener<String, ArrayList<Point>> listener){
-		myMapData.addSpawnPointListener(listener);
+	
+	public ArrayList<Point> getSpawnPoints(String name){
+		return spawnPoints.get(name);
+	}
+	
+	public HashMap<String, ArrayList<Point>> getSpawnPointMap(){
+		return spawnPoints;
 	}
 	
 	/**
-	 * Functions for sink points
+	 * SINK POINT FUNCTIONS
 	 */
-	public void addSinkPoint(Point p){
+	public void addSinkPoint(Point newSinkPoint){
 		try{
-			myMapData.addSinkPoint(p);
+			validatePoint(newSinkPoint, "sink");
 		}catch(Exception e){
+			//Show error to front-end here
 		}
+		sinkPoints.add(newSinkPoint);
+		System.out.println("Added Sink Point " + newSinkPoint.toString());
 	}
+	
 	public void removeSinkPoint(Point p){
-		myMapData.removeSinkPoint(p);
+		if (sinkPoints.contains(p)){
+			sinkPoints.remove(p);
+			System.out.println("Removed Sink Point " + p.toString());
+		}
+	}
+	
+	public Set<Point> getSinkPoints(){
+		return sinkPoints;
 	}
 	
 	/**
-	 * Functions for the actual grids on the map (terrain)
+	 * TERRAIN DATA FUNCTIONS
 	 */
-	public void addTerrain(TerrainData t){
-		try{
-			myMapData.addTerrainData(t);
-		}catch(Exception e){
-			//Call error handler
-		}
-	}
-	public void removeTerrain(TerrainData t){
-		myMapData.removeTerrainData(t);
-	}
-	public Set<TerrainData> getTerrainList(){
-		return myMapData.getTerrainList();
+	public void addTerrainData(TerrainData terrain) throws Exception{
+		validatePoint(terrain.getLoc(), "terrain");
+		terrainList.add(terrain);
 	}
 
+	public void removeTerrainData(TerrainData terrain){
+		if (terrainList.contains(terrain)){
+			terrainList.remove(terrain);
+		}
+	}
+	
+	public Set<TerrainData> getTerrainList(){
+		return terrainList;
+	}
+	
 	/**
-	 * Functions for adding valid terrain
+	 * VALID TERRAIN FUNCTIONS
 	 */
-	public void addValidTerrain(String s) throws Exception{
-		myMapData.addValidTerrain(s);
+	public void addValidTerrain(String name, String color) throws Exception{
+		if (name == null || name.length() == 0){
+			throw new Exception("No terrain specified.");
+		}
+		validTerrain.put(name, color);
+		notifyObservers();
+		System.out.println("Added Terrain: " + name);
 	}
-	public void removeValidTerrain(String s) throws Exception{
-		myMapData.removeValidTerrain(s);
+	public void removeValidTerrain(String name) throws Exception{
+		if (validTerrain.containsKey(name)){
+			validTerrain.remove(name);
+			notifyObservers();
+		}
 	}
-	public void addTerrainListener(SetChangeListener<String> listener){
-		myMapData.addValidTerrainListener(listener);
+	
+	public HashMap<String, String> getValidTerrainMap(){
+		return validTerrain;
 	}
-	public MapData getMapData() {
-		return myMapData;
+	
+
+	/**
+	 * IObservable functions
+	 *
+	 */
+	public void attach(IObserver<Controller> listener){
+		myListeners.add(listener);
+	}
+	
+	public void detach(IObserver<Controller> listener){
+		myListeners.remove(listener);
+	}
+	
+	public void notifyObservers(){
+		for (IObserver<Controller> listener: myListeners){
+			listener.update(this);
+		}
+	}
+	
+	
+	
+	private void validatePoint(Point p, String type) throws Exception{
+		if (p.getX() >= numXCells || p.getX() < 0){
+			throw new Exception("X location of " + type + " point not valid.");
+		}
+		if (p.getY() >= numYCells || p.getY() < 0){
+			throw new Exception("Y location of " + type + " point not valid.");
+		}
 	}
 }

@@ -9,10 +9,26 @@ public class TowerData implements IReadableData {
 
 	private String name;
 	private String weaponName;
+	
+	/**
+	 * Initial buying price for a tower. A positive number means this tower 
+	 * can be bought without upgrading (essentially is a root). If buyPrice is -1 this 
+	 *  means that this tower cannot be bought and must be upgraded to.
+	 */
 	private int buyPrice;
+	
+	/**
+	 * Amount of money you get for selling.
+	 */
 	private int sellPrice;
 	private int maxHealth;
-	private List<Map<String, Integer>> upgrades;
+	
+	/**
+	 * Map of towers which this particular tower can upgrade from. The Integer is the cost of updating
+	 * from the previous tower to this one.
+	 */
+	private Map<String, Integer> upgrades;
+	
 	private String imagePath;
 	private List<String> traversableTerrain;
 	private int collisionRadius;
@@ -75,11 +91,12 @@ public class TowerData implements IReadableData {
 		return maxHealth;
 	}
 	
-	public void setUpgrades(List<Map<String, Integer>> upgrades){
-		this.upgrades = upgrades;
+	public void addUpgrades(String name, Integer upgradeCost){
+		//this.upgradeFrom = upgrades;
+		this.upgrades.put(name, upgradeCost);
 	}
 	
-	public List<Map<String, Integer>> getUpgrades(){
+	public Map<String, Integer> getUpgrades(){
 		return upgrades;
 	}
 	

@@ -5,13 +5,16 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import authoring.controller.Controller;
 import authoring.controller.WaveDataController;
+import authoring.controller.MapDataController;
+import authoring.controller.EnemyDataController;
 import authoring.model.EnemyData;
 import authoring.model.WaveData;
 import authoring.view.input_menus.WaveMenu;
+import engine.IObserver;
 import utility.Point;
-import javafx.collections.MapChangeListener;
-import javafx.collections.SetChangeListener;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,7 +25,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class WaveLevelTab extends Tab  {
+public class WaveLevelTab extends Tab implements IObserver<Controller>{
 
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -116,34 +119,51 @@ public class WaveLevelTab extends Tab  {
 		return mySpawnPoints;
 	}
 	
-	public MapChangeListener<String, EnemyData> createEnemyListener(){
-		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
-			@Override
-			public void onChanged(MapChangeListener.Change<? extends String, ? extends EnemyData> change) {
-				if (change.wasAdded()){
-					myEnemies.add(change.getKey());
-				}
-				else if (change.wasRemoved()){
-					myEnemies.remove(change.getKey());
-				}
+	/**
+	 * IObserver interface methods
+	 */
+	public void update(Controller c){
+		if (c instanceof MapDataController){
+			mySpawnPoints.clear();
+			for (String spawnPoint: ((MapDataController) c).getSpawnPointMap().keySet()){
+				mySpawnPoints.add(spawnPoint);
 			}
-		};
-		return listener;
+		}else if(c instanceof EnemyDataController){
+			myEnemies.clear();
+			for (String enemyName: ((EnemyDataController) c).getEnemyDataMap().keySet()){
+				myEnemies.add(enemyName);
+			}
+		}
 	}
 	
-	public MapChangeListener<String, ArrayList<Point>> createSpawnPointListener(){
-		MapChangeListener<String, ArrayList<Point>> listener = new MapChangeListener<String, ArrayList<Point>>() {
-			@Override
-			public void onChanged(MapChangeListener.Change<? extends String, ? extends ArrayList<Point>> change) {
-				if (change.wasAdded()){
-					mySpawnPoints.add(change.getKey());
-				}
-				else if (change.wasRemoved()){
-					mySpawnPoints.remove(change.getKey());
-				}
-			}
-		};
-		return listener;
-	}
+//	public MapChangeListener<String, EnemyData> createEnemyListener(){
+//		MapChangeListener<String, EnemyData> listener = new MapChangeListener<String, EnemyData>() {
+//			@Override
+//			public void onChanged(MapChangeListener.Change<? extends String, ? extends EnemyData> change) {
+//				if (change.wasAdded()){
+//					myEnemies.add(change.getKey());
+//				}
+//				else if (change.wasRemoved()){
+//					myEnemies.remove(change.getKey());
+//				}
+//			}
+//		};
+//		return listener;
+//	}
+//	
+//	public MapChangeListener<String, ArrayList<Point>> createSpawnPointListener(){
+//		MapChangeListener<String, ArrayList<Point>> listener = new MapChangeListener<String, ArrayList<Point>>() {
+//			@Override
+//			public void onChanged(MapChangeListener.Change<? extends String, ? extends ArrayList<Point>> change) {
+//				if (change.wasAdded()){
+//					mySpawnPoints.add(change.getKey());
+//				}
+//				else if (change.wasRemoved()){
+//					mySpawnPoints.remove(change.getKey());
+//				}
+//			}
+//		};
+//		return listener;
+//	}
 	
 }
