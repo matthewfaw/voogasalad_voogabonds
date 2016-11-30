@@ -26,136 +26,20 @@ import javafx.stage.Stage;
  *
  */
 public class TowerMenu extends AbstractMenu {
-    private static final int SIZE = 500;
+    private static final int WIDTH = 400, HEIGHT = 500;
     
-    //private ResourceBundle myResources;
-    //private TowerTab myTab;
-    //private TowerDataController myController;
-    //private MenuHelper myHelper;
-    //private Stage myTowerWindow;
     private TextField myNameField;
-    //private TextField myTypeField; // X
     private TextField myHealthField;
     private TextField myBuyPriceField;
     private TextField mySellPriceField;
     private TextField mySizeField;
     private TextField myImageField;
-    //private TextField mySoundField; // X
     private ComboBox<String> myWeaponChoice;
     //private ComboBox<String> myMovementChoice;
     
     public TowerMenu(ResourceBundle resources, TowerTab tab, TowerDataController towerController) {
         super(resources, tab);
-//        myResources = resources;
-//        myTab = tab;
-//        myController = towerController;
-//        myHelper = new MenuHelper(myResources);
     }
-    
-//    public void createTowerMenu(String nameVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal, String weaponVal) {
-//        myTowerWindow = new Stage();
-//        myTowerWindow.initModality(Modality.APPLICATION_MODAL);
-//        VBox root = new VBox();
-//        setUpTowerScreen(root, nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal, weaponVal);
-//        Scene scene = new Scene(root, SIZE, SIZE);
-//        myTowerWindow.setTitle(myResources.getString("AddTower"));
-//        myTowerWindow.setScene(scene);
-//        myTowerWindow.show();
-//    }
-//    
-//    private void setUpTowerScreen(VBox root, String nameVal, String healthVal, String buyVal, String sellVal, String sizeVal, String imageVal, String weaponVal) {
-//        myNameField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterName"), nameVal);
-//        //myTypeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterType"), typeVal);
-//        myHealthField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterHealth"), healthVal);
-//        myBuyPriceField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterBuyPrice"), buyVal);
-//        mySellPriceField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSellPrice"), sellVal);
-//        mySizeField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSize"), sizeVal);
-//        setUpImage(root, imageVal);
-//        //setUpSound(root, soundVal);
-//        myWeaponChoice = setUpWeapon(root, weaponVal);
-//        setUpFinishButton(root);
-//    }
-//    
-//    private void setUpImage(VBox root, String value) {
-//        myImageField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterImage"), value);
-//        myHelper.setUpBrowseButton(root, myImageField, "PNG", "*.png");
-//    }
-//    
-//    private void setUpSound(VBox root, String value) {
-//        if (value == null)
-//                mySoundField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSound"), 
-//                                myResources.getString("DefaultSound"));
-//        else
-//                mySoundField = myHelper.setUpBasicUserInput(root, myResources.getString("EnterSound"), value);
-//        myHelper.setUpBrowseButton(root, mySoundField, "WAV", "*.wav");
-//    }
-//    
-//    private ComboBox<String> setUpWeapon(VBox root, String value) {
-//        Text weaponText = new Text(myResources.getString("SelectWeapon"));
-//        ObservableList<String> weaponChoices = FXCollections.observableArrayList("Machine Gun", "Bomb", "Arrow");
-//        ComboBox<String> weaponBox = new ComboBox<String>(weaponChoices);
-//        weaponBox.setValue(value);
-//        root.getChildren().addAll(weaponText, weaponBox);
-//        return weaponBox;
-//    }
-//    
-//    private void setUpFinishButton(VBox root){
-//        Button finishButton = new Button(myResources.getString("Finish"));
-//        finishButton.setOnAction(new EventHandler<ActionEvent>() {
-//                public void handle(ActionEvent event){
-//                        String name = myNameField.getCharacters().toString();
-//                        //String type = myTypeField.getCharacters().toString();
-//                        int health = 0;
-//                        int buyPrice = 0; int sellPrice = 0;
-//                        int size = 1;
-//                        try {
-//                                health = Integer.parseInt(myHealthField.getCharacters().toString());
-//                                buyPrice = Integer.parseInt(myBuyPriceField.getCharacters().toString());
-//                                sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
-//                                size = Integer.parseInt(mySizeField.getCharacters().toString());
-//                        } catch(Exception e) {
-//                                myHelper.showError(myResources.getString("BadIntInput"));
-//                                return;
-//                        }
-//                        String weapon = myWeaponChoice.getValue();
-//                        String image = myImageField.getCharacters().toString();
-//                        
-//                        TowerData tower = createTowerData(name, health, buyPrice, sellPrice, size, weapon, image);
-//                        if (tower == null) {
-//                            return; // keeps window open
-//                        }
-//                        
-////                        String sound = mySoundField.getCharacters().toString();
-////                        if (sound.substring(sound.length() - 4).equals(".wav")){
-////                                tower.setSound(sound);
-////                        }
-//                        
-//                        myTab.addTower(name);
-//                        myController.createTowerData(tower);
-//                        myTowerWindow.close();
-//                }
-//        });
-//        root.getChildren().add(finishButton);
-//    }
-//    
-//    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String weapon, String imagePath) {
-//        TowerData towerDat = new TowerData();
-//        
-//        try {
-//            towerDat.setName(name);
-//            towerDat.setMaxHealth(health);
-//            towerDat.setBuyPrice(buyPrice);
-//            towerDat.setSellPrice(sellPrice);
-//            towerDat.setCollisionRadius(size);
-//            towerDat.setWeaponName(weapon);
-//            towerDat.setImagePath(imagePath);
-//        } catch (Exception e) {
-//            myHelper.showError(e.getMessage());
-//            return null;
-//        }
-//        
-//        return towerDat;
-//    }
     
     @Override
     protected void setUpNewCreateScreen (VBox root) {
@@ -175,40 +59,29 @@ public class TowerMenu extends AbstractMenu {
         //// No MenuButtons in a Tower menu, but these can be added by following setupTextFields/setupCombos
         
         // Create finish button/action
-        Button done = new Button(getResources().getString("Finish"));
-        done.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                TowerData tower = buildTowerDataFromInput();
-                
-                if (tower == null) {
-                    return; // leave window open
-                }
-                
-                String name = tower.getName();
-                
-                // add Tower (tab passes data to controller and updates view)
-                try {
-                    getTab().addObject(name, tower);
-                } catch (Exception e) {
-                    getHelper().showError(e.getMessage());
-                    return;
-                }
-                getWindow().close();
-            }
-        });
+        Button done = buildDoneButton(true);
         root.getChildren().add(done);
     }
     
     private void setUpEditTowerScreen(VBox root, List<String> objectData) {
-        int last = objectData.size()-1;
-        String weapon = objectData.get(last);
-        
+        String weapon = objectData.get(objectData.size()-1);
         if (!setupTextFields(root, objectData) || !setupCombo(root, weapon)) {
             return;
         }
         //// No MenuButtons currently
         
         // Create finish button/action
+        Button done = buildDoneButton(false);
+        root.getChildren().add(done);
+    }
+    
+    /**
+     * Builds a Done button which adds a new tower when isNewObject is true, and updates an existing tower when isNewObject is false
+     * 
+     * @param isNewObject
+     * @return reference to created button
+     */
+    private Button buildDoneButton(boolean isNewObject) {
         Button done = new Button(getResources().getString("Finish"));
         done.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -220,17 +93,21 @@ public class TowerMenu extends AbstractMenu {
                 
                 String name = tower.getName();
                 
-                // update Tower (tab passes data to controller and updates view)
+                // add/update Tower (tab passes data to controller and updates view)
                 try {
-                    getTab().updateObject(name, tower);
+                    if (isNewObject) {
+                        getTab().addObject(name, tower);
+                    } else {
+                        getTab().updateObject(name, tower);
+                    }
                 } catch (Exception e) {
-                    getHelper().showError(getResources().getString("EditTowerError"));
+                    getHelper().showError(getResources().getString(e.getMessage()));
                     return; // leave window open
                 }
                 getWindow().close();
             }
         });
-        root.getChildren().add(done);
+        return done;
     }
     
     private boolean setupTextFields(VBox root) {
@@ -257,6 +134,23 @@ public class TowerMenu extends AbstractMenu {
         return true;
     }
     
+    /**
+     * Expects objectData to be structured as follows:
+     * 
+     * 
+     * 
+     * @param root
+     * @param objectData - expected to contain the following data:
+         * index  |  TextField
+         * ===================
+         *    0   |   name
+         *    1   |   health
+         *    2   |   buy
+         *    3   |   sell
+         *    4   |   size
+         *    5   |   image
+     * @return success/failure
+     */
     private boolean setupTextFields(VBox root, List<String> objectData) {
         try {
             myNameField = this.setUpTextInput(root, getResources().getString("EnterName"), objectData.get(0));
@@ -438,7 +332,17 @@ public class TowerMenu extends AbstractMenu {
     @Override
     protected void checkForErrors (MenuHelper helper) {
         // Currently no need, can generate a Tower whenever
-        
+        return;
+    }
+
+    @Override
+    protected int defineWidth () {
+        return WIDTH;
+    }
+
+    @Override
+    protected int defineHeight () {
+        return HEIGHT;
     }
     
 }

@@ -27,12 +27,11 @@ import javafx.stage.Stage;
  *
  */
 public abstract class AbstractMenu implements IMenu {
-    public static final int SIZE = 500;
-    
     private ResourceBundle myResources;
     private AbstractInfoTab myTab;
     private MenuHelper myHelper;
     private Stage myWindow;
+    private int width, height;
     private List<TextField> myTextFields;
     private List<ComboBox<String>> myComboBoxes;
     private List<MenuButton> myMenuButtons;
@@ -41,6 +40,8 @@ public abstract class AbstractMenu implements IMenu {
         myResources = resources;
         myTab = tab;
         myHelper = new MenuHelper(myResources);
+        width = defineWidth();
+        height = defineHeight();
         myTextFields = defineTextFields();
         myComboBoxes = defineComboBoxes();
         myMenuButtons = defineMenuButtons();
@@ -53,7 +54,7 @@ public abstract class AbstractMenu implements IMenu {
         myWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
         this.setUpNewMenuScreen(root, isNewObject, inputFieldValues);
-        Scene scene = new Scene(root, SIZE, SIZE);
+        Scene scene = new Scene(root, width, height);
         this.setTitle();
         myWindow.setScene(scene);
         myWindow.show();
@@ -185,6 +186,20 @@ public abstract class AbstractMenu implements IMenu {
     }
     
     // Abstract Methods \\
+    
+    /**
+     * This method must be defined to give the menu a width, default is 0.
+     * 
+     * @return width of menu
+     */
+    protected abstract int defineWidth();
+    
+    /**
+     * This method must be defined to give the menu a height, default is 0.
+     * 
+     * @return height of menu
+     */
+    protected abstract int defineHeight();
     
     /**
      * This method sets up a new menu screen to create a new game object defined by instance variable lists myTextFields, myComboBox, and myMenuButtons.
