@@ -1,9 +1,10 @@
 package gamePlayerView.interfaces;
 
+import engine.IObservable;
 import engine.model.playerinfo.IViewablePlayer;
 
 public interface IResourceAcceptor {
 
-	void acceptResources(IViewablePlayer aPlayer);
+	void acceptResources(IObservable<IViewablePlayer> aPlayer);
 
 }

@@ -83,11 +83,11 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	 * @return
 	 */
 	public IMoney getPrice(Tower tower) {
-		for (TowerNode towernode : myBaseTowers) {
+//		for (TowerNode towernode : myBaseTowers) {
 //			if (towernode.getID().equals(tower)) {
 //				return towernode.getPrice();
 //			}
-		}
+//		}
 		// not a base tower
 		return null;
 	}

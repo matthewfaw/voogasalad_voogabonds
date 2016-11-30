@@ -18,7 +18,7 @@ public class CashBox extends InfoBox implements IObserver<IViewablePlayer>,ICash
 		myDisplay=makeDisplay("Cash: ");
 	}
 
-	public void acceptCash(IViewablePlayer aPlayer) {
+	public void acceptCash(IObservable<IViewablePlayer> aPlayer) {
 		aPlayer.attach(this);
 		update(aPlayer);
 	}

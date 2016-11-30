@@ -5,6 +5,7 @@ import java.util.List;
 import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import engine.IObservable;
+import engine.IViewable;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.interfaces.ICashAcceptor;
@@ -32,7 +33,7 @@ public class Router {
 		//mySprites = myGamePlayerScene.getSprites();
 	}
 	
-	public void distributePlayer(IViewablePlayer aPlayer)
+	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
 	{
 		//This is where you'll get player specific info such as money and lives and Tower Data
 		distributeCash(aPlayer);
@@ -44,19 +45,19 @@ public class Router {
 	//TODO:
 //	public void distributeGameState() //Will have wave stuff
 	
-	private void distributeResourceStore(IViewablePlayer aPlayer) {
+	private void distributeResourceStore(IObservable<IViewablePlayer> aPlayer) {
 		for(IResourceAcceptor r : myResources){
 			r.acceptResources(aPlayer);
 		}
 	}
 
-	private void distributeLives(IViewablePlayer aPlayer) {
+	private void distributeLives(IObservable<IViewablePlayer> aPlayer) {
 		for(ILivesAcceptor l : myLives){
 			l.acceptLives(aPlayer);
 		}
 	}
 
-	private void distributeCash(IViewablePlayer aPlayer) {
+	private void distributeCash(IObservable<IViewablePlayer> aPlayer) {
 		for(ICashAcceptor c : myCash){
 			c.acceptCash(aPlayer);
 		}
@@ -71,8 +72,17 @@ public class Router {
 	public void distributeMapData(MapData aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
+	    myGamePlayerScene.giveMapData(aMapData);
 	}
 	
+	/**
+	 * A method to distribute viewable game elements
+	 * @param aComponent
+	 */
+	public void distributeViewableComponent(IObservable<IViewable> aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
 	
 	/**
 	 * An example to follow for setting up the router
