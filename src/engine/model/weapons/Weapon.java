@@ -50,7 +50,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 
 	@Override
 	public void fire(double heading, Point position) {
-		List<Machine> targets = myMap.withinRange(getLocation(), myRange);
+		List<Machine> targets = myMap.withinRange(getPosition(), myRange);
 		
 		if (myTimeToFire <= 0 && targets.size() > 0){
 			
@@ -80,8 +80,8 @@ public class Weapon implements IWeapon, IKillerOwner {
 	}
 
 	@Override
-	public Point getLocation() {
-		return myMachine.getLocation();
+	public Point getPosition() {
+		return myMachine.getPosition();
 	}
 
 	@Override
