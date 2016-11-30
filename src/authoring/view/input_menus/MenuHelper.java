@@ -45,7 +45,7 @@ public class MenuHelper {
 		return box;
 	}
 	
-	public void setUpBrowseButton(VBox root, TextField field, String extensionName, String extension){
+	public TextField setUpBrowseButton(VBox root, TextField field, String extensionName, String extension){
 		Button browseButton = new Button(myResources.getString("Browse"));
 		browseButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
@@ -58,6 +58,7 @@ public class MenuHelper {
 			}
 		});
 		root.getChildren().add(browseButton);
+		return field;
 	}
 
 	public void showError (String message) {

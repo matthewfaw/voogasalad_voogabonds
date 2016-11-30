@@ -12,7 +12,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -43,16 +42,13 @@ public class LoadGameTab {
 	private void populateTab() {
 		VBox loadGameOptions = new VBox(screenHeight*0.1);
 		loadGameOptions.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
-		TextField selectedGameName = new TextField();
-		selectedGameName.setPromptText(myResources.getString("NewGameName"));
-		selectedGameName.setPrefColumnCount((int) (screenWidth*0.1));
 		Button chooseSavePath = new Button(myResources.getString("OldGame"));
-		loadHandler(chooseSavePath, selectedGameName);
-		loadGameOptions.getChildren().addAll(selectedGameName, chooseSavePath);
+		loadHandler(chooseSavePath);
+		loadGameOptions.getChildren().addAll(chooseSavePath);
 		loadGame.setContent(loadGameOptions);
 	}
 	
-	private void loadHandler(Button button, TextField gameName) {
+	private void loadHandler(Button button) {
 		button.setOnAction(
 				new EventHandler<ActionEvent>() {
 					@Override

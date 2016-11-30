@@ -54,10 +54,6 @@ public class GameDisplay {
 		columns = (int) (screenWidth*0.8/(DEFAULT_TILE_SIZE + GAP));
 		rows = (int) (screenHeight*0.88/(DEFAULT_TILE_SIZE + GAP));
 		this.controller.setDimensions(columns, rows);
-//		System.out.println("getX: " + controller.getX());
-//		System.out.println("columns: " + columns);
-//		System.out.println("getY: " + controller.getY());
-//		System.out.println("rows: " + rows);
 		populateGrid();
 	}
 	

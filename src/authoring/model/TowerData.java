@@ -66,11 +66,13 @@ public class TowerData extends MachineData {
 			}
 			System.out.println(f.get(this).toString());
 		}
-		
-		return result;
-		
+	}
+	
+	public void setImagePath(String imagePath) throws Exception{
+	    System.out.println("image path: "+imagePath);
+		if (!imagePath.endsWith(".png") || !(new File(imagePath).exists())){
+			throw new Exception("Image file is invalid.");
+		}
 	}
 	*/
-	
-	
 }

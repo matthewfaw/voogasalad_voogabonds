@@ -2,6 +2,7 @@ package gamePlayerView.GUIPieces;
 
 import java.util.ArrayList;
 import authoring.model.map.MapData;
+import authoring.model.map.TerrainData;
 import engine.model.machine.IViewableMachine;
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
@@ -43,26 +44,24 @@ public class MapDisplay implements IObserver<TimelineController> {
         myPane = new Pane();
         init();
         isPlaying = false;
-        MapData temp = new MapData();
-        temp.setNumXCells(14);
-        temp.setNumYCells(12);
-        background = new MapGrid(temp.getNumXCells(), temp.getNumYCells());
-        setMap(temp);
     }
     
     public void setMap(MapData aMapData){
-        for(int i = 0; i < background.getNumRows(); i++)
-        {
-            for(int j = 0; j < background.getNumCols(); j++)
-            {
-                myPane.getChildren().add(background.fillCell(i, j, aMapData));
-            }
+        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize());
+        for (TerrainData terrainData: aMapData.getTerrainList()) {
+        	//XXX: I don't like that we have to cast here
+        	myPane.getChildren().add(background.fillCell((int)terrainData.getLoc().getX(), 
+        												(int)terrainData.getLoc().getY(), 
+        												terrainData.getSize(), 
+        												terrainData.getColor()));
         }
         
         myRoot.getChildren().add(myPane);
         background.setRoot(myRoot);
     }
     
+    //TODO: Use timeline controller instead
+    @Deprecated
     public void init(){
         KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                                       e -> step(SECOND_DELAY));

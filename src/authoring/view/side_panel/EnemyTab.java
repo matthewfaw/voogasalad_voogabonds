@@ -7,11 +7,13 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import authoring.controller.EnemyDataController;
+import authoring.controller.WeaponDataController;
+import authoring.controller.MapDataController;
+import authoring.controller.Controller;
 import authoring.model.EnemyData;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.EnemyMenu;
-import javafx.collections.MapChangeListener;
-import javafx.collections.SetChangeListener;
+import engine.IObserver;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -27,7 +29,7 @@ import javafx.scene.layout.VBox;
  * Creates the enemy pane option that allows user to add enemies. Preexisting/created enemies will showup in the pane as buttons that can be edited upon click.
  */
 
-public class EnemyTab extends Tab {
+public class EnemyTab extends Tab implements IObserver<Controller>{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
 	private ResourceBundle myResources;
@@ -124,33 +126,50 @@ public class EnemyTab extends Tab {
 		return myTerrains;
 	}
 
-	public MapChangeListener<String, WeaponData> createWeaponListener(){
-		MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
-			@Override
-			public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
-				if (change.wasAdded()){
-					myWeapons.add(change.getKey());
-				}
-				else if (change.wasRemoved()){
-					myWeapons.remove(change.getKey());
-				}
+	/**
+	 * Observer interface method
+	 */
+	public void update(Controller c){
+		if (c instanceof WeaponDataController){
+			myWeapons.clear();
+			for (String weaponName: ((WeaponDataController) c).getWeaponDataMap().keySet()){
+				myWeapons.add(weaponName);
 			}
-		};
-		return listener;
+		}else if(c instanceof MapDataController){
+			myTerrains.clear();
+			for (String terrainName: ((MapDataController) c).getValidTerrainMap().keySet()){
+				myTerrains.add(terrainName);
+			}
+		}
 	}
 	
-	public MapChangeListener<String, String> createTerrainListener(){
-		MapChangeListener<String, String> listener = new MapChangeListener<String, String>() {
-			@Override
-			public void onChanged(MapChangeListener.Change<? extends String, ? extends String> change) {
-				if (change.wasAdded()){
-					myTerrains.add(change.getKey());
-				}
-				else if (change.wasRemoved()){
-					myTerrains.remove(change.getKey());
-				}
-			}
-		};
-		return listener;
-	}
+//	public MapChangeListener<String, WeaponData> createWeaponListener(){
+//		MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
+//			@Override
+//			public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
+//				if (change.wasAdded()){
+//					myWeapons.add(change.getKey());
+//				}
+//				else if (change.wasRemoved()){
+//					myWeapons.remove(change.getKey());
+//				}
+//			}
+//		};
+//		return listener;
+//	}
+//	
+//	public MapChangeListener<String, String> createTerrainListener(){
+//		MapChangeListener<String, String> listener = new MapChangeListener<String, String>() {
+//			@Override
+//			public void onChanged(MapChangeListener.Change<? extends String, ? extends String> change) {
+//				if (change.wasAdded()){
+//					myTerrains.add(change.getKey());
+//				}
+//				else if (change.wasRemoved()){
+//					myTerrains.remove(change.getKey());
+//				}
+//			}
+//		};
+//		return listener;
+//	}
 }

@@ -1,5 +1,7 @@
 package engine.controller;
 
+import java.util.ArrayList;
+
 import authoring.model.EnemyData;
 import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
@@ -11,6 +13,7 @@ import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
 import engine.model.game_environment.terrain.TerrainMap;
+import utility.Point;
 
 /**
  * A class to construct some mock game data for testing
@@ -23,7 +26,43 @@ class MockGameDataConstructor {
 	{
 	}
 	
-	void constructMockData() throws SerializationException
+	MapData getMockMapData()
+	{
+		MapData mapData = new MapData();
+		try {
+			int x = 14;
+			int y = 12;
+			int xmin = x/3;
+			int xmax = 2*x/3;
+			int ymax = y/2;
+			mapData.setNumXCells(x);
+			mapData.setNumYCells(y);
+			for (int i=0; i<x; ++i) {
+				for (int j=0; j<y; ++j) {
+					TerrainData terrain;
+					if (i > xmin && i < xmax && j < ymax) {
+						terrain = new TerrainData("water", i, j, 50, "0x0000ff");
+					} else {
+						terrain = new TerrainData("grass", i, j, 50, "0x008000");
+					}
+					mapData.addTerrainData(terrain);
+				}
+			}
+			ArrayList<Point> spawnPoints = new ArrayList<Point>();
+			spawnPoints.add(new Point(1, 1));
+			mapData.addSpawnPoints("spawnPoint", spawnPoints);
+			mapData.addSinkPoint(new Point(x-1, 1));
+			mapData.cellSize(50);
+//			mapData.addValidTerrain(terrain1.getName(), "exampleColor 1");
+//			mapData.addValidTerrain(terrain2.getName(), "exampleColor 2");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mapData;
+	}
+	
+	private void constructMockData() throws SerializationException
 	{
 		JSONDeserializer derp = new JSONDeserializer(); 
 		
@@ -35,8 +74,8 @@ class MockGameDataConstructor {
 		try {
 			
 			// Terrain Data 
-			TerrainData terrain1 = new TerrainData("grass", 0, 0);
-			TerrainData terrain2 = new TerrainData("water", 0, 1);
+			TerrainData terrain1 = new TerrainData("grass", 0, 0, 50, "0x008000");
+			TerrainData terrain2 = new TerrainData("water", 0, 1, 50, "0x0000ff");
 			// Tower Data
 			TowerData tow = new TowerData();
 			tow.setWeaponName("weapon 1");
@@ -87,8 +126,12 @@ class MockGameDataConstructor {
 			md.setNumYCells(2);
 			md.addTerrainData(terrain1);
 			md.addTerrainData(terrain2);
-//			md.addSpawnPoint(new Point(0,0));
-//			md.addSinkPoint(new Point(1,1));
+			ArrayList<Point> spawnPoints = new ArrayList<Point>();
+			spawnPoints.add(new Point(1, 1));
+			md.addSpawnPoints("spawnPoint", spawnPoints);
+			md.addSinkPoint(new Point(1, 0));
+			md.addValidTerrain(terrain1.getName(), "exampleColor 1");
+			md.addValidTerrain(terrain2.getName(), "exampleColor 2");
 			
 			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
 			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
@@ -107,10 +150,12 @@ class MockGameDataConstructor {
 			throw new SerializationException("Could not serialize");
 		}
 	}
+	/*
 	public static void main(String[] args) throws SerializationException
 	{
 		JSONSerializer ser = new JSONSerializer();
 		MockGameDataConstructor m = new MockGameDataConstructor();
 		m.constructMockData();
 	}
+	*/
 }
