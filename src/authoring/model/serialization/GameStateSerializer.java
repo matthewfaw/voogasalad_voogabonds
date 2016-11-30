@@ -4,12 +4,20 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+import javafx.collections.ObservableMap;
 import authoring.controller.Router;
 import authoring.controller.TowerDataController;
 import authoring.model.EnemyData;
+import authoring.model.ProjectileData;
+import authoring.model.TowerData;
+import authoring.model.WaveData;
+import authoring.model.WeaponData;
 import authoring.view.side_panel.InfoTabs;
 
 public class GameStateSerializer {
@@ -19,7 +27,7 @@ public class GameStateSerializer {
 	private JSONSerializer ser = new JSONSerializer();
 	private JSONDeserializer des = new JSONDeserializer();
 
-	
+
 	/**
 	 * 
 	 * @param gameName
@@ -33,43 +41,58 @@ public class GameStateSerializer {
 
 		try {
 			createNewDirectory("EnemyData", gameName);
-			ser.serializeToFile(router.getEnemyDataController().finalizeEnemyDataMap(), gameName+"/"+"EnemyData"+"/"+"exampleEnemyData");
+			AbstractMap<String, EnemyData> ed = router.getEnemyDataController().finalizeEnemyDataMap();
+			for (String edName : ed.keySet()){
+				ser.serializeToFile(ed.get(edName), gameName+"/"+"EnemyData"+"/"+edName);
+			}
 		}catch(Exception e){
 			System.out.println("Enemy fail");
 		}
 		try{
 			createNewDirectory("TowerData", gameName);
-			ser.serializeToFile(router.getTowerDataController().finalizeTowerDataMap(), gameName+"/"+"TowerData"+"/"+"exampleTowerData");
+			ObservableMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
+			for (String tdName : td.keySet()){
+			ser.serializeToFile(td.get(tdName), gameName+"/"+"TowerData"+"/"+tdName);
+			}
 		}catch(Exception e1){
 			System.out.println("Tower fail");
 		}
 		try{
 			createNewDirectory("WeaponData", gameName);
-			ser.serializeToFile(router.getWeaponDataController().finalizeWeaponDataMap(), "/"+gameName+"/"+"WeaponData"+"/"+"exampleWeaponData");
-		}catch(Exception e){
+			AbstractMap<String, WeaponData> wd = router.getWeaponDataController().finalizeWeaponDataMap();
+			for (String wdName : wd.keySet()){
+			ser.serializeToFile(wd.get(wdName), "/"+gameName+"/"+"WeaponData"+"/"+wdName);
+			}
+			}catch(Exception e){
 			System.out.println("Weapon fail");
 		}
 		try{
 			createNewDirectory("ProjectileData", gameName);
-			ser.serializeToFile(router.getProjectileDataController().getProjectileDataMap(), "/"+gameName+"/"+"ProjectileData"+"/"+"exampleProjectileData");
+			AbstractMap<String, ProjectileData> pd = router.getProjectileDataController().getProjectileDataMap();
+			for (String pdName : pd.keySet()){
+			ser.serializeToFile(pd.get(pdName), "/"+gameName+"/"+"ProjectileData"+"/"+pdName);
+			}
 		}catch(Exception e){
 			System.out.println("Projectile fail");
 		}
 		try{
 			createNewDirectory("WaveData", gameName);
-			ser.serializeToFile(router.getWaveDataController().finalizeWaveDataMap(), "/"+gameName+"/"+"WaveData"+"/"+"exampleWaveData");
+			LinkedHashMap<String, WaveData> wavd = router.getWaveDataController().finalizeWaveDataMap();
+			for (String wavdName : wavd.keySet()){
+			ser.serializeToFile(wavd.get(wavdName), "/"+gameName+"/"+"WaveData"+"/"+wavdName);
+			}
 		}catch(Exception e){
 			System.out.println("Wave fail");
 		}
 		try{
 			createNewDirectory("MapData", gameName);
-			ser.serializeToFile(router.getMapDataController().getMapData(), gameName+"/"+"MapData"+"/"+"exampleMapData");
+			ser.serializeToFile(router.getMapDataController().getMapData(), gameName+"/"+"MapData"+"/"+"MapData");
 		}catch(Exception e){
 			System.out.println("Map fail");
 		}
 		try{
 			createNewDirectory("PlayerData", gameName);
-			ser.serializeToFile(router.getPlayerDataController().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"examplePlayerData");
+			ser.serializeToFile(router.getPlayerDataController().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"PlayerData");
 		}catch(Exception e){
 			System.out.println("Player fail");
 		}
@@ -78,7 +101,7 @@ public class GameStateSerializer {
 	}
 
 	private void createNewDirectory(String gameName, String modifier){
-		
+
 		if (modifier!= ""){
 			modifier = modifier+"/";
 		}
