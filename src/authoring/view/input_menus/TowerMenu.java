@@ -70,7 +70,7 @@ public class TowerMenu extends AbstractMenu {
     }
     
     private void setUpEditTowerScreen(VBox root, List<String> objectData) {
-        String weapon = objectData.get(objectData.size()-1);
+        String weapon = objectData.get(6); // Weapon is the 6th element of objectData
         if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || setupMenuButton(root)) {
             return;
         }
@@ -304,6 +304,20 @@ public class TowerMenu extends AbstractMenu {
         String image = myImageField.getCharacters().toString();
         String weapon = myWeaponChoice.getValue();
         
+        // Get checked terrains
+        List<String> terrains = new ArrayList<String>();
+        for (MenuItem item: myPossibleTerrains.getItems()){
+                CustomMenuItem custom = (CustomMenuItem) item;
+                CheckBox check = (CheckBox) custom.getContent();
+                if (check.isSelected()){
+                        terrains.add(check.getText());
+                }
+        }
+        if (terrains.size() == 0){
+                showError(getResources().getString("NoTerrainInput"));
+                return null;
+        }
+        
         // Package Tower Data
         
         // Error check input
@@ -313,7 +327,7 @@ public class TowerMenu extends AbstractMenu {
         }
         health = nums[0]; buyPrice = nums[1]; sellPrice = nums[2]; size = nums[3];
         
-        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon);
+        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon, terrains);
         if (tower == null) {
             return null;
         }
@@ -345,7 +359,7 @@ public class TowerMenu extends AbstractMenu {
         return value == null ? -1 : value.intValue();
     }
     
-    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon) {
+    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon, List<String> terrains) {
       TowerData towerDat = new TowerData();
       try {
           towerDat.setName(name);
@@ -355,6 +369,7 @@ public class TowerMenu extends AbstractMenu {
           towerDat.setCollisionRadius(size);
           towerDat.setImagePath(imagePath);
           towerDat.setWeaponName(weapon);
+          towerDat.setTraversableTerrain(terrains);
       } catch (Exception e) {
           this.showError(e.getMessage());
           return null;
@@ -409,7 +424,6 @@ public class TowerMenu extends AbstractMenu {
     @Override
     protected List<MenuButton> defineMenuButtons () {
         // Terrain
-        
         List<MenuButton> menuBtns = new ArrayList<>();
         menuBtns.add(myPossibleTerrains);
         return menuBtns;

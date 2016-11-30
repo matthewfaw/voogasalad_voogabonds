@@ -82,7 +82,7 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     protected List<ObservableList<String>> defineObservableLists () {
         myTowers = FXCollections.observableArrayList();
         myWeapons = FXCollections.observableArrayList();
-        myTerrains = FXCollections.observableArrayList("Land","Water");
+        myTerrains = FXCollections.observableArrayList();
 
         return Arrays.asList(myTowers, myWeapons, myTerrains);
     }
@@ -136,7 +136,16 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
             weaponVal = "null";
         }
 
+        List<String> terrainVals;
+        try {
+            terrainVals = td.getTraversableTerrain();
+        } catch(Exception e) {
+            terrainVals = Arrays.asList("null");
+        }
+        
         List<String> inputDefaults = Arrays.asList(nameVal, healthVal, buyVal, sellVal, sizeVal, imageVal, weaponVal);
+        inputDefaults.addAll(terrainVals);
+        
         return inputDefaults;
     }
 
