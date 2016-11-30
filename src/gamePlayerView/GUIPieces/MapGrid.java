@@ -95,7 +95,7 @@ public class MapGrid extends Node{
         source.setX(closest.getX());
         source.setY(closest.getY());
         System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
-//        myApplicationController.onTowerDropped(source.)
+        myApplicationController.onTowerDropped(source.)
         source.setFitHeight(closest.getHeight());
         source.setFitWidth(closest.getWidth());
         //sprites.add(source);
