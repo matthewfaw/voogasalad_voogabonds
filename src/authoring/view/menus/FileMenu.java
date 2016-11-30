@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.*;
 
+import authoring.model.serialization.GameStateSerializer;
 import authoring.model.serialization.JSONSerializer;
 import main.MainInitializer;
 import main.MainMenu;
@@ -66,9 +67,7 @@ public class FileMenu extends Menu {
 	private void performOpenProject(MenuItem openProject) {
 		openProject.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
-				//this does not work.
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setCurrentDirectory(null);
+				//TODO: Deserialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 			}
 		});
 	}
@@ -85,10 +84,7 @@ public class FileMenu extends Menu {
 		saveProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
-//				if (file != null) {
-//					SerializeJSON json = new SerializeJSON();
-//					json.SerializeToFile(file, file.getAbsolutePath());
-//				}
+				//TODO: Serialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 			}
 		});
 	}
@@ -104,14 +100,15 @@ public class FileMenu extends Menu {
 					       ); 
 					Stage stage = new Stage();
 					File file = newGameSave.showSaveDialog(stage);
-					if (file != null) {
-						JSONSerializer json = new JSONSerializer();
+//					if (file != null) {
+						GameStateSerializer gss = new GameStateSerializer();
 						try {
-							json.serializeToFile(file, file.getAbsolutePath());
+							//change "exampleGame to user input"
+							gss.saveGameState("exampleGame");
 						} catch (Exception e1) {
 							System.out.println("Unable to save current game state.");
 						}
-					}
+//					}
 				}
 		});
 	}

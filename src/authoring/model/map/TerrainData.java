@@ -4,12 +4,13 @@ import utility.Point;
 import authoring.model.IReadableData;
 
 /**
- * type: the 'type' of terrain this represents, e.g. 'water', 'air', 'ground'
- * loc: Point with x and y coordinates 
  * @author philipfoo
  *
  */
 public class TerrainData implements IReadableData {
+	/**
+	 * Will correspond to a type of "valid terrain" as defined by the author.
+	 */
 	private String type;
 	private Point loc;
 	
@@ -24,9 +25,11 @@ public class TerrainData implements IReadableData {
 		return type;
 	}
 	
+	
 	public Point getLoc(){
 		return loc;
 	}
+	
 	
 	@Override
 	public boolean equals(Object o){

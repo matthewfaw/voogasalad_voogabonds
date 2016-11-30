@@ -5,10 +5,16 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import authoring.controller.Controller;
+import authoring.controller.MapDataController;
 import authoring.controller.TowerDataController;
+import authoring.controller.WeaponDataController;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.TowerMenu;
+import engine.IObservable;
+import engine.IObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
@@ -33,7 +39,7 @@ import javafx.scene.layout.VBox;
  * Implements the tab that allows user to add, delete, or edit preexisting towers.
  */
 
-public class TowerTab extends Tab {
+public class TowerTab extends Tab implements IObserver<Controller>{
 
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -150,34 +156,21 @@ public class TowerTab extends Tab {
             return handler;
         }
 	
-	public MapChangeListener<String, WeaponData> createWeaponListener(){
-	    MapChangeListener<String, WeaponData> listener = new MapChangeListener<String, WeaponData>() {
-	        @Override
-	        public void onChanged(MapChangeListener.Change<? extends String, ? extends WeaponData> change) {
-	            if (change.wasAdded()){
-	                myWeapons.add(change.getKey());
-	            }
-	            else if (change.wasRemoved()){
-	                myWeapons.remove(change.getKey());
-	            }
-	        }
-	    };
-	    return listener;
-	}
-
-	public SetChangeListener<String> createTerrainListener(){
-	    SetChangeListener<String> listener = new SetChangeListener<String>() {
-	        @Override
-	        public void onChanged(SetChangeListener.Change<? extends String> change) {
-	            if (change.wasAdded()){
-	                myTerrains.add(change.getElementAdded());
-	            }
-	            else if (change.wasRemoved()){
-	                myTerrains.remove(change.getElementRemoved());
-	            }
-	        }
-	    };
-	    return listener;
+	/**
+	 * IObservable method
+	 */
+	public void update(Controller c){
+		if (c instanceof WeaponDataController){
+			myWeapons.clear();
+			for (String weaponName: ((WeaponDataController) c).getWeaponDataMap().keySet()){
+				myWeapons.add(weaponName);
+			}
+		}else if (c instanceof MapDataController){
+			myTerrains.clear();
+			for (String terrainName: ((MapDataController) c).getValidTerrainMap().keySet()){
+				myTerrains.add(terrainName);
+			}
+		}
 	}
 	
 	private void screenInfo() {

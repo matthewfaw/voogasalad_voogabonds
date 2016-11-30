@@ -1,5 +1,8 @@
 package authoring.view.display;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -12,15 +15,20 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * @author Christopher Lu
@@ -39,22 +47,31 @@ public class GridToolBar {
 	private Color selectedColor;
 	private String selectedTerrain;
 	private Image mouseCursor;
+	private int screenHeight;
+	private int screenWidth;
+	private HashMap<String, Color> colorToTerrain;
 	private ObservableList<String> terrainOptions = 
 			FXCollections.observableArrayList (
-					"Ground",
-					"Water",
-					"Ice",
-					"Acid"
+					"Add Terrain..."
 					);
 	
 	public GridToolBar(VBox box, Scene sc) {
+		setUpScreenResolution();
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
+		this.colorToTerrain = new HashMap<String, Color>();
 		selectedColor = Color.WHITE;
+		this.selectedTerrain = myResources.getString("DNE");
 		createToolBar();
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
+	}
+	
+	private void setUpScreenResolution() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenWidth = (int) screenSize.getWidth();
+		screenHeight = (int) screenSize.getHeight();
 	}
 	
 	private void createToolBar() {
@@ -68,11 +85,9 @@ public class GridToolBar {
 		ToggleButton setSinkPoint = new ToggleButton(myResources.getString("SinkPoint"));
 		setSinkPoint.setToggleGroup(toggles);
 		sinkHandler(toggles, setSinkPoint);
-		ColorPicker colorChooser = new ColorPicker();
-		colorHandler(colorChooser);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
 		terrainHandler(terrainChooser);
-		toolBar.getChildren().addAll(setSinkPoint, setSpawnPoint, drawMode, colorChooser, terrainChooser);
+		toolBar.getChildren().addAll(setSinkPoint, setSpawnPoint, drawMode, terrainChooser);
 	}
 	
 	/**
@@ -83,7 +98,6 @@ public class GridToolBar {
 		drawGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
-		    	mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
 		    	if (new_toggle == null) {
 		            toggleStatus = false;
 		        }
@@ -92,13 +106,12 @@ public class GridToolBar {
 			            toggleStatus = true;
 			            spawnStatus = false;
 			            sinkStatus = false;
+			    		mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
+				        scene.setCursor(new ImageCursor(mouseCursor)); 
 		        	}
 		        }
 		    	if (!toggleStatus) {
 		    		scene.setCursor(Cursor.DEFAULT);
-		    	}
-		    	else {
-			        scene.setCursor(new ImageCursor(mouseCursor)); 
 		    	}
 		    }
 		});
@@ -145,18 +158,6 @@ public class GridToolBar {
 	}
 	
 	/**
-	 * Sets selectedColor to the color chosen by the user when using the Color Picker from the toolbar.
-	 * @param colors
-	 */
-	private void colorHandler(ColorPicker colors) {
-		colors.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle (ActionEvent e) {
-				selectedColor = colors.getValue();
-			}
-		});
-	}
-	
-	/**
 	 * Sets selectedTerrain to the terrain chosen by the user when using the terrain combo box from the toolbar.
 	 * @param terrains
 	 */
@@ -164,8 +165,36 @@ public class GridToolBar {
 		terrains.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
-				selectedTerrain = terrains.getSelectionModel().getSelectedItem();
-
+				String selectedItem = terrains.getSelectionModel().getSelectedItem();
+				if (selectedItem.equals(myResources.getString("DefaultTerrainOption"))) {
+					Stage createTerrain = new Stage();
+					createTerrain.initModality(Modality.APPLICATION_MODAL);
+					HBox choiceArea = new HBox(screenWidth*0.01);
+					ColorPicker colorChooser = new ColorPicker();
+					TextField terrainName = new TextField();
+					terrainName.setText(myResources.getString("TerrainName"));
+					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
+					choiceArea.getChildren().addAll(colorChooser, terrainName, confirmTerrain);
+					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
+					Scene terrainChoiceScene = new Scene(choiceArea, screenWidth*0.3, screenHeight*0.1);
+					createTerrain.setScene(terrainChoiceScene);
+					createTerrain.show();
+				}
+				else {
+					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
+					selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+				}
+//				terrains.getSelectionModel().clearSelection();
+			}
+		});
+	}
+	
+	private void confirmTerrainHandler(Stage createTerrain, TextField field, Button b, ColorPicker colors) {
+		b.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle (ActionEvent e) {
+				terrainOptions.add(field.getText());
+				colorToTerrain.put(field.getText(), colors.getValue());
+				createTerrain.close();
 			}
 		});
 	}
@@ -183,6 +212,7 @@ public class GridToolBar {
 	}
 		
 	public Color getSelectedColor() {
+		System.out.println(selectedColor);
 		return selectedColor;
 	}
 	
