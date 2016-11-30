@@ -30,13 +30,13 @@ public class CollisionDetectionTemp implements ISystem, IObserver<ICollidable>, 
 	 * @return
 	 */
 	private boolean intersects(ICollidable a, ICollidable b) {
-		double a_x = a.getLocation().getX();
-		double a_y = a.getLocation().getY();
-		double a_r = a.getRadius();
+		double a_x = a.getPosition().getX();
+		double a_y = a.getPosition().getY();
+		double a_r = a.getCollisionRadius();
 		
-		double b_x = b.getLocation().getX();
-		double b_y = b.getLocation().getY();
-		double b_r = b.getRadius();
+		double b_x = b.getPosition().getX();
+		double b_y = b.getPosition().getY();
+		double b_r = b.getCollisionRadius();
 		
 		return Math.pow(a_r - b_r, 2) <= 
 				Math.pow(a_x - b_x, 2) + 

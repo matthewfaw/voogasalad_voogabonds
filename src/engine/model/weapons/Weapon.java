@@ -5,6 +5,7 @@ import java.util.List;
 
 import authoring.model.WeaponData;
 import engine.model.machine.Machine;
+import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.projectiles.ProjectileFactory;
 import engine.model.strategies.ITargetStrategy;
 import engine.model.strategies.StrategyFactory;
@@ -97,6 +98,9 @@ public class Weapon implements IWeapon, IKillerOwner {
 		return myCareerDamage;
 	}
 	
-	
+	@Override
+	public IModifiablePlayer getOwner() {
+		return myMachine.getOwner();
+	}
 
 }

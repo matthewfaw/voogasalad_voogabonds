@@ -65,6 +65,7 @@ public class Router {
 	public void distributeMapData(MapData aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
+	    myGamePlayerScene.giveMapData(aMapData);
 	}
 	
 	public void distributeMoveableComponent(IViewableMoveableComponent aComponent)
