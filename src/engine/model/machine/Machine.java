@@ -4,6 +4,7 @@ import java.util.List;
 
 import authoring.model.MachineData;
 import engine.IObserver;
+import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.terrain.Terrain;
@@ -18,6 +19,7 @@ import utility.Damage;
 import utility.Point;
 
 abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable {
+	private List<IObserver<IViewable>> myObservers;
 	private IModifiablePlayer myModifiablePlayer;
 	private Health myHealth;
 	private double myHeading;
@@ -54,6 +56,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		myWeapon.fire(myHeading, myPosition);
 	}
 	
+	@Deprecated //TODO
 	private void move() {
 		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
@@ -61,6 +64,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	}
 	
 	@Override
+	@Deprecated //TODO
 	public String getImagePath() {
 		return null;
 	}
@@ -102,6 +106,8 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public IModifiablePlayer getOwner() {
 		return myModifiablePlayer;
 	}
+
+	@Deprecated//TODO
 	public boolean onMap() {
 		return true;
 	}
@@ -137,6 +143,23 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		return myCollisionRadius;
 	}
 	
+	/************** IObservable interface ****************/
+	@Override
+	public void attach(IObserver<IViewable> aObserver)
+	{
+		myObservers.add(aObserver);
+	}
+	@Override
+	public void detach(IObserver<IViewable> aObserver)
+	{
+		myObservers.remove(aObserver);
+	}
+	@Override
+	public void notifyObservers()
+	{
+		myObservers.forEach(observer -> observer.update(this));
+	}
+
 	
 	/********** ICollidable Interface Methods ************/
 	@Override

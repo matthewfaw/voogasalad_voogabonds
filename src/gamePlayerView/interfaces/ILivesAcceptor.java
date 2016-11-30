@@ -17,6 +17,6 @@ public interface ILivesAcceptor{
  /**
  * Allows router to establish connection between backend and frontend object 
  */
-	public void acceptLives(IViewablePlayer aPlayer);
+	public void acceptLives(IObservable<IViewablePlayer> aPlayer);
 	
 }

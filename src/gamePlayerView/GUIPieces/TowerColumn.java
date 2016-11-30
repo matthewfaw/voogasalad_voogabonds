@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import authoring.model.TowerData;
+import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -160,9 +161,9 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		return myTowerColumn;
 	}
 	
-	public void acceptResources(IViewablePlayer aPlayer) {
+	public void acceptResources(IObservable<IViewablePlayer> aPlayer) {
 		aPlayer.attach(this);
-		update(aPlayer);
+//		update(aPlayer);
 	}
 
 	@Override

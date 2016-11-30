@@ -2,7 +2,7 @@ package engine;
 
 import utility.Point;
 
-public interface IViewable {
+public interface IViewable extends IObservable<IViewable> {
 	
 	abstract public double getSize();
 	abstract public double getHeading();
