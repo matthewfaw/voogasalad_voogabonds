@@ -5,5 +5,5 @@ import utility.Damage;
 
 public interface IModifiableMachine {
 	abstract public double getHealth();
-	abstract public DamageInfo takeDamage(Damage damageDealt);
+	abstract public DamageInfo takeDamage(Damage dmg);
 }

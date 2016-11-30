@@ -11,6 +11,11 @@ public class BinaryDamageStrategy implements IDamageStrategy {
 	public Damage getAoEDamage(Projectile missile, Point location) {
 		return new Damage(0);
 	}
+	
+	@Override
+	public Damage getAoEAllyDamage(Projectile missile, Point location) {
+		return new Damage(0);
+	}
 
 	@Override
 	public Damage getTargetDamage() {

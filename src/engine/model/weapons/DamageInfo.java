@@ -8,17 +8,19 @@ package engine.model.weapons;
  */
 public class DamageInfo {
 	private double myDamage;
+	private double myHealing;
 	private int myMoney;
 	private int myKills;
 	
-	public DamageInfo(double damageDealt, int moneyGained, int unitsKilled){
+	public DamageInfo(double damageDealt, double healing, int moneyGained, int unitsKilled){
 		myDamage = damageDealt;
+		myHealing = healing;
 		myMoney = moneyGained;
 		myKills = unitsKilled;
 	}
 	
 	public DamageInfo() {
-		this(0, 0, 0);
+		this(0, 0, 0, 0);
 	}
 
 	public int getDamage(){
@@ -32,6 +34,6 @@ public class DamageInfo {
 	}
 	
 	public DamageInfo add(DamageInfo d) {
-		return new DamageInfo(myDamage + d.myDamage, myMoney + d.myMoney, myKills + d.myKills);
+		return new DamageInfo(myDamage + d.myDamage, myHealing + d.myHealing, myMoney + d.myMoney, myKills + d.myKills);
 	}
 }

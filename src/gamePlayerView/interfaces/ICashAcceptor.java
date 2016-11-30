@@ -25,6 +25,6 @@ public interface ICashAcceptor{
  /**
  * Allows router to establish connection between backend and frontend object 
  */
-	public void acceptCash(IViewablePlayer aPlayer);
+	public void acceptCash(IObservable<IViewablePlayer> aPlayer);
 	
 }

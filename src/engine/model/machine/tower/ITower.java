@@ -7,7 +7,10 @@ import java.util.Collection;
  */
 public interface ITower {
 	abstract public int getSellPrice();
-	abstract public void upgrade(String upgradeName, ITowerUpgradeStore towerUpgradeStore);
 	abstract public int getUpgradeCost(String upgradeName);
+	
+	abstract public void upgrade(String upgradeName, ITowerUpgradeStore towerUpgradeStore);
+	abstract public void sell();
+
 	abstract public Collection<String> getUpgrades();
 }

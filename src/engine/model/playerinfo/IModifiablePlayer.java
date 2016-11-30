@@ -11,4 +11,6 @@ public interface IModifiablePlayer {
 	
 	public void addResourceStore(ResourceStore aResourceStore);
 	public void removeResourceStore(ResourceStore aResourceStore);
+	
+	public boolean isAlly(IModifiablePlayer owner);
 }
