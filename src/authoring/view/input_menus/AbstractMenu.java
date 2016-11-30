@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.controller.IDataController;
 import authoring.controller.TowerDataController;
+import authoring.model.IReadableData;
 import authoring.view.side_panel.AbstractInfoTab;
 import authoring.view.side_panel.TowerTab;
 import javafx.collections.FXCollections;
@@ -64,23 +65,23 @@ public abstract class AbstractMenu implements IMenu {
     }
     
     @Override
-    public void createObjectMenu (boolean isNewObject, List<String> inputFieldValues) {
+    public void createObjectMenu (IReadableData objectData) {
         checkForErrors();
         myWindow = new Stage();
         myWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
-        this.setUpNewMenuScreen(root, isNewObject, inputFieldValues);
+        this.setUpNewMenuScreen(root, objectData);
         Scene scene = new Scene(root, width, height);
         this.setTitle();
         myWindow.setScene(scene);
         myWindow.show();
     }
     
-    private void setUpNewMenuScreen(VBox root, boolean isNewObject, List<String> inputFieldValues) {
-        if (isNewObject) {
+    private void setUpNewMenuScreen(VBox root, IReadableData objectData) {
+        if (objectData == null) {
             setUpNewCreateScreen(root);
         } else {
-            setUpNewUpdateScreen(root, inputFieldValues);
+            setUpNewUpdateScreen(root, objectData);
         }
     }
     
@@ -245,9 +246,9 @@ public abstract class AbstractMenu implements IMenu {
     
     /**
      * This method sets up a new menu screen to update an existing game object defined by instance variables myTextFields, myComboBox, and myMenuButtons.
-     * @param objectData - Default value of text fields: an ordered list of parameters which represents the IReadableData of the game object
+     * @param objectData - represents the game object
      */
-    protected abstract void setUpNewUpdateScreen(VBox root, List<String> objectData);
+    protected abstract void setUpNewUpdateScreen(VBox root, IReadableData objectData);
     
     /**
      * @return the title of the menu window

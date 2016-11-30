@@ -35,9 +35,10 @@ public class InfoTabs {
 		Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
 		Tab enemyTab = new EnemyTab(infoTab, r.getEnemyDataController());
 		Tab waveTab = new WaveLevelTab(infoTab, r.getWaveDataController());
-		Tab gameTab = new GameTab(infoTab);
+		//Tab gameTab = new GameTab(infoTab);
 		Tab weaponTab = new WeaponTab(infoTab, r.getWeaponDataController());
-		r.link((TowerTab) towerTab, (EnemyTab) enemyTab, (WaveLevelTab) waveTab, (GameTab) gameTab);
+		// TODO: change null to GameTab
+		r.link((TowerTab) towerTab, (EnemyTab) enemyTab, (WaveLevelTab) waveTab, null); 
 		infoTab.setPrefSize(screenWidth/5, screenHeight);
 		root.setLeft(infoTab);
 	}
