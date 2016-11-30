@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
+import authoring.model.IReadableData;
 import authoring.model.TowerData;
 import authoring.view.side_panel.TowerTab;
 import javafx.collections.FXCollections;
@@ -53,7 +54,7 @@ public class TowerMenu extends AbstractMenu {
     }
 
     @Override
-    protected void setUpNewUpdateScreen (VBox root, List<String> objectData) {
+    protected void setUpNewUpdateScreen (VBox root, IReadableData objectData) {
         setUpEditTowerScreen(root, objectData);
     }
     
@@ -69,9 +70,11 @@ public class TowerMenu extends AbstractMenu {
         root.getChildren().add(done);
     }
     
-    private void setUpEditTowerScreen(VBox root, List<String> objectData) {
-        String weapon = objectData.get(6); // Weapon is the 6th element of objectData
-        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || setupMenuButton(root)) {
+    private void setUpEditTowerScreen(VBox root, IReadableData objectData) {
+        TowerData td = (TowerData) objectData;
+        String weapon = td.getWeaponName();
+        List<String> terrains = td.getTraversableTerrain();
+        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || setupMenuButton(root, terrains)) {
             return;
         }
         //// No MenuButtons currently
@@ -163,14 +166,15 @@ public class TowerMenu extends AbstractMenu {
          *    5   |   image
      * @return success/failure
      */
-    private boolean setupTextFields(VBox root, List<String> objectData) {
+    private boolean setupTextFields(VBox root, IReadableData objectData) {
+        TowerData td = (TowerData) objectData;
         try {
-            myNameField = this.setUpTextInput(objectData.get(0));
-            myHealthField = this.setUpTextInput(objectData.get(1));
-            myBuyPriceField = this.setUpTextInput(objectData.get(2));
-            mySellPriceField = this.setUpTextInput(objectData.get(3));
-            mySizeField = this.setUpTextInput(objectData.get(4));
-            myImageField = this.setUpTextInput(objectData.get(5));
+            myNameField = this.setUpTextInput(td.getName());
+            myHealthField = this.setUpTextInput(td.getMaxHealth()+"");
+            myBuyPriceField = this.setUpTextInput(td.getBuyPrice()+"");
+            mySellPriceField = this.setUpTextInput(td.getSellPrice()+"");
+            mySizeField = this.setUpTextInput("1"); // Default size = 1
+            myImageField = this.setUpTextInput(td.getImagePath());
         } catch (Exception e) {
             return false;
         }

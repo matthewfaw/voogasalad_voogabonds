@@ -1,6 +1,7 @@
 package authoring.view.input_menus;
 
 import java.util.List;
+import authoring.model.IReadableData;
 
 /**
  * @author Niklas Sjoquist
@@ -18,6 +19,6 @@ public interface IMenu {
      * @param isNewObject - indicates whether the menu is generating a new object or not
      * @param inputFieldValues - default values for text inputs of menu
      */
-    public void createObjectMenu(boolean isNewObject, List<String> inputFieldValues);
+    public void createObjectMenu(IReadableData objectData);
 
 }
