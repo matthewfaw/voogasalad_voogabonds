@@ -13,8 +13,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -36,6 +40,8 @@ public class TowerMenu extends AbstractMenu {
     private TextField myImageField;
     private ComboBox<String> myWeaponChoice;
     //private ComboBox<String> myMovementChoice;
+    private MenuButton myPossibleTerrains;
+    private Button myFileBrowser;
     
     public TowerMenu(ResourceBundle resources, TowerTab tab, TowerDataController towerController) {
         super(resources, tab);
@@ -53,7 +59,7 @@ public class TowerMenu extends AbstractMenu {
     
     private void setUpNewTowerScreen(VBox root) {
         // Try to set initial text in TextFields & Weapon ComboBox choices
-        if (!setupTextFields(root) || !setupCombo(root)) {
+        if (!setupTextFields(root) || !setupCombo(root) || !setupMenuButton(root)) {
             return;
         }
         //// No MenuButtons in a Tower menu, but these can be added by following setupTextFields/setupCombos
@@ -65,7 +71,7 @@ public class TowerMenu extends AbstractMenu {
     
     private void setUpEditTowerScreen(VBox root, List<String> objectData) {
         String weapon = objectData.get(objectData.size()-1);
-        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon)) {
+        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || setupMenuButton(root)) {
             return;
         }
         //// No MenuButtons currently
@@ -86,13 +92,10 @@ public class TowerMenu extends AbstractMenu {
         done.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 TowerData tower = buildTowerDataFromInputFields();
-                
                 if (tower == null) {
                     return; // leave window open
                 }
-                
                 String name = tower.getName();
-                
                 // add/update Tower (tab passes data to controller and updates view)
                 try {
                     if (isNewObject) {
@@ -101,7 +104,7 @@ public class TowerMenu extends AbstractMenu {
                         getTab().updateObject(name, tower);
                     }
                 } catch (Exception e) {
-                    getHelper().showError(getResources().getString(e.getMessage()));
+                    showError(getResources().getString(e.getMessage()));
                     return; // leave window open
                 }
                 getWindow().close();
@@ -110,26 +113,35 @@ public class TowerMenu extends AbstractMenu {
         return done;
     }
     
+    private void setToDefaultFields() {
+        myNameField = this.setUpTextInput(getResources().getString("DefaultTowerName"));
+        myHealthField = this.setUpTextInput(getResources().getString("DefaultHealth"));
+        myBuyPriceField = this.setUpTextInput(getResources().getString("DefaultBuyPrice"));
+        mySellPriceField = this.setUpTextInput(getResources().getString("DefaultSellPrice"));
+        mySizeField = this.setUpTextInput(getResources().getString("DefaultSize"));
+        myImageField = this.setUpTextInput(getResources().getString("DefaultImage"));
+    }
+    
     private boolean setupTextFields(VBox root) {
-        List<TextField> fields = this.getInputFields();
-        try {
-            myNameField = fields.get(0);
-            myHealthField = fields.get(1);
-            myBuyPriceField = fields.get(2);
-            mySellPriceField = fields.get(3);
-            mySizeField = fields.get(4);
-            myImageField = fields.get(5);
-        } catch (Exception e) {
-            this.getHelper().showError("TextField inputs could not be generated.");
-            return false;
-        }
+        setToDefaultFields();
         
-        myNameField = this.setUpTextInput(root, getResources().getString("EnterName"), getResources().getString("DefaultTowerName"));
-        myHealthField = this.setUpTextInput(root, getResources().getString("EnterHealth"), getResources().getString("DefaultHealth"));
-        myBuyPriceField = this.setUpTextInput(root, getResources().getString("EnterBuyPrice"), getResources().getString("DefaultBuyPrice"));
-        mySellPriceField = this.setUpTextInput(root, getResources().getString("EnterSellPrice"), getResources().getString("DefaultSellPrice"));
-        mySizeField = this.setUpTextInput(root, getResources().getString("EnterSize"), getResources().getString("DefaultSize"));
-        myImageField = this.setUpBrowseButton(root, getResources().getString("EnterImage"), getResources().getString("DefaultImage"), "PNG", "*.png");
+        // Create text labels
+        Text nameLbl = this.setUpLabel(getResources().getString("EnterName"));
+        Text healthLbl = this.setUpLabel(getResources().getString("EnterHealth"));
+        Text buyLbl = this.setUpLabel(getResources().getString("EnterBuyPrice"));
+        Text sellLbl = this.setUpLabel(getResources().getString("EnterSellPrice"));
+        Text sizeLbl = this.setUpLabel(getResources().getString("EnterSize"));
+        Text imageLbl = this.setUpLabel(getResources().getString("EnterImage"));
+        
+        // Create button for file browser
+        myFileBrowser = this.setUpBrowseButton(myImageField, "PNG", "*.png");
+        
+        root.getChildren().addAll(nameLbl, myNameField,
+                                  healthLbl, myHealthField,
+                                  buyLbl, myBuyPriceField,
+                                  sellLbl, mySellPriceField,
+                                  sizeLbl, mySizeField,
+                                  imageLbl, myImageField, myFileBrowser);
         
         return true;
     }
@@ -153,34 +165,48 @@ public class TowerMenu extends AbstractMenu {
      */
     private boolean setupTextFields(VBox root, List<String> objectData) {
         try {
-            myNameField = this.setUpTextInput(root, getResources().getString("EnterName"), objectData.get(0));
-            myHealthField = this.setUpTextInput(root, getResources().getString("EnterHealth"), objectData.get(1));
-            myBuyPriceField = this.setUpTextInput(root, getResources().getString("EnterBuyPrice"), objectData.get(2));
-            mySellPriceField = this.setUpTextInput(root, getResources().getString("EnterSellPrice"), objectData.get(3));
-            mySizeField = this.setUpTextInput(root, getResources().getString("EnterSize"), objectData.get(4));
-            myImageField = this.setUpBrowseButton(root, getResources().getString("EnterImage"), objectData.get(5), "PNG", "*.png");
-            return true;
+            myNameField = this.setUpTextInput(objectData.get(0));
+            myHealthField = this.setUpTextInput(objectData.get(1));
+            myBuyPriceField = this.setUpTextInput(objectData.get(2));
+            mySellPriceField = this.setUpTextInput(objectData.get(3));
+            mySizeField = this.setUpTextInput(objectData.get(4));
+            myImageField = this.setUpTextInput(objectData.get(5));
         } catch (Exception e) {
-            getHelper().showError(getResources().getString("DataRetrieveError"));
             return false;
         }
+        
+        // Create text labels
+        Text nameLbl = this.setUpLabel(getResources().getString("EnterName"));
+        Text healthLbl = this.setUpLabel(getResources().getString("EnterHealth"));
+        Text buyLbl = this.setUpLabel(getResources().getString("EnterBuyPrice"));
+        Text sellLbl = this.setUpLabel(getResources().getString("EnterSellPrice"));
+        Text sizeLbl = this.setUpLabel(getResources().getString("EnterSize"));
+        Text imageLbl = this.setUpLabel(getResources().getString("EnterImage"));
+
+        // Create button for file browser
+        myFileBrowser = this.setUpBrowseButton(myImageField, "PNG", "*.png");
+        
+        root.getChildren().addAll(nameLbl, myNameField, 
+                                  healthLbl, myHealthField, 
+                                  buyLbl, myBuyPriceField, 
+                                  sellLbl, mySellPriceField, 
+                                  sizeLbl, mySizeField, 
+                                  imageLbl, myImageField, myFileBrowser);
+        
+        return true;
     }
     
     private boolean setupCombo(VBox root) {
         List<ComboBox<String>> combos = this.getComboBoxes();
-        
         try {
             myWeaponChoice = combos.get(0);
         } catch (Exception e) {
-            this.getHelper().showError("Weapon ComboBox could not be generated");
             return false;
         }
-
-        // Fake initial values
-        ObservableList<String> weaponChoices = FXCollections.observableArrayList("Machine Gun", "Bomb", "Arrow");
         
-        String weapon = getResources().getString("SelectWeapon");
-        myWeaponChoice = this.setUpComboBox(root, weapon, weaponChoices, weapon);
+        // Set up label
+        Text weaponLbl = this.setUpLabel(getResources().getString("SelectWeapon"));
+        root.getChildren().addAll(weaponLbl, myWeaponChoice);
         return true;
     }
     
@@ -188,12 +214,66 @@ public class TowerMenu extends AbstractMenu {
         if (weaponValue == null) {
             return false;
         }
+        List<ComboBox<String>> combos = this.getComboBoxes();
+        try {
+            myWeaponChoice = combos.get(0);
+        } catch (Exception e) {
+            return false;
+        }
         
-        // Fake initial values
-        ObservableList<String> weaponChoices = FXCollections.observableArrayList("Machine Gun", "Bomb", "Arrow");
+        // Set up label
+        Text weaponLbl = this.setUpLabel(getResources().getString("SelectWeapon"));
+        // Set given value
+        myWeaponChoice.setValue(weaponValue);
+        root.getChildren().addAll(weaponLbl, myWeaponChoice);
+        return true;
+    }
+    
+    private boolean setupMenuButton(VBox root) {
+        List<MenuButton> menuBtns = this.getMenuButtons();
+        try {
+            myPossibleTerrains = menuBtns.get(0);
+        } catch (Exception e) {
+            return false;
+        }
         
-        String weapon = getResources().getString("SelectWeapon");
-        myWeaponChoice = this.setUpComboBox(root, weapon, weaponChoices, weaponValue);
+        // Set up label 
+        Text terrainLbl = this.setUpLabel(getResources().getString("SelectTerrains"));
+        
+        // Populate check box options
+        myPossibleTerrains = new MenuButton(getResources().getString("SelectTerrains"));
+        for (String terrain: ((TowerTab)getTab()).getTerrains()){
+                CheckBox checkBox = new CheckBox(terrain);
+                CustomMenuItem custom = new CustomMenuItem(checkBox);
+                myPossibleTerrains.getItems().add(custom);
+        }
+        
+        root.getChildren().addAll(terrainLbl, myPossibleTerrains);
+        
+        return true;
+    }
+    
+    private boolean setupMenuButton(VBox root, List<String> checkedTerrains) {
+        List<MenuButton> menuBtns = this.getMenuButtons();
+        try {
+            myPossibleTerrains = menuBtns.get(0);
+        } catch (Exception e) {
+            return false;
+        }
+        
+        // Set up label
+        Text terrainLbl = this.setUpLabel(getResources().getString("SelectTerrains"));
+        
+        // Populate check box options and set checked values
+        myPossibleTerrains = new MenuButton(getResources().getString("SelectTerrains"));
+        for (String terrain: ((TowerTab)getTab()).getTerrains()){
+                CheckBox checkBox = new CheckBox(terrain);
+                checkBox.setSelected(checkedTerrains.contains(terrain));
+                CustomMenuItem custom = new CustomMenuItem(checkBox);
+                myPossibleTerrains.getItems().add(custom);
+        }
+        
+        root.getChildren().addAll(terrainLbl, myPossibleTerrains);
         
         return true;
     }
@@ -214,7 +294,7 @@ public class TowerMenu extends AbstractMenu {
         
         if (!parseNumberInput(health,buyPrice,sellPrice,size)) {
             // If number parsing fails, show error and return
-            getHelper().showError(getResources().getString("BadIntInput"));
+            this.showError(getResources().getString("BadIntInput"));
             return null;
         }
         
@@ -267,7 +347,6 @@ public class TowerMenu extends AbstractMenu {
     
     private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon) {
       TowerData towerDat = new TowerData();
-      
       try {
           towerDat.setName(name);
           towerDat.setMaxHealth(health);
@@ -277,10 +356,9 @@ public class TowerMenu extends AbstractMenu {
           towerDat.setImagePath(imagePath);
           towerDat.setWeaponName(weapon);
       } catch (Exception e) {
-          this.getHelper().showError(e.getMessage());
+          this.showError(e.getMessage());
           return null;
       }
-      
       return towerDat;
   }
 
@@ -303,14 +381,12 @@ public class TowerMenu extends AbstractMenu {
     @Override
     protected List<TextField> defineTextFields () {
         List<TextField> textFields = new ArrayList<>();
-        
         textFields.add(myNameField);
         textFields.add(myHealthField);
         textFields.add(myBuyPriceField);
         textFields.add(mySellPriceField);
         textFields.add(mySizeField);
         textFields.add(myImageField);
-        
         return textFields;
     }
 
@@ -319,6 +395,12 @@ public class TowerMenu extends AbstractMenu {
      */
     @Override
     protected List<ComboBox<String>> defineComboBoxes () {
+        // Weapons
+        
+        ObservableList<String> weaponChoices = ((TowerTab)getTab()).getWeapons();
+        String value = getResources().getString("SelectWeapon");
+        myWeaponChoice = this.setUpComboBox(weaponChoices, value);
+        
         List<ComboBox<String>> comboBoxes = new ArrayList<>();
         comboBoxes.add(myWeaponChoice);
         return comboBoxes;
@@ -326,12 +408,23 @@ public class TowerMenu extends AbstractMenu {
 
     @Override
     protected List<MenuButton> defineMenuButtons () {
-        // No check boxes
-        return null;
+        // Terrain
+        
+        List<MenuButton> menuBtns = new ArrayList<>();
+        menuBtns.add(myPossibleTerrains);
+        return menuBtns;
     }
 
     @Override
-    protected void checkForErrors (MenuHelper helper) {
+    protected List<Button> defineBrowserButtons () {
+        // Image browser
+        List<Button> browsers = new ArrayList<>();
+        browsers.add(myFileBrowser);
+        return browsers;
+    }
+
+    @Override
+    protected void checkForErrors () {
         // Currently no need, can generate a Tower whenever
         return;
     }

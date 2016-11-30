@@ -56,8 +56,16 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     /**
      * @return list of the names of the current towers
      */
-    public List<String> getTowers() {
+    public ObservableList<String> getTowers() {
         return myTowers;
+    }
+    
+    public ObservableList<String> getTerrains() {
+        return myTerrains;
+    }
+    
+    public ObservableList<String> getWeapons() {
+        return myWeapons;
     }
 
     @Override
@@ -152,7 +160,7 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
         try {
             getController().updateObjectData(oldName, data);
         } catch (Exception e) {
-            getMenu().getHelper().showError(e.getMessage());
+            getMenu().showError(e.getMessage());
         }
     }
 

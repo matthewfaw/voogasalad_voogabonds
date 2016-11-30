@@ -1,5 +1,6 @@
 package authoring.view.input_menus;
 
+import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.controller.IDataController;
@@ -8,48 +9,63 @@ import authoring.view.side_panel.AbstractInfoTab;
 import authoring.view.side_panel.TowerTab;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
  * @author Niklas Sjoquist
  * 
- * Allows new types of IMenus to be extended easily.
+ * Defines a general Menu class. Allows new types of IMenus to be extended easily.
  *
  */
 public abstract class AbstractMenu implements IMenu {
     private ResourceBundle myResources;
     private AbstractInfoTab myTab;
-    private MenuHelper myHelper;
+    //private MenuHelper myHelper;
     private Stage myWindow;
     private int width, height;
     private List<TextField> myTextFields;
+    private List<Button> myFileBrowsers;
     private List<ComboBox<String>> myComboBoxes;
     private List<MenuButton> myMenuButtons;
     
     protected AbstractMenu(ResourceBundle resources, AbstractInfoTab tab) {
         myResources = resources;
         myTab = tab;
-        myHelper = new MenuHelper(myResources);
+        //myHelper = new MenuHelper(myResources);
         width = defineWidth();
         height = defineHeight();
         myTextFields = defineTextFields();
+        myFileBrowsers = defineBrowserButtons();
         myComboBoxes = defineComboBoxes();
         myMenuButtons = defineMenuButtons();
     }
     
+    public void showError (String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(myResources.getString("ErrorTitle"));
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
     @Override
     public void createObjectMenu (boolean isNewObject, List<String> inputFieldValues) {
-        checkForErrors(myHelper);
+        checkForErrors();
         myWindow = new Stage();
         myWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
@@ -85,15 +101,18 @@ public abstract class AbstractMenu implements IMenu {
         return myResources;
     }
     
-    /**
-     * Note: this method is public in order to allow access by Tabs
-     * 
-     * @return MenuHelper to help show error messages, etc.
-     */
-    public MenuHelper getHelper() {
-        return myHelper;
-    }
+//    /**
+//     * Note: this method is public in order to allow access by Tabs
+//     * 
+//     * @return MenuHelper to help show error messages, etc.
+//     */
+//    public MenuHelper getHelper() {
+//        return myHelper;
+//    }
     
+    /**
+     * @return Stage window
+     */
     protected Stage getWindow() {
         return myWindow;
     }
@@ -111,39 +130,15 @@ public abstract class AbstractMenu implements IMenu {
     }
     
     /**
-     * Helper method to create a ComboBox. 
+     * Helper method to create a basic text label.
      * 
-     * This method adds a ComboBox with a given label to the Menu's view and returns the ComboBox, if the user wants a reference
+     * Simply packages the string input into a Text object.
      * 
-     * @param root
      * @param label
-     * @param choices - the list of choices of the ComboBox
-     * @param value - the default value of the ComboBox
-     * @return ComboBox
+     * @return
      */
-    protected ComboBox<String> setUpComboBox(VBox root, String label, ObservableList<String> choices, String value) {
-        Text labelText = new Text(label);
-        ComboBox<String> cb = new ComboBox<String>(choices);
-        cb.setValue(value);
-        root.getChildren().addAll(labelText, cb);
-        return cb;
-    }
-    
-    /**
-     * Helper method to create a FileChooser button. 
-     * 
-     * This method adds a FileChooser button to the Menu's view, and returns a reference to the TextField. 
-     * 
-     * @param root
-     * @param label
-     * @param value - default value
-     * @param extensionName - name of expected file extension (e.g., WAV, PNG, etc.) 
-     * @param extension - format of expected file extension (e.g., '*.wav', '*.png', etc.)
-     */
-    protected TextField setUpBrowseButton(VBox root, String label, String value, String extensionName, String extension) {
-        TextField prompt = myHelper.setUpBasicUserInput(root, label, value);
-        TextField path = myHelper.setUpBrowseButton(root, prompt, extensionName, extension);
-        return path;
+    protected Text setUpLabel(String label) {
+        return new Text(label);
     }
     
     /**
@@ -156,11 +151,51 @@ public abstract class AbstractMenu implements IMenu {
      * @param value - initial value of the TextField input area
      * @return
      */
-    protected TextField setUpTextInput(VBox root, String label, String value) {
-        Text text = new Text(label);
+    protected TextField setUpTextInput(String value) {
         TextField textField = new TextField(value);
-        root.getChildren().addAll(text, textField);
         return textField;
+    }
+    
+    /**
+     * Helper method to create a ComboBox. 
+     * 
+     * This method adds a ComboBox with a given label to the Menu's view and returns the ComboBox, if the user wants a reference
+     * 
+     * @param root
+     * @param label
+     * @param choices - the list of choices of the ComboBox
+     * @param value - the default value of the ComboBox
+     * @return ComboBox
+     */
+    protected ComboBox<String> setUpComboBox(ObservableList<String> choices, String value) {
+        ComboBox<String> cb = new ComboBox<String>(choices);
+        cb.setValue(value);
+        return cb;
+    }
+
+    /**
+     * Helper method to create a FileChooser button.
+     * 
+     * This method takes in a TextField to edit, and returns a FileChooser.
+     * 
+     * @param field - text field to edit with filepath
+     * @param extensionName - name of expected file extension (e.g., WAV, PNG, etc.)
+     * @param extension - format of expected file extension (e.g., '*.wav', '*.png', etc.)
+     * @return
+     */
+    protected Button setUpBrowseButton(TextField field, String extensionName, String extension) {
+        Button browseButton = new Button(myResources.getString("Browse"));
+        browseButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event){
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(extensionName, extension));
+                File file = fileChooser.showOpenDialog(new Stage());
+                if (file != null){
+                    field.setText(file.getPath());
+                }
+            }
+        });
+        return browseButton;
     }
     
     /**
@@ -173,7 +208,7 @@ public abstract class AbstractMenu implements IMenu {
      * @param options - possible values of the check box
      * @return
      */
-    protected MenuButton setUpMenuButton(VBox root, String value, ObservableList<String> options) {
+    protected MenuButton setUpMenuButton(String value, ObservableList<String> options) {
         MenuButton menuBtn = new MenuButton(value);
         for (String terrain : options){ //changed from myTab.getTerrains() -> options
                 CheckBox checkBox = new CheckBox(terrain);
@@ -181,7 +216,6 @@ public abstract class AbstractMenu implements IMenu {
                 CustomMenuItem custom = new CustomMenuItem(checkBox);
                 menuBtn.getItems().add(custom);
         }
-        root.getChildren().add(menuBtn);
         return menuBtn;
     }
     
@@ -234,11 +268,16 @@ public abstract class AbstractMenu implements IMenu {
     protected abstract List<MenuButton> defineMenuButtons();
     
     /**
+     * @return an ordered list of FileChooser buttons which are needed to create menus for this type of object (may be null if menu has no browsers)
+     */
+    protected abstract List<Button> defineBrowserButtons();
+    
+    /**
      * Checks for errors and uses the given MenuHelper to display an error message to the user.
      * This method should use the MenuHelper.showError method, and should also include a return statement if the menu pop-up window should be suppressed. 
      * May not show any errors.
      * @param helper
      */
-    protected abstract void checkForErrors(MenuHelper helper);
+    protected abstract void checkForErrors();
 
 }

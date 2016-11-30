@@ -22,7 +22,7 @@ import javafx.event.EventHandler;
 /**
  * @author Niklas Sjoquist
  * 
- * This Abstract Class defines a Tab of InfoTabs in order to more easily create new types of Tabs. 
+ * This Abstract Class defines a general Tab of InfoTabs in order to more easily create new types of Tabs. 
  *
  */
 public abstract class AbstractInfoTab extends Tab {
@@ -42,11 +42,12 @@ public abstract class AbstractInfoTab extends Tab {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + VIEW_RESOURCES);
         myTab = new Tab(this.getTitle());
         myController = controller;
-        myMenu = initMenu(myResources, myController);
         defineObservableLists();
+        myMenu = initMenu(myResources, myController);
         initTab(pane, myTab, this.getTitle());
     }
     
+    // TODO: fix magic numbers
     private void initTab(TabPane pane, Tab tab, String title) {
         // VBox to wrap contents of Tab
         VBox tabArea = new VBox(screenHeight*0.01);
@@ -92,30 +93,51 @@ public abstract class AbstractInfoTab extends Tab {
     
     // Protected helper methods \\
     
+    /**
+     * @return
+     */
     protected int getWidth() {
         return screenWidth;
     }
     
+    /**
+     * @return
+     */
     protected int getHeight() {
         return screenHeight;
     }
     
+    /**
+     * @param menu
+     */
     protected void setMenu(AbstractMenu menu) {
         myMenu = menu;
     }
     
+    /**
+     * @return
+     */
     protected AbstractMenu getMenu() {
         return myMenu;
     }
     
+    /**
+     * @return
+     */
     protected IDataController getController() {
         return myController;
     }
     
+    /**
+     * @return
+     */
     protected ResourceBundle getResources() {
         return myResources;
     }
     
+    /**
+     * @return
+     */
     protected List<ObservableList<String>> getObservableLists() {
         return myObservableLists;
     }
