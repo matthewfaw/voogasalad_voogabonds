@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import authoring.controller.IDataController;
 import authoring.controller.TowerDataController;
-import authoring.view.side_panel.ITerrainTab;
+import authoring.view.side_panel.AbstractInfoTab;
 import authoring.view.side_panel.TowerTab;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,14 +30,14 @@ public abstract class AbstractMenu implements IMenu {
     public static final int SIZE = 500;
     
     private ResourceBundle myResources;
-    private ITerrainTab myTab;
+    private AbstractInfoTab myTab;
     private MenuHelper myHelper;
     private Stage myWindow;
     private List<TextField> myTextFields;
     private List<ComboBox<String>> myComboBoxes;
     private List<MenuButton> myMenuButtons;
     
-    protected AbstractMenu(ResourceBundle resources, ITerrainTab tab) {
+    protected AbstractMenu(ResourceBundle resources, AbstractInfoTab tab) {
         myResources = resources;
         myTab = tab;
         myHelper = new MenuHelper(myResources);
@@ -52,18 +52,18 @@ public abstract class AbstractMenu implements IMenu {
         myWindow = new Stage();
         myWindow.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
-        this.setUpNewMenuScreen(isNewObject, inputFieldValues);
+        this.setUpNewMenuScreen(root, isNewObject, inputFieldValues);
         Scene scene = new Scene(root, SIZE, SIZE);
         this.setTitle();
         myWindow.setScene(scene);
         myWindow.show();
     }
     
-    private void setUpNewMenuScreen(boolean isNewObject, List<String> inputFieldValues) {
+    private void setUpNewMenuScreen(VBox root, boolean isNewObject, List<String> inputFieldValues) {
         if (isNewObject) {
-            setUpNewCreateScreen(myResources);
+            setUpNewCreateScreen(root);
         } else {
-            setUpNewUpdateScreen(inputFieldValues);
+            setUpNewUpdateScreen(root, inputFieldValues);
         }
     }
     
@@ -73,11 +73,27 @@ public abstract class AbstractMenu implements IMenu {
     
     // Protected Helper Methods \\
     
+    protected AbstractInfoTab getTab() {
+        return myTab;
+    }
+    
+    /**
+     * @return ResourceBundle associated with this menu
+     */
     protected ResourceBundle getResources() {
         return myResources;
     }
     
-    protected Stage getStage() {
+    /**
+     * Note: this method is public in order to allow access by Tabs
+     * 
+     * @return MenuHelper to help show error messages, etc.
+     */
+    public MenuHelper getHelper() {
+        return myHelper;
+    }
+    
+    protected Stage getWindow() {
         return myWindow;
     }
     
@@ -85,7 +101,7 @@ public abstract class AbstractMenu implements IMenu {
         return myTextFields;
     }
     
-    protected List<ComboBox<String>> getComboBox() {
+    protected List<ComboBox<String>> getComboBoxes() {
         return myComboBoxes;
     }
     
@@ -124,8 +140,8 @@ public abstract class AbstractMenu implements IMenu {
      * @param extension - format of expected file extension (e.g., '*.wav', '*.png', etc.)
      */
     protected TextField setUpBrowseButton(VBox root, String label, String value, String extensionName, String extension) {
-        TextField path = myHelper.setUpBasicUserInput(root, label, value);
-        myHelper.setUpBrowseButton(root, path, extensionName, extension);
+        TextField prompt = myHelper.setUpBasicUserInput(root, label, value);
+        TextField path = myHelper.setUpBrowseButton(root, prompt, extensionName, extension);
         return path;
     }
     
@@ -158,9 +174,9 @@ public abstract class AbstractMenu implements IMenu {
      */
     protected MenuButton setUpMenuButton(VBox root, String value, ObservableList<String> options) {
         MenuButton menuBtn = new MenuButton(value);
-        for (String terrain : myTab.getTerrains()){
+        for (String terrain : options){ //changed from myTab.getTerrains() -> options
                 CheckBox checkBox = new CheckBox(terrain);
-                checkBox.setSelected(options.contains(terrain));
+                //checkBox.setSelected(options.contains(terrain)); Not sure why this was included
                 CustomMenuItem custom = new CustomMenuItem(checkBox);
                 menuBtn.getItems().add(custom);
         }
@@ -174,13 +190,13 @@ public abstract class AbstractMenu implements IMenu {
      * This method sets up a new menu screen to create a new game object defined by instance variable lists myTextFields, myComboBox, and myMenuButtons.
      * @param resources - Contains default value of TextFields.
      */
-    protected abstract void setUpNewCreateScreen(ResourceBundle resources);
+    protected abstract void setUpNewCreateScreen(VBox root);
     
     /**
      * This method sets up a new menu screen to update an existing game object defined by instance variables myTextFields, myComboBox, and myMenuButtons.
      * @param objectData - Default value of text fields: an ordered list of parameters which represents the IReadableData of the game object
      */
-    protected abstract void setUpNewUpdateScreen(List<String> objectData);
+    protected abstract void setUpNewUpdateScreen(VBox root, List<String> objectData);
     
     /**
      * @return the title of the menu window

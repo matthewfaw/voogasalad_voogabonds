@@ -114,7 +114,7 @@ public class TowerMenu extends AbstractMenu {
 //                                sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
 //                                size = Integer.parseInt(mySizeField.getCharacters().toString());
 //                        } catch(Exception e) {
-//                                myHelper.showError(myResources.getString("BadDoubleInput"));
+//                                myHelper.showError(myResources.getString("BadIntInput"));
 //                                return;
 //                        }
 //                        String weapon = myWeaponChoice.getValue();
@@ -156,37 +156,224 @@ public class TowerMenu extends AbstractMenu {
 //        
 //        return towerDat;
 //    }
-
+    
     @Override
-    protected void setUpNewCreateScreen (ResourceBundle resources) {
-        // TODO Auto-generated method stub
-        
+    protected void setUpNewCreateScreen (VBox root) {
+        setUpTowerScreen(root, true);
     }
 
     @Override
-    protected void setUpNewUpdateScreen (List<String> objectData) {
+    protected void setUpNewUpdateScreen (VBox root, List<String> objectData) {
         // TODO Auto-generated method stub
         
     }
+    
+    private boolean setupTextFields(VBox root) {
+        List<TextField> fields = this.getInputFields();
+        try {
+            myNameField = fields.get(0);
+            myHealthField = fields.get(1);
+            myBuyPriceField = fields.get(2);
+            mySellPriceField = fields.get(3);
+            mySizeField = fields.get(4);
+            myImageField = fields.get(5);
+        } catch (Exception e) {
+            this.getHelper().showError("TextField inputs could not be generated.");
+            return false;
+        }
+        
+        myNameField = this.setUpTextInput(root, getResources().getString("EnterName"), getResources().getString("DefaultTowerName"));
+        myHealthField = this.setUpTextInput(root, getResources().getString("EnterHealth"), getResources().getString("DefaultHealth"));
+        myBuyPriceField = this.setUpTextInput(root, getResources().getString("EnterBuyPrice"), getResources().getString("DefaultBuyPrice"));
+        mySellPriceField = this.setUpTextInput(root, getResources().getString("EnterSellPrice"), getResources().getString("DefaultSellPrice"));
+        mySizeField = this.setUpTextInput(root, getResources().getString("EnterSize"), getResources().getString("DefaultSize"));
+        myImageField = this.setUpBrowseButton(root, getResources().getString("EnterImage"), getResources().getString("DefaultImage"), "PNG", "*.png");
+        
+        return true;
+    }
+    
+    private boolean setupCombo(VBox root) {
+        List<ComboBox<String>> combos = this.getComboBoxes();
+        
+        try {
+            myWeaponChoice = combos.get(0);
+        } catch (Exception e) {
+            this.getHelper().showError("Weapon ComboBox could not be generated");
+            return false;
+        }
+
+        // Fake initial values
+        ObservableList<String> weaponChoices = FXCollections.observableArrayList("Machine Gun", "Bomb", "Arrow");
+        
+        String weapon = getResources().getString("SelectWeapon");
+        myWeaponChoice = this.setUpComboBox(root, weapon, weaponChoices, weapon);
+        return true;
+    }
+    
+    private boolean setupTextFields(VBox root, List<String> textFields) {
+        return false;
+    }
+    
+    private boolean setupCombo(VBox root, String value) {
+        return false;
+    }
+    
+    private void setUpTowerScreen(VBox root, boolean isNewObject) {
+        // Try to set initial text in TextFields & Weapon ComboBox choices
+        if (isNewObject) {
+            // set up with default initial input fields
+            if (!setupTextFields(root) || !setupCombo(root)) {
+                return;
+            }
+        } else {
+            // TODO: set up with retrieved data
+            
+        }
+        
+        //// No MenuButtons in a Tower menu, but these can be added by following setupTextFields/setupCombos
+        
+        // Create finish button
+        Button done = new Button(getResources().getString("Finish"));
+        done.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                TowerData tower = buildTowerDataFromInput();
+                
+                if (tower == null) {
+                    return; // leave window open
+                }
+                
+                String name = tower.getName();
+                
+                // add/update Tower (tab passes data to controller and updates view)
+                if (isNewObject) {
+                    getTab().addObject(name, tower);
+                } else {
+                    getTab().updateObject(name, tower);
+                }
+                getWindow().close();
+            }
+        });
+        root.getChildren().add(done);
+    }
+    
+    private TowerData buildTowerDataFromInput() {
+        // Parse number input
+        
+        Integer health = null, buyPrice = null, sellPrice = null, size = null;
+        
+        try {
+            health = Integer.parseInt(myHealthField.getCharacters().toString());
+            buyPrice = Integer.parseInt(myBuyPriceField.getCharacters().toString());
+            sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
+            size = Integer.parseInt(mySizeField.getCharacters().toString());
+        } catch (Exception e) {
+            return null;
+        }
+        
+        if (!parseNumberInput(health,buyPrice,sellPrice,size)) {
+            // If number parsing fails, show error and return
+            getHelper().showError(getResources().getString("BadIntInput"));
+            return null;
+        }
+        
+        // Parse text input fields
+        
+        String name = myNameField.getCharacters().toString();
+        String image = myImageField.getCharacters().toString();
+        String weapon = myWeaponChoice.getValue();
+        
+        // Package Tower Data
+        
+        // Error check input
+        Integer[] nums = {health,buyPrice,sellPrice,size};
+        for (int i=0; i<nums.length; i++) {
+            nums[i] = correctNullInteger(nums[i]); // make null Integers = -1
+        }
+        health = nums[0]; buyPrice = nums[1]; sellPrice = nums[2]; size = nums[3];
+        
+        System.out.println(image);
+        
+        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), weapon, image);
+        if (tower == null) {
+            return null;
+        }
+        return tower;
+    }
+    
+    /**
+     * Parses numbers and returns false if failed or numbers are null.
+     */
+    private boolean parseNumberInput(Integer health, Integer buyPrice, Integer sellPrice, Integer size) {
+        try {
+            health = Integer.parseInt(myHealthField.getCharacters().toString());
+            buyPrice = Integer.parseInt(myBuyPriceField.getCharacters().toString());
+            sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
+            size = Integer.parseInt(mySizeField.getCharacters().toString());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    private int correctNullInteger(Integer value) {
+        if (value == null) {
+            System.out.println("Integer was null.");
+        }
+        return value == null ? -1 : value.intValue();
+    }
+    
+    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String weapon, String imagePath) {
+      TowerData towerDat = new TowerData();
+      
+      try {
+          towerDat.setName(name);
+          towerDat.setMaxHealth(health);
+          towerDat.setBuyPrice(buyPrice);
+          towerDat.setSellPrice(sellPrice);
+          towerDat.setCollisionRadius(size);
+          towerDat.setImagePath(imagePath);
+          towerDat.setWeaponName(weapon);
+      } catch (Exception e) {
+          this.getHelper().showError(e.getMessage());
+          return null;
+      }
+      
+      return towerDat;
+  }
 
     @Override
     protected String getTitle () {
         return getResources().getString("AddTower");
     }
 
+    /* 
+     * TextField array:
+     * index  |  TextField
+     * ===================
+     *    0   |   name
+     *    1   |   health
+     *    2   |   buy
+     *    3   |   sell
+     *    4   |   size
+     *    5   |   image
+     */
     @Override
     protected List<TextField> defineTextFields () {
         List<TextField> textFields = new ArrayList<>();
+        
         textFields.add(myNameField);
         textFields.add(myHealthField);
         textFields.add(myBuyPriceField);
         textFields.add(mySellPriceField);
-        textFields.add(myBuyPriceField);
         textFields.add(mySizeField);
         textFields.add(myImageField);
+        
         return textFields;
     }
 
+    /* 
+     * One combo box for weapon choice
+     */
     @Override
     protected List<ComboBox<String>> defineComboBoxes () {
         List<ComboBox<String>> comboBoxes = new ArrayList<>();
@@ -202,7 +389,7 @@ public class TowerMenu extends AbstractMenu {
 
     @Override
     protected void checkForErrors (MenuHelper helper) {
-        // TODO Auto-generated method stub
+        // Currently no need, can generate a Tower whenever
         
     }
     
