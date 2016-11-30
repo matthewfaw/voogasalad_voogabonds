@@ -6,6 +6,8 @@ import authoring.model.IReadableData;
  * @author Niklas Sjoquist
  *
  * An IDataController can create and edit a certain type of game object.
+ * 
+ * This interface is used to encapsulate DataControllers into an interface with basic CRUD capabilities.
  *
  */
 public interface IDataController {
@@ -30,5 +32,13 @@ public interface IDataController {
      * @return
      */
     public IReadableData getObjectData(String name);
+    
+    /**
+     * Deletes the data object associated with the given name
+     * 
+     * @param name
+     * @return success/failure
+     */
+    public boolean deleteObjectData(String name);
 
 }

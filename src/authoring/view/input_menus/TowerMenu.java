@@ -85,7 +85,7 @@ public class TowerMenu extends AbstractMenu {
         Button done = new Button(getResources().getString("Finish"));
         done.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                TowerData tower = buildTowerDataFromInput();
+                TowerData tower = buildTowerDataFromInputFields();
                 
                 if (tower == null) {
                     return; // leave window open
@@ -198,7 +198,7 @@ public class TowerMenu extends AbstractMenu {
         return true;
     }
     
-    private TowerData buildTowerDataFromInput() {
+    private TowerData buildTowerDataFromInputFields() {
         // Parse number input
         
         Integer health = null, buyPrice = null, sellPrice = null, size = null;
@@ -233,8 +233,6 @@ public class TowerMenu extends AbstractMenu {
         }
         health = nums[0]; buyPrice = nums[1]; sellPrice = nums[2]; size = nums[3];
         
-        System.out.println(image);
-        
         TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon);
         if (tower == null) {
             return null;
@@ -257,10 +255,13 @@ public class TowerMenu extends AbstractMenu {
         }
     }
     
+    /**
+     * Converts null Integers to -1.
+     * 
+     * @param value
+     * @return value, or -1 if value is null
+     */
     private int correctNullInteger(Integer value) {
-        if (value == null) {
-            System.out.println("Integer was null.");
-        }
         return value == null ? -1 : value.intValue();
     }
     
