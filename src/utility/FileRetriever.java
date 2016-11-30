@@ -55,8 +55,8 @@ public class FileRetriever {
 	private String getRelativeFilePath(File aFile)
 	{
 		String absoluteFilePath = aFile.getAbsolutePath();
-		String defaultPath = myDefaultPath.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
-		return absoluteFilePath.substring(absoluteFilePath.indexOf(defaultPath)/*+ myDefaultPath.length() + 1*/);
+		//String defaultPath = myDefaultPath.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
+		return absoluteFilePath.substring(absoluteFilePath.indexOf(myDefaultPath)/*+ myDefaultPath.length() + 1*/);
 	}
 
 	/*
