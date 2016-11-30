@@ -192,7 +192,9 @@ public abstract class AbstractMenu implements IMenu {
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(extensionName, extension));
                 File file = fileChooser.showOpenDialog(new Stage());
                 if (file != null){
-                    field.setText(file.getPath());
+                	int placeHolder = file.getPath().indexOf("src");
+                	String simplePath = file.getPath().substring(placeHolder, file.getPath().length());
+                    field.setText(simplePath);
                 }
             }
         });

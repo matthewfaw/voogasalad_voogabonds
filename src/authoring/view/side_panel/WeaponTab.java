@@ -99,5 +99,7 @@ public class WeaponTab extends Tab {
 		});
 		myContent.getChildren().add(button);
 	}
+	
+	
     
 }
