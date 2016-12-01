@@ -2,7 +2,7 @@ package authoring.controller;
 import java.util.LinkedHashMap;
 import authoring.model.WaveData;
 
-public class WaveDataController {
+public class WaveDataContainer {
 	/**
 	 * HashMap which maintains insertion order. Insertion order is important because
 	 * waves all have an attribute 'timeBeforeWave', which means that they are

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.AbstractMap;
 
 
-public class TowerDataController implements IDataController {
+public class TowerDataContainer implements IDataContainer {
 
     private AbstractMap<String, TowerData> myTowerDataMap = new HashMap<String, TowerData>();
 
