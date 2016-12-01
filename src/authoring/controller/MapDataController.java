@@ -28,6 +28,7 @@ public class MapDataController extends Controller implements IReadableData, IObs
 	private int numXCells;
 	private int numYCells;
 	private int cellSize;
+	
 	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
 	private MapData myMapData = new MapData();
 	
