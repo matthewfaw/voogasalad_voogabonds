@@ -1,1 +1,0 @@
-{"numXCells":29,"numYCells":18,"cellSize":0,"myListeners":[{},{},{}],"spawnPoints":{"spawn2":[{"myX":7.0,"myY":4.0,"myZ":0.0}],"spawn1":[{"myX":7.0,"myY":2.0,"myZ":0.0}]},"sinkPoints":[{"myX":11.0,"myY":2.0,"myZ":0.0},{"myX":11.0,"myY":4.0,"myZ":0.0}],"terrainList":[],"validTerrain":{"purple":"0x663366ff"}}
