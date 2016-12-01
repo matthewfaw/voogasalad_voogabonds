@@ -14,6 +14,7 @@ import engine.model.entities.EntityData;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
+import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
 import engine.model.machine.tower.Tower;
 import engine.model.playerinfo.Player;
@@ -84,6 +85,12 @@ public class MapDistributor implements IDistributor {
 		//TODO: Construct the enemy object
 		// return myMapMediator.attemptToPlaceEntity(aSpawnPoint, enemy);
 		throw new RuntimeException("Add implementation here");
+	}
+
+	@Deprecated
+	public void distribute(EnemyData random, TimelineController aChangedObject, Player p) {
+		Machine toAdd = myAnarchosyndacalistCommune.newEnemy(random.getName(), p, new Point(0, 0));
+		
 	}
 
 }

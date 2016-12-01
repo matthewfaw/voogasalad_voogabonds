@@ -70,7 +70,7 @@ public class ApplicationController {
 	}
 
 	public void onPlayButtonPressed() {
-		//AnimationController.play()
+		myBackendController.startTimeLine();
 	}
 
 	public void onPauseButtonPressed() {

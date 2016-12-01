@@ -73,8 +73,7 @@ public class BackendController {
 		myPlayerController = new PlayerController(myRouter);
 		
 		constructStaticBackendObjects();
-		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-//		constructDynamicBackendObjects();
+		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		
@@ -95,10 +94,10 @@ public class BackendController {
 	//TODO: Update when WaveData is ready from Authoring
 	private void constructDynamicBackendObjects()
 	{
-		List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
+		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
-		myWaveController = new WaveController(myMapDistributor, data.get(0), myEnemyDataStore);
+		myWaveController = new WaveController(myMapDistributor/*, data.get(0)*/, myEnemyDataStore, myPlayerController.getActivePlayer());
 		myTimelineController.attach(myWaveController);
 	}
 	
@@ -223,6 +222,10 @@ public class BackendController {
 			}
 		}
 		return data;
+	}
+
+	public void startTimeLine() {
+		myTimelineController.start();
 	}
 	
 	/*
