@@ -3,7 +3,7 @@ package authoring.view.input_menus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.controller.TowerDataController;
+import authoring.controller.TowerDataContainer;
 import authoring.model.IReadableData;
 import authoring.model.TowerData;
 import authoring.view.side_panel.TowerTab;
@@ -44,7 +44,7 @@ public class TowerMenu extends AbstractMenu {
     private MenuButton myPossibleTerrains;
     private Button myFileBrowser;
     
-    public TowerMenu(ResourceBundle resources, TowerTab tab, TowerDataController towerController) {
+    public TowerMenu(ResourceBundle resources, TowerTab tab, TowerDataContainer towerController) {
         super(resources, tab);
     }
     

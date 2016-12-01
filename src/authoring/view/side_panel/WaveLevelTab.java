@@ -5,10 +5,10 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import authoring.controller.Controller;
-import authoring.controller.WaveDataController;
-import authoring.controller.MapDataController;
-import authoring.controller.EnemyDataController;
+import authoring.controller.Container;
+import authoring.controller.WaveDataContainer;
+import authoring.controller.MapDataContainer;
+import authoring.controller.EnemyDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.WaveData;
 import authoring.view.input_menus.WaveMenu;
@@ -25,7 +25,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class WaveLevelTab extends Tab implements IObserver<Controller>{
+public class WaveLevelTab extends Tab implements IObserver<Container>{
 
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -33,12 +33,12 @@ public class WaveLevelTab extends Tab implements IObserver<Controller>{
 	private int screenWidth;
 	private int screenHeight;
 	private WaveMenu myMenu;
-	private WaveDataController myController;
+	private WaveDataContainer myController;
 	private ArrayList<String> myEnemies;
 	private ArrayList<String> mySpawnPoints;
 	private VBox myContent;
 	
-	public WaveLevelTab(TabPane pane, WaveDataController controller) {
+	public WaveLevelTab(TabPane pane, WaveDataContainer controller) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		waveTab = new Tab(myResources.getString("Waves"));
@@ -107,7 +107,7 @@ public class WaveLevelTab extends Tab implements IObserver<Controller>{
 		myContent.getChildren().add(button);
 	}
 	
-	public WaveDataController getController(){
+	public WaveDataContainer getController(){
 		return myController;
 	}
 	
@@ -122,15 +122,15 @@ public class WaveLevelTab extends Tab implements IObserver<Controller>{
 	/**
 	 * IObserver interface methods
 	 */
-	public void update(Controller c){
-		if (c instanceof MapDataController){
+	public void update(Container c){
+		if (c instanceof MapDataContainer){
 			mySpawnPoints.clear();
-			for (String spawnPoint: ((MapDataController) c).getSpawnPointMap().keySet()){
+			for (String spawnPoint: ((MapDataContainer) c).getSpawnPointMap().keySet()){
 				mySpawnPoints.add(spawnPoint);
 			}
-		}else if(c instanceof EnemyDataController){
+		}else if(c instanceof EnemyDataContainer){
 			myEnemies.clear();
-			for (String enemyName: ((EnemyDataController) c).getEnemyDataMap().keySet()){
+			for (String enemyName: ((EnemyDataContainer) c).getEnemyDataMap().keySet()){
 				myEnemies.add(enemyName);
 			}
 		}

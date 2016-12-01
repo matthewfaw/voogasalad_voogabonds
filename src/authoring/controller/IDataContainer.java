@@ -10,7 +10,7 @@ import authoring.model.IReadableData;
  * This interface is used to encapsulate DataControllers into an interface with basic CRUD capabilities.
  *
  */
-public interface IDataController {
+public interface IDataContainer {
     
     /**
      * Creates new game object (adds it to this' observableDataMap)
