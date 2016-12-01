@@ -59,8 +59,10 @@ public class TowerMenu extends AbstractMenu {
     }
     
     private void setUpNewTowerScreen(VBox root) {
+        System.out.println("Setting up NEW tower menu.");
         // Try to set initial text in TextFields & Weapon ComboBox choices
         if (!setupTextFields(root) || !setupCombo(root) || !setupMenuButton(root)) {
+            this.showError("Could not set up new menu");
             return;
         }
         //// No MenuButtons in a Tower menu, but these can be added by following setupTextFields/setupCombos
@@ -71,10 +73,12 @@ public class TowerMenu extends AbstractMenu {
     }
     
     private void setUpEditTowerScreen(VBox root, IReadableData objectData) {
+        System.out.println("Setting up EDIT tower menu.");
         TowerData td = (TowerData) objectData;
         String weapon = td.getWeaponName();
         List<String> terrains = td.getTraversableTerrain();
         if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || !setupMenuButton(root, terrains)) {
+            this.showError("Could not set up edit menu");
             return;
         }
         //// No MenuButtons currently
@@ -96,10 +100,12 @@ public class TowerMenu extends AbstractMenu {
             public void handle(ActionEvent event) {
                 TowerData tower = buildTowerDataFromInputFields();
                 if (tower == null) {
+                    System.out.println("Tower was null");
                     return; // leave window open
                 }
                 String name = tower.getName();
                 // add/update Tower (tab passes data to controller and updates view)
+                System.out.println(isNewObject);
                 try {
                     if (isNewObject) {
                         getTab().addObject(name, tower);
@@ -285,20 +291,22 @@ public class TowerMenu extends AbstractMenu {
     
     private TowerData buildTowerDataFromInputFields() {
         // Parse number input
-        
-        Integer health = null, buyPrice = null, sellPrice = null, size = null;
+        Number health = null, buyPrice = null, sellPrice = null, size = null;
         
         try {
-            health = Integer.parseInt(myHealthField.getCharacters().toString());
+            health = Double.parseDouble(myHealthField.getCharacters().toString());
             buyPrice = Integer.parseInt(myBuyPriceField.getCharacters().toString());
             sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
             size = Integer.parseInt(mySizeField.getCharacters().toString());
         } catch (Exception e) {
+            this.showError(e.getMessage());
+            System.out.println("Number parsing.");
             return null;
         }
         
         if (!parseNumberInput(health,buyPrice,sellPrice,size)) {
             // If number parsing fails, show error and return
+            System.out.println("Bad numbers");
             this.showError(getResources().getString("BadIntInput"));
             return null;
         }
@@ -315,10 +323,12 @@ public class TowerMenu extends AbstractMenu {
                 CustomMenuItem custom = (CustomMenuItem) item;
                 CheckBox check = (CheckBox) custom.getContent();
                 if (check.isSelected()){
+                    System.out.println("Is Selected");
                         terrains.add(check.getText());
                 }
         }
         if (terrains.size() == 0){
+            System.out.println("No terrains.");
                 showError(getResources().getString("NoTerrainInput"));
                 return null;
         }
@@ -326,25 +336,27 @@ public class TowerMenu extends AbstractMenu {
         // Package Tower Data
         
         // Error check input
-        Integer[] nums = {health,buyPrice,sellPrice,size};
+        Number[] nums = {health,buyPrice,sellPrice,size};
         for (int i=0; i<nums.length; i++) {
             nums[i] = correctNullInteger(nums[i]); // make null Integers = -1
         }
         health = nums[0]; buyPrice = nums[1]; sellPrice = nums[2]; size = nums[3];
         
-        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon, terrains);
+        TowerData tower = createTowerData(name, health.doubleValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon, terrains);
         if (tower == null) {
+            System.out.println("createTowerData Error.");
             return null;
         }
+        System.out.println("Not null");
         return tower;
     }
     
     /**
      * Parses numbers and returns false if failed or numbers are null.
      */
-    private boolean parseNumberInput(Integer health, Integer buyPrice, Integer sellPrice, Integer size) {
+    private boolean parseNumberInput(Number health, Number buyPrice, Number sellPrice, Number size) {
         try {
-            health = Integer.parseInt(myHealthField.getCharacters().toString());
+            health = Double.parseDouble(myHealthField.getCharacters().toString());
             buyPrice = Integer.parseInt(myBuyPriceField.getCharacters().toString());
             sellPrice = Integer.parseInt(mySellPriceField.getCharacters().toString());
             size = Integer.parseInt(mySizeField.getCharacters().toString());
@@ -360,11 +372,11 @@ public class TowerMenu extends AbstractMenu {
      * @param value
      * @return value, or -1 if value is null
      */
-    private int correctNullInteger(Integer value) {
+    private int correctNullInteger(Number value) {
         return value == null ? -1 : value.intValue();
     }
     
-    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon, List<String> terrains) {
+    private TowerData createTowerData(String name, double health, int buyPrice, int sellPrice, int size, String imagePath, String weapon, List<String> terrains) {
       TowerData towerDat = new TowerData();
       try {
           towerDat.setName(name);
@@ -376,7 +388,7 @@ public class TowerMenu extends AbstractMenu {
           towerDat.setWeaponName(weapon);
           towerDat.setTraversableTerrain(terrains);
       } catch (Exception e) {
-          this.showError(e.getMessage());
+          this.showError("Could not create Tower Data");
           return null;
       }
       return towerDat;
