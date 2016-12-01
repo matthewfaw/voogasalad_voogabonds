@@ -68,7 +68,7 @@ public class MapGrid extends Node{
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
 				//sprites.add(source);
 				//TODO: move this outside of this method--into the update method
-    			MoveableComponentView source = new MoveableComponentView();
+				MoveableComponentView source = new MoveableComponentView();
 				source.setImage(db.getImage());
 				source.setX(closestRectangle.getX());
 				source.setY(closestRectangle.getY());
