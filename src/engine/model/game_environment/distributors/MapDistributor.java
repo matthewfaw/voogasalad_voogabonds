@@ -30,6 +30,7 @@ public class MapDistributor implements IDistributor {
 	private MapMediator myMapMediator;
 	private EntityFactory myEntityFactory;
 	private MachineFactory myAnarchosyndacalistCommune;
+	private ResourceStore myResourceStore;
 	private Router myRouter;
 	
 	public MapDistributor(MapMediator aMapMediator,
@@ -43,9 +44,10 @@ public class MapDistributor implements IDistributor {
 		myRouter = aRouter;
 		myMapMediator = aMapMediator;
 		myEntityFactory = new EntityFactory();
+		myResourceStore = aTowerDataStore;
 		myAnarchosyndacalistCommune = new MachineFactory(
 				aTimelineController,
-				aTowerDataStore,
+				myResourceStore,
 				aEnemyDataStore,
 				aWeaponDataStore,
 				aProjectileDataStore,
@@ -58,6 +60,8 @@ public class MapDistributor implements IDistributor {
 		Tower tower = myAnarchosyndacalistCommune.newTower(aTowerName, aPlayerController.getActivePlayer(), aLocation);
 		if (myMapMediator.attemptToPlaceEntity(aLocation, tower)) {
 			myRouter.distributeViewableComponent(tower);
+			int price = myResourceStore.getTowerPrice(tower.getName());
+			aPlayerController.getActivePlayer().updateAvailableMoney(-price);
 		}
 //		return true;
 	}
