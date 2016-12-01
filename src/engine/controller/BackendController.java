@@ -53,7 +53,6 @@ public class BackendController {
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
 	private DataStore<EnemyData> myEnemyDataStore;
-	private DataStore<TowerData> myTowerDataStore;
 	private PlayerData myPlayerData;
 	
 	//Controllers to manage events
@@ -86,9 +85,9 @@ public class BackendController {
 	 * @param aLocation
 	 * @return true if it is successfully placed, false otherwise
 	 */
-	public boolean attemptToPlaceTower(String aTowerName, Point aLocation)
+	public void attemptToPlaceTower(String aTowerName, Point aLocation)
 	{
-		return myMapDistributor.distribute(aTowerName, myPlayerController, aLocation);
+		myMapDistributor.distribute(aTowerName, myPlayerController, aLocation);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -136,11 +135,12 @@ public class BackendController {
 		//distribute to backend
 		myMapDistributor = new MapDistributor(
 				mapMediator,
-				myTowerDataStore,
+				myResourceStore,
 				myEnemyDataStore,
 				myWeaponDataStore,
 				myProjectileDataStore,
-				myTimelineController
+				myTimelineController,
+				myRouter
 				);
 		
 		//distribute to frontend

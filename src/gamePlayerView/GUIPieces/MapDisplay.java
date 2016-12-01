@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.model.machine.IViewableMachine;
+import engine.IObservable;
 import engine.IObserver;
+import engine.IViewable;
 import engine.controller.ApplicationController;
 import engine.controller.timeline.TimelineController;
 import javafx.animation.Animation;
@@ -47,6 +49,11 @@ public class MapDisplay implements IObserver<TimelineController> {
         myPane = new Pane();
         init();
         isPlaying = false;
+    }
+    
+    public void giveViewableComponent(IObservable<IViewable> aObservable)
+    {
+    	background.giveViewableComponent(aObservable);
     }
     
     public void setMap(MapData aMapData){

@@ -95,7 +95,7 @@ public class ApplicationController {
 	
 	public void onTowerDropped(String aTowerName, Point aDropLocation)
 	{
-		boolean towerPlaced = myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
+		myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
 	}
 	
 	/*

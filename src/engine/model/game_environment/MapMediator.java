@@ -61,7 +61,7 @@ public class MapMediator {
 		// TODO Auto-generated method stub
 	}
 
-	public boolean attemptToPlaceEntity(Point aLocation, IPhysical aPhysicalComponent)
+	public boolean attemptToPlaceEntity(Point aLocation, Machine aPhysicalComponent)
 	{
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(aLocation);
