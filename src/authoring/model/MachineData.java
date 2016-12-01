@@ -66,11 +66,11 @@ abstract public class MachineData implements IReadableData {
 	public double getMaxHealth(){
 		return myMaxHealth;
 	}
-	public void setMaxHealth(double maxHealth){
-		if (maxHealth < 0){
+	public void setMaxHealth(Number maxHealth){
+		if (maxHealth.doubleValue() < 0){
 			throw new IllegalArgumentException(ResouceAccess.getError(NEGATIVE_HEALTH_ERROR));
 		}
-		myMaxHealth = maxHealth;
+		myMaxHealth = maxHealth.doubleValue();
 	}
 	
 	public String getImagePath(){
@@ -83,24 +83,24 @@ abstract public class MachineData implements IReadableData {
 	public double getCollisionRadius(){
 		return myCollisionRadius;
 	}
-	public void setCollisionRadius(double collisionRadius) throws Exception{
-		if (collisionRadius < 0){
+	public void setCollisionRadius(Number collisionRadius) throws Exception{
+		if (collisionRadius.doubleValue() < 0){
 			throw new IllegalArgumentException(ResouceAccess.getError(NEGATIVE_RADIUS_ERROR));
 		}
-		myCollisionRadius = collisionRadius;
+		myCollisionRadius = collisionRadius.doubleValue();
 	}
 	
 	public double getMoveSpeed(){
 		return myMoveSpeed;
 	}
-	public void setMoveSpeed(double speed){
-		myMoveSpeed = speed;
+	public void setMoveSpeed(Number speed){
+		myMoveSpeed = speed.doubleValue();
 	}
 	public double getTurnSpeed(){
 		return myTurnSpeed;
 	}
-	public void setTurnSpeed(double speed){
-		myTurnSpeed = speed;
+	public void setTurnSpeed(Number speed){
+		myTurnSpeed = speed.doubleValue();
 	}
 	
 	public void setTerrainList(List<String> terrainList){

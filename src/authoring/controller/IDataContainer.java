@@ -15,7 +15,7 @@ public interface IDataContainer {
     /**
      * Creates new game object (adds it to this' observableDataMap)
      */
-    public void createObjectData(IReadableData data);
+    public void createObjectData(IReadableData data) throws Exception;
     
     /**
      * Edits the game object defined by input data (edits the reference in observableDataMap)
