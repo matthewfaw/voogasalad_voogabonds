@@ -1,8 +1,8 @@
 package authoring.view.input_menus;
 
 import java.util.ResourceBundle;
-import authoring.controller.TowerDataController;
-import authoring.controller.WeaponDataController;
+import authoring.controller.TowerDataContainer;
+import authoring.controller.WeaponDataContainer;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.view.side_panel.TowerTab;

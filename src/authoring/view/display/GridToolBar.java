@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -56,9 +56,9 @@ public class GridToolBar {
 			FXCollections.observableArrayList (
 					"Add Terrain..."
 					);
-	private MapDataController controller;
+	private MapDataContainer controller;
 	
-	public GridToolBar(VBox box, Scene sc, MapDataController controller) {
+	public GridToolBar(VBox box, Scene sc, MapDataContainer controller) {
 		setUpScreenResolution();
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");

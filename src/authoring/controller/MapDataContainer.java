@@ -23,12 +23,13 @@ import com.sun.prism.paint.Color;
  * @author philipfoo
  *
  */
-public class MapDataController extends Controller implements IReadableData, IObservable<Controller>{
+public class MapDataContainer extends Container implements IReadableData, IObservable<Container>{
 	private String myName;
 	private int numXCells;
 	private int numYCells;
 	private int cellSize;
-	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
+	
+	private transient ArrayList<IObserver<Container>> myListeners = new ArrayList<IObserver<Container>>();
 	
 	/**
 	 * Each group of spawn points will have a name. A map is necessary because
@@ -54,7 +55,7 @@ public class MapDataController extends Controller implements IReadableData, IObs
 	 */
 	private HashMap<String, String> validTerrain;
 	
-	public MapDataController(){
+	public MapDataContainer(){
 		this.spawnPoints = new HashMap<String, ArrayList<Point>>();
 		this.sinkPoints = new HashSet<Point>();
 		this.terrainList = new HashSet<TerrainData>();
@@ -214,16 +215,16 @@ public class MapDataController extends Controller implements IReadableData, IObs
 	 * IObservable functions
 	 *
 	 */
-	public void attach(IObserver<Controller> listener){
+	public void attach(IObserver<Container> listener){
 		myListeners.add(listener);
 	}
 	
-	public void detach(IObserver<Controller> listener){
+	public void detach(IObserver<Container> listener){
 		myListeners.remove(listener);
 	}
 	
 	public void notifyObservers(){
-		for (IObserver<Controller> listener: myListeners){
+		for (IObserver<Container> listener: myListeners){
 			listener.update(this);
 		}
 	}
