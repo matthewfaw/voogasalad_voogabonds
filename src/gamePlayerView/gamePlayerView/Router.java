@@ -82,6 +82,7 @@ public class Router {
 	public void distributeViewableComponent(IObservable<IViewable> aComponent)
 	{
 		//TODO: give all viewable components the new component
+		myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
 	}
 	
 	/**

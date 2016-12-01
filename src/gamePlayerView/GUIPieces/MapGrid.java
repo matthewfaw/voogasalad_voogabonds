@@ -12,7 +12,11 @@ import com.sun.javafx.sg.prism.NGNode;
 import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
+import engine.IObservable;
+import engine.IObserver;
+import engine.IViewable;
 import engine.controller.ApplicationController;
+import engine.model.components.MoveableComponent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -25,7 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import utility.Point;
 
-public class MapGrid extends Node{
+public class MapGrid extends Node {
 	private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
@@ -66,22 +70,20 @@ public class MapGrid extends Node{
 				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
 //    			}
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
-				//sprites.add(source);
-				//TODO: move this outside of this method--into the update method
-				MoveableComponentView source = new MoveableComponentView();
-				source.setImage(db.getImage());
-				source.setX(closestRectangle.getX());
-				source.setY(closestRectangle.getY());
-				source.setFitHeight(closestRectangle.getHeight());
-				source.setFitWidth(closestRectangle.getWidth());
-				System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
-				myPane.getChildren().add(source);
     			event.consume();
     		}
     	});
 
     	actualGrid[row][col] = temp;
     	return actualGrid[row][col];
+    }
+    
+    public void giveViewableComponent(IObservable<IViewable> aObservable)
+    {
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable);
+    	aObservable.attach(aComponent);
+    	sprites.add(aComponent);
+    	myPane.getChildren().add(aComponent);
     }
     
     private void loadTerrainData(Rectangle temp, int row, int col, MapData aMapData){
@@ -161,6 +163,7 @@ public class MapGrid extends Node{
         // TODO Auto-generated method stub
         return null;
     }
+
 
     
 }
