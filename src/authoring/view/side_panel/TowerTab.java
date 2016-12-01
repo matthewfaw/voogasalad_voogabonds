@@ -93,7 +93,7 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
         TowerData defaultTower = new TowerData();
         try {
             defaultTower.setName(getResources().getString("DefaultTowerName"));
-            defaultTower.setMaxHealth(Integer.parseInt(getResources().getString("DefaultBuyPrice")));
+            defaultTower.setMaxHealth(Double.parseDouble(getResources().getString("DefaultBuyPrice")));
             defaultTower.setBuyPrice(Integer.parseInt(getResources().getString("DefaultBuyPrice")));
             defaultTower.setSellPrice(Integer.parseInt(getResources().getString("DefaultSellPrice")));
             defaultTower.setImagePath(getResources().getString("DefaultImage"));
@@ -107,7 +107,11 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     @Override
     public void addObject (String name, IReadableData data) {
         this.addTower(name);
-        getController().createObjectData(data);
+        try {
+            getController().createObjectData(data);
+        } catch (Exception e) {
+            getMenu().showError(e.getMessage());
+        }
     }
 
     @Override
