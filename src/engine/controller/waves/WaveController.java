@@ -29,6 +29,7 @@ public class WaveController implements IObserver<TimelineController>{
 	public WaveController(MapDistributor aMapDistributor/*, DummyWaveOperationData aWaveOperationData*/, DataStore<EnemyData> aEnemyDataStore, Player p)
 	{
 		myEnemy = p;
+		myEnemyDataStore = aEnemyDataStore;
 		myMapDistributor = aMapDistributor;
 		//myActiveWaveManager = new ActiveWaveManager(aWaveOperationData, aEnemyDataStore);
 	}

@@ -10,9 +10,9 @@ import utility.Point;
 public class Enemy extends Machine {
 	private int myBounty;
 	
-	public Enemy(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, EnemyData data,
+	public Enemy(WeaponFactory armory, IModifiablePlayer owner, EnemyData data,
 			Point initialPosition) {
-		super(time, armory, owner, data, initialPosition);
+		super(armory, owner, data, initialPosition);
 		myBounty = data.getKillReward();
 	}
 	

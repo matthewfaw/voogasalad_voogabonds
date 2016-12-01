@@ -74,7 +74,7 @@ public class ApplicationController {
 	}
 
 	public void onPauseButtonPressed() {
-		//AnimationController.pause()
+		myBackendController.pauseTimeline();
 	}
 
 	public void onFastButtonPressed() {

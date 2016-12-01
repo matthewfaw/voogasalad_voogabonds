@@ -24,11 +24,13 @@ public class TimelineController implements IObservable<TimelineController> {
 
 	public TimelineController()
 	{
-		myTimeline = new Timeline();
 		myObservers = new ArrayList<IObserver<TimelineController>>();
 		
+		myTimeline = new Timeline();
+		myTimeline.setCycleCount(Timeline.INDEFINITE);
 		//TODO: maybe change this to another location?
-		myTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers()));
+		KeyFrame frame = new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers());
+		myTimeline.getKeyFrames().add(frame);
 	}
 	
 	/**
@@ -75,6 +77,13 @@ public class TimelineController implements IObservable<TimelineController> {
 
 	@Override
 	public void notifyObservers() {
-		myObservers.forEach(observer -> observer.update(this));
+//		myObservers.forEach(observer -> observer.update(this));
+//		for (IObserver<TimelineController> observer: myObservers) {
+//			observer.update(this);
+//		}
+		myObservers.get(0).update(this);
+		if (myObservers.get(1) != null) {
+			myObservers.get(1).update(this);
+		}
 	}
 }

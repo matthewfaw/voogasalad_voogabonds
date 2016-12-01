@@ -17,6 +17,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
 import engine.model.machine.tower.Tower;
+import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
@@ -98,8 +99,12 @@ public class MapDistributor implements IDistributor {
 
 	@Deprecated
 	public void distribute(EnemyData random, TimelineController aChangedObject, Player p) {
-		Machine toAdd = myAnarchosyndacalistCommune.newEnemy(random.getName(), p, new Point(0, 0));
+		Point loc = new Point(1,1);
+		Machine toAdd = myAnarchosyndacalistCommune.newEnemy(random.getName(), p, loc);
 		
+		if (myMapMediator.attemptToPlaceEntity(loc, toAdd)) {
+			myRouter.distributeViewableComponent(toAdd);
+		}
 	}
 
 }

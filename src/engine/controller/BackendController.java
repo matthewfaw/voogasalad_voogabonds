@@ -72,10 +72,9 @@ public class BackendController {
 		myPlayerController = new PlayerController(myRouter);
 		
 		constructStaticBackendObjects();
-		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
-		
+		constructDynamicBackendObjects();
 	}
 	
 	//TODO
@@ -226,6 +225,10 @@ public class BackendController {
 
 	public void startTimeLine() {
 		myTimelineController.start();
+	}
+	public void pauseTimeline()
+	{
+		myTimelineController.pause();
 	}
 	
 	/*

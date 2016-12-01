@@ -38,15 +38,21 @@ public class MachineFactory {
 	}
 	
 	public Tower newTower(String name, IModifiablePlayer owner, Point intitialPosition) {
-		if (myTowers.hasKey(name))
-			return new Tower(myTime, myArmory, owner, myTowers.getData(name), intitialPosition);
+		if (myTowers.hasKey(name)) {
+			Tower tower = new Tower(myArmory, owner, myTowers.getData(name), intitialPosition);
+			myTime.attach(tower);
+			return tower;
+		}
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_TOWER_ERROR) + name);
 	}
 	
 	public Enemy newEnemy(String name, IModifiablePlayer owner, Point intitialPosition) {
-		if (myEnemies.hasKey(name))
-			return new Enemy(myTime, myArmory, owner, myEnemies.getData(name), intitialPosition);
+		if (myEnemies.hasKey(name)) {
+			Enemy enemy = new Enemy(myArmory, owner, myEnemies.getData(name), intitialPosition);
+			myTime.attach(enemy);
+			return enemy;
+		}
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_ENEMY_ERROR) + name);
 	}
