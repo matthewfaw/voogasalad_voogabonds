@@ -3,6 +3,7 @@ package gamePlayerView.gamePlayerView;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.model.map.MapData;
+import engine.controller.ApplicationController;
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.MapDisplay;
@@ -38,14 +39,16 @@ public class GamePlayerScene {
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
+	private ApplicationController myApplicationController;
 	//private List<MoveableComponentView> mySprites;
 	
-	public GamePlayerScene(Stage aStage) throws Exception{
+	public GamePlayerScene(Stage aStage,ApplicationController applicationController) throws Exception{
 		//myStage=stage;
 		myCash = new ArrayList<ICashAcceptor>();
 		myLives = new ArrayList<ILivesAcceptor>();
 		myWaves = new ArrayList<IWavesAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
+		myApplicationController=applicationController;
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
@@ -83,7 +86,7 @@ public class GamePlayerScene {
 	public BorderPane setScreen() throws Exception{
 	    myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
-		myStatisticsRow = new StatisticsRow();
+		myStatisticsRow = new StatisticsRow(myApplicationController);
 		myCash.add(myStatisticsRow.getCash());
 		myLives.add(myStatisticsRow.getLives());
 		myResources.add(myTowerColumn);

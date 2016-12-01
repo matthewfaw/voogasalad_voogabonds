@@ -50,7 +50,7 @@ public class ApplicationController {
 	 */
 	private GamePlayerScene constructGUI(Stage aStage) throws Exception
 	{
-		GamePlayerScene scene = new GamePlayerScene(aStage);
+		GamePlayerScene scene = new GamePlayerScene(aStage,this);
 		myAnimationTimelineController = new TimelineController();
 		myAnimationTimelineController.attach(scene.getMapDisplay());
 		return scene;

@@ -22,13 +22,15 @@ public class StatisticsRow implements IGUIPiece {
 	private CashBox myCashBox;
 	private LivesBox myLivesBox;
 	private WavesBox myWavesBox;
+	private ApplicationController myApplicationController;
 	
-	public StatisticsRow(){
+	public StatisticsRow(ApplicationController applicationController){
 		myCashBox=new CashBox();
 		myLivesBox=new LivesBox();
 		myWavesBox =new WavesBox();
 		myStatisticsRow= buildHBox();
 		myStatisticsRow.setPrefHeight(110);
+		myApplicationController=applicationController;
 	}
 	
 	/**
@@ -47,18 +49,18 @@ public class StatisticsRow implements IGUIPiece {
 	    InfoBoxes.getChildren().addAll(myCashBox.getView(),myLivesBox.getView(),myWavesBox.getView());
 	    
 	    Button playButton=makeButton("PLAY");
-	    playButton.setOnAction(e->ApplicationController.onPlayButtonPressed());
+	    playButton.setOnAction(e->myApplicationController.onPlayButtonPressed());
 	    Button pauseButton=makeButton("PAUSE");
-	    pauseButton.setOnAction(e->ApplicationController.onPauseButtonPressed());
+	    pauseButton.setOnAction(e->myApplicationController.onPauseButtonPressed());
 	    Button fastButton=makeButton("FAST FORWARD");
-	    fastButton.setOnAction(e->ApplicationController.onFastButtonPressed());
+	    fastButton.setOnAction(e->myApplicationController.onFastButtonPressed());
 	    Button slowButton=makeButton("SLOW");
-	    slowButton.setOnAction(e->ApplicationController.onSlowButtonPressed());
+	    slowButton.setOnAction(e->myApplicationController.onSlowButtonPressed());
 	    //Will probably delete later
 	    Button upgradeButton=makeButton("UPGRADE");
-	    upgradeButton.setOnAction(e->ApplicationController.onUpgradeButtonPressed());
+	    upgradeButton.setOnAction(e->myApplicationController.onUpgradeButtonPressed());
 	    Button sellButton=makeButton("SELL");
-	    sellButton.setOnAction(e->ApplicationController.onSellButtonPressed());
+	    sellButton.setOnAction(e->myApplicationController.onSellButtonPressed());
 	    
 	    VBox PlayPauseBox= makeButtonSet(playButton,pauseButton);
 	    VBox TowerOptionBox= makeButtonSet(upgradeButton,sellButton);
