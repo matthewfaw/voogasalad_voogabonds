@@ -12,7 +12,7 @@ import java.util.List;
 
 import javafx.collections.ObservableMap;
 import authoring.controller.Router;
-import authoring.controller.TowerDataController;
+import authoring.controller.TowerDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
