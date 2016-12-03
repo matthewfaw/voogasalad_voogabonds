@@ -24,6 +24,9 @@ public class TerrainMap {
 		myMapFactory = new TerrainGridFactory();
 		myMap = myMapFactory.constructTerrainMap(aTerrainMapData);
 		
+		myTerrainWidth = aTerrainMapData.getCellSize();
+		myTerrainHeight = aTerrainMapData.getCellSize();
+		
 		//TODO: Change this to be constructed in a factory, perhaps
 		myNeighborStrategy = new AdjacentNeighborStrategy(this);
 	}
@@ -47,9 +50,16 @@ public class TerrainMap {
 	public boolean hasTerrain(List<String> list, Point aLocation) {
 		Terrain terrain = getTerrain(aLocation);
 		
-		return list.stream()
-				.map(t -> terrain.getTerrainType().equals(t))
-				.reduce(true, (a, b) -> a && b);
+		for (String terrainName: list) {
+			if (terrain.getTerrainType().equals(terrainName)) {
+				return true;
+			}
+		}
+		return false;
+		
+//		return list.stream()
+//				.map(t -> terrain.getTerrainType().equals(t))
+//				.reduce(true, (a, b) -> a && b);
 	}
 	
 	/**

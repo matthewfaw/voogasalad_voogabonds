@@ -10,6 +10,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.machine.enemy.Enemy;
 import engine.model.machine.tower.Tower;
 import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.resourcestore.ResourceStore;
 import engine.model.weapons.WeaponFactory;
 import utility.Point;
 import utility.ResouceAccess;
@@ -25,27 +26,33 @@ public class MachineFactory {
 	
 	public MachineFactory(
 			TimelineController time,
-			DataStore<TowerData> towers,
+			ResourceStore aResourceStore,
 			DataStore<EnemyData> enemies,
 			DataStore<WeaponData> weapons,
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
 		myTime = time;
-		myTowers = towers;
+		myTowers = new DataStore<TowerData>(aResourceStore.getAvailableTowers());
 		myEnemies = enemies;
 		myArmory = new WeaponFactory(weapons, projectiles, time, map);
 	}
 	
 	public Tower newTower(String name, IModifiablePlayer owner, Point intitialPosition) {
-		if (myTowers.hasKey(name))
-			return new Tower(myTime, myArmory, owner, myTowers.getData(name), intitialPosition);
+		if (myTowers.hasKey(name)) {
+			Tower tower = new Tower(myArmory, owner, myTowers.getData(name), intitialPosition);
+			myTime.attach(tower);
+			return tower;
+		}
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_TOWER_ERROR) + name);
 	}
 	
 	public Enemy newEnemy(String name, IModifiablePlayer owner, Point intitialPosition) {
-		if (myEnemies.hasKey(name))
-			return new Enemy(myTime, myArmory, owner, myEnemies.getData(name), intitialPosition);
+		if (myEnemies.hasKey(name)) {
+			Enemy enemy = new Enemy(myArmory, owner, myEnemies.getData(name), intitialPosition);
+			myTime.attach(enemy);
+			return enemy;
+		}
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_ENEMY_ERROR) + name);
 	}

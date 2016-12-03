@@ -1,5 +1,6 @@
 package engine.model.machine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.MachineData;
@@ -28,6 +29,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	private WeaponFactory myArmory;
 	
 	private String myName;
+	private String myImagePath;
 	private IWeapon myWeapon;
 	private Health myHealth;
 	
@@ -41,11 +43,14 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	List<ISystem> mySystems;
 	
-	public Machine (TimelineController time, WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
+	public Machine (WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
+		myObservers = new ArrayList<IObserver<IViewable>>();
+
 		myModifiablePlayer = owner;
 		myArmory = armory;
 		
 		myName = data.getName();
+		myImagePath = data.getImagePath();
 		myWeapon = myArmory.newWeapon(data.getWeaponName(), this);
 		myHealth = new Health(data.getMaxHealth());
 		
@@ -56,8 +61,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		myMoveSpeed = data.getMoveSpeed();
 		myHeading = 0;
 		myPosition = initialPosition;
-		
-		time.attach(this);
 	}
 	
 	public Machine(String name, int maxHealth) {
@@ -77,7 +80,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void update(TimelineController time) {
 		move();
-		myWeapon.fire(myHeading, myPosition);
+//		myWeapon.fire(myHeading, myPosition);
 	}
 	
 	@Deprecated //TODO
@@ -85,12 +88,12 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
 		myHeading = nextMove.getKey();
+		notifyObservers();
 	}
 	
 	@Override
-	@Deprecated //TODO
 	public String getImagePath() {
-		return null;
+		return myImagePath;
 	}
 	@Override
 	public double getHeading() {
@@ -172,6 +175,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public void attach(IObserver<IViewable> aObserver)
 	{
 		myObservers.add(aObserver);
+		notifyObservers();
 	}
 	@Override
 	public void detach(IObserver<IViewable> aObserver)

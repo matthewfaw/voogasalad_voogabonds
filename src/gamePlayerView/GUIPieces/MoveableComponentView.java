@@ -5,26 +5,27 @@ import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.javafx.jmx.MXNodeAlgorithm;
 import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
+
+import engine.IObservable;
+import engine.IObserver;
+import engine.IViewable;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class MoveableComponentView extends ImageView{
-    private double myX;
-    private double myY;
-    private double myHeight;
-    private double myWidth;
-    private ImageView myImage;
-    
-    
-    
-    public MoveableComponentView(){
-        myX = 0;
-        myY = 0;
-        myHeight = 25;
-        myWidth = 25;
-        myImage = new ImageView();
+public class MoveableComponentView extends ImageView implements IObserver<IViewable> {
+
+    public MoveableComponentView(IObservable<IViewable> aObservable){
     }
 
-    
+	@Override
+	public void update(IViewable aChangedObject) {
+		String imagePath = aChangedObject.getImagePath();
+		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
+		this.setImage(image);
+		this.setX(aChangedObject.getPosition().getY());
+		this.setY(aChangedObject.getPosition().getX());
+		this.setFitWidth(aChangedObject.getSize());
+		this.setFitHeight(aChangedObject.getSize());
+	}
 }
