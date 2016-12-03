@@ -2,9 +2,11 @@ package engine.model.entities;
 
 import java.util.ArrayList;
 
+import engine.IObserver;
 import engine.model.components.IComponent;
 
 public class ConcreteEntity implements IEntity {
+	private ArrayList<IObserver<IEntity>> myObservers;
 	private ArrayList<IComponent> myComponents;
 	
 	/**
@@ -15,18 +17,39 @@ public class ConcreteEntity implements IEntity {
 	ConcreteEntity()
 	{
 		myComponents = new ArrayList<IComponent>();
+		myObservers = new ArrayList<IObserver<IEntity>>();
 	}
 
 	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return hashCode();
 	}
 
 	@Override
 	public void addComponent(IComponent aComponent) {
-		// TODO Auto-generated method stub
+		myComponents.add(aComponent);
+	}
+
+	@Override
+	public void delete() {
+		myComponents.removeAll(myComponents);
 		
+	}
+
+	//********************IObservable interface***********//
+	@Override
+	public void attach(IObserver<IEntity> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IEntity> aObserver) {
+		myObservers.remove(myObservers);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.stream().forEach(o -> o.update(this));
 	}
 
 }
