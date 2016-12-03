@@ -16,7 +16,8 @@ import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.MachineFactory;
 import engine.model.machine.tower.Tower;
-import engine.model.playerinfo.Player;
+import engine.model.resourcestore.ResourceStore;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 
 /**
@@ -29,20 +30,24 @@ public class MapDistributor implements IDistributor {
 	private MapMediator myMapMediator;
 	private EntityFactory myEntityFactory;
 	private MachineFactory myAnarchosyndacalistCommune;
+	private ResourceStore myResourceStore;
+	private Router myRouter;
 	
 	public MapDistributor(MapMediator aMapMediator,
-			DataStore<TowerData> aTowerDataStore,
+			ResourceStore aTowerDataStore,
 			DataStore<EnemyData> aEnemyDataStore,
 			DataStore<WeaponData> aWeaponDataStore,
 			DataStore<ProjectileData> aProjectileDataStore,
-			TimelineController aTimelineController
-			
+			TimelineController aTimelineController,
+			Router aRouter
 			) {
+		myRouter = aRouter;
 		myMapMediator = aMapMediator;
 		myEntityFactory = new EntityFactory();
+		myResourceStore = aTowerDataStore;
 		myAnarchosyndacalistCommune = new MachineFactory(
 				aTimelineController,
-				aTowerDataStore,
+				myResourceStore,
 				aEnemyDataStore,
 				aWeaponDataStore,
 				aProjectileDataStore,
@@ -50,11 +55,15 @@ public class MapDistributor implements IDistributor {
 				);
 	}
 	
-	public boolean distribute(String aTowerName, PlayerController aPlayerController, Point aLocation)
+	public void distribute(String aTowerName, PlayerController aPlayerController, Point aLocation)
 	{
-//		Tower tower = myAnarchosyndacalistCommune.newTower(aTowerName, aPlayerController.getActivePlayer(), aLocation);
-//		return myMapMediator.attemptToPlaceEntity(aLocation, tower);
-		return true;
+		Tower tower = myAnarchosyndacalistCommune.newTower(aTowerName, aPlayerController.getActivePlayer(), aLocation);
+		if (myMapMediator.attemptToPlaceEntity(aLocation, tower)) {
+			myRouter.distributeViewableComponent(tower);
+			int price = myResourceStore.getTowerPrice(tower.getName());
+			aPlayerController.getActivePlayer().updateAvailableMoney(-price);
+		}
+//		return true;
 	}
 
 	/**

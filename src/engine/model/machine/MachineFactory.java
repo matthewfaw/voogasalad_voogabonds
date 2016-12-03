@@ -10,6 +10,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.machine.enemy.Enemy;
 import engine.model.machine.tower.Tower;
 import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.resourcestore.ResourceStore;
 import engine.model.weapons.WeaponFactory;
 import utility.Point;
 import utility.ResouceAccess;
@@ -25,13 +26,13 @@ public class MachineFactory {
 	
 	public MachineFactory(
 			TimelineController time,
-			DataStore<TowerData> towers,
+			ResourceStore aResourceStore,
 			DataStore<EnemyData> enemies,
 			DataStore<WeaponData> weapons,
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
 		myTime = time;
-		myTowers = towers;
+		myTowers = new DataStore<TowerData>(aResourceStore.getAvailableTowers());
 		myEnemies = enemies;
 		myArmory = new WeaponFactory(weapons, projectiles, time, map);
 	}

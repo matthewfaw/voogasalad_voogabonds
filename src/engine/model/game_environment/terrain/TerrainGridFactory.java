@@ -1,6 +1,7 @@
 package engine.model.game_environment.terrain;
 
 import authoring.model.map.MapData;
+import authoring.model.map.TerrainData;
 
 public class TerrainGridFactory {
 	public TerrainGridFactory()
@@ -11,11 +12,12 @@ public class TerrainGridFactory {
 	@Deprecated
 	public Terrain[][] constructTerrainMap(MapData aTerrainMapData)
 	{
-		Terrain[][] terrain = new Terrain[2][2];
-		terrain[0][0] = new Terrain(0,0,"grass");
-		terrain[0][1] = new Terrain(0,1,"grass");
-		terrain[1][0] = new Terrain(1,0,"grass");
-		terrain[1][1] = new Terrain(1,1,"grass");
+		Terrain[][] terrain = new Terrain[aTerrainMapData.getNumXCells()][aTerrainMapData.getNumXCells()];
+		for (TerrainData data: aTerrainMapData.getTerrainList()) {
+			int xLoc = (int) data.getLoc().getX();
+			int yLoc = (int) data.getLoc().getY();
+			terrain[xLoc][yLoc] = new Terrain(xLoc,yLoc,data.getName());
+		}
 		return terrain;
 	}
 }
