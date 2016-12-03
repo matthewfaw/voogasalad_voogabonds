@@ -104,4 +104,5 @@ public class PhysicalComponent implements IComponent, IPhysical {
 	public IModifiablePlayer getOwner() {
 		return myOwner;
 	}
+
 }

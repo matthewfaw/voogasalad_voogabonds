@@ -16,6 +16,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 	private PhysicalComponent myPhysical;
 	
 	private boolean myDestroyOnCollision;
+	private ICollidable myCollidedWith;
 	
 
 	//*******************IObservable interface***********//
@@ -76,11 +77,17 @@ public class CollidableComponent implements IComponent, ICollidable {
 
 	//*******************ICollidable interface***********//
 	@Override
-	public void collideInto(ICollidable movedCollidable) {
+	public void collideInto(ICollidable unmovedCollidable) {
+		myCollidedWith = unmovedCollidable;
 		myObservers.forEach(o -> o.update(this));
 		if (myDestroyOnCollision) {
 			getEntity().delete();
 		}
+		myCollidedWith = null;
+	}
+	
+	public ICollidable getCollidedWith() {
+		return myCollidedWith;
 	}
 	
 	/*

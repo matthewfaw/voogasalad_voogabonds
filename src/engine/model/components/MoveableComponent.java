@@ -7,6 +7,7 @@ import engine.model.entities.IEntity;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
+import engine.model.strategies.IPhysical;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -22,7 +23,7 @@ public class MoveableComponent implements IComponent, IMovable {
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
-	private Point myGoalPoint;
+	private IPhysical myGoal;
 	
 	private double myMaxDistance;
 	private double myMovedDistance;
@@ -57,7 +58,7 @@ public class MoveableComponent implements IComponent, IMovable {
 	//********************IMovable interface***********//
 	@Override
 	public Point getGoal() {
-		return myGoalPoint;
+		return myGoal.getPosition();
 	}
 
 	@Override
