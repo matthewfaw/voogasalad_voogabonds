@@ -75,6 +75,9 @@ public class TimelineController implements IObservable<TimelineController> {
 
 	@Override
 	public void notifyObservers() {
-		myObservers.forEach(observer -> observer.update(this));
+		//IMPORTANT: cannot write a foreach loop here because of JavaFX concurrency issues
+		for (int i=0; i<myObservers.size(); ++i) {
+			myObservers.get(i).update(this);
+		}
 	}
 }
