@@ -103,7 +103,7 @@ public class ApplicationController {
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
-//		appcont.constructMap();
+		appcont.constructMap();
 	}
 	*/
 	

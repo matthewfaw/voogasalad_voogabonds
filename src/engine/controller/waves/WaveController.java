@@ -25,12 +25,14 @@ public class WaveController implements IObserver<TimelineController>{
 	private ActiveWaveManager myActiveWaveManager;
 	private DataStore<EnemyData> myEnemyDataStore;
 	private Player myEnemy;
+	private int i;
 	
 	public WaveController(MapDistributor aMapDistributor/*, DummyWaveOperationData aWaveOperationData*/, DataStore<EnemyData> aEnemyDataStore, Player p)
 	{
 		myEnemy = p;
 		myEnemyDataStore = aEnemyDataStore;
 		myMapDistributor = aMapDistributor;
+		i = 1;
 		//myActiveWaveManager = new ActiveWaveManager(aWaveOperationData, aEnemyDataStore);
 	}
 
@@ -44,7 +46,10 @@ public class WaveController implements IObserver<TimelineController>{
 			//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
 			//TODO: Change to a better way?
 			//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
-		myMapDistributor.distribute(myEnemyDataStore.getRandom(), aChangedObject, myEnemy);
+		if (i==1) {
+			i = 0;
+			myMapDistributor.distribute(myEnemyDataStore.getRandom(), aChangedObject, myEnemy);
+		}
 		
 		//TODO: check if we should transition to the next wave
 	}
