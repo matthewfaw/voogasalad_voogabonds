@@ -19,11 +19,11 @@ public interface ISystem {
 	 * Adds aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void register(IRegisterable registerable);
+//	public void register(IRegisterable registerable);
 	
 	/**
 	 * Removes aComonent to be registered with the system
 	 * @param aComponent
 	 */
-	public void unregister(IRegisterable registerable);
+//	public void unregister(IRegisterable registerable);
 }
