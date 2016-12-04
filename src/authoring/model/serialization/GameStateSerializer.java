@@ -50,8 +50,11 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("TowerData", gameName);
-			ObservableMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
+			AbstractMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
+			System.out.println(td);
 			for (String tdName : td.keySet()){
+				System.out.println(tdName);
+				System.out.println(td.keySet());
 			ser.serializeToFile(td.get(tdName), gameName+"/"+"TowerData"+"/"+tdName);
 			}
 		}catch(Exception e1){
