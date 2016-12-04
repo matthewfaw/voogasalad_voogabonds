@@ -58,7 +58,7 @@ public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObs
 			if (intersects(movedObservable, observable)) {
 				/* notify component and let component handle which 
 				systems to talk to in order to handle collision properly*/
-				
+				movedObservable.collideInto(observable);
 			}
 		}
 	}
