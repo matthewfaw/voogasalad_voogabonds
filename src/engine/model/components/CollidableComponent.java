@@ -18,6 +18,8 @@ public class CollidableComponent implements IComponent, ICollidable {
 	private boolean myDestroyOnCollision;
 	private ICollidable myCollidedWith;
 	
+//	private HealthSystem myHealthSystem;
+//	private MoneySystem myMoneySystem;
 
 	//*******************IObservable interface***********//
 	@Override
@@ -78,9 +80,20 @@ public class CollidableComponent implements IComponent, ICollidable {
 	//*******************ICollidable interface***********//
 	@Override
 	public void collideInto(ICollidable unmovedCollidable) {
+		/*
+		 * Health System needs to know:
+		 * * how much health to change
+		 * * which entity's health to change 
+		 */
+		// healthSystem.changeHealth(this, deltaHealth);
 		myCollidedWith = unmovedCollidable;
 		myObservers.forEach(o -> o.update(this));
 		if (myDestroyOnCollision) {
+			/* Money system needs to know: 
+			 * * who to give money to
+			 * * how much money to give
+			 */
+			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
 			getEntity().delete();
 		}
 		myCollidedWith = null;
