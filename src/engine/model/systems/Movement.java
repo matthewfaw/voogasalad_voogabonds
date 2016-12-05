@@ -12,17 +12,17 @@ import engine.model.strategies.IMovable;
  */
 public class Movement implements ISystem {
 
-	@Override
-	public void register(IRegisterable collidable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unregister(IRegisterable collidable) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void register(IRegisterable collidable) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void unregister(IRegisterable collidable) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	
 
