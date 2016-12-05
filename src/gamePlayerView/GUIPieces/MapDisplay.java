@@ -5,6 +5,7 @@ import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.model.machine.IViewableMachine;
 import engine.IObserver;
+import engine.controller.ApplicationController;
 import engine.controller.timeline.TimelineController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -26,6 +27,7 @@ import javafx.util.Duration;
 
 public class MapDisplay implements IObserver<TimelineController> {
     
+	private ApplicationController myAppController;
     private Pane myRoot;
     private Pane myPane;
     private MapGrid background;
@@ -38,7 +40,8 @@ public class MapDisplay implements IObserver<TimelineController> {
 	//TODO: matthewfaw
     //Set up map from backend
     //register as observer of timeline
-    public MapDisplay() throws Exception{
+    public MapDisplay(ApplicationController aAppController) throws Exception{
+    	myAppController = aAppController;
         sprites = new ArrayList<MoveableComponentView>();
         myRoot = new Pane();
         myPane = new Pane();
@@ -47,7 +50,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     }
     
     public void setMap(MapData aMapData){
-        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize());
+        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
         	myPane.getChildren().add(background.fillCell((int)terrainData.getLoc().getX(), 

@@ -2,10 +2,12 @@ package engine.controller;
 
 import java.util.ResourceBundle;
 
+import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.stage.Stage;
+import utility.Point;
 
 /**
  * A main controller whose primary purpose is to
@@ -50,7 +52,7 @@ public class ApplicationController {
 	 */
 	private GamePlayerScene constructGUI(Stage aStage) throws Exception
 	{
-		GamePlayerScene scene = new GamePlayerScene(aStage,this);
+		GamePlayerScene scene = new GamePlayerScene(aStage, this);
 		myAnimationTimelineController = new TimelineController();
 		myAnimationTimelineController.attach(scene.getMapDisplay());
 		return scene;
@@ -89,6 +91,11 @@ public class ApplicationController {
 
 	public void onSellButtonPressed() {
 		//
+	}
+	
+	public void onTowerDropped(String aTowerName, Point aDropLocation)
+	{
+		boolean towerPlaced = myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
 	}
 	
 	/*

@@ -1,10 +1,12 @@
 
 package gamePlayerView.GUIPieces;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import authoring.model.TowerData;
 import engine.IObservable;
@@ -27,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -54,6 +57,16 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	
 	public TowerColumn(){
 		myTowerColumn= buildVBox();
+	}
+	
+	public TowerData getTowerData(String aTowerName)
+	{
+		for (TowerData data: towerSettings.values()) {
+			if (data.getName().equals(aTowerName)) {
+				return data;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -134,6 +147,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	 */
 	private void PopulateTowerDataDisplay(TowerData tower,TextArea towerDataDisplay) {
 		towerDataDisplay.clear();
+		towerDataDisplay.setEditable(false);
 		String namelabel=new String("TOWER NAME: ");
 		String name= new String(tower.getName());
 		String newline=new String("\n");
@@ -152,6 +166,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
                 ClipboardContent content = new ClipboardContent();
                 towerToBeDragged = towerSet.getSelectionModel().getSelectedItem();
                 content.putImage(towerToBeDragged.getImage());
+                content.putString(towerSettings.get(towerToBeDragged).getName());
                 db.setContent(content);
                 event.consume();
             }  

@@ -8,17 +8,25 @@ import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.javafx.jmx.MXNodeAlgorithm;
 import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
+
+import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
+import engine.controller.ApplicationController;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import utility.Point;
 
 public class MapGrid extends Node{
+	private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
     private Rectangle[][] actualGrid;
@@ -26,13 +34,15 @@ public class MapGrid extends Node{
     private ArrayList<MoveableComponentView> sprites;
     private int myCellSize;
     
-    public MapGrid(int rows, int cols, int aCellSize){
-       myPane = new Pane();
-       sprites = new ArrayList<MoveableComponentView>();
-       numColumns = cols;
-       numRows = rows;
-       myCellSize = aCellSize;
-       actualGrid = new Rectangle[numRows][numColumns];
+    //XXX: maybe remove this--just a quick fix
+    public MapGrid(int rows, int cols, int aCellSize, ApplicationController aAppController){
+    	myAppController = aAppController;
+    	myPane = new Pane();
+    	sprites = new ArrayList<MoveableComponentView>();
+    	numColumns = cols;
+    	numRows = rows;
+    	myCellSize = aCellSize;
+    	actualGrid = new Rectangle[numRows][numColumns];
     }
     
     public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
@@ -49,11 +59,23 @@ public class MapGrid extends Node{
 
     	temp.setOnDragDropped(new EventHandler<DragEvent>() {
     		public void handle(DragEvent event) {
-    			MoveableComponentView source = new MoveableComponentView();
+				Dragboard db = event.getDragboard();
+//				TowerData data = myTowerColumn.getTowerData(db.getString());
+//				System.out.println(data.getBuyPrice());
 //    			if(!isFull(temp)){
-    				source.setImage(event.getDragboard().getImage());
-    				findDropLocation(event.getX(), event.getY(), source);
+				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
 //    			}
+				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
+				//sprites.add(source);
+				//TODO: move this outside of this method--into the update method
+    			MoveableComponentView source = new MoveableComponentView();
+				source.setImage(db.getImage());
+				source.setX(closestRectangle.getX());
+				source.setY(closestRectangle.getY());
+				source.setFitHeight(closestRectangle.getHeight());
+				source.setFitWidth(closestRectangle.getWidth());
+				System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
+				myPane.getChildren().add(source);
     			event.consume();
     		}
     	});
@@ -76,7 +98,7 @@ public class MapGrid extends Node{
     }
    
     
-    public void findDropLocation(double x, double y, MoveableComponentView source){
+    public Rectangle findDropLocation(double x, double y){
         Rectangle closest = new Rectangle();
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
@@ -92,14 +114,7 @@ public class MapGrid extends Node{
                 }
             }
         }
-        source.setX(closest.getX());
-        source.setY(closest.getY());
-        System.out.println("Dropping at: " + source.getX() + ", " + source.getY());
-//        myApplicationController.onTowerDropped(source.)
-        source.setFitHeight(closest.getHeight());
-        source.setFitWidth(closest.getWidth());
-        //sprites.add(source);
-        myPane.getChildren().add(source);
+        return closest;
     }
     
     private double calculateDistance (double x, double y, double x2, double y2) {

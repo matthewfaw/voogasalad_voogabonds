@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
  */
 
 public class StatisticsRow implements IGUIPiece {
+	private ApplicationController myAppController;
 	
 	private HBox myStatisticsRow;
 	private CashBox myCashBox;
@@ -24,13 +25,14 @@ public class StatisticsRow implements IGUIPiece {
 	private WavesBox myWavesBox;
 	private ApplicationController myApplicationController;
 	
-	public StatisticsRow(ApplicationController applicationController){
+	public StatisticsRow(ApplicationController aAppController){
+    	myAppController = aAppController;
 		myCashBox=new CashBox();
 		myLivesBox=new LivesBox();
 		myWavesBox =new WavesBox();
 		myStatisticsRow= buildHBox();
 		myStatisticsRow.setPrefHeight(110);
-		myApplicationController=applicationController;
+		//myApplicationController=applicationController;
 	}
 	
 	/**
@@ -46,21 +48,21 @@ public class StatisticsRow implements IGUIPiece {
 	    
 	    HBox InfoBoxes =new HBox();
 	    InfoBoxes.setSpacing(20);
-	    InfoBoxes.getChildren().addAll(myCashBox.getView(),myLivesBox.getView(),myWavesBox.getView());
+	    InfoBoxes.getChildren().addAll(myCashBox.getView(),myLivesBox.getView()/*,myWavesBox.getView()*/);
 	    
 	    Button playButton=makeButton("PLAY");
-	    playButton.setOnAction(e->myApplicationController.onPlayButtonPressed());
+	    playButton.setOnAction(e->myAppController.onPlayButtonPressed());
 	    Button pauseButton=makeButton("PAUSE");
-	    pauseButton.setOnAction(e->myApplicationController.onPauseButtonPressed());
+	    pauseButton.setOnAction(e->myAppController.onPauseButtonPressed());
 	    Button fastButton=makeButton("FAST FORWARD");
-	    fastButton.setOnAction(e->myApplicationController.onFastButtonPressed());
+	    fastButton.setOnAction(e->myAppController.onFastButtonPressed());
 	    Button slowButton=makeButton("SLOW");
-	    slowButton.setOnAction(e->myApplicationController.onSlowButtonPressed());
+	    slowButton.setOnAction(e->myAppController.onSlowButtonPressed());
 	    //Will probably delete later
 	    Button upgradeButton=makeButton("UPGRADE");
-	    upgradeButton.setOnAction(e->myApplicationController.onUpgradeButtonPressed());
+	    upgradeButton.setOnAction(e->myAppController.onUpgradeButtonPressed());
 	    Button sellButton=makeButton("SELL");
-	    sellButton.setOnAction(e->myApplicationController.onSellButtonPressed());
+	    sellButton.setOnAction(e->myAppController.onSellButtonPressed());
 	    
 	    VBox PlayPauseBox= makeButtonSet(playButton,pauseButton);
 	    VBox TowerOptionBox= makeButtonSet(upgradeButton,sellButton);

@@ -7,19 +7,15 @@ import engine.controller.ApplicationController;
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.MapDisplay;
-import gamePlayerView.GUIPieces.MoveableComponentView;
 import gamePlayerView.GUIPieces.StatisticsRow;
 import gamePlayerView.GUIPieces.TowerColumn;
-import gamePlayerView.GUIPieces.WavesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
-import gamePlayerView.interfaces.ISprite;
 import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -29,6 +25,7 @@ import javafx.stage.Stage;
  */
 
 public class GamePlayerScene {
+	private ApplicationController myAppController;
 	
 	private Stage myStage;
 	private TowerColumn myTowerColumn;
@@ -42,13 +39,15 @@ public class GamePlayerScene {
 	private ApplicationController myApplicationController;
 	//private List<MoveableComponentView> mySprites;
 	
-	public GamePlayerScene(Stage aStage,ApplicationController applicationController) throws Exception{
+
+	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
 		//myStage=stage;
+    	myAppController = aAppController;
 		myCash = new ArrayList<ICashAcceptor>();
 		myLives = new ArrayList<ILivesAcceptor>();
 		myWaves = new ArrayList<IWavesAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
-		myApplicationController=applicationController;
+		//myApplicationController=applicationController;
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
@@ -84,9 +83,9 @@ public class GamePlayerScene {
 	}
 	
 	public BorderPane setScreen() throws Exception{
-	    myMap = new MapDisplay();
 		myTowerColumn   = new TowerColumn();
-		myStatisticsRow = new StatisticsRow(myApplicationController);
+	    myMap = new MapDisplay(myAppController);
+		myStatisticsRow = new StatisticsRow(myAppController);
 		myCash.add(myStatisticsRow.getCash());
 		myLives.add(myStatisticsRow.getLives());
 		myResources.add(myTowerColumn);
