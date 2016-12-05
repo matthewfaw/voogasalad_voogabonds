@@ -7,11 +7,11 @@ import java.util.*;
 
 public class AttributeFetcher {
 
-	public Map<String, List<String>> componentAttributeMap = new HashMap<String, List<String>>();
-	public List<String> componentList;
-	public List<String> attributeList;
+	public static Map<String, List<String>> componentAttributeMap = new HashMap<String, List<String>>();
+	public static List<String> componentList;
+	public static List<String> attributeList;
 
-	public void fetch(){
+	public static void fetch(){
 		
 		componentList = new ArrayList<String>();
 		File dir = new File("src/authoring/model");
@@ -47,6 +47,14 @@ public class AttributeFetcher {
 			}
 		}
 
+	}
+	
+	public static List<String> getComponentList(){
+		return componentList;
+	}
+	
+	public static List<String> getComponentAttributeList(String component){
+		return componentAttributeMap.get(component);
 	}
 
 }
