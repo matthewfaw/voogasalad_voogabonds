@@ -12,7 +12,6 @@ public class AttributeFetcher {
 	public static List<String> attributeList;
 
 	public static void fetch(){
-		
 		componentList = new ArrayList<String>();
 		File dir = new File("src/authoring/model");
 		

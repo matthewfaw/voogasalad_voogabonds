@@ -8,7 +8,7 @@ import engine.IObservable;
 
 public class EntityList implements IObservable<EntityList>{
 	ArrayList<EntityData> myEntities = new ArrayList<EntityData>();
-	ArrayList<IObserver<EntityList>> myDamageDealingObservers = new ArrayList<IObserver<EntityList>>();
+	ArrayList<IObserver<EntityList>> myObservers = new ArrayList<IObserver<EntityList>>();
 	
 	
 	public void addEntity(EntityData ed){
@@ -43,15 +43,15 @@ public class EntityList implements IObservable<EntityList>{
 	 * IObservable functions
 	 */
 	public void attach(IObserver<EntityList> observer){
-		myDamageDealingObservers.add(observer);
+		myObservers.add(observer);
 	}
 	
 	public void detach(IObserver<EntityList> observer){
-		myDamageDealingObservers.remove(observer);
+		myObservers.remove(observer);
 	}
 	
 	public void notifyObservers(){
-		for (IObserver<EntityList> observer: myDamageDealingObservers){
+		for (IObserver<EntityList> observer: myObservers){
 			observer.update(this);
 		}
 	}
