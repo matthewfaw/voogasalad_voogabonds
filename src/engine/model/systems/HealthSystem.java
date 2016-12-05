@@ -11,6 +11,19 @@ public class HealthSystem {
 	private List<HealthComponent> myHealthComponents;
 	private List<DamageDealingComponent> myDamageDealingComponents;
 	
+	public void changeHealthBy(IEntity entity, double deltaHealth) {
+		HealthComponent healthComponent = findHealthComponent(entity);
+//		healthComponent.updateHealth(healthComponent.getHealth() + deltaHealth);
+	}
+	
+	/**
+	 * Checks if moved and unmoved deal damage. Then update health to 
+	 * take damage if either deals damage. 
+	 * If moved deals damage, unmoved takes that damage.
+	 * If unmoved deals damage, moved takes that damage.
+	 * @param moved
+	 * @param unmoved
+	 */
 	public void updateHealthFromCollision(CollidableComponent moved, CollidableComponent unmoved){
 		// need to check moved and unmoved to see if they are damage dealing
 		DamageDealingComponent movedDamageDealingComponent = findDamageDealingComponent(moved.getEntity());
@@ -33,6 +46,12 @@ public class HealthSystem {
 		}
 	}
 	
+	/**
+	 * Given the input entity, returns the corresponding damage dealing component.
+	 * 
+	 * @param entityQuery
+	 * @return damage dealing component that the input entity owns
+	 */
 	private DamageDealingComponent findDamageDealingComponent(IEntity entityQuery) {
 		DamageDealingComponent found = null;
 		for(DamageDealingComponent ddc: myDamageDealingComponents) {
@@ -43,6 +62,12 @@ public class HealthSystem {
 		return found;
 	}
 	
+	/**
+	 * Given the input entity, returns the corresponding health component.
+	 * 
+	 * @param entityQuery
+	 * @return health component that the input entity owns
+	 */
 	private HealthComponent findHealthComponent(IEntity entityQuery) {
 		HealthComponent found = null;
 		for(HealthComponent hc: myHealthComponents) {
