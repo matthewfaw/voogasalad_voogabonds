@@ -19,6 +19,7 @@ import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
 import engine.model.machine.enemy.Enemy;
 import engine.model.strategies.IPhysical;
+import javafx.util.Pair;
 import utility.Point;
 
 public class MapMediator {
@@ -50,7 +51,7 @@ public class MapMediator {
 	public boolean attemptToPlaceEntity(Point aLocation, PhysicalComponent aPhysicalComponent)
 	{
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
-			aPhysicalComponent.setLocation(aLocation);
+			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
@@ -61,10 +62,10 @@ public class MapMediator {
 		// TODO Auto-generated method stub
 	}
 
-	public boolean attemptToPlaceEntity(Point aLocation, IPhysical aPhysicalComponent)
+	public boolean attemptToPlaceEntity(Point aLocation, Machine aPhysicalComponent)
 	{
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
-			aPhysicalComponent.setPosition(aLocation);
+			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}

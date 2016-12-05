@@ -78,8 +78,8 @@ public abstract class AbstractInfoTab extends Tab {
     private EventHandler<ActionEvent> handleAddNewObject() {
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
-                List<String> inputDefaults = generateInputDefaults();
-                myMenu.createObjectMenu(true, inputDefaults);
+                IReadableData defaultData = generateDefaultData();
+                myMenu.createObjectMenu(defaultData);
             }
         };
         return handler;
@@ -192,6 +192,6 @@ public abstract class AbstractInfoTab extends Tab {
      * 
      * @return
      */
-    protected abstract List<String> generateInputDefaults();
+    protected abstract IReadableData generateDefaultData();
 
 }

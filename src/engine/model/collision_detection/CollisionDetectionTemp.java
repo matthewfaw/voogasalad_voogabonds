@@ -85,17 +85,16 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		// TODO Auto-generated method stub
 		myObservers.forEach(observer -> observer.update(this));
 	}
-
 	
 	//************************************ISystem interface****************************//
-	@Override
-	public void register(IRegisterable registerable) {
-		myRegisterables.add(registerable);
-	}
-
-	@Override
-	public void unregister(IRegisterable registerable) {
-		myRegisterables.remove(registerable);
-	}
+//	@Override
+//	public void register(IRegisterable registerable) {
+//		myRegisterables.add(registerable);
+//	}
+//
+//	@Override
+//	public void unregister(IRegisterable registerable) {
+//		myRegisterables.remove(registerable);
+//	}
 
 }

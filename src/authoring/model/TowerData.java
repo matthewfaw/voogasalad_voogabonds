@@ -1,6 +1,7 @@
 package authoring.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TowerData extends MachineData {
@@ -23,6 +24,8 @@ public class TowerData extends MachineData {
 	 */
 	private Map<String, Integer> myUpgrades;
 	
+	private List<String> traversableTerrain;
+
 	public TowerData() {
 		myUpgrades = new HashMap<String, Integer>();
 	}
@@ -48,6 +51,15 @@ public class TowerData extends MachineData {
 	
 	public Map<String, Integer> getUpgrades(){
 		return myUpgrades;
+	}
+	
+	public void setTraversableTerrain(List<String> traversableTerrain)
+	{
+		this.traversableTerrain = traversableTerrain;
+	}
+	public List<String> getTraversableTerrain()
+	{
+		return traversableTerrain;
 	}
 	
 	/*

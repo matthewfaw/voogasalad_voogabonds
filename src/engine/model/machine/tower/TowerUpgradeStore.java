@@ -82,14 +82,8 @@ public class TowerUpgradeStore implements ITowerUpgradeStore {
 	 * @param tower
 	 * @return
 	 */
-	public IMoney getPrice(Tower tower) {
-//		for (TowerNode towernode : myBaseTowers) {
-//			if (towernode.getID().equals(tower)) {
-//				return towernode.getPrice();
-//			}
-//		}
-		// not a base tower
-		return null;
+	public int getPrice(String aTowerName) {
+		return myConstructedTowerNodes.get(aTowerName).getTowerData().getBuyPrice();
 	}
 	public List<TowerData> getPossibleUpgrades(TowerData tower) 
 	{

@@ -6,7 +6,7 @@ import engine.model.strategies.IPhysical;
 
 public interface ICollidable extends IPhysical {
 
-	public void collideInto(ICollidable movedCollidable);
+	public void collideInto(ICollidable unmovedCollidable);
 	public void collideInto(Machine unmovedCollidable);
 	public void collideInto(Projectile unmovedCollidable);
 

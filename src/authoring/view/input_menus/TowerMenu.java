@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import authoring.controller.TowerDataController;
+import authoring.model.IReadableData;
 import authoring.model.TowerData;
 import authoring.view.side_panel.TowerTab;
 import javafx.collections.FXCollections;
@@ -53,7 +54,7 @@ public class TowerMenu extends AbstractMenu {
     }
 
     @Override
-    protected void setUpNewUpdateScreen (VBox root, List<String> objectData) {
+    protected void setUpNewUpdateScreen (VBox root, IReadableData objectData) {
         setUpEditTowerScreen(root, objectData);
     }
     
@@ -69,9 +70,11 @@ public class TowerMenu extends AbstractMenu {
         root.getChildren().add(done);
     }
     
-    private void setUpEditTowerScreen(VBox root, List<String> objectData) {
-        String weapon = objectData.get(objectData.size()-1);
-        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || setupMenuButton(root)) {
+    private void setUpEditTowerScreen(VBox root, IReadableData objectData) {
+        TowerData td = (TowerData) objectData;
+        String weapon = td.getWeaponName();
+        List<String> terrains = td.getTraversableTerrain();
+        if (!setupTextFields(root, objectData) || !setupCombo(root, weapon) || !setupMenuButton(root, terrains)) {
             return;
         }
         //// No MenuButtons currently
@@ -163,14 +166,15 @@ public class TowerMenu extends AbstractMenu {
          *    5   |   image
      * @return success/failure
      */
-    private boolean setupTextFields(VBox root, List<String> objectData) {
+    private boolean setupTextFields(VBox root, IReadableData objectData) {
+        TowerData td = (TowerData) objectData;
         try {
-            myNameField = this.setUpTextInput(objectData.get(0));
-            myHealthField = this.setUpTextInput(objectData.get(1));
-            myBuyPriceField = this.setUpTextInput(objectData.get(2));
-            mySellPriceField = this.setUpTextInput(objectData.get(3));
-            mySizeField = this.setUpTextInput(objectData.get(4));
-            myImageField = this.setUpTextInput(objectData.get(5));
+            myNameField = this.setUpTextInput(td.getName());
+            myHealthField = this.setUpTextInput(td.getMaxHealth()+"");
+            myBuyPriceField = this.setUpTextInput(td.getBuyPrice()+"");
+            mySellPriceField = this.setUpTextInput(td.getSellPrice()+"");
+            mySizeField = this.setUpTextInput("1"); // Default size = 1
+            myImageField = this.setUpTextInput(td.getImagePath());
         } catch (Exception e) {
             return false;
         }
@@ -268,7 +272,8 @@ public class TowerMenu extends AbstractMenu {
         myPossibleTerrains = new MenuButton(getResources().getString("SelectTerrains"));
         for (String terrain: ((TowerTab)getTab()).getTerrains()){
                 CheckBox checkBox = new CheckBox(terrain);
-                checkBox.setSelected(checkedTerrains.contains(terrain));
+                if (checkedTerrains != null)
+                	checkBox.setSelected(checkedTerrains.contains(terrain));
                 CustomMenuItem custom = new CustomMenuItem(checkBox);
                 myPossibleTerrains.getItems().add(custom);
         }
@@ -304,6 +309,20 @@ public class TowerMenu extends AbstractMenu {
         String image = myImageField.getCharacters().toString();
         String weapon = myWeaponChoice.getValue();
         
+        // Get checked terrains
+        List<String> terrains = new ArrayList<String>();
+        for (MenuItem item: myPossibleTerrains.getItems()){
+                CustomMenuItem custom = (CustomMenuItem) item;
+                CheckBox check = (CheckBox) custom.getContent();
+                if (check.isSelected()){
+                        terrains.add(check.getText());
+                }
+        }
+        if (terrains.size() == 0){
+                showError(getResources().getString("NoTerrainInput"));
+                return null;
+        }
+        
         // Package Tower Data
         
         // Error check input
@@ -313,7 +332,7 @@ public class TowerMenu extends AbstractMenu {
         }
         health = nums[0]; buyPrice = nums[1]; sellPrice = nums[2]; size = nums[3];
         
-        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon);
+        TowerData tower = createTowerData(name, health.intValue(), buyPrice.intValue(), sellPrice.intValue(), size.intValue(), image, weapon, terrains);
         if (tower == null) {
             return null;
         }
@@ -345,7 +364,7 @@ public class TowerMenu extends AbstractMenu {
         return value == null ? -1 : value.intValue();
     }
     
-    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon) {
+    private TowerData createTowerData(String name, int health, int buyPrice, int sellPrice, int size, String imagePath, String weapon, List<String> terrains) {
       TowerData towerDat = new TowerData();
       try {
           towerDat.setName(name);
@@ -355,6 +374,7 @@ public class TowerMenu extends AbstractMenu {
           towerDat.setCollisionRadius(size);
           towerDat.setImagePath(imagePath);
           towerDat.setWeaponName(weapon);
+          towerDat.setTraversableTerrain(terrains);
       } catch (Exception e) {
           this.showError(e.getMessage());
           return null;
@@ -409,7 +429,6 @@ public class TowerMenu extends AbstractMenu {
     @Override
     protected List<MenuButton> defineMenuButtons () {
         // Terrain
-        
         List<MenuButton> menuBtns = new ArrayList<>();
         menuBtns.add(myPossibleTerrains);
         return menuBtns;

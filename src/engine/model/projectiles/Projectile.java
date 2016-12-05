@@ -177,8 +177,9 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		return myValidTerrain;
 	}
 	@Override
-	public void setPosition(Point aLocation) {
-		myLocation = aLocation;
+	public void setPosition(Pair<Double, Point> aLocation) {
+		myLocation = aLocation.getValue();
+		myHeading = aLocation.getKey();
 	}
 	@Override
 	public double getSize() {
