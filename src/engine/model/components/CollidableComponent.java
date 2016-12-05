@@ -119,4 +119,10 @@ public class CollidableComponent implements IComponent, ICollidable {
 		
 	}
 
+	@Override
+	public void collideInto(ICollidable unmovedCollidable) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

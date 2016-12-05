@@ -97,5 +97,9 @@ public class DamageDealingComponent implements IComponent, IObserver<IComponent>
 		return null;
 	}
 
+	public double getDamage() {
+		return myDamage;
+	}
+
 
 }

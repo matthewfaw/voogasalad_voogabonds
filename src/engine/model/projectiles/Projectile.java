@@ -9,6 +9,7 @@ import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
+import engine.model.components.CollidableComponent;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
@@ -25,7 +26,7 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable, ISystem, IRegisterable {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, /*ICollidable,*/ ISystem, IRegisterable {
 
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -196,28 +197,33 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 
 	/********** ICollidable Interface Methods ************/
 
-	@Override
-	public void collideInto(ICollidable movedCollidable) {
-		movedCollidable.collideInto(this);
-	}
+//	@Override
+//	public void collideInto(ICollidable unmovedCollidable) {
+//		unmovedCollidable.collideInto(this);
+//	}
+//	
+//	@Override
+//	public void collideInto(Machine unmoved) {
+//		//This method is a bit of a mess; refactor?
+//		if (getOwner().isAlly(myTarget.getOwner()))
+//			if (getOwner().isAlly(unmoved.getOwner()))
+//				//Projectile targets allies, unmoved is an ally
+//				hitUnit((Machine) unmoved);
+//		else
+//			if (!getOwner().isAlly(unmoved.getOwner()))
+//				//Projectile targets enemies, unmoved is an enemy
+//				hitUnit((Machine) unmoved);
+//	}
+//	
+//	@Override
+//	public void collideInto(Projectile unmovedCollidable) {
+//		//Do nothing, probably
+//	}
 	
-	@Override
-	public void collideInto(Machine unmoved) {
-		//This method is a bit of a mess; refactor?
-		if (getOwner().isAlly(myTarget.getOwner()))
-			if (getOwner().isAlly(unmoved.getOwner()))
-				//Projectile targets allies, unmoved is an ally
-				hitUnit((Machine) unmoved);
-		else
-			if (!getOwner().isAlly(unmoved.getOwner()))
-				//Projectile targets enemies, unmoved is an enemy
-				hitUnit((Machine) unmoved);
-	}
-	
-	@Override
-	public void collideInto(Projectile unmovedCollidable) {
-		//Do nothing, probably
-	}
+//	@Override
+//	public void collideInto(CollidableComponent unmovedCollidable) {
+//		unmovedCollidable.collideInto(unmovedCollidable);
+//	}
 	//***************Observable interface****************//
 	@Override
 	public void attach(IObserver<IViewable> aObserver) {
@@ -254,4 +260,5 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 			mySystems.remove(s);
 		}
 	}
+
 }
