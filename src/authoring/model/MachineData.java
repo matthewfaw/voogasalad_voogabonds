@@ -20,6 +20,11 @@ abstract public class MachineData implements IReadableData {
 	private String myMoveStrategyName;
 	private List<String> myValidTerrains;
 	private double myCollisionRadius;
+	
+	/**
+	 * The size of the machine, as displayed by the front-end.
+	 */
+	private double size;
 	private double myMoveSpeed;
 	private double myTurnSpeed;
 	
