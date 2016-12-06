@@ -2,12 +2,13 @@ package engine.model.systems;
 
 import java.util.List;
 
+import engine.IObserver;
 import engine.model.components.CollidableComponent;
 import engine.model.components.DamageDealingComponent;
 import engine.model.components.HealthComponent;
 import engine.model.entities.IEntity;
 
-public class HealthSystem {
+public class HealthSystem implements IObserver<CollidableComponent>{
 	private List<HealthComponent> myHealthComponents;
 	private List<DamageDealingComponent> myDamageDealingComponents;
 	
@@ -76,5 +77,12 @@ public class HealthSystem {
 			}
 		}
 		return found;
+	}
+
+	/************ IObserver Interface ************/
+	@Override
+	public void update(CollidableComponent aChangedObject) {
+		// TODO Auto-generated method stub
+		
 	}
 }
