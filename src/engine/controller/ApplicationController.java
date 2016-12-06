@@ -97,6 +97,16 @@ public class ApplicationController {
 	{
 		myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
 	}
+
+	public void onSellButtonPressed(TowerData tower) {
+		// TODO Auto-generated method stub
+//		return null;
+	}
+
+	public void onSavePressed() {
+		// TODO Auto-generated method stub
+	//	return null;
+	}
 	
 	/*
 	public static void main(String[] args)

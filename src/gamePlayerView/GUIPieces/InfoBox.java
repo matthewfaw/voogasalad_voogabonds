@@ -33,7 +33,7 @@ public abstract class InfoBox implements IGUIPiece {
 	public TextArea makeTextArea() {
 		TextArea t= new TextArea();
 		t.setEditable(false);
-		t.setPrefSize(5, 5);
+		t.setMaxSize(5, 5);
 		return t;
 	}
 

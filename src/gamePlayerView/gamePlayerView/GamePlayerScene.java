@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.model.map.MapData;
 import engine.controller.ApplicationController;
+import gamePlayerView.GamePlayOptions;
+import gamePlayerView.LeftPane;
 import gamePlayerView.GUIPieces.CashBox;
 import gamePlayerView.GUIPieces.LivesBox;
 import gamePlayerView.GUIPieces.MapDisplay;
-import gamePlayerView.GUIPieces.StatisticsRow;
+import gamePlayerView.GUIPieces.BottomPane;
 import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
@@ -29,7 +31,9 @@ public class GamePlayerScene {
 	
 	private Stage myStage;
 	private TowerColumn myTowerColumn;
-	private StatisticsRow myStatisticsRow;
+	private BottomPane myStatisticsRow;
+	private GamePlayOptions myGamePlayOptions;
+	private LeftPane myLeftPane;
 	private MapDisplay myMap;
 	private Scene myScene;
 	private List<ICashAcceptor> myCash;
@@ -84,16 +88,19 @@ public class GamePlayerScene {
 	
 	public BorderPane setScreen() throws Exception{
 		myTowerColumn   = new TowerColumn();
+		//myGamePlayOptions=new GamePlayOptions(myAppController);
+		myLeftPane=new LeftPane(myAppController);
 	    myMap = new MapDisplay(myAppController);
-		myStatisticsRow = new StatisticsRow(myAppController);
-		myCash.add(myStatisticsRow.getCash());
-		myLives.add(myStatisticsRow.getLives());
+		myStatisticsRow = new BottomPane(myAppController);
+		myCash.add(myLeftPane.getCash());
+		myLives.add(myLeftPane.getLives());
 		myResources.add(myTowerColumn);
 		//mySprites.add(myMap.getSprites());
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myTowerColumn.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
 		borderpane.setCenter(myMap.getView());
+		borderpane.setLeft(myLeftPane.getView());
 		myMap.setupDragging(myScene);
 		return borderpane;
 	}
