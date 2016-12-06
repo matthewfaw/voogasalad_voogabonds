@@ -8,6 +8,7 @@ import java.util.List;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
+import engine.model.components.CollidableComponent;
 
 /**
  * A system to manage collision detection in the game
@@ -19,13 +20,13 @@ import engine.model.collision_detection.ICollidable;
  * This class is observable by any system
  *
  */
-public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObservable<ISystem> {
-	private List<ICollidable> myCollidableComponents;
+public class CollisionDetection implements ISystem, IObserver<CollidableComponent>, IObservable<ISystem> {
+	private List<CollidableComponent> myCollidableComponents;
 	
 	private List<IObserver<ISystem>> myObservers;
 	
 	public CollisionDetection() {
-		myCollidableComponents = new ArrayList<ICollidable>();
+		myCollidableComponents = new ArrayList<CollidableComponent>();
 		myObservers = new ArrayList<IObserver<ISystem>>();
 	}
 
@@ -35,7 +36,7 @@ public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObs
 	 * @param b
 	 * @return
 	 */
-	private boolean intersects(ICollidable a, ICollidable b)
+	private boolean intersects(CollidableComponent a, CollidableComponent b)
 	{
 		double a_x = a.getPosition().getX();
 		double a_y = a.getPosition().getY();
@@ -52,9 +53,9 @@ public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObs
 
 	//************************************Observer interface****************************//
 	@Override
-	public void update(ICollidable movedObservable) {
+	public void update(CollidableComponent movedObservable) {
 		// Check all Entities to see if any are intersecting with the current object
-		for(ICollidable observable: myCollidableComponents) {
+		for(CollidableComponent observable: myCollidableComponents) {
 			if (intersects(movedObservable, observable)) {
 				/* notify component and let component handle which 
 				systems to talk to in order to handle collision properly*/
@@ -68,7 +69,7 @@ public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObs
 	 * for that component. Added component should be ICollidable.
 	 * @param aNewComponent
 	 */
-	public void addComponent(ICollidable aNewComponent)
+	public void addComponent(CollidableComponent aNewComponent)
 	{
 		myCollidableComponents.add(aNewComponent);
 	}
@@ -78,7 +79,7 @@ public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObs
 	 * Component will no longer be able to collide.
 	 * @param aNewComponent
 	 */
-	public void removeComponent(ICollidable aNewComponent)
+	public void removeComponent(CollidableComponent aNewComponent)
 	{
 		myCollidableComponents.remove(aNewComponent);
 	}

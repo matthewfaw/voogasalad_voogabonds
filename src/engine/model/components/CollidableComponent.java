@@ -8,6 +8,7 @@ import engine.model.entities.IEntity;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.projectiles.Projectile;
+import engine.model.systems.HealthSystem;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -18,7 +19,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 	private boolean myDestroyOnCollision;
 	private ICollidable myCollidedWith;
 	
-//	private HealthSystem myHealthSystem;
+	private HealthSystem myHealthSystem;
 //	private MoneySystem myMoneySystem;
 
 	//*******************IObservable interface***********//
@@ -79,13 +80,13 @@ public class CollidableComponent implements IComponent, ICollidable {
 
 	//*******************ICollidable interface***********//
 	@Override
-	public void collideInto(ICollidable unmovedCollidable) {
+	public void collideInto(CollidableComponent unmovedCollidable) {
 		/*
 		 * Health System needs to know:
 		 * * how much health to change
 		 * * which entity's health to change 
 		 */
-		// healthSystem.changeHealth(this, deltaHealth);
+		myHealthSystem.updateHealthFromCollision(this, unmovedCollidable);
 		myCollidedWith = unmovedCollidable;
 		myObservers.forEach(o -> o.update(this));
 		if (myDestroyOnCollision) {
@@ -114,6 +115,12 @@ public class CollidableComponent implements IComponent, ICollidable {
 	}
 	@Override
 	public void collideInto(Projectile unmovedCollidable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void collideInto(ICollidable unmovedCollidable) {
 		// TODO Auto-generated method stub
 		
 	}
