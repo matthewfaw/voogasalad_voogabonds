@@ -77,18 +77,10 @@ public class TimelineController implements IObservable<TimelineController> {
 	// TODO: FIX POSSIBLE INDEX OUT OF BOUNDS
 	@Override
 	public void notifyObservers() {
-		
-		//myObservers.forEach(observer -> observer.update(this));
+
+		//IMPORTANT: cannot write a foreach loop here because of JavaFX concurrency issues
 		for (int i=0; i<myObservers.size(); ++i) {
 			myObservers.get(i).update(this);
 		}
-//		System.out.println(myObservers.size());
-//		for (IObserver<TimelineController> observer: myObservers) {
-//			observer.update(this);
-//		}
-//		myObservers.get(0).update(this);
-//		if (myObservers.get(1) != null) {
-//			myObservers.get(1).update(this);
-//		}
 	}
 }

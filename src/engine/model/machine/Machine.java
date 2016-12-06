@@ -162,8 +162,9 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		return myValidTerrains;
 	}
 	@Override
-	public void setPosition(Point p) {
-		myPosition = p;
+	public void setPosition(Pair<Double, Point> p) {
+		myPosition = p.getValue();
+		myHeading = p.getKey();
 	}
 	@Override
 	public double getSize() {
@@ -225,7 +226,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void unregisterMyself() {
 		for(ISystem s: mySystems) {
-			s.unregister(this);
+//			s.unregister(this);
 			mySystems.remove(s);
 		}
 	}

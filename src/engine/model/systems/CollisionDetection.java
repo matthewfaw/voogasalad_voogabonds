@@ -1,32 +1,32 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
-import engine.model.components.MoveableComponent;
 
 /**
  * A system to manage collision detection in the game
  * Entities with the proper componets can register with the
  * Collision detection system so that collisions may be reported
  * 
- * This class is an observer to Entities
+ * This class is an observer to ICollidable entities
  * 
  * This class is observable by any system
- * 
- * @author matthewfaw
  *
  */
-public class CollisionDetection implements ISystem, IObserver<MoveableComponent>, IObservable<ISystem> {
-	private List<MoveableComponent> myMoveableComponents;
+public class CollisionDetection implements ISystem, IObserver<ICollidable>, IObservable<ISystem> {
+	private List<ICollidable> myCollidableComponents;
 	
 	private List<IObserver<ISystem>> myObservers;
 	
-	public CollisionDetection()
-	{
+	public CollisionDetection() {
+		myCollidableComponents = new ArrayList<ICollidable>();
+		myObservers = new ArrayList<IObserver<ISystem>>();
 	}
 
 	/**
@@ -35,32 +35,52 @@ public class CollisionDetection implements ISystem, IObserver<MoveableComponent>
 	 * @param b
 	 * @return
 	 */
-	private boolean intersects(MoveableComponent a, MoveableComponent b)
+	private boolean intersects(ICollidable a, ICollidable b)
 	{
-		//TODO: check for collision
-		return false;
+		double a_x = a.getPosition().getX();
+		double a_y = a.getPosition().getY();
+		double a_r = a.getCollisionRadius();
+		
+		double b_x = b.getPosition().getX();
+		double b_y = b.getPosition().getY();
+		double b_r = b.getCollisionRadius();
+		
+		return Math.pow(a_r - b_r, 2) <= 
+				Math.pow(a_x - b_x, 2) + 
+				Math.pow(a_y - b_y, 2);
 	}
 
 	//************************************Observer interface****************************//
 	@Override
-	public void update(MoveableComponent aChangedObject) {
+	public void update(ICollidable movedObservable) {
 		// Check all Entities to see if any are intersecting with the current object
-		for (MoveableComponent component: myMoveableComponents) {
-			if (intersects(aChangedObject, component)) {
-				notifyObservers();
+		for(ICollidable observable: myCollidableComponents) {
+			if (intersects(movedObservable, observable)) {
+				/* notify component and let component handle which 
+				systems to talk to in order to handle collision properly*/
+				movedObservable.collideInto(observable);
 			}
 		}
 	}
 
-	//TODO: maybe add these to the Observer interface... not sure if this makes sense tho
-	public void addComponent(MoveableComponent aNewComponent)
+	/**
+	 * Adds component to list so that there is collision detection
+	 * for that component. Added component should be ICollidable.
+	 * @param aNewComponent
+	 */
+	public void addComponent(ICollidable aNewComponent)
 	{
-		myMoveableComponents.add(aNewComponent);
+		myCollidableComponents.add(aNewComponent);
 	}
 
-	public void removeComponent(MoveableComponent aNewComponent)
+	/**
+	 * Removes component from being tracked by collision detection.
+	 * Component will no longer be able to collide.
+	 * @param aNewComponent
+	 */
+	public void removeComponent(ICollidable aNewComponent)
 	{
-		myMoveableComponents.remove(aNewComponent);
+		myCollidableComponents.remove(aNewComponent);
 	}
 
 	//************************************Observable interface****************************//
@@ -82,18 +102,6 @@ public class CollisionDetection implements ISystem, IObserver<MoveableComponent>
 	public void notifyObservers() {
 		//XXX: not sure how I feel about passing null here
 		myObservers.forEach(observer -> observer.update(this));
-	}
-
-	@Override
-	public void register(IRegisterable collidable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unregister(IRegisterable collidable) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

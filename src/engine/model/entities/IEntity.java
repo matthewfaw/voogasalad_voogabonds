@@ -1,5 +1,6 @@
 package engine.model.entities;
 
+import engine.IObservable;
 import engine.model.components.IComponent;
 
 
@@ -14,7 +15,7 @@ import engine.model.components.IComponent;
  * @author matthewfaw
  *
  */
-public interface IEntity {
+public interface IEntity extends IObservable<IEntity> {
 
 	/**
 	 * a method to get the unique identifier corresponding to the entity
@@ -28,4 +29,8 @@ public interface IEntity {
 	 * @param aComponent
 	 */
 	public void addComponent(IComponent aComponent);
+	
+	
+	public void delete();
+	
 }
