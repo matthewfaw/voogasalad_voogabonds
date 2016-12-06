@@ -1,4 +1,4 @@
-package gamePlayerView.GUIPieces.MachineInfoView;
+/*package gamePlayerView.GUIPieces.MachineInfoView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -67,3 +67,4 @@ public class MachineUpgradeOrSell {
 		
 	}
 }
+*/
