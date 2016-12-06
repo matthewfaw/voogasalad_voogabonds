@@ -5,8 +5,9 @@ import java.util.List;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.CollidableComponent;
-import engine.model.components.IComponent;
 import engine.model.components.MoveableComponent;
+import engine.model.components.PhysicalComponent;
+import engine.model.entities.IEntity;
 
 /**
  * A system to manage collision detection in the game
@@ -22,35 +23,63 @@ public class CollisionDetectionSystem implements ISystem, IObserver<MoveableComp
 	private List<MoveableComponent> myMoveableComponents;
 	private List<CollidableComponent> myCollidableComponents;
 	private List<IObserver<ISystem>> myObservers;
+	private List<PhysicalComponent> myPhysicalComponents;
 	
 	public CollisionDetectionSystem() {
 	}
 
 	/**
-	 * A method to determine if a and b intersect
-	 * @param a
-	 * @param b
-	 * @return
+	 * A method to determine if entity a and entity b intersect
+	 * @param a: first entity
+	 * @param b: second entity
+	 * @return true if a and b are in either of each other's 
+	 * collision radii; false if not
 	 */
-	private boolean intersects(MoveableComponent a, MoveableComponent b)
+	private boolean intersects(IEntity a, IEntity b)
 	{
-		double a_x = a.getPosition().getX();
-		double a_y = a.getPosition().getY();
-		double a_r = a.getCollisionRadius();
+		PhysicalComponent aPhysical = findPhysicalComponent(a);
+		PhysicalComponent bPhysical = findPhysicalComponent(b);
+		double a_x = aPhysical.getPosition().getX();
+		double a_y = aPhysical.getPosition().getY();
+		double b_x = bPhysical.getPosition().getX();
+		double b_y = bPhysical.getPosition().getY();
 		
-		double b_x = b.getPosition().getX();
-		double b_y = b.getPosition().getY();
-		double b_r = b.getCollisionRadius();
+		CollidableComponent aCollidable = findCollidableComponent(a);
+		CollidableComponent bCollidable = findCollidableComponent(b);
+		double a_r = aCollidable.getCollisionRadius();
+		double b_r = bCollidable.getCollisionRadius();
 		
 		return Math.pow(a_r - b_r, 2) <= 
 				Math.pow(a_x - b_x, 2) + 
 				Math.pow(a_y - b_y, 2);
 	}
 	
-	private CollidableComponent findCollidableComponent(IComponent query) {
+	/**
+	 * Given the input entity, returns the corresponding physical component.
+	 * 
+	 * @param query: entity being queried
+	 * @return physical component that the input entity owns
+	 */
+	private PhysicalComponent findPhysicalComponent(IEntity query) {
+		PhysicalComponent found = null;
+		for (PhysicalComponent cc: myPhysicalComponents) {
+			if (cc.getEntity() == query) {
+				found = cc;
+			}
+		}
+		return found;
+	}
+
+	/**
+	 * Given the input entity, returns the corresponding collidable component.
+	 * 
+	 * @param query: entity being queried
+	 * @return collidable component that the input entity owns
+	 */
+	private CollidableComponent findCollidableComponent(IEntity query) {
 		CollidableComponent found = null;
 		for (CollidableComponent cc: myCollidableComponents) {
-			if (cc.getEntity() == query.getEntity()) {
+			if (cc.getEntity() == query) {
 				found = cc;
 			}
 		}
@@ -58,14 +87,26 @@ public class CollisionDetectionSystem implements ISystem, IObserver<MoveableComp
 	}
 
 	//************************************Observer interface****************************//
+	
+	/**
+	 * When a MoveableComponent notifies collision detection,
+	 * the system checks if that entity collides with any other
+	 * collidable entities. If there is a collision, the collision
+	 * is passed to the collidable components to handle.
+	 * 
+	 * @param the observable moveable component that moved
+	 */
 	@Override
 	public void update(MoveableComponent movedObservable) {
-		// Check all Entities to see if any are intersecting with the current object
-		for(MoveableComponent observable: myMoveableComponents) {
-			if (intersects(movedObservable, observable)) {
-				/* notify component and let component handle which 
-				systems to talk to in order to handle collision properly*/
-				// movedObservable.collideInto(observable);
+		// Make sure moveable is also collidable
+		CollidableComponent movedCollidable = findCollidableComponent(movedObservable.getEntity());
+		if (movedCollidable != null) {
+			// Check all Entities to see if any are intersecting with the current object
+			for(MoveableComponent observable: myMoveableComponents) {
+				if (intersects(movedObservable.getEntity(), observable.getEntity())) {
+					CollidableComponent unmovedCollidable = findCollidableComponent(observable.getEntity());
+					movedCollidable.collideInto(unmovedCollidable);
+				}
 			}
 		}
 	}

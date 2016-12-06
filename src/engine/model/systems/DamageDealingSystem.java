@@ -5,7 +5,7 @@ import java.util.List;
 import engine.model.components.DamageDealingComponent;
 import engine.model.entities.IEntity;
 
-public class DamageDealingSystem {
+public class DamageDealingSystem implements ISystem{
 	private List<DamageDealingComponent> myDamageDealingComponents;
 	
 	/**

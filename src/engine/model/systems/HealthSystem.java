@@ -8,7 +8,7 @@ import engine.model.components.DamageDealingComponent;
 import engine.model.components.HealthComponent;
 import engine.model.entities.IEntity;
 
-public class HealthSystem{
+public class HealthSystem implements ISystem{
 	private List<HealthComponent> myHealthComponents;
 //	private List<DamageDealingComponent> myDamageDealingComponents;
 	
