@@ -5,12 +5,15 @@ import java.util.List;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
-import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.projectiles.Projectile;
-import javafx.util.Pair;
-import utility.Point;
 
+/**
+ * The purpose of this class is to encapsulate the information relevant
+ * to entities that can collide
+ * These entities will register with the CollisionDetectionSystem, and this
+ * class will define what happens when a collision occurs
+ * @author matthewfaw
+ *
+ */
 public class CollidableComponent implements IComponent, ICollidable {
 	private List<IObserver<IComponent>> myObservers;
 	private PhysicalComponent myPhysical;
@@ -18,7 +21,6 @@ public class CollidableComponent implements IComponent, ICollidable {
 	private double myCollisionRadius;
 	
 	private boolean myDestroyOnCollision;
-	private ICollidable myCollidedWith;
 	
 //	private HealthSystem myHealthSystem;
 //	private MoneySystem myMoneySystem;
@@ -43,7 +45,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 		 * * which entity's health to change 
 		 */
 		// healthSystem.changeHealth(this, deltaHealth);
-		myCollidedWith = unmovedCollidable;
+//		myCollidedWith = unmovedCollidable;
 		myObservers.forEach(o -> o.update(this));
 		if (myDestroyOnCollision) {
 			/* Money system needs to know: 
@@ -53,11 +55,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
 			getEntity().delete();
 		}
-		myCollidedWith = null;
-	}
-	
-	public ICollidable getCollidedWith() {
-		return myCollidedWith;
+//		myCollidedWith = null;
 	}
 	
 }

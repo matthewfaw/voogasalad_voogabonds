@@ -8,6 +8,13 @@ import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import utility.Point;
 
+/**
+ * Manages the information relevant to the physical information of an entity
+ * Physical components contain information relevant to existing on a grid, and being displayed
+ * 
+ * @author matthewfaw
+ *
+ */
 public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 	private List<IObserver<IViewable>> myObservers;
 	private IEntity myEntity;

@@ -1,18 +1,13 @@
 package engine.model.components;
 
-import java.util.List;
-
-import engine.IObserver;
 import engine.model.entities.IEntity;
-import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
-import javafx.util.Pair;
 import utility.Point;
 
 /**
- * A component that defines an entities ability to move
+ * A component that defines an entity's ability to move
  * @author matthewfaw, Weston
  *
  */

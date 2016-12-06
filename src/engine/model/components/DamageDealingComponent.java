@@ -5,6 +5,13 @@ import engine.model.entities.IEntity;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.weapons.DamageInfo;
 
+/**
+ * The purpose of this class is to manage the information relevant to 
+ * dealing damage to another entity
+ * 
+ * @author matthewfaw
+ *
+ */
 public class DamageDealingComponent implements IComponent {
 	private IDamageStrategy myDamageStrategy;
 	private int myDamage;
@@ -15,11 +22,19 @@ public class DamageDealingComponent implements IComponent {
 	public DamageDealingComponent() {
 	}
 	
+	/**
+	 * gets the amount of damage this entity inflicts
+	 * @return the damage value
+	 */
 	public int getDamage()
 	{
 		return myDamage;
 	}
 	
+	/**
+	 * gets the radius of effect of this entity
+	 * @return the radius
+	 */
 	public double getDamageRadius()
 	{
 		return myDamageRadius;
