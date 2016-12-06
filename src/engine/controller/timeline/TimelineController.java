@@ -85,5 +85,8 @@ public class TimelineController implements IObservable<TimelineController> {
 		if (myObservers.get(1) != null) {
 			myObservers.get(1).update(this);
 		}
+//		if (myObservers.get(2) != null) {
+//			myObservers.get(2).update(this);
+//		}
 	}
 }
