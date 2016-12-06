@@ -2,6 +2,7 @@ package engine.model.machine.enemy;
 
 import authoring.model.EnemyData;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.CollidableComponent;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.weapons.WeaponFactory;
@@ -26,5 +27,11 @@ public class Enemy extends Machine {
 	public Point getGoal() {
 		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
+	}
+
+	@Override
+	public void collideInto(CollidableComponent unmovedCollidable) {
+		// TODO Auto-generated method stub
+		
 	}
 }

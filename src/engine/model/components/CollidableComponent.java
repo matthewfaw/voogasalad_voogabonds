@@ -18,9 +18,6 @@ public class CollidableComponent implements IComponent, ICollidable {
 	
 	private boolean myDestroyOnCollision;
 	private ICollidable myCollidedWith;
-	
-	private HealthSystem myHealthSystem;
-//	private MoneySystem myMoneySystem;
 
 	//*******************IObservable interface***********//
 	@Override
@@ -86,7 +83,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 		 * * how much health to change
 		 * * which entity's health to change 
 		 */
-		myHealthSystem.updateHealthFromCollision(this, unmovedCollidable);
+//		myHealthSystem.updateHealthFromCollision(this, unmovedCollidable);
 		myCollidedWith = unmovedCollidable;
 		myObservers.forEach(o -> o.update(this));
 		if (myDestroyOnCollision) {

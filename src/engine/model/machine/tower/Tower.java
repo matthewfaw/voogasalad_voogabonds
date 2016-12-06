@@ -2,6 +2,7 @@ package engine.model.machine.tower;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.CollidableComponent;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.weapons.WeaponFactory;
@@ -32,6 +33,12 @@ public class Tower extends Machine implements IUpgradable {
 	public Point getGoal() {
 		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
+	}
+
+	@Override
+	public void collideInto(CollidableComponent unmovedCollidable) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

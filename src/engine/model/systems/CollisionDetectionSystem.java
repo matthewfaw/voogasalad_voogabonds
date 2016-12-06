@@ -1,33 +1,29 @@
 package engine.model.systems;
 
-import java.util.ArrayList;
 import java.util.List;
-
-
 
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.collision_detection.ICollidable;
 import engine.model.components.CollidableComponent;
+import engine.model.components.IComponent;
+import engine.model.components.MoveableComponent;
 
 /**
  * A system to manage collision detection in the game
- * Entities with the proper componets can register with the
+ * Entities with the proper components can register with the
  * Collision detection system so that collisions may be reported
  * 
- * This class is an observer to ICollidable entities
+ * This class is an observer to Physical components
  * 
  * This class is observable by any system
  *
  */
-public class CollisionDetection implements ISystem, IObserver<CollidableComponent>, IObservable<ISystem> {
+public class CollisionDetectionSystem implements ISystem, IObserver<MoveableComponent>, IObservable<ISystem> {
+	private List<MoveableComponent> myMoveableComponents;
 	private List<CollidableComponent> myCollidableComponents;
-	
 	private List<IObserver<ISystem>> myObservers;
 	
-	public CollisionDetection() {
-		myCollidableComponents = new ArrayList<CollidableComponent>();
-		myObservers = new ArrayList<IObserver<ISystem>>();
+	public CollisionDetectionSystem() {
 	}
 
 	/**
@@ -36,7 +32,7 @@ public class CollisionDetection implements ISystem, IObserver<CollidableComponen
 	 * @param b
 	 * @return
 	 */
-	private boolean intersects(CollidableComponent a, CollidableComponent b)
+	private boolean intersects(MoveableComponent a, MoveableComponent b)
 	{
 		double a_x = a.getPosition().getX();
 		double a_y = a.getPosition().getY();
@@ -50,16 +46,26 @@ public class CollisionDetection implements ISystem, IObserver<CollidableComponen
 				Math.pow(a_x - b_x, 2) + 
 				Math.pow(a_y - b_y, 2);
 	}
+	
+	private CollidableComponent findCollidableComponent(IComponent query) {
+		CollidableComponent found = null;
+		for (CollidableComponent cc: myCollidableComponents) {
+			if (cc.getEntity() == query.getEntity()) {
+				found = cc;
+			}
+		}
+		return found;
+	}
 
 	//************************************Observer interface****************************//
 	@Override
-	public void update(CollidableComponent movedObservable) {
+	public void update(MoveableComponent movedObservable) {
 		// Check all Entities to see if any are intersecting with the current object
-		for(CollidableComponent observable: myCollidableComponents) {
+		for(MoveableComponent observable: myMoveableComponents) {
 			if (intersects(movedObservable, observable)) {
 				/* notify component and let component handle which 
 				systems to talk to in order to handle collision properly*/
-				movedObservable.collideInto(observable);
+				// movedObservable.collideInto(observable);
 			}
 		}
 	}
@@ -69,9 +75,9 @@ public class CollisionDetection implements ISystem, IObserver<CollidableComponen
 	 * for that component. Added component should be ICollidable.
 	 * @param aNewComponent
 	 */
-	public void addComponent(CollidableComponent aNewComponent)
+	public void addComponent(MoveableComponent aNewComponent)
 	{
-		myCollidableComponents.add(aNewComponent);
+		myMoveableComponents.add(aNewComponent);
 	}
 
 	/**
@@ -79,9 +85,9 @@ public class CollisionDetection implements ISystem, IObserver<CollidableComponen
 	 * Component will no longer be able to collide.
 	 * @param aNewComponent
 	 */
-	public void removeComponent(CollidableComponent aNewComponent)
+	public void removeComponent(MoveableComponent aNewComponent)
 	{
-		myCollidableComponents.remove(aNewComponent);
+		myMoveableComponents.remove(aNewComponent);
 	}
 
 	//************************************Observable interface****************************//
