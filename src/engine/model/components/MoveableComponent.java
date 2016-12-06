@@ -54,13 +54,16 @@ public class MoveableComponent implements IComponent, IMovable {
 		return myMoveSpeed;
 	}
 	
+	//TODO
 	public void move() {
+		/*
 		Pair<Double, Point> toMove = myMovementCalc.nextMove(this);
 		myMovedDistance += toMove.getValue().getDistanceTo(getPosition());
 		myPhysical.setPosition(toMove);
 		if (myMovedDistance >= myMaxDistance){
 			//Delete entity 
 		}
+		*/
 	}
 
 

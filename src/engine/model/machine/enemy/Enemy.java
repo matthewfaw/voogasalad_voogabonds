@@ -7,7 +7,9 @@ import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.weapons.WeaponFactory;
 import utility.Point;
 
-public class Enemy extends Machine {
+@Deprecated
+public class Enemy /*extends Machine*/ {
+	/*
 	private int myBounty;
 	
 	public Enemy(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, EnemyData data,
@@ -27,4 +29,5 @@ public class Enemy extends Machine {
 		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
 	}
+	*/
 }

@@ -23,6 +23,7 @@ import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 
+@Deprecated //do not use this class--using ECS now
 abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IKillerOwner, IRegisterable {
 	private List<IObserver<IViewable>> myObservers;
 	private IModifiablePlayer myModifiablePlayer;
@@ -153,6 +154,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public double getMoveSpeed() {
 		return myMoveSpeed;
 	}
+	/*
 	@Override
 	public double getCollisionRadius() {
 		return myCollisionRadius;
@@ -171,6 +173,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public double getSize() {
 		return myCollisionRadius;
 	}
+	*/
 	
 	/************** IObservable interface ****************/
 	@Override
@@ -196,6 +199,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public void collideInto(ICollidable movedCollidable) {
 		movedCollidable.collideInto(this);
 	}
+	/*
 	@Override
 	public void collideInto(Machine unmovedCollidable) {
 		//do nothing for now since machines will not deal dmg
@@ -206,6 +210,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		//Should the Machine running into the projectile trigger an explode
 		//unmovedCollidable.collideInto(this);
 	}
+	*/
 	
 	public DamageInfo notifyDestroy(DamageInfo result) {
 		return result;

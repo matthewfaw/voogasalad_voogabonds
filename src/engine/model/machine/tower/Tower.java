@@ -8,7 +8,8 @@ import engine.model.weapons.WeaponFactory;
 import javafx.util.Pair;
 import utility.Point;
 
-public class Tower extends Machine implements IUpgradable {
+@Deprecated
+public class Tower{ /*extends Machine implements IUpgradable {
 	
 
 	public Tower(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, TowerData data,
@@ -33,5 +34,5 @@ public class Tower extends Machine implements IUpgradable {
 		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
 	}
-
+*/
 }
