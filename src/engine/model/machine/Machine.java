@@ -227,7 +227,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void unregisterMyself() {
 		for(ISystem s: mySystems) {
-			s.unregister(this);
+//			s.unregister(this);
 			mySystems.remove(s);
 		}
 	}
