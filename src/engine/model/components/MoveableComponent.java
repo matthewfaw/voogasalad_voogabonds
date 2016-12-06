@@ -17,42 +17,25 @@ import utility.Point;
  *
  */
 public class MoveableComponent implements IComponent, IMovable {
-	private List<IObserver<IComponent>> myObservers;
-	private PhysicalComponent myPhysical;
+
+	//replace with: PhysicalSystem
+//	private PhysicalComponent myPhysical;
+	private IEntity myEntity;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
 	private IPhysical myGoal;
 	
+	//XXX: ???
 	private double myMaxDistance;
 	private double myMovedDistance;
 	
-	//********************IObservable interface***********//
-	@Override
-	public void attach(IObserver<IComponent> aObserver) {
-		myObservers.add(aObserver);		
-	}
-
-	@Override
-	public void detach(IObserver<IComponent> aObserver) {
-		myObservers.remove(aObserver);		
-	}
-
-	@Override
-	public void notifyObservers() {
-		myObservers.forEach(o -> o.update(this));		
-	}
 
 	//********************IComponent interface***********//
 	@Override
 	public IEntity getEntity() {
-		return myPhysical.getEntity();
-	}
-
-	@Override
-	public IModifiablePlayer getOwner() {
-		return myPhysical.getOwner();
+		return myEntity;
 	}
 
 	//********************IMovable interface***********//
@@ -78,32 +61,6 @@ public class MoveableComponent implements IComponent, IMovable {
 		if (myMovedDistance >= myMaxDistance){
 			//Delete entity 
 		}
-	}
-
-	//********************IPhysical interface***********//
-	@Override
-	public double getCollisionRadius() {
-		return myPhysical.getCollisionRadius();
-	}
-
-	@Override
-	public Point getPosition() {
-		return myPhysical.getPosition();
-	}
-
-	@Override
-	public double getHeading() {
-		return myPhysical.getHeading();
-	}
-
-	@Override
-	public List<String> getValidTerrains() {
-		return myPhysical.getValidTerrains();
-	}
-
-	@Override
-	public void setPosition(Pair<Double, Point> p) {
-		myPhysical.setPosition(p);
 	}
 
 
