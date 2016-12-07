@@ -17,9 +17,9 @@ public class HealthComponent implements IComponent {
 	{
 		return myCurrentHealth;
 	}
-	public void takeDamage(Damage aDamage)
+	public void takeDamage(int damage)
 	{
-		myCurrentHealth -= aDamage.getDamage();
+		myCurrentHealth -= damage;
 		//TODO: Manage death, perhaps with a strategy
 	}
 

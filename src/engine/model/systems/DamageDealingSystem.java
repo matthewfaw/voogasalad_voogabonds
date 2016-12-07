@@ -30,7 +30,7 @@ public class DamageDealingSystem implements ISystem{
 	 * @return damage dealt by entity; 0 if entity 
 	 * is not a damage dealing component
 	 */
-	public double getDamageDealt(IEntity entity) {
+	public int getDamageDealt(IEntity entity) {
 		DamageDealingComponent damageDealer = findDamageDealingComponent(entity);
 		return damageDealer == null ? 0 : damageDealer.getDamage();
 	}
