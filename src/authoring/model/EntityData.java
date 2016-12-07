@@ -1,11 +1,15 @@
 package authoring.model;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author owenchung and alanguo
+ */
 
 public class EntityData implements IReadableData {
 	private String myName;
-	AbstractMap<String, ComponentData> myComponents = new HashMap<String, ComponentData>();
+	List<ComponentData> myComponents = new ArrayList<ComponentData>();
 	
 	public String getName(){
 		return myName;
@@ -15,11 +19,11 @@ public class EntityData implements IReadableData {
 		this.myName = s;
 	}
 	
-	public void addComponent(String componentName, ComponentData comp){
-		myComponents.put(componentName, comp);
+	public void addComponent(ComponentData comp){
+		myComponents.add(comp);
 	}
 	
-	public AbstractMap<String, ComponentData> getComponents(){
+	public List<ComponentData> getComponents(){
 		return myComponents;
 	}
 }

@@ -3,6 +3,7 @@ package engine.model.components;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IDamageStrategy;
+import engine.model.systems.DamageDealingSystem;
 import engine.model.weapons.DamageInfo;
 
 /**
@@ -19,7 +20,11 @@ public class DamageDealingComponent implements IComponent {
 	
 	private IEntity myEntity;
 
-	public DamageDealingComponent() {
+	private DamageDealingSystem myDamageDealingSystem;
+	
+	public DamageDealingComponent(DamageDealingSystem damageDealingSystem) {
+		myDamageDealingSystem = damageDealingSystem;
+		myDamageDealingSystem.attachComponent(this);
 	}
 	
 	/**

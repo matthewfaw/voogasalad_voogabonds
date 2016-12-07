@@ -27,8 +27,7 @@ public class WaveController implements IObserver<TimelineController> {
 	private EntityFactory myEntityFactory;
 	private Player myEnemy;
 	
-	public WaveController( GameLevelsData aGameLevelsData, DataStore<EntityData> aEnemyDataStore, Player p)
-	{
+	public WaveController (GameLevelsData aGameLevelsData, DataStore<EntityData> aEnemyDataStore, Player p) {
 //		myMapDistributor = aMapDistributor;
 		myEnemy = p;
 		myActiveWaveManager = new ActiveWaveManager(aGameLevelsData, aEnemyDataStore);
@@ -41,13 +40,13 @@ public class WaveController implements IObserver<TimelineController> {
 		// if true, then distribute the enemy through the mediator
 		Map<EntityData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct(aChangedObject.getTotalTimeElapsed());
 		for (EntityData enemyData: enemiesToConstruct.keySet()) {
-		
+			myEntityFactory.constructEntity(enemyData);
 		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
 		//TODO: Change to a better way?
 		//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
-			myEntityFactory.constructEntity(enemyData);
+			
 		}
 		
-		//TODO: check if we should transition to the next wave
+		
 	}
 }

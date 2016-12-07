@@ -1,6 +1,7 @@
 package engine.model.components;
 
 import engine.model.entities.IEntity;
+import engine.model.systems.RewardSystem;
 
 /**
  * The purpose of this class is to manage the information
@@ -14,7 +15,12 @@ import engine.model.entities.IEntity;
 public class BountyComponent implements IComponent {
 	private IEntity myEntity;
 	private int myBountyValue;
-
+	private RewardSystem myRewardSystem;
+	
+	public BountyComponent (RewardSystem rewardSystem) {
+		myRewardSystem = rewardSystem;
+		myRewardSystem.attachComponent(this);
+	}
 	/**
 	 * A method to retrieve the bounty value associated with an entity
 	 * 
