@@ -195,10 +195,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	
 	/********** ICollidable Interface Methods ************/
-	@Override
-	public void collideInto(ICollidable movedCollidable) {
-		movedCollidable.collideInto(this);
-	}
 	/*
 	@Override
 	public void collideInto(Machine unmovedCollidable) {
