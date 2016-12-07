@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.controller.MapDataContainer;
+import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
 import authoring.view.side_panel.InfoTabs;
@@ -65,8 +66,9 @@ public class MainInitializer {
 	}
 	
 	public void initSim() {
-		TopMenuBar menuBar = new TopMenuBar(this, root);
-		InfoTabs infoTab = new InfoTabs(root, scene);
+		//TopMenuBar menuBar = new TopMenuBar(this, root);
+		//InfoTabs infoTab = new InfoTabs(root, scene);
+	        AuthorDisplay authoring = new AuthorDisplay(this, root);
 		stage.setScene(scene);
 	}
 	
