@@ -1,7 +1,7 @@
 package authoring.controller;
 import authoring.model.PlayerData;
 
-public class PlayerDataController{
+public class PlayerDataContainer{
 	private PlayerData myPlayerData = new PlayerData();
 	
 	/**

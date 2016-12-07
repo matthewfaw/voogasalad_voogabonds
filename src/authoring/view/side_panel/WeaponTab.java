@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
-import authoring.controller.WeaponDataController;
+import authoring.controller.WeaponDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.WeaponMenu;
@@ -26,11 +26,11 @@ public class WeaponTab extends Tab {
     private int screenWidth;
     private int screenHeight;
     private WeaponMenu myMenu;
-    private WeaponDataController myController;
+    private WeaponDataContainer myController;
     private VBox myContent;
     
 
-    public WeaponTab(TabPane pane, WeaponDataController controller) {
+    public WeaponTab(TabPane pane, WeaponDataContainer controller) {
         screenInfo();
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
         weaponTab = new Tab(myResources.getString("Weapons"));
@@ -73,7 +73,7 @@ public class WeaponTab extends Tab {
         screenHeight = (int) screenSize.getHeight();
     }
     
-    public WeaponDataController getController(){
+    public WeaponDataContainer getController(){
     	return myController;
     }
     
