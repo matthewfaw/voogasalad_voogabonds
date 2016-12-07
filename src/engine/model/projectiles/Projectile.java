@@ -9,6 +9,7 @@ import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
+import engine.model.components.CollidableComponent;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
@@ -26,7 +27,7 @@ import engine.model.weapons.IKillerOwner;
  * @author Weston
  */
 @Deprecated
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable, ISystem, IRegisterable {
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, /*ICollidable,*/ ISystem, IRegisterable {
 
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -202,11 +203,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 
 
 	/********** ICollidable Interface Methods ************/
-
-	@Override
-	public void collideInto(ICollidable movedCollidable) {
-		movedCollidable.collideInto(this);
-	}
 	
 	/*
 	@Override
@@ -223,12 +219,10 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	}
 	*/
 	
-	/*
-	@Override
-	public void collideInto(Projectile unmovedCollidable) {
-		//Do nothing, probably
-	}
-	*/
+//	@Override
+//	public void collideInto(CollidableComponent unmovedCollidable) {
+//		unmovedCollidable.collideInto(unmovedCollidable);
+//	}
 	//***************Observable interface****************//
 	@Override
 	public void attach(IObserver<IViewable> aObserver) {
@@ -265,4 +259,5 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 			mySystems.remove(s);
 		}
 	}
+
 }
