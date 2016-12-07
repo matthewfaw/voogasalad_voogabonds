@@ -28,6 +28,11 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 	
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	
+	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem) {
+		myCollisionDetectionSystem = collisionDetectionSystem;
+		myCollisionDetectionSystem.attachComponent(this);
+	}
+	
 	/******** Setters ********/
 	public void setPosition(Point position) {
 		myPosition = position;

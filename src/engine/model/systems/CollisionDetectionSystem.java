@@ -1,12 +1,12 @@
 package engine.model.systems;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.CollidableComponent;
-import engine.model.components.MoveableComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
 
@@ -21,13 +21,11 @@ import engine.model.entities.IEntity;
  *
  */
 public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableComponent>,*/ IObservable<ISystem> {
-	private List<MoveableComponent> myMoveableComponents;
 	private List<CollidableComponent> myCollidableComponents;
 	private List<IObserver<ISystem>> myObservers;
 	private List<PhysicalComponent> myPhysicalComponents;
 	
 	public CollisionDetectionSystem() {
-		myMoveableComponents = new ArrayList<MoveableComponent>();
 		myCollidableComponents = new ArrayList<CollidableComponent>();
 		myPhysicalComponents = new ArrayList<PhysicalComponent>();
 	}
@@ -99,7 +97,7 @@ public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableCo
 		CollidableComponent movedCollidable = findCollidableComponent(movedPhysicalComponent.getEntity());
 		if (movedCollidable != null) {
 			// Check all Entities to see if any are intersecting with the current object
-			for(MoveableComponent observable: myMoveableComponents) {
+			for(PhysicalComponent observable: myPhysicalComponents) {
 				if (intersects(movedPhysicalComponent.getEntity(), observable.getEntity())) {
 					CollidableComponent unmovedCollidable = findCollidableComponent(observable.getEntity());
 					movedCollidable.collideInto(unmovedCollidable);
@@ -109,12 +107,6 @@ public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableCo
 	}
 	
 	/************ Attach and detach component methods ************/
-	public void attachComponent(MoveableComponent aComponent) {
-		myMoveableComponents.add(aComponent);
-	}
-	public void detachComponent(MoveableComponent aComponent) {
-		myMoveableComponents.remove(aComponent);
-	}
 	
 	public void attachComponent(CollidableComponent aComponent) {
 		myCollidableComponents.add(aComponent);
@@ -154,28 +146,6 @@ public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableCo
 //			}
 //		}
 //	}
-	
-	
-
-	/**
-	 * Adds component to list so that there is collision detection
-	 * for that component. Added component should be ICollidable.
-	 * @param aNewComponent
-	 */
-	public void addComponent(MoveableComponent aNewComponent)
-	{
-		myMoveableComponents.add(aNewComponent);
-	}
-
-	/**
-	 * Removes component from being tracked by collision detection.
-	 * Component will no longer be able to collide.
-	 * @param aNewComponent
-	 */
-	public void removeComponent(MoveableComponent aNewComponent)
-	{
-		myMoveableComponents.remove(aNewComponent);
-	}
 
 	/**************************** Observable interface **************************/
 	@Override

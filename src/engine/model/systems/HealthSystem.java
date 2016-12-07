@@ -6,6 +6,7 @@ import engine.IObserver;
 import engine.model.components.CollidableComponent;
 import engine.model.components.DamageDealingComponent;
 import engine.model.components.HealthComponent;
+import engine.model.components.MoveableComponent;
 import engine.model.entities.IEntity;
 
 public class HealthSystem implements ISystem{
@@ -41,6 +42,14 @@ public class HealthSystem implements ISystem{
 			}
 		}
 		return found;
+	}
+	
+	/************ Attach and detach component methods ************/
+	public void attachComponent(HealthComponent aComponent) {
+		myHealthComponents.add(aComponent);
+	}
+	public void detachComponent(HealthComponent aComponent) {
+		myHealthComponents.remove(aComponent);
 	}
 	
 }

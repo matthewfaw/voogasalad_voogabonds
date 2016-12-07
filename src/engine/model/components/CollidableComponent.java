@@ -5,6 +5,7 @@ import java.util.List;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
+import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.RewardSystem;
@@ -26,6 +27,20 @@ public class CollidableComponent implements IComponent, ICollidable {
 	private HealthSystem myHealthSystem;
 	private DamageDealingSystem myDamageDealingSystem;
 	private RewardSystem myRewardSystem;
+	private CollisionDetectionSystem myCollisionDetectionSystem;
+	
+	public CollidableComponent (CollisionDetectionSystem collisionDetectionSystem, 
+			HealthSystem healthSystem,
+			DamageDealingSystem damageDealingSystem, 
+			RewardSystem rewardSystem) {
+		
+		myCollisionDetectionSystem = collisionDetectionSystem;
+		myHealthSystem = healthSystem;
+		myDamageDealingSystem = damageDealingSystem;
+		myRewardSystem = rewardSystem;
+		
+		myCollisionDetectionSystem.attachComponent(this);
+	}
 
 	//*******************IComponent interface***********//
 	@Override
