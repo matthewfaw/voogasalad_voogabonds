@@ -3,7 +3,7 @@ package authoring.model;
 import java.util.AbstractMap;
 import java.util.HashMap;
 
-public class EntityData {
+public class EntityData implements IReadableData {
 	private String myName;
 	AbstractMap<String, ComponentData> myComponents = new HashMap<String, ComponentData>();
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.model.EnemyData;
+import authoring.model.EntityData;
 import authoring.model.GameLevelsData;
 import authoring.model.IReadableData;
 import authoring.model.PlayerData;
@@ -12,11 +13,8 @@ import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
-import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
-import engine.controller.waves.DummyEntityData;
-import engine.controller.waves.DummyWaveOperationData;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
@@ -54,7 +52,7 @@ public class BackendController {
 	//Data relevant to constructing objects
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
-	private DataStore<DummyEntityData> myEnemyDataStore;
+	private DataStore<EntityData> myEnemyDataStore;
 	private PlayerData myPlayerData;
 	private GameLevelsData myGameLevelsData;
 	
@@ -185,8 +183,8 @@ public class BackendController {
 	 */
 	private void constructEnemyDataStore()
 	{
-		List<DummyEntityData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
-		myEnemyDataStore = new DataStore<DummyEntityData>(data);
+		List<EntityData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
+		myEnemyDataStore = new DataStore<EntityData>(data);
 	}
 	
 	/**

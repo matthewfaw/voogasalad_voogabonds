@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import authoring.model.EntityData;
 import authoring.model.GameLevelsData;
 import authoring.model.OneLevelData;
 import authoring.model.WaveData;
@@ -25,14 +26,14 @@ public class ActiveWaveManager {
 	private GameLevelsData myGameLevelsData;
 	private OneLevelData myCurrLevelData;
 	private int myCurrLevel;
-	private DataStore<DummyEntityData> myEnemyDataStore;
+	private DataStore<EntityData> myEnemyDataStore;
 	
 //	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
 	private List<WaveState> myWaveStates;
 	private double myCurrentTime;
 	private double myTimeToAddMoreWaves;
 	
-	public ActiveWaveManager(GameLevelsData aGameLevelsData, DataStore<DummyEntityData> aEnemyDataStore)
+	public ActiveWaveManager(GameLevelsData aGameLevelsData, DataStore<EntityData> aEnemyDataStore)
 	{
 		myCurrLevel = 0;
 		myGameLevelsData = aGameLevelsData;
@@ -52,7 +53,7 @@ public class ActiveWaveManager {
 	 * 
 	 * TODO: This return type is kinda hacky... maybe make a custom class for this?
 	 */
-	public Map<DummyEntityData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
+	public Map<EntityData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
 	{
 		//1. Update the current time
 		setCurrentTime(aTotalTimeElapsed);
@@ -63,10 +64,10 @@ public class ActiveWaveManager {
 		}
 		
 		//3. get all the enemies
-		Map<DummyEntityData, String> enemiesToConstruct = new HashMap<DummyEntityData, String>();
+		Map<EntityData, String> enemiesToConstruct = new HashMap<EntityData, String>();
 		for (WaveState activeWave: myWaveStates) {
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
-				DummyEntityData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
+				EntityData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
 				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
 			} else {
 				myWaveStates.remove(activeWave);

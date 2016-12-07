@@ -1,12 +1,12 @@
 package engine.model.game_environment.distributors;
 
 import authoring.model.EnemyData;
+import authoring.model.EntityData;
 import authoring.model.ProjectileData;
 import authoring.model.WeaponData;
 import engine.IObservable;
 import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
-import engine.controller.waves.DummyEntityData;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
@@ -33,7 +33,7 @@ public class MapDistributor implements IDistributor {
 	
 	public MapDistributor(MapMediator aMapMediator,
 			ResourceStore aTowerDataStore,
-			DataStore<DummyEntityData> aEnemyDataStore,
+			DataStore<EntityData> aEnemyDataStore,
 			DataStore<WeaponData> aWeaponDataStore,
 			DataStore<ProjectileData> aProjectileDataStore,
 			TimelineController aTimelineController,
@@ -43,6 +43,7 @@ public class MapDistributor implements IDistributor {
 		myMapMediator = aMapMediator;
 		myEntityFactory = new EntityFactory();
 		myResourceStore = aTowerDataStore;
+		/*
 		myAnarchosyndacalistCommune = new MachineFactory(
 				aTimelineController,
 				myResourceStore,
@@ -51,6 +52,7 @@ public class MapDistributor implements IDistributor {
 				aProjectileDataStore,
 				aMapMediator
 				);
+				*/
 	}
 	
 	@Deprecated
