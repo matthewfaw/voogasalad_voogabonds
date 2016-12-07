@@ -41,7 +41,7 @@ public class MapDistributor implements IDistributor {
 			) {
 		myRouter = aRouter;
 		myMapMediator = aMapMediator;
-		myEntityFactory = new EntityFactory();
+//		myEntityFactory = new EntityFactory();
 		myResourceStore = aTowerDataStore;
 		/*
 		myAnarchosyndacalistCommune = new MachineFactory(

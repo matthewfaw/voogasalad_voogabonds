@@ -21,8 +21,6 @@ import engine.model.data_stores.DataStore;
  */
 public class ActiveWaveManager {
 	private static final double DEFAULT_START_TIME = 0.0;
-
-//	private DummyWaveOperationData myWaveOperationData;
 	private GameLevelsData myGameLevelsData;
 	private OneLevelData myCurrLevelData;
 	private int myCurrLevel;
