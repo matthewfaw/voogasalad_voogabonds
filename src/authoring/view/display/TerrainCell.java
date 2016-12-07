@@ -80,8 +80,10 @@ public class TerrainCell extends Rectangle {
 								Image image = new Image(toolBar.getSelectedImagePath());
 								ImagePattern imagePattern = new ImagePattern(image);
 								setFill(imagePattern);
+								System.out.println("Image Path is: " + toolBar.getSelectedImagePath());
 							}
 							else {
+								System.out.println("Hello");
 								setFill(toolBar.getSelectedColor());
 							}
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
@@ -179,8 +181,13 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
-			controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
-			setFill(toolBar.getSelectedColor());
+
+			if (toolBar.getImageStatus()) {
+				controller.addValidTerrain(terrainType, toolBar.getSelectedImagePath().toString());
+			}
+			else {
+				controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
+			}
 		} catch (Exception e) {
 			ErrorBox.displayError(myResources.getString("TerrainError"));
 		}

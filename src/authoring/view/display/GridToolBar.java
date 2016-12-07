@@ -50,10 +50,12 @@ public class GridToolBar {
 	private Color selectedColor;
 	private String selectedTerrain;
 	private String selectedImagePath;
+	private String selectedImage;
 	private Image mouseCursor;
 	private int screenHeight;
 	private int screenWidth;
 	private HashMap<String, Color> colorToTerrain;
+	private HashMap<String, String> imageToTerrain;
 	private ObservableList<String> terrainOptions = 
 			FXCollections.observableArrayList (
 					"Add Terrain..."
@@ -66,6 +68,7 @@ public class GridToolBar {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
 		this.colorToTerrain = new HashMap<String, Color>();
+		this.imageToTerrain = new HashMap<String, String>();
 		selectedColor = Color.WHITE;
 		this.selectedTerrain = myResources.getString("DNE");
 		this.controller = controller;
@@ -180,7 +183,7 @@ public class GridToolBar {
 					TextField terrainName = new TextField();
 					terrainName.setText(myResources.getString("TerrainName"));
 					Button chooseImage = new Button(myResources.getString("ChooseTerrainImage"));
-					confirmImageHandler(chooseImage, createTerrain);
+					confirmImageHandler(chooseImage);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
 					choiceArea.getChildren().addAll(colorChooser, chooseImage, terrainName, confirmTerrain);
 					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
@@ -190,18 +193,23 @@ public class GridToolBar {
 				}
 				else {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
-					selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					if (imageStatus) {
+						selectedImage = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					}
+					else {
+						selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					}
 				}
 //				terrains.getSelectionModel().clearSelection();
 			}
 		});
 	}
 	
-	private void confirmImageHandler(Button chooseImage, Stage imageStage) {
+	private void confirmImageHandler(Button chooseImage) {
 		chooseImage.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, imageStage, myResources.getString("TerrainImageFilePath"));
+				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, myResources.getString("TerrainImageFilePath"));
 			}
 		});
 	}
@@ -210,7 +218,12 @@ public class GridToolBar {
 		b.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle (ActionEvent event) {
 				terrainOptions.add(field.getText());
-				colorToTerrain.put(field.getText(), colors.getValue());
+				if (imageStatus) {
+					imageToTerrain.put(field.getText(), selectedImagePath);
+				}
+				else {
+					colorToTerrain.put(field.getText(), colors.getValue());
+				}
 				try {
 					controller.addValidTerrain(field.getText(), colors.getValue().toString());
 				} catch (Exception e) {

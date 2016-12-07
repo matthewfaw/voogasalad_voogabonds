@@ -35,11 +35,11 @@ public class ImageGallery {
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
-	public ImageGallery(GridToolBar tBar, Stage tStage, String fPath) {
+	public ImageGallery(GridToolBar tBar, String fPath) {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.scrollPane = new ScrollPane();
-		this.terrainStage = tStage;
+		this.terrainStage = new Stage();
 		this.toolBar = tBar;
 		this.container = new VBox(screenWidth*0.01);
 		imagePane = new TilePane();
