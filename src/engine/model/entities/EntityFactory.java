@@ -1,5 +1,7 @@
 package engine.model.entities;
 
+import authoring.model.EntityData;
+
 public class EntityFactory {
 	public EntityFactory()
 	{

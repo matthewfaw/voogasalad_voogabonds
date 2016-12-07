@@ -1,11 +1,11 @@
 package engine.model.machine;
 
 import authoring.model.EnemyData;
+import authoring.model.EntityData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import engine.controller.timeline.TimelineController;
-import engine.controller.waves.DummyEntityData;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.enemy.Enemy;
@@ -24,12 +24,12 @@ public class MachineFactory {
 	private TimelineController myTime;
 	private WeaponFactory myArmory;
 	private DataStore<TowerData> myTowers;
-	private DataStore<DummyEntityData> myEnemies;
+	private DataStore<EntityData> myEnemies;
 	
 	public MachineFactory(
 			TimelineController time,
 			ResourceStore aResourceStore,
-			DataStore<DummyEntityData> enemies,
+			DataStore<EntityData> enemies,
 			DataStore<WeaponData> weapons,
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
