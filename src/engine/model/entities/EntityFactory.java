@@ -24,10 +24,10 @@ public class EntityFactory {
 	
 	public IEntity constructEntity(EntityData aEntityData ) {
 		IEntity entity = new ConcreteEntity();
-		Map<String, ComponentData> componentMap = aEntityData.getComponents();
-		for (Entry<String, ComponentData> mapEntry : componentMap.entrySet()) {
-			String className = mapEntry.getKey();
-			IComponent component = myComponentFactory.constructComponent(entity, mapEntry.getKey(), mapEntry.getValue());
+		List<ComponentData> componentMap = aEntityData.getComponents();
+		for (ComponentData compdata : componentMap) {
+			String className = compdata.getComponentName();
+			IComponent component = myComponentFactory.constructComponent(entity, compdata);
 			entity.addComponent(component);
 			
 		}

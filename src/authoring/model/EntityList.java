@@ -1,18 +1,20 @@
 package authoring.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import authoring.controller.Container;
 import engine.IObserver;
 import engine.IObservable;
 
 public class EntityList implements IObservable<EntityList>{
-	ArrayList<EntityData> myEntities = new ArrayList<EntityData>();
-	ArrayList<IObserver<EntityList>> myObservers = new ArrayList<IObserver<EntityList>>();
 	
+	List<EntityData> myEntities = new ArrayList<EntityData>();
+	List<IObserver<EntityList>> myObservers = new ArrayList<IObserver<EntityList>>();
 	
+	/*
 	public void addEntity(EntityData ed){
-		for (String componentName: ed.getComponents().keySet()){
+		for (String componentName: ed.getComponents()){
 			if (componentName.equals("DamageDealing")){
 				notifyObservers();
 			}
@@ -28,6 +30,7 @@ public class EntityList implements IObservable<EntityList>{
 		}
 		myEntities.remove(ed);
 	}
+	*/
 	
 	public EntityData getEntity(String name){
 		for (EntityData ed: myEntities){

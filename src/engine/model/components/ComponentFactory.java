@@ -5,7 +5,7 @@ import engine.model.entities.IEntity;
 
 public class ComponentFactory {
 
-	public IComponent constructComponent(IEntity entity, String key, ComponentData value) {
+	public IComponent constructComponent(IEntity entity, ComponentData value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
