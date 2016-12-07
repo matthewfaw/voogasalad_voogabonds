@@ -10,9 +10,9 @@ public class AttributeFetcher {
 	public static List<String> componentList;
 	public static List<String> attributeList;
 	//src/engine/model/components
-	private static final String PACKAGE = "authoring.model.";
+	private static final String PACKAGE = "engine.model.components.";
 	//engine.model.components.
-	private static final String PATH = "src/authoring/model";
+	private static final String PATH = "src/engine/model/components";
 
 	public static void fetch(){
 		componentList = new ArrayList<String>();
