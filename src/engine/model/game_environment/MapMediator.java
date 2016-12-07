@@ -5,21 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import authoring.model.EnemyData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
-import authoring.model.WeaponData;
-import engine.controller.timeline.TimelineController;
 import engine.model.components.PhysicalComponent;
-import engine.model.data_stores.DataStore;
 import engine.model.game_environment.paths.PathFactory;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
-import engine.model.machine.enemy.Enemy;
 import engine.model.strategies.IPhysical;
-import javafx.util.Pair;
 import utility.Point;
 
 //TODO: update this class to ECS
