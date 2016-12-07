@@ -94,6 +94,8 @@ class MockGameDataConstructor {
 			
 			// Enemy Data
 			EnemyData ed = new EnemyData();
+			ed.setMoveStrategyName("derp");
+			ed.setTerrainList(terrainList);
 			ed.setCollisionRadius(5);
 			ed.setImagePath("src/resources/boss.png");
 			ed.setKillReward(100);
@@ -141,8 +143,8 @@ class MockGameDataConstructor {
 //			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
 //			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
 //			ser.serializeToFile(terrain2, "exampleGame/TerrainData/"+terrain2.getClass().getSimpleName()+"2");
-			ser.serializeToFile(tow, "exampleGame/TowerData/"+tow.getClass().getSimpleName());
-//			ser.serializeToFile(ed, "exampleGame/EnemyData/"+ed.getClass().getSimpleName());
+//			ser.serializeToFile(tow, "exampleGame/TowerData/"+tow.getClass().getSimpleName());
+			ser.serializeToFile(ed, "exampleGame/EnemyData/"+ed.getClass().getSimpleName());
 //			ser.serializeToFile(wd, "exampleGame/WeaponData/"+wd.getClass().getSimpleName());
 //			ser.serializeToFile(pd, "exampleGame/ProjectileData/"+pd.getClass().getSimpleName());
 //			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());

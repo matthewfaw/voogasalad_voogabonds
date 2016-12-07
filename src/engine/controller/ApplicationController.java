@@ -70,11 +70,11 @@ public class ApplicationController {
 	}
 
 	public void onPlayButtonPressed() {
-		//AnimationController.play()
+		myBackendController.startTimeLine();
 	}
 
 	public void onPauseButtonPressed() {
-		//AnimationController.pause()
+		myBackendController.pauseTimeline();
 	}
 
 	public void onFastButtonPressed() {
@@ -103,7 +103,7 @@ public class ApplicationController {
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
-//		appcont.constructMap();
+		appcont.constructMap();
 	}
 	*/
 	

@@ -1,6 +1,5 @@
 package engine.model.game_environment.distributors;
 
-import engine.model.entities.EntityData;
 import utility.Point;
 
 public interface IDistributor {

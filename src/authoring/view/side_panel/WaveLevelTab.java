@@ -100,7 +100,7 @@ public class WaveLevelTab extends Tab implements IObserver<Container>{
 			public void handle(ActionEvent event){
 				WaveData wave = myController.getWaveData(text);
 				myMenu.createWaveWindow(wave.getName(), String.valueOf(wave.getTimeBetweenEnemy()), 
-						String.valueOf(wave.getTimeForWave()), String.valueOf(wave.getNumEnemies()), 
+						String.valueOf(wave.getTimeUntilNextWave()), String.valueOf(wave.getNumEnemies()), 
 						wave.getWaveEnemy(), wave.getSpawnPointName(), false);
 			}
 		});

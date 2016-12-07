@@ -44,7 +44,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	List<ISystem> mySystems;
 	
-	public Machine (TimelineController time, WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
+	public Machine (WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
 
 		myModifiablePlayer = owner;
@@ -62,8 +62,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		myMoveSpeed = data.getMoveSpeed();
 		myHeading = 0;
 		myPosition = initialPosition;
-		
-		time.attach(this);
 	}
 	
 	public Machine(String name, int maxHealth) {
@@ -83,7 +81,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void update(TimelineController time) {
 		move();
-		myWeapon.fire(myHeading, myPosition);
+//		myWeapon.fire(myHeading, myPosition);
 	}
 	
 	@Deprecated //TODO
@@ -91,6 +89,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
 		myHeading = nextMove.getKey();
+		notifyObservers();
 	}
 	
 	@Override
@@ -195,6 +194,12 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	
 	/********** ICollidable Interface Methods ************/
+	/*
+	@Override
+	public void collideInto(ICollidable movedCollidable) {
+		movedCollidable.collideInto(this);
+	}
+	*/
 	/*
 	@Override
 	public void collideInto(Machine unmovedCollidable) {

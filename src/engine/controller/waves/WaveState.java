@@ -3,6 +3,11 @@ package engine.controller.waves;
 import authoring.model.WaveData;
 
 //TODO: move to the model
+/**
+ * A class intended to store the states of waves and WaveData 
+ * @author matthewfaw
+ *
+ */
 public class WaveState {
 	private WaveData myWaveData;
 	private int myUnreleasedEnemyCount;

@@ -13,9 +13,9 @@ import utility.Point;
 public class Tower{ /*extends Machine implements IUpgradable {
 	
 
-	public Tower(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, TowerData data,
+	public Tower(WeaponFactory armory, IModifiablePlayer owner, TowerData data,
 			Point initialPosition) {
-		super(time, armory, owner, data, initialPosition);
+		super(armory, owner, data, initialPosition);
 	}
 	
 	@Override
