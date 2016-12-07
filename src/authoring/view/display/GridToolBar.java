@@ -46,8 +46,10 @@ public class GridToolBar {
 	private boolean toggleStatus;
 	private boolean spawnStatus;
 	private boolean sinkStatus;
+	private boolean imageStatus;
 	private Color selectedColor;
 	private String selectedTerrain;
+	private String selectedImagePath;
 	private Image mouseCursor;
 	private int screenHeight;
 	private int screenWidth;
@@ -177,8 +179,10 @@ public class GridToolBar {
 					ColorPicker colorChooser = new ColorPicker();
 					TextField terrainName = new TextField();
 					terrainName.setText(myResources.getString("TerrainName"));
+					Button chooseImage = new Button(myResources.getString("ChooseTerrainImage"));
+					confirmImageHandler(chooseImage, createTerrain);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
-					choiceArea.getChildren().addAll(colorChooser, terrainName, confirmTerrain);
+					choiceArea.getChildren().addAll(colorChooser, chooseImage, terrainName, confirmTerrain);
 					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
 					Scene terrainChoiceScene = new Scene(choiceArea, screenWidth*0.3, screenHeight*0.1);
 					createTerrain.setScene(terrainChoiceScene);
@@ -189,6 +193,15 @@ public class GridToolBar {
 					selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 				}
 //				terrains.getSelectionModel().clearSelection();
+			}
+		});
+	}
+	
+	private void confirmImageHandler(Button chooseImage, Stage imageStage) {
+		chooseImage.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, imageStage, myResources.getString("TerrainImageFilePath"));
 			}
 		});
 	}
@@ -227,6 +240,19 @@ public class GridToolBar {
 	
 	public String getSelectedTerrain() {
 		return selectedTerrain;
+	}
+	
+	public String getSelectedImagePath() {
+		return selectedImagePath;
+	}
+	
+	public void setSelectedImagePath(String newPath) {
+		selectedImagePath = newPath;
+		imageStatus= true;
+	}
+	
+	public boolean getImageStatus() {
+		return imageStatus;
 	}
 	
 }
