@@ -5,6 +5,7 @@ import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import engine.controller.timeline.TimelineController;
+import engine.controller.waves.DummyEntityData;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.enemy.Enemy;
@@ -22,12 +23,12 @@ public class MachineFactory {
 	private TimelineController myTime;
 	private WeaponFactory myArmory;
 	private DataStore<TowerData> myTowers;
-	private DataStore<EnemyData> myEnemies;
+	private DataStore<DummyEntityData> myEnemies;
 	
 	public MachineFactory(
 			TimelineController time,
 			ResourceStore aResourceStore,
-			DataStore<EnemyData> enemies,
+			DataStore<DummyEntityData> enemies,
 			DataStore<WeaponData> weapons,
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
@@ -46,6 +47,8 @@ public class MachineFactory {
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_TOWER_ERROR) + name);
 	}
+	/*
+	 * TODO: Change it to entity
 	
 	public Enemy newEnemy(String name, IModifiablePlayer owner, Point intitialPosition) {
 		if (myEnemies.hasKey(name)) {
@@ -56,5 +59,6 @@ public class MachineFactory {
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_ENEMY_ERROR) + name);
 	}
+	*/
 
 }

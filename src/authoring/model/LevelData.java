@@ -2,7 +2,7 @@ package authoring.model;
 
 import java.util.List;
 import java.util.Stack;
-
+@Deprecated
 public class LevelData {
 	
 	private WaveData waveData;

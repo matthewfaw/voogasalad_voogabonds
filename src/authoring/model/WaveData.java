@@ -22,9 +22,9 @@ public class WaveData implements IReadableData {
 	private double timeBetweenEnemy;
 	
 	/**
-	 * How long this wave is supposed to last, the amount of time before the next wave, in seconds.
+	 * The amount of time before the next wave, in seconds.
 	 */
-	private double timeForWave;
+	private double timeUntilNextWave;
 	
 	/**
 	 * Number of enemies in this wave.
@@ -66,14 +66,14 @@ public class WaveData implements IReadableData {
 		this.timeBetweenEnemy = timeBetweenEnemy;
 	}
 	
-	public double getTimeForWave() {
-		return timeForWave;
+	public double getTimeUntilNextWave() {
+		return timeUntilNextWave;
 	}
 	public void setTimeForWave(double timeBeforeWave) throws Exception{
 		if (timeBeforeWave < 0){
 			throw new Exception("Time between waves cannot be a negative number.");
 		}
-		this.timeForWave = timeBeforeWave;
+		this.timeUntilNextWave = timeBeforeWave;
 	}
 	
 	public int getNumEnemies(){

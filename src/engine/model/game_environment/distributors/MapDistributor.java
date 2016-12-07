@@ -7,6 +7,7 @@ import authoring.model.WeaponData;
 import engine.IObservable;
 import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
+import engine.controller.waves.DummyEntityData;
 import engine.model.components.PhysicalComponent;
 import engine.model.components.PhysicalComponentData;
 import engine.model.data_stores.DataStore;
@@ -37,7 +38,7 @@ public class MapDistributor implements IDistributor {
 	
 	public MapDistributor(MapMediator aMapMediator,
 			ResourceStore aTowerDataStore,
-			DataStore<EnemyData> aEnemyDataStore,
+			DataStore<DummyEntityData> aEnemyDataStore,
 			DataStore<WeaponData> aWeaponDataStore,
 			DataStore<ProjectileData> aProjectileDataStore,
 			TimelineController aTimelineController,
@@ -96,7 +97,7 @@ public class MapDistributor implements IDistributor {
 		// return myMapMediator.attemptToPlaceEntity(aSpawnPoint, enemy);
 		throw new RuntimeException("Add implementation here");
 	}
-
+	/* TODO: should be changed
 	@Deprecated
 	public void distribute(EnemyData random, TimelineController aChangedObject, Player p) {
 		Point loc = new Point(1,1);
@@ -106,5 +107,6 @@ public class MapDistributor implements IDistributor {
 			myRouter.distributeViewableComponent(toAdd);
 		}
 	}
+	 */
 
 }
