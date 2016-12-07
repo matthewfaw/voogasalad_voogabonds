@@ -4,27 +4,34 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import utility.FileRetriever;
+
 public class AttributeFetcher {
 
-	public static Map<String, List<String>> componentAttributeMap = new HashMap<String, List<String>>();
-	public static List<String> componentList;
-	public static List<String> attributeList;
-	//src/engine/model/components
-	private static final String PACKAGE = "engine.model.components.";
-	//engine.model.components.
-	private static final String PATH = "src/engine/model/components";
+	public Map<String, List<String>> componentAttributeMap = new HashMap<String, List<String>>();
+	public List<String> componentList;
+	public List<String> attributeList;
+	private final String PACKAGE = "engine/model/components";
+	private final String EXTENSION = ".class";
+	private int index;
 
-	public static void fetch(){
+	public void fetch(){
 		componentList = new ArrayList<String>();
-		File dir = new File(PATH);
+//		File dir = new File(PATH);
+		List<String> fileList = new ArrayList<String>();
+		FileRetriever fr = new FileRetriever(PACKAGE);
+		fileList = fr.getFileNames("/");
+		
 
-		for (int i = 0; i<dir.listFiles().length; i++){
+		for (String fileName : fileList){
 
 			attributeList = new ArrayList<String>();
 
 			try{
-				String tempString = PACKAGE + dir.listFiles()[i].getName();
-				tempString = tempString.substring(0, tempString.length()-5);
+				String tempString = fileName;
+				index = tempString.indexOf(EXTENSION);
+				tempString = tempString.substring(0, index);
+				tempString = tempString.replace('/','.');
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
 				componentList.add(newCompName);
@@ -44,17 +51,17 @@ public class AttributeFetcher {
 
 	}
 	
-	private static String fieldManipulator(Field f){	
+	private String fieldManipulator(Field f){	
 		String fieldString = f.toString();
 		fieldString = fieldString.substring(fieldString.lastIndexOf(".")+1, fieldString.length());
 		return fieldString;
 	}
 
-	public static List<String> getComponentList(){
+	public List<String> getComponentList(){
 		return componentList;
 	}
 
-	public static List<String> getComponentAttributeList(String component){
+	public List<String> getComponentAttributeList(String component){
 		return componentAttributeMap.get(component);
 	}
 
