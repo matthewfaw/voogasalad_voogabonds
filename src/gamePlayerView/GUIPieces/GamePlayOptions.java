@@ -1,8 +1,8 @@
-package gamePlayerView;
+package gamePlayerView.GUIPieces;
 
 import engine.controller.ApplicationController;
-import gamePlayerView.GUIPieces.IGUIPiece;
 import gamePlayerView.interfaces.IButtonMaker;
+import gamePlayerView.interfaces.IGUIPiece;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.GUIPieces.InfoBoxes;
 
 import engine.IObservable;
 import engine.IObserver;

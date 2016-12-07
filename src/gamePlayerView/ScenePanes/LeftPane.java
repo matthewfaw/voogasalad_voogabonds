@@ -1,17 +1,23 @@
-package gamePlayerView;
+package gamePlayerView.ScenePanes;
 
 import java.util.Collection;
 
 import engine.controller.ApplicationController;
-import gamePlayerView.GUIPieces.CashBox;
-import gamePlayerView.GUIPieces.IGUIPiece;
-import gamePlayerView.GUIPieces.LivesBox;
+import gamePlayerView.GUIPieces.GamePlayOptions;
+import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
+import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.interfaces.IGUIPiece;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+/**
+ * @author Guhan Muruganandam
+ * 
+ */
 
 public class LeftPane implements IGUIPiece {
 	private Pane myLeftPane;

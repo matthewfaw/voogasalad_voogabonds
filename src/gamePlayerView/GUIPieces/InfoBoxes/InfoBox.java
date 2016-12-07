@@ -1,8 +1,9 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.GUIPieces.InfoBoxes;
 
 import com.sun.prism.paint.Color;
 
 import engine.IObservable;
+import gamePlayerView.interfaces.IGUIPiece;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;

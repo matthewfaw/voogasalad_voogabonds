@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.model.map.MapData;
 import engine.controller.ApplicationController;
-import gamePlayerView.GamePlayOptions;
-import gamePlayerView.LeftPane;
-import gamePlayerView.GUIPieces.CashBox;
-import gamePlayerView.GUIPieces.LivesBox;
-import gamePlayerView.GUIPieces.MapDisplay;
-import gamePlayerView.GUIPieces.BottomPane;
+import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
+import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
+import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+import gamePlayerView.GUIPieces.MapView.MapDisplay;
+import gamePlayerView.ScenePanes.BottomPane;
+import gamePlayerView.ScenePanes.LeftPane;
+import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -34,6 +35,7 @@ public class GamePlayerScene {
 	private BottomPane myStatisticsRow;
 	private GamePlayOptions myGamePlayOptions;
 	private LeftPane myLeftPane;
+	private RightPane myRightPane;
 	private MapDisplay myMap;
 	private Scene myScene;
 	private List<ICashAcceptor> myCash;
@@ -87,17 +89,18 @@ public class GamePlayerScene {
 	}
 	
 	public BorderPane setScreen() throws Exception{
-		myTowerColumn   = new TowerColumn();
+		//myTowerColumn   = new TowerColumn();
 		//myGamePlayOptions=new GamePlayOptions(myAppController);
 		myLeftPane=new LeftPane(myAppController);
+		myRightPane=new RightPane();
 	    myMap = new MapDisplay(myAppController);
 		myStatisticsRow = new BottomPane(myAppController);
 		myCash.add(myLeftPane.getCash());
 		myLives.add(myLeftPane.getLives());
-		myResources.add(myTowerColumn);
+		myResources.add(myRightPane.getTowerColumn());
 		//mySprites.add(myMap.getSprites());
 		BorderPane borderpane=new BorderPane();
-		borderpane.setRight(myTowerColumn.getView());
+		borderpane.setRight(myRightPane.getView());
 		borderpane.setBottom(myStatisticsRow.getView());
 		borderpane.setCenter(myMap.getView());
 		borderpane.setLeft(myLeftPane.getView());

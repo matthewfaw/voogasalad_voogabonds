@@ -1,6 +1,8 @@
 package gamePlayerView.GUIPieces.MachineInfoView;
 
 import authoring.model.TowerData;
+import gamePlayerView.interfaces.IGUIPiece;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -9,30 +11,30 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Guhan Muruganandam
+ * 
+ */
 
-public class TowerStatisticsandOptions {
+public class TowerStatisticsandOptions implements IGUIPiece {
 	private VBox myDisplay;
 	
-	public TowerStatisticsandOptions(TowerData tower){
+	public TowerStatisticsandOptions(){
 		myDisplay= new VBox();
-		myDisplay=makeDisplay(tower);
+		myDisplay=makeDisplay();
 	}
 
-	private VBox makeDisplay(TowerData tower) {
+	private VBox makeDisplay() {
 		VBox vbox=new VBox();
-		HBox towerStats=makeTowerStats();
+		TowerStatistics towerStats=new TowerStatistics();
 		TargetingButtons targetingButtons=new TargetingButtons();
-		vbox.getChildren().add(towerStats);
+		vbox.getChildren().add(towerStats.getView());
 		vbox.getChildren().add(targetingButtons.getView());
 		return vbox;
 		
 	}
 
-	private HBox makeTowerStats() {
-		HBox towerStats=new HBox();
-		EnemiesKilledBox enemieskilled=new EnemiesKilledBox();
-		//OTHER STATS
-		towerStats.getChildren().addAll(enemieskilled.getView()/*,valueofTower*/);
-		return towerStats;
+	public Node getView() {
+		return myDisplay;
 	}
 }

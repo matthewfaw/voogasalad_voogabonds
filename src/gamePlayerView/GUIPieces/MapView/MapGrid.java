@@ -1,4 +1,4 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 import java.util.Set;

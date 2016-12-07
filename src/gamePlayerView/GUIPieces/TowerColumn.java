@@ -12,6 +12,7 @@ import authoring.model.TowerData;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
+import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,15 +74,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	 * Builds object that will actually be returned
 	 */
 	private VBox buildVBox() {
-		
-		VBox vbox = new VBox();
-		vbox.setPrefWidth(200);
-		vbox.setPrefHeight(600);
-	    vbox.setPadding(new Insets(10));
-	    vbox.setSpacing(8);
-	    //TODO:Export CSS to other part
-	    vbox.setStyle("-fx-background-color: #778899;");
-	    
+	    VBox vbox=new VBox();
 	    towerDataDisplay= new TextArea();
 	    towerInfo=new ListView<ImageView>(); 
 	    //populatetowerInfo(availableTowers,towerDataDisplay);

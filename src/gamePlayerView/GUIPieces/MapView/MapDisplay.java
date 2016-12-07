@@ -1,4 +1,4 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 import authoring.model.map.MapData;

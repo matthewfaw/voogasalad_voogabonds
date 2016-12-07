@@ -1,7 +1,12 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.ScenePanes;
 
 import engine.controller.ApplicationController;
 import gamePlayerView.Styles;
+import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
+import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
+import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
+import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
+import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IViewPane;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -40,8 +45,10 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	    hbox.setPadding(new Insets(10, 10,10, 10));
 	    hbox.setSpacing(10);
 	    hbox.setStyle("-fx-background-color: #993384;");
-	    
-	    //TODO: hbox.getChildren().addAll();
+	    TowerStatisticsandOptions myTowerOptions=new TowerStatisticsandOptions();
+	    UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
+	    MachineInfo myMachineView=new MachineInfo();
+	    hbox.getChildren().addAll(myMachineView.getView(),myTowerOptions.getView(),myUpgradeandSell.getView());
 
 	    return hbox;
 	}
