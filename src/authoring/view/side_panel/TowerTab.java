@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.controller.IDataController;
-import authoring.controller.TowerDataController;
+import authoring.controller.IDataContainer;
+import authoring.controller.TowerDataContainer;
 import authoring.model.IReadableData;
-import authoring.controller.Controller;
-import authoring.controller.MapDataController;
-import authoring.controller.TowerDataController;
-import authoring.controller.WeaponDataController;
+import authoring.controller.Container;
+import authoring.controller.MapDataContainer;
+import authoring.controller.TowerDataContainer;
+import authoring.controller.WeaponDataContainer;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.AbstractMenu;
@@ -34,14 +34,14 @@ import javafx.scene.layout.VBox;
  * Implements the tab that allows user to add, delete, or edit preexisting towers.
  */
 
-public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
+public class TowerTab extends AbstractInfoTab implements IObserver<Container> {
 
     //private TowerMenu myMenu;
     //private TowerDataController myTowerController;
     private ObservableList<String> myTowers, myWeapons, myTerrains;
     private ListView<String> towers;
 
-    public TowerTab(TabPane pane, TowerDataController controller) {
+    public TowerTab(TabPane pane, TowerDataContainer controller) {
         super(pane, controller);
     }
 
@@ -75,8 +75,8 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     }
 
     @Override
-    protected AbstractMenu initMenu (ResourceBundle resources, IDataController controller) {
-        return new TowerMenu(resources, this, (TowerDataController)controller);
+    protected AbstractMenu initMenu (ResourceBundle resources, IDataContainer controller) {
+        return new TowerMenu(resources, this, (TowerDataContainer)controller);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
         TowerData defaultTower = new TowerData();
         try {
             defaultTower.setName(getResources().getString("DefaultTowerName"));
-            defaultTower.setMaxHealth(Integer.parseInt(getResources().getString("DefaultBuyPrice")));
+            defaultTower.setMaxHealth(Double.parseDouble(getResources().getString("DefaultBuyPrice")));
             defaultTower.setBuyPrice(Integer.parseInt(getResources().getString("DefaultBuyPrice")));
             defaultTower.setSellPrice(Integer.parseInt(getResources().getString("DefaultSellPrice")));
             defaultTower.setImagePath(getResources().getString("DefaultImage"));
@@ -107,7 +107,11 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     @Override
     public void addObject (String name, IReadableData data) {
         this.addTower(name);
-        getController().createObjectData(data);
+        try {
+            getController().createObjectData(data);
+        } catch (Exception e) {
+            getMenu().showError(e.getMessage());
+        }
     }
 
     @Override
@@ -158,7 +162,7 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
     }
 
     private void editTower(String tower) {
-        TowerData td = ((TowerDataController)getController()).getTowerData(tower);
+        TowerData td = ((TowerDataContainer)getController()).getTowerData(tower);
         getMenu().createObjectMenu(td);
     }
 
@@ -166,15 +170,15 @@ public class TowerTab extends AbstractInfoTab implements IObserver<Controller> {
      * IObservable method
      */
     @Override
-    public void update(Controller c){
-            if (c instanceof WeaponDataController){
+    public void update(Container c){
+            if (c instanceof WeaponDataContainer){
                     myWeapons.clear();
-                    for (String weaponName: ((WeaponDataController) c).getWeaponDataMap().keySet()){
+                    for (String weaponName: ((WeaponDataContainer) c).getWeaponDataMap().keySet()){
                             myWeapons.add(weaponName);
                     }
-            }else if (c instanceof MapDataController){
+            }else if (c instanceof MapDataContainer){
                     myTerrains.clear();
-                    for (String terrainName: ((MapDataController) c).getValidTerrainMap().keySet()){
+                    for (String terrainName: ((MapDataContainer) c).getValidTerrainMap().keySet()){
                             myTerrains.add(terrainName);
                     }
             }

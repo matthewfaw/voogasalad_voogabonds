@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import authoring.controller.EnemyDataController;
-import authoring.controller.WeaponDataController;
-import authoring.controller.MapDataController;
-import authoring.controller.Controller;
+import authoring.controller.EnemyDataContainer;
+import authoring.controller.WeaponDataContainer;
+import authoring.controller.MapDataContainer;
+import authoring.controller.Container;
 import authoring.model.EnemyData;
 import authoring.model.WeaponData;
 import authoring.view.input_menus.EnemyMenu;
@@ -29,7 +29,7 @@ import javafx.scene.layout.VBox;
  * Creates the enemy pane option that allows user to add enemies. Preexisting/created enemies will showup in the pane as buttons that can be edited upon click.
  */
 
-public class EnemyTab extends Tab implements IObserver<Controller>{
+public class EnemyTab extends Tab implements IObserver<Container>{
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
 	private ResourceBundle myResources;
@@ -38,11 +38,11 @@ public class EnemyTab extends Tab implements IObserver<Controller>{
 	private int screenHeight;
 	private VBox myContent;
 	private EnemyMenu myMenu;
-	private EnemyDataController myController;
+	private EnemyDataContainer myController;
 	private ArrayList<String> myWeapons;
 	private ArrayList<String> myTerrains;
 	
-	public EnemyTab(TabPane pane, EnemyDataController controller) {
+	public EnemyTab(TabPane pane, EnemyDataContainer controller) {
 		screenInfo();
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		enemyTab = new Tab(myResources.getString("Enemies"));
@@ -114,7 +114,7 @@ public class EnemyTab extends Tab implements IObserver<Controller>{
 		myContent.getChildren().add(button);
 	}
 	
-	public EnemyDataController getController(){
+	public EnemyDataContainer getController(){
 		return myController;
 	}
 	
@@ -129,15 +129,15 @@ public class EnemyTab extends Tab implements IObserver<Controller>{
 	/**
 	 * Observer interface method
 	 */
-	public void update(Controller c){
-		if (c instanceof WeaponDataController){
+	public void update(Container c){
+		if (c instanceof WeaponDataContainer){
 			myWeapons.clear();
-			for (String weaponName: ((WeaponDataController) c).getWeaponDataMap().keySet()){
+			for (String weaponName: ((WeaponDataContainer) c).getWeaponDataMap().keySet()){
 				myWeapons.add(weaponName);
 			}
-		}else if(c instanceof MapDataController){
+		}else if(c instanceof MapDataContainer){
 			myTerrains.clear();
-			for (String terrainName: ((MapDataController) c).getValidTerrainMap().keySet()){
+			for (String terrainName: ((MapDataContainer) c).getValidTerrainMap().keySet()){
 				myTerrains.add(terrainName);
 			}
 		}

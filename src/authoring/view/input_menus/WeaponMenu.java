@@ -1,8 +1,8 @@
 package authoring.view.input_menus;
 
 import java.util.ResourceBundle;
-import authoring.controller.TowerDataController;
-import authoring.controller.WeaponDataController;
+import authoring.controller.TowerDataContainer;
+import authoring.controller.WeaponDataContainer;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import authoring.view.side_panel.TowerTab;
@@ -69,10 +69,10 @@ public class WeaponMenu {
 			public void handle(ActionEvent event){
 				String name = myNameField.getCharacters().toString();
 				String projectile = myProjectileNameField.getCharacters().toString();
-				int range = 0;
+				double range = 0;
 				int rate = 0;
 				try {
-					range = Integer.parseInt(myRangeField.getCharacters().toString());
+					range = Double.parseDouble(myRangeField.getCharacters().toString());
 					rate = Integer.parseInt(myRateField.getCharacters().toString());
 				} catch (Exception e){
 					myHelper.showError(myResources.getString("BadIntInput"));
@@ -96,7 +96,7 @@ public class WeaponMenu {
 		root.getChildren().add(finishButton);
 	}
 	
-	private WeaponData createWeaponData(String name, String projectile, int range, int rate) {
+	private WeaponData createWeaponData(String name, String projectile, double range, int rate) {
 		WeaponData weapon = new WeaponData();
 		try {
 			weapon.setName(name);

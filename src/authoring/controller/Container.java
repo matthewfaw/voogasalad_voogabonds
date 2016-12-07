@@ -1,5 +1,5 @@
 package authoring.controller;
 
-public class Controller {
+public class Container {
 
 }
