@@ -5,6 +5,10 @@ import java.util.List;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
+import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.systems.HealthSystem;
+import javafx.util.Pair;
+import utility.Point;
 
 /**
  * The purpose of this class is to encapsulate the information relevant
@@ -21,7 +25,6 @@ public class CollidableComponent implements IComponent, ICollidable {
 	private double myCollisionRadius;
 	
 	private boolean myDestroyOnCollision;
-	
 //	private HealthSystem myHealthSystem;
 //	private MoneySystem myMoneySystem;
 
@@ -38,14 +41,13 @@ public class CollidableComponent implements IComponent, ICollidable {
 	}
 	
 	@Override
-	public void collideInto(ICollidable unmovedCollidable) {
+	public void collideInto(CollidableComponent unmovedCollidable) {
 		/*
 		 * Health System needs to know:
 		 * * how much health to change
 		 * * which entity's health to change 
 		 */
 		// healthSystem.changeHealth(this, deltaHealth);
-//		myCollidedWith = unmovedCollidable;
 		myObservers.forEach(o -> o.update(this));
 		if (myDestroyOnCollision) {
 			/* Money system needs to know: 
@@ -55,7 +57,6 @@ public class CollidableComponent implements IComponent, ICollidable {
 			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
 			getEntity().delete();
 		}
-//		myCollidedWith = null;
 	}
 	
 }
