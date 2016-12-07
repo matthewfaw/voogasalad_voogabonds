@@ -1,10 +1,8 @@
 package engine.model.strategies;
 
-import java.util.List;
-
 import utility.Point;
 
-public interface IMovable extends IPhysical {
+public interface IMovable {
 	
 	abstract public Point getGoal();
 	abstract public double getTurnSpeed();

@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 
-public class EnemyDataController extends Controller implements IObservable<Controller>{
+public class EnemyDataContainer extends Container implements IObservable<Container>{
 	private AbstractMap<String, EnemyData> myEnemyDataMap = new HashMap<String, EnemyData>();
-	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
+	private transient ArrayList<IObserver<Container>> myListeners = new ArrayList<IObserver<Container>>();
 	
 	
 	public AbstractMap<String, EnemyData> finalizeEnemyDataMap(){
@@ -41,16 +41,16 @@ public class EnemyDataController extends Controller implements IObservable<Contr
 	/**
 	 * IObserver functions
 	 */
-	public void attach(IObserver<Controller> listener){
+	public void attach(IObserver<Container> listener){
 		myListeners.add(listener);
 	}
 	
-	public void detach(IObserver<Controller> listener){
+	public void detach(IObserver<Container> listener){
 		myListeners.remove(listener);
 	}
 	
 	public void notifyObservers(){
-		for (IObserver<Controller> observer: myListeners){
+		for (IObserver<Container> observer: myListeners){
 			observer.update(this);
 		}
 	}

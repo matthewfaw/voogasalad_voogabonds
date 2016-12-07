@@ -1,28 +1,29 @@
 package engine.model.components;
 
-import engine.IObserver;
 import engine.model.entities.IEntity;
+import utility.Damage;
 
+/**
+ * The purpose of this class is to manage the health information
+ * relevant to an entity
+ * manages how an entity should take damage
+ * @author matthewfaw
+ *
+ */
 public class HealthComponent implements IComponent {
-
-	@Override
-	public void attach(IObserver<IComponent> aObserver) {
-		// TODO Auto-generated method stub
-		
+	private int myCurrentHealth;
+	
+	public int getCurrentHealth()
+	{
+		return myCurrentHealth;
+	}
+	public void takeDamage(int damage)
+	{
+		myCurrentHealth -= damage;
+		//TODO: Manage death, perhaps with a strategy
 	}
 
-	@Override
-	public void detach(IObserver<IComponent> aObserver) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**********************IComponent Interface********/
 	@Override
 	public IEntity getEntity() {
 		// TODO Auto-generated method stub

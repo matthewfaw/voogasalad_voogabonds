@@ -2,18 +2,13 @@ package engine.model.game_environment.distributors;
 
 import authoring.model.EnemyData;
 import authoring.model.ProjectileData;
-import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import engine.IObservable;
 import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.DummyEntityData;
-import engine.model.components.PhysicalComponent;
-import engine.model.components.PhysicalComponentData;
 import engine.model.data_stores.DataStore;
-import engine.model.entities.EntityData;
 import engine.model.entities.EntityFactory;
-import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
@@ -58,14 +53,17 @@ public class MapDistributor implements IDistributor {
 				);
 	}
 	
+	@Deprecated
 	public void distribute(String aTowerName, PlayerController aPlayerController, Point aLocation)
 	{
+		/*
 		Tower tower = myAnarchosyndacalistCommune.newTower(aTowerName, aPlayerController.getActivePlayer(), aLocation);
 		if (myMapMediator.attemptToPlaceEntity(aLocation, tower)) {
 			myRouter.distributeViewableComponent(tower);
 			int price = myResourceStore.getTowerPrice(tower.getName());
 			aPlayerController.getActivePlayer().updateAvailableMoney(-price);
 		}
+		*/
 //		return true;
 	}
 
@@ -73,6 +71,7 @@ public class MapDistributor implements IDistributor {
 	 * Constructs the Entity object, and places it on the map, if the location
 	 * is valid
 	 */
+	/*
 	@Override
 	public boolean distribute(EntityData aEntityData, PhysicalComponentData aPhysicalComponentData, Point aLocation)
 	{
@@ -86,6 +85,7 @@ public class MapDistributor implements IDistributor {
 		
 		return myMapMediator.attemptToPlaceEntity(aLocation, physicalComponent);
 	}
+	*/
 	
 	//TODO: add the implementation
 	//TODO: I'm imagining that EnemyData and TowerData are going to have similar interfaces, so we're probs

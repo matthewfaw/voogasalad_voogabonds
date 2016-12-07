@@ -2,13 +2,15 @@ package engine.model.machine.tower;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.CollidableComponent;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.weapons.WeaponFactory;
 import javafx.util.Pair;
 import utility.Point;
 
-public class Tower extends Machine implements IUpgradable {
+@Deprecated
+public class Tower{ /*extends Machine implements IUpgradable {
 	
 
 	public Tower(WeaponFactory armory, IModifiablePlayer owner, TowerData data,
@@ -33,5 +35,5 @@ public class Tower extends Machine implements IUpgradable {
 		//This is intended. (Contrast with projectile's getGoal() method.)
 		return null;
 	}
-
+*/
 }

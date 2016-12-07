@@ -16,6 +16,7 @@ import engine.model.weapons.WeaponFactory;
 import utility.Point;
 import utility.ResouceAccess;
 
+@Deprecated
 public class MachineFactory {
 	private static final String INVALID_TOWER_ERROR = "NoSuchTower";
 	private static final String INVALID_ENEMY_ERROR = "NoSuchTower";
@@ -38,6 +39,7 @@ public class MachineFactory {
 		myArmory = new WeaponFactory(weapons, projectiles, time, map);
 	}
 	
+	/*
 	public Tower newTower(String name, IModifiablePlayer owner, Point intitialPosition) {
 		if (myTowers.hasKey(name)) {
 			Tower tower = new Tower(myArmory, owner, myTowers.getData(name), intitialPosition);
@@ -47,9 +49,8 @@ public class MachineFactory {
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_TOWER_ERROR) + name);
 	}
-	/*
-	 * TODO: Change it to entity
 	
+	/*
 	public Enemy newEnemy(String name, IModifiablePlayer owner, Point intitialPosition) {
 		if (myEnemies.hasKey(name)) {
 			Enemy enemy = new Enemy(myArmory, owner, myEnemies.getData(name), intitialPosition);

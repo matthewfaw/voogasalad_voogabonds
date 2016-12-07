@@ -12,10 +12,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 
-public class WeaponDataController extends Controller implements IObservable<Controller>{
+public class WeaponDataContainer extends Container implements IObservable<Container>{
 
 	private AbstractMap<String, WeaponData> myWeaponDataMap = new HashMap<String, WeaponData>();
-	private ArrayList<IObserver<Controller>> myListeners = new ArrayList<IObserver<Controller>>();
+	private transient ArrayList<IObserver<Container>> myListeners = new ArrayList<IObserver<Container>>();
 
 	public AbstractMap<String, WeaponData> finalizeWeaponDataMap(){
 		//TODO: Error checking to make sure that enemies at least exist
@@ -41,16 +41,16 @@ public class WeaponDataController extends Controller implements IObservable<Cont
 		notifyObservers();
 	}
 	
-	public void attach(IObserver<Controller> listener){
+	public void attach(IObserver<Container> listener){
 		myListeners.add(listener);
 	}
 	
-	public void detach(IObserver<Controller> listener){
+	public void detach(IObserver<Container> listener){
 		myListeners.remove(listener);
 	}
 	
 	public void notifyObservers(){
-		for (IObserver<Controller> observer: myListeners){
+		for (IObserver<Container> observer: myListeners){
 			observer.update(this);
 		}
 	}

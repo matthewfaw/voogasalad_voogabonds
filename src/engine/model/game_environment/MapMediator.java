@@ -22,6 +22,8 @@ import engine.model.strategies.IPhysical;
 import javafx.util.Pair;
 import utility.Point;
 
+//TODO: update this class to ECS
+@Deprecated
 public class MapMediator {
 	private PathFactory myPathFactory;
 	
@@ -50,11 +52,13 @@ public class MapMediator {
 	 */
 	public boolean attemptToPlaceEntity(Point aLocation, PhysicalComponent aPhysicalComponent)
 	{
+		/*
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
+		*/
 		return false;
 	}
 	
@@ -64,14 +68,17 @@ public class MapMediator {
 
 	public boolean attemptToPlaceEntity(Point aLocation, Machine aPhysicalComponent)
 	{
+		/*
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
+		*/
 		return false;
 	}
 	
+	@Deprecated
 	public List<Machine> withinRange(Point p, double radius){
 		Stream<IPhysical> s = myEntityManager.stream();
 		
@@ -82,11 +89,18 @@ public class MapMediator {
 	}
 
 	private boolean isInRadius(IPhysical e, Point p, double radius) {
+		/*
 		return e.getPosition().euclideanDistance(p) - e.getCollisionRadius() - radius >= 0;
+		*/
+		return false;
 	}
 
+	@Deprecated //please don't use instanceof unless completely unavoidable. If necessary, please document why
 	private boolean isEnemy(IPhysical e) {
+		/*
 		return e instanceof Enemy;
+		*/
+		return false;
 	}
 
 	/**

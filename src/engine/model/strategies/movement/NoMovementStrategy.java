@@ -8,12 +8,14 @@ public class NoMovementStrategy extends AbstractMovementStrategy {
 
 	@Override
 	protected Pair<Double, Point> nextMoveNoGoal(IMovable m) {
-		return new Pair<Double, Point>(m.getHeading(), m.getPosition());
+		//return new Pair<Double, Point>(m.getHeading(), m.getPosition());
+		return null;
 	}
 
 	@Override
 	protected Pair<Double, Point> nextMoveWithGoal(IMovable m) {
-		return new Pair<Double, Point>(m.getHeading(), m.getPosition());
+		//return new Pair<Double, Point>(m.getHeading(), m.getPosition());
+		return null;
 	}
 
 }
