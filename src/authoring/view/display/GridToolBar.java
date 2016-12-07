@@ -46,8 +46,10 @@ public class GridToolBar {
 	private boolean toggleStatus;
 	private boolean spawnStatus;
 	private boolean sinkStatus;
+	private boolean imageStatus;
 	private Color selectedColor;
 	private String selectedTerrain;
+	private String selectedImagePath;
 	private Image mouseCursor;
 	private int screenHeight;
 	private int screenWidth;
@@ -199,7 +201,7 @@ public class GridToolBar {
 		chooseImage.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				ImageGallery terrainImages = new ImageGallery(imageStage, myResources.getString("TerrainImageFilePath"));
+				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, imageStage, myResources.getString("TerrainImageFilePath"));
 			}
 		});
 	}
@@ -238,6 +240,19 @@ public class GridToolBar {
 	
 	public String getSelectedTerrain() {
 		return selectedTerrain;
+	}
+	
+	public String getSelectedImagePath() {
+		return selectedImagePath;
+	}
+	
+	public void setSelectedImagePath(String newPath) {
+		selectedImagePath = newPath;
+		imageStatus= true;
+	}
+	
+	public boolean getImageStatus() {
+		return imageStatus;
 	}
 	
 }

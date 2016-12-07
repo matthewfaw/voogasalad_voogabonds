@@ -12,10 +12,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -74,7 +76,14 @@ public class TerrainCell extends Rectangle {
 									controller.removeSinkPoint(point);
 								}
 							}
-							setFill(toolBar.getSelectedColor());
+							if (toolBar.getImageStatus()) {
+								Image image = new Image(toolBar.getSelectedImagePath());
+								ImagePattern imagePattern = new ImagePattern(image);
+								setFill(imagePattern);
+							}
+							else {
+								setFill(toolBar.getSelectedColor());
+							}
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 							setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
 							setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
