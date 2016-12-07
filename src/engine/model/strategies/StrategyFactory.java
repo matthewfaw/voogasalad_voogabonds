@@ -2,6 +2,7 @@ package engine.model.strategies;
 
 import engine.model.strategies.damage.ExponentialDamageStrategy;
 import engine.model.strategies.movement.GreedyMovementStrategy;
+import engine.model.strategies.movement.NoMovementStrategy;
 import engine.model.strategies.target.BadTargetStrategy;
 
 /**
@@ -18,6 +19,8 @@ public class StrategyFactory {
 	 * @return GreedyMovementStategy
 	 */
 	public static IMovementStrategy movementStrategy(String movementStrategy) {
+		if (movementStrategy.equals("fast as fuck"))
+			return new NoMovementStrategy();
 		return new GreedyMovementStrategy();
 	}
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 import javafx.collections.ObservableMap;
 import authoring.controller.Router;
-import authoring.controller.TowerDataController;
+import authoring.controller.TowerDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
@@ -50,8 +50,11 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("TowerData", gameName);
-			ObservableMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
+			AbstractMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
+			System.out.println(td);
 			for (String tdName : td.keySet()){
+				System.out.println(tdName);
+				System.out.println(td.keySet());
 			ser.serializeToFile(td.get(tdName), gameName+"/"+"TowerData"+"/"+tdName);
 			}
 		}catch(Exception e1){
@@ -86,7 +89,7 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("MapData", gameName);
-			ser.serializeToFile(router.getMapDataController().getMapData(), gameName+"/"+"MapData"+"/"+"MapData");
+			ser.serializeToFile(router.getMapDataController(), gameName+"/"+"MapData"+"/"+"MapData");
 		}catch(Exception e){
 			System.out.println("Map fail");
 		}

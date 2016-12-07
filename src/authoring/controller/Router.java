@@ -2,13 +2,13 @@ package authoring.controller;
 import authoring.view.side_panel.*;
 
 public class Router {
-	private EnemyDataController edc = new EnemyDataController();
-	private MapDataController mdc = new MapDataController();
-	private PlayerDataController pldc = new PlayerDataController();
-	private ProjectileDataController prdc = new ProjectileDataController();
-	private TowerDataController tdc = new TowerDataController();
-	private WaveDataController wadc = new WaveDataController();
-	private WeaponDataController wedc = new WeaponDataController();
+	private EnemyDataContainer edc = new EnemyDataContainer();
+	private MapDataContainer mdc = new MapDataContainer();
+	private PlayerDataContainer pldc = new PlayerDataContainer();
+	private ProjectileDataContainer prdc = new ProjectileDataContainer();
+	private TowerDataContainer tdc = new TowerDataContainer();
+	private WaveDataContainer wadc = new WaveDataContainer();
+	private WeaponDataContainer wedc = new WeaponDataContainer();
 	
 	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
 		/**
@@ -32,31 +32,31 @@ public class Router {
 		
 	}
 	
-	public EnemyDataController getEnemyDataController(){
+	public EnemyDataContainer getEnemyDataController(){
 		return edc;
 	}
 	
-	public MapDataController getMapDataController(){
+	public MapDataContainer getMapDataController(){
 		return mdc;
 	}
 	
-	public PlayerDataController getPlayerDataController(){
+	public PlayerDataContainer getPlayerDataController(){
 		return pldc;
 	}
 	
-	public ProjectileDataController getProjectileDataController(){
+	public ProjectileDataContainer getProjectileDataController(){
 		return prdc;
 	}
 	
-	public TowerDataController getTowerDataController(){
+	public TowerDataContainer getTowerDataController(){
 		return tdc;
 	}
 	
-	public WaveDataController getWaveDataController(){
+	public WaveDataContainer getWaveDataController(){
 		return wadc;
 	}
 	
-	public WeaponDataController getWeaponDataController(){
+	public WeaponDataContainer getWeaponDataController(){
 		return wedc;
 	}
 }

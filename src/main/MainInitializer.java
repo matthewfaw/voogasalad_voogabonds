@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
 import authoring.view.side_panel.InfoTabs;

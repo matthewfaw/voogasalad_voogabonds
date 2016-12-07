@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.model.EnemyData;
+import authoring.model.GameLevelsData;
 import authoring.model.IReadableData;
 import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
@@ -14,6 +15,7 @@ import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
+import engine.controller.waves.DummyEntityData;
 import engine.controller.waves.DummyWaveOperationData;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
@@ -52,8 +54,9 @@ public class BackendController {
 	//Data relevant to constructing objects
 	private DataStore<WeaponData> myWeaponDataStore;
 	private DataStore<ProjectileData> myProjectileDataStore;
-	private DataStore<EnemyData> myEnemyDataStore;
+	private DataStore<DummyEntityData> myEnemyDataStore;
 	private PlayerData myPlayerData;
+	private GameLevelsData myGameLevelsData;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
@@ -72,11 +75,9 @@ public class BackendController {
 		myPlayerController = new PlayerController(myRouter);
 		
 		constructStaticBackendObjects();
-		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-//		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
-		
+		constructDynamicBackendObjects();
 	}
 	
 	//TODO
@@ -94,10 +95,10 @@ public class BackendController {
 	//TODO: Update when WaveData is ready from Authoring
 	private void constructDynamicBackendObjects()
 	{
-		List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
+		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
-		myWaveController = new WaveController(myMapDistributor, data.get(0), myEnemyDataStore);
+		myWaveController = new WaveController(myGameLevelsData, myEnemyDataStore, myPlayerController.getActivePlayer());
 		myTimelineController.attach(myWaveController);
 	}
 	
@@ -184,8 +185,8 @@ public class BackendController {
 	 */
 	private void constructEnemyDataStore()
 	{
-		List<EnemyData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
-		myEnemyDataStore = new DataStore<EnemyData>(data);
+		List<DummyEntityData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
+		myEnemyDataStore = new DataStore<DummyEntityData>(data);
 	}
 	
 	/**
@@ -223,6 +224,14 @@ public class BackendController {
 			}
 		}
 		return data;
+	}
+
+	public void startTimeLine() {
+		myTimelineController.start();
+	}
+	public void pauseTimeline()
+	{
+		myTimelineController.pause();
 	}
 	
 	/*

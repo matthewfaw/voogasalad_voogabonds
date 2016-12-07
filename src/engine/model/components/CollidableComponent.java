@@ -5,6 +5,9 @@ import java.util.List;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
+import engine.model.systems.DamageDealingSystem;
+import engine.model.systems.HealthSystem;
+import engine.model.systems.RewardSystem;
 
 /**
  * The purpose of this class is to encapsulate the information relevant
@@ -20,10 +23,9 @@ public class CollidableComponent implements IComponent, ICollidable {
 	
 	private double myCollisionRadius;
 	
-	private boolean myDestroyOnCollision;
-	
-//	private HealthSystem myHealthSystem;
-//	private MoneySystem myMoneySystem;
+	private HealthSystem myHealthSystem;
+	private DamageDealingSystem myDamageDealingSystem;
+	private RewardSystem myRewardSystem;
 
 	//*******************IComponent interface***********//
 	@Override
@@ -38,24 +40,35 @@ public class CollidableComponent implements IComponent, ICollidable {
 	}
 	
 	@Override
-	public void collideInto(ICollidable unmovedCollidable) {
-		/*
-		 * Health System needs to know:
-		 * * how much health to change
-		 * * which entity's health to change 
-		 */
-		// healthSystem.changeHealth(this, deltaHealth);
-//		myCollidedWith = unmovedCollidable;
-		myObservers.forEach(o -> o.update(this));
-		if (myDestroyOnCollision) {
+	public void collideInto(CollidableComponent unmovedCollidable) {
+		
+		// Have both components deal damage to each other
+		dealDamage(this, unmovedCollidable);
+		dealDamage(unmovedCollidable, this);
+		
+		if (myHealthSystem.isDead(this.getEntity())) {
+			/* Money system needs to know: 
+			 * * who to give money to
+			 * * how much money to give
+			 */
+//			myRewardSystem.giveMoneyTo(myPlayer, this);
+			this.getEntity().delete();
+		}
+		if (myHealthSystem.isDead(unmovedCollidable.getEntity())) {
 			/* Money system needs to know: 
 			 * * who to give money to
 			 * * how much money to give
 			 */
 			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
-			getEntity().delete();
+			unmovedCollidable.getEntity().delete();
 		}
-//		myCollidedWith = null;
+	}
+
+	private void dealDamage(CollidableComponent a, CollidableComponent b) {
+		// Get damage dealt by a
+		int damage = myDamageDealingSystem.getDamageDealt(a.getEntity());
+		// Deal damage to b
+		myHealthSystem.takeDamage(b.getEntity(), damage);
 	}
 	
 }

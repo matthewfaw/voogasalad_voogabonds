@@ -6,10 +6,14 @@ import authoring.model.WeaponData;
 import engine.IObservable;
 import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
+import engine.controller.waves.DummyEntityData;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
+import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
+import engine.model.machine.tower.Tower;
+import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
@@ -29,7 +33,7 @@ public class MapDistributor implements IDistributor {
 	
 	public MapDistributor(MapMediator aMapMediator,
 			ResourceStore aTowerDataStore,
-			DataStore<EnemyData> aEnemyDataStore,
+			DataStore<DummyEntityData> aEnemyDataStore,
 			DataStore<WeaponData> aWeaponDataStore,
 			DataStore<ProjectileData> aProjectileDataStore,
 			TimelineController aTimelineController,
@@ -93,5 +97,16 @@ public class MapDistributor implements IDistributor {
 		// return myMapMediator.attemptToPlaceEntity(aSpawnPoint, enemy);
 		throw new RuntimeException("Add implementation here");
 	}
+	/* TODO: should be changed
+	@Deprecated
+	public void distribute(EnemyData random, TimelineController aChangedObject, Player p) {
+		Point loc = new Point(1,1);
+		Machine toAdd = myAnarchosyndacalistCommune.newEnemy(random.getName(), p, loc);
+		
+		if (myMapMediator.attemptToPlaceEntity(loc, toAdd)) {
+			myRouter.distributeViewableComponent(toAdd);
+		}
+	}
+	 */
 
 }

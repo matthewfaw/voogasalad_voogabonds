@@ -2,6 +2,7 @@ package engine.model.machine.tower;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.CollidableComponent;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.weapons.WeaponFactory;
@@ -12,9 +13,9 @@ import utility.Point;
 public class Tower{ /*extends Machine implements IUpgradable {
 	
 
-	public Tower(TimelineController time, WeaponFactory armory, IModifiablePlayer owner, TowerData data,
+	public Tower(WeaponFactory armory, IModifiablePlayer owner, TowerData data,
 			Point initialPosition) {
-		super(time, armory, owner, data, initialPosition);
+		super(armory, owner, data, initialPosition);
 	}
 	
 	@Override

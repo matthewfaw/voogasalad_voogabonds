@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import utility.ErrorBox;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -38,11 +38,11 @@ public class TerrainCell extends Rectangle {
 	private int colLocation;
 	private int screenHeight;
 	private int screenWidth;
-	private MapDataController controller;
+	private MapDataContainer controller;
 	private int DEFAULT_TILE_SIZE;
 	private Point point;
 	
-	public TerrainCell(MapDataController c, GridToolBar tools, int row, int column) {	
+	public TerrainCell(MapDataContainer c, GridToolBar tools, int row, int column) {	
 		setUpScreenResolution();
 		this.toolBar = tools;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");

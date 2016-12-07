@@ -6,7 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import authoring.model.EnemyData;
+import authoring.model.GameLevelsData;
+import authoring.model.OneLevelData;
 import authoring.model.WaveData;
 import engine.model.data_stores.DataStore;
 
@@ -14,25 +15,29 @@ import engine.model.data_stores.DataStore;
  * A class intended to manage which waves are currently active
  * Provides a simple interface to retrieve which Enemies to be constructed
  * at a given time step 
- * @author matthewfaw
+ * @author matthewfaw and owenchung
  *
  */
 public class ActiveWaveManager {
 	private static final double DEFAULT_START_TIME = 0.0;
 
-	private DummyWaveOperationData myWaveOperationData;
-	private DataStore<EnemyData> myEnemyDataStore;
+//	private DummyWaveOperationData myWaveOperationData;
+	private GameLevelsData myGameLevelsData;
+	private OneLevelData myCurrLevelData;
+	private int myCurrLevel;
+	private DataStore<DummyEntityData> myEnemyDataStore;
 	
 //	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
 	private List<WaveState> myWaveStates;
 	private double myCurrentTime;
 	private double myTimeToAddMoreWaves;
 	
-	public ActiveWaveManager(DummyWaveOperationData aWaveOperationData, DataStore<EnemyData> aEnemyDataStore)
+	public ActiveWaveManager(GameLevelsData aGameLevelsData, DataStore<DummyEntityData> aEnemyDataStore)
 	{
-		myWaveOperationData = aWaveOperationData;
+		myCurrLevel = 0;
+		myGameLevelsData = aGameLevelsData;
 		myEnemyDataStore = aEnemyDataStore;
-
+		myCurrLevelData = myGameLevelsData.getLevelData(myCurrLevel);
 //		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
 		myWaveStates = new ArrayList<WaveState>();
 		
@@ -47,7 +52,7 @@ public class ActiveWaveManager {
 	 * 
 	 * TODO: This return type is kinda hacky... maybe make a custom class for this?
 	 */
-	public Map<EnemyData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
+	public Map<DummyEntityData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
 	{
 		//1. Update the current time
 		setCurrentTime(aTotalTimeElapsed);
@@ -58,10 +63,10 @@ public class ActiveWaveManager {
 		}
 		
 		//3. get all the enemies
-		Map<EnemyData, String> enemiesToConstruct = new HashMap<EnemyData, String>();
+		Map<DummyEntityData, String> enemiesToConstruct = new HashMap<DummyEntityData, String>();
 		for (WaveState activeWave: myWaveStates) {
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
-				EnemyData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
+				DummyEntityData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
 				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
 			} else {
 				myWaveStates.remove(activeWave);
@@ -75,17 +80,12 @@ public class ActiveWaveManager {
 	 * A method to add the next round of wave data to be set as active
 	 * Assumes that multiple waves can be active at the same time
 	 */
-	private void setNextRoundOfWaveDataAsActive()
-	{
-		while(true) {
-			WaveData waveData = myWaveOperationData.pop();
-			if (waveData != null) {
-				myWaveStates.add(new WaveState(waveData, myCurrentTime));
-				if (waveData.getTimeForWave() != 0) {
-					updateTimeOfNextTransition(waveData.getTimeForWave());
-					break;
-				}
-			} else {
+	private void setNextRoundOfWaveDataAsActive() {
+		while (myCurrLevelData.peekNextWaveData() != null) {
+			WaveData waveData = myCurrLevelData.popNextWaveData();
+			myWaveStates.add(new WaveState(waveData, myCurrentTime));
+			if (waveData.getTimeUntilNextWave() != 0) {
+				updateTimeUntilNextTransition(waveData.getTimeUntilNextWave());
 				break;
 			}
 		}
@@ -114,7 +114,7 @@ public class ActiveWaveManager {
 	 * to the current time
 	 * @param aDeltaTime: a wave duration
 	 */
-	private void updateTimeOfNextTransition(double aDeltaTime)
+	private void updateTimeUntilNextTransition(double aDeltaTime)
 	{
 		myTimeToAddMoreWaves = myCurrentTime + aDeltaTime;
 	}
