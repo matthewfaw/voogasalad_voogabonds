@@ -51,7 +51,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 			 * * who to give money to
 			 * * how much money to give
 			 */
-			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
+//			myRewardSystem.giveMoneyTo(myPlayer, this);
 			this.getEntity().delete();
 		}
 		if (myHealthSystem.isDead(unmovedCollidable.getEntity())) {
