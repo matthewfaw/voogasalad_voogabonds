@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 
+@Deprecated
 public class WeaponDataContainer extends Container implements IObservable<Container>{
 
 	private AbstractMap<String, WeaponData> myWeaponDataMap = new HashMap<String, WeaponData>();
