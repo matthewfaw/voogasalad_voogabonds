@@ -4,6 +4,7 @@ import java.util.List;
 
 import engine.model.components.BountyComponent;
 import engine.model.components.CollidableComponent;
+import engine.model.components.DamageDealingComponent;
 import engine.model.components.IComponent;
 import engine.model.entities.IEntity;
 import engine.model.playerinfo.IModifiablePlayer;
@@ -44,5 +45,13 @@ public class RewardSystem implements ISystem{
 	 */
 	private void collectBounty(IModifiablePlayer player, IComponent component) {
 		player.updateAvailableMoney(getBountyFromComponent(component));
+	}
+	
+	/************ Attach and detach component methods ************/
+	public void attachComponent(BountyComponent aComponent) {
+		myBountyComponents.add(aComponent);
+	}
+	public void detachComponent(BountyComponent aComponent) {
+		myBountyComponents.remove(aComponent);
 	}
 }

@@ -1,11 +1,12 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.CollidableComponent;
-import engine.model.components.MoveableComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
 
@@ -19,13 +20,14 @@ import engine.model.entities.IEntity;
  * This class is observable by any system
  *
  */
-public class CollisionDetectionSystem implements ISystem, IObserver<MoveableComponent>, IObservable<ISystem> {
-	private List<MoveableComponent> myMoveableComponents;
+public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableComponent>,*/ IObservable<ISystem> {
 	private List<CollidableComponent> myCollidableComponents;
 	private List<IObserver<ISystem>> myObservers;
 	private List<PhysicalComponent> myPhysicalComponents;
 	
 	public CollisionDetectionSystem() {
+		myCollidableComponents = new ArrayList<CollidableComponent>();
+		myPhysicalComponents = new ArrayList<PhysicalComponent>();
 	}
 
 	/**
@@ -85,53 +87,67 @@ public class CollisionDetectionSystem implements ISystem, IObserver<MoveableComp
 		}
 		return found;
 	}
-
-	//************************************Observer interface****************************//
 	
 	/**
-	 * When a MoveableComponent notifies collision detection,
-	 * the system checks if that entity collides with any other
-	 * collidable entities. If there is a collision, the collision
-	 * is passed to the collidable components to handle.
-	 * 
-	 * @param the observable moveable component that moved
+	 * Checks if a physical component collides with anything in
+	 * it's collision radius.
+	 * @param the physical component that changed position
 	 */
-	@Override
-	public void update(MoveableComponent movedObservable) {
-		// Make sure moveable is also collidable
-		CollidableComponent movedCollidable = findCollidableComponent(movedObservable.getEntity());
+	public void checkCollision(PhysicalComponent movedPhysicalComponent) {
+		CollidableComponent movedCollidable = findCollidableComponent(movedPhysicalComponent.getEntity());
 		if (movedCollidable != null) {
 			// Check all Entities to see if any are intersecting with the current object
-			for(MoveableComponent observable: myMoveableComponents) {
-				if (intersects(movedObservable.getEntity(), observable.getEntity())) {
+			for(PhysicalComponent observable: myPhysicalComponents) {
+				if (intersects(movedPhysicalComponent.getEntity(), observable.getEntity())) {
 					CollidableComponent unmovedCollidable = findCollidableComponent(observable.getEntity());
 					movedCollidable.collideInto(unmovedCollidable);
 				}
 			}
 		}
 	}
-
-	/**
-	 * Adds component to list so that there is collision detection
-	 * for that component. Added component should be ICollidable.
-	 * @param aNewComponent
-	 */
-	public void addComponent(MoveableComponent aNewComponent)
-	{
-		myMoveableComponents.add(aNewComponent);
+	
+	/************ Attach and detach component methods ************/
+	
+	public void attachComponent(CollidableComponent aComponent) {
+		myCollidableComponents.add(aComponent);
+	}
+	public void detachComponent(CollidableComponent aComponent) {
+		myCollidableComponents.remove(aComponent);
+	}
+	
+	public void attachComponent(PhysicalComponent aComponent) {
+		myPhysicalComponents.add(aComponent);
+	}
+	public void detachComponent(PhysicalComponent aComponent) {
+		myPhysicalComponents.remove(aComponent);
 	}
 
-	/**
-	 * Removes component from being tracked by collision detection.
-	 * Component will no longer be able to collide.
-	 * @param aNewComponent
-	 */
-	public void removeComponent(MoveableComponent aNewComponent)
-	{
-		myMoveableComponents.remove(aNewComponent);
-	}
+//	/************************* Observer interface ****************************/
+//	
+//	/**
+//	 * When a MoveableComponent notifies collision detection,
+//	 * the system checks if that entity collides with any other
+//	 * collidable entities. If there is a collision, the collision
+//	 * is passed to the collidable components to handle.
+//	 * 
+//	 * @param the observable moveable component that moved
+//	 */
+//	@Override
+//	public void update(MoveableComponent movedObservable) {
+//		// Make sure moveable is also collidable
+//		CollidableComponent movedCollidable = findCollidableComponent(movedObservable.getEntity());
+//		if (movedCollidable != null) {
+//			// Check all Entities to see if any are intersecting with the current object
+//			for(MoveableComponent observable: myMoveableComponents) {
+//				if (intersects(movedObservable.getEntity(), observable.getEntity())) {
+//					CollidableComponent unmovedCollidable = findCollidableComponent(observable.getEntity());
+//					movedCollidable.collideInto(unmovedCollidable);
+//				}
+//			}
+//		}
+//	}
 
-	//************************************Observable interface****************************//
+	/**************************** Observable interface **************************/
 	@Override
 	public void attach(IObserver<ISystem> aObserver) {
 		myObservers.add(aObserver);

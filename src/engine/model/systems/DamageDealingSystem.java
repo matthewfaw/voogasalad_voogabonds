@@ -3,6 +3,7 @@ package engine.model.systems;
 import java.util.List;
 
 import engine.model.components.DamageDealingComponent;
+import engine.model.components.HealthComponent;
 import engine.model.entities.IEntity;
 
 public class DamageDealingSystem implements ISystem{
@@ -33,5 +34,13 @@ public class DamageDealingSystem implements ISystem{
 	public int getDamageDealt(IEntity entity) {
 		DamageDealingComponent damageDealer = findDamageDealingComponent(entity);
 		return damageDealer == null ? 0 : damageDealer.getDamage();
+	}
+	
+	/************ Attach and detach component methods ************/
+	public void attachComponent(DamageDealingComponent aComponent) {
+		myDamageDealingComponents.add(aComponent);
+	}
+	public void detachComponent(DamageDealingComponent aComponent) {
+		myDamageDealingComponents.remove(aComponent);
 	}
 }
