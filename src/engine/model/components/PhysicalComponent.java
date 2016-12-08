@@ -7,6 +7,7 @@ import engine.IViewable;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.CollisionDetectionSystem;
+import javafx.util.Pair;
 import utility.Point;
 
 /**
@@ -69,6 +70,13 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 	@Override
 	public List<String> getValidTerrains() {
 		return myValidTerrains;
+	}
+	
+	@Override
+	public void setPosition(Pair<Double, Point> p) {
+		myHeading = p.getKey();
+		myPosition = p.getValue();
+		notifyObservers();
 	}
 
 	/***************IComponent interface**********/

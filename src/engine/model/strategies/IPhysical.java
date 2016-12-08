@@ -10,9 +10,7 @@ public interface IPhysical {
 
 	public Point getPosition();
 	public double getHeading();
-//	public double getCollisionRadius();
 	public List<String> getValidTerrains();
-//	public IModifiablePlayer getOwner();
-//	public void setPosition(Pair<Double, Point> p);
+	public void setPosition(Pair<Double, Point> p);
 	
 }

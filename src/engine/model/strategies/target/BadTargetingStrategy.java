@@ -8,12 +8,8 @@ import engine.model.strategies.IPhysical;
 
 public class BadTargetingStrategy extends AbstractTargetingStrategy {
 
-	public BadTargetingStrategy(MapMediator map) {
-		super(map);
-	}
-
 	@Override
-	public IPhysical target(IPhysical location, ITargeting targeter) {
-		return getTargets(location, targeter).get(0);
+	public IPhysical target(MapMediator map, IPhysical location, ITargeting targeter) {
+		return getTargets(map, location, targeter).get(0);
 	}
 }

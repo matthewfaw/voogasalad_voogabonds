@@ -20,12 +20,12 @@ public class CreatorComponent implements IComponent, ICreator {
 	
 	private int myTimeBetweenSpawns;
 	private int myTimeSinceSpawning;
+	private IPhysical myTarget;
 
-	
-	//TODO:
 	private ISpawningStrategy mySpawningStrategy;
 	private EntityFactory myEntityFactory;
-	private PhysicalSystem myPhysicalSystem;
+
+
 	
 	//TODO:
 	/**
@@ -39,13 +39,17 @@ public class CreatorComponent implements IComponent, ICreator {
 		return myEntity;
 	}
 
-	public void spawn(IPhysical target) {
-		
-		if (myTimeSinceSpawning >= myTimeSinceSpawning) {
-			mySpawningStrategy.spawn(myEntityFactory, target, myPhysicalSystem.get(this), this);
+	public void spawn(IPhysical location) {
+		if (myTimeSinceSpawning >= myTimeSinceSpawning && myTarget != null) {
+			mySpawningStrategy.spawn(myEntityFactory, myTarget, location, this);
 			myTimeSinceSpawning = 0;
 		} else
 			myTimeSinceSpawning++;
 		
+	}
+
+	@Override
+	public void setTarget(IPhysical target) {
+		myTarget = target;
 	}
 }

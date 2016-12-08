@@ -5,6 +5,7 @@ import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
+import javafx.util.Pair;
 import utility.Point;
 
 /**
@@ -22,13 +23,17 @@ public class MoveableComponent implements IComponent, IMovable {
 	private double myTurnSpeed;
 	private double myMoveSpeed;
 	private IPhysical myGoal;
+	private PathManager myPath;
 	
-	//XXX: ???
+	//NOTE: So that entities can die after traveling a certain distance.
 	private double myMaxDistance;
 	private double myMovedDistance;
 
-	private PathManager myPath;
+
 	
+	public Pair<Double, Point> getMove(IPhysical p) {
+		return myMovementCalc.nextMove(this, p);
+	}
 
 	//********************IComponent interface***********//
 	@Override
@@ -51,23 +56,14 @@ public class MoveableComponent implements IComponent, IMovable {
 	public double getMoveSpeed() {
 		return myMoveSpeed;
 	}
-	
-	//TODO
-	public void move() {
-		/*
-		Pair<Double, Point> toMove = myMovementCalc.nextMove(this);
-		myMovedDistance += toMove.getValue().getDistanceTo(getPosition());
-		myPhysical.setPosition(toMove);
-		if (myMovedDistance >= myMaxDistance){
-			//Delete entity 
-		}
-		*/
-	}
 
 	@Override
 	public PathManager getPath() {
 		return myPath;
 	}
-
+	
+	public void setGoal(IPhysical p) {
+		myGoal = p;
+	}
 
 }
