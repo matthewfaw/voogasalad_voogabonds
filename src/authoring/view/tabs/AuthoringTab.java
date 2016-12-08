@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -40,8 +41,8 @@ public class AuthoringTab extends Tab {
      * @param label
      * @return
      */
-    protected Text setUpLabel(String label) {
-        return new Text(label);
+    protected Label setUpLabel(String label) {
+        return new Label(label);
     }
     
     /**
@@ -72,7 +73,8 @@ public class AuthoringTab extends Tab {
      */
     protected ComboBox<String> setUpStringComboBox(ObservableList<String> choices, String value) {
         ComboBox<String> cb = new ComboBox<String>(choices);
-        cb.setValue(value);
+        if (value != null)
+        	cb.setValue(value);
         return cb;
     }
 

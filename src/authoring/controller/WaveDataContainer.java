@@ -18,13 +18,7 @@ public class WaveDataContainer extends Container implements IObservable<Containe
 	private AbstractMap<String, WaveData> myWaveMap = new LinkedHashMap<String, WaveData>();
 	
 	public void createNewWave(String name, WaveData wave){
-		try{
-			//Create WaveData object here
-			//Add to wave
-		}
-		catch(Exception e){
-			//Call front-end error handler;
-		}
+		myWaveMap.put(name, wave);
 	}
 	
 	public WaveData getWaveData(String name){

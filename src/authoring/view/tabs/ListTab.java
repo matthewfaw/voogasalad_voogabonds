@@ -113,5 +113,9 @@ public abstract class ListTab<A> extends AuthoringTab {
     protected TilePane getTilePane(){
     	return myContent;
     }
+    
+    protected ObservableList<A> getObservableList(){
+    	return myList;
+    }
 
 }
