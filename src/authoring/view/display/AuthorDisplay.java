@@ -27,12 +27,15 @@ public class AuthorDisplay {
     private Router r;
     private EntityList el;
     private Scene scene;
+    private int mapXDim;
+    private int mapYDim;
     
-    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn) {
+    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY) {
         // set title
         mainInit.setTitle(AUTHORING_TITLE);
         this.scene = scn;
-        
+        this.mapXDim = mapX;
+        this.mapYDim = mapY;
         // Set up BorderPane
         root = pane;
         // bind to take available space
@@ -68,11 +71,12 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        Tab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer());
-        Tab entityTab = new EntityTab(r.getEntityDataContainer());
-        Tab rulesTab = new RulesTab("Rules");
-        Tab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
-        Tab levelTab = new LevelTab("Levels");
+        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer());
+        EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
+        RulesTab rulesTab = new RulesTab("Rules");
+        WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
+        LevelTab levelTab = new LevelTab("Levels");
+        r.link(entityTab, levelTab, waveTab);
         // Add Tabs to list
         tabs.add(mapTab);
         tabs.add(entityTab);

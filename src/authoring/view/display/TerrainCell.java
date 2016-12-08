@@ -43,8 +43,9 @@ public class TerrainCell extends Rectangle {
 	private MapDataContainer controller;
 	private int DEFAULT_TILE_SIZE;
 	private Point point;
+	private GameDisplay gameDisplay;
 	
-	public TerrainCell(MapDataContainer c, GridToolBar tools, int row, int column) {	
+	public TerrainCell(MapDataContainer c, GridToolBar tools, int row, int column, GameDisplay disp) {	
 		setUpScreenResolution();
 		this.toolBar = tools;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
@@ -54,6 +55,7 @@ public class TerrainCell extends Rectangle {
 		this.controller = c;
 		this.DEFAULT_TILE_SIZE = Integer.parseInt(myResources.getString("DefaultTileSize"));
 		this.point = new Point(column, row);
+		this.gameDisplay = disp;
 		clickEvent();
 	}
 	
@@ -68,7 +70,7 @@ public class TerrainCell extends Rectangle {
 							mouseEvent.consume();
 						}
 						else {
-							if (TerrainCell.this.getHeight() != DEFAULT_TILE_SIZE || TerrainCell.this.getWidth() != DEFAULT_TILE_SIZE) {
+							if (TerrainCell.this.getHeight() != gameDisplay.getTileSize() || TerrainCell.this.getWidth() != gameDisplay.getTileSize()) {
 								if (TerrainCell.this.getFill().equals(Color.RED)) {
 									controller.removeSpawnPoints(cellName);
 								}
@@ -87,18 +89,18 @@ public class TerrainCell extends Rectangle {
 								setFill(toolBar.getSelectedColor());
 							}
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
-							setWidth(Integer.parseInt(myResources.getString("DefaultTerrainCellWidth")));
-							setHeight(Integer.parseInt(myResources.getString("DefaultTerrainCellHeight")));
+							setWidth(gameDisplay.getTileSize());
+							setHeight(gameDisplay.getTileSize());
 						}
 					}
 					else if (toolBar.getSpawnStatus()) {
-						if (TerrainCell.this.getHeight() != DEFAULT_TILE_SIZE || TerrainCell.this.getWidth() != DEFAULT_TILE_SIZE) {
+						if (TerrainCell.this.getHeight() != gameDisplay.getTileSize() || TerrainCell.this.getWidth() != gameDisplay.getTileSize()) {
 							if (TerrainCell.this.getFill().equals(Color.GREEN)) {
 								controller.removeSinkPoint(point);
 							}
 						}
-						setWidth(Integer.parseInt(myResources.getString("DefaultSpawnCellWidth")));
-						setHeight(Integer.parseInt(myResources.getString("DefaultSpawnCellHeight")));
+						setWidth(gameDisplay.getTileSize()/2);
+						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
 						createSpawnNameWindow();
 					}
@@ -108,8 +110,8 @@ public class TerrainCell extends Rectangle {
 								controller.removeSpawnPoints(cellName);
 							}
 						}
-						setWidth(Integer.parseInt(myResources.getString("DefaultSinkCellWidth")));
-						setHeight(Integer.parseInt(myResources.getString("DefaultSinkCellHeight")));
+						setWidth(gameDisplay.getTileSize()/2);
+						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
 						controller.addSinkPoint(point);
 					}
