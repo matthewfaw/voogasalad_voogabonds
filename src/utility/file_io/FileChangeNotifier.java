@@ -1,6 +1,5 @@
 package utility.file_io;
 
-import java.nio.file.StandardWatchEventKinds;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -13,9 +12,9 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Scanner;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import com.sun.org.apache.xpath.internal.functions.Function;
 
 /**
  * The purpose of this class is to provide a means of detecting file changes.
@@ -69,7 +68,7 @@ public class FileChangeNotifier implements Runnable {
 						WatchEvent.Kind<?> specifiedKind = myWatchEventKinds[i];
 						if (specifiedKind == kind) {
 							Path newPath = ((WatchEvent<Path>) watchEvent).context();
-							System.out.println("Path change detected: ");
+							System.out.println("Path change detected: " + myPath.resolve(newPath.getFileName()));
 							if (newPath.toFile().isFile()) {
 								Scanner s = new Scanner(newPath.toFile());
 								while(s.hasNextLine()) {
