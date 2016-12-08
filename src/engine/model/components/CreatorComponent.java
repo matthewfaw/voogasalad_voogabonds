@@ -1,7 +1,13 @@
 package engine.model.components;
 
+import engine.IObserver;
+import engine.controller.timeline.TimelineController;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
+import engine.model.strategies.IPhysical;
+import engine.model.strategies.ISpawningStrategy;
+import engine.model.strategies.ITargetingStrategy;
+import engine.model.systems.PhysicalSystem;
 
 /**
  * The purpose of this class is to manage the work necessary
@@ -12,13 +18,20 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class CreatorComponent implements IComponent {
+public class CreatorComponent implements IComponent, IObserver<TimelineController>, ICreator {
 	private IEntity myEntity;
 	
+	private double mySightRange;
+	private double mySightWidth;
+	
+	private int myTimeBetweenSpawns;
+	private int myTimeSinceSpawning;
+	
 	//TODO:
-//	private ISpawningStrategy myEnemySpawningStrategy;
-//	private ITargetingStrategy myTargetingStrategy;
+	private ISpawningStrategy mySpawningStrategy;
+	private ITargetingStrategy myTargetingStrategy;
 	private EntityFactory myEntityFactory;
+	private PhysicalSystem myPhysicalSystem;
 	
 	//TODO:
 	/**
@@ -26,16 +39,31 @@ public class CreatorComponent implements IComponent {
 	 * entity spawning strategy.  This entity will be launched
 	 * towards the target determined by the targeting strategy
 	 */
-	public void spawnEntity()
-	{
-		//myEnemySpawningStrategy.getEntityToSpawn();
-		//Create it
-		//set it's target
-		//maybe register with that entity
-	}
 
 	@Override
 	public IEntity getEntity() {
 		return myEntity;
+	}
+
+	@Override
+	public void update(TimelineController aChangedObject) {
+		IPhysical target = myTargetingStrategy.target(myPhysicalSystem.get(this), this);
+		
+		if (myTimeSinceSpawning >= myTimeSinceSpawning) {
+			mySpawningStrategy.spawn(myEntityFactory, target, myPhysicalSystem.get(this), this);
+			myTimeSinceSpawning = 0;
+		} else
+			myTimeSinceSpawning++;
+		
+	}
+
+	@Override
+	public double getTargetWedgeWidth() {
+		return mySightWidth;
+	}
+
+	@Override
+	public double getTargetWedgeRadius() {
+		return mySightRange;
 	}
 }

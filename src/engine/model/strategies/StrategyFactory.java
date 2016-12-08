@@ -40,7 +40,7 @@ public class StrategyFactory {
 	 * @param targetStrategy
 	 * @return BadTargetStrategy
 	 */
-	public static ITargetStrategy targetStrategy(String targetStrategy) {
+	public ITargetingStrategy targetStrategy(String targetStrategy) {
 		return new BadTargetStrategy();
 	}
 

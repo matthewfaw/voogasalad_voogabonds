@@ -7,7 +7,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.projectiles.ProjectileFactory;
-import engine.model.strategies.ITargetStrategy;
+import engine.model.strategies.ITargetingStrategy;
 import engine.model.strategies.StrategyFactory;
 import utility.Point;
 
@@ -21,7 +21,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 	private MapMediator myMap;
 	
 	private ProjectileFactory myProjectileFactory;
-	private ITargetStrategy myTargetStrategy;
+	private ITargetingStrategy myTargetStrategy;
 	private String myProjectile;
 	private int myFireRate;
 	private int myTimeToFire;
