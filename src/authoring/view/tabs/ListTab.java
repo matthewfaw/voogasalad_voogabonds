@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
@@ -64,15 +65,14 @@ public abstract class ListTab<A> extends AuthoringTab {
         myContent.setPrefColumns(2);
         VBox left = new VBox();
         ScrollPane scroll = new ScrollPane();
-        scroll.prefWidthProperty().bind(left.widthProperty());
-        scroll.prefHeightProperty().bind(left.heightProperty());
+        bindSize(left, scroll);
         left.setPrefWidth(screenSize.getWidth()/2.0);
         left.setPrefHeight(screenSize.getHeight()/1.5);
         
         // Set up add button
         Button add = new Button(ADD);
         add.setOnAction(handleAddNewObject());
-        add.prefWidthProperty().bind(left.widthProperty());
+        bindWidth(left, add);
         
         // Set up ListView
         if (list != null) {
@@ -81,13 +81,26 @@ public abstract class ListTab<A> extends AuthoringTab {
             myList = FXCollections.observableArrayList();
         }
         myListView = new ListView<A>(myList);
-        myListView.prefWidthProperty().bind(scroll.widthProperty());
-        myListView.prefHeightProperty().bind(scroll.heightProperty());
+        bindSize(scroll, myListView);
+        
         // Add Nodes to Tab
         scroll.setContent(myListView);
         left.getChildren().addAll(add, scroll);
         myContent.getChildren().add(left);
         this.setContent(myContent);
+    }
+    
+    private void bindSize(Region parent, Region child) {
+        bindWidth(parent,child);
+        bindHeight(parent,child);
+    }
+    
+    private void bindWidth(Region parent, Region child) {
+        child.prefWidthProperty().bind(parent.widthProperty());
+    }
+    
+    private void bindHeight(Region parent, Region child) {
+        child.prefHeightProperty().bind(parent.heightProperty());
     }
     
     private Dimension retrieveScreenSize() {
