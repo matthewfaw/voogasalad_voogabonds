@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 /**
  * Info about making a new thread obtained here:
@@ -18,7 +21,7 @@ public class MainThreadClass {
 		FileRetriever fr = new FileRetriever("SerializedFiles/exampleGame");
 		URL url = fr.getUrlRelativeToProject("SerializedFiles");
 		Path folder = Paths.get(url.getPath());
-		FileChangeNotifier fcn = new FileChangeNotifier(folder);
+		FileChangeNotifier fcn = new FileChangeNotifier(folder, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
 		Thread t = new Thread(fcn);
 		t.start();
 		System.out.println("derp");

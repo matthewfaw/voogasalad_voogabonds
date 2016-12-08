@@ -1,9 +1,7 @@
 package utility.file_io;
 
-import java.nio.file.LinkOption;
 import java.nio.file.StandardWatchEventKinds;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -17,6 +15,10 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 
 /**
+ * The purpose of this class is to provide a means of detecting file changes.
+ * In order to be useful, the processEvents method must be able to run on its
+ * own thread.  Thus, this class implements the Runnable interface
+ * 
  * adapted from 
  * http://andreinc.net/2013/12/06/java-7-nio-2-tutorial-writing-a-simple-filefolder-monitor-using-the-watch-service-api/
  * for the basic implementation of file change notification
@@ -28,44 +30,27 @@ import java.nio.file.attribute.BasicFileAttributes;
  */
 public class FileChangeNotifier implements Runnable {
 	
-	private WatchService watcher;
 	private Path myPath;
+	private WatchEvent.Kind<?>[] myWatchEventKinds;
 	
-	public FileChangeNotifier(Path aPath) throws IOException
+	public FileChangeNotifier(Path aPath, WatchEvent.Kind<?>...aEventKinds) throws IOException
 	{
-		watcher = FileSystems.getDefault().newWatchService();
 		myPath = aPath;
+		
+		myWatchEventKinds = aEventKinds;
 	}
 	
 	private void processEvents()
 	{
-		// Sanity check - Check if myPath is a folder
-		try {
-			Boolean isFolder = (Boolean) Files.getAttribute(myPath,
-					"basic:isDirectory", LinkOption.NOFOLLOW_LINKS);
-			if (!isFolder) {
-				throw new IllegalArgumentException("Path: " + myPath + " is not a folder");
-			}
-		} catch (IOException ioe) {
-			// Folder does not exists
-			ioe.printStackTrace();
-		}
-
 		System.out.println("Watching myPath: " + myPath);
 
-		// We obtain the file system of the Path
-		FileSystem fs = myPath.getFileSystem ();
-
 		// We create the new WatchService using the new try() block
-		try(WatchService service = fs.newWatchService()) {
+		try(WatchService service = myPath.getFileSystem().newWatchService()) {
 
-			// We register the myPath to the service
-			// We watch for creation events
-//			myPath.register(service, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,StandardWatchEventKinds.ENTRY_MODIFY);
 			Files.walkFileTree(myPath, new SimpleFileVisitor<Path>() {
 		        @Override
 		        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-		            dir.register(service, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);
+		            dir.register(service, myWatchEventKinds);
 		            return FileVisitResult.CONTINUE;
 		        }
 		    });
@@ -104,23 +89,6 @@ public class FileChangeNotifier implements Runnable {
 			ie.printStackTrace();
 		}
 	}
-	
-	/*
-	public static void main(String[] args)
-	{
-		FileChangeNotifier f;
-		try {
-			f = new FileChangeNotifier();
-			FileRetriever fr = new FileRetriever("SerializedFiles/exampleGame");
-			URL url = fr.getUrlRelativeToProject("SerializedFiles");
-			Path folder = Paths.get(url.getPath());
-			f.processEvents(folder);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	*/
 
 	@Override
 	public void run() {
