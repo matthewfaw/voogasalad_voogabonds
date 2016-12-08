@@ -5,6 +5,7 @@ import java.util.List;
 import engine.model.components.DamageDealingComponent;
 import engine.model.components.HealthComponent;
 import engine.model.entities.IEntity;
+import utility.Damage;
 
 public class DamageDealingSystem implements ISystem{
 	private List<DamageDealingComponent> myDamageDealingComponents;
@@ -31,9 +32,9 @@ public class DamageDealingSystem implements ISystem{
 	 * @return damage dealt by entity; 0 if entity 
 	 * is not a damage dealing component
 	 */
-	public int getDamageDealt(IEntity entity) {
-		DamageDealingComponent damageDealer = findDamageDealingComponent(entity);
-		return damageDealer == null ? 0 : damageDealer.getDamage();
+	public Damage getDamageDealt(IEntity dmgDealer) {
+		DamageDealingComponent damageDealer = findDamageDealingComponent(dmgDealer);
+		return damageDealer == null ? new Damage(0) : damageDealer.getDamage();
 	}
 	
 	/************ Attach and detach component methods ************/

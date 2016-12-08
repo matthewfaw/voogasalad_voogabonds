@@ -1,6 +1,7 @@
 package engine.model.components;
 
 import engine.model.entities.IEntity;
+import engine.model.machine.Health;
 import engine.model.systems.HealthSystem;
 import utility.Damage;
 
@@ -12,21 +13,22 @@ import utility.Damage;
  *
  */
 public class HealthComponent implements IComponent {
-	private int myCurrentHealth;
+	private Health myHealth;
 	private HealthSystem myHealthSystem;
 	
-	public HealthComponent(HealthSystem healthSystem) {
+	public HealthComponent(HealthSystem healthSystem, double maxHealth) {
 		myHealthSystem = healthSystem;
 		myHealthSystem.attachComponent(this);
 	}
 	
 	public int getCurrentHealth()
 	{
-		return myCurrentHealth;
+		return (int) myHealth.getHealth();
 	}
-	public void takeDamage(int damage)
+	public void takeDamage(Damage dmg)
 	{
-		myCurrentHealth -= damage;
+		myHealth.takeDamage(dmg);
+		
 		//TODO: Manage death, perhaps with a strategy
 	}
 
