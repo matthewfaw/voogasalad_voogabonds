@@ -41,6 +41,10 @@ public abstract class ListTab<A> extends AuthoringTab {
         myList = list;
     }
     
+    public ListView<A> getListView() {
+        return myListView;
+    }
+    
     /**
      * @param handler - sets the action upon a click
      */

@@ -124,9 +124,8 @@ public class EditEntityBox extends VBox {
             @Override
             public void handle(MouseEvent event) {
                 String selectedAttribute = myComponentsView.getSelectionModel().getSelectedItem();
-                System.out.println("Handle Edit");
                 if (event.getClickCount() == 2 && selectedAttribute!=null) {
-                    System.out.println("Double Click: "+selectedAttribute);
+                    //System.out.println("Double Click: "+selectedAttribute);
                     EditComponentBox editComponent;
                     if (myComponentData.containsKey(selectedAttribute)) {
                         editComponent = new EditComponentBox(EditEntityBox.this, myTab, myComponentData.get(selectedAttribute).getFields());

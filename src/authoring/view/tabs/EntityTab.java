@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -34,19 +35,17 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     private EntityDataContainer myEntities;
     private ArrayList<String> validTerrains = new ArrayList<String>();
     
-    AttributeFetcher ecFetcher = new AttributeFetcher();
-    
-    //private EntityDataController myController;
-    
+    private AttributeFetcher ecFetcher = new AttributeFetcher();
 
     public EntityTab (EntityDataContainer entities) {
         super(TITLE, COLS);
         
-        // TODO: use EntityList
         myEntities = entities;
         
         // initialize AttributeFetcher
         ecFetcher.fetch();
+        
+        this.setClickAction(handleEditEntity());
     }
     
     public boolean addEntity(EntityData entity){
@@ -71,6 +70,19 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     	        this.showError(e.getMessage());
     	        return false;
     	}
+    }
+    
+    private EventHandler<MouseEvent> handleEditEntity () {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event){
+                if (event.getClickCount() == 2) {
+                    // TODO: implement retrieving data
+                }
+//                EditEntityBox newEntityMenu = getNewEntityMenu();
+//                getTilePane().getChildren().add(newEntityMenu);
+            }
+        };
+        return handler;
     }
 
     @Override
