@@ -38,11 +38,19 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     }
     
     public void addEntity(EntityData entity){
-        myEntities.createEntityData(entity);
+        try{
+        	myEntities.createEntityData(entity);
+        }catch(Exception e){
+        	//Show error
+        }
     }
     
     public void updateEntity(String oldName, EntityData entity){
-    	myEntities.updateEntityData(oldName, entity);
+    	try{
+    		myEntities.updateEntityData(oldName, entity);
+    	}catch(Exception e){
+    		//Show error
+    	}
     }
 
     @Override
