@@ -1,5 +1,7 @@
 package authoring.view.tabs;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,6 +15,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
@@ -66,16 +69,21 @@ public abstract class ListTab<A> extends Tab {
     }
     
     private void initContent(ObservableList<A> list) {
+        Dimension screenSize = retrieveScreenSize();
         // Set up content
         myContent = new TilePane();
         myContent.setPrefColumns(2);
         VBox left = new VBox();
         ScrollPane scroll = new ScrollPane();
+        scroll.prefWidthProperty().bind(left.widthProperty());
+        scroll.prefHeightProperty().bind(left.heightProperty());
+        left.setPrefWidth(screenSize.getWidth()/2.0);
+        left.setPrefHeight(screenSize.getHeight()/1.5);
         
         // Set up add button
         Button add = new Button(ADD);
         add.setOnAction(handleAddNewObject());
-        add.setMinWidth(300);
+        add.prefWidthProperty().bind(left.widthProperty());
         
         // Set up ListView
         if (list != null) {
@@ -84,12 +92,18 @@ public abstract class ListTab<A> extends Tab {
             myList = FXCollections.observableArrayList();
         }
         myListView = new ListView<A>(myList);
-        myListView.setMinWidth(300);
+        myListView.prefWidthProperty().bind(scroll.widthProperty());
+        myListView.prefHeightProperty().bind(scroll.heightProperty());
         // Add Nodes to Tab
         scroll.setContent(myListView);
         left.getChildren().addAll(add, scroll);
         myContent.getChildren().add(left);
         this.setContent(myContent);
+    }
+    
+    private Dimension retrieveScreenSize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        return screenSize;
     }
     
     protected abstract EventHandler<ActionEvent> handleAddNewObject();
