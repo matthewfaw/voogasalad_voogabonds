@@ -1,7 +1,6 @@
 package authoring.model;
 
 import java.util.*;
-import java.util.Stack;
 
 public class LevelData {
 	
