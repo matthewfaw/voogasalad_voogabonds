@@ -3,6 +3,7 @@ package engine.model.strategies.movement;
 import java.util.Random;
 
 import engine.model.game_environment.paths.PathManager;
+import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
 import javafx.util.Pair;
 import utility.Point;
@@ -11,8 +12,12 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	private static final Random RANDOM = new Random();
 	private PathManager myPath;
 	
-	public PathMovementStrategy(PathManager path) {
-		myPath = path;
+	@Override
+	public  Pair<Double, Point> nextMove(IMovable m) {
+		if (myPath == null) {
+			myPath = m.getPath();
+		}
+		return super.nextMove(m);
 	}
 	
 	@Override

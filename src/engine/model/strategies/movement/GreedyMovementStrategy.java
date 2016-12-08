@@ -1,5 +1,6 @@
 package engine.model.strategies.movement;
 
+import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
 import javafx.util.Pair;
 import utility.Point;
