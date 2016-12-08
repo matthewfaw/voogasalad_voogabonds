@@ -80,7 +80,7 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("WaveData", gameName);
-			LinkedHashMap<String, WaveData> wavd = router.getWaveDataController().finalizeWaveDataMap();
+			LinkedHashMap<String, WaveData> wavd = router.getWaveDataContainer().finalizeWaveDataMap();
 			for (String wavdName : wavd.keySet()){
 			ser.serializeToFile(wavd.get(wavdName), "/"+gameName+"/"+"WaveData"+"/"+wavdName);
 			}
@@ -89,13 +89,13 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("MapData", gameName);
-			ser.serializeToFile(router.getMapDataController(), gameName+"/"+"MapData"+"/"+"MapData");
+			ser.serializeToFile(router.getMapDataContainer(), gameName+"/"+"MapData"+"/"+"MapData");
 		}catch(Exception e){
 			System.out.println("Map fail");
 		}
 		try{
 			createNewDirectory("PlayerData", gameName);
-			ser.serializeToFile(router.getPlayerDataController().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"PlayerData");
+			ser.serializeToFile(router.getPlayerDataContainer().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"PlayerData");
 		}catch(Exception e){
 			System.out.println("Player fail");
 		}

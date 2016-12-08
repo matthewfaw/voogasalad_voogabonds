@@ -1,61 +1,47 @@
 package authoring.controller;
 import authoring.view.side_panel.*;
 import authoring.view.tabs.WaveTab;
+import authoring.view.tabs.EntityTab;
+import authoring.view.tabs.LevelTab;
 
 public class Router {
 	private MapDataContainer mdc = new MapDataContainer();
+	private EntityDataContainer edc = new EntityDataContainer();
 	private PlayerDataContainer pldc = new PlayerDataContainer();
 	private LevelDataContainer ldc = new LevelDataContainer();
 	private WaveDataContainer wadc = new WaveDataContainer();
-<<<<<<< HEAD
-	private WeaponDataContainer wedc = new WeaponDataContainer();
-	private LevelDataContainer ldc = new LevelDataContainer();
-=======
->>>>>>> b22a96a9a42a9fbec7a59ec09c7c0333134910da
 	
-	public void link(TowerTab tTab, EnemyTab eTab, WaveTab wTab, GameTab gTab){
-		/**
-		 * CONNECTIONS TO BE CREATED:
-		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
-		 */
+	public void link(EntityTab e, LevelTab l, WaveTab w){
+		//Listeners for EntityTab
+		mdc.attach(e); //Entity listener
 		
-		//Listeners for WaveLevelTab
-		edc.attach(wTab); //Enemy data listener
-		mdc.attach(wTab); //Spawn point listener
-		
-		//Listeners for EnemyTab
-		mdc.attach(eTab); //Terrain listener
-		wedc.attach(eTab); //Weapon listener
+		//Listeners for WaveTab
+		mdc.attach(w); //Terrain listener
+		edc.attach(w); //Entity listener
 
-                //TowerTab
-		wedc.attach(tTab); //Weapon listener
-		mdc.attach(tTab); //Terrain listener
-		
-		//GameTab
+		//Listeners for levelTab
+		wadc.attach(l);
 		
 	}
 	
 	
-	public MapDataContainer getMapDataController(){
+	public MapDataContainer getMapDataContainer(){
 		return mdc;
 	}
 	
-	public PlayerDataContainer getPlayerDataController(){
+	public PlayerDataContainer getPlayerDataContainer(){
 		return pldc;
 	}
 	
-	public WaveDataContainer getWaveDataController(){
+	public WaveDataContainer getWaveDataContainer(){
 		return wadc;
 	}
 	
-<<<<<<< HEAD
-	public WeaponDataContainer getWeaponDataController(){
-		return wedc;
-	}
-	
-	public LevelDataContainer getLevelDataController(){
+	public LevelDataContainer getLevelDataContainer(){
 		return ldc;
 	}
-=======
->>>>>>> b22a96a9a42a9fbec7a59ec09c7c0333134910da
+	
+	public EntityDataContainer getEntityDataContainer(){
+		return edc;
+	}
 }
