@@ -1,5 +1,7 @@
 package gamePlayerView.ScenePanes;
 
+import java.util.Collection;
+
 import engine.controller.ApplicationController;
 import gamePlayerView.Styles;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
@@ -25,12 +27,12 @@ import javafx.scene.text.Font;
 
 public class BottomPane implements IGUIPiece,IViewPane {
 	private ApplicationController myAppController;
-	private Pane myBottomPane;
+	private HBox myBottomPane=new HBox();
 	private ApplicationController myApplicationController;
 	
 	public BottomPane(ApplicationController aAppController){
     	myAppController = aAppController;
-		myBottomPane=setUpPane();
+    	setUpPane();
 		myBottomPane.setPrefHeight(110);
 		//myApplicationController=applicationController;
 	}
@@ -38,22 +40,31 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	/**
 	 * Creates the object that will actually be returned
 	 */
-	public Pane setUpPane() {
-		HBox hbox = new HBox();
-		hbox.setPrefWidth(900);
-		hbox.setMaxHeight(100);
-	    hbox.setPadding(new Insets(10, 10,10, 10));
-	    hbox.setSpacing(10);
-	    hbox.setStyle("-fx-background-color: #993384;");
+	public void setUpPane() {
+		myBottomPane.setPrefWidth(900);
+		myBottomPane.setMaxHeight(100);
+		myBottomPane.setPadding(new Insets(10, 10,10, 10));
+		myBottomPane.setSpacing(10);
+		myBottomPane.setStyle("-fx-background-color: #993384;");
 	    TowerStatisticsandOptions myTowerOptions=new TowerStatisticsandOptions();
 	    UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
-	    MachineInfo myMachineView=new MachineInfo();
-	    hbox.getChildren().addAll(myMachineView.getView(),myTowerOptions.getView(),myUpgradeandSell.getView());
-
-	    return hbox;
+	    //MachineInfo myMachineView=new MachineInfo();
+	    myBottomPane.getChildren().addAll(/*myMachineView.getView(),*/myTowerOptions.getView(),myUpgradeandSell.getView());
 	}
 	
 	public Node getView() {
 		return myBottomPane;
+	}
+
+	@Override
+	public void add(Collection<Node> collection) {
+		for(Node n:collection){
+			myBottomPane.getChildren().add(n);
+		}
+	}
+
+	@Override
+	public void clear() {
+		myBottomPane.getChildren().clear();
 	}
 }

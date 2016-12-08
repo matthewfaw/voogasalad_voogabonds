@@ -45,10 +45,13 @@ public class UpgradeOrSell implements IGUIPiece {
 	private HBox buildHBox() {
 		
 		VBox upgradeOrSell=new VBox();
+		upgradeOrSell.setSpacing(10);
 		Button SellButton=new Button("Sell");
 		SellButton.setPrefSize(100, 20);
+		SellButton.setStyle("-fx-background-color: linear-gradient(#f0aa35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
 		SellButton.setOnAction(e->myAppController.onSellButtonPressed());
 		Button UpgradeButton=new Button("Upgrade");
+		UpgradeButton.setStyle("-fx-background-color: linear-gradient(#f0aa35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
 		UpgradeButton.setPrefSize(100, 20);
 		UpgradeButton.setOnAction(e->myAppController.onUpgradeButtonPressed());
 		upgradeOrSell.getChildren().addAll(SellButton,UpgradeButton);
@@ -59,8 +62,9 @@ public class UpgradeOrSell implements IGUIPiece {
 	    Label heading = new Label("Upgrades");
 	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
-	    resourceTabs.getTabs().add(buildTab(upgradeInfo, "Path 1"));
+	    resourceTabs.getTabs().add(buildTab(upgradeInfo,"Path 1"));
 	    resourceTabs.getTabs().add(buildTab(upgradeInfo,"Path 2"));
+	    //resourceTabs.getTabs().add(buildTab(upgradeInfo,"Path 3"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
 	    hbox.getChildren().addAll(resourceTabs,upgradeOrSell);

@@ -8,6 +8,7 @@ import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IGUIPiece;
+import gamePlayerView.interfaces.IViewPane;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -19,26 +20,30 @@ import javafx.scene.layout.VBox;
  * 
  */
 
-public class LeftPane implements IGUIPiece {
-	private Pane myLeftPane;
+public class LeftPane implements IGUIPiece,IViewPane {
+	private VBox myLeftPane=new VBox();
 	private CashBox myWallet;
 	private LivesBox myLives;
 	
 	public LeftPane(ApplicationController appcontrol){
-		myLeftPane = setUpPane();
+		setUpPane();
 		GamePlayOptions myGamePlayOptions=new GamePlayOptions(appcontrol);
 		myWallet=new CashBox();
 		myLives=new LivesBox();
-		myLeftPane.getChildren().addAll(myGamePlayOptions.getView(),myWallet.getView(),myLives.getView());
+		myLeftPane.getChildren().addAll(myGamePlayOptions.getView(),myWallet.getView(),myLives.getView()); ///////////////////// 
 	}
-	private Pane setUpPane() {
-		VBox vbox=new VBox();
-		vbox.setPrefWidth(100);
-		vbox.setMaxHeight(700);
-	    vbox.setPadding(new Insets(10, 10,10, 10));
-	    vbox.setSpacing(10);
-	    vbox.setStyle("-fx-background-color: #336699;");
-		return vbox;
+	public void setUpPane() {
+		myLeftPane.setPrefWidth(100);
+		myLeftPane.setMaxHeight(700);
+	    myLeftPane.setPadding(new Insets(10, 10,10, 10));
+	    myLeftPane.setSpacing(10);
+	    myLeftPane.setStyle("-fx-background-color: #336699;");
+	}
+	
+	public void add(Collection<Node> collection){
+		for(Node n:collection){
+			myLeftPane.getChildren().add(n);
+		}
 	}
 	@Override
 	public Node getView() {
@@ -49,6 +54,10 @@ public class LeftPane implements IGUIPiece {
 	}
 	public LivesBox getLives() {
 		return myLives;
+	}
+	@Override
+	public void clear() {
+		myLeftPane.getChildren().clear();
 	}
 	
 }

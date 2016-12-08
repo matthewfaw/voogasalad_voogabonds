@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 public abstract class InfoBox implements IGUIPiece {
 	public HBox myDisplay= new HBox();
 	Label myLabel=new Label();
-	TextArea myOutput= new TextArea();
+	Label myOutput= new Label();
 	
 	public InfoBox(){
 		//
@@ -26,7 +26,7 @@ public abstract class InfoBox implements IGUIPiece {
 	public HBox makeDisplay(String text){
 		HBox h=new HBox();
 		myLabel= makeLabel(text);
-		myOutput = makeTextArea();
+		myOutput = makeLabel("");//makeTextArea();
 		h.getChildren().addAll(myLabel,myOutput);
 		return h;
 	}

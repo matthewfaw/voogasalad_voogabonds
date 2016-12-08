@@ -1,5 +1,7 @@
 package gamePlayerView.ScenePanes;
 
+import java.util.Collection;
+
 import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
@@ -16,25 +18,23 @@ import javafx.scene.layout.VBox;
  */
 
 public class RightPane implements IGUIPiece,IViewPane {
-	private Pane myRightPane;
+	private VBox myRightPane=new VBox();
 	private TowerColumn myTowerColumn;
 	
 	public RightPane(){
-		myRightPane = setUpPane();
+		setUpPane();
 		myTowerColumn=new TowerColumn();
 		myRightPane.getChildren().add(myTowerColumn.getView());
 	}
 
 	@Override
-	public Pane setUpPane() {
-		VBox vbox = new VBox();
-		vbox.setPrefWidth(200);
-		vbox.setPrefHeight(600);
-	    vbox.setPadding(new Insets(10));
-	    vbox.setSpacing(8);
+	public void setUpPane() {
+		myRightPane.setPrefWidth(200);
+		myRightPane.setPrefHeight(600);
+		myRightPane.setPadding(new Insets(10));
+		myRightPane.setSpacing(8);
 	    //TODO:Export CSS to other part
-	    vbox.setStyle("-fx-background-color: #778899;");
-	    return vbox;
+		myRightPane.setStyle("-fx-background-color: #778899;");
 	}
 
 	@Override
@@ -43,5 +43,17 @@ public class RightPane implements IGUIPiece,IViewPane {
 	}
 	public TowerColumn getTowerColumn(){
 		return myTowerColumn;
+	}
+
+	@Override
+	public void add(Collection<Node> collection) {
+		for(Node n:collection){
+			myRightPane.getChildren().add(n);
+		}
+	}
+
+	@Override
+	public void clear() {
+		myRightPane.getChildren().clear();
 	}
 }

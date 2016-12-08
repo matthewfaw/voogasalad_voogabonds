@@ -17,6 +17,7 @@ import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -32,12 +33,13 @@ public class GamePlayerScene {
 	
 	private Stage myStage;
 	private TowerColumn myTowerColumn;
-	private BottomPane myStatisticsRow;
+	private BottomPane myBottomPane;
 	private GamePlayOptions myGamePlayOptions;
 	private LeftPane myLeftPane;
 	private RightPane myRightPane;
 	private MapDisplay myMap;
 	private Scene myScene;
+	private Group myGamePlayer;
 	private List<ICashAcceptor> myCash;
 	private List<ILivesAcceptor> myLives; 
 	private List<IWavesAcceptor> myWaves;
@@ -82,26 +84,38 @@ public class GamePlayerScene {
 	*/
 
 	public Scene build(Stage stage) throws Exception {
-		Group gameplayer =new Group();
-		myScene = new Scene(gameplayer, 900, 700);
-		gameplayer.getChildren().add(setScreen());
+		myGamePlayer =new Group();
+		myScene = new Scene(myGamePlayer, 1000, 700);
+		myGamePlayer.getChildren().add(setScreen());
 		return myScene;
 	}
-	
+	//This will be called by controller
+	public void rebuild(Stage aStage,BorderPane aPane) {
+		myScene = new Scene(myGamePlayer, 1000, 700);
+		myGamePlayer.getChildren().clear();
+		myGamePlayer.getChildren().add(updateScreen(aPane));
+		setScene(aStage,myScene);
+	}
+
+	private BorderPane updateScreen(BorderPane aPane) {
+		//  TODO /// This might not be necessary
+		return null;
+	}
+
 	public BorderPane setScreen() throws Exception{
 		//myTowerColumn   = new TowerColumn();
 		//myGamePlayOptions=new GamePlayOptions(myAppController);
 		myLeftPane=new LeftPane(myAppController);
 		myRightPane=new RightPane();
 	    myMap = new MapDisplay(myAppController);
-		myStatisticsRow = new BottomPane(myAppController);
+		myBottomPane = new BottomPane(myAppController);
 		myCash.add(myLeftPane.getCash());
 		myLives.add(myLeftPane.getLives());
 		myResources.add(myRightPane.getTowerColumn());
 		//mySprites.add(myMap.getSprites());
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myRightPane.getView());
-		borderpane.setBottom(myStatisticsRow.getView());
+		borderpane.setBottom(myBottomPane.getView());
 		borderpane.setCenter(myMap.getView());
 		borderpane.setLeft(myLeftPane.getView());
 		myMap.setupDragging(myScene);

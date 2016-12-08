@@ -25,9 +25,9 @@ public class MachineInfo implements IGUIPiece {
 
 	private VBox makeDisplay(/*TowerData tower*/) {
 		VBox vbox=new VBox();
-		Image image= new Image(tower.getImagePath());
+		//Image image= new Image(this.getClass().getClassLoader().getResourceAsStream("voogasalad_voogabonds/src/resources/cow.png"));
 		ImageView imageView=new ImageView();
-		imageView.setImage(image);
+		//imageView.setImage(image);
 		imageView.setFitWidth(100);
 		imageView.setPreserveRatio(true);
 		imageView.setSmooth(true);

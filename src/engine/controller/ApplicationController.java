@@ -6,6 +6,7 @@ import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import utility.Point;
 
@@ -28,6 +29,7 @@ public class ApplicationController {
 	private BackendController myBackendController;
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
+	private Stage myStage; //////Guhan
 
 	public ApplicationController()
 	{
@@ -40,6 +42,7 @@ public class ApplicationController {
 	 */
 	public void init(Stage aStage) throws Exception
 	{
+		myStage=aStage; ///Guhan 
 		GamePlayerScene scene = constructGUI(aStage);
 		Router router = new Router(scene);
 		constructBackend(router);
@@ -67,6 +70,11 @@ public class ApplicationController {
 	{
 		//TODO: Change this to make this dynamic--select different games
 		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
+	}
+	private BorderPane constructBorderPane(){
+		BorderPane pane= new BorderPane();
+		
+		return null;
 	}
 
 	public void onPlayButtonPressed() {

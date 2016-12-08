@@ -27,6 +27,7 @@ public class TargetingButtons implements IGUIPiece {
 		Button b4= makeButton("Weakest");
 		//b4.setOnAction(e->myAppController.onFirstPressed());
 		HBox hbox=new HBox();
+		hbox.setSpacing(10);
 		hbox.getChildren().addAll(b1,b2,b3,b4);
 		return hbox;
 	}
@@ -35,7 +36,7 @@ public class TargetingButtons implements IGUIPiece {
 		Button b= new Button(string);
 		b.setPrefSize(100, 20);
 		//b.setId(value);
-		//b.setStyle("-fx-background-color: linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
+		b.setStyle("-fx-background-color: linear-gradient(#f0aa35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
 		return b;
 	}
 
