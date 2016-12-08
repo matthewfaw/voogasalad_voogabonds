@@ -36,8 +36,12 @@ public class EntityDataContainer extends Container implements IDataContainer, IO
     /**
      * @return
      */
-    public int getNumEntitys() {
+    public int getNumEntities() {
         return myEntityDataMap.size();
+    }
+    
+    public AbstractMap<String, EntityData> getEntityDataMap(){
+    	return myEntityDataMap;
     }
 
     /**
