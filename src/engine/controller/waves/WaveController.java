@@ -1,5 +1,6 @@
 package engine.controller.waves;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import authoring.model.EntityData;
@@ -40,7 +41,13 @@ public class WaveController implements IObserver<TimelineController> {
 		// if true, then distribute the enemy through the mediator
 		Map<EntityData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct(aChangedObject.getTotalTimeElapsed());
 		for (EntityData enemyData: enemiesToConstruct.keySet()) {
-			myEntityFactory.constructEntity(enemyData);
+			try {
+				myEntityFactory.constructEntity(enemyData);
+			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+					| IllegalArgumentException | InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
 		//TODO: Change to a better way?
 		//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);

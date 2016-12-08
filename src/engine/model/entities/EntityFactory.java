@@ -1,5 +1,6 @@
 package engine.model.entities;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 
@@ -11,15 +12,16 @@ import engine.model.strategies.IPhysical;
 import engine.model.systems.ISystem;
 import utility.Point;
 /**
- * 
+ * Creates all the entities
  * @author owenchung and alanguo
  *
  */
 public class EntityFactory {
 	private ComponentFactory myComponentFactory;
 	private List<ISystem> mySystems;
+
 	public EntityFactory(List<ISystem> systems) {
-		myComponentFactory = new ComponentFactory();
+		myComponentFactory = new ComponentFactory(systems);
 		mySystems = systems;
 	}
 	
@@ -38,19 +40,19 @@ public class EntityFactory {
 	 * calls constructEntity will need to supply them.
 	 */
 	@Deprecated
-	public IEntity constructEntity(EntityData aEntityData ) {
+	public IEntity constructEntity(EntityData aEntityData ) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		IEntity entity = new ConcreteEntity();
 		List<ComponentData> componentMap = aEntityData.getComponents();
 		for (ComponentData compdata : componentMap) {
-			String className = compdata.getComponentName();
-			IComponent component = myComponentFactory.constructComponent(entity, compdata);
-			entity.addComponent(component);
-			
+			IComponent component = myComponentFactory.constructComponent(compdata);
+			entity.addComponent(component);	
 		}
+		
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?
 		//3. return the fully constructed object
+
 		return entity;
 	}
 }
