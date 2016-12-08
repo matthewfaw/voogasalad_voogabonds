@@ -58,7 +58,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		return new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				VBox menu = setUpMenu();
-				myContent.getChildren().add(menu);
+				getTilePane().getChildren().add(menu);
 			}
 		};
 	}
