@@ -44,6 +44,7 @@ public class WaveData implements IReadableData {
 		if (name == null || name.length() == 0){
 			throw new Exception("Wave name must be specified.");
 		}
+		this.name = name;
 	}
 	
 	public String getWaveEnemy() {

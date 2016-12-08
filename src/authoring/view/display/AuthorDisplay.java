@@ -76,7 +76,7 @@ public class AuthorDisplay {
         EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
         RulesTab rulesTab = new RulesTab("Rules");
         WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
-        LevelTab levelTab = new LevelTab("Levels");
+        LevelTab levelTab = new LevelTab("Levels", r.getLevelDataContainer());
         r.link(entityTab, levelTab, waveTab);
         // Add Tabs to list
         tabs.add(mapTab);

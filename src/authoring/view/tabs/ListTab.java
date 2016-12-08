@@ -86,7 +86,13 @@ public abstract class ListTab<A> extends AuthoringTab {
         }
         myListView = new ListView<A>(myList);
         bindSize(scroll, myListView);
-        
+        myListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        	public void handle(MouseEvent event){
+        		if (event.getClickCount() == 2 && myListView.getSelectionModel().getSelectedItem()!=null){
+                    edit(myListView.getSelectionModel().getSelectedItem());
+                }
+        	}
+        });
         // Add Nodes to Tab
         scroll.setContent(myListView);
         left.getChildren().addAll(add, scroll);
@@ -113,6 +119,8 @@ public abstract class ListTab<A> extends AuthoringTab {
     }
     
     protected abstract EventHandler<ActionEvent> handleAddNewObject();
+    
+    protected abstract void edit(A name);
     
     protected TilePane getTilePane(){
     	return myContent;
