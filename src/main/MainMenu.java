@@ -51,8 +51,10 @@ public class MainMenu {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.tabContainer = new TabPane();
 		tabContainer.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		this.newTab = new NewGameTab(tabContainer);
-		this.loadTab = new LoadGameTab(tabContainer);
+		this.playTab = new PlayerTab(tabContainer);
+		this.authorTab = new AuthoringTab(tabContainer);
+//		this.newTab = new NewGameTab(tabContainer);
+//		this.loadTab = new LoadGameTab(tabContainer);
 		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
 	}
 	
