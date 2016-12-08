@@ -2,13 +2,10 @@ package authoring.controller;
 import authoring.view.side_panel.*;
 
 public class Router {
-	private EnemyDataContainer edc = new EnemyDataContainer();
 	private MapDataContainer mdc = new MapDataContainer();
 	private PlayerDataContainer pldc = new PlayerDataContainer();
-	private ProjectileDataContainer prdc = new ProjectileDataContainer();
-	private TowerDataContainer tdc = new TowerDataContainer();
+	private LevelDataContainer ldc = new LevelDataContainer();
 	private WaveDataContainer wadc = new WaveDataContainer();
-	private WeaponDataContainer wedc = new WeaponDataContainer();
 	
 	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
 		/**
@@ -32,9 +29,6 @@ public class Router {
 		
 	}
 	
-	public EnemyDataContainer getEnemyDataController(){
-		return edc;
-	}
 	
 	public MapDataContainer getMapDataController(){
 		return mdc;
@@ -44,19 +38,8 @@ public class Router {
 		return pldc;
 	}
 	
-	public ProjectileDataContainer getProjectileDataController(){
-		return prdc;
-	}
-	
-	public TowerDataContainer getTowerDataController(){
-		return tdc;
-	}
-	
 	public WaveDataContainer getWaveDataController(){
 		return wadc;
 	}
 	
-	public WeaponDataContainer getWeaponDataController(){
-		return wedc;
-	}
 }

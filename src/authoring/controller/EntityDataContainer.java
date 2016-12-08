@@ -82,7 +82,4 @@ public class EntityDataContainer implements IDataContainer{
         myEntityDataMap.remove(name);
         return true;
     }
-
-	
-
 }
