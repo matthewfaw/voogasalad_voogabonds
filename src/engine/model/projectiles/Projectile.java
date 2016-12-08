@@ -129,7 +129,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	}
 	
 	private Point advance() {
-		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this);
+		Pair<Double, Point> nextMove = new Pair<Double, Point>(0.0, null);//myMovementCalc.nextMove(this, this);
 		
 		myTraveled += myLocation.euclideanDistance(nextMove.getValue());
 		myHeading = nextMove.getKey();

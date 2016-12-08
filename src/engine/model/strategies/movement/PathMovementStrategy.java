@@ -5,6 +5,7 @@ import java.util.Random;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
+import engine.model.strategies.IPhysical;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -13,67 +14,58 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	private PathManager myPath;
 	
 	@Override
-	public  Pair<Double, Point> nextMove(IMovable m) {
+	public  Pair<Double, Point> nextMove(IMovable m, IPhysical p) {
 		if (myPath == null) {
 			myPath = m.getPath();
 		}
-		return super.nextMove(m);
+		return super.nextMove(m, p);
 	}
 	
 	@Override
-	protected Pair<Double, Point> nextMoveNoGoal(IMovable m) {
+	protected Pair<Double, Point> nextMoveNoGoal(IMovable m, IPhysical p) {
 		//Spins around aimlessly
-		/*
-		return new Pair<Double, Point>(m.getHeading() + RANDOM.nextDouble() * m.getTurnSpeed(), m.getPosition());
-		*/
-		return null;
+		return new Pair<Double, Point>(p.getHeading() + RANDOM.nextDouble() * m.getTurnSpeed(), p.getPosition());
 	}
 
 	@Override
-	protected Pair<Double, Point> nextMoveWithGoal(IMovable m) {
-		/*
-		Point subGoal = myPath.getNextVertex(m.getPosition());
+	protected Pair<Double, Point> nextMoveWithGoal(IMovable m, IPhysical p) {
+		Point subGoal = myPath.getNextVertex(p.getPosition());
 		
 		//Check if we aren't on the path anymore
 		if (subGoal == null)
-			return nextMoveNoGoal(m);
+			return nextMoveNoGoal(m, p);
 		
-		double newHeading = newHeadingTowards(subGoal, m);
+		double newHeading = newHeadingTowards(subGoal, m, p);
 		
 		Point newPosition;
-		if (m.getPosition().towards(subGoal) == newHeading)
-			newPosition = moveTowards(subGoal, newHeading, m);
+		if (p.getPosition().towards(subGoal) == newHeading)
+			newPosition = moveTowards(subGoal, newHeading, m, p);
 		else
-			newPosition = m.getPosition();
+			newPosition = p.getPosition();
 		
 		return new Pair<Double, Point>(newHeading, newPosition);
-		*/
-		return null;
 	}
 	
 	
 
-	private Point moveTowards(Point subGoal, double heading, IMovable m) {
-		/*
-		double distance = Math.min(m.getMoveSpeed(), m.getPosition().euclideanDistance(m.getGoal()));
+	private Point moveTowards(Point subGoal, double heading, IMovable m, IPhysical p) {
+		double distance = Math.min(m.getMoveSpeed(), p.getPosition().euclideanDistance(subGoal));
 		
-		return m.getPosition().moveAlongHeading(distance, heading);
+		return p.getPosition().moveAlongHeading(distance, heading);
 	}
 
 	
-	private double newHeadingTowards(Point goal, IMovable m) {
+	private double newHeadingTowards(Point goal, IMovable m, IPhysical p) {
 		double newHeading;
-		double deltaToTarget = m.getHeading() - m.getPosition().towards(m.getGoal());
+		double deltaToTarget = p.getHeading() - p.getPosition().towards(m.getGoal());
 		
 		if (Math.abs(deltaToTarget) <= Math.abs(m.getTurnSpeed()))
-			newHeading = m.getHeading() + deltaToTarget;
+			newHeading = p.getHeading() + deltaToTarget;
 		else
 			//heading = currHeading + turnSpeed + (delta/|delta|)
-			newHeading = m.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
+			newHeading = p.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
 		
 		return newHeading;
-		*/
-		return null;
 	}
 
 }

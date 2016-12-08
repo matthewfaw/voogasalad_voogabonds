@@ -10,5 +10,5 @@ public interface IMovementStrategy {
 	 * @param m Movable to be moved
 	 * @return a javafx pair containng the new heading (double) and position (Point)
 	 */
-	public Pair<Double, Point> nextMove(IMovable m);
+	public Pair<Double, Point> nextMove(IMovable m, IPhysical p);
 }
