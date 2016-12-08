@@ -5,6 +5,7 @@ import engine.model.entities.IEntity;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.weapons.DamageInfo;
+import utility.Damage;
 
 /**
  * The purpose of this class is to manage the information relevant to 
@@ -31,9 +32,9 @@ public class DamageDealingComponent implements IComponent {
 	 * gets the amount of damage this entity inflicts
 	 * @return the damage value
 	 */
-	public int getDamage()
+	public Damage getDamage()
 	{
-		return myDamage;
+		return myDamageStrategy.getTargetDamage(myDamage);
 	}
 	
 	/**
