@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
+import main.MainInitializer;
 
 /**
  * @author Christopher Lu
@@ -25,13 +26,15 @@ public class PlayerTab extends Tab {
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private VBox playOptions;
+	private MainInitializer initializer;
 	
-	public PlayerTab(TabPane mainMenuTab) {
+	public PlayerTab(TabPane mainMenuTab, MainInitializer init) {
 		setUpScreenResolution();
 		this.root = mainMenuTab;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.playerTab = new Tab(myResources.getString("EnterPlayerMode"));
 		this.playOptions = new VBox(screenHeight*0.1);
+		this.initializer = init;
 		populateTab();
 		root.getTabs().add(playerTab);
 	}

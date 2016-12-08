@@ -20,14 +20,14 @@ public class MapTab extends Tab {
 	private Scene scene;
 	private MapDataContainer controller;
 	
-	public MapTab(TabPane tPain, Scene sc, MapDataContainer con) {
+	public MapTab(TabPane tPain, Scene sc, MapDataContainer con, int mapX, int mapY) {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.tbPane = tPain;
 		this.mapTab = new Tab(myResources.getString("MapTab"));
 		this.pane = new BorderPane();
 		this.scene = sc;
 		this.controller = con;
-		this.mapDisplay = new GameDisplay(pane, scene, con);
+		this.mapDisplay = new GameDisplay(pane, scene, con, mapX, mapY);
 		mapTab.setContent(mapDisplay.getTerrainBox());
 		tbPane.getTabs().add(mapTab);
 	}

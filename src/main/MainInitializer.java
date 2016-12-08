@@ -65,10 +65,10 @@ public class MainInitializer {
 		return scene;
 	}
 	
-	public void initSim() {
+	public void initAuthoring(int mapX, int mapY) {
 		//TopMenuBar menuBar = new TopMenuBar(this, root);
 		//InfoTabs infoTab = new InfoTabs(root, scene);
-	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene);
+	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, mapX, mapY);
 		stage.setScene(scene);
 	}
 	
