@@ -31,11 +31,11 @@ public class InfoTabs {
 		infoTab = new TabPane();
 		infoTab.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		r = new Router();
-		GameDisplay mapDisplay = new GameDisplay(root, scene, r.getMapDataController());
+		GameDisplay mapDisplay = new GameDisplay(root, scene, r.getMapDataContainer());
 		//Change to take in a controller as a second parameter please:
 		Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
 		Tab enemyTab = new EnemyTab(infoTab, r.getEnemyDataController());
-		Tab waveTab = new WaveTab(infoTab, r.getWaveDataController());
+		Tab waveTab = new WaveTab(infoTab, r.getWaveDataContainer());
 		//Tab gameTab = new GameTab(infoTab);
 		Tab weaponTab = new WeaponTab(infoTab, r.getWeaponDataController());
 		// TODO: change null to GameTab

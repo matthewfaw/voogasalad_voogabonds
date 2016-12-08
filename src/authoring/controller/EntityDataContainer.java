@@ -28,16 +28,23 @@ public class EntityDataContainer extends Container implements IDataContainer, IO
     /**
      * @param EntityData
      */
-    public void createEntityData(EntityData EntityData){
-        myEntityDataMap.put(EntityData.getName(), EntityData);
+    public void createEntityData(EntityData entityData) throws Exception{
+        if (myEntityDataMap.containsKey(entityData.getName())){
+        	throw new Exception("An entity with this name already exists!");
+        }
+    	myEntityDataMap.put(entityData.getName(), entityData);
         notifyObservers();
     }
 
     /**
      * @return
      */
-    public int getNumEntitys() {
+    public int getNumEntities() {
         return myEntityDataMap.size();
+    }
+    
+    public AbstractMap<String, EntityData> getEntityDataMap(){
+    	return myEntityDataMap;
     }
 
     /**
@@ -52,7 +59,7 @@ public class EntityDataContainer extends Container implements IDataContainer, IO
      * @param originalName
      * @param updatedEntity
      */
-    public void updateEntityData(String originalName, EntityData updatedEntity){
+    public void updateEntityData(String originalName, EntityData updatedEntity) throws Exception{
         myEntityDataMap.remove(originalName);
         createEntityData(updatedEntity);
         notifyObservers();
@@ -70,7 +77,7 @@ public class EntityDataContainer extends Container implements IDataContainer, IO
     }
 
     @Override
-    public void createObjectData (IReadableData data) {
+    public void createObjectData (IReadableData data) throws Exception{
         createEntityData((EntityData)data);
     }
 

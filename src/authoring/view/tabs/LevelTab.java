@@ -1,10 +1,18 @@
 package authoring.view.tabs;
 
+import java.util.ArrayList;
+
+import authoring.controller.Container;
+import authoring.controller.WaveDataContainer;
+import engine.IObservable;
+import engine.IObserver;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class LevelTab extends ListTab<String> {
+public class LevelTab extends ListTab<String> implements IObserver<Container>{
 
+	private ArrayList<String> myWaves = new ArrayList<String>();
+	
 	public LevelTab(String text) {
 		super(text);
 		// TODO Auto-generated constructor stub
@@ -16,4 +24,13 @@ public class LevelTab extends ListTab<String> {
 		return null;
 	}
 
+	@Override
+	public void update(Container c) {
+		myWaves.clear();
+		if (c instanceof WaveDataContainer){
+			for (String s: ((WaveDataContainer) c).getWaveMap().keySet()){
+				myWaves.add(s);
+			}
+		}
+	}
 }

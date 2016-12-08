@@ -48,7 +48,6 @@ public class AuthorDisplay {
         
         // Set up Router
         r = new Router();
-        el = new EntityList();
         
         // Add Tabs
         List<Tab> tabs = getTabs();
@@ -69,10 +68,10 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        Tab mapTab = new MapTab(tabPane, scene, r.getMapDataController());
-        Tab entityTab = new EntityTab(el);
+        Tab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer());
+        Tab entityTab = new EntityTab(r.getEntityDataContainer());
         Tab rulesTab = new RulesTab("Rules");
-        Tab waveTab = new WaveTab("Waves", r.getWaveDataController());
+        Tab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
         Tab levelTab = new LevelTab("Levels");
         // Add Tabs to list
         tabs.add(mapTab);

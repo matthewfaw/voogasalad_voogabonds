@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import authoring.controller.Container;
 import authoring.controller.WaveDataContainer;
 import authoring.controller.MapDataContainer;
-import authoring.controller.EnemyDataContainer;
+import authoring.controller.EntityDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.WaveData;
 import authoring.view.input_menus.WaveMenu;
@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
 public class WaveTab extends ListTab<String> implements IObserver<Container>{
 
 	private WaveDataContainer myContainer;
-	private ArrayList<String> myEnemies;
+	private ArrayList<String> myEntities;
 	private ArrayList<String> mySpawnPoints;
 	
 	public WaveTab(String text, WaveDataContainer container){
@@ -36,22 +36,6 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		myContainer = container;
 	}
 	
-	/**
-	 * IObserver interface methods
-	 */
-	public void update(Container c){
-		if (c instanceof MapDataContainer){
-			mySpawnPoints.clear();
-			for (String spawnPoint: ((MapDataContainer) c).getSpawnPointMap().keySet()){
-				mySpawnPoints.add(spawnPoint);
-			}
-		}else if(c instanceof EnemyDataContainer){
-			myEnemies.clear();
-			for (String enemyName: ((EnemyDataContainer) c).getEnemyDataMap().keySet()){
-				myEnemies.add(enemyName);
-			}
-		}
-	}
 
 	@Override
 	protected EventHandler handleAddNewObject() {
@@ -67,5 +51,22 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		VBox v = new VBox();
 		v.getChildren().add(new Button("hi"));
 		return v;
+	}
+	
+	/**
+	 * IObserver interface methods
+	 */
+	public void update(Container c){
+		if (c instanceof MapDataContainer){
+			mySpawnPoints.clear();
+			for (String spawnPoint: ((MapDataContainer) c).getSpawnPointMap().keySet()){
+				mySpawnPoints.add(spawnPoint);
+			}
+		}else if(c instanceof EntityDataContainer){
+			myEntities.clear();
+			for (String enemyName: ((EntityDataContainer) c).getEntityDataMap().keySet()){
+				myEntities.add(enemyName);
+			}
+		}
 	}
 }
