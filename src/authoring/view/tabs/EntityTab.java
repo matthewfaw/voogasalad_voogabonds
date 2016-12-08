@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EntityTab extends ListTab<String> implements IObserver<Container>{
     public static final String TITLE = "Entities";
@@ -47,19 +48,27 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
         ecFetcher.fetch();
     }
     
-    public void addEntity(EntityData entity){
+    public boolean addEntity(EntityData entity){
         try{
         	myEntities.createEntityData(entity);
+        	this.getList().add(entity.getName());
+        	return true;
         }catch(Exception e){
-        	//Show error
+        	this.showError(e.getMessage());
+        	return false;
         }
     }
     
-    public void updateEntity(String oldName, EntityData entity){
+    public boolean updateEntity(String oldName, EntityData entity){
     	try{
     		myEntities.updateEntityData(oldName, entity);
+    		if (!oldName.equals(entity.getName())) {
+    		    this.getList().set(this.getList().indexOf(oldName), entity.getName());
+    		}
+    		return true;
     	}catch(Exception e){
-    		//Show error
+    	        this.showError(e.getMessage());
+    	        return false;
     	}
     }
 
@@ -67,15 +76,14 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     protected EventHandler<ActionEvent> handleAddNewObject () {
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
-                // TODO: implement method
-                VBox newEntityMenu = getNewEntityMenu();
+                EditEntityBox newEntityMenu = getNewEntityMenu();
                 getTilePane().getChildren().add(newEntityMenu);
             }
         };
         return handler;
     }
     
-    private VBox getNewEntityMenu() {
+    private EditEntityBox getNewEntityMenu() {
         return new EditEntityBox(this, ecFetcher.getComponentList());
     }
     

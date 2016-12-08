@@ -58,14 +58,17 @@ public class EditEntityBox extends VBox {
         this.getChildren().addAll(title,
                                   nameLbl, nameField,
                                   addComponentLbl, componentsBox,
-                                  myComponentsView);
+                                  myComponentsView,
+                                  done);
     }
     
     private EventHandler<ActionEvent> handleDone() {
         EventHandler<ActionEvent> finish = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
                 EntityData entity = createDataFromInput();
-                myTab.addEntity(entity);
+                if (myTab.addEntity(entity)) {
+                    myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
+                }
             }
         };
         return finish;
