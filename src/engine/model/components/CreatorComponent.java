@@ -1,12 +1,9 @@
 package engine.model.components;
 
-import engine.IObserver;
-import engine.controller.timeline.TimelineController;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.ISpawningStrategy;
-import engine.model.strategies.ITargetingStrategy;
 import engine.model.systems.PhysicalSystem;
 
 /**
@@ -18,11 +15,8 @@ import engine.model.systems.PhysicalSystem;
  * @author matthewfaw
  *
  */
-public class CreatorComponent implements IComponent, IObserver<TimelineController>, ICreator {
+public class CreatorComponent implements IComponent, ICreator {
 	private IEntity myEntity;
-	
-	private double mySightRange;
-	private double mySightWidth;
 	
 	private int myTimeBetweenSpawns;
 	private int myTimeSinceSpawning;
@@ -30,7 +24,6 @@ public class CreatorComponent implements IComponent, IObserver<TimelineControlle
 	
 	//TODO:
 	private ISpawningStrategy mySpawningStrategy;
-	private ITargetingStrategy myTargetingStrategy;
 	private EntityFactory myEntityFactory;
 	private PhysicalSystem myPhysicalSystem;
 	
@@ -46,9 +39,7 @@ public class CreatorComponent implements IComponent, IObserver<TimelineControlle
 		return myEntity;
 	}
 
-	@Override
-	public void update(TimelineController aChangedObject) {
-		IPhysical target = myTargetingStrategy.target(myPhysicalSystem.get(this), this);
+	public void spawn(IPhysical target) {
 		
 		if (myTimeSinceSpawning >= myTimeSinceSpawning) {
 			mySpawningStrategy.spawn(myEntityFactory, target, myPhysicalSystem.get(this), this);
@@ -56,15 +47,5 @@ public class CreatorComponent implements IComponent, IObserver<TimelineControlle
 		} else
 			myTimeSinceSpawning++;
 		
-	}
-
-	@Override
-	public double getTargetWedgeWidth() {
-		return mySightWidth;
-	}
-
-	@Override
-	public double getTargetWedgeRadius() {
-		return mySightRange;
 	}
 }

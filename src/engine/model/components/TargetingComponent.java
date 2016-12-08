@@ -1,5 +1,5 @@
 package engine.model.components;
 
-public interface ICreator {
+public class TargetingComponent {
 
 }
