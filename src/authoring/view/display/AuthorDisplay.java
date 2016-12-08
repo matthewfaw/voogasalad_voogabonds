@@ -27,12 +27,15 @@ public class AuthorDisplay {
     private Router r;
     private EntityList el;
     private Scene scene;
+    private int mapXDim;
+    private int mapYDim;
     
-    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn) {
+    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY) {
         // set title
         mainInit.setTitle(AUTHORING_TITLE);
         this.scene = scn;
-        
+        this.mapXDim = mapX;
+        this.mapYDim = mapY;
         // Set up BorderPane
         root = pane;
         // bind to take available space

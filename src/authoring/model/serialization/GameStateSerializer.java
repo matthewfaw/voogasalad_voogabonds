@@ -39,48 +39,55 @@ public class GameStateSerializer {
 
 		createNewDirectory(gameName,"");
 
-		try {
-			createNewDirectory("EnemyData", gameName);
-			AbstractMap<String, EnemyData> ed = router.getEnemyDataController().finalizeEnemyDataMap();
-			for (String edName : ed.keySet()){
-				ser.serializeToFile(ed.get(edName), gameName+"/"+"EnemyData"+"/"+edName);
-			}
-		}catch(Exception e){
-			System.out.println("Enemy fail");
-		}
+//		try {
+//			createNewDirectory("EnemyData", gameName);
+//			AbstractMap<String, EnemyData> ed = router.getEnemyDataController().finalizeEnemyDataMap();
+//			for (String edName : ed.keySet()){
+//				ser.serializeToFile(ed.get(edName), gameName+"/"+"EnemyData"+"/"+edName);
+//			}
+//		}catch(Exception e){
+//			System.out.println("Enemy fail");
+//		}
+//		try{
+//			createNewDirectory("TowerData", gameName);
+//			AbstractMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
+//			System.out.println(td);
+//			for (String tdName : td.keySet()){
+//				System.out.println(tdName);
+//				System.out.println(td.keySet());
+//			ser.serializeToFile(td.get(tdName), gameName+"/"+"TowerData"+"/"+tdName);
+//			}
+//		}catch(Exception e1){
+//			System.out.println("Tower fail");
+//		}
+//		try{
+//			createNewDirectory("WeaponData", gameName);
+//			AbstractMap<String, WeaponData> wd = router.getWeaponDataController().finalizeWeaponDataMap();
+//			for (String wdName : wd.keySet()){
+//			ser.serializeToFile(wd.get(wdName), "/"+gameName+"/"+"WeaponData"+"/"+wdName);
+//			}
+//			}catch(Exception e){
+//			System.out.println("Weapon fail");
+//		}
+//		try{
+//			createNewDirectory("ProjectileData", gameName);
+//			AbstractMap<String, ProjectileData> pd = router.getProjectileDataController().getProjectileDataMap();
+//			for (String pdName : pd.keySet()){
+//			ser.serializeToFile(pd.get(pdName), "/"+gameName+"/"+"ProjectileData"+"/"+pdName);
+//			}
+//		}catch(Exception e){
+//			System.out.println("Projectile fail");
+//		}
 		try{
-			createNewDirectory("TowerData", gameName);
-			AbstractMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
-			System.out.println(td);
-			for (String tdName : td.keySet()){
-				System.out.println(tdName);
-				System.out.println(td.keySet());
-			ser.serializeToFile(td.get(tdName), gameName+"/"+"TowerData"+"/"+tdName);
-			}
-		}catch(Exception e1){
-			System.out.println("Tower fail");
+			createNewDirectory("EntityData", gameName);
+			ser.serializeToFile(router.getEntityDataContainer(), gameName+"/"+"EntityData"+"/"+"EntityData");
 		}
-		try{
-			createNewDirectory("WeaponData", gameName);
-			AbstractMap<String, WeaponData> wd = router.getWeaponDataController().finalizeWeaponDataMap();
-			for (String wdName : wd.keySet()){
-			ser.serializeToFile(wd.get(wdName), "/"+gameName+"/"+"WeaponData"+"/"+wdName);
-			}
-			}catch(Exception e){
-			System.out.println("Weapon fail");
-		}
-		try{
-			createNewDirectory("ProjectileData", gameName);
-			AbstractMap<String, ProjectileData> pd = router.getProjectileDataController().getProjectileDataMap();
-			for (String pdName : pd.keySet()){
-			ser.serializeToFile(pd.get(pdName), "/"+gameName+"/"+"ProjectileData"+"/"+pdName);
-			}
-		}catch(Exception e){
-			System.out.println("Projectile fail");
+		catch(Exception e){
+			System.out.println("Entity Fail");
 		}
 		try{
 			createNewDirectory("WaveData", gameName);
-			LinkedHashMap<String, WaveData> wavd = router.getWaveDataContainer().finalizeWaveDataMap();
+			AbstractMap<String, WaveData> wavd = router.getWaveDataContainer().finalizeWaveDataMap();
 			for (String wavdName : wavd.keySet()){
 			ser.serializeToFile(wavd.get(wavdName), "/"+gameName+"/"+"WaveData"+"/"+wavdName);
 			}
