@@ -7,11 +7,6 @@ public class Router {
 	private PlayerDataContainer pldc = new PlayerDataContainer();
 	private LevelDataContainer ldc = new LevelDataContainer();
 	private WaveDataContainer wadc = new WaveDataContainer();
-<<<<<<< HEAD
-	private WeaponDataContainer wedc = new WeaponDataContainer();
-	private LevelDataContainer ldc = new LevelDataContainer();
-=======
->>>>>>> b22a96a9a42a9fbec7a59ec09c7c0333134910da
 	
 	public void link(TowerTab tTab, EnemyTab eTab, WaveTab wTab, GameTab gTab){
 		/**
@@ -20,15 +15,12 @@ public class Router {
 		 */
 		
 		//Listeners for WaveLevelTab
-		edc.attach(wTab); //Enemy data listener
 		mdc.attach(wTab); //Spawn point listener
 		
 		//Listeners for EnemyTab
 		mdc.attach(eTab); //Terrain listener
-		wedc.attach(eTab); //Weapon listener
 
                 //TowerTab
-		wedc.attach(tTab); //Weapon listener
 		mdc.attach(tTab); //Terrain listener
 		
 		//GameTab
@@ -48,14 +40,7 @@ public class Router {
 		return wadc;
 	}
 	
-<<<<<<< HEAD
-	public WeaponDataContainer getWeaponDataController(){
-		return wedc;
-	}
-	
 	public LevelDataContainer getLevelDataController(){
 		return ldc;
 	}
-=======
->>>>>>> b22a96a9a42a9fbec7a59ec09c7c0333134910da
 }
