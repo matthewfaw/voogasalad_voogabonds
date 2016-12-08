@@ -10,6 +10,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 import authoring.controller.Router;
 import authoring.view.display.GameDisplay;
+import authoring.view.tabs.WaveTab;
 
 /**
  * @author Christopher Lu
@@ -34,11 +35,11 @@ public class InfoTabs {
 		//Change to take in a controller as a second parameter please:
 		Tab towerTab = new TowerTab(infoTab, r.getTowerDataController());
 		Tab enemyTab = new EnemyTab(infoTab, r.getEnemyDataController());
-		Tab waveTab = new WaveLevelTab(infoTab, r.getWaveDataController());
+		Tab waveTab = new WaveTab(infoTab, r.getWaveDataController());
 		//Tab gameTab = new GameTab(infoTab);
 		Tab weaponTab = new WeaponTab(infoTab, r.getWeaponDataController());
 		// TODO: change null to GameTab
-		r.link((TowerTab) towerTab, (EnemyTab) enemyTab, (WaveLevelTab) waveTab, null); 
+		r.link((TowerTab) towerTab, (EnemyTab) enemyTab, (WaveTab) waveTab, null); 
 		infoTab.setPrefSize(screenWidth/5, screenHeight);
 		root.setLeft(infoTab);
 	}

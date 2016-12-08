@@ -1,16 +1,19 @@
 package authoring.controller;
 import authoring.view.side_panel.*;
+import authoring.view.tabs.WaveTab;
 
 public class Router {
-	private EnemyDataContainer edc = new EnemyDataContainer();
 	private MapDataContainer mdc = new MapDataContainer();
 	private PlayerDataContainer pldc = new PlayerDataContainer();
-	private ProjectileDataContainer prdc = new ProjectileDataContainer();
-	private TowerDataContainer tdc = new TowerDataContainer();
+	private LevelDataContainer ldc = new LevelDataContainer();
 	private WaveDataContainer wadc = new WaveDataContainer();
+<<<<<<< HEAD
 	private WeaponDataContainer wedc = new WeaponDataContainer();
+	private LevelDataContainer ldc = new LevelDataContainer();
+=======
+>>>>>>> b22a96a9a42a9fbec7a59ec09c7c0333134910da
 	
-	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
+	public void link(TowerTab tTab, EnemyTab eTab, WaveTab wTab, GameTab gTab){
 		/**
 		 * CONNECTIONS TO BE CREATED:
 		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
@@ -32,9 +35,6 @@ public class Router {
 		
 	}
 	
-	public EnemyDataContainer getEnemyDataController(){
-		return edc;
-	}
 	
 	public MapDataContainer getMapDataController(){
 		return mdc;
@@ -44,19 +44,18 @@ public class Router {
 		return pldc;
 	}
 	
-	public ProjectileDataContainer getProjectileDataController(){
-		return prdc;
-	}
-	
-	public TowerDataContainer getTowerDataController(){
-		return tdc;
-	}
-	
 	public WaveDataContainer getWaveDataController(){
 		return wadc;
 	}
 	
+<<<<<<< HEAD
 	public WeaponDataContainer getWeaponDataController(){
 		return wedc;
 	}
+	
+	public LevelDataContainer getLevelDataController(){
+		return ldc;
+	}
+=======
+>>>>>>> b22a96a9a42a9fbec7a59ec09c7c0333134910da
 }

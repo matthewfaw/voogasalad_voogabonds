@@ -46,13 +46,13 @@ public class GameDisplay {
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene, controller);
 		this.controller = controller;
-		terrainGrid.setPrefWidth(screenWidth*0.8);
-		terrainGrid.setMaxHeight(screenHeight*0.9);
+		terrainGrid.setPrefWidth(screenWidth);
+		terrainGrid.setMaxHeight(screenHeight);
 		terrainArea.setContent(terrainGrid);
 		terrainContainer.getChildren().add(terrainArea);
 		root.setCenter(terrainContainer);
-		columns = (int) (screenWidth*0.8/(DEFAULT_TILE_SIZE + GAP));
-		rows = (int) (screenHeight*0.88/(DEFAULT_TILE_SIZE + GAP));
+		columns = (int) (screenWidth/(DEFAULT_TILE_SIZE + GAP));
+		rows = (int) (screenHeight*0.82/(DEFAULT_TILE_SIZE + GAP));
 		this.controller.setDimensions(columns, rows);
 		populateGrid();
 	}
@@ -89,6 +89,10 @@ public class GameDisplay {
 		rows = numRows;
 		terrainGrid.setPrefRows(rows);
 		populateGrid();
+	}
+	
+	public VBox getTerrainBox() {
+		return terrainContainer;
 	}
 	
 }

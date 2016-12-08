@@ -17,6 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import mainmenu.tabs.AuthoringTab;
+import mainmenu.tabs.LoadGameTab;
+import mainmenu.tabs.NewGameTab;
+import mainmenu.tabs.PlayerTab;
 /**
  * @author ChristopherLu
  * This class generates the main menu that, in the future, will allow the user to choose between working on a new or previously saved object.
@@ -31,6 +35,8 @@ public class MainMenu {
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private TabPane tabContainer;
+	private PlayerTab playTab;
+	private AuthoringTab authorTab;
 	private NewGameTab newTab;
 	private LoadGameTab loadTab;
 	private int screenWidth;
