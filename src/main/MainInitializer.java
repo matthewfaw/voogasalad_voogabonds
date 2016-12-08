@@ -68,7 +68,7 @@ public class MainInitializer {
 	public void initSim() {
 		//TopMenuBar menuBar = new TopMenuBar(this, root);
 		//InfoTabs infoTab = new InfoTabs(root, scene);
-	        AuthorDisplay authoring = new AuthorDisplay(this, root, scene);
+	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene);
 		stage.setScene(scene);
 	}
 	

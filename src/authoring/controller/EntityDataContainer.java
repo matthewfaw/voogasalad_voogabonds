@@ -1,16 +1,22 @@
 package authoring.controller;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import authoring.model.EntityData;
+import authoring.model.EntityList;
 import authoring.model.IReadableData;
+import engine.IObserver;
 import authoring.model.EntityData;
+import engine.IObserver;
+import engine.IObservable;
 
 
-public class EntityDataContainer implements IDataContainer{
+public class EntityDataContainer extends Container implements IDataContainer, IObservable<Container>{
 	
     private AbstractMap<String, EntityData> myEntityDataMap = new HashMap<String, EntityData>();
+    ArrayList<IObserver<Container>> myObservers = new ArrayList<IObserver<Container>>();
 
     /**
      * @return
@@ -24,6 +30,7 @@ public class EntityDataContainer implements IDataContainer{
      */
     public void createEntityData(EntityData EntityData){
         myEntityDataMap.put(EntityData.getName(), EntityData);
+        notifyObservers();
     }
 
     /**
@@ -48,6 +55,7 @@ public class EntityDataContainer implements IDataContainer{
     public void updateEntityData(String originalName, EntityData updatedEntity){
         myEntityDataMap.remove(originalName);
         createEntityData(updatedEntity);
+        notifyObservers();
     }
 
     
@@ -80,6 +88,24 @@ public class EntityDataContainer implements IDataContainer{
             return false;
         }
         myEntityDataMap.remove(name);
+        notifyObservers();
         return true;
     }
+    
+	/**
+	 * IObservable functions
+	 */
+	public void attach(IObserver<Container> observer){
+		myObservers.add(observer);
+	}
+	
+	public void detach(IObserver<Container> observer){
+		myObservers.remove(observer);
+	}
+	
+	public void notifyObservers(){
+		for (IObserver<Container> observer: myObservers){
+			observer.update(this);
+		}
+	}
 }

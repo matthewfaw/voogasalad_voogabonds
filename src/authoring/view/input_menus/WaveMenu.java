@@ -3,7 +3,7 @@ package authoring.view.input_menus;
 import java.util.ResourceBundle;
 
 import authoring.model.WaveData;
-import authoring.view.side_panel.WaveLevelTab;
+import authoring.view.tabs.WaveTab;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ public class WaveMenu {
 	private static final int SIZE = 500;
 	
 	private ResourceBundle myResources;
-	private WaveLevelTab myTab;
+	private WaveTab myTab;
 	private Stage myWaveWindow;
 	private MenuHelper myHelper;
 	private TextField myNameField;
@@ -29,7 +29,7 @@ public class WaveMenu {
 	private ComboBox<String> mySpawnBox;
 	private boolean myIsDefault;
 	
-	public WaveMenu(ResourceBundle resources, WaveLevelTab tab){
+	public WaveMenu(ResourceBundle resources, WaveTab tab){
 		myResources = resources;
 		myTab = tab;
 		myHelper = new MenuHelper(myResources);
@@ -37,14 +37,14 @@ public class WaveMenu {
 	
 	public void createWaveWindow(String nameVal, String timeBetweenVal, String timeForVal, String numberVal,
 			String enemyVal, String spawnVal, boolean isDefault){
-		if (myTab.getEnemies().size() == 0){
-			myHelper.showError(myResources.getString("NoEnemiesError"));
-			return;
-		}
-		if (myTab.getSpawnPoints().size() == 0){
-			myHelper.showError(myResources.getString("NoSpawnPointsError"));
-			return;
-		}
+//		if (myTab.getEnemies().size() == 0){
+//			myHelper.showError(myResources.getString("NoEnemiesError"));
+//			return;
+//		}
+//		if (myTab.getSpawnPoints().size() == 0){
+//			myHelper.showError(myResources.getString("NoSpawnPointsError"));
+//			return;
+//		}
 		myIsDefault = isDefault;
 		myWaveWindow = new Stage();
 		myWaveWindow.initModality(Modality.APPLICATION_MODAL);
