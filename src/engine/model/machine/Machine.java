@@ -86,7 +86,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	
 	@Deprecated //TODO
 	private void move() {
-		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
+		Pair<Double, Point> nextMove = new Pair<Double, Point>(0.0, null);//myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
 		myHeading = nextMove.getKey();
 		notifyObservers();

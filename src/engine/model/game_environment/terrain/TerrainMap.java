@@ -23,7 +23,7 @@ public class TerrainMap {
 	public TerrainMap(MapDataContainer aTerrainMapData)
 	{
 		myMapFactory = new TerrainGridFactory();
-		myMap = myMapFactory.constructTerrainMap(aTerrainMapData);
+		myMap = myMapFactory.constructTerrainMap(aTerrainMapData, aTerrainMapData.getCellSize());
 		
 		myTerrainWidth = aTerrainMapData.getCellSize();
 		myTerrainHeight = aTerrainMapData.getCellSize();

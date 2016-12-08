@@ -31,15 +31,11 @@ public class EntityFactory {
 	 * @param entityName
 	 * @return the constructed entity
 	 */
-	public IEntity constructEntity(String entityName, Point start, double heading, IPhysical target) {
+	public IEntity constructEntity(String entityName) {
 		return null;
 	}
 	
-	/*
-	 * This needs more information. EntityData won't have a starting location, starting heading, or a target, so whoever
-	 * calls constructEntity will need to supply them.
-	 */
-	@Deprecated
+	@Deprecated //Can we use the one above instead?
 	public IEntity constructEntity(EntityData aEntityData ) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		IEntity entity = new ConcreteEntity();
 		List<ComponentData> componentMap = aEntityData.getComponents();

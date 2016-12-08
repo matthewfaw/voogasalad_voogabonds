@@ -11,6 +11,7 @@ import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.CollidableComponent;
 import engine.model.game_environment.MapMediator;
+import engine.model.game_environment.paths.PathManager;
 import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import javafx.util.Pair;
@@ -128,7 +129,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	}
 	
 	private Point advance() {
-		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this);
+		Pair<Double, Point> nextMove = new Pair<Double, Point>(0.0, null);//myMovementCalc.nextMove(this, this);
 		
 		myTraveled += myLocation.euclideanDistance(nextMove.getValue());
 		myHeading = nextMove.getKey();
@@ -154,6 +155,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	}
 	
 	private DamageInfo explode() {
+		/*
 		List<Machine> targets = myMap.withinRange(getPosition(), myAoERadius);
 		
 		DamageInfo result = new DamageInfo();
@@ -172,6 +174,9 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		// remove references
 		unregisterMyself();
 		return result;
+		
+		*/
+		return null;
 		
 		
 	}
@@ -258,6 +263,10 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 //			s.unregister(this);
 			mySystems.remove(s);
 		}
+	}
+	@Override
+	public PathManager getPath() {
+		return null;
 	}
 
 }

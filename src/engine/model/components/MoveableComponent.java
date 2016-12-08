@@ -1,6 +1,7 @@
 package engine.model.components;
 
 import engine.model.entities.IEntity;
+import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
@@ -25,6 +26,8 @@ public class MoveableComponent implements IComponent, IMovable {
 	//XXX: ???
 	private double myMaxDistance;
 	private double myMovedDistance;
+
+	private PathManager myPath;
 	
 
 	//********************IComponent interface***********//
@@ -59,6 +62,11 @@ public class MoveableComponent implements IComponent, IMovable {
 			//Delete entity 
 		}
 		*/
+	}
+
+	@Override
+	public PathManager getPath() {
+		return myPath;
 	}
 
 

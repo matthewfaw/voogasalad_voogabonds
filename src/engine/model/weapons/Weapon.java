@@ -40,7 +40,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 		myProjectileFactory = projFactory;
 		
 		//TODO: Get strategy name from data
-		myTargetStrategy = StrategyFactory.targetStrategy("");
+		//myTargetStrategy = StrategyFactory.targetStrategy("");
 		
 		myCareerKills = 0;
 		myCareerDamage = 0;
@@ -50,6 +50,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 
 	@Override
 	public void fire(double heading, Point position) {
+		/*
 		List<Machine> targets = myMap.withinRange(getPosition(), myRange);
 		
 		if (myTimeToFire <= 0 && targets.size() > 0){
@@ -62,6 +63,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 		} else {
 			myTimeToFire--;
 		}
+		*/
 		
 	}
 

@@ -26,6 +26,7 @@ public class CreatorComponent implements IComponent, IObserver<TimelineControlle
 	
 	private int myTimeBetweenSpawns;
 	private int myTimeSinceSpawning;
+
 	
 	//TODO:
 	private ISpawningStrategy mySpawningStrategy;

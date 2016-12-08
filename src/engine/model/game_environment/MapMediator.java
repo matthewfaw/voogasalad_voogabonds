@@ -21,7 +21,6 @@ public class MapMediator {
 	
 	private TerrainMap myTerrainMap;
 	private ArrayList<PhysicalComponent> myEntityManager;
-	private PathManager myPathManager;
 	private MachineFactory myAnarchosyndacalistCommune;
 	
 	//TODO: Change this constructor so that it hides away the terrain map
@@ -30,8 +29,7 @@ public class MapMediator {
 	public MapMediator(TerrainMap aTerrainMap) {
 		myTerrainMap = aTerrainMap;
 		myEntityManager = new ArrayList<PhysicalComponent>();
-		myPathFactory = new PathFactory();
-		myPathManager = myPathFactory.constructPaths(myTerrainMap);
+		myPathFactory = new PathFactory(myTerrainMap);
 
 	}
 	

@@ -147,6 +147,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	 */
 	private void PopulateTowerDataDisplay(TowerData tower,TextArea towerDataDisplay) {
 		towerDataDisplay.clear();
+		towerDataDisplay.setEditable(false);
 		String namelabel=new String("TOWER NAME: ");
 		String name= new String(tower.getName());
 		String newline=new String("\n");
