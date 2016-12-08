@@ -8,6 +8,7 @@ import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
@@ -38,6 +39,7 @@ public class GamePlayerScene {
 	private LeftPane myLeftPane;
 	private RightPane myRightPane;
 	private MapDisplay myMap;
+	private PauseMenu pause;
 	private Scene myScene;
 	private Group myGamePlayer;
 	private List<ICashAcceptor> myCash;
@@ -113,6 +115,8 @@ public class GamePlayerScene {
 		myLives.add(myLeftPane.getLives());
 		myResources.add(myRightPane.getTowerColumn());
 		//mySprites.add(myMap.getSprites());
+		pause = new PauseMenu();
+                makePauseMenu();
 		BorderPane borderpane=new BorderPane();
 		borderpane.setRight(myRightPane.getView());
 		borderpane.setBottom(myBottomPane.getView());
@@ -121,6 +125,10 @@ public class GamePlayerScene {
 		myMap.setupDragging(myScene);
 		return borderpane;
 	}
+	
+	public void makePauseMenu(){ 
+            myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));
+        }
 	
 	public List<ICashAcceptor> getCash() {
 		return myCash;

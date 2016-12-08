@@ -25,9 +25,9 @@ public class Main extends Application {
 		//TODO:
 		ApplicationController appController = new ApplicationController();
 		appController.init(s);
-//		GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
-//    	gamePlayerScene.init(s);
-    	//Router myRouter = new Router(gamePlayerScene);
+		//GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
+		//gamePlayerScene.init(s);
+		//Router myRouter = new Router(gamePlayerScene);
   
 	}
 
