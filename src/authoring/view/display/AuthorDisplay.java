@@ -54,8 +54,9 @@ public class AuthorDisplay {
         
         // Add Tabs
         List<Tab> tabs = getTabs();
-        for (Tab tab : tabs) {
-            tabPane.getTabs().add(tab);
+        for (int i = 0; i < tabs.size(); i++) {
+            //System.out.println("Tab "+i+" Added");
+            tabPane.getTabs().add(tabs.get(i));
         }
         
         // Set regions of BorderPane
@@ -71,7 +72,7 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer());
+        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer(), mapXDim, mapYDim);
         EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
         RulesTab rulesTab = new RulesTab("Rules");
         WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());

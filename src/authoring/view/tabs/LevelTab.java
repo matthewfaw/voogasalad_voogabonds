@@ -11,10 +11,12 @@ import javafx.event.EventHandler;
 
 public class LevelTab extends ListTab<String> implements IObserver<Container>{
 
+        private static final int COLS = 2;
+    
 	private ArrayList<String> myWaves = new ArrayList<String>();
 	
 	public LevelTab(String text) {
-		super(text);
+		super(text, COLS);
 		// TODO Auto-generated constructor stub
 	}
 

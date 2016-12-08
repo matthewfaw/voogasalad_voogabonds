@@ -4,6 +4,7 @@ import authoring.controller.Container;
 import authoring.controller.EntityDataContainer;
 import authoring.controller.MapDataContainer;
 import authoring.controller.IDataContainer;
+import authoring.model.AttributeFetcher;
 import authoring.model.EntityData;
 import authoring.model.EntityList;
 import engine.IObserver;
@@ -13,56 +14,90 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EntityTab extends ListTab<String> implements IObserver<Container>{
     public static final String TITLE = "Entities";
     public static final String ADD_ENTITY = "Add Entity";
+    private static final int COLS = 3;
 
     private EntityDataContainer myEntities;
     private ArrayList<String> validTerrains = new ArrayList<String>();
     
-    //private EntityDataController myController;
-    
+    private AttributeFetcher ecFetcher = new AttributeFetcher();
 
     public EntityTab (EntityDataContainer entities) {
-        super(TITLE);
+        super(TITLE, COLS);
         
-        // TODO: use EntityList
         myEntities = entities;
+        
+        // initialize AttributeFetcher
+        ecFetcher.fetch();
+        
+        this.setClickAction(handleEditEntity());
     }
     
-    public void addEntity(EntityData entity){
+    public boolean addEntity(EntityData entity){
         try{
         	myEntities.createEntityData(entity);
+        	this.getList().add(entity.getName());
+        	return true;
         }catch(Exception e){
-        	//Show error
+        	this.showError(e.getMessage());
+        	return false;
         }
     }
     
-    public void updateEntity(String oldName, EntityData entity){
+    public boolean updateEntity(String oldName, EntityData entity){
     	try{
     		myEntities.updateEntityData(oldName, entity);
+    		if (!oldName.equals(entity.getName())) {
+    		    this.getList().set(this.getList().indexOf(oldName), entity.getName());
+    		}
+    		return true;
     	}catch(Exception e){
-    		//Show error
+    	        this.showError(e.getMessage());
+    	        return false;
     	}
+    }
+    
+    private EventHandler<MouseEvent> handleEditEntity () {
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event){
+                if (event.getClickCount() == 2) {
+                    // TODO: implement retrieving data
+                }
+//                EditEntityBox newEntityMenu = getNewEntityMenu();
+//                getTilePane().getChildren().add(newEntityMenu);
+            }
+        };
+        return handler;
     }
 
     @Override
     protected EventHandler<ActionEvent> handleAddNewObject () {
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
-                // TODO: implement method
-                //IReadableData defaultData = generateDefaultData();
-                //myMenu.createObjectMenu(null);
+                EditEntityBox newEntityMenu = getNewEntityMenu();
+                getTilePane().getChildren().add(newEntityMenu);
             }
         };
         return handler;
+    }
+    
+    public EditEntityBox getNewEntityMenu() {
+        return new EditEntityBox(this, ecFetcher);
     }
     
     /**

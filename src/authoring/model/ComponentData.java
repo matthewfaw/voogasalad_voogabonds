@@ -9,4 +9,8 @@ public class ComponentData {
 	public void addField(String fieldName, String fieldValue){
 		myFields.put(fieldName, fieldValue);
 	}
+	
+	public AbstractMap<String, String> getFields() {
+	    return myFields;
+	}
 }
