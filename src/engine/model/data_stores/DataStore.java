@@ -1,7 +1,9 @@
 package engine.model.data_stores;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import authoring.model.IReadableData;
 
@@ -30,5 +32,12 @@ public class DataStore<T extends IReadableData> {
 	
 	public boolean hasKey(String aWeaponName) {
 		return myWeaponData.containsKey(aWeaponName);
+	}
+	
+	public T getRandom() {
+		List<T> values = new ArrayList<T>(myWeaponData.values());
+		Random r = new Random();
+		
+		return values.get(r.nextInt(values.size()));
 	}
 }

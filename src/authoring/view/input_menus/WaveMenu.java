@@ -109,6 +109,7 @@ public class WaveMenu {
 				else {
 					myTab.getController().updateWave(wave, originalName);
 				}
+				myWaveWindow.close();
 			}
 		});
 		root.getChildren().add(finishButton);

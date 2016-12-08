@@ -5,23 +5,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import authoring.model.EnemyData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
-import authoring.model.WeaponData;
-import engine.controller.timeline.TimelineController;
 import engine.model.components.PhysicalComponent;
-import engine.model.data_stores.DataStore;
 import engine.model.game_environment.paths.PathFactory;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
-import engine.model.machine.enemy.Enemy;
 import engine.model.strategies.IPhysical;
-import javafx.util.Pair;
 import utility.Point;
 
+//TODO: update this class to ECS
+@Deprecated
 public class MapMediator {
 	private PathFactory myPathFactory;
 	
@@ -48,11 +42,13 @@ public class MapMediator {
 	 */
 	public boolean attemptToPlaceEntity(Point aLocation, PhysicalComponent aPhysicalComponent)
 	{
+		/*
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
+		*/
 		return false;
 	}
 	
@@ -62,14 +58,17 @@ public class MapMediator {
 
 	public boolean attemptToPlaceEntity(Point aLocation, Machine aPhysicalComponent)
 	{
+		/*
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
+		*/
 		return false;
 	}
 	
+	@Deprecated
 	public List<Machine> withinRange(Point p, double radius){
 		Stream<IPhysical> s = myEntityManager.stream();
 		
@@ -80,11 +79,18 @@ public class MapMediator {
 	}
 
 	private boolean isInRadius(IPhysical e, Point p, double radius) {
+		/*
 		return e.getPosition().euclideanDistance(p) - e.getCollisionRadius() - radius >= 0;
+		*/
+		return false;
 	}
 
+	@Deprecated //please don't use instanceof unless completely unavoidable. If necessary, please document why
 	private boolean isEnemy(IPhysical e) {
+		/*
 		return e instanceof Enemy;
+		*/
+		return false;
 	}
 
 	/**

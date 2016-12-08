@@ -1,6 +1,7 @@
 package engine.model.machine;
 
 import authoring.model.EnemyData;
+import authoring.model.EntityData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
 import authoring.model.WeaponData;
@@ -15,6 +16,7 @@ import engine.model.weapons.WeaponFactory;
 import utility.Point;
 import utility.ResouceAccess;
 
+@Deprecated
 public class MachineFactory {
 	private static final String INVALID_TOWER_ERROR = "NoSuchTower";
 	private static final String INVALID_ENEMY_ERROR = "NoSuchTower";
@@ -22,12 +24,12 @@ public class MachineFactory {
 	private TimelineController myTime;
 	private WeaponFactory myArmory;
 	private DataStore<TowerData> myTowers;
-	private DataStore<EnemyData> myEnemies;
+	private DataStore<EntityData> myEnemies;
 	
 	public MachineFactory(
 			TimelineController time,
 			ResourceStore aResourceStore,
-			DataStore<EnemyData> enemies,
+			DataStore<EntityData> enemies,
 			DataStore<WeaponData> weapons,
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
@@ -37,18 +39,27 @@ public class MachineFactory {
 		myArmory = new WeaponFactory(weapons, projectiles, time, map);
 	}
 	
+	/*
 	public Tower newTower(String name, IModifiablePlayer owner, Point intitialPosition) {
-		if (myTowers.hasKey(name))
-			return new Tower(myTime, myArmory, owner, myTowers.getData(name), intitialPosition);
+		if (myTowers.hasKey(name)) {
+			Tower tower = new Tower(myArmory, owner, myTowers.getData(name), intitialPosition);
+			myTime.attach(tower);
+			return tower;
+		}
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_TOWER_ERROR) + name);
 	}
 	
+	/*
 	public Enemy newEnemy(String name, IModifiablePlayer owner, Point intitialPosition) {
-		if (myEnemies.hasKey(name))
-			return new Enemy(myTime, myArmory, owner, myEnemies.getData(name), intitialPosition);
+		if (myEnemies.hasKey(name)) {
+			Enemy enemy = new Enemy(myArmory, owner, myEnemies.getData(name), intitialPosition);
+			myTime.attach(enemy);
+			return enemy;
+		}
 		else
 			throw new IllegalArgumentException(ResouceAccess.getError(INVALID_ENEMY_ERROR) + name);
 	}
+	*/
 
 }

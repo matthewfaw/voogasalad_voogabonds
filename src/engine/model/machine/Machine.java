@@ -23,6 +23,7 @@ import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 
+@Deprecated //do not use this class--using ECS now
 abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IKillerOwner, IRegisterable {
 	private List<IObserver<IViewable>> myObservers;
 	private IModifiablePlayer myModifiablePlayer;
@@ -43,7 +44,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	List<ISystem> mySystems;
 	
-	public Machine (TimelineController time, WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
+	public Machine (WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
 
 		myModifiablePlayer = owner;
@@ -61,8 +62,6 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		myMoveSpeed = data.getMoveSpeed();
 		myHeading = 0;
 		myPosition = initialPosition;
-		
-		time.attach(this);
 	}
 	
 	public Machine(String name, int maxHealth) {
@@ -82,7 +81,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	@Override
 	public void update(TimelineController time) {
 		move();
-		myWeapon.fire(myHeading, myPosition);
+//		myWeapon.fire(myHeading, myPosition);
 	}
 	
 	@Deprecated //TODO
@@ -90,6 +89,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
 		myHeading = nextMove.getKey();
+		notifyObservers();
 	}
 	
 	@Override
@@ -153,6 +153,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public double getMoveSpeed() {
 		return myMoveSpeed;
 	}
+	/*
 	@Override
 	public double getCollisionRadius() {
 		return myCollisionRadius;
@@ -171,6 +172,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public double getSize() {
 		return myCollisionRadius;
 	}
+	*/
 	
 	/************** IObservable interface ****************/
 	@Override
@@ -192,10 +194,13 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	
 	/********** ICollidable Interface Methods ************/
+	/*
 	@Override
 	public void collideInto(ICollidable movedCollidable) {
 		movedCollidable.collideInto(this);
 	}
+	*/
+	/*
 	@Override
 	public void collideInto(Machine unmovedCollidable) {
 		//do nothing for now since machines will not deal dmg
@@ -206,6 +211,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		//Should the Machine running into the projectile trigger an explode
 		//unmovedCollidable.collideInto(this);
 	}
+	*/
 	
 	public DamageInfo notifyDestroy(DamageInfo result) {
 		return result;

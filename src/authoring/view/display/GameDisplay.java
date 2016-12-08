@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -34,10 +34,10 @@ public class GameDisplay {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private MapDataController controller;
+	private MapDataContainer controller;
 	private Scene scene;
 	
-	public GameDisplay(BorderPane root, Scene scene, MapDataController controller) {
+	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller) {
 		setUpScreenResolution();
 		this.scene = scene;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");

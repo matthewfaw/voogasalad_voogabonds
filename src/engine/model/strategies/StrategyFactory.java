@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import engine.model.game_environment.paths.PathFactory;
 import engine.model.strategies.damage.ExponentialDamageStrategy;
 import engine.model.strategies.movement.GreedyMovementStrategy;
+import engine.model.strategies.movement.NoMovementStrategy;
 import engine.model.strategies.target.BadTargetStrategy;
 
 /**
@@ -75,10 +76,14 @@ public class StrategyFactory {
 	}
 	
 	public static IMovementStrategy movementStrategy(String movementStrategy) {
+		
 		switch (movementStrategy.toLowerCase()) {
 		case "greedy":
 			return new GreedyMovementStrategy();
+		case "fast as fuck":
+			return new NoMovementStrategy();
 		}
+
 		return new GreedyMovementStrategy();
 	}
 

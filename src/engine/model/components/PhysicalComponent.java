@@ -1,108 +1,95 @@
 package engine.model.components;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import engine.IObserver;
-import engine.model.collision_detection.ICollidable;
+import engine.IViewable;
 import engine.model.entities.IEntity;
-import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.projectiles.Projectile;
 import engine.model.strategies.IPhysical;
-import javafx.util.Pair;
+import engine.model.systems.CollisionDetectionSystem;
 import utility.Point;
 
-public class PhysicalComponent implements IComponent, IPhysical {
-	private List<IObserver<IComponent>> myObservers;
-
-	private IModifiablePlayer myOwner;
-	private List<String> myValidTerrains;
-	private Point myLocation;
-	private double myHeading;
-
+/**
+ * Manages the information relevant to the physical information of an entity
+ * Physical components contain information relevant to existing on a grid, and being displayed
+ * 
+ * @author matthewfaw
+ *
+ */
+public class PhysicalComponent implements IComponent, IPhysical, IViewable {
+	private List<IObserver<IViewable>> myObservers;
 	private IEntity myEntity;
+
+	private Point myPosition;
+	private double myHeading;
+	private String myImagePath;
+	private double myImageSize;
+	private List<String> myValidTerrains;
 	
-	public PhysicalComponent(PhysicalComponentData aPhysicalComponentData)
-	{
-		//TODO
-		myObservers = new ArrayList<IObserver<IComponent>>();
-	}
-	PhysicalComponent(IEntity aEntity, List<String> aValidTerrainList, Point aLocation)
-	{
-		myEntity = aEntity;
-
-		myValidTerrains = aValidTerrainList;
-		myLocation = aLocation;
+	private CollisionDetectionSystem myCollisionDetectionSystem;
+	
+	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem) {
+		myCollisionDetectionSystem = collisionDetectionSystem;
+		myCollisionDetectionSystem.attachComponent(this);
 	}
 	
-
-
-	//********************IObservable interface***********//
+	/******** Setters ********/
+	public void setPosition(Point position) {
+		myPosition = position;
+		/*  ask collision detection system if this physical 
+		 *  component collides with anything
+		 */
+		myCollisionDetectionSystem.checkCollision(this);
+	}
+	
+	/******************IViewable interface********/
 	@Override
-	public void attach(IObserver<IComponent> aObserver) {
+	public Point getPosition() {
+		return myPosition;
+	}
+
+	@Override
+	public double getHeading() {
+		return myHeading;
+	}
+
+	@Override
+	public double getSize()
+	{
+		return myImageSize;
+	}
+
+	@Override
+	public String getImagePath()
+	{
+		return myImagePath;
+	}
+	
+	/***************IPhysical interface************/
+	@Override
+	public List<String> getValidTerrains() {
+		return myValidTerrains;
+	}
+
+	/***************IComponent interface**********/
+	@Override
+	public IEntity getEntity() {
+		return myEntity;
+	}
+
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IComponent> aObserver) {
+	public void detach(IObserver<IViewable> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
-		myObservers.forEach(o -> o.update(this));
+		myObservers.forEach(observer -> observer.update(this));
 	}
-
-	//*******************IComponent interface***********//
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
-	
-	//*******************IPhysical interface***********//
-	/**
-	 * A method to get the valid terrains on which an entity may be placed
-	 * This assumes that every entity may be placed on a location
-	 * @return list of terrains on which the entity may be placed
-	 */
-	public List<String> getValidTerrains()
-	{
-		return myValidTerrains;
-	}
-	/**
-	 * A method to get the current location of the
-	 * corresponding entity
-	 * @return
-	 */
-	@Override
-	public Point getPosition() {
-		return myLocation;
-	}
-	@Override
-	public double getHeading() {
-		return myHeading;
-	}
-	@Override
-	public double getCollisionRadius() {
-		return 0;
-	}
-	
-	/**
-	 * A method to set the current location of an entity on the map
-	 * Assumes that all entities can be placed on the map
-	 * 
-	 * @param aLocation to place the entity
-	 */
-	@Override
-	public void setPosition(Pair<Double, Point> p) {
-		myLocation = p.getValue();
-		myHeading = p.getKey();
-		
-	}
-	@Override
-	public IModifiablePlayer getOwner() {
-		return myOwner;
-	}
-
 }

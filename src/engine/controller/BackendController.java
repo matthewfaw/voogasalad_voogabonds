@@ -5,20 +5,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.model.EnemyData;
+import authoring.model.EntityData;
+import authoring.model.GameLevelsData;
 import authoring.model.IReadableData;
 import authoring.model.PlayerData;
-import authoring.model.ProjectileData;
 import authoring.model.TowerData;
-import authoring.model.WeaponData;
 import authoring.model.map.MapData;
-import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
-import engine.controller.waves.DummyWaveOperationData;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
-import engine.model.game_environment.distributors.MapDistributor;
+import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
@@ -46,14 +44,13 @@ public class BackendController {
 	private JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-	private MapDistributor myMapDistributor;
 	private ResourceStore myResourceStore;
 
 	//Data relevant to constructing objects
-	private DataStore<WeaponData> myWeaponDataStore;
-	private DataStore<ProjectileData> myProjectileDataStore;
-	private DataStore<EnemyData> myEnemyDataStore;
+	private DataStore<EntityData> myEntityDataStore;
 	private PlayerData myPlayerData;
+	private GameLevelsData myGameLevelsData;
+	private MapDistributor myMapDistributor;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
@@ -72,11 +69,9 @@ public class BackendController {
 		myPlayerController = new PlayerController(myRouter);
 		
 		constructStaticBackendObjects();
-		//XXX: Currently, the dynamic objects depend on the static objects being constructed already
-//		constructDynamicBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
-		
+		constructDynamicBackendObjects();
 	}
 	
 	//TODO
@@ -86,18 +81,18 @@ public class BackendController {
 	 * @param aLocation
 	 * @return true if it is successfully placed, false otherwise
 	 */
-	public void attemptToPlaceTower(String aTowerName, Point aLocation)
+	public void attemptToPlaceEntity(String aEntityName, Point aLocation)
 	{
-		myMapDistributor.distribute(aTowerName, myPlayerController, aLocation);
+//		myMapDistributor.distribute(aEntityName, aPlayerID, aLocation);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
 	private void constructDynamicBackendObjects()
 	{
-		List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
+		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
-		myWaveController = new WaveController(myMapDistributor, data.get(0), myEnemyDataStore);
+		myWaveController = new WaveController(myGameLevelsData, myEntityDataStore, myPlayerController.getActivePlayer());
 		myTimelineController.attach(myWaveController);
 	}
 	
@@ -107,9 +102,7 @@ public class BackendController {
 	private void constructStaticBackendObjects()
 	{
 		constructResourceStore();
-		constructWeaponDataStore();
-		constructProjectileDataStore();
-		constructEnemyDataStore();
+		constructEntityDataStore();
 		constructPlayerData();
 		constructMap();
 	}
@@ -132,18 +125,8 @@ public class BackendController {
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 		MapMediator mapMediator = new MapMediator(terrainMap);
+		myMapDistributor = new MapDistributor(mapMediator);
 
-		//distribute to backend
-		myMapDistributor = new MapDistributor(
-				mapMediator,
-				myResourceStore,
-				myEnemyDataStore,
-				myWeaponDataStore,
-				myProjectileDataStore,
-				myTimelineController,
-				myRouter
-				);
-		
 		//distribute to frontend
 		myRouter.distributeMapData(mapData);
 		
@@ -153,39 +136,21 @@ public class BackendController {
 	 * from the GameData file
 	 * 
 	 */
+	//TODO
 	private void constructResourceStore()
 	{
-		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
-		myResourceStore = new ResourceStore(data);
+//		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
+//		myResourceStore = new ResourceStore(data);
 	}
 	
-	/**
-	 * This method handles the construction of the object which will be used to query
-	 * information about weapon data when the towers are being constructed
-	 */
-	private void constructWeaponDataStore()
-	{
-		List<WeaponData> data = getData(myGameDataRelativePaths.getString("WeaponPath"), WeaponData.class);
-		myWeaponDataStore = new DataStore<WeaponData>(data);
-	}
-	
-	/**
-	 * This method handles the construction of the object which manages all of the projectile
-	 * data
-	 */
-	private void constructProjectileDataStore()
-	{
-		List<ProjectileData> data = getData(myGameDataRelativePaths.getString("ProjectilePath"), ProjectileData.class);
-		myProjectileDataStore = new DataStore<ProjectileData>(data);
-	}
 	/**
 	 * This method handles the construction of the object which manages all of the enemy
 	 * data
 	 */
-	private void constructEnemyDataStore()
+	private void constructEntityDataStore()
 	{
-		List<EnemyData> data = getData(myGameDataRelativePaths.getString("EnemyPath"), EnemyData.class);
-		myEnemyDataStore = new DataStore<EnemyData>(data);
+		List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EnemyData.class);
+		myEntityDataStore = new DataStore<EntityData>(data);
 	}
 	
 	/**
@@ -223,6 +188,14 @@ public class BackendController {
 			}
 		}
 		return data;
+	}
+
+	public void startTimeLine() {
+		myTimelineController.start();
+	}
+	public void pauseTimeline()
+	{
+		myTimelineController.pause();
 	}
 	
 	/*

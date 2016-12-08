@@ -1,48 +1,56 @@
 package engine.model.components;
 
-import java.util.List;
-
-import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
-import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IDamageStrategy;
+import engine.model.systems.DamageDealingSystem;
 import engine.model.weapons.DamageInfo;
 
-public class DamageDealingComponent implements IComponent, IObserver<IComponent> {
-	private IDamageStrategy myDamageCalc;
-	private boolean myTargetsEnemies;
-	private IModifiablePlayer myOwner;
-	private double myDamage;
+/**
+ * The purpose of this class is to manage the information relevant to 
+ * dealing damage to another entity
+ * 
+ * @author matthewfaw
+ *
+ */
+public class DamageDealingComponent implements IComponent {
+	private IDamageStrategy myDamageStrategy;
+	private int myDamage;
+	private double myDamageRadius;
+	
+	private IEntity myEntity;
 
-	public DamageDealingComponent(CollidableComponent c) {
-		c.attach(this);
+	private DamageDealingSystem myDamageDealingSystem;
+	
+	public DamageDealingComponent(DamageDealingSystem damageDealingSystem) {
+		myDamageDealingSystem = damageDealingSystem;
+		myDamageDealingSystem.attachComponent(this);
+	}
+	
+	/**
+	 * gets the amount of damage this entity inflicts
+	 * @return the damage value
+	 */
+	public int getDamage()
+	{
+		return myDamage;
+	}
+	
+	/**
+	 * gets the radius of effect of this entity
+	 * @return the radius
+	 */
+	public double getDamageRadius()
+	{
+		return myDamageRadius;
 	}
 	
 	@Override
-	public void attach(IObserver<IComponent> aObserver) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void detach(IObserver<IComponent> aObserver) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public IEntity getEntity() {
-		// TODO Auto-generated method stub
-		return null;
+		return myEntity;
 	}
 
+	/*
 	@Override
 	public void update(IComponent aChangedObject) {
 		//TODO: Is there a better way to only update when called by a CollidableComponent?
@@ -59,7 +67,9 @@ public class DamageDealingComponent implements IComponent, IObserver<IComponent>
 		}
 		
 	}
+	*/
 
+	//TODO: This should envoke the damage dealing strategy
 	private DamageInfo explode() {
 		/*
 		List<PhysicalComponent> targets = myMap.withinRange(getPosition(), myAoERadius);
@@ -96,6 +106,5 @@ public class DamageDealingComponent implements IComponent, IObserver<IComponent>
 		*/
 		return null;
 	}
-
 
 }

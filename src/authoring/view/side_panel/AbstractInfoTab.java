@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import authoring.controller.IDataController;
+import authoring.controller.IDataContainer;
 import authoring.model.IReadableData;
 import authoring.view.input_menus.AbstractMenu;
 import javafx.collections.ObservableList;
@@ -34,10 +34,10 @@ public abstract class AbstractInfoTab extends Tab {
     private int screenWidth, screenHeight;
     private VBox myContent;
     private AbstractMenu myMenu;
-    private IDataController myController;
+    private IDataContainer myController;
     private List<ObservableList<String>> myObservableLists;
     
-    protected AbstractInfoTab(TabPane pane, IDataController controller) {
+    protected AbstractInfoTab(TabPane pane, IDataContainer controller) {
         this.retrieveScreenInfo();
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + VIEW_RESOURCES);
         myTab = new Tab(this.getTitle());
@@ -78,8 +78,8 @@ public abstract class AbstractInfoTab extends Tab {
     private EventHandler<ActionEvent> handleAddNewObject() {
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
-                IReadableData defaultData = generateDefaultData();
-                myMenu.createObjectMenu(defaultData);
+                //IReadableData defaultData = generateDefaultData();
+                myMenu.createObjectMenu(null);
             }
         };
         return handler;
@@ -124,7 +124,7 @@ public abstract class AbstractInfoTab extends Tab {
     /**
      * @return
      */
-    protected IDataController getController() {
+    protected IDataContainer getController() {
         return myController;
     }
     
@@ -177,7 +177,7 @@ public abstract class AbstractInfoTab extends Tab {
      * 
      * @return the specific type of Menu contained in this Tab
      */
-    protected abstract AbstractMenu initMenu(ResourceBundle resources, IDataController controller);
+    protected abstract AbstractMenu initMenu(ResourceBundle resources, IDataContainer controller);
     
     /**
      * This method should specify the different lists of Strings that this tab will need to track.

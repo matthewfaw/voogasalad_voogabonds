@@ -23,11 +23,15 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	@Override
 	protected Pair<Double, Point> nextMoveNoGoal(IMovable m) {
 		//Spins around aimlessly
+		/*
 		return new Pair<Double, Point>(m.getHeading() + RANDOM.nextDouble() * m.getTurnSpeed(), m.getPosition());
+		*/
+		return null;
 	}
 
 	@Override
 	protected Pair<Double, Point> nextMoveWithGoal(IMovable m) {
+		/*
 		Point subGoal = myPath.getNextVertex(m.getPosition());
 		
 		//Check if we aren't on the path anymore
@@ -43,11 +47,14 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 			newPosition = m.getPosition();
 		
 		return new Pair<Double, Point>(newHeading, newPosition);
+		*/
+		return null;
 	}
 	
 	
 
 	private Point moveTowards(Point subGoal, double heading, IMovable m) {
+		/*
 		double distance = Math.min(m.getMoveSpeed(), m.getPosition().euclideanDistance(m.getGoal()));
 		
 		return m.getPosition().moveAlongHeading(distance, heading);
@@ -65,6 +72,8 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 			newHeading = m.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
 		
 		return newHeading;
+		*/
+		return null;
 	}
 
 }

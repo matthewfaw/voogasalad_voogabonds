@@ -6,6 +6,7 @@ package utility;
  * @author Weston
  *
  */
+@Deprecated
 public class Damage {
 	double myDamage;
 	
