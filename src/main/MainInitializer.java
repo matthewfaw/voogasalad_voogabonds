@@ -8,7 +8,6 @@ import authoring.controller.MapDataContainer;
 import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
-import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;

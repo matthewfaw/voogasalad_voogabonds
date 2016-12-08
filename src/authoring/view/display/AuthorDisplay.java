@@ -71,7 +71,7 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer());
+        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer(), mapXDim, mapYDim);
         EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
         RulesTab rulesTab = new RulesTab("Rules");
         WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
