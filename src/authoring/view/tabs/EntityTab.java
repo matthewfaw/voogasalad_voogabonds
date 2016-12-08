@@ -29,17 +29,18 @@ import java.util.List;
 public class EntityTab extends ListTab<String> implements IObserver<Container>{
     public static final String TITLE = "Entities";
     public static final String ADD_ENTITY = "Add Entity";
+    private static final int COLS = 3;
 
     private EntityDataContainer myEntities;
     private ArrayList<String> validTerrains = new ArrayList<String>();
     
-    private AttributeFetcher ecFetcher = new AttributeFetcher();
+    AttributeFetcher ecFetcher = new AttributeFetcher();
     
     //private EntityDataController myController;
     
 
     public EntityTab (EntityDataContainer entities) {
-        super(TITLE);
+        super(TITLE, COLS);
         
         // TODO: use EntityList
         myEntities = entities;
@@ -83,8 +84,8 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
         return handler;
     }
     
-    private EditEntityBox getNewEntityMenu() {
-        return new EditEntityBox(this, ecFetcher.getComponentList());
+    public EditEntityBox getNewEntityMenu() {
+        return new EditEntityBox(this, ecFetcher);
     }
     
     /**

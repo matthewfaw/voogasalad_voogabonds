@@ -54,8 +54,9 @@ public class AuthorDisplay {
         
         // Add Tabs
         List<Tab> tabs = getTabs();
-        for (Tab tab : tabs) {
-            tabPane.getTabs().add(tab);
+        for (int i = 0; i < tabs.size(); i++) {
+            //System.out.println("Tab "+i+" Added");
+            tabPane.getTabs().add(tabs.get(i));
         }
         
         // Set regions of BorderPane

@@ -17,19 +17,20 @@ import javafx.scene.layout.VBox;
 
 public abstract class ListTab<A> extends AuthoringTab {
     public static final String ADD = "Add";
+    private static final int OFFSET = 2;
     
     private ObservableList<A> myList;
     private ListView<A> myListView;
     private TilePane myContent;
     
-    public ListTab (String text) {
+    public ListTab (String text, int prefColumns) {
         super(text);
-        initContent();
+        initContent(prefColumns);
     }
 
-    public ListTab (String text, ObservableList<A> list) {
+    public ListTab (String text, int prefColumns, ObservableList<A> list) {
         super(text);
-        initContent(list);
+        initContent(prefColumns, list);
     }
     
     public ObservableList<A> getList() {
@@ -54,21 +55,20 @@ public abstract class ListTab<A> extends AuthoringTab {
         myListView.setOnKeyReleased(handler);
     }
     
-    private void initContent() {
-        initContent(null);
+    private void initContent(int prefColumns) {
+        initContent(prefColumns, null);
     }
     
-    private void initContent(ObservableList<A> list) {
+    private void initContent(int prefColumns, ObservableList<A> list) {
         Dimension screenSize = retrieveScreenSize();
         // Set up content
         myContent = new TilePane();
-        myContent.setPrefColumns(2);
+        myContent.setPrefColumns(prefColumns);
         VBox left = new VBox();
         ScrollPane scroll = new ScrollPane();
         bindSize(left, scroll);
-        left.setPrefWidth(screenSize.getWidth()/2.0);
+        left.setPrefWidth(screenSize.getWidth()/prefColumns - OFFSET);
         left.setPrefHeight(screenSize.getHeight()/1.5);
-        
         // Set up add button
         Button add = new Button(ADD);
         add.setOnAction(handleAddNewObject());

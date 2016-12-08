@@ -21,13 +21,15 @@ import javafx.scene.layout.VBox;
 
 public class WaveTab extends ListTab<String> implements IObserver<Container>{
 
+        private static final int COLS = 2;
+    
 	private WaveDataContainer myContainer;
 	
 	private ObservableList<String> myEntities = FXCollections.observableList(new ArrayList<String>());
 	private ObservableList<String> mySpawnPoints = FXCollections.observableList(new ArrayList<String>());
 	
 	public WaveTab(String text, WaveDataContainer container){
-		super(text);
+		super(text,COLS);
 		myContainer = container;
 	}
 	
