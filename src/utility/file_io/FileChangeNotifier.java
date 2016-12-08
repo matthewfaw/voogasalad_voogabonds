@@ -2,7 +2,6 @@ package utility.file_io;
 
 import java.nio.file.StandardWatchEventKinds;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +12,10 @@ import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Scanner;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * The purpose of this class is to provide a means of detecting file changes.
@@ -32,12 +35,18 @@ public class FileChangeNotifier implements Runnable {
 	
 	private Path myPath;
 	private WatchEvent.Kind<?>[] myWatchEventKinds;
+	private Supplier<?> myOnWatchEventTrigger;
 	
 	public FileChangeNotifier(Path aPath, WatchEvent.Kind<?>...aEventKinds) throws IOException
 	{
 		myPath = aPath;
 		
 		myWatchEventKinds = aEventKinds;
+	}
+	
+	public void onWatchEventTriggered(Supplier<?> aFunction)
+	{
+		myOnWatchEventTrigger = aFunction;
 	}
 	
 	private void processEvents()
@@ -47,35 +56,41 @@ public class FileChangeNotifier implements Runnable {
 		// We create the new WatchService using the new try() block
 		try(WatchService service = myPath.getFileSystem().newWatchService()) {
 
-			Files.walkFileTree(myPath, new SimpleFileVisitor<Path>() {
-		        @Override
-		        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-		            dir.register(service, myWatchEventKinds);
-		            return FileVisitResult.CONTINUE;
-		        }
-		    });
+			registerWatchServiceWithEntireFileTree(service, myPath);
 
 			// Start the infinite polling loop
-			WatchKey key = null;
 			while(true) {
-				key = service.take();
+				WatchKey key = service.take();
 
-				// Dequeueing events
-				Kind<?> kind = null;
 				for(WatchEvent<?> watchEvent : key.pollEvents()) {
 					// Get the type of the event
-					kind = watchEvent.kind();
-					if (StandardWatchEventKinds.OVERFLOW == kind) {
-						continue; //loop
-					} else if (StandardWatchEventKinds.ENTRY_CREATE == kind) {
-						// A new Path was created 
-						Path newPath = ((WatchEvent<Path>) watchEvent).context();
-						// Output
-						System.out.println("New myPath created: " + newPath);
-					} else if (StandardWatchEventKinds.ENTRY_MODIFY == kind) {
-						Path newPath = ((WatchEvent<Path>) watchEvent).context();
-						System.out.println("myPath modified: " + newPath);
+					Kind<?> kind = watchEvent.kind();
+					for(int i=0; i<myWatchEventKinds.length; ++i) {
+						WatchEvent.Kind<?> specifiedKind = myWatchEventKinds[i];
+						if (specifiedKind == kind) {
+							Path newPath = ((WatchEvent<Path>) watchEvent).context();
+							System.out.println("Path change detected: ");
+							if (newPath.toFile().isFile()) {
+								Scanner s = new Scanner(newPath.toFile());
+								while(s.hasNextLine()) {
+									System.out.println(s.nextLine());
+								}
+								myOnWatchEventTrigger.get();
+								break;
+							}
+						}
 					}
+//					if (StandardWatchEventKinds.OVERFLOW == kind) {
+//						continue; //loop
+//					} else if (StandardWatchEventKinds.ENTRY_CREATE == kind) {
+//						// A new Path was created 
+//						Path newPath = ((WatchEvent<Path>) watchEvent).context();
+//						// Output
+//						System.out.println("New myPath created: " + newPath);
+//					} else if (StandardWatchEventKinds.ENTRY_MODIFY == kind) {
+//						Path newPath = ((WatchEvent<Path>) watchEvent).context();
+//						System.out.println("myPath modified: " + newPath);
+//					}
 				}
 
 				if(!key.reset()) {
@@ -88,6 +103,18 @@ public class FileChangeNotifier implements Runnable {
 		} catch(InterruptedException ie) {
 			ie.printStackTrace();
 		}
+	}
+	
+	
+	private void registerWatchServiceWithEntireFileTree(WatchService aWatchService, Path aPath) throws IOException
+	{
+		Files.walkFileTree(aPath, new SimpleFileVisitor<Path>() {
+			@Override
+			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+				dir.register(aWatchService, myWatchEventKinds);
+				return FileVisitResult.CONTINUE;
+			}
+		});
 	}
 
 	@Override

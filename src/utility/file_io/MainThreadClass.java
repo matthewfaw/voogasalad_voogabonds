@@ -22,6 +22,7 @@ public class MainThreadClass {
 		URL url = fr.getUrlRelativeToProject("SerializedFiles");
 		Path folder = Paths.get(url.getPath());
 		FileChangeNotifier fcn = new FileChangeNotifier(folder, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
+		fcn.onWatchEventTriggered(() -> {System.out.println("derp"); return "";});
 		Thread t = new Thread(fcn);
 		t.start();
 		System.out.println("derp");
