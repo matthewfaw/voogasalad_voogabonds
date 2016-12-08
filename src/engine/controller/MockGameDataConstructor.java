@@ -3,10 +3,15 @@ package engine.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.controller.MapDataContainer;
+import authoring.model.ComponentData;
 import authoring.model.EnemyData;
+import authoring.model.EntityData;
+import authoring.model.LevelData;
 import authoring.model.PlayerData;
 import authoring.model.ProjectileData;
 import authoring.model.TowerData;
+import authoring.model.WaveData;
 import authoring.model.WeaponData;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
@@ -27,24 +32,23 @@ class MockGameDataConstructor {
 	{
 	}
 	
-	MapData getMockMapData()
+	MapDataContainer getMockMapData(TerrainData terrain1, TerrainData terrain2)
 	{
-		MapData mapData = new MapData();
+		MapDataContainer mapData = new MapDataContainer();
 		try {
 			int x = 14;
 			int y = 12;
 			int xmin = x/3;
 			int xmax = 2*x/3;
 			int ymax = y/2;
-			mapData.setNumXCells(x);
-			mapData.setNumYCells(y);
+			mapData.setDimensions(x,y);
 			for (int i=0; i<x; ++i) {
 				for (int j=0; j<y; ++j) {
 					TerrainData terrain;
 					if (i > xmin && i < xmax && j < ymax) {
-						terrain = new TerrainData("water", i, j, 50, "0x0000ff");
+						terrain = terrain1;
 					} else {
-						terrain = new TerrainData("grass", i, j, 50, "0x008000");
+						terrain = terrain2;
 					}
 					mapData.addTerrainData(terrain);
 				}
@@ -80,45 +84,15 @@ class MockGameDataConstructor {
 			List<String> terrainList = new ArrayList<String>();
 			terrainList.add(terrain1.getName());
 			terrainList.add(terrain2.getName());
-			// Tower Data
-			TowerData tow = new TowerData();
-			tow.setTerrainList(terrainList);
-			tow.setWeaponName("weapon 1");
-			tow.setBuyPrice(40);
-			tow.setCollisionRadius(2);
-			tow.setImagePath("src/resources/boss.png");
-			tow.setMaxHealth(1000);
-			tow.setMoveStrategyName("fast as fuck");
-			tow.setName("tower 1");
-			tow.setSellPrice(100);
+
+			//Map data
+			MapDataContainer md = this.getMockMapData(terrain1, terrain2);
 			
-			// Enemy Data
-			EnemyData ed = new EnemyData();
-			ed.setMoveStrategyName("derp");
-			ed.setTerrainList(terrainList);
-			ed.setCollisionRadius(5);
-			ed.setImagePath("src/resources/boss.png");
-			ed.setKillReward(100);
-			ed.setMaxHealth(100);
-			ed.setName("enemy 1");
-			ed.setMoveSpeed(10);
-			ed.setWeaponName("weapon 1");
-			
-			// Weapon Data
-			WeaponData wd = new WeaponData();
-			wd.setFireRate(10);
-			wd.setName("weapon 1");
-			wd.setProjectileName("projectile 1");
-			wd.setRange(100);
-			
-			// Projectile Data
-			ProjectileData pd = new ProjectileData();
-			pd.setAreaOfEffectRadius(10);
-			pd.setDamageStrategy("damage");
-			pd.setImagePath("src/resources/boss.png");
-			pd.setMaxRange(10);
-			pd.setMovementStrategy("fast as fuck");
-			pd.setName("projectile 1");
+			// Entity data
+			EntityData ed  = new EntityData();
+			ed.setName("Awesome Tower");
+			ComponentData cd = new ComponentData();
+			cd.setComponentName("PhysicalComponent");
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();
@@ -127,27 +101,38 @@ class MockGameDataConstructor {
 			pdd.setWinStrategyName("win strategy 1");
 			pdd.setStartingLives(5);
 			
-			// Map Data
-			MapData md = new MapData();
-			md.setNumXCells(2);
-			md.setNumYCells(2);
-			md.addTerrainData(terrain1);
-			md.addTerrainData(terrain2);
-			ArrayList<Point> spawnPoints = new ArrayList<Point>();
-			spawnPoints.add(new Point(1, 1));
-			md.addSpawnPoints("spawnPoint", spawnPoints);
-			md.addSinkPoint(new Point(1, 0));
-			md.addValidTerrain(terrain1.getName(), "exampleColor 1");
-			md.addValidTerrain(terrain2.getName(), "exampleColor 2");
+			//Level data
+			WaveData wad1 = new WaveData();
+			wad1.setName("Cool wave");
+			wad1.setNumEnemies(10);
+			wad1.setSpawnPointName("Cool spawn point");
+			wad1.setTimeBetweenEnemy(20);
+			wad1.setTimeForWave(0);
+			wad1.setWaveEnemy("Cool enemy");
+			WaveData wad2 = new WaveData();
+			wad2.setName("Awesome wave");
+			wad2.setNumEnemies(20);
+			wad2.setSpawnPointName("Awesome spawn point");
+			wad2.setTimeBetweenEnemy(50);
+			wad2.setTimeForWave(1);
+			wad2.setWaveEnemy("Awesome enemy");
+			WaveData wad3 = new WaveData();
+			wad3.setName("Dumb wave");
+			wad3.setNumEnemies(30);
+			wad3.setSpawnPointName("Dumb spawn point");
+			wad3.setTimeBetweenEnemy(60);
+			wad3.setTimeForWave(6);
+			wad3.setWaveEnemy("Dumb enemy");
+			LevelData ld = new LevelData();
+			ld.addWaveDataListToList(wad1);
+			ld.addWaveDataListToList(wad2);
+			ld.addWaveDataListToList(wad3);
 			
-//			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
-//			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
-//			ser.serializeToFile(terrain2, "exampleGame/TerrainData/"+terrain2.getClass().getSimpleName()+"2");
-//			ser.serializeToFile(tow, "exampleGame/TowerData/"+tow.getClass().getSimpleName());
-			ser.serializeToFile(ed, "exampleGame/EnemyData/"+ed.getClass().getSimpleName());
-//			ser.serializeToFile(wd, "exampleGame/WeaponData/"+wd.getClass().getSimpleName());
-//			ser.serializeToFile(pd, "exampleGame/ProjectileData/"+pd.getClass().getSimpleName());
-//			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
+			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
+			ser.serializeToFile(terrain2, "exampleGame/TerrainData/"+terrain2.getClass().getSimpleName()+"2");
+			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(pdd, "exampleGame/LevelData/"+pdd.getClass().getSimpleName());
 			
 			
 			TerrainMap terrainMap = new TerrainMap(md);

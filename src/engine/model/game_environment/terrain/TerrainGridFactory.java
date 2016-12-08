@@ -1,5 +1,6 @@
 package engine.model.game_environment.terrain;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 
@@ -10,7 +11,7 @@ public class TerrainGridFactory {
 	
 	//TODO: Add the real implementation of this--just for testing purposes
 	@Deprecated
-	public Terrain[][] constructTerrainMap(MapData aTerrainMapData)
+	public Terrain[][] constructTerrainMap(MapDataContainer aTerrainMapData)
 	{
 		Terrain[][] terrain = new Terrain[aTerrainMapData.getNumXCells()][aTerrainMapData.getNumXCells()];
 		for (TerrainData data: aTerrainMapData.getTerrainList()) {

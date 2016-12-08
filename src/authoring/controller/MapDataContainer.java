@@ -91,7 +91,8 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		return numXCells;
 	}
 	
-	private void cellSize(int cellSize) throws Exception{
+	//matthewfaw: making this public--hope it's ok
+	public void cellSize(int cellSize) throws Exception{
 		if (cellSize<=0){
 			throw new Exception("The size of cells must be greater than 0 pixels.");
 		}

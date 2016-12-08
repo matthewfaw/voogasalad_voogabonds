@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.GameLevelsData;
@@ -117,11 +118,11 @@ public class BackendController {
 	private void constructMap()
 	{
 		//TODO: Add these next lines back
-//		List<MapData> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
-//		MapData mapData = data.get(0);
+		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
+		MapDataContainer mapData = data.get(0);
 		//TODO: remove this map construction
-		MockGameDataConstructor m = new MockGameDataConstructor();
-		MapData mapData = m.getMockMapData();
+//		MockGameDataConstructor m = new MockGameDataConstructor();
+//		MapData mapData = m.getMockMapData();
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 		MapMediator mapMediator = new MapMediator(terrainMap);
