@@ -6,8 +6,10 @@ import java.util.List;
 import authoring.controller.Router;
 import authoring.model.EntityList;
 import authoring.view.menus.FileMenuBar;
-import authoring.view.side_panel.WaveLevelTab;
 import authoring.view.tabs.EntityTab;
+import authoring.view.tabs.LevelTab;
+import authoring.view.tabs.RulesTab;
+import authoring.view.tabs.WaveTab;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -66,16 +68,15 @@ public class AuthorDisplay {
         // Define Tabs
         //Tab mapTab = new MapTab(tabPane);
         Tab entityTab = new EntityTab(el);
-        //Tab rulesTab = new RulesTab(tabPane);
-        Tab waveTab = new WaveLevelTab(tabPane, r.getWaveDataController());
-        //Tab levelTab = new LevelTab(tabPane);
-        
+        Tab rulesTab = new RulesTab("Rules");
+        Tab waveTab = new WaveTab("Waves", r.getWaveDataController());
+        Tab levelTab = new LevelTab("Levels");
         // Add Tabs to list
         //tabs.add(mapTab);
         tabs.add(entityTab);
-        //tabs.add(rulesTab);
+        tabs.add(rulesTab);
         tabs.add(waveTab);
-        //tabs.add(levelTab);
+        tabs.add(levelTab);
         
         // Return list
         return tabs;

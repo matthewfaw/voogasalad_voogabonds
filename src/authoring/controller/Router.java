@@ -1,5 +1,6 @@
 package authoring.controller;
 import authoring.view.side_panel.*;
+import authoring.view.tabs.WaveTab;
 
 public class Router {
 	private EnemyDataContainer edc = new EnemyDataContainer();
@@ -9,8 +10,9 @@ public class Router {
 	private TowerDataContainer tdc = new TowerDataContainer();
 	private WaveDataContainer wadc = new WaveDataContainer();
 	private WeaponDataContainer wedc = new WeaponDataContainer();
+	private LevelDataContainer ldc = new LevelDataContainer();
 	
-	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
+	public void link(TowerTab tTab, EnemyTab eTab, WaveTab wTab, GameTab gTab){
 		/**
 		 * CONNECTIONS TO BE CREATED:
 		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
@@ -58,5 +60,9 @@ public class Router {
 	
 	public WeaponDataContainer getWeaponDataController(){
 		return wedc;
+	}
+	
+	public LevelDataContainer getLevelDataController(){
+		return ldc;
 	}
 }
