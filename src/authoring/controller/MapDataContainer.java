@@ -10,6 +10,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import utility.Point;
 
+import java.util.Stack;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,7 +48,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 * TerrainDatas, which can be used to populate the entire map. Should contain
 	 * a minimum of numXCells x numYCells TerrainData elements.
 	 */
-	private HashSet<TerrainData> terrainList;
+	private Stack<TerrainData>[][] terrainList;
 	
 	/**
 	 * Map of possible terrains that might exist, as created by the user.
@@ -58,7 +59,6 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	public MapDataContainer(){
 		this.spawnPoints = new HashMap<String, ArrayList<Point>>();
 		this.sinkPoints = new HashSet<Point>();
-		this.terrainList = new HashSet<TerrainData>();
 		this.validTerrain = new HashMap<String, String>();
 	}
 	
@@ -75,6 +75,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		try{
 			setNumXCells(x);
 			setNumYCells(y);
+			this.terrainList = new Stack[x][y];
 		}catch(Exception e){
 			//Show error to front-end here
 		}
@@ -175,16 +176,25 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 */
 	public void addTerrainData(TerrainData terrain) throws Exception{
 		validatePoint(terrain.getLoc(), "terrain");
-		terrainList.add(terrain);
+		int terrainX = (int) terrain.getLoc().getX();
+		int terrainY = (int) terrain.getLoc().getY();
+		if (!terrainList[terrainX][terrainY].contains(terrain)){
+			terrainList[terrainX][terrainY].push(terrain);
+		}
 	}
 
 	public void removeTerrainData(TerrainData terrain){
-		if (terrainList.contains(terrain)){
-			terrainList.remove(terrain);
+		int terrainX = (int) terrain.getLoc().getX();
+		int terrainY = (int) terrain.getLoc().getY();
+		Stack<TerrainData> arrayStack = terrainList[terrainX][terrainY];
+		for (TerrainData td: arrayStack){
+			if (td.getName().equals(terrain.getName())){
+				arrayStack.remove(td);
+			}
 		}
 	}
 	
-	public Set<TerrainData> getTerrainList(){
+	public Stack<TerrainData>[][] getTerrainList(){
 		return terrainList;
 	}
 	
