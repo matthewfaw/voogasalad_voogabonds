@@ -112,4 +112,10 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     	}
     }
 
+	@Override
+	protected void edit(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

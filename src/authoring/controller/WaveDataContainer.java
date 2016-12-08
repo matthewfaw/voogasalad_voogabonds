@@ -19,6 +19,7 @@ public class WaveDataContainer extends Container implements IObservable<Containe
 	
 	public void createNewWave(String name, WaveData wave){
 		myWaveMap.put(name, wave);
+		notifyObservers();
 	}
 	
 	public WaveData getWaveData(String name){
