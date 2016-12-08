@@ -91,4 +91,8 @@ public class GameDisplay {
 		populateGrid();
 	}
 	
+	public VBox getTerrainBox() {
+		return terrainContainer;
+	}
+	
 }

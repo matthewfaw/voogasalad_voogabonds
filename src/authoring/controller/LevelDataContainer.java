@@ -6,18 +6,37 @@ import authoring.model.LevelData;
 
 public class LevelDataContainer {
 	
-	private Map<String, LevelData> myLevelMap = new HashMap<String, LevelData>();
+	private List<LevelData> myLevelList = new ArrayList<LevelData>();
 	
+	/**
+	 * 
+	 * @param LevelData
+	 * Adds new LevelData object to list of LevelData
+	 */
 	public void createNewLevelData(LevelData ld){
-		myLevelMap.put(ld.getLevelName(), ld);
+		myLevelList.add(ld);
 	}
 	
+	/**
+	 *@param String: Level Name
+	 *Returns specific level by input of its specified name 
+	 */
 	public LevelData getLevelData(String name){
-		return myLevelMap.get(name);
+		for (LevelData LD : myLevelList){
+			if (LD.getLevelName().equals(name)){
+				return LD;
+			}
+		}
+		return null;
 	}
 	
-	public Map<String, LevelData> finalizeLevelDataMap(){
-		return myLevelMap;
+	/**
+	 * 
+	 * @return List<LevelData>
+	 * Returns current list of all levels
+	 */
+	public List<LevelData> finalizeLevelDataMap(){
+		return myLevelList;
 	}
 
 }
