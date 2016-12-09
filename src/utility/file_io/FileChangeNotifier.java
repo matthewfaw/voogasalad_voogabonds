@@ -27,6 +27,35 @@ import com.sun.org.apache.xpath.internal.functions.Function;
  * In order to be useful, the processEvents method must be able to run on its
  * own thread.  Thus, this class implements the Runnable interface
  * 
+ * Note that the FileChangeNotifier monitors the root folder and all child folders
+ * 
+ * One may use this class in the following way:
+ * 
+ * First, import the type of watch events you would like to use:
+ * import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+ * import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+ * import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
+ * 
+ * Next, choose the root file path to monitor
+ * Path filePath = "...";
+ * FileChangeNotifier fileChangeNotifier = new FileChangeNotifier(filePath, ENTRY_CREATE);
+ * or
+ * FileChangeNotifier fileChangeNotifier = new FileChangeNotifier(filePath, ENTRY_CREATE, ENTRY_MODIFY);
+ * or any other combination of watch events
+ * 
+ * If you want a function to be called every time a file change is detected,
+ * fileChangeNotifier.onFileChangeDetected(file -> doStuff(file));
+ * where doStuff is any method that takes a File as its input, and returns null
+ * 
+ * In order for this method to be useful, one should run this the FileChangeNotifier on its own thread.
+ * To do this:
+ * Create a thread with the fileChangeNotifier
+ * Thread t = new Thread(fileChangeNotifier);
+ * Start the thread
+ * t.start();
+ * One may stop this thread by calling
+ * t.stop();
+ * 
  * adapted from 
  * http://andreinc.net/2013/12/06/java-7-nio-2-tutorial-writing-a-simple-filefolder-monitor-using-the-watch-service-api/
  * for the basic implementation of file change notification
@@ -45,23 +74,45 @@ public class FileChangeNotifier implements Runnable {
 	private List<Kind<?>> myWatchEventKindsList;
 	private Consumer<File> myOnFileChangeDetectedMethod;
 	
-	public FileChangeNotifier(Path aPath, WatchEvent.Kind<?>...aEventKinds) throws IOException
+	public FileChangeNotifier(String aPath, Kind<?>...aEventKinds) throws IllegalArgumentException
 	{
-		myPath = aPath;
+		File path = new File(aPath);
+		if (!path.isDirectory()) {
+			throw new IllegalArgumentException("The specified path must be a directory");
+		}
+		myPath = path.toPath();
 		
 		myWatchEventKindsList = new ArrayList<Kind<?>>(Arrays.asList(aEventKinds));
+		
+		myOnFileChangeDetectedMethod = (file -> System.out.println("Change detected in: "+file.getAbsolutePath()));
 	}
 	
+	/**
+	 * This method sets up the function to be performed when a file change is detected
+	 * This function takes a File as an input, and returns void.
+	 * An example usage:
+	 * fileChangeNotifier.onFileChangeDetected(file -> System.out.println(file));
+	 * @param aFunction the function to be called when a File change is detected
+	 */
 	public void onFileChangeDetected(Consumer<File> aFunction)
 	{
 		myOnFileChangeDetectedMethod = aFunction;
 	}
-	
-	private void processEvents()
-	{
-		System.out.println("Watching myPath: " + myPath);
 
-		// We create the new WatchService using the new try() block
+	/**
+	 * This method runs the FileChangeNotifier
+	 * Note that this method runs indefinitely, and thus should be run on its own thread
+	 * 
+	 * In order to run this method on its own thread, 
+	 * assuming the FileChangeNotifier has been constructed, one may do the following:
+	 * 
+	 * Thread thread = new Thread(fileChangeNotifier);
+	 * thread.start();
+	 * 
+	 */
+	@Override
+	public void run() 
+	{
 		try(WatchService service = myPath.getFileSystem().newWatchService()) {
 
 			registerWatchServiceWithEntireFileTree(service, myPath);
@@ -119,10 +170,4 @@ public class FileChangeNotifier implements Runnable {
 			}
 		});
 	}
-
-	@Override
-	public void run() {
-		processEvents();
-	}
-
 }
