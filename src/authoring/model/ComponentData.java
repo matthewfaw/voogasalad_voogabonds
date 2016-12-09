@@ -2,6 +2,7 @@ package authoring.model;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -10,8 +11,13 @@ import java.util.HashMap;
  */
 
 public class ComponentData {
-	private AbstractMap<String, String> myFields = new HashMap<String, String>();
+	private Map<String, String> myFields;
 	private String myComponentName;
+	
+	public ComponentData()
+	{
+		myFields = new HashMap<String, String>();
+	}
 	
 	public void addField(String fieldName, String fieldValue){
 		myFields.put(fieldName, fieldValue);
@@ -25,7 +31,7 @@ public class ComponentData {
 		this.myComponentName = myComponentName;
 	}
 
-	public AbstractMap<String, String> getFields() {
+	public Map<String, String> getFields() {
 	    return myFields;
 	}
 }

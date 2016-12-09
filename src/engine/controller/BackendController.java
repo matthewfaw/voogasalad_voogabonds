@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
 import authoring.model.EnemyData;
 import authoring.model.EntityData;
@@ -50,7 +51,7 @@ public class BackendController {
 	//Data relevant to constructing objects
 	private DataStore<EntityData> myEntityDataStore;
 	private PlayerData myPlayerData;
-	private GameLevelsData myGameLevelsData;
+	private LevelDataContainer myLevelDataContainer;
 	private MapDistributor myMapDistributor;
 	
 	//Controllers to manage events
@@ -93,7 +94,7 @@ public class BackendController {
 		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
-		myWaveController = new WaveController(myGameLevelsData, myEntityDataStore, myPlayerController.getActivePlayer());
+		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
 		myTimelineController.attach(myWaveController);
 	}
 	
@@ -134,10 +135,12 @@ public class BackendController {
 		
 	}
 	
+	/**
+	 * Constructs level data object, assuming there's exactly one of them
+	 */
 	private void constructLevelData() {
-//		GameLevelsData data = getData(myGameDataRelativePaths.getString("LevelPath"), GameLevelsData.class);
-//		myGameLevelsData = new DataStore<GameLevelsData>(data);
-		myGameLevelsData = new GameLevelsData();
+		List<LevelDataContainer> data = getData(myGameDataRelativePaths.getString("LevelPath"), LevelDataContainer.class);
+		myLevelDataContainer = data.get(0);
 	}
 	
 	/**
@@ -158,7 +161,7 @@ public class BackendController {
 	 */
 	private void constructEntityDataStore()
 	{
-		List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EnemyData.class);
+		List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EntityData.class);
 		myEntityDataStore = new DataStore<EntityData>(data);
 	}
 	
@@ -182,7 +185,7 @@ public class BackendController {
 	 * @param aClass
 	 * @return
 	 */
-	private <T extends IReadableData> List<T> getData(String aFilePath, Class<? extends IReadableData> aClass)
+	private <T> List<T> getData(String aFilePath, Class<T> aClass)
 	{
 		List<String> files = myFileRetriever.getFileNames(aFilePath);
 		List<T> data = new ArrayList<T>();
@@ -208,10 +211,12 @@ public class BackendController {
 	}
 	
 	
+	/*
 	public static void main(String[] args)
 	{
 		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
 		controller.getClass();
 	}
+	*/
 	
 }

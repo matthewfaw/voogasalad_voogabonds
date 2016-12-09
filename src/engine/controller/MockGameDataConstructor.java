@@ -134,12 +134,13 @@ class MockGameDataConstructor {
 			ld.addWaveDataListToList(wad1);
 			ld.addWaveDataListToList(wad2);
 			ld.addWaveDataListToList(wad3);
+			ld.setLevelName("0");
 			LevelDataContainer ldc = new LevelDataContainer();
 			ldc.createNewLevelData(ld);
 
 			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
 			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
-			ser.serializeToFile(ld, "exampleGame/LevelData/"+ld.getClass().getSimpleName());
+			ser.serializeToFile(ldc, "exampleGame/LevelData/"+ldc.getClass().getSimpleName());
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName());
 			
 			TerrainMap terrainMap = new TerrainMap(md);

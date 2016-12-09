@@ -6,7 +6,12 @@ import authoring.model.LevelData;
 
 public class LevelDataContainer {
 	
-	private List<LevelData> myLevelList = new ArrayList<LevelData>();
+	private List<LevelData> myLevelList;
+	
+	public LevelDataContainer()
+	{
+		myLevelList = new ArrayList<LevelData>();
+	}
 	
 	/**
 	 * 

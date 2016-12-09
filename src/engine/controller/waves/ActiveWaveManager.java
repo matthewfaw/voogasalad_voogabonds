@@ -6,8 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import authoring.controller.LevelDataContainer;
 import authoring.model.EntityData;
 import authoring.model.GameLevelsData;
+import authoring.model.LevelData;
 import authoring.model.OneLevelData;
 import authoring.model.WaveData;
 import engine.model.data_stores.DataStore;
@@ -21,9 +23,9 @@ import engine.model.data_stores.DataStore;
  */
 public class ActiveWaveManager {
 	private static final double DEFAULT_START_TIME = 0.0;
-	private GameLevelsData myGameLevelsData;
-	private OneLevelData myCurrLevelData;
-	private int myCurrLevel;
+	private LevelDataContainer myLevelDataContainer;
+	private LevelData myCurrLevelData;
+	private String myCurrLevel;
 	private DataStore<EntityData> myEnemyDataStore;
 	
 //	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
@@ -31,12 +33,12 @@ public class ActiveWaveManager {
 	private double myCurrentTime;
 	private double myTimeToAddMoreWaves;
 	
-	public ActiveWaveManager(GameLevelsData aGameLevelsData, DataStore<EntityData> aEnemyDataStore)
+	public ActiveWaveManager(LevelDataContainer aLevelDataContainer, DataStore<EntityData> aEnemyDataStore)
 	{
-		myCurrLevel = 0;
-		myGameLevelsData = aGameLevelsData;
+		myCurrLevel = "0";
+		myLevelDataContainer = aLevelDataContainer;
 		myEnemyDataStore = aEnemyDataStore;
-		myCurrLevelData = myGameLevelsData.getLevelData(myCurrLevel);
+		myCurrLevelData = myLevelDataContainer.getLevelData(myCurrLevel);
 //		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
 		myWaveStates = new ArrayList<WaveState>();
 		
@@ -80,7 +82,7 @@ public class ActiveWaveManager {
 	 * Assumes that multiple waves can be active at the same time
 	 */
 	private void setNextRoundOfWaveDataAsActive() {
-		while (myCurrLevelData.peekNextWaveData() != null) {
+		while (!myCurrLevelData.isEmpty()) {
 			WaveData waveData = myCurrLevelData.popNextWaveData();
 			myWaveStates.add(new WaveState(waveData, myCurrentTime));
 			if (waveData.getTimeUntilNextWave() != 0) {

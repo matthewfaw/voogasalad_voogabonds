@@ -9,7 +9,12 @@ import java.util.List;
 
 public class EntityData implements IReadableData {
 	private String myName;
-	List<ComponentData> myComponents = new ArrayList<ComponentData>();
+	List<ComponentData> myComponents;
+	
+	public EntityData()
+	{
+		myComponents = new ArrayList<ComponentData>();
+	}
 	
 	public String getName(){
 		return myName;

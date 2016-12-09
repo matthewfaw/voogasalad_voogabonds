@@ -3,6 +3,7 @@ package engine.controller.waves;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import authoring.controller.LevelDataContainer;
 import authoring.model.EntityData;
 import authoring.model.GameLevelsData;
 import engine.IObserver;
@@ -28,7 +29,7 @@ public class WaveController implements IObserver<TimelineController> {
 	private EntityFactory myEntityFactory;
 	private Player myEnemy;
 	
-	public WaveController (GameLevelsData aGameLevelsData, DataStore<EntityData> aEnemyDataStore, Player p) {
+	public WaveController (LevelDataContainer aGameLevelsData, DataStore<EntityData> aEnemyDataStore, Player p) {
 //		myMapDistributor = aMapDistributor;
 		myEnemy = p;
 		myActiveWaveManager = new ActiveWaveManager(aGameLevelsData, aEnemyDataStore);
