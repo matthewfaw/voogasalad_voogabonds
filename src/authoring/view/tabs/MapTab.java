@@ -1,4 +1,4 @@
-package authoring.view.side_panel;
+package authoring.view.tabs;
 
 import java.util.ResourceBundle;
 
