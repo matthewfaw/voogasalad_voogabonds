@@ -15,12 +15,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import com.sun.org.apache.xpath.internal.functions.Function;
 
 /**
  * The purpose of this class is to provide a means of detecting file changes.
@@ -73,6 +68,7 @@ public class FileChangeNotifier implements Runnable {
 	private Path myPath;
 	private List<Kind<?>> myWatchEventKindsList;
 	private Consumer<File> myOnFileChangeDetectedMethod;
+	private Consumer<String> myOnErrorDetectedMethod;
 	
 	public FileChangeNotifier(String aPath, Kind<?>...aEventKinds) throws IllegalArgumentException
 	{
@@ -85,6 +81,7 @@ public class FileChangeNotifier implements Runnable {
 		myWatchEventKindsList = new ArrayList<Kind<?>>(Arrays.asList(aEventKinds));
 		
 		myOnFileChangeDetectedMethod = (file -> System.out.println("Change detected in: "+file.getAbsolutePath()));
+		myOnErrorDetectedMethod = (errorMessage -> System.out.println(errorMessage));
 	}
 	
 	/**
@@ -97,6 +94,23 @@ public class FileChangeNotifier implements Runnable {
 	public void onFileChangeDetected(Consumer<File> aFunction)
 	{
 		myOnFileChangeDetectedMethod = aFunction;
+	}
+	
+	/**
+	 * This method sets up the function to be performed when an error occurs in the FileChangeNotifier
+	 * The thrown errors are I/O Exceptions and thread Interrupt exceptions
+	 * an example usage:
+	 * fileChangeNotifier.onFileChangeDetected(errMessage -> System.out.println(errMessage));
+	 * 
+	 * The purpose of this method is to allow the user of the FileChangeNotifier to attach a custom error-handling
+	 * method to this notifier that is called whenever an error occurs.  Thus, an error handling service can
+	 * take over when an error occurs
+	 * 
+	 * @param aFunction
+	 */
+	public void onErrorDetected(Consumer<String> aFunction)
+	{
+		myOnErrorDetectedMethod = aFunction;
 	}
 
 	/**
@@ -120,12 +134,22 @@ public class FileChangeNotifier implements Runnable {
 			pollForFileChange(service);
 
 		} catch(IOException ioe) {
-			ioe.printStackTrace();
+			myOnErrorDetectedMethod.accept("IOException: an I/O Exception occurred while traversing the file tree specified by directory: " + myPath);
 		} catch(InterruptedException ie) {
-			ie.printStackTrace();
+			myOnErrorDetectedMethod.accept("InterruptedException: The watch service was interrupted while waiting for the WatchKey");
 		}
 	}
 	
+	/**
+	 * The main method of the FileChangeNotifier that, given a watch service, continually checks to see if
+	 * a file change has occurred
+	 * 
+	 * This method assumes that the watch service has been registered to listen to the proper files
+	 * 
+	 * @param aWatchService
+	 * @throws InterruptedException if interrupted while the watch service is interrupted while
+	 * waiting for the watch key
+	 */
 	private void pollForFileChange(WatchService aWatchService) throws InterruptedException
 	{
 		while(true) {
@@ -140,11 +164,20 @@ public class FileChangeNotifier implements Runnable {
 			}
 
 			if(!key.reset()) {
-				break; //loop
+				break; 
 			}
 		}
 	}
 	
+	/**
+	 * A method which manages calling the user-specified file change method if 
+	 * the polled event is the same as the user-specified event
+	 * 
+	 * @param aUserSpecifiedKind
+	 * @param aPollEventKind
+	 * @param aKey
+	 * @param aWatchEvent
+	 */
 	private void handleWatchEvent(Kind<?> aUserSpecifiedKind, Kind<?> aPollEventKind, WatchKey aKey, WatchEvent<?> aWatchEvent)
 	{
 		Path absolutePath = getAbsolutePath(aKey, aWatchEvent);
@@ -153,6 +186,14 @@ public class FileChangeNotifier implements Runnable {
 		}
 	}
 	
+	/**
+	 * A helper method to get the absolute file path of the changed file
+	 * The watch key gives the base directory,
+	 * and the watchEvent gives the new path
+	 * @param aKey
+	 * @param aWatchEvent
+	 * @return absolute path to the file that changed
+	 */
 	private Path getAbsolutePath(WatchKey aKey, WatchEvent<?> aWatchEvent)
 	{
 		Path baseDirectory = (Path)aKey.watchable();
@@ -160,6 +201,16 @@ public class FileChangeNotifier implements Runnable {
 
 		return baseDirectory.resolve(newPath);
 	}
+	
+	/**
+	 * A helper method to register the watch service with the entire file tree
+	 * This method walks the file tree specified by aPath, and registers the entire tree
+	 * with the watch service
+	 * 
+	 * @param aWatchService
+	 * @param aPath
+	 * @throws IOException if an I/O error occurs
+	 */
 	private void registerWatchServiceWithEntireFileTree(WatchService aWatchService, Path aPath) throws IOException
 	{
 		Files.walkFileTree(aPath, new SimpleFileVisitor<Path>() {
