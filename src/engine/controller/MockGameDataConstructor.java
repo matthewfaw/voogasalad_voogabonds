@@ -126,14 +126,14 @@ class MockGameDataConstructor {
 			wad3.setTimeBetweenEnemy(60);
 			wad3.setTimeForWave(6);
 			wad3.setWaveEnemy("Dumb enemy");
-//			LevelData ld = new LevelData();
-//			ld.addWaveDataListToList(wad1);
-//			ld.addWaveDataListToList(wad2);
-//			ld.addWaveDataListToList(wad3);
+			LevelData ld = new LevelData();
+			ld.addWaveDataListToList(wad1);
+			ld.addWaveDataListToList(wad2);
+			ld.addWaveDataListToList(wad3);
 
 			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
 			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
-			ser.serializeToFile(pdd, "exampleGame/LevelData/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(ld, "exampleGame/LevelData/"+pdd.getClass().getSimpleName());
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName());
 			
 			TerrainMap terrainMap = new TerrainMap(md);

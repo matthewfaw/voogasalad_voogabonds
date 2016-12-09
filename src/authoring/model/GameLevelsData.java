@@ -9,18 +9,22 @@ import java.util.List;
  */
 public class GameLevelsData {
 	
-	private List<OneLevelData> WavesInLevel;
+	private List<OneLevelData> wavesInLevel;
 	
 	public GameLevelsData() {
-		WavesInLevel = new ArrayList<OneLevelData>();
+		wavesInLevel = new ArrayList<OneLevelData>();
 	}
 	
 	public void addGameLevels(OneLevelData aLevelData) {
-		WavesInLevel.add(aLevelData);
+		wavesInLevel.add(aLevelData);
 	}
 	
 	public OneLevelData getLevelData(int currLevel) {
-		return WavesInLevel.get(currLevel);
+		if (wavesInLevel.contains(currLevel)) {
+			return wavesInLevel.get(currLevel);
+		} else {
+			return null;
+		}
 	}
 	
 }
