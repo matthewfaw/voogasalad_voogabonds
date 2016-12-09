@@ -103,7 +103,7 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		//constructResourceStore();
+		constructResourceStore();
 		constructEntityDataStore();
 		constructPlayerData();
 		constructMap();

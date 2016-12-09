@@ -1,4 +1,4 @@
-package engine.model.machine.tower;
+package engine.model.resourcestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+import authoring.model.EntityData;
 import authoring.model.TowerData;
-import engine.model.resourcestore.IMoney;
+import engine.model.machine.tower.ITowerUpgradeStore;
+import engine.model.machine.tower.TowerNode;
 
 /**
  * Tower Upgrade Store that stores the hierarchies among towers
@@ -17,11 +19,11 @@ import engine.model.resourcestore.IMoney;
 
 
 public class TowerUpgradeStore implements ITowerUpgradeStore {
-	private ArrayList<TowerNode> myBaseTowers;
+	private ArrayList<EntityNode> myBaseTowers;
 	private Map<String, TowerNode> myConstructedTowerNodes;
 	
-	public TowerUpgradeStore(List<TowerData> aTowerInfoList) {
-		myBaseTowers = new ArrayList<TowerNode>();
+	public TowerUpgradeStore(List<EntityData> aTowerInfoList) {
+		myBaseTowers = new ArrayList<EntityNode>();
 		myConstructedTowerNodes = new HashMap<String, TowerNode>();
 		Stack<TowerNode> towerNodes = constructNodes(aTowerInfoList);
 		connectNodes(towerNodes);
