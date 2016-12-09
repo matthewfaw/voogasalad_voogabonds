@@ -44,4 +44,8 @@ public class LevelDataContainer {
 		return myLevelList;
 	}
 
+	public LevelData getLevelData(int aLevel) {
+		return myLevelList.get(aLevel);
+	}
+
 }

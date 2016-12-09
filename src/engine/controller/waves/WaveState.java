@@ -61,7 +61,7 @@ public class WaveState {
 	 * Determines if there are enemies that can be released in the wave
 	 * @return true if there are, false otherwise
 	 */
-	private boolean hasEnemiesToRelease()
+	public boolean hasEnemiesToRelease()
 	{
 		return myUnreleasedEnemyCount > 0;
 	}
