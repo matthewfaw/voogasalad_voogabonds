@@ -40,8 +40,8 @@ public class WaveController implements IObserver<TimelineController> {
 	public void update(TimelineController aChangedObject) {
 		//TODO: check if we should spawn a new enemy
 		// if true, then distribute the enemy through the mediator
-		Map<EntityData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct(aChangedObject.getTotalTimeElapsed());
-		for (EntityData enemyData: enemiesToConstruct.keySet()) {
+		Map<EntityData, String> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aChangedObject.getTotalTimeElapsed());
+		for (EntityData enemyData: entitiesToConstruct.keySet()) {
 			try {
 				myEntityFactory.constructEntity(enemyData);
 			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException

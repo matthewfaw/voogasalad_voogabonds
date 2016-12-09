@@ -2,6 +2,11 @@ package authoring.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import engine.model.components.PurchasableComponentData;
+import engine.model.components.SellableComponentData;
+import engine.model.components.UpgradableComponentData;
 
 /**
  * @author owenchung and alanguo
@@ -10,6 +15,9 @@ import java.util.List;
 public class EntityData implements IReadableData {
 	private String myName;
 	List<ComponentData> myComponents;
+	Optional<UpgradableComponentData> myUpgradeData;
+	Optional<SellableComponentData> mySellData;
+	Optional<PurchasableComponentData> myPurchaseData;
 	
 	public EntityData()
 	{

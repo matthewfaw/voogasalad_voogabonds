@@ -53,7 +53,7 @@ public class ActiveWaveManager {
 	 * 
 	 * TODO: This return type is kinda hacky... maybe make a custom class for this?
 	 */
-	public Map<EntityData, String> getEnemiesToConstruct(double aTotalTimeElapsed)
+	public Map<EntityData, String> getEntitiesToConstruct(double aTotalTimeElapsed)
 	{
 		//1. Update the current time
 		setCurrentTime(aTotalTimeElapsed);

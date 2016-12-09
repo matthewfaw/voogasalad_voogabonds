@@ -34,7 +34,7 @@ public class MachineFactory {
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
 		myTime = time;
-		myTowers = new DataStore<TowerData>(aResourceStore.getAvailableTowers());
+		myTowers = new DataStore<TowerData>(aResourceStore.getAvailableEntities());
 		myEnemies = enemies;
 		myArmory = new WeaponFactory(weapons, projectiles, time, map);
 	}

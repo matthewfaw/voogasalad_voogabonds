@@ -94,7 +94,7 @@ public class Player implements IViewablePlayer, IModifiablePlayer {
 	public List<TowerData> getAvailableTowers() {
 		List<TowerData> towerList = new ArrayList<TowerData>();
 		for (ResourceStore resourceStore: myResourceStores) {
-			towerList.addAll(resourceStore.getAvailableTowers());
+			towerList.addAll(resourceStore.getAvailableEntities());
 		}
 		return towerList;
 	}

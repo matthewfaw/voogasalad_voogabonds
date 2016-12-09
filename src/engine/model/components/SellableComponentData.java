@@ -9,8 +9,7 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class SellableComponent implements IComponent {
-	private IEntity myEntity;
+public class SellableComponentData {
 	private int mySellValue;
 	
 	public int getSellValue()
@@ -18,8 +17,8 @@ public class SellableComponent implements IComponent {
 		return mySellValue;
 	}
 
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
+	public void setSellPrice(int aPrice)
+	{
+		mySellValue = aPrice;
 	}
 }

@@ -11,19 +11,19 @@ import authoring.model.TowerData;
  */
 public class ResourceStore implements /*IModifiableStore, */ IViewableStore {
 
-	private TowerUpgradeStore myUpgradeStore;
+	private EntityUpgradeStore myUpgradeStore;
 	
 	public ResourceStore(List<EntityData> aEntityInfoList) {
-		myUpgradeStore = new TowerUpgradeStore(aEntityInfoList);
+		myUpgradeStore = new EntityUpgradeStore(aEntityInfoList);
 	}
 	
 	@Override
-	public List<TowerData> getAvailableTowers() {
-		return myUpgradeStore.getBaseTowersData();
+	public List<EntityData> getAvailableEntities() {
+		return myUpgradeStore.getBaseEntitesData();
 	}
 	
-	public int getTowerPrice(String aTowerName)
+	public int getTowerPrice(String aEntityName)
 	{
-		return myUpgradeStore.getPrice(aTowerName);
+		return myUpgradeStore.getPrice(aEntityName);
 	}
 }

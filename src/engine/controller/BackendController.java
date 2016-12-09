@@ -6,13 +6,8 @@ import java.util.ResourceBundle;
 
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
-import authoring.model.EnemyData;
 import authoring.model.EntityData;
-import authoring.model.GameLevelsData;
-import authoring.model.IReadableData;
 import authoring.model.PlayerData;
-import authoring.model.TowerData;
-import authoring.model.map.MapData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.WaveController;
