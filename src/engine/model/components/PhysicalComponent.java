@@ -8,6 +8,7 @@ import engine.IViewable;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.CollisionDetectionSystem;
+import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -34,9 +35,15 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 	
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	
-	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem) {
+	@Hide
+	private Router myRouter;
+	
+	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router) {
 		myCollisionDetectionSystem = collisionDetectionSystem;
 		myCollisionDetectionSystem.attachComponent(this);
+		
+		myRouter = router;
+		myRouter.distributeViewableComponent(this);
 	}
 	
 	/******** Setters ********/
