@@ -116,15 +116,10 @@ public class BackendController {
 	 * 
 	 * Assumes that the only map data to use is the first one
 	 */
-	@Deprecated // need to actually deserialize the object, but can't because they're using javafx rn
 	private void constructMap()
 	{
-		//TODO: Add these next lines back
 		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
 		MapDataContainer mapData = data.get(0);
-		//TODO: remove this map construction
-//		MockGameDataConstructor m = new MockGameDataConstructor();
-//		MapData mapData = m.getMockMapData();
 		TerrainMap terrainMap = new TerrainMap(mapData);
 		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 		MapMediator mapMediator = new MapMediator(terrainMap);
