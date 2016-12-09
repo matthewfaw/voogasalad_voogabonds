@@ -7,16 +7,11 @@ import utility.Index;
 import utility.Point;
 
 public class Terrain {
-	private int mySize;
-	private Index myIndex;
-	private Stack<TerrainData> myTerrainLevels;
+	private TerrainData myTerrainData;
 	
-	public Terrain(Stack<TerrainData> aTerrainStack)
+	public Terrain(TerrainData aTerrainData)
 	{
-		TerrainData topTerrain = aTerrainStack.peek();
-		mySize = aTerrainStack.peek().getSize();
-		myIndex = new Index((int)topTerrain.getLoc().getX(), (int)topTerrain.getLoc().getY());
-		myTerrainLevels = aTerrainStack;
+		myTerrainData = aTerrainData;
 	}
 	
 	/**
@@ -25,7 +20,7 @@ public class Terrain {
 	 */
 	public Index getIndexInMap()
 	{
-		return myIndex;
+		return new Index((int)myTerrainData.getLoc().getX(), (int)myTerrainData.getLoc().getY());
 	}
 	
 	/**
@@ -34,11 +29,14 @@ public class Terrain {
 	 */
 	public String getTerrainType()
 	{
-		return myTerrainLevels.peek().getName();
+		return myTerrainData.getName();
 	}
 	
 	public Point getCenter() {
-		return new Point(mySize * (myIndex.getX() + 0.5), mySize * (myIndex.getY() + 0.5));
+		int size = myTerrainData.getSize();
+		int x = (int) myTerrainData.getLoc().getX();
+		int y = (int) myTerrainData.getLoc().getY();
+		return new Point(size * (x + 0.5), size * (y + 0.5));
 	}
 	
 

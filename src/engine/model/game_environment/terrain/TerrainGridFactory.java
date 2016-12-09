@@ -15,9 +15,8 @@ public class TerrainGridFactory {
 	{
 		Terrain[][] terrain = new Terrain[aTerrainMapData.getNumXCells()][aTerrainMapData.getNumXCells()];
 		
-		for (Stack<TerrainData> terrainCell: aTerrainMapData.getTerrainList()) {
-			TerrainData topTerrain = terrainCell.peek();
-			terrain[(int) topTerrain.getLoc().getX()][(int) topTerrain.getLoc().getY()] = new Terrain(terrainCell);
+		for (TerrainData terrainCell: aTerrainMapData.getTerrainList()) {
+			terrain[(int) terrainCell.getLoc().getX()][(int) terrainCell.getLoc().getY()] = new Terrain(terrainCell);
 		}
 		return terrain;
 	}

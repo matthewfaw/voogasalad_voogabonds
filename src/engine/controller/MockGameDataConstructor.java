@@ -2,8 +2,11 @@ package engine.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
+import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
 import authoring.model.ComponentData;
 import authoring.model.EnemyData;
@@ -131,10 +134,12 @@ class MockGameDataConstructor {
 			ld.addWaveDataListToList(wad1);
 			ld.addWaveDataListToList(wad2);
 			ld.addWaveDataListToList(wad3);
+			LevelDataContainer ldc = new LevelDataContainer();
+			ldc.createNewLevelData(ld);
 
 			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
 			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
-			ser.serializeToFile(ld, "exampleGame/LevelData/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(ld, "exampleGame/LevelData/"+ld.getClass().getSimpleName());
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName());
 			
 			TerrainMap terrainMap = new TerrainMap(md);

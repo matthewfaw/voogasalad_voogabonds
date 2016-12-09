@@ -50,7 +50,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 * TerrainDatas, which can be used to populate the entire map. Should contain
 	 * a minimum of numXCells x numYCells TerrainData elements.
 	 */
-	private HashMap<Point, Stack<TerrainData>> terrainList;
+	private HashSet<TerrainData> terrainList;
 	
 	/**
 	 * Map of possible terrains that might exist, as created by the user.
@@ -77,7 +77,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		try{
 			setNumXCells(x);
 			setNumYCells(y);
-			this.terrainList = new HashMap<Point, Stack<TerrainData>>();
+			this.terrainList = new HashSet<TerrainData>();
 		}catch(Exception e){
 			//Show error to front-end here
 		}
@@ -181,18 +181,15 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 */
 	public void addTerrainData(TerrainData terrain) throws Exception{
 		validatePoint(terrain.getLoc(), "terrain");
-		if (!terrainList.containsKey(terrain.getLoc())) {
-			terrainList.put(terrain.getLoc(), new Stack<TerrainData>());
-		}
-		terrainList.get(terrain.getLoc()).push(terrain);
+		terrainList.add(terrain);
 	}
 
 	public void removeTerrainData(TerrainData terrain){
 		terrainList.remove(terrain.getLoc());
 	}
 	
-	public Collection<Stack<TerrainData>> getTerrainList(){
-		return terrainList.values();
+	public Collection<TerrainData> getTerrainList(){
+		return terrainList;
 	}
 	
 	/**
