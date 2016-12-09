@@ -6,9 +6,9 @@ import java.util.List;
 import authoring.controller.Router;
 import authoring.model.EntityList;
 import authoring.view.menus.FileMenuBar;
-import authoring.view.side_panel.MapTab;
 import authoring.view.tabs.EntityTab;
 import authoring.view.tabs.LevelTab;
+import authoring.view.tabs.MapTab;
 import authoring.view.tabs.RulesTab;
 import authoring.view.tabs.WaveTab;
 import javafx.scene.Scene;
@@ -48,7 +48,6 @@ public class AuthorDisplay {
         // Set up TabPane
         tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        
         // Set up Router
         r = new Router();
         
@@ -58,6 +57,7 @@ public class AuthorDisplay {
             //System.out.println("Tab "+i+" Added");
             tabPane.getTabs().add(tabs.get(i));
         }
+        tabPane.getTabs().remove(1);
         
         // Set regions of BorderPane
         root.setTop(topMenuBar);
@@ -74,7 +74,7 @@ public class AuthorDisplay {
         // Define Tabs
         MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer(), mapXDim, mapYDim);
         EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
-        RulesTab rulesTab = new RulesTab("Rules");
+        RulesTab rulesTab = new RulesTab("Rules", r.getPlayerDataContainer());
         WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
         LevelTab levelTab = new LevelTab("Levels", r.getLevelDataContainer());
         r.link(entityTab, levelTab, waveTab);
