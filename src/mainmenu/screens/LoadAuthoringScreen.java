@@ -56,21 +56,20 @@ public class LoadAuthoringScreen {
 	private void populatePane() {
 		HBox optionArea = new HBox(screenWidth*0.1);
 		TableView<MenuTableItem> chooseProjectTable = new TableView<MenuTableItem>();
-		TableColumn firstCol = new TableColumn(myResources.getString("ProjectTitle"));
-		TableColumn secondCol = new TableColumn(myResources.getString("LastModified"));
-		chooseProjectTable.getColumns().addAll(firstCol, secondCol);
+		TableColumn<MenuTableItem, String> firstCol = new TableColumn<MenuTableItem, String>(myResources.getString("ProjectTitle"));
+		TableColumn<MenuTableItem, Date> secondCol = new TableColumn<MenuTableItem, Date>(myResources.getString("LastModified"));
 		String relativePath = new File("").getAbsolutePath();
 		String finalPath = relativePath.concat(myResources.getString("ExistingAuthoringFiles"));
 		File directory = new File(finalPath);
 		for (File f : directory.listFiles()) {
 			Date date = new Date(f.lastModified());
 			MenuTableItem item = new MenuTableItem(f.getName(), date);
-			data.add(new MenuTableItem(f.getName(), date));
+			data.add(item);
 		}
 		firstCol.setCellValueFactory(
 				new PropertyValueFactory<MenuTableItem, String>("projectName"));
 		secondCol.setCellValueFactory(
-				new PropertyValueFactory<MenuTableItem, Long>("modifiedDate"));
+				new PropertyValueFactory<MenuTableItem, Date>("modifiedDate"));
 		chooseProjectTable.setItems(data);
 		chooseProjectTable.getColumns().addAll(firstCol, secondCol);
 		VBox boxRight = new VBox(screenHeight*0.1);
