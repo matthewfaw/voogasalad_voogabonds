@@ -25,10 +25,10 @@ public class EntityFactory {
 	private Router myRouter;
 
 	public EntityFactory(List<ISystem> systems, DataStore<EntityData> entityDataStore, Router router) {
-		myComponentFactory = new ComponentFactory(systems);
 		mySystems = systems;
 		myEntityDataStore = entityDataStore;
 		myRouter = router;
+		myComponentFactory = new ComponentFactory(systems, myRouter); // depends on router initialization
 	}
 	
 	/**
