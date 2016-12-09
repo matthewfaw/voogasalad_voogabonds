@@ -14,12 +14,9 @@ import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
-<<<<<<< HEAD
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
-=======
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
->>>>>>> 8079f1bd58eb4eb677d8111cb3e3b2d5485b5059
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
