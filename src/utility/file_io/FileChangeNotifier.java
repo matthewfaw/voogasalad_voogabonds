@@ -63,13 +63,19 @@ import java.util.function.Consumer;
  * @author matthewfaw
  *
  */
-public class FileChangeNotifier implements Runnable {
+public class FileChangeNotifier implements IFileChangeNotifier {
 	
 	private Path myPath;
 	private List<Kind<?>> myWatchEventKindsList;
 	private Consumer<File> myOnFileChangeDetectedMethod;
 	private Consumer<String> myOnErrorDetectedMethod;
 	
+	/**
+	 * Constructs the FileChangeNotifier object
+	 * @param aPath the base file path to which the Notifier listens
+	 * @param aEventKinds the type of change events to listen to--e.g. ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE
+	 * @throws IllegalArgumentException if the specified File path is not a valid directory
+	 */
 	public FileChangeNotifier(String aPath, Kind<?>...aEventKinds) throws IllegalArgumentException
 	{
 		File path = new File(aPath);
@@ -84,30 +90,13 @@ public class FileChangeNotifier implements Runnable {
 		myOnErrorDetectedMethod = (errorMessage -> System.out.println(errorMessage));
 	}
 	
-	/**
-	 * This method sets up the function to be performed when a file change is detected
-	 * This function takes a File as an input, and returns void.
-	 * An example usage:
-	 * fileChangeNotifier.onFileChangeDetected(file -> System.out.println(file));
-	 * @param aFunction the function to be called when a File change is detected
-	 */
+	@Override
 	public void onFileChangeDetected(Consumer<File> aFunction)
 	{
 		myOnFileChangeDetectedMethod = aFunction;
 	}
 	
-	/**
-	 * This method sets up the function to be performed when an error occurs in the FileChangeNotifier
-	 * The thrown errors are I/O Exceptions and thread Interrupt exceptions
-	 * an example usage:
-	 * fileChangeNotifier.onFileChangeDetected(errMessage -> System.out.println(errMessage));
-	 * 
-	 * The purpose of this method is to allow the user of the FileChangeNotifier to attach a custom error-handling
-	 * method to this notifier that is called whenever an error occurs.  Thus, an error handling service can
-	 * take over when an error occurs
-	 * 
-	 * @param aFunction
-	 */
+	@Override
 	public void onErrorDetected(Consumer<String> aFunction)
 	{
 		myOnErrorDetectedMethod = aFunction;
