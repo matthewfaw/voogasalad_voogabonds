@@ -22,8 +22,8 @@ import engine.model.game_environment.distributors.MapDistributor;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import gamePlayerView.gamePlayerView.Router;
-import utility.FileRetriever;
 import utility.Point;
+import utility.file_io.FileRetriever;
 
 /**
  * The primary gateway into the game engine

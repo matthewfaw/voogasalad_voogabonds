@@ -1,4 +1,4 @@
-package utility;
+package utility.file_io;
 
 import java.io.File;
 import java.net.URL;
@@ -34,7 +34,7 @@ public class FileRetriever {
 	public List<String> getFileNames(String aDirectory)
 	{
 //		aDirectory = aDirectory.replace(DEFAULT_PATH_SEPARATOR, File.separatorChar);
-		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
+		URL url = getUrlRelativeToProject(myDefaultPath + aDirectory);
 		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
 		ArrayList<String> filesInDirectory = new ArrayList<String>();
@@ -45,6 +45,10 @@ public class FileRetriever {
 			}
 		}
 		return filesInDirectory;
+	}
+	public URL getUrlRelativeToProject(String aRelativePath)
+	{
+		return getClass().getClassLoader().getResource(aRelativePath);
 	}
 	/**
 	 * A method to retrieve the file path relative to myDefaultPath 
