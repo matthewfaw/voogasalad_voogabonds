@@ -1,10 +1,13 @@
 package main;
 
+import gamePlayerView.Main;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.controller.MapDataContainer;
+import authoring.model.serialization.GameStateSerializer;
 import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
@@ -26,6 +29,7 @@ public class MainInitializer {
 	private String title;
 	private Scene scene;
 	private BorderPane root;
+	private static AuthorDisplay AuthDisp;
 
 	public MainInitializer(Stage s) throws IOException {
 		this.stage = s;
@@ -64,11 +68,26 @@ public class MainInitializer {
 		return scene;
 	}
 	
-	public void initAuthoring(int mapX, int mapY) {
-		//TopMenuBar menuBar = new TopMenuBar(this, root);
-		//InfoTabs infoTab = new InfoTabs(root, scene);
+	public void initAuthoring(int mapX, int mapY, String authoringName) {
 	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, mapX, mapY);
+	    this.AuthDisp = authoring;
 		stage.setScene(scene);
+	}
+
+	public static GameStateSerializer setUpSerialization(){
+		return new GameStateSerializer(AuthDisp.getRouter());
+	}
+	public void initPlayer() {
+		//TODO: Initialize a game player. Will need to pass in some sort of identifier that indicates which game is being played
+		// so that game state and game type can be deserialized.
+		try{
+			Stage s = new Stage();
+			Main playInstance = new Main();
+			playInstance.start(s);
+		}
+		catch(Exception e){
+			System.out.println("Unable to start new game.");
+		}
 	}
 	
 }
