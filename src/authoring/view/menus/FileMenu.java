@@ -100,11 +100,11 @@ public class FileMenu extends Menu {
 					       ); 
 					Stage stage = new Stage();
 					File file = newGameSave.showSaveDialog(stage);
+					String gameName = file.getName();
 //					if (file != null) {
-						GameStateSerializer gss = new GameStateSerializer();
 						try {
 							//change "exampleGame to user input"
-							gss.saveGameState("exampleGame");
+							MainInitializer.setUpSerialization().saveGameState(gameName);
 						} catch (Exception e1) {
 							System.out.println("Unable to save current game state.");
 						}

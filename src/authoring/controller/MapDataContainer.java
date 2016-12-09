@@ -43,7 +43,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	/**
 	 * Set of points that enemies will try to reach.
 	 */
-	private HashSet<Point> sinkPoints = new HashSet<Point>();
+	private HashMap<String, ArrayList<Point>> sinkPoints;
 	
 	/**
 	 * Set defines the geography of the entire map. This set will contain a list of
@@ -60,7 +60,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	
 	public MapDataContainer(){
 		this.spawnPoints = new HashMap<String, ArrayList<Point>>();
-		this.sinkPoints = new HashSet<Point>();
+		this.sinkPoints = new HashMap<String, ArrayList<Point>>();
 		this.validTerrain = new HashMap<String, String>();
 	}
 	
@@ -153,25 +153,27 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	/**
 	 * SINK POINT FUNCTIONS
 	 */
-	public void addSinkPoint(Point newSinkPoint){
+	public void addSinkPoints(String name, ArrayList<Point> newSinkPoints){
 		try{
-			validatePoint(newSinkPoint, "sink");
+			for (Point p: newSinkPoints) {
+				validatePoint(p, "sink");
+			}
 		}catch(Exception e){
 			//Show error to front-end here
 		}
-		sinkPoints.add(newSinkPoint);
-		System.out.println("Added Sink Point " + newSinkPoint.toString());
+		sinkPoints.put(name, newSinkPoints);
+		System.out.println("Added Sink Point " + name);
 	}
 	
-	public void removeSinkPoint(Point p){
-		if (sinkPoints.contains(p)){
-			sinkPoints.remove(p);
-			System.out.println("Removed Sink Point " + p.toString());
+	public void removeSinkPoint(String name){
+		if (sinkPoints.containsKey(name)){
+			sinkPoints.remove(name);
+			System.out.println("Removed Sink Point " + name);
 		}
 	}
 	
-	public Set<Point> getSinkPoints(){
-		return sinkPoints;
+	public ArrayList<Point> getSinkPoints(String name){
+		return sinkPoints.get(name);
 	}
 	
 	/**

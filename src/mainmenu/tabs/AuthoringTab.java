@@ -12,7 +12,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import main.MainInitializer;
+import mainmenu.screens.LoadAuthoringScreen;
 import mainmenu.screens.NewAuthoringScreen;
+import utility.ErrorBox;
 
 public class AuthoringTab extends Tab {
 	
@@ -49,8 +51,7 @@ public class AuthoringTab extends Tab {
 				try {
 					handleNewProject();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					ErrorBox.displayError(myResources.getString("NewAuthoringError"));
 				}
 			}
 		});
@@ -58,7 +59,11 @@ public class AuthoringTab extends Tab {
 		loadProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				handleOldProject();
+				try {
+					handleOldProject();
+				} catch (IOException e1) {
+					ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+				}
 			}
 		});
 		authorOptions.getChildren().addAll(newProject, loadProject);
@@ -68,8 +73,8 @@ public class AuthoringTab extends Tab {
 		NewAuthoringScreen newScreen = new NewAuthoringScreen();
 	}
 	
-	private void handleOldProject() {
-		
+	private void handleOldProject() throws IOException {
+		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen();
 	}
 	
 	private void setUpScreenResolution() {

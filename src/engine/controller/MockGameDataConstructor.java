@@ -1,6 +1,7 @@
 package engine.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import authoring.controller.MapDataContainer;
@@ -56,7 +57,7 @@ class MockGameDataConstructor {
 			ArrayList<Point> spawnPoints = new ArrayList<Point>();
 			spawnPoints.add(new Point(1, 1));
 			mapData.addSpawnPoints("spawnPoint", spawnPoints);
-			mapData.addSinkPoint(new Point(x-1, 1));
+			mapData.addSinkPoints("sinkPoint",new ArrayList<Point>(Arrays.asList(new Point(x-1, 1))));
 			mapData.cellSize(50);
 //			mapData.addValidTerrain(terrain1.getName(), "exampleColor 1");
 //			mapData.addValidTerrain(terrain2.getName(), "exampleColor 2");

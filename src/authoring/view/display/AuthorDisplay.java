@@ -88,5 +88,9 @@ public class AuthorDisplay {
         // Return list
         return tabs;
     }
+    
+    public Router getRouter(){
+    	return r;
+    }
 
 }

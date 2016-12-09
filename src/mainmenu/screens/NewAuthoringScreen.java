@@ -37,7 +37,7 @@ public class NewAuthoringScreen {
 	private int screenHeight;
 	private int mapXDim;
 	private int mapYDim;
-	private int cellSize;
+	private String authoringName;
 	
 	public NewAuthoringScreen() throws IOException {
 		setUpScreenResolution();
@@ -83,6 +83,7 @@ public class NewAuthoringScreen {
 							JSONSerializer json = new JSONSerializer();
 							try {
 								json.serializeToFile(file, file.getName());
+								setAuthoringName(file.getName());
 							} catch (Exception exception) {
 								System.out.println("Cannot create new game.");
 							}
@@ -105,7 +106,7 @@ public class NewAuthoringScreen {
 		startProjectButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				initializer.initAuthoring(mapXDim, mapYDim);
+				initializer.initAuthoring(mapXDim, mapYDim, authoringName);
 			}
 		});
 	}
@@ -124,6 +125,10 @@ public class NewAuthoringScreen {
 		mapYDim = newYDim;
 	}
 	
+	private void setAuthoringName(String newName) {
+		authoringName = newName;
+	}
+	
 	public int getMapXDim() {
 		return mapXDim;
 	}
@@ -131,5 +136,10 @@ public class NewAuthoringScreen {
 	public int getMapYDim() {
 		return mapYDim;
 	}
+	
+	public String getAuthoringName() {
+		return authoringName;
+	}
+	
 	
 }
