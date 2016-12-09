@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.controller.MapDataContainer;
+import authoring.model.serialization.GameStateSerializer;
 import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
@@ -26,6 +27,7 @@ public class MainInitializer {
 	private String title;
 	private Scene scene;
 	private BorderPane root;
+	private static AuthorDisplay AuthDisp;
 
 	public MainInitializer(Stage s) throws IOException {
 		this.stage = s;
@@ -68,7 +70,12 @@ public class MainInitializer {
 		//TopMenuBar menuBar = new TopMenuBar(this, root);
 		//InfoTabs infoTab = new InfoTabs(root, scene);
 	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, mapX, mapY);
+	    this.AuthDisp = authoring;
 		stage.setScene(scene);
+	}
+	
+	public static GameStateSerializer setUpSerialization(){
+		return new GameStateSerializer(AuthDisp.getRouter());
 	}
 	
 }

@@ -12,13 +12,8 @@ import java.util.List;
 
 import javafx.collections.ObservableMap;
 import authoring.controller.Router;
-import authoring.controller.TowerDataContainer;
-import authoring.model.EnemyData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
 import authoring.model.WaveData;
-import authoring.model.WeaponData;
-import authoring.view.side_panel.InfoTabs;
+import authoring.view.display.AuthorDisplay;
 
 public class GameStateSerializer {
 
@@ -26,16 +21,20 @@ public class GameStateSerializer {
 	private Router router;
 	private JSONSerializer ser = new JSONSerializer();
 	private JSONDeserializer des = new JSONDeserializer();
+	
+	public GameStateSerializer(Router r){
+		this.router = r;
+	}
 
 
 	/**
 	 * 
 	 * @param gameName
 	 * Note: This code is ugly as hell but I'm refactoring as soon as basic is ok.
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public void saveGameState(String gameName){
-
-		router = InfoTabs.getRouter();
+	public void saveGameState(String gameName) throws InstantiationException, IllegalAccessException{
 
 		createNewDirectory(gameName,"");
 
