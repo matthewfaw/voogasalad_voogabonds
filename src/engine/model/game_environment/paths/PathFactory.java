@@ -46,6 +46,7 @@ public class PathFactory {
 	 * @param aTerrainMap
 	 * @return a map from terrain nodes to their previous node on the path
 	 */
+	//TODO: Refactor this pls
 	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, TerrainMap aTerrainMap)
 	{
 		HashMap<Terrain, Terrain> pathToFollow = new HashMap<Terrain, Terrain>();

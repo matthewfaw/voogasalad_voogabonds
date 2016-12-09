@@ -2,6 +2,7 @@ package engine.model.components;
 
 import java.util.List;
 
+import authoring.model.Hide;
 import engine.IObserver;
 import engine.IViewable;
 import engine.model.entities.IEntity;
@@ -17,13 +18,17 @@ import utility.Point;
  *
  */
 public class PhysicalComponent implements IComponent, IPhysical, IViewable {
+	@Hide
 	private List<IObserver<IViewable>> myObservers;
+	@Hide
 	private IEntity myEntity;
-
+	@Hide
 	private Point myPosition;
+	
 	private double myHeading;
 	private String myImagePath;
 	private double myImageSize;
+	@Hide
 	private List<String> myValidTerrains;
 	
 	private CollisionDetectionSystem myCollisionDetectionSystem;

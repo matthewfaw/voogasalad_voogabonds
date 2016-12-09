@@ -102,10 +102,11 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructResourceStore();
+		//constructResourceStore();
 		constructEntityDataStore();
 		constructPlayerData();
 		constructMap();
+		constructLevelData();
 	}
 
 	/**
@@ -118,7 +119,7 @@ public class BackendController {
 	private void constructMap()
 	{
 		//TODO: Add these next lines back
-		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapData.class);
+		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
 		MapDataContainer mapData = data.get(0);
 		//TODO: remove this map construction
 //		MockGameDataConstructor m = new MockGameDataConstructor();
@@ -132,6 +133,13 @@ public class BackendController {
 		myRouter.distributeMapData(mapData);
 		
 	}
+	
+	private void constructLevelData() {
+//		GameLevelsData data = getData(myGameDataRelativePaths.getString("LevelPath"), GameLevelsData.class);
+//		myGameLevelsData = new DataStore<GameLevelsData>(data);
+		myGameLevelsData = new GameLevelsData();
+	}
+	
 	/**
 	 * Helper method to create the backend resource store object
 	 * from the GameData file
@@ -199,11 +207,11 @@ public class BackendController {
 		myTimelineController.pause();
 	}
 	
-	/*
+	
 	public static void main(String[] args)
 	{
-		BackendController controller = new BackendController("SerializedFiles/default_game",null);
+		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
 		controller.getClass();
 	}
-	*/
+	
 }

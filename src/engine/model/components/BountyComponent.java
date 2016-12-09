@@ -1,5 +1,6 @@
 package engine.model.components;
 
+import authoring.model.Hide;
 import engine.model.entities.IEntity;
 import engine.model.systems.RewardSystem;
 
@@ -13,8 +14,10 @@ import engine.model.systems.RewardSystem;
  *
  */
 public class BountyComponent implements IComponent {
+	@Hide
 	private IEntity myEntity;
 	private int myBountyValue;
+	@Hide
 	private RewardSystem myRewardSystem;
 	
 	public BountyComponent (RewardSystem rewardSystem) {

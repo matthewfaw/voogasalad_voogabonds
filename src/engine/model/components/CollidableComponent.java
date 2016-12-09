@@ -2,6 +2,7 @@ package engine.model.components;
 
 import java.util.List;
 
+import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
@@ -19,14 +20,20 @@ import engine.model.systems.RewardSystem;
  *
  */
 public class CollidableComponent implements IComponent, ICollidable {
+	@Hide
 	private List<IObserver<IComponent>> myObservers;
+	@Hide
 	private PhysicalComponent myPhysical;
 	
 	private double myCollisionRadius;
 	
+	@Hide
 	private HealthSystem myHealthSystem;
+	@Hide
 	private DamageDealingSystem myDamageDealingSystem;
+	@Hide
 	private RewardSystem myRewardSystem;
+	@Hide
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	
 	public CollidableComponent (CollisionDetectionSystem collisionDetectionSystem, 

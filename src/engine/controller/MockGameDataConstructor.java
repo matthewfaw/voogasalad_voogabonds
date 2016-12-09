@@ -32,7 +32,7 @@ class MockGameDataConstructor {
 	{
 	}
 	
-	MapDataContainer getMockMapData(TerrainData terrain1, TerrainData terrain2)
+	MapDataContainer getMockMapData()
 	{
 		MapDataContainer mapData = new MapDataContainer();
 		try {
@@ -46,9 +46,9 @@ class MockGameDataConstructor {
 				for (int j=0; j<y; ++j) {
 					TerrainData terrain;
 					if (i > xmin && i < xmax && j < ymax) {
-						terrain = terrain1;
+						terrain = new TerrainData("grass", i, j, 50, "0x008000");
 					} else {
-						terrain = terrain2;
+						terrain = new TerrainData("water", i, j, 50, "0x0000ff");
 					}
 					mapData.addTerrainData(terrain);
 				}
@@ -78,21 +78,24 @@ class MockGameDataConstructor {
 		
 		try {
 			
-			// Terrain Data 
-			TerrainData terrain1 = new TerrainData("grass", 0, 0, 50, "0x008000");
-			TerrainData terrain2 = new TerrainData("water", 0, 1, 50, "0x0000ff");
-			List<String> terrainList = new ArrayList<String>();
-			terrainList.add(terrain1.getName());
-			terrainList.add(terrain2.getName());
-
 			//Map data
-			MapDataContainer md = this.getMockMapData(terrain1, terrain2);
+			MapDataContainer md = this.getMockMapData();
 			
 			// Entity data
 			EntityData ed  = new EntityData();
 			ed.setName("Awesome Tower");
-			ComponentData cd = new ComponentData();
-			cd.setComponentName("PhysicalComponent");
+			ComponentData cd1 = new ComponentData();
+			cd1.setComponentName("PhysicalComponent");
+			cd1.addField("myHeading", "0");
+			cd1.addField("myImagePath", "src/resources/cookie.png");
+			cd1.addField("myImageSize", "50");
+			
+			ComponentData cd2 = new ComponentData();
+			cd2.setComponentName("CollidableComponent");
+			cd2.addField("myCollisionRadius", "50");
+			
+			ed.addComponent(cd1);
+			ed.addComponent(cd2);
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();
@@ -123,20 +126,18 @@ class MockGameDataConstructor {
 			wad3.setTimeBetweenEnemy(60);
 			wad3.setTimeForWave(6);
 			wad3.setWaveEnemy("Dumb enemy");
-			LevelData ld = new LevelData();
-			ld.addWaveDataListToList(wad1);
-			ld.addWaveDataListToList(wad2);
-			ld.addWaveDataListToList(wad3);
-			
+//			LevelData ld = new LevelData();
+//			ld.addWaveDataListToList(wad1);
+//			ld.addWaveDataListToList(wad2);
+//			ld.addWaveDataListToList(wad3);
+
 			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
-			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
-			ser.serializeToFile(terrain2, "exampleGame/TerrainData/"+terrain2.getClass().getSimpleName()+"2");
 			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
 			ser.serializeToFile(pdd, "exampleGame/LevelData/"+pdd.getClass().getSimpleName());
-			
+			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName());
 			
 			TerrainMap terrainMap = new TerrainMap(md);
-			terrainMap.getDestination();
+//			terrainMap.getDestination();
 		} catch (Exception e) {
 			//TODO add more meaningful error message
 			throw new SerializationException("Could not serialize");
