@@ -1,5 +1,7 @@
 package mainmenu.screens;
 
+import java.util.Date;
+
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -11,9 +13,9 @@ import javafx.beans.property.SimpleStringProperty;
 public class MenuTableItem {
 
 	private SimpleStringProperty projectName;
-	private long modifiedDate;
+	private Date modifiedDate;
 	
-	public MenuTableItem(String pName, long pDate) {
+	public MenuTableItem(String pName, Date pDate) {
 		this.projectName = new SimpleStringProperty(pName);
 		this.modifiedDate = pDate;
 	}
@@ -26,11 +28,11 @@ public class MenuTableItem {
 		projectName.set(newProjectName);
 	}
 	
-	public long getModifiedDate() {
+	public Date getModifiedDate() {
 		return modifiedDate;
 	}
 	
-	public void setModifiedDate(long newDate) {
+	public void setModifiedDate(Date newDate) {
 		modifiedDate = newDate;
 	}
 	

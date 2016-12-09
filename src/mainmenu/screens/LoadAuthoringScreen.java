@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -62,8 +63,9 @@ public class LoadAuthoringScreen {
 		String finalPath = relativePath.concat(myResources.getString("ExistingAuthoringFiles"));
 		File directory = new File(finalPath);
 		for (File f : directory.listFiles()) {
-			MenuTableItem item = new MenuTableItem(f.getName(), f.lastModified());
-			data.add(new MenuTableItem(f.getName(), f.lastModified()));
+			Date date = new Date(f.lastModified());
+			MenuTableItem item = new MenuTableItem(f.getName(), date);
+			data.add(new MenuTableItem(f.getName(), date));
 		}
 		firstCol.setCellValueFactory(
 				new PropertyValueFactory<MenuTableItem, String>("projectName"));
