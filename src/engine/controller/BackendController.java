@@ -188,7 +188,7 @@ public class BackendController {
 	{
 		List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EntityData.class);
 		myEntityDataStore = new DataStore<EntityData>(data);
-		myResourceStore = new ResourceStore(data);
+//		myResourceStore = new ResourceStore(data);
 	}
 	
 	/**
