@@ -73,7 +73,7 @@ public class Router {
 	public void distributeMapData(MapDataContainer aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
-//	    myGamePlayerScene.giveMapData(aMapData);
+	    myGamePlayerScene.giveMapData(aMapData);
 	}
 	
 	/**

@@ -50,9 +50,9 @@ class MockGameDataConstructor {
 				for (int j=0; j<y; ++j) {
 					TerrainData terrain;
 					if (i > xmin && i < xmax && j < ymax) {
-						terrain = new TerrainData("grass", i, j, 50, "0x008000");
-					} else {
 						terrain = new TerrainData("water", i, j, 50, "0x0000ff");
+					} else {
+						terrain = new TerrainData("grass", i, j, 50, "0x008000");
 					}
 					mapData.addTerrainData(terrain);
 				}

@@ -2,6 +2,8 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import engine.controller.ApplicationController;
 import gamePlayerView.GamePlayOptions;
@@ -117,7 +119,7 @@ public class GamePlayerScene {
 		return myWaves;
 	}
 	
-	public void giveMapData(MapData aMapData){
+	public void giveMapData(MapDataContainer aMapData){
 	        myMap.setMap(aMapData);
 	}
 	
