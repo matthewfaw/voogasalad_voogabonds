@@ -14,7 +14,7 @@ public class ResourceStore implements /*IModifiableStore, */ IViewableStore {
 	private TowerUpgradeStore myUpgradeStore;
 	
 	public ResourceStore(List<EntityData> aEntityInfoList) {
-		myUpgradeStore = new TowerUpgradeStore(aTowerInfoList);
+		myUpgradeStore = new TowerUpgradeStore(aEntityInfoList);
 	}
 	
 	@Override

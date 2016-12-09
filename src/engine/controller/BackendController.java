@@ -103,7 +103,6 @@ public class BackendController {
 	 */
 	private void constructStaticBackendObjects()
 	{
-		constructResourceStore();
 		constructEntityDataStore();
 		constructPlayerData();
 		constructMap();
@@ -139,18 +138,6 @@ public class BackendController {
 	}
 	
 	/**
-	 * Helper method to create the backend resource store object
-	 * from the GameData file
-	 * 
-	 */
-	//TODO
-	private void constructResourceStore()
-	{
-//		List<TowerData> data = getData(myGameDataRelativePaths.getString("TowerPath"), TowerData.class);
-//		myResourceStore = new ResourceStore(data);
-	}
-	
-	/**
 	 * This method handles the construction of the object which manages all of the enemy
 	 * data
 	 */
@@ -158,6 +145,7 @@ public class BackendController {
 	{
 		List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EntityData.class);
 		myEntityDataStore = new DataStore<EntityData>(data);
+		myResourceStore = new ResourceStore(data);
 	}
 	
 	/**
