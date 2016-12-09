@@ -1,6 +1,7 @@
 package engine.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -21,6 +22,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
+import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
 import utility.FileRetriever;
 import utility.Point;
@@ -53,12 +55,22 @@ public class BackendController {
 	private PlayerData myPlayerData;
 	private LevelDataContainer myLevelDataContainer;
 	private MapDistributor myMapDistributor;
+	private MapMediator mapMediator;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private PlayerController myPlayerController;
 	private WaveController myWaveController;
 	private Router myRouter;
+	
+	private CollisionDetectionSystem myCollisionDetectionSystem;
+	private DamageDealingSystem myDamageDealingSystem;
+	private HealthSystem myHealthSystem;
+	private MovementSystem myMovementSystem;
+	private PhysicalSystem myPhysicalSystem;
+	private RewardSystem myRewardSystem;
+	private SpawningSystem mySpawningSystem;
+	private TargetingSystem myTargetingSystem;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
@@ -74,6 +86,20 @@ public class BackendController {
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		constructDynamicBackendObjects();
+	}
+	
+	private void constructSystems() {
+		myCollisionDetectionSystem = new CollisionDetectionSystem();
+		myDamageDealingSystem = new DamageDealingSystem();
+		myHealthSystem = new HealthSystem();
+		// ORDERING MATTERS for physical -> targeting -> movement
+		myPhysicalSystem = new PhysicalSystem(mapMediator);
+		myTargetingSystem = new TargetingSystem();
+		myMovementSystem = new MovementSystem(myPhysicalSystem, myTargetingSystem);
+		
+		myRewardSystem = new RewardSystem();
+		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
+		
 	}
 	
 	//TODO
@@ -108,6 +134,7 @@ public class BackendController {
 		constructPlayerData();
 		constructMap();
 		constructLevelData();
+		constructSystems();
 	}
 
 	/**
