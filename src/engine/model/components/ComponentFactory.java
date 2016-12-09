@@ -8,6 +8,7 @@ import java.util.List;
 import authoring.model.ComponentData;
 import engine.model.entities.IEntity;
 import engine.model.systems.ISystem;
+import gamePlayerView.gamePlayerView.Router;
 /**
  * Creates all the components
  * @author owenchung
@@ -15,9 +16,11 @@ import engine.model.systems.ISystem;
  */
 public class ComponentFactory {
 	private List<ISystem> mySystems;
+	private Router myRouter;
 
-	public ComponentFactory(List<ISystem> systems) {
+	public ComponentFactory(List<ISystem> systems, Router router) {
 		mySystems = systems;
+		myRouter = router;
 	}
 	
 	/**
@@ -39,12 +42,15 @@ public class ComponentFactory {
 		
 		// Note: Assuming only one constructor
 		Class<?> [] arguments = constructors[0].getParameterTypes();
-		List<ISystem> systemsToAttach = new ArrayList<ISystem>();
+		List<Object> objectsToAttach = new ArrayList<Object>();
 		for (Class<?> arg : arguments) {
-			systemsToAttach.add(getSystemToAttach(arg));
+			// attach appropriate system to argument
+			objectsToAttach.add(getSystemToAttach(arg));
+			// check if arg is Router, if so, attach myRouter
+			objectsToAttach.add(getRouterToAttach(arg));
 		}
 		
-		return (IComponent) constructors[0].newInstance( new Object[] { systemsToAttach.toArray() } );
+		return (IComponent) constructors[0].newInstance( new Object[] { objectsToAttach.toArray() } );
 		
 	}
 
@@ -56,6 +62,13 @@ public class ComponentFactory {
 			}
 		}
 		// SHOULD NOT EVER HAPPEN
+		return null;
+	}
+	
+	private Router getRouterToAttach(Class<?> arg) {
+		if (arg.isInstance(myRouter)) {
+			return myRouter;
+		}
 		return null;
 	}
 	

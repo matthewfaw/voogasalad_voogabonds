@@ -11,6 +11,7 @@ import engine.model.components.IComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.ISystem;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 /**
  * Creates all the entities
@@ -21,11 +22,13 @@ public class EntityFactory {
 	private ComponentFactory myComponentFactory;
 	private List<ISystem> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
+	private Router myRouter;
 
-	public EntityFactory(List<ISystem> systems, DataStore<EntityData> entityDataStore) {
+	public EntityFactory(List<ISystem> systems, DataStore<EntityData> entityDataStore, Router router) {
 		myComponentFactory = new ComponentFactory(systems);
 		mySystems = systems;
 		myEntityDataStore = entityDataStore;
+		myRouter = router;
 	}
 	
 	/**

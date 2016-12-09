@@ -155,7 +155,7 @@ public class BackendController {
 		mySystems.add(mySpawningSystem);
 		mySystems.add(myTargetingSystem);
 		
-		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore);
+		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter);
 	}
 
 	/**
