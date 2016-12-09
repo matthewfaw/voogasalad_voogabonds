@@ -3,26 +3,27 @@ package engine.model.systems;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import engine.IObservable;
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.MoveableComponent;
+import engine.model.strategies.IPhysical;
 
-@Deprecated
-public class MovementSystem implements IObservable<MovementSystem>, IObserver<TimelineController>, ISystem{
-	private List<IObserver<MovementSystem>> myObservers;
+public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	private List<MoveableComponent> myMoveableComponents;
+	private TargetingSystem myTargeting;
+	private PhysicalSystem myPhysical;
 	
-	public MovementSystem () {
+	public MovementSystem (PhysicalSystem physical, TargetingSystem targeting) {
 		myMoveableComponents = new ArrayList<MoveableComponent>();
+		myPhysical = physical;
+		myTargeting = targeting;
 	}
 	
 	private void updateNextMoves() {
-		// get next move for all registered movable components
-		// update new position for all registered movable components
 		for (MoveableComponent mc: myMoveableComponents) {
-			// physComponent.setPosition(mc.getNextMove());
+			mc.setGoal(myTargeting.getTarget(mc));
+			IPhysical p = myPhysical.get(mc);
+			p.setPosition(mc.getMove(p));
 		}
 	}
 	
@@ -34,26 +35,11 @@ public class MovementSystem implements IObservable<MovementSystem>, IObserver<Ti
 		myMoveableComponents.remove(aComponent);
 	}
 	
-	/********* Observable interface ***********/
+	/********* Observer interface ***********/
 	@Override
 	public void update(TimelineController aChangedObject) {
 		updateNextMoves();
 	}
 
-	/********* Observer interface ***********/
-	@Override
-	public void attach(IObserver<MovementSystem> aObserver) {
-		myObservers.add(aObserver);
-	}
-
-	@Override
-	public void detach(IObserver<MovementSystem> aObserver) {
-		myObservers.remove(aObserver);
-	}
-
-	@Override
-	public void notifyObservers() {
-		myObservers.forEach(o -> o.update(this));
-	}
 
 }

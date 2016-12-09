@@ -12,11 +12,11 @@ import engine.model.game_environment.terrain.TerrainMap;
 
 public class PathFactory {
 	
-	private HashMap<Terrain, Integer> myDistanceMap;
+	TerrainMap myMap;
 	
-	public PathFactory()
+	public PathFactory(TerrainMap aTerrainMap)
 	{
-		myDistanceMap = new HashMap<Terrain, Integer>();
+		myMap = aTerrainMap;
 	}
 	
 	/**
@@ -24,18 +24,17 @@ public class PathFactory {
 	 * @param aTerrainMap
 	 * @return
 	 */
-	public PathManager constructPaths(TerrainMap aTerrainMap)
+	public PathManager constructPaths(List<String> aValidTerrains)
 	{
-		Terrain source = aTerrainMap.getSource();
+		Terrain source = myMap.getSource();
 
 		Queue<Terrain> terrainQueue = new LinkedList<Terrain>();
 		
-		myDistanceMap.put(source, 0);
 		terrainQueue.add(source);
 
-		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, aTerrainMap);
+		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, aValidTerrains);
 		
-		List<Terrain> shortestPath = constructShortestPath(paths, aTerrainMap.getDestination());
+		List<Terrain> shortestPath = constructShortestPath(paths, myMap.getDestination());
 		
 		PathManager pathManager = new PathManager(shortestPath);
 		return pathManager;
@@ -47,17 +46,19 @@ public class PathFactory {
 	 * @return a map from terrain nodes to their previous node on the path
 	 */
 	//TODO: Refactor this pls
-	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, TerrainMap aTerrainMap)
+
+	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, List<String> aValidTerrains)
+
 	{
 		HashMap<Terrain, Terrain> pathToFollow = new HashMap<Terrain, Terrain>();
 		while (!aQueue.isEmpty()) {
 			Terrain currentTerrain = aQueue.poll();
-			for (Terrain neighbor: aTerrainMap.getNeighbors(currentTerrain)) {
+			for (Terrain neighbor: myMap.getNeighbors(currentTerrain)) {
 				if (!pathToFollow.containsKey(neighbor)) {//node is unmarked
-					if (hasSameTerrainType(aTerrainMap.getSource(), neighbor)) {
+					if (hasValidTerrainType(aValidTerrains, neighbor)) {
 						pathToFollow.put(neighbor, currentTerrain);
 						aQueue.add(neighbor);
-						if (neighbor == aTerrainMap.getDestination()) { 
+						if (neighbor == myMap.getDestination()) { 
 							return pathToFollow;
 						}
 					}
@@ -67,10 +68,18 @@ public class PathFactory {
 		//TODO: Throw error-->No path from source to destination!
 		return null;
 	}
+	
+	
+	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {	
+		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor));
+	}
+
 	private boolean hasSameTerrainType(Terrain t1, Terrain t2)
 	{
 		return t1.getTerrainType().equals(t2.getTerrainType());
 	}
+	
+	
 	private List<Terrain> constructShortestPath(Map<Terrain,Terrain> aPreviousPathMap, Terrain aEndingTerrain)
 	{
 		List<Terrain> shortestPath = new ArrayList<Terrain>();
@@ -84,24 +93,13 @@ public class PathFactory {
 		return shortestPath;
 	}
 	
-	/**
-	 * Returns the distance from the source to this node
-	 * @param aTerrain
-	 * @return
-	 */
-	private int getDistanceFromSource(Terrain aTerrain)
-	{
-		if (myDistanceMap.containsKey(aTerrain)) {
-			return myDistanceMap.get(aTerrain);
-		} else {
-			return 0;
-		}
-	}
+
 	public static void main(String[] args)
 	{
-		PathFactory p = new PathFactory();
-		TerrainMap t = new TerrainMap(null);
 		
-		p.constructPaths(t);
+		TerrainMap t = new TerrainMap(null);
+		PathFactory p = new PathFactory(t);
+		
+		//p.constructPaths(t);
 	}
 }

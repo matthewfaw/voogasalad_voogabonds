@@ -20,8 +20,7 @@ public class MapMediator {
 	private PathFactory myPathFactory;
 	
 	private TerrainMap myTerrainMap;
-	private ArrayList<IPhysical> myEntityManager;
-	private PathManager myPathManager;
+	private ArrayList<PhysicalComponent> myEntityManager;
 	private MachineFactory myAnarchosyndacalistCommune;
 	
 	//TODO: Change this constructor so that it hides away the terrain map
@@ -29,9 +28,8 @@ public class MapMediator {
 	// this makes the ownership model more explicit
 	public MapMediator(TerrainMap aTerrainMap) {
 		myTerrainMap = aTerrainMap;
-		myEntityManager = new ArrayList<IPhysical>();
-		myPathFactory = new PathFactory();
-		myPathManager = myPathFactory.constructPaths(myTerrainMap);
+		myEntityManager = new ArrayList<PhysicalComponent>();
+		myPathFactory = new PathFactory(myTerrainMap);
 
 	}
 	
@@ -71,12 +69,12 @@ public class MapMediator {
 	}
 	
 	@Deprecated
-	public List<Machine> withinRange(Point p, double radius){
-		Stream<IPhysical> s = myEntityManager.stream();
+	public List<PhysicalComponent> withinRange(Point p, double radius){
+		Stream<PhysicalComponent> s = myEntityManager.stream();
 		
 		s.filter(e -> isEnemy(e) && isInRadius(e, p, radius));
 		
-		return s.map(e -> (Machine) e).collect(Collectors.toList());
+		return s.collect(Collectors.toList());
 		
 	}
 
@@ -95,13 +93,5 @@ public class MapMediator {
 		return false;
 	}
 
-	/**
-	 * Accepts entity to be tracked by map
-	 * @param aEntityToTrack
-	 */
-	private void accept(IPhysical aEntityToTrack, Point aLocation)
-	{
-		myEntityManager.add(aEntityToTrack);
-	}
 
 }

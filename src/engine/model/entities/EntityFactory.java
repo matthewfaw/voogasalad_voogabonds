@@ -1,39 +1,54 @@
 package engine.model.entities;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
+import engine.model.strategies.IPhysical;
 import engine.model.systems.ISystem;
+import utility.Point;
 /**
- * 
+ * Creates all the entities
  * @author owenchung and alanguo
  *
  */
 public class EntityFactory {
 	private ComponentFactory myComponentFactory;
 	private List<ISystem> mySystems;
-	public EntityFactory(List<ISystem> systems ) {
-		myComponentFactory = new ComponentFactory();
+
+	public EntityFactory(List<ISystem> systems) {
+		myComponentFactory = new ComponentFactory(systems);
 		mySystems = systems;
 	}
 	
-	public IEntity constructEntity(EntityData aEntityData ) {
+	/**
+	 * Using its name, fetch the Entity data out of a map (that the factory owns) of all the entity data.
+	 * This way, you wan't need to know everything about an entity to make it, just the entity's name.
+	 * @param entityName
+	 * @return the constructed entity
+	 */
+	public IEntity constructEntity(String entityName) {
+		return null;
+	}
+	
+	@Deprecated //Can we use the one above instead?
+	public IEntity constructEntity(EntityData aEntityData ) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		IEntity entity = new ConcreteEntity();
 		List<ComponentData> componentMap = aEntityData.getComponents();
 		for (ComponentData compdata : componentMap) {
-			String className = compdata.getComponentName();
-			IComponent component = myComponentFactory.constructComponent(entity, compdata);
-			entity.addComponent(component);
-			
+			IComponent component = myComponentFactory.constructComponent(compdata);
+			entity.addComponent(component);	
 		}
+		
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
+		//2.5 Attach components to relevant systems?
 		//3. return the fully constructed object
+
 		return entity;
 	}
 }

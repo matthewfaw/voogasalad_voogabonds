@@ -8,6 +8,7 @@ import engine.model.components.DamageDealingComponent;
 import engine.model.components.HealthComponent;
 import engine.model.components.MoveableComponent;
 import engine.model.entities.IEntity;
+import utility.Damage;
 
 public class HealthSystem implements ISystem{
 	private List<HealthComponent> myHealthComponents;
@@ -23,9 +24,9 @@ public class HealthSystem implements ISystem{
 	 * @param deltaHealth: change in health
 	 */
 	// TODO: What if entity does not have a health component?
-	public void takeDamage(IEntity entity, int damage) {
+	public void takeDamage(IEntity entity, Damage dmg) {
 		HealthComponent healthComponent = findHealthComponent(entity);
-		healthComponent.takeDamage(damage);
+		healthComponent.takeDamage(dmg);
 	}
 	
 	/**

@@ -10,6 +10,7 @@ import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.RewardSystem;
+import utility.Damage;
 
 /**
  * The purpose of this class is to encapsulate the information relevant
@@ -68,12 +69,13 @@ public class CollidableComponent implements IComponent, ICollidable {
 		dealDamage(this, unmovedCollidable);
 		dealDamage(unmovedCollidable, this);
 		
+		//XXX: This feels like we're butting into health component/system's business
 		if (myHealthSystem.isDead(this.getEntity())) {
 			/* Money system needs to know: 
 			 * * who to give money to
 			 * * how much money to give
 			 */
-//			myRewardSystem.giveMoneyTo(myPlayer, this);
+			//myRewardSystem.giveMoneyTo(myPlayer, this);
 			this.getEntity().delete();
 		}
 		if (myHealthSystem.isDead(unmovedCollidable.getEntity())) {
@@ -84,11 +86,13 @@ public class CollidableComponent implements IComponent, ICollidable {
 			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
 			unmovedCollidable.getEntity().delete();
 		}
+		
+		//TODO: Check if any explosions happen.
 	}
 
 	private void dealDamage(CollidableComponent a, CollidableComponent b) {
 		// Get damage dealt by a
-		int damage = myDamageDealingSystem.getDamageDealt(a.getEntity());
+		Damage damage = myDamageDealingSystem.getDamageDealt(a.getEntity());
 		// Deal damage to b
 		myHealthSystem.takeDamage(b.getEntity(), damage);
 	}
