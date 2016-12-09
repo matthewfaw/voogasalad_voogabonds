@@ -98,7 +98,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		
 		ObservableList<ImageView> items =FXCollections.observableArrayList();
 		towerSettings.clear();
-		for(TowerData t : affordableTowers){
+		for(TowerData t : availableTowers){
 			ImageView towerPicture = new ImageView();
 			String imagePath = t.getImagePath();
 			//TODO: make this cleaner--hard coded now
@@ -107,6 +107,9 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 			}
 			Image towerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath)); //THIS IS IFFY. COME BACK TO THIS
 			towerPicture.setImage(towerImage);
+			if(!affordableTowers.contains(t)){
+				towerPicture.setOpacity(0.3);
+			}
 			towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
@@ -158,10 +161,12 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
                 Dragboard db = towerSet.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
                 towerToBeDragged = towerSet.getSelectionModel().getSelectedItem();
-                content.putImage(towerToBeDragged.getImage());
-                content.putString(towerSettings.get(towerToBeDragged).getName());
-                db.setContent(content);
-                event.consume();
+                if(towerToBeDragged.getOpacity()>0.5){
+                	content.putImage(towerToBeDragged.getImage());
+                	content.putString(towerSettings.get(towerToBeDragged).getName());
+                	db.setContent(content);
+                	event.consume();
+                }
             }  
         });
 	}
