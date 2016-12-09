@@ -50,6 +50,7 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     
     public boolean addEntity(EntityData entity){
         try{
+                System.out.println("Adding Entity: "+entity.getName());
         	myEntities.createEntityData(entity);
         	this.getList().add(entity.getName());
         	return true;
@@ -77,6 +78,9 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
             public void handle(MouseEvent event){
                 if (event.getClickCount() == 2) {
                     // TODO: implement retrieving data
+                    EntityData clickedEntity = myEntities.getEntityData(EntityTab.this.getListView().getSelectionModel().getSelectedItem());
+                    EditEntityBox editEntityMenu = EntityTab.this.getEditEntityMenu(myEntities.getEntityData(clickedEntity.getName()));
+                    getTilePane().getChildren().add(editEntityMenu);
                 }
 //                EditEntityBox newEntityMenu = getNewEntityMenu();
 //                getTilePane().getChildren().add(newEntityMenu);
@@ -98,6 +102,10 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     
     public EditEntityBox getNewEntityMenu() {
         return new EditEntityBox(this, ecFetcher);
+    }
+    
+    public EditEntityBox getEditEntityMenu(EntityData entity) {
+        return new EditEntityBox(this, ecFetcher, entity);
     }
     
     /**

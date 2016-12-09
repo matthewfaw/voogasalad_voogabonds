@@ -12,6 +12,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+@Deprecated
 public class GameTab extends Tab {
 	
 	private ResourceBundle myResources;

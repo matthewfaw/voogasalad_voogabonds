@@ -3,6 +3,7 @@ package authoring.view.input_menus;
 import java.util.List;
 import authoring.model.IReadableData;
 
+@Deprecated
 /**
  * @author Niklas Sjoquist
  * 

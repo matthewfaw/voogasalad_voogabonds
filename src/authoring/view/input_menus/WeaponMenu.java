@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Deprecated
 public class WeaponMenu {
     private static final int SIZE = 500;
     

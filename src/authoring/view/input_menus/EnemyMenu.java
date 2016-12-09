@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Deprecated
 public class EnemyMenu {
 	private static final int SIZE = 400;
 	
