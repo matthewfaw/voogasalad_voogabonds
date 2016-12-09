@@ -19,7 +19,7 @@ public class MainThreadClass {
 	public MainThreadClass() throws IOException
 	{
 		FileRetriever fr = new FileRetriever("SerializedFiles/exampleGame");
-		URL url = fr.getUrlRelativeToProject("SerializedFiles");
+		URL url = fr.getUrlRelativeToProject("SerializedFiles/exampleGame");
 		Path folder = Paths.get(url.getPath());
 		FileChangeNotifier fcn = new FileChangeNotifier(folder, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE);
 		fcn.onWatchEventTriggered(() -> {System.out.println("derp"); return "";});

@@ -27,6 +27,9 @@ import com.sun.org.apache.xpath.internal.functions.Function;
  * 
  * To examine the entire tree:
  * http://stackoverflow.com/questions/18701242/how-to-watch-a-folder-and-subfolders-for-changes
+ * 
+ * To resolve the absolute file path on the change event:
+ * http://stackoverflow.com/questions/7801662/java-nio-file-watchevent-gives-me-only-relative-path-how-can-i-get-the-absolute
  * @author matthewfaw
  *
  */
@@ -68,7 +71,8 @@ public class FileChangeNotifier implements Runnable {
 						WatchEvent.Kind<?> specifiedKind = myWatchEventKinds[i];
 						if (specifiedKind == kind) {
 							Path newPath = ((WatchEvent<Path>) watchEvent).context();
-							System.out.println("Path change detected: " + myPath.resolve(newPath.getFileName()));
+							Path dir = (Path)key.watchable();
+							System.out.println("Path change detected: " + dir.resolve(newPath));
 							if (newPath.toFile().isFile()) {
 								Scanner s = new Scanner(newPath.toFile());
 								while(s.hasNextLine()) {
