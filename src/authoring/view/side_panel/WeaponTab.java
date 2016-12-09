@@ -18,6 +18,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+@Deprecated
 public class WeaponTab extends Tab {
     
     private ResourceBundle myResources;

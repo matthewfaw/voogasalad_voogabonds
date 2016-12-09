@@ -1,5 +1,6 @@
 package authoring.model;
 
+@Deprecated
 public class WeaponData implements IReadableData {
 
 	private String name;
