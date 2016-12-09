@@ -8,6 +8,7 @@ import authoring.model.ComponentData;
 import authoring.model.EntityData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
+import engine.model.data_stores.DataStore;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.ISystem;
 import utility.Point;
@@ -19,10 +20,12 @@ import utility.Point;
 public class EntityFactory {
 	private ComponentFactory myComponentFactory;
 	private List<ISystem> mySystems;
+	private DataStore<EntityData> myEntityDataStore;
 
-	public EntityFactory(List<ISystem> systems) {
+	public EntityFactory(List<ISystem> systems, DataStore<EntityData> entityDataStore) {
 		myComponentFactory = new ComponentFactory(systems);
 		mySystems = systems;
+		myEntityDataStore = entityDataStore;
 	}
 	
 	/**
@@ -30,9 +33,22 @@ public class EntityFactory {
 	 * This way, you wan't need to know everything about an entity to make it, just the entity's name.
 	 * @param entityName
 	 * @return the constructed entity
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws NoSuchMethodException 
+	 * @throws ClassNotFoundException 
 	 */
-	public IEntity constructEntity(String entityName) {
-		return null;
+	public IEntity constructEntity(String entityName) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		IEntity entity = new ConcreteEntity();
+		EntityData entityData = myEntityDataStore.getData(entityName);
+		List<ComponentData> componentMap = entityData.getComponents();
+		for (ComponentData compdata : componentMap) {
+			IComponent component = myComponentFactory.constructComponent(compdata);
+			entity.addComponent(component);	
+		}
+		return entity;
 	}
 	
 	@Deprecated //Can we use the one above instead?
