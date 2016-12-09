@@ -18,6 +18,7 @@ import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.WaveController;
 import engine.model.data_stores.DataStore;
+import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.game_environment.terrain.TerrainMap;
@@ -63,6 +64,10 @@ public class BackendController {
 	private WaveController myWaveController;
 	private Router myRouter;
 	
+	//Factories
+	private EntityFactory myEntityFactory;
+	
+	//Systems
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	private DamageDealingSystem myDamageDealingSystem;
 	private HealthSystem myHealthSystem;
@@ -135,6 +140,22 @@ public class BackendController {
 		constructMap();
 		constructLevelData();
 		constructSystems();
+		
+		constructEntityFactory(); //depends on constructing systems first
+	}
+
+	private void constructEntityFactory() {
+		List<ISystem> mySystems = new ArrayList<ISystem>();
+		mySystems.add(myCollisionDetectionSystem);
+		mySystems.add(myDamageDealingSystem);
+		mySystems.add(myHealthSystem);
+		mySystems.add(myMovementSystem);
+		mySystems.add(myPhysicalSystem);
+		mySystems.add(myRewardSystem);
+		mySystems.add(mySpawningSystem);
+		mySystems.add(myTargetingSystem);
+		
+		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore);
 	}
 
 	/**
