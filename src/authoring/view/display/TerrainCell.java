@@ -75,7 +75,7 @@ public class TerrainCell extends Rectangle {
 									controller.removeSpawnPoints(cellName);
 								}
 								else {
-									controller.removeSinkPoint(point);
+									controller.removeSinkPoint(cellName);
 								}
 							}
 							if (toolBar.getImageStatus()) {
@@ -96,7 +96,7 @@ public class TerrainCell extends Rectangle {
 					else if (toolBar.getSpawnStatus()) {
 						if (TerrainCell.this.getHeight() != gameDisplay.getTileSize() || TerrainCell.this.getWidth() != gameDisplay.getTileSize()) {
 							if (TerrainCell.this.getFill().equals(Color.GREEN)) {
-								controller.removeSinkPoint(point);
+								controller.removeSinkPoint(cellName);
 							}
 						}
 						setWidth(gameDisplay.getTileSize()/2);
@@ -113,9 +113,47 @@ public class TerrainCell extends Rectangle {
 						setWidth(gameDisplay.getTileSize()/2);
 						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
-						controller.addSinkPoint(point);
+						createSinkNameWindow();
 					}
 				}
+			}
+		});
+	}
+	
+	private void createSinkNameWindow() {
+		Stage sinkStage = new Stage();
+		VBox sinkBox = new VBox(screenHeight*0.01);
+		TextField setPointName = new TextField();
+		Button confirmName = new Button(myResources.getString("ApplyChanges"));
+		sinkNameHandler(sinkStage, setPointName, confirmName);
+		sinkBox.getChildren().addAll(setPointName, confirmName);
+		Scene sinkNameScene = new Scene(sinkBox, screenWidth*0.2, screenHeight*0.08);
+		sinkStage.setTitle(myResources.getString("SetSpawnName"));
+		sinkStage.setScene(sinkNameScene);
+		sinkStage.show();
+		sinkStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+		    	if (setPointName.getText().isEmpty()) {
+			        event.consume();
+				}
+		    	else {	
+					sinkStage.close();
+		    	}
+		    }
+		});
+	}
+	
+	private void sinkNameHandler(Stage s, TextField text, Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				String name = text.getText();
+				TerrainCell.this.setName(name);
+				ArrayList<Point> list = new ArrayList<Point>();
+				list.add(new Point((double) colLocation, (double) rowLocation));
+				controller.addSinkPoints(name, list);
+				s.close();
 			}
 		});
 	}
