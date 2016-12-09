@@ -1,31 +1,36 @@
 package authoring.controller;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import authoring.model.WaveData;
+import engine.IObservable;
+import engine.IObserver;
 
-public class WaveDataContainer {
+public class WaveDataContainer extends Container implements IObservable<Container>{
+	private transient ArrayList<IObserver<Container>> myObservers = new ArrayList<IObserver<Container>>();
+	
 	/**
 	 * HashMap which maintains insertion order. Insertion order is important because
 	 * waves all have an attribute 'timeBeforeWave', which means that they are
 	 * relative to what comes before them. As a result, we need to make sure that
 	 * waves are in the map in the order in which they were created.
 	 */
-	private LinkedHashMap<String, WaveData> myWaveMap = new LinkedHashMap<String, WaveData>();
+	private AbstractMap<String, WaveData> myWaveMap = new LinkedHashMap<String, WaveData>();
 	
 	public void createNewWave(String name, WaveData wave){
-		try{
-			//Create WaveData object here
-			//Add to wave
-		}
-		catch(Exception e){
-			//Call front-end error handler;
-		}
+		myWaveMap.put(name, wave);
+		notifyObservers();
 	}
 	
 	public WaveData getWaveData(String name){
 		return myWaveMap.get(name);
 	}
 	
-	public LinkedHashMap<String, WaveData> finalizeWaveDataMap(){
+	public AbstractMap<String, WaveData> getWaveMap(){
+		return myWaveMap;
+	}
+	
+	public AbstractMap<String, WaveData> finalizeWaveDataMap(){
 		return myWaveMap;
 	}
 	
@@ -51,6 +56,26 @@ public class WaveDataContainer {
 				}
 			}
 			myWaveMap = newMap;
+		}
+	}
+
+	/*
+	 * IObservable functions
+	 */
+	@Override
+	public void attach(IObserver<Container> observer) {
+		myObservers.add(observer);
+	}
+
+	@Override
+	public void detach(IObserver<Container> observer) {
+		myObservers.remove(observer);	
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (IObserver<Container> observer: myObservers){
+			observer.update(this);
 		}
 	}
 }

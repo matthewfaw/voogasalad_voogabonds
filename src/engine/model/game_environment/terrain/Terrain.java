@@ -1,18 +1,22 @@
 package engine.model.game_environment.terrain;
 
+import java.util.Stack;
+
+import authoring.model.map.TerrainData;
 import utility.Index;
 import utility.Point;
 
 public class Terrain {
 	private int mySize;
 	private Index myIndex;
-	private String myTerrainType;
+	private Stack<TerrainData> myTerrainLevels;
 	
-	public Terrain(int aXIndex, int aYIndex, String aTerrainType, int size)
+	public Terrain(Stack<TerrainData> aTerrainStack)
 	{
-		mySize = size;
-		myIndex = new Index(aXIndex, aYIndex);
-		myTerrainType = aTerrainType;
+		TerrainData topTerrain = aTerrainStack.peek();
+		mySize = aTerrainStack.peek().getSize();
+		myIndex = new Index((int)topTerrain.getLoc().getX(), (int)topTerrain.getLoc().getY());
+		myTerrainLevels = aTerrainStack;
 	}
 	
 	/**
@@ -25,12 +29,12 @@ public class Terrain {
 	}
 	
 	/**
-	 * Returns the terrain type of this Terrain object
+	 * Returns the *top* terrain type of this Terrain object
 	 * @return
 	 */
 	public String getTerrainType()
 	{
-		return myTerrainType;
+		return myTerrainLevels.peek().getName();
 	}
 	
 	public Point getCenter() {

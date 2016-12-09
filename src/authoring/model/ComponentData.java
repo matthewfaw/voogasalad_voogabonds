@@ -25,4 +25,7 @@ public class ComponentData {
 		this.myComponentName = myComponentName;
 	}
 
+	public AbstractMap<String, String> getFields() {
+	    return myFields;
+	}
 }

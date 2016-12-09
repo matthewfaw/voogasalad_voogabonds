@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import authoring.model.ProjectileData;
 
+@Deprecated
 public class ProjectileDataContainer {
 
 	private AbstractMap<String, ProjectileData> myProjectileDataMap = new HashMap<String, ProjectileData>();

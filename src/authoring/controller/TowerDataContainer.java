@@ -7,7 +7,7 @@ import javafx.collections.MapChangeListener;
 import java.util.HashMap;
 import java.util.AbstractMap;
 
-
+@Deprecated
 public class TowerDataContainer implements IDataContainer {
 
     private AbstractMap<String, TowerData> myTowerDataMap = new HashMap<String, TowerData>();

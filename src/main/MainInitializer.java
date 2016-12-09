@@ -5,9 +5,9 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import authoring.controller.MapDataContainer;
+import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
-import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -64,9 +64,10 @@ public class MainInitializer {
 		return scene;
 	}
 	
-	public void initSim() {
-		TopMenuBar menuBar = new TopMenuBar(this, root);
-		InfoTabs infoTab = new InfoTabs(root, scene);
+	public void initAuthoring(int mapX, int mapY) {
+		//TopMenuBar menuBar = new TopMenuBar(this, root);
+		//InfoTabs infoTab = new InfoTabs(root, scene);
+	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, mapX, mapY);
 		stage.setScene(scene);
 	}
 	

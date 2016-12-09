@@ -1,20 +1,19 @@
 package authoring.model;
 
 import java.util.List;
-import java.util.Stack;
-@Deprecated
+import java.util.*;
+
 public class LevelData {
 	
-	private WaveData waveData;
-	private List<WaveData> waveDataList;
-	private Stack<List<WaveData>> levelData;
+	private String name;
+	private List<WaveData> waveDataList = new ArrayList<WaveData>();
 	
-	public void setWaveData(WaveData waveData){
-		this.waveData = waveData;
+	public void setLevelName(String name){
+		this.name = name;
 	}
 	
-	public WaveData getWaveData(){
-		return waveData;
+	public String getLevelName(){
+		return name;
 	}
 	
 	public void addWaveDataListToList(WaveData waveData){
@@ -22,7 +21,7 @@ public class LevelData {
 	}
 	
 	public List<WaveData> getWaveDataList(){
-		return this.waveDataList;
+		return waveDataList;
 	}
 	
 	public void removeWaveDataFromList(WaveData waveData){
@@ -31,22 +30,6 @@ public class LevelData {
 	
 	public void clearCurrentWaveData(){
 		this.waveDataList.clear();
-	}
-	
-	public void setWaveListInLevel(List<WaveData> waveDataList){
-		levelData.push(waveDataList);
-	}
-	
-	public List<WaveData> getWaveListInLevel(){
-		return levelData.peek();
-	}
-	
-	public void clearLevelData(){
-		levelData.clear();
-	}
-	
-	public Stack<List<WaveData>> getLevelData(){
-		return this.levelData;
 	}
 
 }

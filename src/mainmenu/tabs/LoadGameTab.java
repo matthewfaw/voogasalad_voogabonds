@@ -1,4 +1,4 @@
-package main;
+package mainmenu.tabs;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -15,6 +15,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.MainInitializer;
 
 /**
  * @author Christopher Lu
@@ -29,12 +30,14 @@ public class LoadGameTab {
 	private Tab loadGame;
 	private int screenWidth;
 	private int screenHeight;
+	private MainInitializer initializer;
 	
-	public LoadGameTab (TabPane pane) {
+	public LoadGameTab (TabPane pane, MainInitializer init) {
 		setUpScreenResolution();
 		this.root = pane;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.loadGame = new Tab(myResources.getString("LoadGameTabName"));
+		this.initializer = init;
 		populateTab();
 		root.getTabs().add(loadGame);
 	}

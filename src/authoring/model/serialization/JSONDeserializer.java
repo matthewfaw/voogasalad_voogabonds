@@ -19,7 +19,7 @@ public class JSONDeserializer {
 	// this should make our code more flexible
 	//String fileLoc = "src/SerializedFiles/";
 	
-	public Object Deserialize(JsonElement json, Class cls){
+	public Object Deserialize(String json, Class cls){
 		
 		gson = new Gson();
 		return (gson.fromJson(json, cls));

@@ -7,7 +7,7 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-
+@Deprecated
 public class EnemyDataContainer extends Container implements IObservable<Container>{
 	private AbstractMap<String, EnemyData> myEnemyDataMap = new HashMap<String, EnemyData>();
 	private transient ArrayList<IObserver<Container>> myListeners = new ArrayList<IObserver<Container>>();

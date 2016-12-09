@@ -36,6 +36,7 @@ public class FileRetriever {
 		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
 		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
+		
 		ArrayList<String> filesInDirectory = new ArrayList<String>();
 		for (File aFile: files){
 			if (aFile.isFile()) {

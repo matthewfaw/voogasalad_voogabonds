@@ -22,7 +22,7 @@ public class TopMenuBar {
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
-	public TopMenuBar(MainInitializer init, BorderPane root) {
+	public TopMenuBar(BorderPane root) {
 		topMenu = new MenuBar();
 		Menu fileMenu = new FileMenu(topMenu);
 		Menu editMenu = new EditMenu(topMenu);
@@ -30,6 +30,6 @@ public class TopMenuBar {
 		Menu playMenu = new PlayMenu(topMenu);
 		root.setTop(topMenu);
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
-		init.setTitle(myResources.getString("AuthoringTitle"));
+		//maininit.setTitle(myResources.getString("AuthoringTitle"));
 	}
 }
