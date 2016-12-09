@@ -25,12 +25,12 @@ public class LeftPane implements IGUIPiece,IViewPane {
 	private CashBox myWallet;
 	private LivesBox myLives;
 	
-	public LeftPane(ApplicationController appcontrol){
+	public LeftPane(){
 		setUpPane();
-		GamePlayOptions myGamePlayOptions=new GamePlayOptions(appcontrol);
-		myWallet=new CashBox();
-		myLives=new LivesBox();
-		myLeftPane.getChildren().addAll(myGamePlayOptions.getView(),myWallet.getView(),myLives.getView()); ///////////////////// 
+	//	GamePlayOptions myGamePlayOptions=new GamePlayOptions(appcontrol);
+	//	myWallet=new CashBox();
+	//	myLives=new LivesBox();
+	//	myLeftPane.getChildren().addAll(myGamePlayOptions.getView(),myWallet.getView(),myLives.getView()); ///////////////////// 
 	}
 	public void setUpPane() {
 		myLeftPane.setPrefWidth(100);
@@ -49,12 +49,12 @@ public class LeftPane implements IGUIPiece,IViewPane {
 	public Node getView() {
 		return myLeftPane;
 	}
-	public CashBox getCash() {
-		return myWallet;
-	}
-	public LivesBox getLives() {
-		return myLives;
-	}
+	//public CashBox getCash() {
+		//return myWallet;
+	//}
+	//public LivesBox getLives() {
+		//return myLives;
+	//}
 	@Override
 	public void clear() {
 		myLeftPane.getChildren().clear();

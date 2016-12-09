@@ -30,8 +30,8 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	private HBox myBottomPane=new HBox();
 	private ApplicationController myApplicationController;
 	
-	public BottomPane(ApplicationController aAppController){
-    	myAppController = aAppController;
+	public BottomPane(){
+    	//myAppController = aAppController;
     	setUpPane();
 		myBottomPane.setPrefHeight(110);
 		//myApplicationController=applicationController;
@@ -46,10 +46,10 @@ public class BottomPane implements IGUIPiece,IViewPane {
 		myBottomPane.setPadding(new Insets(10, 10,10, 10));
 		myBottomPane.setSpacing(10);
 		myBottomPane.setStyle("-fx-background-color: #993384;");
-	    TowerStatisticsandOptions myTowerOptions=new TowerStatisticsandOptions();
-	    UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
+	    //TowerStatisticsandOptions myTowerOptions=new TowerStatisticsandOptions();
+	    //UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
 	    //MachineInfo myMachineView=new MachineInfo();
-	    myBottomPane.getChildren().addAll(/*myMachineView.getView(),*/myTowerOptions.getView(),myUpgradeandSell.getView());
+	   // myBottomPane.getChildren().addAll(/*myMachineView.getView(),*/myTowerOptions.getView(),myUpgradeandSell.getView());
 	}
 	
 	public Node getView() {

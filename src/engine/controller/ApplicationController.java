@@ -4,9 +4,14 @@ import java.util.ResourceBundle;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import gamePlayerView.GUIPieces.MapView.MapDisplay;
+import gamePlayerView.ScenePanes.BottomPane;
+import gamePlayerView.ScenePanes.LeftPane;
+import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utility.Point;
 
@@ -30,6 +35,7 @@ public class ApplicationController {
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
 	private Stage myStage; //////Guhan
+	private Pane myPane=new BorderPane();
 
 	public ApplicationController()
 	{
@@ -72,8 +78,20 @@ public class ApplicationController {
 		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
 	}
 	private BorderPane constructBorderPane(){
-		BorderPane pane= new BorderPane();
-		
+		/*myPane= new BorderPane();
+		LeftPane myLeftPane=new LeftPane(this);
+		RightPane myRightPane=new RightPane();
+	    MapDisplay myMap = new MapDisplay(this);
+		BottomPane myBottomPane = new BottomPane(this);
+		//myCash.add(myLeftPane.getCash());
+		//myLives.add(myLeftPane.getLives());
+		//myResources.add(myRightPane.getTowerColumn());
+		//mySprites.add(myMap.getSprites());
+		borderpane.setRight(myRightPane.getView());
+		borderpane.setBottom(myBottomPane.getView());
+		borderpane.setCenter(myMap.getView());
+		borderpane.setLeft(myLeftPane.getView());
+		myMap.setupDragging(myScene);*/
 		return null;
 	}
 

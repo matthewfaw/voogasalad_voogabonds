@@ -23,8 +23,8 @@ public class RightPane implements IGUIPiece,IViewPane {
 	
 	public RightPane(){
 		setUpPane();
-		myTowerColumn=new TowerColumn();
-		myRightPane.getChildren().add(myTowerColumn.getView());
+		//myTowerColumn=new TowerColumn();
+		//myRightPane.getChildren().add(myTowerColumn.getView());
 	}
 
 	@Override
@@ -41,9 +41,9 @@ public class RightPane implements IGUIPiece,IViewPane {
 	public Node getView() {
 		return myRightPane;
 	}
-	public TowerColumn getTowerColumn(){
-		return myTowerColumn;
-	}
+	//public TowerColumn getTowerColumn(){
+		//return myTowerColumn;
+	//}
 
 	@Override
 	public void add(Collection<Node> collection) {
