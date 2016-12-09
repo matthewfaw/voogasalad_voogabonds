@@ -1,5 +1,6 @@
 package utility.file_io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -11,7 +12,12 @@ import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import com.sun.org.apache.xpath.internal.functions.Function;
@@ -36,19 +42,19 @@ import com.sun.org.apache.xpath.internal.functions.Function;
 public class FileChangeNotifier implements Runnable {
 	
 	private Path myPath;
-	private WatchEvent.Kind<?>[] myWatchEventKinds;
-	private Supplier<?> myOnWatchEventTrigger;
+	private List<Kind<?>> myWatchEventKindsList;
+	private Consumer<File> myOnFileChangeDetectedMethod;
 	
 	public FileChangeNotifier(Path aPath, WatchEvent.Kind<?>...aEventKinds) throws IOException
 	{
 		myPath = aPath;
 		
-		myWatchEventKinds = aEventKinds;
+		myWatchEventKindsList = new ArrayList<Kind<?>>(Arrays.asList(aEventKinds));
 	}
 	
-	public void onWatchEventTriggered(Supplier<?> aFunction)
+	public void onFileChangeDetected(Consumer<File> aFunction)
 	{
-		myOnWatchEventTrigger = aFunction;
+		myOnFileChangeDetectedMethod = aFunction;
 	}
 	
 	private void processEvents()
@@ -59,47 +65,8 @@ public class FileChangeNotifier implements Runnable {
 		try(WatchService service = myPath.getFileSystem().newWatchService()) {
 
 			registerWatchServiceWithEntireFileTree(service, myPath);
-
-			// Start the infinite polling loop
-			while(true) {
-				WatchKey key = service.take();
-
-				for(WatchEvent<?> watchEvent : key.pollEvents()) {
-					// Get the type of the event
-					Kind<?> kind = watchEvent.kind();
-					for(int i=0; i<myWatchEventKinds.length; ++i) {
-						WatchEvent.Kind<?> specifiedKind = myWatchEventKinds[i];
-						if (specifiedKind == kind) {
-							Path newPath = ((WatchEvent<Path>) watchEvent).context();
-							Path dir = (Path)key.watchable();
-							System.out.println("Path change detected: " + dir.resolve(newPath));
-							if (newPath.toFile().isFile()) {
-								Scanner s = new Scanner(newPath.toFile());
-								while(s.hasNextLine()) {
-									System.out.println(s.nextLine());
-								}
-								myOnWatchEventTrigger.get();
-								break;
-							}
-						}
-					}
-//					if (StandardWatchEventKinds.OVERFLOW == kind) {
-//						continue; //loop
-//					} else if (StandardWatchEventKinds.ENTRY_CREATE == kind) {
-//						// A new Path was created 
-//						Path newPath = ((WatchEvent<Path>) watchEvent).context();
-//						// Output
-//						System.out.println("New myPath created: " + newPath);
-//					} else if (StandardWatchEventKinds.ENTRY_MODIFY == kind) {
-//						Path newPath = ((WatchEvent<Path>) watchEvent).context();
-//						System.out.println("myPath modified: " + newPath);
-//					}
-				}
-
-				if(!key.reset()) {
-					break; //loop
-				}
-			}
+			
+			pollForFileChange(service);
 
 		} catch(IOException ioe) {
 			ioe.printStackTrace();
@@ -108,13 +75,46 @@ public class FileChangeNotifier implements Runnable {
 		}
 	}
 	
+	private void pollForFileChange(WatchService aWatchService) throws InterruptedException
+	{
+		while(true) {
+			WatchKey key = aWatchService.take();
+			
+			for(WatchEvent<?> watchEvent : key.pollEvents()) {
+				Kind<?> polledEventKind = watchEvent.kind();
+				
+				for (Kind<?> specifiedKind: myWatchEventKindsList) {
+					handleWatchEvent(specifiedKind, polledEventKind, key, watchEvent);
+				}
+			}
+
+			if(!key.reset()) {
+				break; //loop
+			}
+		}
+	}
 	
+	private void handleWatchEvent(Kind<?> aUserSpecifiedKind, Kind<?> aPollEventKind, WatchKey aKey, WatchEvent<?> aWatchEvent)
+	{
+		Path absolutePath = getAbsolutePath(aKey, aWatchEvent);
+		if (aUserSpecifiedKind == aPollEventKind && absolutePath.toFile().isFile()) {
+			myOnFileChangeDetectedMethod.accept(absolutePath.toFile());
+		}
+	}
+	
+	private Path getAbsolutePath(WatchKey aKey, WatchEvent<?> aWatchEvent)
+	{
+		Path baseDirectory = (Path)aKey.watchable();
+		Path newPath = ((WatchEvent<Path>) aWatchEvent).context();
+
+		return baseDirectory.resolve(newPath);
+	}
 	private void registerWatchServiceWithEntireFileTree(WatchService aWatchService, Path aPath) throws IOException
 	{
 		Files.walkFileTree(aPath, new SimpleFileVisitor<Path>() {
 			@Override
 			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-				dir.register(aWatchService, myWatchEventKinds);
+				dir.register(aWatchService, myWatchEventKindsList.toArray(new Kind<?>[myWatchEventKindsList.size()]));
 				return FileVisitResult.CONTINUE;
 			}
 		});
