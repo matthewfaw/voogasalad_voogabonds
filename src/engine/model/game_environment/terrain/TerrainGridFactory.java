@@ -14,12 +14,10 @@ public class TerrainGridFactory {
 	public Terrain[][] constructTerrainMap(MapDataContainer aTerrainMapData, int cellSize)
 	{
 		Terrain[][] terrain = new Terrain[aTerrainMapData.getNumXCells()][aTerrainMapData.getNumXCells()];
-
-		for (int i=0; i<aTerrainMapData.getNumXCells(); ++i) {
-			for (int j=0; j<aTerrainMapData.getNumYCells(); ++j) {
-				Stack<TerrainData> terrainData = aTerrainMapData.getTerrainList()[i][j];
-				terrain[i][j] = new Terrain(terrainData);
-			}
+		
+		for (Stack<TerrainData> terrainCell: aTerrainMapData.getTerrainList()) {
+			TerrainData topTerrain = terrainCell.peek();
+			terrain[(int) topTerrain.getLoc().getX()][(int) topTerrain.getLoc().getY()] = new Terrain(terrainCell);
 		}
 		return terrain;
 	}

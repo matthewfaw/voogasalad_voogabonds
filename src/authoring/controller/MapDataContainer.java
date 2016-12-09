@@ -13,7 +13,9 @@ import utility.Point;
 import java.util.Stack;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.HashMap;
 
 import com.sun.prism.paint.Color;
@@ -48,7 +50,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 * TerrainDatas, which can be used to populate the entire map. Should contain
 	 * a minimum of numXCells x numYCells TerrainData elements.
 	 */
-	private Stack<TerrainData>[][] terrainList;
+	private HashMap<Point, Stack<TerrainData>> terrainList;
 	
 	/**
 	 * Map of possible terrains that might exist, as created by the user.
@@ -75,7 +77,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		try{
 			setNumXCells(x);
 			setNumYCells(y);
-			this.terrainList = new Stack[x][y];
+			this.terrainList = new HashMap<Point, Stack<TerrainData>>();
 		}catch(Exception e){
 			//Show error to front-end here
 		}
@@ -177,26 +179,18 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 */
 	public void addTerrainData(TerrainData terrain) throws Exception{
 		validatePoint(terrain.getLoc(), "terrain");
-		int terrainX = (int) terrain.getLoc().getX();
-		int terrainY = (int) terrain.getLoc().getY();
-		if (!terrainList[terrainX][terrainY].contains(terrain)){
-			terrainList[terrainX][terrainY].push(terrain);
+		if (!terrainList.containsKey(terrain.getLoc())) {
+			terrainList.put(terrain.getLoc(), new Stack<TerrainData>());
 		}
+		terrainList.get(terrain.getLoc()).push(terrain);
 	}
 
 	public void removeTerrainData(TerrainData terrain){
-		int terrainX = (int) terrain.getLoc().getX();
-		int terrainY = (int) terrain.getLoc().getY();
-		Stack<TerrainData> arrayStack = terrainList[terrainX][terrainY];
-		for (TerrainData td: arrayStack){
-			if (td.getName().equals(terrain.getName())){
-				arrayStack.remove(td);
-			}
-		}
+		terrainList.remove(terrain.getLoc());
 	}
 	
-	public Stack<TerrainData>[][] getTerrainList(){
-		return terrainList;
+	public Collection<Stack<TerrainData>> getTerrainList(){
+		return terrainList.values();
 	}
 	
 	/**
