@@ -14,8 +14,12 @@ import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+<<<<<<< HEAD
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
+=======
+import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
+>>>>>>> 8079f1bd58eb4eb677d8111cb3e3b2d5485b5059
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
@@ -46,6 +50,7 @@ public class GamePlayerScene {
 	private LeftPane myLeftPane;
 	private RightPane myRightPane;
 	private MapDisplay myMap;
+	private PauseMenu pause;
 	private Scene myScene;
 	private Group myGamePlayer;
 	private List<ICashAcceptor> myCash;
@@ -129,6 +134,8 @@ public class GamePlayerScene {
 		myBottomPane=createBottomPane();
 	    myMap = new MapDisplay(myAppController);
 		//mySprites.add(myMap.getSprites());
+	    pause = new PauseMenu();
+        makePauseMenu();
 		myBorderPane.setRight(myRightPane.getView());
 		myBorderPane.setBottom(myBottomPane.getView());
 		myBorderPane.setCenter(myMap.getView());
@@ -136,7 +143,6 @@ public class GamePlayerScene {
 		myMap.setupDragging(myScene);
 		//return borderpane;
 	}
-	
 	private BottomPane createBottomPane() {
 		BottomPane pane=new BottomPane();
 		Label l =new Label("Wassup");
@@ -171,6 +177,11 @@ public class GamePlayerScene {
 		return pane;
 	}
 
+
+	public void makePauseMenu(){ 
+            myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));
+        }
+	
 	public List<ICashAcceptor> getCash() {
 		return myCash;
 	}
