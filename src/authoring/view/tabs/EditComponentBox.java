@@ -52,22 +52,12 @@ public class EditComponentBox extends VBox implements ISubmittable {
             lbl.setId("label");
             myLabels.add(lbl);
             myFields.add(field);
-
             this.getChildren().add(lbl);
             this.getChildren().add(field);
         }
         
         // Set up horizontal buttons
-        HBox btns = new HBox(SPACING);
-        btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
-        btns.setId("hbox");
-        Button done = new Button(DONE);
-        done.setOnAction(handleDone());
-        done.setId("button");
-        Button cancel = new Button(CANCEL);
-        cancel.setOnAction(handleCancel());
-        cancel.setId("button");
-        btns.getChildren().addAll(done,cancel);
+        HBox btns = getBottomButtons();
 
         // Add nodes to Menu Box
         this.getChildren().add(btns);
@@ -97,13 +87,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
             lbl.setId("label");
             myLabels.add(lbl);
             myFields.add(field);
-            // Add nodes to Menu Box
             this.getChildren().add(lbl);
             this.getChildren().add(field);
         }
         
         HBox btns = getBottomButtons();
-        btns.setId("hbox");
         // Add nodes to Menu Box
         this.getChildren().add(btns);
     }
@@ -111,12 +99,13 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private HBox getBottomButtons() {
         HBox btns = new HBox(SPACING);
         btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
+        btns.setId("hbox");
         Button done = new Button(DONE);
         done.setOnAction(handleDone());
         done.setId("button");
         Button cancel = new Button(CANCEL);
         cancel.setOnAction(handleCancel());
-        cancel.setId("cancel");
+        cancel.setId("button");
         btns.getChildren().addAll(done,cancel);
         return btns;
     }
