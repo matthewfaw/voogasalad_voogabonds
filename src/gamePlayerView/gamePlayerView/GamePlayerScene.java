@@ -15,6 +15,7 @@ import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatistics;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
@@ -34,6 +35,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -117,7 +119,7 @@ public class GamePlayerScene {
 		setScene(aStage,myScene);
 	}*/
 
-	private void updateTowerStatisticsRow(TowerData tower) throws Exception {
+	public void updateTowerStatisticsRow(/*TowerData tower*/) throws Exception {
 		myBottomPane.clear();
 		Collection<Node> myCollection=new ArrayList<Node>();
 		TowerStatistics myTowerStatistics=new TowerStatistics();
@@ -126,6 +128,8 @@ public class GamePlayerScene {
 		myTowerOptions.setSpacing(10);
 		myTowerOptions.getChildren().addAll(myTowerStatistics.getView(),myTargetingMechanism.getView());
 	    UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
+	    MachineInfo myInfo=new MachineInfo();
+	    myCollection.add(myInfo.getView());
 		myCollection.add(myTowerOptions);
 		myCollection.add(myUpgradeandSell.getView());
 		myBottomPane.add(myCollection);
@@ -154,6 +158,8 @@ public class GamePlayerScene {
 		BottomPane pane=new BottomPane();
 		Label l =new Label("Wassup");
 		Collection<Node> myCollection=new ArrayList<Node>();
+		//MachineInfo myInfo=new MachineInfo();
+		//myCollection.add(myInfo.getView());
 		myCollection.add(l);
 		pane.add(myCollection);
 		return pane;

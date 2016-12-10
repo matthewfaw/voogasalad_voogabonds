@@ -82,13 +82,21 @@ public class MapGrid extends Node {
     
     public void setClickAction(){
         for(MoveableComponentView m : sprites){
-            m.setOnMouseClicked(e -> setClickForComponent(m));
+            m.setOnMouseClicked(e -> {
+				try {
+					setClickForComponent(m);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
         }
     }
     
-    private void setClickForComponent(MoveableComponentView m) {
+    private void setClickForComponent(MoveableComponentView m) throws Exception {
         //get info to come up on click
         //m.getInfo();
+    	myAppController.DisplayStats();
         System.out.println("hi");
     }
     

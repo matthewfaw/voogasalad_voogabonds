@@ -3,6 +3,7 @@ package gamePlayerView.GUIPieces.InfoBoxes;
 import com.sun.prism.paint.Color;
 
 import engine.IObservable;
+import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.IGUIPiece;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
