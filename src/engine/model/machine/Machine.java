@@ -9,32 +9,29 @@ import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.projectiles.Projectile;
 import engine.model.strategies.IMovable;
-import engine.model.strategies.IMovementStrategy;
-import engine.model.strategies.StrategyFactory;
 import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
-import engine.model.weapons.IWeapon;
 import engine.model.weapons.WeaponFactory;
 import javafx.util.Pair;
 import utility.Damage;
 import utility.Point;
 
+@Deprecated //do not use this class--using ECS now
 abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IKillerOwner, IRegisterable {
 	private List<IObserver<IViewable>> myObservers;
 	private IModifiablePlayer myModifiablePlayer;
-	private WeaponFactory myArmory;
+	//private WeaponFactory myArmory;
 	
 	private String myName;
 	private String myImagePath;
-	private IWeapon myWeapon;
+	//private IWeapon myWeapon;
 	private Health myHealth;
 	
-	private IMovementStrategy myMoveCalc;
-	private List<String> myValidTerrains;
+	//private IMovementStrategy myMoveCalc;
+	//private List<String> myValidTerrains;
 	private double myCollisionRadius;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
@@ -43,26 +40,24 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	List<ISystem> mySystems;
 	
-	public Machine (TimelineController time, WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
+	public Machine (WeaponFactory armory, IModifiablePlayer owner, MachineData data, Point initialPosition) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
 
 		myModifiablePlayer = owner;
-		myArmory = armory;
+		//myArmory = armory;
 		
 		myName = data.getName();
 		myImagePath = data.getImagePath();
-		myWeapon = myArmory.newWeapon(data.getWeaponName(), this);
+		//myWeapon = myArmory.newWeapon(data.getWeaponName(), this);
 		myHealth = new Health(data.getMaxHealth());
 		
-		myMoveCalc = StrategyFactory.movementStrategy(data.getMoveStrategyName());
-		myValidTerrains = data.getTerrainList();
+		//myMoveCalc = StrategyFactory.movementStrategy(data.getMoveStrategyName());
+		//myValidTerrains = data.getTerrainList();
 		myCollisionRadius = data.getCollisionRadius();
 		myTurnSpeed = data.getTurnSpeed();
 		myMoveSpeed = data.getMoveSpeed();
 		myHeading = 0;
 		myPosition = initialPosition;
-		
-		time.attach(this);
 	}
 	
 	public Machine(String name, int maxHealth) {
@@ -76,20 +71,21 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	
 	@Deprecated
 	public void setPossibleTerrains(List<String> l) {
-		myValidTerrains = l;
+		//myValidTerrains = l;
 	}
 	
 	@Override
 	public void update(TimelineController time) {
 		move();
-		myWeapon.fire(myHeading, myPosition);
+//		myWeapon.fire(myHeading, myPosition);
 	}
 	
 	@Deprecated //TODO
 	private void move() {
-		Pair<Double, Point> nextMove = myMoveCalc.nextMove(this);
+		Pair<Double, Point> nextMove = new Pair<Double, Point>(0.0, null);//myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
 		myHeading = nextMove.getKey();
+		notifyObservers();
 	}
 	
 	@Override
@@ -153,6 +149,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public double getMoveSpeed() {
 		return myMoveSpeed;
 	}
+	/*
 	@Override
 	public double getCollisionRadius() {
 		return myCollisionRadius;
@@ -171,6 +168,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	public double getSize() {
 		return myCollisionRadius;
 	}
+	*/
 	
 	/************** IObservable interface ****************/
 	@Override
@@ -192,10 +190,13 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	
 	/********** ICollidable Interface Methods ************/
+	/*
 	@Override
 	public void collideInto(ICollidable movedCollidable) {
 		movedCollidable.collideInto(this);
 	}
+	*/
+	/*
 	@Override
 	public void collideInto(Machine unmovedCollidable) {
 		//do nothing for now since machines will not deal dmg
@@ -206,6 +207,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		//Should the Machine running into the projectile trigger an explode
 		//unmovedCollidable.collideInto(this);
 	}
+	*/
 	
 	public DamageInfo notifyDestroy(DamageInfo result) {
 		return result;
@@ -213,11 +215,11 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	protected void upgrade(MachineData upgradeData) {
 		myName = upgradeData.getName();
-		myWeapon = myArmory.newWeapon(upgradeData.getWeaponName(), this);
+		//myWeapon = myArmory.newWeapon(upgradeData.getWeaponName(), this);
 		myHealth.setMaxHealth(upgradeData.getMaxHealth());
 		
-		myMoveCalc = StrategyFactory.movementStrategy(upgradeData.getMoveStrategyName());
-		myValidTerrains = upgradeData.getTerrainList();
+		//myMoveCalc = StrategyFactory.movementStrategy(upgradeData.getMoveStrategyName());
+		//myValidTerrains = upgradeData.getTerrainList();
 		myCollisionRadius = upgradeData.getCollisionRadius();
 		myTurnSpeed = upgradeData.getTurnSpeed();
 		myMoveSpeed = upgradeData.getMoveSpeed();

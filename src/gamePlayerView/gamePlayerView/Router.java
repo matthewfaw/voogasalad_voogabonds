@@ -2,6 +2,7 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.List;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import engine.IObservable;
@@ -34,6 +35,11 @@ public class Router {
 		myWaves=myGamePlayerScene.getWaves();
 		myResources=myGamePlayerScene.getResources();
 		//mySprites = myGamePlayerScene.getSprites();
+	}
+	
+	public void distributeErrors(String aErrorMessage)
+	{
+		//TODO:
 	}
 	
 	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
@@ -72,7 +78,7 @@ public class Router {
 		//}		
 	//}
 
-	public void distributeMapData(MapData aMapData)
+	public void distributeMapData(MapDataContainer aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
 	    myGamePlayerScene.giveMapData(aMapData);

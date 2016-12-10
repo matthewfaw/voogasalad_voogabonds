@@ -2,6 +2,7 @@ package engine.model.weapons;
 
 import utility.Point;
 
+@Deprecated
 public class NullWeapon implements IWeapon {
 
 	@Override

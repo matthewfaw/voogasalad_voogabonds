@@ -14,7 +14,7 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public interface IComponent extends IObservable<IComponent> {
+public interface IComponent {
 	/**
 	 * Gets the Entity object which owns this component
 	 * Assumes that component is owned by a entity

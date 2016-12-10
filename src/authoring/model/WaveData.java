@@ -14,7 +14,7 @@ public class WaveData implements IReadableData {
 	/**
 	 * A String corresponding to the enemy name, which should have an EnemyData map entry
 	 */
-	private String waveEnemy;
+	private String waveEntity;
 	
 	/**
 	 * Time between each enemy (so they don't all show up at once) in milliseconds.
@@ -22,9 +22,9 @@ public class WaveData implements IReadableData {
 	private double timeBetweenEnemy;
 	
 	/**
-	 * How long this wave is supposed to last, the amount of time before the next wave, in seconds.
+	 * The amount of time before the next wave, in seconds.
 	 */
-	private double timeForWave;
+	private double timeUntilNextWave;
 	
 	/**
 	 * Number of enemies in this wave.
@@ -44,21 +44,33 @@ public class WaveData implements IReadableData {
 		if (name == null || name.length() == 0){
 			throw new Exception("Wave name must be specified.");
 		}
+		this.name = name;
 	}
 	
-	public String getWaveEnemy() {
-		return waveEnemy;
+	public String getWaveEntity() {
+		return waveEntity;
 	}
-	public void setWaveEnemy(String waveEnemy) throws Exception{
+	public void setWaveEntity(String waveEnemy) throws Exception{
 		if (waveEnemy == null || waveEnemy.length() == 0){
 			throw new Exception("Enemy in wave must be specified.");
 		}
-		this.waveEnemy = waveEnemy;
+		this.waveEntity = waveEnemy;
 	}
 	
-	public double getTimeBetweenEnemy() {
+	public double getTimeBetweenEntity() {
 		return timeBetweenEnemy;
 	}
+	
+	public void setTimeBetweenEnemy(String timeBetweenEnemy) throws Exception{
+		double timeBetweenEnemyDouble = 0;
+		try {
+			timeBetweenEnemyDouble = Double.parseDouble(timeBetweenEnemy);
+		} catch (Exception e){
+			throw new Exception("Time between enemy must be a number.");
+		}
+		setTimeBetweenEnemy(timeBetweenEnemyDouble);
+	}
+	
 	public void setTimeBetweenEnemy(double timeBetweenEnemy) throws Exception{
 		if (timeBetweenEnemy < 0){
 			throw new Exception("Time between enemy cannot be a negative number.");
@@ -66,19 +78,41 @@ public class WaveData implements IReadableData {
 		this.timeBetweenEnemy = timeBetweenEnemy;
 	}
 	
-	public double getTimeForWave() {
-		return timeForWave;
+	public double getTimeUntilNextWave() {
+		return timeUntilNextWave;
 	}
+	
+	public void setTimeForWave(String timeForWave) throws Exception{
+		double timeForWaveDouble = 0;
+		try {
+			timeForWaveDouble = Double.parseDouble(timeForWave);
+		} catch(Exception e){
+			throw new Exception("Time between waves must be a number.");
+		}
+		setTimeForWave(timeForWaveDouble);
+	}
+	
 	public void setTimeForWave(double timeBeforeWave) throws Exception{
 		if (timeBeforeWave < 0){
 			throw new Exception("Time between waves cannot be a negative number.");
 		}
-		this.timeForWave = timeBeforeWave;
+		this.timeUntilNextWave = timeBeforeWave;
 	}
 	
-	public int getNumEnemies(){
+	public int getNumEntities(){
 		return numEnemies;
 	}
+	
+	public void setNumEnemies(String numEnemies) throws Exception{
+		int numEnemiesInt = 0;
+		try {
+			numEnemiesInt = Integer.parseInt(numEnemies);
+		} catch(Exception e){
+			throw new Exception("Number of enemies must be an integer.");
+		}
+		setNumEnemies(numEnemiesInt);
+	}
+	
 	public void setNumEnemies(int numEnemies) throws Exception{
 		if (numEnemies < 0){
 			throw new Exception("Number of enemies cannot be a negative number.");

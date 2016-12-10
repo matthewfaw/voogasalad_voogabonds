@@ -1,13 +1,8 @@
 package engine.model.collision_detection;
 
-import engine.model.machine.Machine;
-import engine.model.projectiles.Projectile;
-import engine.model.strategies.IPhysical;
+import engine.model.components.CollidableComponent;
 
-public interface ICollidable extends IPhysical {
+public interface ICollidable {
 
-	public void collideInto(ICollidable unmovedCollidable);
-	public void collideInto(Machine unmovedCollidable);
-	public void collideInto(Projectile unmovedCollidable);
-
+	public void collideInto(CollidableComponent unmovedCollidable);
 }

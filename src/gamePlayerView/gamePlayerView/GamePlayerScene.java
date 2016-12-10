@@ -2,16 +2,14 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.TowerData;
-import authoring.model.map.MapData;
 import engine.controller.ApplicationController;
 import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
-import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
@@ -211,7 +209,7 @@ public class GamePlayerScene {
 		return myEnemiesKilled;
 	}
 	
-	public void giveMapData(MapData aMapData){
+	public void giveMapData(MapDataContainer aMapData){
 	        myMap.setMap(aMapData);
 	}
 	
@@ -230,5 +228,4 @@ public class GamePlayerScene {
 	//}
 	
 }
-
 

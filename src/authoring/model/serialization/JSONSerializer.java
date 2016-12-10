@@ -10,14 +10,14 @@ public class JSONSerializer {
 	
 	private Gson gson;
 	
-	public JsonElement serialize(Object obj){
+	public String serialize(Object obj){
 
 		//overly verbose for now, but easily changeable later, for whether we want a JsonElement or String
 		gson = new Gson();
 		String jsonString = gson.toJson(obj);
 		JsonElement json = gson.toJsonTree(obj);
 		System.out.println(json);
-		return json;
+		return jsonString;
 		
 			
 	}
