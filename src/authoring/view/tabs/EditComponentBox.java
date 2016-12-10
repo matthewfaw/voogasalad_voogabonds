@@ -26,13 +26,21 @@ public class EditComponentBox extends VBox {
     private List<TextField> myFields;
     private EditEntityBox parent;
     private EntityTab grandparent;
-    private String myEntity;
+    private String myName;
 
-    public EditComponentBox (EditEntityBox parent, EntityTab grandparent, List<String> attributes) {
+    /**
+     * Create new component.
+     * @param parent
+     * @param grandparent
+     * @param componentName
+     * @param attributes
+     */
+    public EditComponentBox (EditEntityBox parent, EntityTab grandparent, String componentName, List<String> attributes) {
         super(SPACING);
         
         this.parent = parent;
         this.grandparent = grandparent;
+        myName = componentName;
         
         myLabels = new ArrayList<Label>(attributes.size());
         myFields = new ArrayList<TextField>(attributes.size());
@@ -61,11 +69,19 @@ public class EditComponentBox extends VBox {
         this.getChildren().add(btns);
     }
     
-    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, Map<String,String> retrievedData) {
+    /**
+     * Edit existing component.
+     * @param parent
+     * @param grandparent
+     * @param componentName
+     * @param retrievedData
+     */
+    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, String componentName, Map<String,String> retrievedData) {
         super(SPACING);
         
         this.parent = parent;
         this.grandparent = grandparent;
+        myName = componentName;
         
         myLabels = new ArrayList<Label>(retrievedData.size());
         myFields = new ArrayList<TextField>(retrievedData.size());
@@ -103,7 +119,7 @@ public class EditComponentBox extends VBox {
             public void handle(ActionEvent event){
                 String name = getName();
                 ComponentData entity = createDataFromInput();
-                System.out.println("Put Component ("+name+") in parent map");
+                //System.out.println("Put Component ("+name+") in parent map");
                 parent.editComponent(name, entity);
                 grandparent.getTilePane().getChildren().remove(EditComponentBox.this); // this = reference of parent (i.e., this EditEntityBox class)
             }
@@ -123,20 +139,16 @@ public class EditComponentBox extends VBox {
     private ComponentData createDataFromInput () {
         ComponentData component = new ComponentData();
         for (int i = 0; i < myLabels.size(); i++) {
-            component.addField(myLabels.get(i).getText(), myFields.get(i).getCharacters().toString());
+            String attributeName = myLabels.get(i).getText();
+            String attributeValue = myFields.get(i).getCharacters().toString();
+            //System.out.println("Attribute Name: "+attributeName+"\tAttribute Value: "+attributeValue);
+            component.addField(attributeName, attributeValue);
         }
         return component;
     }
     
     private String getName() {
-        for (Label lbl : myLabels) {
-            String text = lbl.getText();
-            System.out.println(text);
-            if (text.equals("Name*")) {
-                return text;
-            }
-        }
-        return null;
+        return myName;
     }
 
 }
