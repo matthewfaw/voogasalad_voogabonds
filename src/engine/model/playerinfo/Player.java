@@ -14,9 +14,13 @@ import engine.model.strategies.winlose.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
  
-
+/**
+ * 
+ * @author owenchung and matthewfaw
+ *
+ */
 //TODO: Implement all unimplemented methods
-public class Player implements IModifiablePlayer {
+public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
@@ -46,17 +50,12 @@ public class Player implements IModifiablePlayer {
 		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
 	}
 	 
-	/**
-	 * 0 corresponds to live change
-	 */
 	@Override
 	public void updateLivesRemaining(int deltaLives) {
 		myLives = myLives + deltaLives;
 		notifyObservers();
 	}
-	/**
-	 * 1 corresponds to funds change
-	 */
+	
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
