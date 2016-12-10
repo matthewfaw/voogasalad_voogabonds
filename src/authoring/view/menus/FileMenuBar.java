@@ -18,6 +18,10 @@ public class FileMenuBar extends MenuBar {
     
     public FileMenuBar (BorderPane root) {
         myMenus = getMenus(root);
+        this.setId("hbox");
+        for (Menu menu: this.getMenus()){
+        	menu.setId("menu");
+        }
         this.getMenus().addAll(myMenus);
     }
 

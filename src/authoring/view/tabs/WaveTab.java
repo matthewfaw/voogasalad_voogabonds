@@ -62,7 +62,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 	private VBox setUpMenu(String name, String timeBetween, String timeFor, String numEnemies, 
 			String enemy, String spawn){
 		myV = new VBox();
-		myV.setId("blue-background");
+		myV.setId("vbox");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		myTimeBetweenField = setUpTextInputWithLabel(getResources().getString("EnterTimeBetween"), 
 				timeBetween, myV);
@@ -78,6 +78,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 		Button finish = setUpSubmitButton();
 		Button cancel = setUpCancelButton(myV);
 		HBox h = new HBox();
+		h.setId("hbox");
 		h.getChildren().addAll(finish, cancel);
 		myV.getChildren().add(h);
 		return myV;
@@ -118,6 +119,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 
 	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
+		finish.setId("button");
 		finish.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				WaveData wave = new WaveData();

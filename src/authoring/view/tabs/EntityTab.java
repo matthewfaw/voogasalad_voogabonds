@@ -29,8 +29,6 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
         
         // initialize AttributeFetcher
         ecFetcher.fetch();
-        
-        this.setClickAction(handleEditEntity());
     }
     
     public boolean addEntity(EntityData entity){
@@ -49,7 +47,8 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     	try{
     		myEntities.updateEntityData(oldName, entity);
     		if (!oldName.equals(entity.getName())) {
-    		    this.getList().set(this.getList().indexOf(oldName), entity.getName());
+    		    this.getList().remove(oldName);
+    		    this.getList().add(entity.getName());
     		}
     		return true;
     	}catch(Exception e){
@@ -58,20 +57,11 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     	}
     }
     
-    private EventHandler<MouseEvent> handleEditEntity () {
-        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event){
-                if (event.getClickCount() == 2) {
-                    // TODO: implement retrieving data
-                    EntityData clickedEntity = myEntities.getEntityData(EntityTab.this.getListView().getSelectionModel().getSelectedItem());
-                    EditEntityBox editEntityMenu = EntityTab.this.getEditEntityMenu(myEntities.getEntityData(clickedEntity.getName()));
-                    getTilePane().getChildren().add(editEntityMenu);
-                }
-//                EditEntityBox newEntityMenu = getNewEntityMenu();
-//                getTilePane().getChildren().add(newEntityMenu);
-            }
-        };
-        return handler;
+    public boolean removeEntity(String name) {
+        if (this.getList().contains(name)) {
+            this.getList().remove(name);
+        }
+        return myEntities.deleteObjectData(name);
     }
 
     @Override
@@ -107,8 +97,9 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
 
 	@Override
 	protected void edit(String name) {
-		// TODO Auto-generated method stub
-		
+                EntityData clickedEntity = myEntities.getEntityData(EntityTab.this.getListView().getSelectionModel().getSelectedItem());
+                EditEntityBox editEntityMenu = EntityTab.this.getEditEntityMenu(myEntities.getEntityData(clickedEntity.getName()));
+                getTilePane().getChildren().add(editEntityMenu);
 	}
 
 }
