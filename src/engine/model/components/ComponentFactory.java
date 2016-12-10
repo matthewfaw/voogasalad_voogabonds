@@ -15,6 +15,7 @@ import gamePlayerView.gamePlayerView.Router;
  *
  */
 public class ComponentFactory {
+	private static final String COMPONENT_PATH = "engine.model.components.";
 	private List<ISystem> mySystems;
 	private Router myRouter;
 
@@ -37,7 +38,7 @@ public class ComponentFactory {
 	 */
 	public IComponent constructComponent(ComponentData compdata) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> tmpclass =  Class.forName(compdata.getComponentName());
+		Class<?> tmpclass =  Class.forName(COMPONENT_PATH+compdata.getComponentName());
 		Constructor<?>[] constructors = tmpclass.getConstructors();
 		
 		// Note: Assuming only one constructor

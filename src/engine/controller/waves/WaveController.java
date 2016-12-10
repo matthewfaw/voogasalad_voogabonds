@@ -40,13 +40,12 @@ public class WaveController {
 		Map<EntityData, String> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
 		for (Iterator<EntityData> iterator = entitiesToConstruct.keySet().iterator(); iterator.hasNext();) {
 			EntityData entityData = iterator.next();
-			//TODO: add this back
-//			try {
-//				myEntityFactory.constructEntity(entityData);
-//			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-//					| IllegalArgumentException | InvocationTargetException e) {
-//				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
-//			}
+			try {
+				myEntityFactory.constructEntity(entityData);
+			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+					| IllegalArgumentException | InvocationTargetException e) {
+				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
+			}
 		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
 		//TODO: Change to a better way?
 		//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
