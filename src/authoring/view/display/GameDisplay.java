@@ -6,12 +6,17 @@ import java.util.ResourceBundle;
 
 import authoring.controller.MapDataContainer;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 @Deprecated
@@ -47,6 +52,7 @@ public class GameDisplay {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainContainer = new VBox();
 		this.terrainArea = new ScrollPane();
+		terrainArea.setId("background");
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene, controller);
 		this.controller = controller;

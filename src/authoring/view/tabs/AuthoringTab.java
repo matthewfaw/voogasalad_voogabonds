@@ -42,8 +42,11 @@ public abstract class AuthoringTab extends Tab {
      * @param label
      * @return
      */
-    protected Label setUpLabel(String label) {
-        return new Label(label);
+    protected Label setUpLabel(String text) {
+        Label label = new Label(text);
+        label.getStylesheets().add("style.css");
+    	label.setId("label");
+    	return label;
     }
     
     /**

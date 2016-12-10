@@ -46,6 +46,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 	
 	private VBox setUpMenu(String name, List<WaveData> selectedWaves) {
 		myV = new VBox();
+		myV.setId("vbox");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		Label wavesLabel = setUpLabel(getResources().getString("SelectWaves"));
 		myWaveChecks = new ArrayList<CheckBox>();
@@ -87,6 +88,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 
 	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
+		finish.setId("button");
 		finish.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent event){
 				LevelData level = new LevelData();

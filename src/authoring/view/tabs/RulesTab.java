@@ -31,6 +31,7 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 				getResources().getString("NoMoneyLose"));
 		myContainer = container;
 		VBox menu = setUpMenu();
+		menu.setId("vbox");
 		setContent(menu);
 	}
 
@@ -51,6 +52,7 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 
 	public Button setUpSubmitButton() {
 		Button applyChanges = new Button(getResources().getString("ApplyChanges"));
+		applyChanges.setId("button");
 		applyChanges.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				PlayerData player = new PlayerData();

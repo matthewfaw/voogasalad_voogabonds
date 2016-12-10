@@ -50,16 +50,19 @@ public class EditEntityBox extends VBox implements ISubmittable{
     public EditEntityBox (EntityTab parent, AttributeFetcher fetcher) {
         // Set up spacing
         super(SPACING);
+        this.setId("vbox");
         myTab = parent;
         // Set up name label+field
         Label nameLbl = new Label(myTab.getResources().getString("EnterName"));
         nameField = new TextField(myTab.getResources().getString("Entity"));
         nameLbl.setLabelFor(nameField);
+        nameLbl.setId("label");
         // Set up components ComboBox
         Label addComponentLbl = new Label(myTab.getResources().getString("AddComponents"));
         ObservableList<String> componentList = FXCollections.observableArrayList(fetcher.getComponentList());
         componentsBox = new ComboBox<String>(componentList);
         addComponentLbl.setLabelFor(componentsBox);
+        addComponentLbl.setId("label");
         componentsBox.setOnAction(handleAddComponent());
         // Set up ListView of components
         myComponentsView = new ListView<String>(myComponents);
@@ -67,12 +70,15 @@ public class EditEntityBox extends VBox implements ISubmittable{
         // Set up button container
         HBox buttons = new HBox(SPACING);
         buttons.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
+        buttons.setId("hbox");
         // Set up finish button
         Button done = new Button(myTab.getResources().getString("Finish"));
         done.setOnAction(handleDone(null));
+        done.setId("button");
         // Set up cancel button
         Button cancel = new Button(myTab.getResources().getString("Cancel"));
         cancel.setOnAction(handleCancel());
+        cancel.setId("button");
         // Add buttons to container
         buttons.getChildren().addAll(done, cancel);
         // Add nodes to this VBox
@@ -85,13 +91,16 @@ public class EditEntityBox extends VBox implements ISubmittable{
     public EditEntityBox (EntityTab parent, AttributeFetcher fetcher, EntityData entityData) {
         // Set up spacing
         super(SPACING);
+        this.setId("vbox");
         myTab = parent;
         // Set up name label+field
         Label nameLbl = new Label(myTab.getResources().getString("EnterName"));
         nameField = new TextField(entityData.getName());
         nameLbl.setLabelFor(nameField);
+        nameLbl.setId("label");
         // Set up components ComboBox
         Label addComponentLbl = new Label(myTab.getResources().getString("AddComponents"));
+        addComponentLbl.setId("label");
         ObservableList<String> componentList = FXCollections.observableArrayList(fetcher.getComponentList());
         componentsBox = new ComboBox<String>(componentList);
         addComponentLbl.setLabelFor(componentsBox);
@@ -103,12 +112,15 @@ public class EditEntityBox extends VBox implements ISubmittable{
         // Set up button container
         HBox buttons = new HBox(SPACING);
         buttons.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
+        buttons.setId("hbox");
         // Set up finish button
         Button done = new Button(myTab.getResources().getString("Finish"));
         done.setOnAction(handleDone(entityData.getName()));
+        done.setId("button");
         // Set up cancel button
         Button cancel = new Button(myTab.getResources().getString("Cancel"));
         cancel.setOnAction(handleCancel());
+        cancel.setId("button");
         // Add buttons to container
         buttons.getChildren().addAll(done, cancel);
         // Add nodes to this VBox
