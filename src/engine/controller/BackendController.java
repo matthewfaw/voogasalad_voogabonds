@@ -73,6 +73,7 @@ public class BackendController {
 	private RewardSystem myRewardSystem;
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
+	private TeamSystem myTeamSystem;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
@@ -91,15 +92,18 @@ public class BackendController {
 	}
 	
 	private void constructSystems() {
-		myCollisionDetectionSystem = new CollisionDetectionSystem();
-		myDamageDealingSystem = new DamageDealingSystem();
+		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		// ORDERING MATTERS for physical -> targeting -> movement
-		myPhysicalSystem = new PhysicalSystem(mapMediator);
-		myTargetingSystem = new TargetingSystem();
-		myMovementSystem = new MovementSystem(myPhysicalSystem, myTargetingSystem);
-		
 		myRewardSystem = new RewardSystem();
+		myDamageDealingSystem = new DamageDealingSystem();
+		
+		// ORDERING MATTERS for physical -> targeting -> collision -> movement
+		myPhysicalSystem = new PhysicalSystem(mapMediator);
+		
+		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
+		myCollisionDetectionSystem = new CollisionDetectionSystem(myPhysicalSystem);
+		
+		myMovementSystem = new MovementSystem(myPhysicalSystem, myCollisionDetectionSystem, myTargetingSystem);
 		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
 		
 	}
