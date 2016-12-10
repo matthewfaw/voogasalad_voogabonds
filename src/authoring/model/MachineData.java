@@ -4,6 +4,7 @@ import java.util.List;
 
 import utility.ResouceAccess;
 
+@Deprecated
 /**
  * An abstract class to contain all fields that both Towers and Enemies have.
  * @author Weston

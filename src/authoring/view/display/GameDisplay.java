@@ -14,6 +14,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 
+@Deprecated
 /**
  * @author Christopher Lu
  * Creates the game display in the authoring environment, where the map is divided into clickable cells that allows the user

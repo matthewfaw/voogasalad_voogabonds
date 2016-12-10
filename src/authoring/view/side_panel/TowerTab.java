@@ -28,6 +28,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+@Deprecated
 /**
  * @author Christopher Lu
  * @modifier Niklas Sjoquist

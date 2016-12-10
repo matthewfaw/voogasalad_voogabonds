@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+@Deprecated
 public class MenuHelper {
 	
 	private ResourceBundle myResources;
