@@ -37,11 +37,13 @@ public class MapGrid extends Node {
     private Pane myPane;
     private ArrayList<MoveableComponentView> sprites;
     private int myCellSize;
+    private Rectangle closest; 
     
     //XXX: maybe remove this--just a quick fix
     public MapGrid(int rows, int cols, int aCellSize, ApplicationController aAppController){
     	myAppController = aAppController;
     	myPane = new Pane();
+    	closest = new Rectangle();
     	sprites = new ArrayList<MoveableComponentView>();
     	numColumns = cols;
     	numRows = rows;
@@ -123,7 +125,7 @@ public class MapGrid extends Node {
    
     
     public Rectangle findDropLocation(double x, double y){
-        Rectangle closest = new Rectangle();
+        closest = new Rectangle();
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
@@ -145,6 +147,7 @@ public class MapGrid extends Node {
         return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
                          + Math.pow((y - (y2 + myCellSize/2)), 2));
     }
+   
 
     public int getNumCols(){
         return numColumns;
@@ -185,6 +188,8 @@ public class MapGrid extends Node {
         // TODO Auto-generated method stub
         return null;
     }
+
+    
 
 
     

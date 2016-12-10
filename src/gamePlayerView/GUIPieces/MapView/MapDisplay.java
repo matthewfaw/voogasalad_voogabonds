@@ -29,7 +29,7 @@ import javafx.util.Duration;
 
 public class MapDisplay implements IObserver<TimelineController> {
     
-	private ApplicationController myAppController;
+    private ApplicationController myAppController;
     private Pane myRoot;
     private Pane myPane;
     private MapGrid background;
@@ -61,9 +61,9 @@ public class MapDisplay implements IObserver<TimelineController> {
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
         	myPane.getChildren().add(background.fillCell((int)terrainData.getLoc().getX(), 
-        												(int)terrainData.getLoc().getY(), 
-        												terrainData.getSize(), 
-        												terrainData.getColor()));
+        	                                             (int)terrainData.getLoc().getY(), 
+        						terrainData.getSize(), 
+        						terrainData.getColor()));
         }
         
         myRoot.getChildren().add(myPane);
@@ -85,6 +85,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         
         myScene.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
+               
                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                event.consume();
             }
