@@ -48,7 +48,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myRouter = router;
 		myRouter.distributeViewableComponent(this);
 	}
-	
+	/*
 	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router, ComponentData data) {
 		this(collisionDetectionSystem, router);
 		
@@ -57,6 +57,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
 	}
+	*/
 	
 	/******** Setters ********/
 	public void setPosition(Point position) {
