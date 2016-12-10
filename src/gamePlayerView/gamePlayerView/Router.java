@@ -37,6 +37,11 @@ public class Router {
 		//mySprites = myGamePlayerScene.getSprites();
 	}
 	
+	public void distributeErrors(String aErrorMessage)
+	{
+		//TODO:
+	}
+	
 	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
 	{
 		//This is where you'll get player specific info such as money and lives and Tower Data

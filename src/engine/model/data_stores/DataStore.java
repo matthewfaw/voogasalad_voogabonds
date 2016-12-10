@@ -15,27 +15,27 @@ import authoring.model.IReadableData;
  *@param T: any class that implements the IReadableData interface
  */
 public class DataStore<T extends IReadableData> {
-	private HashMap<String, T> myWeaponData;
+	private HashMap<String, T> myData;
 
 	public DataStore(List<T> aWeaponDataList) {
-		myWeaponData = new HashMap<String, T>();
-		aWeaponDataList.forEach(e -> myWeaponData.put(e.getName(), e));
+		myData = new HashMap<String, T>();
+		aWeaponDataList.forEach(e -> myData.put(e.getName(), e));
 	}
 	
 	public T getData(String aWeaponName) {
-		if (myWeaponData.containsKey(aWeaponName)) {
-			return myWeaponData.get(aWeaponName);
+		if (myData.containsKey(aWeaponName)) {
+			return myData.get(aWeaponName);
 		} else {
 			return null;
 		}
 	}
 	
 	public boolean hasKey(String aWeaponName) {
-		return myWeaponData.containsKey(aWeaponName);
+		return myData.containsKey(aWeaponName);
 	}
 	
 	public T getRandom() {
-		List<T> values = new ArrayList<T>(myWeaponData.values());
+		List<T> values = new ArrayList<T>(myData.values());
 		Random r = new Random();
 		
 		return values.get(r.nextInt(values.size()));

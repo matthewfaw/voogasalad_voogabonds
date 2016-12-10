@@ -10,7 +10,7 @@ public class BasicSpawnStrategy implements ISpawningStrategy {
 
 	@Override
 	public void spawn(EntityFactory entityFactory, IPhysical target, IPhysical location, ICreator creator) {
-		entityFactory.constructEntity(mySpawnName);
+		//entityFactory.constructEntity(mySpawnName);
 
 	}
 

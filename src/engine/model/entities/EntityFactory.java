@@ -1,6 +1,7 @@
 package engine.model.entities;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -9,10 +10,8 @@ import authoring.model.EntityData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
 import engine.model.data_stores.DataStore;
-import engine.model.strategies.IPhysical;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
-import utility.Point;
 /**
  * Creates all the entities
  * @author owenchung and alanguo
@@ -46,7 +45,7 @@ public class EntityFactory {
 	public IEntity constructEntity(String entityName) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		IEntity entity = new ConcreteEntity();
 		EntityData entityData = myEntityDataStore.getData(entityName);
-		List<ComponentData> componentMap = entityData.getComponents();
+		Collection<ComponentData> componentMap = entityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IComponent component = myComponentFactory.constructComponent(compdata);
 			entity.addComponent(component);	
@@ -55,9 +54,10 @@ public class EntityFactory {
 	}
 	
 	@Deprecated //Can we use the one above instead?
-	public IEntity constructEntity(EntityData aEntityData ) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public IEntity constructEntity(EntityData aEntityData) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException 
+	{
 		IEntity entity = new ConcreteEntity();
-		List<ComponentData> componentMap = aEntityData.getComponents();
+		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IComponent component = myComponentFactory.constructComponent(compdata);
 			entity.addComponent(component);	

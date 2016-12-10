@@ -42,11 +42,11 @@ public class WaveState {
 	 * @param aTotalElapsedTime
 	 * @return the name of the enemy to be created
 	 */
-	public String releaseWaveEnemy(double aTotalElapsedTime)
+	public String releaseWaveEntity(double aTotalElapsedTime)
 	{
 		myUnreleasedEnemyCount -= 1;
 		myTimeSinceLastEnemyCreation = aTotalElapsedTime;
-		return myWaveData.getWaveEnemy();
+		return myWaveData.getWaveEntity();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class WaveState {
 	 * Determines if there are enemies that can be released in the wave
 	 * @return true if there are, false otherwise
 	 */
-	private boolean hasEnemiesToRelease()
+	public boolean hasEnemiesToRelease()
 	{
 		return myUnreleasedEnemyCount > 0;
 	}
