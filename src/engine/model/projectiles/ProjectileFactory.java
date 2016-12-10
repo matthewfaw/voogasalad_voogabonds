@@ -14,6 +14,7 @@ import utility.ResouceAccess;
  * @author Weston
  *
  */
+@Deprecated
 public class ProjectileFactory {
 	private static final String NO_SUCH_PROJECTILE = "NoSuchProjectile";
 	private DataStore<ProjectileData> myProjectiles;
