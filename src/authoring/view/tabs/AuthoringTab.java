@@ -151,7 +151,9 @@ public abstract class AuthoringTab extends Tab {
         alert.showAndWait();
     }
     
-    protected abstract Button setUpFinishButton();
-
+    
+    
+    
+    
 	
 }

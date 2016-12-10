@@ -31,7 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class EditEntityBox extends VBox {
+public class EditEntityBox extends VBox implements ISubmittable{
     private static final int SPACING = 2;
     private static final String UPDATE_CONFIRMATION = "Update confirmation";
     private static final String ALREADY_EXISTS = "An entity with this name already exists. Are you sure you want to overwrite it?";
@@ -208,5 +208,11 @@ public class EditEntityBox extends VBox {
         };
         return handleEdit;
     }
+
+	@Override
+	public Button setUpSubmitButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
