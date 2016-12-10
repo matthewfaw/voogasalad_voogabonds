@@ -30,13 +30,15 @@ public class AuthorDisplay {
     private Scene scene;
     private int mapXDim;
     private int mapYDim;
+    private String filePath;
     
-    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY) {
+    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY, String path) {
         // set title
         mainInit.setTitle(AUTHORING_TITLE);
         this.scene = scn;
         this.mapXDim = mapX;
         this.mapYDim = mapY;
+        this.filePath = path;
         // Set up BorderPane
         root = pane;
         // bind to take available space
@@ -78,7 +80,7 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer(), mapXDim, mapYDim);
+        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer(), mapXDim, mapYDim, filePath);
         EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
         RulesTab rulesTab = new RulesTab("Rules", r.getPlayerDataContainer());
         WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
