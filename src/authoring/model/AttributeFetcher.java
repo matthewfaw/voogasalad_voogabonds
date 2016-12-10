@@ -15,7 +15,7 @@ public class AttributeFetcher {
 	private final String EXTENSION = ".class";
 	private int index;
 
-	public void fetch(){
+	public void fetch() throws ClassNotFoundException {
 		componentList = new ArrayList<String>();
 //		File dir = new File(PATH);
 		List<String> fileList = new ArrayList<String>();
@@ -27,11 +27,12 @@ public class AttributeFetcher {
 
 			attributeList = new ArrayList<String>();
 
+			String tempString = fileName;
+			tempString = fileName;
+			index = tempString.indexOf(EXTENSION);
+			tempString = tempString.substring(0, index);
+			tempString = tempString.replace('/','.');
 			try{
-				String tempString = fileName;
-				index = tempString.indexOf(EXTENSION);
-				tempString = tempString.substring(0, index);
-				tempString = tempString.replace('/','.');
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
 				componentList.add(newCompName);
@@ -44,8 +45,8 @@ public class AttributeFetcher {
 				}
 				componentAttributeMap.put(newCompName, attributeList);
 			}
-			catch(ClassNotFoundException | SecurityException | IllegalArgumentException E){
-				E.printStackTrace();
+			catch(ClassNotFoundException | SecurityException | IllegalArgumentException e){
+				throw new ClassNotFoundException(String.format("No such class: %s", tempString));
 			}
 		}
 

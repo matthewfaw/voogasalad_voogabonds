@@ -95,9 +95,9 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	}
 	
 	//matthewfaw: making this public--hope it's ok
-	public void cellSize(int cellSize) throws Exception{
+	public void cellSize(int cellSize) {
 		if (cellSize<=0){
-			throw new Exception("The size of cells must be greater than 0 pixels.");
+			throw new IllegalArgumentException("The size of cells must be greater than 0 pixels.");
 		}
 		this.cellSize = cellSize;
 	}
@@ -179,7 +179,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	/**
 	 * TERRAIN DATA FUNCTIONS
 	 */
-	public void addTerrainData(TerrainData terrain) throws Exception{
+	public void addTerrainData(TerrainData terrain) {
 		validatePoint(terrain.getLoc(), "terrain");
 		terrainList.add(terrain);
 	}
@@ -255,12 +255,12 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	
 	
 	
-	private void validatePoint(Point p, String type) throws Exception{
+	private void validatePoint(Point p, String type){
 		if (p.getX() >= numXCells || p.getX() < 0){
-			throw new Exception("X location of " + type + " point not valid.");
+			throw new IllegalArgumentException("X location of " + type + " point not valid.");
 		}
 		if (p.getY() >= numYCells || p.getY() < 0){
-			throw new Exception("Y location of " + type + " point not valid.");
+			throw new IllegalArgumentException("Y location of " + type + " point not valid.");
 		}
 	}
 }

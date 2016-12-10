@@ -39,35 +39,31 @@ class MockGameDataConstructor {
 	MapDataContainer getMockMapData()
 	{
 		MapDataContainer mapData = new MapDataContainer();
-		try {
-			int x = 14;
-			int y = 12;
-			int xmin = x/3;
-			int xmax = 2*x/3;
-			int ymax = y/2;
-			mapData.setDimensions(x,y);
-			for (int i=0; i<x; ++i) {
-				for (int j=0; j<y; ++j) {
-					TerrainData terrain;
-					if (i > xmin && i < xmax && j < ymax) {
-						terrain = new TerrainData("water", i, j, 50, "0x0000ff");
-					} else {
-						terrain = new TerrainData("grass", i, j, 50, "0x008000");
-					}
-					mapData.addTerrainData(terrain);
+		int x = 14;
+		int y = 12;
+		int xmin = x/3;
+		int xmax = 2*x/3;
+		int ymax = y/2;
+		mapData.setDimensions(x,y);
+		for (int i=0; i<x; ++i) {
+			for (int j=0; j<y; ++j) {
+				TerrainData terrain;
+				if (i > xmin && i < xmax && j < ymax) {
+					terrain = new TerrainData("water", i, j, 50, "0x0000ff");
+				} else {
+					terrain = new TerrainData("grass", i, j, 50, "0x008000");
 				}
+				mapData.addTerrainData(terrain);
 			}
-			ArrayList<Point> spawnPoints = new ArrayList<Point>();
-			spawnPoints.add(new Point(1, 1));
-			mapData.addSpawnPoints("spawnPoint", spawnPoints);
-			mapData.addSinkPoints("sinkPoint",new ArrayList<Point>(Arrays.asList(new Point(x-1, 1))));
-			mapData.cellSize(50);
+		}
+		ArrayList<Point> spawnPoints = new ArrayList<Point>();
+		spawnPoints.add(new Point(1, 1));
+		mapData.addSpawnPoints("spawnPoint", spawnPoints);
+		mapData.addSinkPoints("sinkPoint",new ArrayList<Point>(Arrays.asList(new Point(x-1, 1))));
+		mapData.cellSize(50);
 //			mapData.addValidTerrain(terrain1.getName(), "exampleColor 1");
 //			mapData.addValidTerrain(terrain2.getName(), "exampleColor 2");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return mapData;
 	}
 	
