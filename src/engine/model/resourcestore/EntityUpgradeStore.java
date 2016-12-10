@@ -77,14 +77,19 @@ public class EntityUpgradeStore implements IEntityUpgradeStore {
 	}
 
 	/**
-	 * TODO
-	 * return the price of a entity if it's a base entity, otherwise return null
+	 * return the price of a entity if it's a base entity, otherwise return -1
 	 * @param entity
 	 * @return
 	 */
 	public int getPrice(String aEntityName) {
-		return myConstructedEntityNodes.get(aEntityName).getEntityData().getBuyPrice();
+		for (EntityNode en : myBaseEntities) {
+			if (en.getName() == aEntityName) {
+				return myConstructedEntityNodes.get(aEntityName).getEntityData().getBuyPrice();
+			}
+		}
+		return -1;	
 	}
+	
 	public List<EntityData> getPossibleUpgrades(EntityData entity) 
 	{
 		List<EntityNode> upgradeNodes = myConstructedEntityNodes.get(entity.getName()).getUpgradeTos();
