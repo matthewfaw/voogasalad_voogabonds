@@ -1,5 +1,7 @@
 package engine.model.machine;
 import utility.Damage;
+
+
 public class Health {
 	private double myMaxHealth;
 	private double myCurrHealth;
