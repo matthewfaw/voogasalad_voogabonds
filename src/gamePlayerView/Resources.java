@@ -1,5 +1,4 @@
 package gamePlayerView;
-
 public class Resources {
 	public static final int SIZE = 800;
 	public static final int FRAMES_PER_SECOND = 50;

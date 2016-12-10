@@ -14,6 +14,9 @@ import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import gamePlayerView.interfaces.IWavesAcceptor;
 
+/**
+ * @author Guhan Muruganandam
+ */
 public class Router {
 	private GamePlayerScene  myGamePlayerScene;
 	//TODO: Change these box objects to instead be acceptor interfaces

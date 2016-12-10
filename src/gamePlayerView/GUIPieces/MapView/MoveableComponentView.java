@@ -1,4 +1,4 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.GUIPieces.MapView;
 
 import com.sun.javafx.geom.BaseBounds;
 import com.sun.javafx.geom.transform.BaseTransform;

@@ -1,4 +1,4 @@
-package gamePlayerView.GUIPieces;
+package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -70,12 +70,26 @@ public class MapGrid extends Node {
 				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
 //    			}
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
-    			event.consume();
+				setClickAction();
+
+				event.consume();
     		}
     	});
 
     	actualGrid[row][col] = temp;
     	return actualGrid[row][col];
+    }
+    
+    public void setClickAction(){
+        for(MoveableComponentView m : sprites){
+            m.setOnMouseClicked(e -> setClickForComponent(m));
+        }
+    }
+    
+    private void setClickForComponent(MoveableComponentView m) {
+        //get info to come up on click
+        //m.getInfo();
+        System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)
