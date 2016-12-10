@@ -17,6 +17,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 import main.MainInitializer;
+import utility.ResouceAccess;
 
 public class AuthorDisplay {
     public static final String AUTHORING_TITLE = "Authoring Environment";
@@ -52,13 +53,18 @@ public class AuthorDisplay {
         r = new Router();
         
         // Add Tabs
-        List<Tab> tabs = getTabs();
-        for (int i = 0; i < tabs.size(); i++) {
-            //System.out.println("Tab "+i+" Added");
-            tabPane.getTabs().add(tabs.get(i));
+        try {
+        	List<Tab> tabs = getTabs();
+        	
+            for (int i = 0; i < tabs.size(); i++) {
+                //System.out.println("Tab "+i+" Added");
+                tabPane.getTabs().add(tabs.get(i));
+            }
+            tabPane.getTabs().remove(1);
+        } catch (ClassNotFoundException e) {
+        	throw new UnsupportedOperationException(ResouceAccess.getError("NoTabs"), e);
         }
-        tabPane.getTabs().remove(1);
-        
+
         // Set regions of BorderPane
         root.setTop(topMenuBar);
         root.setCenter(tabPane);
@@ -68,7 +74,7 @@ public class AuthorDisplay {
         return root;
     }
     
-    private List<Tab> getTabs() {
+    private List<Tab> getTabs() throws ClassNotFoundException {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
