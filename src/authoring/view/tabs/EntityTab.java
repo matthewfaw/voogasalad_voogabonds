@@ -72,6 +72,9 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
     }
     
     public boolean removeEntity(String name) {
+        if (this.getList().contains(name)) {
+            this.getList().remove(name);
+        }
         return myEntities.deleteObjectData(name);
     }
 

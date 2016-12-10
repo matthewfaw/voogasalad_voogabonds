@@ -35,7 +35,7 @@ public class EditEntityBox extends VBox {
     private static final int SPACING = 2;
     private static final String UPDATE_CONFIRMATION = "Update confirmation";
     private static final String ALREADY_EXISTS = "An entity with this name already exists";
-    private static final String ALERT_CONTENT = "Do you really want to overwrite this entity?";
+    private static final String ALERT_CONTENT = "Please give entity a unique name and try again.";
     
     private static final String NAME_CHANGE_ALERT = "Name changed";
     private static final String NAME_CHANGED = "The name of this Entity has been changed.";
@@ -166,6 +166,7 @@ public class EditEntityBox extends VBox {
                     if (result.get() == ButtonType.OK) {
                         myTab.removeEntity(oldName);
                         myTab.addEntity(entity);
+                        myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
                     } else {
                         // User clicked cancel
                     }
@@ -175,10 +176,10 @@ public class EditEntityBox extends VBox {
                         for (String component : entity.getComponents().keySet()) {
                             myComponentData.put(component, entity.getComponents().get(component));
                         }
-                        System.out.println("Entity has "+myComponentData.size()+" Components");
+                        //System.out.println("Entity has "+myComponentData.size()+" Components");
                         myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
                     } else {
-                        Alert alert = new Alert(AlertType.CONFIRMATION);
+                        Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle(UPDATE_CONFIRMATION);
                         alert.setHeaderText(ALREADY_EXISTS);
                         alert.setContentText(ALERT_CONTENT);
