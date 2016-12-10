@@ -92,7 +92,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 
 	private void dealDamage(CollidableComponent a, CollidableComponent b) {
 		// Get damage dealt by a
-		Damage damage = myDamageDealingSystem.getDamageDealt(a.getEntity());
+		Damage damage = myDamageDealingSystem.getDamageDealtToTarget(a.getEntity());
 		// Deal damage to b
 		myHealthSystem.takeDamage(b.getEntity(), damage);
 	}

@@ -32,9 +32,9 @@ public class DamageDealingSystem implements ISystem{
 	 * @return damage dealt by entity; 0 if entity 
 	 * is not a damage dealing component
 	 */
-	public Damage getDamageDealt(IEntity dmgDealer) {
+	public Damage getDamageDealtToTarget(IEntity dmgDealer) {
 		DamageDealingComponent damageDealer = findDamageDealingComponent(dmgDealer);
-		return damageDealer == null ? new Damage(0) : damageDealer.getDamage();
+		return damageDealer == null ? new Damage(0) : damageDealer.getTargetDamage();
 	}
 	
 	/************ Attach and detach component methods ************/
