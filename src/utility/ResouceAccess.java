@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
  */
 public class ResouceAccess {
 	
-	public static final String ERROR_BUNDLE_NAME = "resources/Error.properties";
+	public static final String ERROR_BUNDLE_NAME = "resources/Error";
 	public static final ResourceBundle ERROR_BUNDLE = ResourceBundle.getBundle(ERROR_BUNDLE_NAME);
 	
 	public static String getError(String key){

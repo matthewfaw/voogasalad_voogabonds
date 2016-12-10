@@ -38,6 +38,7 @@ public class MainInitializer {
 		MainMenu menu = new MainMenu(this, s);
 		Scene mainMenu = menu.init();
 		scene = new Scene(root, screenWidth, screenHeight, Color.WHITE);
+		scene.getStylesheets().add("style.css");
 		stage.setScene(mainMenu);
 		stage.show();
 	}

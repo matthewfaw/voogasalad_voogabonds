@@ -1,30 +1,22 @@
 package engine.model.machine;
 
-import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.ProjectileData;
-import authoring.model.TowerData;
 import authoring.model.WeaponData;
 import engine.controller.timeline.TimelineController;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
-import engine.model.machine.enemy.Enemy;
-import engine.model.machine.tower.Tower;
-import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.resourcestore.ResourceStore;
-import engine.model.weapons.WeaponFactory;
-import utility.Point;
-import utility.ResouceAccess;
 
 @Deprecated
 public class MachineFactory {
-	private static final String INVALID_TOWER_ERROR = "NoSuchTower";
-	private static final String INVALID_ENEMY_ERROR = "NoSuchTower";
+	//private static final String INVALID_TOWER_ERROR = "NoSuchTower";
+	//private static final String INVALID_ENEMY_ERROR = "NoSuch";
 	
-	private TimelineController myTime;
-	private WeaponFactory myArmory;
-	private DataStore<TowerData> myTowers;
-	private DataStore<EntityData> myEnemies;
+	//private TimelineController myTime;
+	//private WeaponFactory myArmory;
+	//private DataStore<TowerData> myTowers;
+	//private DataStore<EntityData> myEnemies;
 	
 	public MachineFactory(
 			TimelineController time,
@@ -33,10 +25,10 @@ public class MachineFactory {
 			DataStore<WeaponData> weapons,
 			DataStore<ProjectileData> projectiles,
 			MapMediator map) {
-		myTime = time;
-		myTowers = new DataStore<TowerData>(aResourceStore.getAvailableEntities());
-		myEnemies = enemies;
-		myArmory = new WeaponFactory(weapons, projectiles, time, map);
+		//myTime = time;
+		//myTowers = new DataStore<TowerData>(aResourceStore.getAvailableEntities());
+		//myEnemies = enemies;
+		//myArmory = new WeaponFactory(weapons, projectiles, time, map);
 	}
 	
 	/*

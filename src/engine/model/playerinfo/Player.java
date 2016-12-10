@@ -3,6 +3,7 @@ package engine.model.playerinfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.TowerData;
 import engine.IObserver;
@@ -13,9 +14,13 @@ import engine.model.strategies.winlose.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
  
-
+/**
+ * 
+ * @author owenchung and matthewfaw
+ *
+ */
 //TODO: Implement all unimplemented methods
-public class Player implements IModifiablePlayer {
+public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
@@ -45,17 +50,12 @@ public class Player implements IModifiablePlayer {
 		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
 	}
 	 
-	/**
-	 * 0 corresponds to live change
-	 */
 	@Override
 	public void updateLivesRemaining(int deltaLives) {
 		myLives = myLives + deltaLives;
 		notifyObservers();
 	}
-	/**
-	 * 1 corresponds to funds change
-	 */
+	
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
@@ -91,8 +91,9 @@ public class Player implements IModifiablePlayer {
 	}
 
 	@Override
-	public List<TowerData> getAvailableTowers() {
-		List<TowerData> towerList = new ArrayList<TowerData>();
+	@Deprecated
+	public List<EntityData> getAvailableTowers() {
+		List<EntityData> towerList = new ArrayList<EntityData>();
 		for (ResourceStore resourceStore: myResourceStores) {
 			towerList.addAll(resourceStore.getAvailableEntities());
 		}
@@ -100,9 +101,10 @@ public class Player implements IModifiablePlayer {
 	}
 
 	@Override
-	public List<TowerData> getAffordableTowers() {
-		List<TowerData> towerList = new ArrayList<TowerData>();
-		for (TowerData towerData: getAvailableTowers()) {
+	@Deprecated
+	public List<EntityData> getAffordableTowers() {
+		List<EntityData> towerList = new ArrayList<EntityData>();
+		for (EntityData towerData: getAvailableTowers()) {
 			if (this.getAvailableMoney() > towerData.getBuyPrice()) {
 				towerList.add(towerData);
 			}

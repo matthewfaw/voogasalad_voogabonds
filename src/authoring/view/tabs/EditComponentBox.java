@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class EditComponentBox extends VBox {
+public class EditComponentBox extends VBox implements ISubmittable {
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
@@ -37,7 +37,7 @@ public class EditComponentBox extends VBox {
      */
     public EditComponentBox (EditEntityBox parent, EntityTab grandparent, String componentName, List<String> attributes) {
         super(SPACING);
-        
+        this.setId("vbox");
         this.parent = parent;
         this.grandparent = grandparent;
         myName = componentName;
@@ -49,6 +49,7 @@ public class EditComponentBox extends VBox {
             Label lbl = new Label(attributes.get(i));
             TextField field = new TextField();
             lbl.setLabelFor(field);
+            lbl.setId("label");
             myLabels.add(lbl);
             myFields.add(field);
 
@@ -59,10 +60,13 @@ public class EditComponentBox extends VBox {
         // Set up horizontal buttons
         HBox btns = new HBox(SPACING);
         btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
+        btns.setId("hbox");
         Button done = new Button(DONE);
         done.setOnAction(handleDone());
+        done.setId("button");
         Button cancel = new Button(CANCEL);
         cancel.setOnAction(handleCancel());
+        cancel.setId("button");
         btns.getChildren().addAll(done,cancel);
 
         // Add nodes to Menu Box
@@ -78,7 +82,7 @@ public class EditComponentBox extends VBox {
      */
     public EditComponentBox(EditEntityBox parent, EntityTab grandparent, String componentName, Map<String,String> retrievedData) {
         super(SPACING);
-        
+        this.setId("vbox");
         this.parent = parent;
         this.grandparent = grandparent;
         myName = componentName;
@@ -90,6 +94,7 @@ public class EditComponentBox extends VBox {
             Label lbl = new Label(attributeName);
             TextField field = new TextField(retrievedData.get(attributeName));
             lbl.setLabelFor(field);
+            lbl.setId("label");
             myLabels.add(lbl);
             myFields.add(field);
             // Add nodes to Menu Box
@@ -98,7 +103,7 @@ public class EditComponentBox extends VBox {
         }
         
         HBox btns = getBottomButtons();
-
+        btns.setId("hbox");
         // Add nodes to Menu Box
         this.getChildren().add(btns);
     }
@@ -108,8 +113,10 @@ public class EditComponentBox extends VBox {
         btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
         Button done = new Button(DONE);
         done.setOnAction(handleDone());
+        done.setId("button");
         Button cancel = new Button(CANCEL);
         cancel.setOnAction(handleCancel());
+        cancel.setId("cancel");
         btns.getChildren().addAll(done,cancel);
         return btns;
     }
@@ -150,5 +157,11 @@ public class EditComponentBox extends VBox {
     private String getName() {
         return myName;
     }
+
+	@Override
+	public Button setUpSubmitButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

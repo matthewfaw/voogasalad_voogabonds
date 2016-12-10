@@ -41,4 +41,17 @@ public class EntityData implements IReadableData {
 	public Map<String, ComponentData> getComponents(){
 		return myComponents;
 	}
+
+	public int getBuyPrice() {
+		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
+	}
+
+	public int getSellPrice() {
+		return mySellData.isPresent() ? mySellData.get().getSellValue() : 0;
+	}
+
+	public Map<String, Integer> getUpgrades() {
+		return myUpgradeData.isPresent() ? myUpgradeData.get().getUpgrades() : new HashMap<String, Integer>();
+	}
+
 }

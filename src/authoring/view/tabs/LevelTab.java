@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class LevelTab extends ListTab<String> implements IObserver<Container>{
+public class LevelTab extends ListTab<String> implements IObserver<Container>, ISubmittable{
 
     private static final int COLS = 2;
     
@@ -46,6 +46,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
 	
 	private VBox setUpMenu(String name, List<WaveData> selectedWaves) {
 		myV = new VBox();
+		myV.setId("vbox");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		Label wavesLabel = setUpLabel(getResources().getString("SelectWaves"));
 		myWaveChecks = new ArrayList<CheckBox>();
@@ -60,7 +61,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
 		ScrollPane scroll = new ScrollPane();
 		scroll.setContent(checkV);
 		wavesLabel.setLabelFor(scroll);
-		Button finish = setUpFinishButton();
+		Button finish = setUpSubmitButton();
 		Button cancel = setUpCancelButton(myV);
 		HBox h = new HBox();
 		h.getChildren().addAll(finish, cancel);
@@ -85,9 +86,9 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
 		getTilePane().getChildren().add(menu);
 	}
 
-	@Override
-	protected Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
+		finish.setId("button");
 		finish.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent event){
 				LevelData level = new LevelData();

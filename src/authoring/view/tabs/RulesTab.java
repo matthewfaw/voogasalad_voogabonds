@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class RulesTab extends AuthoringTab {
+public class RulesTab extends AuthoringTab implements ISubmittable {
 	
 	private ObservableList<String> myWins = FXCollections.observableList(new ArrayList<String>());
 	private ObservableList<String> myLosses = FXCollections.observableList(new ArrayList<String>());
@@ -31,6 +31,7 @@ public class RulesTab extends AuthoringTab {
 				getResources().getString("NoMoneyLose"));
 		myContainer = container;
 		VBox menu = setUpMenu();
+		menu.setId("vbox");
 		setContent(menu);
 	}
 
@@ -44,14 +45,14 @@ public class RulesTab extends AuthoringTab {
 				myWins, v);
 		myLoseBox = setUpStringComboBoxWithLabel(getResources().getString("EnterLose"), null,
 				myLosses, v);
-		Button applyChanges = setUpFinishButton();
+		Button applyChanges = setUpSubmitButton();
 		v.getChildren().add(applyChanges);
 		return v;
 	}
 
-	@Override
-	protected Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		Button applyChanges = new Button(getResources().getString("ApplyChanges"));
+		applyChanges.setId("button");
 		applyChanges.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				PlayerData player = new PlayerData();

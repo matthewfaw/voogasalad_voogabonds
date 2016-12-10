@@ -48,6 +48,7 @@ public class AuthorDisplay {
         
         // Set up TabPane
         tabPane = new TabPane();
+        tabPane.setId("background");
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         // Set up Router
         r = new Router();
@@ -59,8 +60,8 @@ public class AuthorDisplay {
             for (int i = 0; i < tabs.size(); i++) {
                 //System.out.println("Tab "+i+" Added");
                 tabPane.getTabs().add(tabs.get(i));
+                tabs.get(i).setId("tab");
             }
-            tabPane.getTabs().remove(1);
         } catch (ClassNotFoundException e) {
         	throw new UnsupportedOperationException(ResouceAccess.getError("NoTabs"), e);
         }

@@ -1,5 +1,4 @@
 package authoring.controller;
-import authoring.view.side_panel.*;
 import authoring.view.tabs.WaveTab;
 import authoring.view.tabs.EntityTab;
 import authoring.view.tabs.LevelTab;

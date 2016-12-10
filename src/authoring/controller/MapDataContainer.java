@@ -162,18 +162,24 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 			//Show error to front-end here
 		}
 		sinkPoints.put(name, newSinkPoints);
+		notifyObservers();
 		System.out.println("Added Sink Point " + name);
 	}
 	
 	public void removeSinkPoint(String name){
 		if (sinkPoints.containsKey(name)){
 			sinkPoints.remove(name);
+			notifyObservers();
 			System.out.println("Removed Sink Point " + name);
 		}
 	}
 	
 	public ArrayList<Point> getSinkPoints(String name){
 		return sinkPoints.get(name);
+	}
+	
+	public HashMap<String, ArrayList<Point>> getSinkPointMap(){
+		return sinkPoints;
 	}
 	
 	/**

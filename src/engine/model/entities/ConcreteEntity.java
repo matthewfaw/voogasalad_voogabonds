@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import engine.IObserver;
 import engine.model.components.IComponent;
+import engine.model.components.IModifiableComponent;
 /**
  * 
  * @author matthewfaw 
@@ -30,8 +31,9 @@ public class ConcreteEntity implements IEntity {
 	}
 
 	@Override
-	public void addComponent(IComponent aComponent) {
+	public void addComponent(IModifiableComponent aComponent) {
 		myComponents.add(aComponent);
+		aComponent.setEntity(this);
 	}
 
 	@Override

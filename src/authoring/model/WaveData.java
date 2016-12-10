@@ -14,7 +14,7 @@ public class WaveData implements IReadableData {
 	/**
 	 * A String corresponding to the enemy name, which should have an EnemyData map entry
 	 */
-	private String waveEnemy;
+	private String waveEntity;
 	
 	/**
 	 * Time between each enemy (so they don't all show up at once) in milliseconds.
@@ -36,6 +36,11 @@ public class WaveData implements IReadableData {
 	 */
 	private String spawnPointName;
 	
+	/**
+	 * A String corresponding to the sink point name, which should have an entry in the map.
+	 */
+	private String sinkPointName;
+	
 	@Override
 	public String getName(){
 		return name;
@@ -47,17 +52,17 @@ public class WaveData implements IReadableData {
 		this.name = name;
 	}
 	
-	public String getWaveEnemy() {
-		return waveEnemy;
+	public String getWaveEntity() {
+		return waveEntity;
 	}
-	public void setWaveEnemy(String waveEnemy) throws Exception{
+	public void setWaveEntity(String waveEnemy) throws Exception{
 		if (waveEnemy == null || waveEnemy.length() == 0){
 			throw new Exception("Enemy in wave must be specified.");
 		}
-		this.waveEnemy = waveEnemy;
+		this.waveEntity = waveEnemy;
 	}
 	
-	public double getTimeBetweenEnemy() {
+	public double getTimeBetweenEntity() {
 		return timeBetweenEnemy;
 	}
 	
@@ -99,7 +104,7 @@ public class WaveData implements IReadableData {
 		this.timeUntilNextWave = timeBeforeWave;
 	}
 	
-	public int getNumEnemies(){
+	public int getNumEntities(){
 		return numEnemies;
 	}
 	
@@ -128,6 +133,16 @@ public class WaveData implements IReadableData {
 			throw new Exception("Spawn point name must be specified.");
 		}
 		this.spawnPointName = spawnPointName;
+	}
+	
+	public String getSinkPointName() {
+		return sinkPointName;
+	}
+	public void setSinkPointName(String sinkPointName) throws Exception{
+		if (sinkPointName == null || sinkPointName.length() == 0){
+			throw new Exception("Sink point name must be specified.");
+		}
+		this.sinkPointName = sinkPointName;
 	}
 	
 }

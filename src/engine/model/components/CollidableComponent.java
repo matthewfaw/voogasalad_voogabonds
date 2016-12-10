@@ -1,11 +1,7 @@
 package engine.model.components;
 
-import java.util.List;
-
 import authoring.model.Hide;
-import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
-import engine.model.entities.IEntity;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -20,12 +16,7 @@ import utility.Damage;
  * @author matthewfaw
  *
  */
-public class CollidableComponent implements IComponent, ICollidable {
-	@Hide
-	private List<IObserver<IComponent>> myObservers;
-	@Hide
-	private PhysicalComponent myPhysical;
-	
+public class CollidableComponent extends AbstractComponent implements ICollidable {
 	private double myCollisionRadius;
 	
 	@Hide
@@ -48,12 +39,6 @@ public class CollidableComponent implements IComponent, ICollidable {
 		myRewardSystem = rewardSystem;
 		
 		myCollisionDetectionSystem.attachComponent(this);
-	}
-
-	//*******************IComponent interface***********//
-	@Override
-	public IEntity getEntity() {
-		return myPhysical.getEntity();
 	}
 
 	//*******************ICollidable interface***********//
@@ -92,7 +77,7 @@ public class CollidableComponent implements IComponent, ICollidable {
 
 	private void dealDamage(CollidableComponent a, CollidableComponent b) {
 		// Get damage dealt by a
-		Damage damage = myDamageDealingSystem.getDamageDealt(a.getEntity());
+		Damage damage = myDamageDealingSystem.getDamageDealtToTarget(a.getEntity());
 		// Deal damage to b
 		myHealthSystem.takeDamage(b.getEntity(), damage);
 	}

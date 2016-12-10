@@ -9,7 +9,7 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class TeamComponent implements IComponent {
+public class TeamComponent extends AbstractComponent {
 	private IEntity myEntity;
 	private String myTeamID;
 	

@@ -32,7 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class EditEntityBox extends VBox {
+public class EditEntityBox extends VBox implements ISubmittable{
     private static final int SPACING = 2;
     
     private static final String NAME_CHANGE_ALERT = "Name changed";
@@ -45,13 +45,13 @@ public class EditEntityBox extends VBox {
     private ObservableList<String> myComponents;
     private HashMap<String, ComponentData> myComponentData = new HashMap<String, ComponentData>();
     
-    // Fields
     private TextField nameField;
     private ComboBox<String> componentsBox;
     private ListView<String> myComponentsView;
 
     public EditEntityBox (EntityTab parent, AttributeFetcher fetcher) {
         super(SPACING);
+        this.setId("vbox");
         myTab = parent;
         nameField = parent.setUpTextInputWithLabel(myTab.getResources().getString("EnterName"), myTab.getResources().getString("Entity"), this);
         setUpComponentBox(parent, fetcher);
@@ -62,6 +62,7 @@ public class EditEntityBox extends VBox {
     
     public EditEntityBox (EntityTab parent, AttributeFetcher fetcher, EntityData entityData) {
         super(SPACING);
+        this.setId("vbox");
         myTab = parent;
         retrieveEntityData(entityData);
         nameField = parent.setUpTextInputWithLabel(myTab.getResources().getString("EnterName"), entityName, this);
@@ -101,16 +102,17 @@ public class EditEntityBox extends VBox {
     private HBox setUpButtonContainer() {
         HBox buttons = new HBox(SPACING);
         buttons.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
-        
-        // Set up finish button
+        // finish button
         Button done = new Button(myTab.getResources().getString("Finish"));
         done.setOnAction(handleDone(entityName));
-        
-        // Set up cancel button
+        // cancel button
         Button cancel = new Button(myTab.getResources().getString("Cancel"));
         cancel.setOnAction(handleCancel());
-        
-        // Add buttons to container
+        // set styling
+        done.setId("button");
+        cancel.setId("button");
+        buttons.setId("hbox");
+        // add nodes
         buttons.getChildren().addAll(done, cancel);
         return buttons;
     }
@@ -172,7 +174,7 @@ public class EditEntityBox extends VBox {
     
     private void tryAddNewEntity(EntityData entity) {
         if (myTab.addEntity(entity)) {
-            System.out.println("Added Entity");
+            //System.out.println("Added Entity");
             for (String component : entity.getComponents().keySet()) {
                 myComponentData.put(component, entity.getComponents().get(component));
             }
@@ -229,5 +231,11 @@ public class EditEntityBox extends VBox {
         };
         return handleEdit;
     }
+
+	@Override
+	public Button setUpSubmitButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

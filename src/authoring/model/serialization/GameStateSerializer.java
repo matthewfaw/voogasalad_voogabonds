@@ -85,7 +85,7 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("MapData", gameName);
-			ser.serializeToFile(router.getMapDataContainer(), gameName+"/"+"MapData"+"/"+"MapData");
+			ser.serializeToFile(router.getMapDataContainer(), gameName+"/"+"MapDataContainer"+"/"+"MapData");
 		}catch(Exception e){
 			System.out.println("Map fail");
 		}

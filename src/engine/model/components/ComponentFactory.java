@@ -15,6 +15,7 @@ import gamePlayerView.gamePlayerView.Router;
  *
  */
 public class ComponentFactory {
+	private static final String COMPONENT_PATH = "engine.model.components.";
 	private List<ISystem> mySystems;
 	private Router myRouter;
 
@@ -35,9 +36,9 @@ public class ComponentFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	public IComponent constructComponent(ComponentData compdata) 
+	public IModifiableComponent constructComponent(ComponentData compdata) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> tmpclass =  Class.forName(compdata.getComponentName());
+		Class<?> tmpclass =  Class.forName(COMPONENT_PATH+compdata.getComponentName());
 		Constructor<?>[] constructors = tmpclass.getConstructors();
 		
 		// Note: Assuming only one constructor
@@ -45,12 +46,24 @@ public class ComponentFactory {
 		List<Object> objectsToAttach = new ArrayList<Object>();
 		for (Class<?> arg : arguments) {
 			// attach appropriate system to argument
-			objectsToAttach.add(getSystemToAttach(arg));
+			ISystem sysToAdd = getSystemToAttach(arg);
+			if (sysToAdd != null) {
+				objectsToAttach.add(getSystemToAttach(arg));
+				continue;
+			}
 			// check if arg is Router, if so, attach myRouter
-			objectsToAttach.add(getRouterToAttach(arg));
+			Router routerToAdd = getRouterToAttach(arg);
+			if (routerToAdd != null) {
+				objectsToAttach.add(getRouterToAttach(arg));
+				continue;
+			}
+			objectsToAttach.add(compdata);
+			
 		}
-		
-		return (IComponent) constructors[0].newInstance( new Object[] { objectsToAttach.toArray() } );
+		System.out.println(compdata.getComponentName());
+		System.out.println(arguments.toString());
+		System.out.println(objectsToAttach);
+		return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		
 	}
 

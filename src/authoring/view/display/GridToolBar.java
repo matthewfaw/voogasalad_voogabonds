@@ -67,6 +67,7 @@ public class GridToolBar {
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
+		toolBar.setId("hbox");
 		this.colorToTerrain = new HashMap<String, Color>();
 		this.imageToTerrain = new HashMap<String, String>();
 		selectedColor = Color.WHITE;
@@ -87,14 +88,18 @@ public class GridToolBar {
 		ToggleGroup toggles = new ToggleGroup();
 		ToggleButton drawMode = new ToggleButton(myResources.getString("DrawMode"));
 		drawMode.setToggleGroup(toggles);
+		drawMode.setId("button");
 		toggleHandler(toggles, drawMode);
 		ToggleButton setSpawnPoint = new ToggleButton(myResources.getString("SpawnPoint"));
 		setSpawnPoint.setToggleGroup(toggles);
+		setSpawnPoint.setId("button");
 		spawnHandler(toggles, setSpawnPoint);
 		ToggleButton setSinkPoint = new ToggleButton(myResources.getString("SinkPoint"));
 		setSinkPoint.setToggleGroup(toggles);
+		setSinkPoint.setId("button");
 		sinkHandler(toggles, setSinkPoint);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
+		terrainChooser.setMinHeight(40);
 		terrainHandler(terrainChooser);
 		toolBar.getChildren().addAll(setSinkPoint, setSpawnPoint, drawMode, terrainChooser);
 	}

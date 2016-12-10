@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public abstract class ListTab<A> extends AuthoringTab {
     public static final String ADD = "Add";
@@ -67,14 +69,20 @@ public abstract class ListTab<A> extends AuthoringTab {
         Dimension screenSize = retrieveScreenSize();
         // Set up content
         myContent = new TilePane();
+        myContent.getStylesheets().add("style.css");
+        myContent.setId("background");
         myContent.setPrefColumns(prefColumns);
         VBox left = new VBox();
+        left.getStylesheets().add("style.css");
+        left.setId("vbox");
         ScrollPane scroll = new ScrollPane();
         bindSize(left, scroll);
         left.setPrefWidth(screenSize.getWidth()/prefColumns - OFFSET);
         left.setPrefHeight(screenSize.getHeight()/1.5);
         // Set up add button
         Button add = new Button(ADD);
+        add.getStylesheets().add("style.css");
+        add.setId("button");
         add.setOnAction(handleAddNewObject());
         bindWidth(left, add);
         
@@ -138,6 +146,8 @@ public abstract class ListTab<A> extends AuthoringTab {
      */
     public Button setUpCancelButton(VBox v){
     	Button cancel = new Button(getResources().getString("Cancel"));
+    	cancel.getStylesheets().add("style.css");
+    	cancel.setId("button");
     	cancel.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent event){
     			getTilePane().getChildren().remove(v);

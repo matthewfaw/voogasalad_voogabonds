@@ -1,14 +1,14 @@
 package engine.model.systems;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.CollidableComponent;
+import engine.model.components.IComponent;
 import engine.model.components.PhysicalComponent;
-import engine.model.entities.IEntity;
+import engine.model.strategies.IPhysical;
 
 /**
  * A system to manage collision detection in the game
@@ -23,11 +23,10 @@ import engine.model.entities.IEntity;
 public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableComponent>,*/ IObservable<ISystem> {
 	private List<CollidableComponent> myCollidableComponents;
 	private List<IObserver<ISystem>> myObservers;
-	private List<PhysicalComponent> myPhysicalComponents;
+	private PhysicalSystem myPhysicalSystem;
 	
-	public CollisionDetectionSystem() {
+	public CollisionDetectionSystem(PhysicalSystem physical) {
 		myCollidableComponents = new ArrayList<CollidableComponent>();
-		myPhysicalComponents = new ArrayList<PhysicalComponent>();
 	}
 
 	/**
@@ -37,73 +36,45 @@ public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableCo
 	 * @return true if a and b are in either of each other's 
 	 * collision radii; false if not
 	 */
-	private boolean intersects(IEntity a, IEntity b)
+	private boolean intersects(CollidableComponent a, CollidableComponent b)
 	{
-		PhysicalComponent aPhysical = findPhysicalComponent(a);
-		PhysicalComponent bPhysical = findPhysicalComponent(b);
+		IPhysical aPhysical = myPhysicalSystem.get(a);
+		IPhysical bPhysical = myPhysicalSystem.get(b);
 		double a_x = aPhysical.getPosition().getX();
 		double a_y = aPhysical.getPosition().getY();
 		double b_x = bPhysical.getPosition().getX();
 		double b_y = bPhysical.getPosition().getY();
 		
-		CollidableComponent aCollidable = findCollidableComponent(a);
-		CollidableComponent bCollidable = findCollidableComponent(b);
-		double a_r = aCollidable.getCollisionRadius();
-		double b_r = bCollidable.getCollisionRadius();
+		double a_r = a.getCollisionRadius();
+		double b_r = b.getCollisionRadius();
 		
 		return Math.pow(a_r - b_r, 2) <= 
 				Math.pow(a_x - b_x, 2) + 
 				Math.pow(a_y - b_y, 2);
 	}
-	
-	/**
-	 * Given the input entity, returns the corresponding physical component.
-	 * 
-	 * @param query: entity being queried
-	 * @return physical component that the input entity owns
-	 */
-	private PhysicalComponent findPhysicalComponent(IEntity query) {
-		PhysicalComponent found = null;
-		for (PhysicalComponent cc: myPhysicalComponents) {
-			if (cc.getEntity() == query) {
-				found = cc;
-			}
-		}
-		return found;
-	}
 
-	/**
-	 * Given the input entity, returns the corresponding collidable component.
-	 * 
-	 * @param query: entity being queried
-	 * @return collidable component that the input entity owns
-	 */
-	private CollidableComponent findCollidableComponent(IEntity query) {
-		CollidableComponent found = null;
-		for (CollidableComponent cc: myCollidableComponents) {
-			if (cc.getEntity() == query) {
-				found = cc;
-			}
-		}
-		return found;
-	}
 	
 	/**
 	 * Checks if a physical component collides with anything in
 	 * it's collision radius.
 	 * @param the physical component that changed position
 	 */
-	public void checkCollision(PhysicalComponent movedPhysicalComponent) {
-		CollidableComponent movedCollidable = findCollidableComponent(movedPhysicalComponent.getEntity());
+	public void checkCollision(PhysicalComponent movedPhysical) {
+		CollidableComponent movedCollidable = get(movedPhysical);
 		if (movedCollidable != null) {
 			// Check all Entities to see if any are intersecting with the current object
-			for(PhysicalComponent observable: myPhysicalComponents) {
-				if (intersects(movedPhysicalComponent.getEntity(), observable.getEntity())) {
-					CollidableComponent unmovedCollidable = findCollidableComponent(observable.getEntity());
-					movedCollidable.collideInto(unmovedCollidable);
-				}
+			for (CollidableComponent c: myCollidableComponents) {
+				if (c != movedCollidable && intersects(movedCollidable, c))
+					movedCollidable.collideInto(c);
 			}
 		}
+	}
+	
+	public CollidableComponent get(IComponent c) {
+		for (CollidableComponent t: myCollidableComponents)
+			if (t.getEntity().equals(c.getEntity()))
+				return t;
+		return null;
 	}
 	
 	/************ Attach and detach component methods ************/
@@ -114,13 +85,7 @@ public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableCo
 	public void detachComponent(CollidableComponent aComponent) {
 		myCollidableComponents.remove(aComponent);
 	}
-	
-	public void attachComponent(PhysicalComponent aComponent) {
-		myPhysicalComponents.add(aComponent);
-	}
-	public void detachComponent(PhysicalComponent aComponent) {
-		myPhysicalComponents.remove(aComponent);
-	}
+
 
 //	/************************* Observer interface ****************************/
 //	

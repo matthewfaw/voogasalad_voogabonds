@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class WaveTab extends ListTab<String> implements IObserver<Container>{
+public class WaveTab extends ListTab<String> implements IObserver<Container>, ISubmittable{
 
     private static final int COLS = 2;
     
@@ -37,6 +37,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 	
 	private ObservableList<String> myEntities = FXCollections.observableList(new ArrayList<String>());
 	private ObservableList<String> mySpawnPoints = FXCollections.observableList(new ArrayList<String>());
+	private ObservableList<String> mySinkPoints = FXCollections.observableList(new ArrayList<String>());
 	
 	public WaveTab(String text, WaveDataContainer container){
 		super(text, COLS);
@@ -61,6 +62,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 	private VBox setUpMenu(String name, String timeBetween, String timeFor, String numEnemies, 
 			String enemy, String spawn){
 		myV = new VBox();
+		myV.setId("vbox");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		myTimeBetweenField = setUpTextInputWithLabel(getResources().getString("EnterTimeBetween"), 
 				timeBetween, myV);
@@ -73,9 +75,10 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		mySpawnBox = setUpStringComboBoxWithLabel(getResources().getString("EnterSpawnPoint"),
 				spawn, mySpawnPoints, myV);
 		myName = name;
-		Button finish = setUpFinishButton();
+		Button finish = setUpSubmitButton();
 		Button cancel = setUpCancelButton(myV);
 		HBox h = new HBox();
+		h.setId("hbox");
 		h.getChildren().addAll(finish, cancel);
 		myV.getChildren().add(h);
 		return myV;
@@ -88,8 +91,12 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 	public void update(Container c){
 		if (c instanceof MapDataContainer){
 			mySpawnPoints.clear();
+			mySinkPoints.clear();
 			for (String spawnPoint: ((MapDataContainer) c).getSpawnPointMap().keySet()){
 				mySpawnPoints.add(spawnPoint);
+			}
+			for (String sinkPoint: ((MapDataContainer) c).getSinkPointMap().keySet()){
+				mySinkPoints.add(sinkPoint);
 			}
 		}else if(c instanceof EntityDataContainer){
 			myEntities.clear();
@@ -104,16 +111,15 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 	protected void edit(String name) {
 		isDefault = false;
 		WaveData wave = myContainer.getWaveData(name);
-		VBox menu = setUpMenu(wave.getName(), String.valueOf(wave.getTimeBetweenEnemy()), 
-				String.valueOf(wave.getTimeUntilNextWave()), String.valueOf(wave.getNumEnemies()), 
-				wave.getWaveEnemy(), wave.getSpawnPointName());
+		VBox menu = setUpMenu(wave.getName(), String.valueOf(wave.getTimeBetweenEntity()), 
+				String.valueOf(wave.getTimeUntilNextWave()), String.valueOf(wave.getNumEntities()), 
+				wave.getWaveEntity(), wave.getSpawnPointName());
 		getTilePane().getChildren().add(menu);
 	}
 
-
-	@Override
-	protected Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
+		finish.setId("button");
 		finish.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				WaveData wave = new WaveData();
@@ -122,7 +128,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 					wave.setTimeBetweenEnemy(myTimeBetweenField.getText());
 					wave.setTimeForWave(myTimeForField.getText());
 					wave.setNumEnemies(myNumEnemiesField.getText());
-					wave.setWaveEnemy(myEnemyBox.getValue());
+					wave.setWaveEntity(myEnemyBox.getValue());
 					wave.setSpawnPointName(mySpawnBox.getValue());
 				} catch(Exception e){
 					showError(e.getMessage());
