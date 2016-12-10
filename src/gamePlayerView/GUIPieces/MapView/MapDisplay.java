@@ -134,6 +134,6 @@ public class MapDisplay implements IObserver<TimelineController> {
 
     @Override
     public void update(TimelineController aChangedObject) {
-        
+        //TODO:
     }
 }
