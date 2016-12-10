@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class WaveTab extends ListTab<String> implements IObserver<Container>{
+public class WaveTab extends ListTab<String> implements IObserver<Container>, ISubmittable{
 
     private static final int COLS = 2;
     
@@ -61,6 +61,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 	private VBox setUpMenu(String name, String timeBetween, String timeFor, String numEnemies, 
 			String enemy, String spawn){
 		myV = new VBox();
+		myV.setId("blue-background");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		myTimeBetweenField = setUpTextInputWithLabel(getResources().getString("EnterTimeBetween"), 
 				timeBetween, myV);
@@ -73,7 +74,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		mySpawnBox = setUpStringComboBoxWithLabel(getResources().getString("EnterSpawnPoint"),
 				spawn, mySpawnPoints, myV);
 		myName = name;
-		Button finish = setUpFinishButton();
+		Button finish = setUpSubmitButton();
 		Button cancel = setUpCancelButton(myV);
 		HBox h = new HBox();
 		h.getChildren().addAll(finish, cancel);
@@ -110,9 +111,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		getTilePane().getChildren().add(menu);
 	}
 
-
-	@Override
-	protected Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
 		finish.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
