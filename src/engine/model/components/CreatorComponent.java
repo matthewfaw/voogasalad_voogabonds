@@ -14,7 +14,7 @@ import engine.model.strategies.ISpawningStrategy;
  * @author matthewfaw
  *
  */
-public class CreatorComponent implements IComponent, ICreator {
+public class CreatorComponent extends AbstractComponent implements ICreator {
 	private IEntity myEntity;
 	
 	private int myTimeBetweenSpawns;
@@ -23,11 +23,6 @@ public class CreatorComponent implements IComponent, ICreator {
 
 	private ISpawningStrategy mySpawningStrategy;
 	private EntityFactory myEntityFactory;
-
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
 
 	//TODO:
 	/**

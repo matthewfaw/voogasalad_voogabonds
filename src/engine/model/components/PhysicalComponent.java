@@ -3,12 +3,13 @@ package engine.model.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.IViewable;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
-import engine.model.systems.CollisionDetectionSystem;
+import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
 import utility.Point;
@@ -20,7 +21,7 @@ import utility.Point;
  * @author matthewfaw
  *
  */
-public class PhysicalComponent implements IComponent, IPhysical, IViewable {
+public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	@Hide
@@ -34,11 +35,7 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 	@Hide
 	private List<String> myValidTerrains;
 	
-	private CollisionDetectionSystem myCollisionDetectionSystem;
-	
-	@Hide
-	private Router myRouter;
-	
+	/*
 	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router) {
 		myCollisionDetectionSystem = collisionDetectionSystem;
 		myCollisionDetectionSystem.attachComponent(this);
@@ -46,14 +43,22 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 		myRouter = router;
 		myRouter.distributeViewableComponent(this);
 	}
+	*/
+	
+	public PhysicalComponent (PhysicalSystem PhysicalSystem, Router router, ComponentData data) {
+		myObservers = new ArrayList<IObserver<IViewable>>();
+		router.distributeViewableComponent(this);
+		
+		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
+		myImagePath = data.getFields().get("myImagePath");
+		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
+		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+	}
+
 	
 	/******** Setters ********/
 	public void setPosition(Point position) {
 		myPosition = position;
-		/*  ask collision detection system if this physical 
-		 *  component collides with anything
-		 */
-		myCollisionDetectionSystem.checkCollision(this);
 	}
 	
 	/******************IViewable interface********/
@@ -90,12 +95,6 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 		myHeading = p.getKey();
 		myPosition = p.getValue();
 		notifyObservers();
-	}
-
-	/***************IComponent interface**********/
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
 	}
 
 	/******************IObservable interface********/

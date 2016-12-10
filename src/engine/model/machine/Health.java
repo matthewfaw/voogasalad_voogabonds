@@ -1,7 +1,7 @@
 package engine.model.machine;
 import utility.Damage;
 
-
+@Deprecated
 public class Health {
 	private double myMaxHealth;
 	private double myCurrHealth;

@@ -3,7 +3,6 @@ package engine.model.resourcestore;
 import java.util.List;
 
 import authoring.model.EntityData;
-import authoring.model.TowerData;
 
 /**
  * This class is the store that keeps all available resources

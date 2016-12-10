@@ -12,6 +12,7 @@ import engine.model.projectiles.ProjectileFactory;
  * @author Weston
  *
  */
+@Deprecated
 public class WeaponFactory {
 	private ProjectileFactory myProjectileFactory;
 	private DataStore<WeaponData> myWeapons;

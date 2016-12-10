@@ -6,6 +6,7 @@ package engine.model.weapons;
  * @author Weston
  *
  */
+@Deprecated
 public class DamageInfo {
 	private double myDamage;
 	private double myHealing;

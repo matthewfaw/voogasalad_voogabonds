@@ -1,5 +1,6 @@
 package engine.model.components;
 
+import authoring.model.ComponentData;
 import engine.model.entities.IEntity;
 import engine.model.systems.HealthSystem;
 import utility.Damage;
@@ -13,16 +14,16 @@ import utility.Damage;
  * @author owenchung (edits)
  *
  */
-public class HealthComponent implements IComponent {
+public class HealthComponent extends AbstractComponent {
 	private static double DEFAULT_HEALTH = 0.0;
 	
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private IEntity myEntity;
-	
-	public HealthComponent(IEntity entity, HealthSystem healthSystem, double maxHealth) {
-		myEntity = entity;
+	/*
+	public HealthComponent(HealthSystem healthSystem, double maxHealth) {
+		//myEntity = entity;
 		
 		//myHealthSystem = healthSystem;
 		healthSystem.attachComponent(this);
@@ -30,9 +31,10 @@ public class HealthComponent implements IComponent {
 		myCurrHealth = maxHealth;
 		myMaxHealth = maxHealth;
 	}
+	*/
 	
-	public HealthComponent(IEntity entity, HealthSystem healthSystem) {
-		myEntity = entity;
+	public HealthComponent(HealthSystem healthSystem, ComponentData componentdata) {
+		//myEntity = entity;
 		
 		//myHealthSystem = healthSystem;
 		healthSystem.attachComponent(this);
@@ -68,11 +70,4 @@ public class HealthComponent implements IComponent {
 			myCurrHealth = myMaxHealth;
 		}
 	}
-
-	/**********************IComponent Interface********/
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
-
 }

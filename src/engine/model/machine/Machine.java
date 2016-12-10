@@ -9,15 +9,11 @@ import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
 import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.projectiles.Projectile;
 import engine.model.strategies.IMovable;
-import engine.model.strategies.IMovementStrategy;
-import engine.model.strategies.StrategyFactory;
 import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
 import engine.model.weapons.DamageInfo;
 import engine.model.weapons.IKillerOwner;
-import engine.model.weapons.IWeapon;
 import engine.model.weapons.WeaponFactory;
 import javafx.util.Pair;
 import utility.Damage;
@@ -27,15 +23,15 @@ import utility.Point;
 abstract public class Machine implements IViewableMachine, IModifiableMachine, IMovable, IObserver<TimelineController>, ICollidable, IKillerOwner, IRegisterable {
 	private List<IObserver<IViewable>> myObservers;
 	private IModifiablePlayer myModifiablePlayer;
-	private WeaponFactory myArmory;
+	//private WeaponFactory myArmory;
 	
 	private String myName;
 	private String myImagePath;
-	private IWeapon myWeapon;
+	//private IWeapon myWeapon;
 	private Health myHealth;
 	
-	private IMovementStrategy myMoveCalc;
-	private List<String> myValidTerrains;
+	//private IMovementStrategy myMoveCalc;
+	//private List<String> myValidTerrains;
 	private double myCollisionRadius;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
@@ -48,15 +44,15 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		myObservers = new ArrayList<IObserver<IViewable>>();
 
 		myModifiablePlayer = owner;
-		myArmory = armory;
+		//myArmory = armory;
 		
 		myName = data.getName();
 		myImagePath = data.getImagePath();
-		myWeapon = myArmory.newWeapon(data.getWeaponName(), this);
+		//myWeapon = myArmory.newWeapon(data.getWeaponName(), this);
 		myHealth = new Health(data.getMaxHealth());
 		
-		myMoveCalc = StrategyFactory.movementStrategy(data.getMoveStrategyName());
-		myValidTerrains = data.getTerrainList();
+		//myMoveCalc = StrategyFactory.movementStrategy(data.getMoveStrategyName());
+		//myValidTerrains = data.getTerrainList();
 		myCollisionRadius = data.getCollisionRadius();
 		myTurnSpeed = data.getTurnSpeed();
 		myMoveSpeed = data.getMoveSpeed();
@@ -75,7 +71,7 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	
 	@Deprecated
 	public void setPossibleTerrains(List<String> l) {
-		myValidTerrains = l;
+		//myValidTerrains = l;
 	}
 	
 	@Override
@@ -219,11 +215,11 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 
 	protected void upgrade(MachineData upgradeData) {
 		myName = upgradeData.getName();
-		myWeapon = myArmory.newWeapon(upgradeData.getWeaponName(), this);
+		//myWeapon = myArmory.newWeapon(upgradeData.getWeaponName(), this);
 		myHealth.setMaxHealth(upgradeData.getMaxHealth());
 		
-		myMoveCalc = StrategyFactory.movementStrategy(upgradeData.getMoveStrategyName());
-		myValidTerrains = upgradeData.getTerrainList();
+		//myMoveCalc = StrategyFactory.movementStrategy(upgradeData.getMoveStrategyName());
+		//myValidTerrains = upgradeData.getTerrainList();
 		myCollisionRadius = upgradeData.getCollisionRadius();
 		myTurnSpeed = upgradeData.getTurnSpeed();
 		myMoveSpeed = upgradeData.getMoveSpeed();

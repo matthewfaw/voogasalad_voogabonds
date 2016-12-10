@@ -15,7 +15,7 @@ import utility.Damage;
  * @author matthewfaw
  *
  */
-public class DamageDealingComponent implements IComponent {
+public class DamageDealingComponent extends AbstractComponent {
 	private IDamageStrategy myDamageStrategy;
 	private int myDamage;
 	private double myDamageRadius;
@@ -50,11 +50,6 @@ public class DamageDealingComponent implements IComponent {
 	public double getDamageRadius()
 	{
 		return myDamageRadius;
-	}
-	
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
 	}
 
 	/*

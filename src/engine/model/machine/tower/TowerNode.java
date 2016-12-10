@@ -9,6 +9,7 @@ import authoring.model.TowerData;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
 
+@Deprecated
 public class TowerNode {
 	private TowerData myTowerData;
 

@@ -16,7 +16,7 @@ public class PhysicalSystem implements ISystem {
 		myMap = map;
 	}
 	
-	public IPhysical get(IComponent c) {
+	public PhysicalComponent get(IComponent c) {
 		for (PhysicalComponent p: myComponents)
 			if (p.getEntity().equals(c.getEntity()))
 				return p;
