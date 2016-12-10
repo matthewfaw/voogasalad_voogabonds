@@ -1,7 +1,9 @@
 package authoring.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import engine.model.components.PurchasableComponentData;
@@ -14,14 +16,14 @@ import engine.model.components.UpgradableComponentData;
 
 public class EntityData implements IReadableData {
 	private String myName;
-	List<ComponentData> myComponents;
+	Map<String, ComponentData> myComponents;
 	Optional<UpgradableComponentData> myUpgradeData;
 	Optional<SellableComponentData> mySellData;
 	Optional<PurchasableComponentData> myPurchaseData;
 	
 	public EntityData()
 	{
-		myComponents = new ArrayList<ComponentData>();
+		myComponents = new HashMap<String, ComponentData>();
 	}
 	
 	public String getName(){
@@ -32,11 +34,11 @@ public class EntityData implements IReadableData {
 		this.myName = s;
 	}
 	
-	public void addComponent(ComponentData comp){
-		myComponents.add(comp);
+	public void addComponent(String aName, ComponentData comp){
+		myComponents.put(aName, comp);
 	}
 	
-	public List<ComponentData> getComponents(){
+	public Map<String, ComponentData> getComponents(){
 		return myComponents;
 	}
 }

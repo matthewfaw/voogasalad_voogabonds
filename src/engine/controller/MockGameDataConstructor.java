@@ -94,8 +94,8 @@ class MockGameDataConstructor {
 			cd2.setComponentName("CollidableComponent");
 			cd2.addField("myCollisionRadius", "50");
 			
-			ed.addComponent(cd1);
-			ed.addComponent(cd2);
+			ed.addComponent("PhysicalComponent",cd1);
+			ed.addComponent("CollidableComponent",cd2);
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();

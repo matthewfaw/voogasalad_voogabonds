@@ -61,7 +61,7 @@ public class EditComponentBox extends VBox {
         this.getChildren().add(btns);
     }
     
-    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, AbstractMap<String,String> retrievedData) {
+    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, Map<String,String> retrievedData) {
         super(SPACING);
         
         this.parent = parent;
