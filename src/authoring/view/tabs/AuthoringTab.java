@@ -15,12 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class AuthoringTab extends Tab {
+public abstract class AuthoringTab extends Tab {
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
     
     private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
@@ -126,12 +127,33 @@ public class AuthoringTab extends Tab {
         return menuBtn;
     }
     
+    protected TextField setUpTextInputWithLabel(String enter, String defaultText, VBox root){
+    	Label label = setUpLabel(enter);
+    	TextField field = setUpTextInput(defaultText);
+    	label.setLabelFor(field);
+    	root.getChildren().addAll(label, field);
+    	return field;
+    }
+    
+    protected ComboBox<String> setUpStringComboBoxWithLabel(String select, String defaultText, 
+    		ObservableList<String> values, VBox root){
+    	Label label = setUpLabel(select);
+    	ComboBox<String> box = setUpStringComboBox(values, defaultText);
+    	label.setLabelFor(box);
+    	root.getChildren().addAll(label, box);
+    	return box;
+    }
+    
     protected void showError (String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(myResources.getString("ErrorTitle"));
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    
+    
+    
+    
+    
 	
 }
