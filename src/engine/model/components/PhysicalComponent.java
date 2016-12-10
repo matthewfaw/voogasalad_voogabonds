@@ -1,8 +1,10 @@
 package engine.model.components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.IViewable;
@@ -45,6 +47,15 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myRouter = router;
 		myRouter.distributeViewableComponent(this);
+	}
+	
+	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router, ComponentData data) {
+		this(collisionDetectionSystem, router);
+		
+		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
+		myImagePath = data.getFields().get("myImagePath");
+		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
+		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
 	}
 	
 	/******** Setters ********/

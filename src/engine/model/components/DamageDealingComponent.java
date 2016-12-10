@@ -51,11 +51,6 @@ public class DamageDealingComponent extends AbstractComponent {
 	{
 		return myDamageRadius;
 	}
-	
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
 
 	/*
 	@Override
