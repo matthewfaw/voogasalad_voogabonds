@@ -7,19 +7,24 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import authoring.model.serialization.GameStateDeserializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.MainInitializer;
+
 
 /**
  * @author Christopher Lu
@@ -36,6 +41,7 @@ public class LoadAuthoringScreen {
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private int screenWidth;
 	private int screenHeight;
+	private TextField showSelectedTitle = new TextField();
 	private ObservableList<MenuTableItem> data =
 			FXCollections.observableArrayList(
 					);
@@ -73,13 +79,27 @@ public class LoadAuthoringScreen {
 		chooseProjectTable.setItems(data);
 		chooseProjectTable.getColumns().addAll(firstCol, secondCol);
 		VBox boxRight = new VBox(screenHeight*0.1);
-		TextField showSelectedTitle = new TextField();
 		showSelectedTitle.setPromptText(myResources.getString("ShowSelectedProject"));
 		showSelectedTitle.setEditable(false);
 		Button startAuthoring = new Button(myResources.getString("ConfirmAuthoringSetUp"));
 		boxRight.getChildren().addAll(showSelectedTitle, startAuthoring);
 		optionArea.getChildren().addAll(chooseProjectTable, boxRight);
 		pane.setCenter(optionArea);
+		chooseProjectTable.setOnMousePressed(new EventHandler<MouseEvent>() {
+		    @Override 
+		    public void handle(MouseEvent event) {
+		        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+		        	GameStateDeserializer GSD = new GameStateDeserializer();
+		        	showSelectedTitle.setText(chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName());
+		        	try {
+						GSD.loadGameState("src/SerializedFiles/"+chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName().toString());
+					} catch (Exception e) {
+						//TODO: add error checking to more appropriate place in package
+					}
+		        }
+		    }
+		});
+
 	}
 	
 	private void setUpScreenResolution() {
@@ -87,5 +107,6 @@ public class LoadAuthoringScreen {
 		screenWidth = (int) screenSize.getWidth();
 		screenHeight = (int) screenSize.getHeight();
 	}
+		
 	
 }
