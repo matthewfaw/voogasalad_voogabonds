@@ -9,6 +9,7 @@ import authoring.model.ComponentData;
 import authoring.model.EntityData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
+import engine.model.components.IModifiableComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -47,7 +48,7 @@ public class EntityFactory {
 		EntityData entityData = myEntityDataStore.getData(entityName);
 		Collection<ComponentData> componentMap = entityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
-			IComponent component = myComponentFactory.constructComponent(compdata);
+			IModifiableComponent component = myComponentFactory.constructComponent(compdata);
 			entity.addComponent(component);	
 		}
 		return entity;
@@ -59,7 +60,7 @@ public class EntityFactory {
 		IEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
-			IComponent component = myComponentFactory.constructComponent(compdata);
+			IModifiableComponent component = myComponentFactory.constructComponent(compdata);
 			entity.addComponent(component);	
 		}
 		

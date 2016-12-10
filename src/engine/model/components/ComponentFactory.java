@@ -36,7 +36,7 @@ public class ComponentFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	public IComponent constructComponent(ComponentData compdata) 
+	public IModifiableComponent constructComponent(ComponentData compdata) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> tmpclass =  Class.forName(COMPONENT_PATH+compdata.getComponentName());
 		Constructor<?>[] constructors = tmpclass.getConstructors();
@@ -58,7 +58,7 @@ public class ComponentFactory {
 			}
 		}
 //		IComponent test = (IComponent) constructors[0].newInstance(objectsToAttach.toArray());
-		return (IComponent) constructors[0].newInstance(objectsToAttach.toArray());
+		return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		
 	}
 

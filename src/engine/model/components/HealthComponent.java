@@ -13,7 +13,7 @@ import utility.Damage;
  * @author owenchung (edits)
  *
  */
-public class HealthComponent implements IComponent {
+public class HealthComponent extends AbstractComponent {
 	private static double DEFAULT_HEALTH = 0.0;
 	
 	//private HealthSystem myHealthSystem;
@@ -21,8 +21,8 @@ public class HealthComponent implements IComponent {
 	private Double myMaxHealth;
 	private IEntity myEntity;
 	
-	public HealthComponent(IEntity entity, HealthSystem healthSystem, double maxHealth) {
-		myEntity = entity;
+	public HealthComponent(HealthSystem healthSystem, double maxHealth) {
+		//myEntity = entity;
 		
 		//myHealthSystem = healthSystem;
 		healthSystem.attachComponent(this);
@@ -32,7 +32,7 @@ public class HealthComponent implements IComponent {
 	}
 	
 	public HealthComponent(IEntity entity, HealthSystem healthSystem) {
-		myEntity = entity;
+		//myEntity = entity;
 		
 		//myHealthSystem = healthSystem;
 		healthSystem.attachComponent(this);
@@ -68,11 +68,4 @@ public class HealthComponent implements IComponent {
 			myCurrHealth = myMaxHealth;
 		}
 	}
-
-	/**********************IComponent Interface********/
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
-
 }

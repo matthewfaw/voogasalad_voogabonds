@@ -20,7 +20,7 @@ import utility.Point;
  * @author matthewfaw
  *
  */
-public class PhysicalComponent implements IComponent, IPhysical, IViewable {
+public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	@Hide
@@ -90,12 +90,6 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 		myHeading = p.getKey();
 		myPosition = p.getValue();
 		notifyObservers();
-	}
-
-	/***************IComponent interface**********/
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
 	}
 
 	/******************IObservable interface********/

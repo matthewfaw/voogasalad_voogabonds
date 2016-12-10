@@ -91,6 +91,7 @@ public class MockGameDataConstructor {
 			cd1.addField("myHeading", "0");
 			cd1.addField("myImagePath", "src/resources/cookie.png");
 			cd1.addField("myImageSize", "50");
+			cd1.addField("myValidTerrains", "grass, ice, steel, dark, fairy");
 			
 			ComponentData cd2 = new ComponentData();
 			cd2.setComponentName("CollidableComponent");
