@@ -46,12 +46,19 @@ public class ComponentFactory {
 		List<Object> objectsToAttach = new ArrayList<Object>();
 		for (Class<?> arg : arguments) {
 			// attach appropriate system to argument
-			objectsToAttach.add(getSystemToAttach(arg));
+			ISystem sysToAdd = getSystemToAttach(arg);
+			if (sysToAdd != null) {
+				objectsToAttach.add(getSystemToAttach(arg));
+				continue;
+			}
 			// check if arg is Router, if so, attach myRouter
-			objectsToAttach.add(getRouterToAttach(arg));
+			Router routerToAdd = getRouterToAttach(arg);
+			if (routerToAdd != null) {
+				objectsToAttach.add(getRouterToAttach(arg));
+			}
 		}
-		
-		return (IComponent) constructors[0].newInstance( new Object[] { objectsToAttach.toArray() } );
+//		IComponent test = (IComponent) constructors[0].newInstance(objectsToAttach.toArray());
+		return (IComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		
 	}
 

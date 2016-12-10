@@ -8,10 +8,15 @@ import utility.Damage;
  * The purpose of this class is to manage the health information
  * relevant to an entity
  * manages how an entity should take damage
- * @author matthewfaw Weston
+<<<<<<< HEAD
+ * @author matthewfaw
+ * @author Weston
+ * @author owenchung (edits)
  *
  */
 public class HealthComponent implements IComponent {
+	private static double DEFAULT_HEALTH = 0.0;
+	
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;
 	private Double myMaxHealth;
@@ -24,9 +29,9 @@ public class HealthComponent implements IComponent {
 		healthSystem.attachComponent(this);
 		
 		myCurrHealth = maxHealth;
-		myMaxHealth = maxHealth;	
+		myMaxHealth = maxHealth;
 	}
-	
+		
 	public int getCurrentHealth() {
 		return myCurrHealth.intValue();
 	}
