@@ -24,6 +24,7 @@ import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
+import utility.ResouceAccess;
 
 /**
  * A class to construct some mock game data for testing
@@ -143,7 +144,7 @@ class MockGameDataConstructor {
 //			terrainMap.getDestination();
 		} catch (Exception e) {
 			//TODO add more meaningful error message
-			throw new SerializationException("Could not serialize");
+			throw new SerializationException(ResouceAccess.getError("NoSerialize"));
 		}
 	}
 	public static void main(String[] args) throws SerializationException

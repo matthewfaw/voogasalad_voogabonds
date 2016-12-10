@@ -17,6 +17,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
 import main.MainInitializer;
+import utility.ResouceAccess;
 
 public class AuthorDisplay {
     public static final String AUTHORING_TITLE = "Authoring Environment";
@@ -61,7 +62,7 @@ public class AuthorDisplay {
             }
             tabPane.getTabs().remove(1);
         } catch (ClassNotFoundException e) {
-        	throw new UnsupportedOperationException("Tabs cannot be constructed.", e);
+        	throw new UnsupportedOperationException(ResouceAccess.getError("NoTabs"), e);
         }
 
         // Set regions of BorderPane
