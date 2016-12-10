@@ -1,6 +1,7 @@
 package engine.controller.waves;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
 import java.util.Map;
 
 import authoring.controller.LevelDataContainer;
@@ -30,16 +31,16 @@ public class WaveController {
 	
 	public WaveController (DataStore<EntityData> aEnemyDataStore, LevelData aLevelData, double startTime) {
 		myActiveWaveManager = new ActiveWaveManager(aEnemyDataStore, aLevelData, startTime);
-	}
 
-	//*******************Observer interface***************//
-	public void update(double elapsedTime) {
-		//TODO: check if we should spawn a new enemy
-		// if true, then distribute the enemy through the mediator
-		Map<EntityData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct( elapsedTime );
-		for (EntityData enemyData: enemiesToConstruct.keySet()) {
+	}
+	
+	public void distributeEntities(double aElapsedTime)
+	{
+		Map<EntityData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct( aElapsedTime );
+		for (Iterator<EntityData> iterator = enemiesToConstruct.keySet().iterator(); iterator.hasNext();) {
+			EntityData entityData = iterator.next();
 			try {
-				myEntityFactory.constructEntity(enemyData);
+				myEntityFactory.constructEntity(entityData);
 			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
 					| IllegalArgumentException | InvocationTargetException e) {
 				// TODO Auto-generated catch block
@@ -50,8 +51,6 @@ public class WaveController {
 		//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
 			
 		}
-		
-		
 	}
 
 	public boolean isLevelFinished() {

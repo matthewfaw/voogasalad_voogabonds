@@ -15,20 +15,24 @@ public class LevelController implements IObserver<TimelineController> {
 	private WaveController myWaveController;
 	private DataStore<EntityData> myEntityDataStore;
 	private int myCurrentLevel;
-	public LevelController(LevelDataContainer aGameLevelsData, DataStore<EntityData> aEntityDataStore) {
+
+	public LevelController(LevelDataContainer aGameLevelsData, int aStartingLevel, DataStore<EntityData> aEntityDataStore) {
 		myLevelDataContainer = aGameLevelsData;
 		myEntityDataStore = aEntityDataStore;
+		
+		myWaveController = new WaveController(aEntityDataStore, aGameLevelsData.getLevelData(aStartingLevel), myCurrentLevel);
 	}
 
 	@Override
 	//*******************Observer interface***************//
 	public void update(TimelineController aChangedObject) {
-		if (myWaveController == null || myWaveController.isLevelFinished()) {
+		if (myWaveController.isLevelFinished()) {
 			myCurrentLevel ++;
-			myWaveController = new WaveController(myEntityDataStore, myLevelDataContainer.getLevelData(myCurrentLevel), aChangedObject.getTotalTimeElapsed());
+			if (myLevelDataContainer.hasLevel(myCurrentLevel)) {
+				myWaveController = new WaveController(myEntityDataStore, myLevelDataContainer.getLevelData(myCurrentLevel), aChangedObject.getTotalTimeElapsed());
+			}
 		}
 		
+		myWaveController.distributeEntities(aChangedObject.getTotalTimeElapsed());
 	}
-	
-	
 }

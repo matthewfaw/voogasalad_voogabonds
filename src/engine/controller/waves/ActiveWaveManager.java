@@ -2,6 +2,7 @@ package engine.controller.waves;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,12 +61,15 @@ public class ActiveWaveManager {
 		
 		//3. get all the enemies
 		Map<EntityData, String> enemiesToConstruct = new HashMap<EntityData, String>();
-		for (WaveState activeWave: myWaveStates) {
+
+		for (Iterator<WaveState> iterator = myWaveStates.iterator(); iterator.hasNext();) {
+			WaveState activeWave = iterator.next();
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
 				EntityData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
 				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
 			} else {
-				myWaveStates.remove(activeWave);
+				iterator.remove();
+//				myWaveStates.remove(activeWave);
 			}
 		}
 		

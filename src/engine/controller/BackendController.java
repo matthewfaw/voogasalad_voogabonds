@@ -6,16 +6,11 @@ import java.util.ResourceBundle;
 
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
-import authoring.model.EnemyData;
 import authoring.model.EntityData;
-import authoring.model.GameLevelsData;
-import authoring.model.IReadableData;
 import authoring.model.PlayerData;
-import authoring.model.TowerData;
-import authoring.model.map.MapData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
-import engine.controller.waves.WaveController;
+import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
@@ -39,6 +34,7 @@ import utility.Point;
  */
 public class BackendController {
 	private static final String GAME_DATA_PATH = "resources/game_data_relative_paths/relative_paths";
+	private static final int DEFAULT_STARTING_LEVEL=0;
 
 	//Utilities
 	private ResourceBundle myGameDataRelativePaths;
@@ -57,7 +53,7 @@ public class BackendController {
 	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private PlayerController myPlayerController;
-	private WaveController myWaveController;
+	private LevelController myLevelController;
 	private Router myRouter;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
@@ -94,8 +90,9 @@ public class BackendController {
 		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
-		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
-		myTimelineController.attach(myWaveController);
+//		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
+		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore);
+		myTimelineController.attach(myLevelController);
 	}
 	
 	/**

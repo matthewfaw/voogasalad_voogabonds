@@ -36,7 +36,8 @@ public class EntityFactory {
 	}
 	
 	@Deprecated //Can we use the one above instead?
-	public IEntity constructEntity(EntityData aEntityData ) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public IEntity constructEntity(EntityData aEntityData ) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException 
+	{
 		IEntity entity = new ConcreteEntity();
 		List<ComponentData> componentMap = aEntityData.getComponents();
 		for (ComponentData compdata : componentMap) {
