@@ -3,6 +3,7 @@ package engine.model.playerinfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.TowerData;
 import engine.IObserver;
@@ -92,8 +93,8 @@ public class Player implements IModifiablePlayer {
 
 	@Override
 	@Deprecated
-	public List<TowerData> getAvailableTowers() {
-		List<TowerData> towerList = new ArrayList<TowerData>();
+	public List<EntityData> getAvailableTowers() {
+		List<EntityData> towerList = new ArrayList<EntityData>();
 		for (ResourceStore resourceStore: myResourceStores) {
 			towerList.addAll(resourceStore.getAvailableEntities());
 		}
@@ -102,9 +103,9 @@ public class Player implements IModifiablePlayer {
 
 	@Override
 	@Deprecated
-	public List<TowerData> getAffordableTowers() {
-		List<TowerData> towerList = new ArrayList<TowerData>();
-		for (TowerData towerData: getAvailableTowers()) {
+	public List<EntityData> getAffordableTowers() {
+		List<EntityData> towerList = new ArrayList<EntityData>();
+		for (EntityData towerData: getAvailableTowers()) {
 			if (this.getAvailableMoney() > towerData.getBuyPrice()) {
 				towerList.add(towerData);
 			}
