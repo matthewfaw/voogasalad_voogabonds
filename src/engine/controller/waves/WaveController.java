@@ -35,6 +35,7 @@ public class WaveController {
 		myEntityFactory = aEntityFactory;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void distributeEntities(double aElapsedTime)
 	{
 		Map<EntityData, String> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);

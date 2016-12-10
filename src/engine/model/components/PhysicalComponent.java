@@ -1,5 +1,6 @@
 package engine.model.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.Hide;
@@ -41,7 +42,7 @@ public class PhysicalComponent implements IComponent, IPhysical, IViewable {
 	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router) {
 		myCollisionDetectionSystem = collisionDetectionSystem;
 		myCollisionDetectionSystem.attachComponent(this);
-		
+		myObservers = new ArrayList<IObserver<IViewable>>();
 		myRouter = router;
 		myRouter.distributeViewableComponent(this);
 	}
