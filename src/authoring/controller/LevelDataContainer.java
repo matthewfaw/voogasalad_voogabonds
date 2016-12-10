@@ -44,4 +44,26 @@ public class LevelDataContainer {
 		return myLevelList;
 	}
 
+	/**
+	 * get the level data corresponding to the specified level
+	 * 
+	 * This method assumes that the requested level exists
+	 * 
+	 * @param aLevel
+	 * @return the level data at the specified index, if it exists
+	 */
+	public LevelData getLevelData(int aLevel) {
+		return myLevelList.get(aLevel);
+	}
+	
+	/**
+	 * A method that returns whether a level at the specified index exists
+	 * @param aLevel
+	 * @return true if aLevel is within the level list
+	 */
+	public boolean hasLevel(int aLevel)
+	{
+		return aLevel < myLevelList.size();
+	}
+
 }

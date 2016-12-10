@@ -105,9 +105,9 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 	protected void edit(String name) {
 		isDefault = false;
 		WaveData wave = myContainer.getWaveData(name);
-		VBox menu = setUpMenu(wave.getName(), String.valueOf(wave.getTimeBetweenEnemy()), 
-				String.valueOf(wave.getTimeUntilNextWave()), String.valueOf(wave.getNumEnemies()), 
-				wave.getWaveEnemy(), wave.getSpawnPointName());
+		VBox menu = setUpMenu(wave.getName(), String.valueOf(wave.getTimeBetweenEntity()), 
+				String.valueOf(wave.getTimeUntilNextWave()), String.valueOf(wave.getNumEntities()), 
+				wave.getWaveEntity(), wave.getSpawnPointName());
 		getTilePane().getChildren().add(menu);
 	}
 
@@ -121,7 +121,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 					wave.setTimeBetweenEnemy(myTimeBetweenField.getText());
 					wave.setTimeForWave(myTimeForField.getText());
 					wave.setNumEnemies(myNumEnemiesField.getText());
-					wave.setWaveEnemy(myEnemyBox.getValue());
+					wave.setWaveEntity(myEnemyBox.getValue());
 					wave.setSpawnPointName(mySpawnBox.getValue());
 				} catch(Exception e){
 					showError(e.getMessage());

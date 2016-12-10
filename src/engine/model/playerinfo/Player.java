@@ -91,6 +91,7 @@ public class Player implements IModifiablePlayer {
 	}
 
 	@Override
+	@Deprecated
 	public List<TowerData> getAvailableTowers() {
 		List<TowerData> towerList = new ArrayList<TowerData>();
 		for (ResourceStore resourceStore: myResourceStores) {
@@ -100,6 +101,7 @@ public class Player implements IModifiablePlayer {
 	}
 
 	@Override
+	@Deprecated
 	public List<TowerData> getAffordableTowers() {
 		List<TowerData> towerList = new ArrayList<TowerData>();
 		for (TowerData towerData: getAvailableTowers()) {
