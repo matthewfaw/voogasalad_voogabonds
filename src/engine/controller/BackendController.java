@@ -12,7 +12,7 @@ import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
 import engine.controller.timeline.TimelineController;
-import engine.controller.waves.WaveController;
+import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
@@ -38,6 +38,7 @@ import utility.Point;
  */
 public class BackendController {
 	private static final String GAME_DATA_PATH = "resources/game_data_relative_paths/relative_paths";
+	private static final int DEFAULT_STARTING_LEVEL=0;
 
 	//Utilities
 	private ResourceBundle myGameDataRelativePaths;
@@ -57,7 +58,7 @@ public class BackendController {
 	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private PlayerController myPlayerController;
-	private WaveController myWaveController;
+	private LevelController myLevelController;
 	private Router myRouter;
 	
 	//Factories
@@ -121,8 +122,9 @@ public class BackendController {
 		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
-		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
-		myTimelineController.attach(myWaveController);
+//		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
+		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore, myEntityFactory);
+		myTimelineController.attach(myLevelController);
 	}
 	
 	/**
@@ -161,15 +163,20 @@ public class BackendController {
 	 */
 	private void constructMap()
 	{
-		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
-		MapDataContainer mapData = data.get(0);
-		TerrainMap terrainMap = new TerrainMap(mapData);
-		//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-		MapMediator mapMediator = new MapMediator(terrainMap);
-		myMapDistributor = new MapDistributor(mapMediator, myEntityFactory);
+		try {
+			List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
+			MapDataContainer mapData = data.get(0);
+			TerrainMap terrainMap = new TerrainMap(mapData);
+			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
+			MapMediator mapMediator = new MapMediator(terrainMap);
+			myMapDistributor = new MapDistributor(mapMediator, myEntityFactory);
 
-		//distribute to frontend
-		myRouter.distributeMapData(mapData);
+			//distribute to frontend
+			myRouter.distributeMapData(mapData);
+		} catch (FileNotFoundException e) {
+			//TODO: Make error message come from resource file
+			myRouter.distributeErrors("The file for MapDataContainer cannot be found!");
+		}
 		
 	}
 	
@@ -177,8 +184,12 @@ public class BackendController {
 	 * Constructs level data object, assuming there's exactly one of them
 	 */
 	private void constructLevelData() {
-		List<LevelDataContainer> data = getData(myGameDataRelativePaths.getString("LevelPath"), LevelDataContainer.class);
-		myLevelDataContainer = data.get(0);
+		try {
+			List<LevelDataContainer> data = getData(myGameDataRelativePaths.getString("LevelPath"), LevelDataContainer.class);
+			myLevelDataContainer = data.get(0);
+		} catch (FileNotFoundException e) {
+			myRouter.distributeErrors("The file for LevelData cannot be found!");
+		}
 	}
 	
 	/**
@@ -187,8 +198,12 @@ public class BackendController {
 	 */
 	private void constructEntityDataStore()
 	{
-		List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EntityData.class);
-		myEntityDataStore = new DataStore<EntityData>(data);
+		try {
+			List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EntityData.class);
+			myEntityDataStore = new DataStore<EntityData>(data);
+		} catch (FileNotFoundException e) {
+			myRouter.distributeErrors("The file for EntityData cannot be found!");
+		}
 //		myResourceStore = new ResourceStore(data);
 	}
 	
@@ -199,10 +214,14 @@ public class BackendController {
 	 * TODO: Possibly change this to make it more flexible?
 	 * @throws FileNotFoundException 
 	 */
-	private void constructPlayerData() throws FileNotFoundException
+	private void constructPlayerData() 
 	{
-		List<PlayerData> data = getData(myGameDataRelativePaths.getString("PlayerPath"), PlayerData.class);
-		myPlayerData = data.get(0);
+		try {
+			List<PlayerData> data = getData(myGameDataRelativePaths.getString("PlayerPath"), PlayerData.class);
+			myPlayerData = data.get(0);
+		} catch (FileNotFoundException e) {
+			myRouter.distributeErrors("The file for PlayerData cannot be found!");
+		}
 	}
 	
 	/**
