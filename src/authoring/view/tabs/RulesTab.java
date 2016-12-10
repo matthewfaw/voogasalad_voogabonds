@@ -19,11 +19,16 @@ public class RulesTab extends AuthoringTab {
 	private ObservableList<String> myWins = FXCollections.observableList(new ArrayList<String>());
 	private ObservableList<String> myLosses = FXCollections.observableList(new ArrayList<String>());
 	private PlayerDataContainer myContainer;
+	private TextField myLivesField;
+	private TextField myCashField;
+	private ComboBox<String> myWinBox;
+	private ComboBox<String> myLoseBox;
 	
 	public RulesTab(String text, PlayerDataContainer container){
 		super(text);
 		myWins.addAll(getResources().getString("NeverWin"));
-		myLosses.addAll(getResources().getString("NeverLose"));
+		myLosses.addAll(getResources().getString("NeverLose"), getResources().getString("HpLose"),
+				getResources().getString("NoMoneyLose"));
 		myContainer = container;
 		VBox menu = setUpMenu();
 		setContent(menu);
@@ -31,35 +36,30 @@ public class RulesTab extends AuthoringTab {
 
 	private VBox setUpMenu() {
 		VBox v = new VBox();
-		Label livesLabel = setUpLabel(getResources().getString("EnterLives"));
-		TextField livesField = setUpTextInput(getResources().getString("DefaultLives"));
-		livesLabel.setLabelFor(livesField);
-		Label cashLabel = setUpLabel(getResources().getString("EnterCash"));
-		TextField cashField = setUpTextInput(getResources().getString("DefaultCash"));
-		cashLabel.setLabelFor(cashField);
-		Label winLabel = setUpLabel(getResources().getString("EnterWin"));
-		ComboBox<String> winBox = setUpStringComboBox(myWins, null);
-		winLabel.setLabelFor(winBox);
-		Label loseLabel = setUpLabel(getResources().getString("EnterLose"));
-		ComboBox<String> loseBox = setUpStringComboBox(myLosses, null);
-		loseLabel.setLabelFor(loseBox);
-		Button applyChanges = setUpApplyChangesButton(livesField, cashField, winBox, loseBox);
-		v.getChildren().addAll(livesLabel, livesField, cashLabel, cashField, winLabel, winBox, loseLabel,
-				loseBox, applyChanges);
+		myLivesField = setUpTextInputWithLabel(getResources().getString("EnterLives"), 
+				getResources().getString("DefaultLives"), v);
+		myCashField = setUpTextInputWithLabel(getResources().getString("EnterCash"),
+				getResources().getString("DefaultCash"), v);
+		myWinBox = setUpStringComboBoxWithLabel(getResources().getString("EnterWin"), null, 
+				myWins, v);
+		myLoseBox = setUpStringComboBoxWithLabel(getResources().getString("EnterLose"), null,
+				myLosses, v);
+		Button applyChanges = setUpFinishButton();
+		v.getChildren().add(applyChanges);
 		return v;
 	}
 
-	private Button setUpApplyChangesButton(TextField livesField, TextField cashField, ComboBox<String> winBox,
-			ComboBox<String> loseBox) {
+	@Override
+	protected Button setUpFinishButton() {
 		Button applyChanges = new Button(getResources().getString("ApplyChanges"));
 		applyChanges.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				PlayerData player = new PlayerData();
 				try {
-					player.setStartingLives(livesField.getText());
-					player.setStartingCash(cashField.getText());
-					player.setWinStrategyName(winBox.getValue());
-					player.setLoseStrategyName(loseBox.getValue());
+					player.setStartingLives(myLivesField.getText());
+					player.setStartingCash(myCashField.getText());
+					player.setWinStrategyName(myWinBox.getValue());
+					player.setLoseStrategyName(myLoseBox.getValue());
 				} catch(Exception e){
 					showError(e.getMessage());
 				}

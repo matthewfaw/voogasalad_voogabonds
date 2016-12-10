@@ -45,11 +45,13 @@ public class WaveDataContainer extends Container implements IObservable<Containe
 	public void updateWave(WaveData wave, String originalName){
 		if (originalName.equals(wave.getName())){
 			//Find original WaveData object, simply update it
+			myWaveMap.put(wave.getName(), wave);
 		}else{
 			LinkedHashMap<String, WaveData> newMap = new LinkedHashMap<String, WaveData>();
 			for (String name: myWaveMap.keySet()){
 				if (name.equals(originalName)){
 					//TODO: Put new object with potentially new name into newMap
+					newMap.put(wave.getName(), wave);
 				}else{
 					//Put same object into newMap
 					newMap.put(name, myWaveMap.get(name));

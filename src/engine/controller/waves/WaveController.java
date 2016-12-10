@@ -11,6 +11,7 @@ import engine.controller.timeline.TimelineController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.playerinfo.Player;
+import utility.ResouceAccess;
 
 /**
  * A class to handle which wave the game is currently in,
@@ -46,8 +47,7 @@ public class WaveController implements IObserver<TimelineController> {
 				myEntityFactory.constructEntity(enemyData);
 			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
 					| IllegalArgumentException | InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
 			}
 		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
 		//TODO: Change to a better way?

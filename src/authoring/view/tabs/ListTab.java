@@ -129,5 +129,21 @@ public abstract class ListTab<A> extends AuthoringTab {
     protected ObservableList<A> getObservableList(){
     	return myList;
     }
+    
+    /**
+     * Public to allow entity boxes access
+     * 
+     * @param v
+     * @return
+     */
+    public Button setUpCancelButton(VBox v){
+    	Button cancel = new Button(getResources().getString("Cancel"));
+    	cancel.setOnAction(new EventHandler<ActionEvent>() {
+    		public void handle(ActionEvent event){
+    			getTilePane().getChildren().remove(v);
+    		}
+    	});
+    	return cancel;
+    }
 
 }

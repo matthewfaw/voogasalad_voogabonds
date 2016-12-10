@@ -12,6 +12,7 @@ import engine.model.game_environment.paths.PathFactory;
 import engine.model.strategies.damage.ExponentialDamageStrategy;
 import engine.model.strategies.movement.GreedyMovementStrategy;
 import engine.model.strategies.movement.NoMovementStrategy;
+import utility.ResouceAccess;
 
 /**
  * A class to pick the right strategy from a given Strategy name
@@ -67,7 +68,7 @@ public class StrategyFactory {
 				IllegalArgumentException |
 				InvocationTargetException |
 				IllegalAccessException e) {
-			throw new ClassNotFoundException(String.format(/*ResouceAccess.getError("BadStrategy")*/ "Bad %s Strategy", movementStrategy), e);
+			throw new ClassNotFoundException(String.format(ResouceAccess.getError("BadStrategy"), movementStrategy), e);
 		}
 
 		
