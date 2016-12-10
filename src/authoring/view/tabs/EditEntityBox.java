@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 import com.sun.javafx.collections.MappingChange.Map;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
@@ -39,8 +40,9 @@ public class EditEntityBox extends VBox {
     private static final String NAME_CONTENT = "Would you like to confirm changes?";
     
     private EntityTab myTab;
+    private String entityName;
     
-    private ObservableList<String> myComponents = FXCollections.observableArrayList();
+    private ObservableList<String> myComponents;
     private HashMap<String, ComponentData> myComponentData = new HashMap<String, ComponentData>();
     
     // Fields
@@ -49,83 +51,68 @@ public class EditEntityBox extends VBox {
     private ListView<String> myComponentsView;
 
     public EditEntityBox (EntityTab parent, AttributeFetcher fetcher) {
-        // Set up spacing
         super(SPACING);
         myTab = parent;
-        // Set up name label+field
-        Label nameLbl = new Label(myTab.getResources().getString("EnterName"));
-        nameField = new TextField(myTab.getResources().getString("Entity"));
-        nameLbl.setLabelFor(nameField);
-        // Set up components ComboBox
-        Label addComponentLbl = new Label(myTab.getResources().getString("AddComponents"));
-        ObservableList<String> componentList = FXCollections.observableArrayList(fetcher.getComponentList());
-        componentsBox = new ComboBox<String>(componentList);
-        addComponentLbl.setLabelFor(componentsBox);
-        componentsBox.setOnAction(handleAddComponent(fetcher));
-        // Set up ListView of components
-        myComponentsView = new ListView<String>(myComponents);
-        myComponentsView.setOnMouseClicked(handleEditComponent(fetcher));
-        // Set up button container
-        HBox buttons = new HBox(SPACING);
-        buttons.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
-        // Set up finish button
-        Button done = new Button(myTab.getResources().getString("Finish"));
-        done.setOnAction(handleDone(null));
-        // Set up cancel button
-        Button cancel = new Button(myTab.getResources().getString("Cancel"));
-        cancel.setOnAction(handleCancel());
-        // Add buttons to container
-        buttons.getChildren().addAll(done, cancel);
-        // Add nodes to this VBox
-        this.getChildren().addAll(nameLbl, nameField,
-                                  addComponentLbl, componentsBox,
-                                  myComponentsView,
-                                  buttons);
+        nameField = parent.setUpTextInputWithLabel(myTab.getResources().getString("EnterName"), myTab.getResources().getString("Entity"), this);
+        setUpComponentBox(parent, fetcher);
+        setUpComponentListView(fetcher, null);
+        HBox buttons = setUpButtonContainer();
+        this.getChildren().addAll(myComponentsView, buttons);
     }
     
     public EditEntityBox (EntityTab parent, AttributeFetcher fetcher, EntityData entityData) {
-        // Set up spacing
         super(SPACING);
         myTab = parent;
-        // Retrieve data from Entity
-        String entityName = entityData.getName();
-        for (String component : entityData.getComponents().keySet()) {
-            myComponentData.put(component, entityData.getComponents().get(component));
-        }
-        // Set up name label+field
-        Label nameLbl = new Label(myTab.getResources().getString("EnterName"));
-        nameField = new TextField(entityName);
-        nameLbl.setLabelFor(nameField);
-        // Set up components ComboBox
-        Label addComponentLbl = new Label(myTab.getResources().getString("AddComponents"));
-        ObservableList<String> componentList = FXCollections.observableArrayList(fetcher.getComponentList());
-        componentsBox = new ComboBox<String>(componentList);
-        addComponentLbl.setLabelFor(componentsBox);
-        componentsBox.setOnAction(handleAddComponent(fetcher));
-        // Set up ListView of components
-        myComponents = FXCollections.observableArrayList(entityData.getComponents().keySet());
-        myComponentsView = new ListView<String>(myComponents);
-        myComponentsView.setOnMouseClicked(handleEditComponent(fetcher));
-        // Set up button container
-        HBox buttons = new HBox(SPACING);
-        buttons.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
-        // Set up finish button
-        Button done = new Button(myTab.getResources().getString("Finish"));
-        done.setOnAction(handleDone(entityName));
-        // Set up cancel button
-        Button cancel = new Button(myTab.getResources().getString("Cancel"));
-        cancel.setOnAction(handleCancel());
-        // Add buttons to container
-        buttons.getChildren().addAll(done, cancel);
-        // Add nodes to this VBox
-        this.getChildren().addAll(nameLbl, nameField,
-                                  addComponentLbl, componentsBox,
-                                  myComponentsView,
-                                  buttons);
+        retrieveEntityData(entityData);
+        nameField = parent.setUpTextInputWithLabel(myTab.getResources().getString("EnterName"), entityName, this);
+        setUpComponentBox(parent, fetcher);
+        setUpComponentListView(fetcher, entityData.getComponents().keySet());
+        HBox buttons = setUpButtonContainer();
+        this.getChildren().addAll(myComponentsView, buttons);
     }
     
     public void editComponent(String name, ComponentData data) {
         myComponentData.put(name, data);
+    }
+    
+    private void retrieveEntityData(EntityData entityData) {
+        entityName = entityData.getName();
+        for (String component : entityData.getComponents().keySet()) {
+            myComponentData.put(component, entityData.getComponents().get(component));
+        }
+    }
+    
+    private void setUpComponentBox(EntityTab parent, AttributeFetcher fetcher) {
+        ObservableList<String> componentList = FXCollections.observableArrayList(fetcher.getComponentList());
+        componentsBox = parent.setUpStringComboBoxWithLabel(myTab.getResources().getString("AddComponents"), null, componentList, this);
+        componentsBox.setOnAction(handleAddComponent(fetcher));
+    }
+    
+    private void setUpComponentListView(AttributeFetcher fetcher, Set<String> components) {
+        if (components != null) {
+            myComponents = FXCollections.observableArrayList(components);
+        } else {
+            myComponents = FXCollections.observableArrayList();
+        }
+        myComponentsView = new ListView<String>(myComponents);
+        myComponentsView.setOnMouseClicked(handleEditComponent(fetcher));
+    }
+    
+    private HBox setUpButtonContainer() {
+        HBox buttons = new HBox(SPACING);
+        buttons.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
+        
+        // Set up finish button
+        Button done = new Button(myTab.getResources().getString("Finish"));
+        done.setOnAction(handleDone(entityName));
+        
+        // Set up cancel button
+        Button cancel = new Button(myTab.getResources().getString("Cancel"));
+        cancel.setOnAction(handleCancel());
+        
+        // Add buttons to container
+        buttons.getChildren().addAll(done, cancel);
+        return buttons;
     }
     
     private EventHandler<ActionEvent> handleAddComponent(AttributeFetcher fetcher) {
