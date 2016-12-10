@@ -46,8 +46,7 @@ public class WaveController implements IObserver<TimelineController> {
 				myEntityFactory.constructEntity(enemyData);
 			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
 					| IllegalArgumentException | InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new UnsupportedOperationException("Invalid entity or component.", e);
 			}
 		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
 		//TODO: Change to a better way?

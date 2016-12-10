@@ -1,5 +1,6 @@
 package engine.controller;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -196,8 +197,9 @@ public class BackendController {
 	 * Assumes there is exactly one player data specified
 	 * 
 	 * TODO: Possibly change this to make it more flexible?
+	 * @throws FileNotFoundException 
 	 */
-	private void constructPlayerData()
+	private void constructPlayerData() throws FileNotFoundException
 	{
 		List<PlayerData> data = getData(myGameDataRelativePaths.getString("PlayerPath"), PlayerData.class);
 		myPlayerData = data.get(0);
@@ -210,20 +212,16 @@ public class BackendController {
 	 * @param aFilePath
 	 * @param aClass
 	 * @return
+	 * @throws FileNotFoundException 
 	 */
-	private <T> List<T> getData(String aFilePath, Class<T> aClass)
+	private <T> List<T> getData(String aFilePath, Class<T> aClass) throws FileNotFoundException
 	{
 		List<String> files = myFileRetriever.getFileNames(aFilePath);
 		List<T> data = new ArrayList<T>();
 		for (String file: files) {
 			T entry;
-			try {
-				entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
-				data.add(entry);
-			} catch (Exception e) {
-				//XXX: REMOVE PLS
-				e.printStackTrace();
-			}
+			entry = (T) myJsonDeserializer.deserializeFromFile(file, aClass);
+			data.add(entry);
 		}
 		return data;
 	}

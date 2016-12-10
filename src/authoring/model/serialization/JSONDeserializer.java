@@ -26,7 +26,7 @@ public class JSONDeserializer {
 		
 	}
 
-	public Object deserializeFromFile(String filepath, Class cls) throws Exception{
+	public Object deserializeFromFile(String filepath, Class cls) throws FileNotFoundException{
 		
 		try {
 			//The following lines look up a file relative to the project path
@@ -35,7 +35,7 @@ public class JSONDeserializer {
 			scanner = new Scanner(file);
 			fileText = scanner.useDelimiter("\\A").next();
 		} catch (FileNotFoundException e) {
-			throw new Exception("File was unable to be deserialized correctly.");
+			throw new FileNotFoundException("File was unable to be deserialized correctly.");
 		} finally{
 			scanner.close();
 		}
