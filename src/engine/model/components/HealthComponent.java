@@ -10,13 +10,15 @@ import utility.Damage;
  * relevant to an entity
  * manages how an entity should take damage
  * @author matthewfaw
- *
+ * @author owenchung (edits)
  */
 public class HealthComponent implements IComponent {
-	private Health myHealth;
+	private static double DEFAULT_HEALTH = 0.0;
 	private HealthSystem myHealthSystem;
+	private Health myHealth;
 	
-	public HealthComponent(HealthSystem healthSystem, double maxHealth) {
+	public HealthComponent(HealthSystem healthSystem /*,double maxHealth*/) {
+		myHealth = new Health(DEFAULT_HEALTH);
 		myHealthSystem = healthSystem;
 		myHealthSystem.attachComponent(this);
 	}
