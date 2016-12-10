@@ -172,7 +172,7 @@ public class BackendController {
 			TerrainMap terrainMap = new TerrainMap(mapData);
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			MapMediator mapMediator = new MapMediator(mapData);
-			myMapDistributor = new MapDistributor(mapMediator, myResourceStore, myEntityFactory);
+			myMapDistributor = new MapDistributor(mapMediator, myResourceStore, myEntityFactory, myPlayerController);
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);

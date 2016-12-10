@@ -36,6 +36,24 @@ public class MapMediator {
 //		myPathFactory = new PathFactory(myTerrainMap);
 
 	}
+	/**
+	 * Determines if an object can be placed on the map at the requested location.
+	 * @param aLocation
+	 * @param validTerrains
+	 * @return
+	 */
+	public boolean attemptToPlaceEntity(Point aLocation, List<String> validTerrains) {
+		for (TerrainData terrainData: myMapData.getTerrainList()) {
+			if (terrainData.getLoc().equals(aLocation)) {
+				for (String validTerrain: validTerrains) {
+					if (validTerrain.equals(terrainData.getName())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Determines if an object can be placed on the map at the requested location
@@ -98,15 +116,15 @@ public class MapMediator {
 		return false;
 	}
 	
-	@Deprecated
-	public List<PhysicalComponent> withinRange(Point p, double radius){
+//	@Deprecated
+//	public List<PhysicalComponent> withinRange(Point p, double radius){
 //		Stream<PhysicalComponent> s = myEntityManager.stream();
-		
-		s.filter(e -> isEnemy(e) && isInRadius(e, p, radius));
-		
-		return s.collect(Collectors.toList());
-		
-	}
+//		
+//		s.filter(e -> isEnemy(e) && isInRadius(e, p, radius));
+//		
+//		return s.collect(Collectors.toList());
+//		
+//	}
 
 	private boolean isInRadius(IPhysical e, Point p, double radius) {
 		/*
