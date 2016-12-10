@@ -1,5 +1,6 @@
 package engine.model.components;
 
+import authoring.model.ComponentData;
 import engine.model.entities.IEntity;
 import engine.model.systems.HealthSystem;
 import utility.Damage;
@@ -20,7 +21,7 @@ public class HealthComponent extends AbstractComponent {
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private IEntity myEntity;
-	
+	/*
 	public HealthComponent(HealthSystem healthSystem, double maxHealth) {
 		//myEntity = entity;
 		
@@ -30,8 +31,9 @@ public class HealthComponent extends AbstractComponent {
 		myCurrHealth = maxHealth;
 		myMaxHealth = maxHealth;
 	}
+	*/
 	
-	public HealthComponent(IEntity entity, HealthSystem healthSystem) {
+	public HealthComponent(HealthSystem healthSystem, ComponentData componentdata) {
 		//myEntity = entity;
 		
 		//myHealthSystem = healthSystem;

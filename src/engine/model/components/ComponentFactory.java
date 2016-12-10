@@ -55,9 +55,11 @@ public class ComponentFactory {
 			Router routerToAdd = getRouterToAttach(arg);
 			if (routerToAdd != null) {
 				objectsToAttach.add(getRouterToAttach(arg));
+				continue;
 			}
+			objectsToAttach.add(compdata);
+			
 		}
-//		IComponent test = (IComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		
 	}
