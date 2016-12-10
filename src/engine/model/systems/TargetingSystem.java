@@ -10,11 +10,12 @@ public class TargetingSystem implements ISystem {
 	
 	List<TargetingComponent> myTargetingComponents;
 	private PhysicalSystem myPhysical;
+	private TeamSystem myTeams;
 	
 	public IPhysical getTarget(IComponent c) {
 		TargetingComponent t = get(c);
 		if (t != null)
-			return t.getTarget(myPhysical.getMap(), myPhysical.get(t));
+			return t.getTarget(myPhysical.getMap(), myTeams, myPhysical.get(t));
 		return null;
 	}
 	

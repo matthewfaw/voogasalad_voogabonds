@@ -1,5 +1,6 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.IObserver;
@@ -10,9 +11,17 @@ import engine.model.components.MoveableComponent;
 import engine.model.entities.IEntity;
 import utility.Damage;
 
+/**
+ * 
+ * @author owenchung(edited)
+ *
+ */
 public class HealthSystem implements ISystem{
 	private List<HealthComponent> myHealthComponents;
 	
+	public HealthSystem () {
+		myHealthComponents = new ArrayList<HealthComponent>();
+	}
 	public boolean isDead(IEntity entity) {
 		HealthComponent healthComponent = findHealthComponent(entity);
 		return healthComponent.getCurrentHealth() <= 0;
