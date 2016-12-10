@@ -74,6 +74,7 @@ public class BackendController {
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
 	private TeamSystem myTeamSystem;
+	private MapDataContainer myMapData;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
@@ -85,6 +86,7 @@ public class BackendController {
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
 		
+		//Must construct static before dynamic.
 		constructStaticBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
@@ -127,7 +129,7 @@ public class BackendController {
 		//XXX: This depends on the map distributor already being constructed
 		// we should refactor this to remove the depenency in calling
 //		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
-		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore, myEntityFactory);
+		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore, myEntityFactory, myPhysicalSystem, myMovementSystem, myMapData);
 		myTimelineController.attach(myLevelController);
 	}
 	
@@ -173,6 +175,7 @@ public class BackendController {
 		try {
 			List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
 			MapDataContainer mapData = data.get(0);
+			myMapData = mapData;
 			TerrainMap terrainMap = new TerrainMap(mapData);
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			MapMediator mapMediator = new MapMediator(mapData);
@@ -240,6 +243,7 @@ public class BackendController {
 	 * @return
 	 * @throws FileNotFoundException 
 	 */
+	@SuppressWarnings("unchecked")
 	private <T> List<T> getData(String aFilePath, Class<T> aClass) throws FileNotFoundException
 	{
 		List<String> files = myFileRetriever.getFileNames(aFilePath);

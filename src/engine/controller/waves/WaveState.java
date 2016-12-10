@@ -56,6 +56,10 @@ public class WaveState {
 	{
 		return myWaveData.getSpawnPointName();
 	}
+	
+	public String getSinkPointName() {
+		return myWaveData.getSinkPointName();
+	}
 
 	/**
 	 * Determines if there are enemies that can be released in the wave

@@ -2,12 +2,14 @@ package utility;
 
 import java.util.List;
 
+import engine.model.strategies.IPosition;
+
 /**
  * A class that represents 2 and 3D points, as well as supporting some math between them. (Distance calculations, vector math, etc.)
  * @author Weston
  *
  */
-public class Point implements IShape {
+public class Point implements IShape, IPosition {
 	private static final double ERROR_TOLERANCE = Math.exp(-6);
 	
 	private double myX;
@@ -273,6 +275,11 @@ public class Point implements IShape {
 	
 	public Point scale(double scale) {
 		return new Point(myX * scale, myY * scale, myZ * scale);
+	}
+
+	@Override
+	public Point getPosition() {
+		return this;
 	}
 	
 	/*

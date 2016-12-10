@@ -4,6 +4,7 @@ import java.util.List;
 
 import engine.model.components.IComponent;
 import engine.model.components.PhysicalComponent;
+import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.strategies.IPhysical;
 
@@ -17,10 +18,7 @@ public class PhysicalSystem implements ISystem {
 	}
 	
 	public PhysicalComponent get(IComponent c) {
-		for (PhysicalComponent p: myComponents)
-			if (p.getEntity().equals(c.getEntity()))
-				return p;
-		return null;
+		return get(c.getEntity());
 	}
 
 	public MapMediator getMap() {
@@ -33,5 +31,12 @@ public class PhysicalSystem implements ISystem {
 	}
 	public void detachComponent(PhysicalComponent aComponent) {
 		myComponents.remove(aComponent);
+	}
+
+	public PhysicalComponent get(IEntity entity) {
+		for (PhysicalComponent p: myComponents)
+			if (p.getEntity().equals(entity))
+				return p;
+		return null;
 	}
 }

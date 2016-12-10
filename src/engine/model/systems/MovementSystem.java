@@ -7,6 +7,7 @@ import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.MoveableComponent;
 import engine.model.components.PhysicalComponent;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 
 public class MovementSystem implements IObserver<TimelineController>, ISystem {
@@ -21,6 +22,13 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+	}
+	
+	public MoveableComponent get(IEntity entity) {
+		for (MoveableComponent m: myMoveableComponents)
+			if (m.getEntity().equals(entity))
+				return m;
+		return null;
 	}
 	
 	private void updateNextMoves() {

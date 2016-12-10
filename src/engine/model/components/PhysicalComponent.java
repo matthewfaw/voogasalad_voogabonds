@@ -25,13 +25,12 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	@Hide
-	private IEntity myEntity;
-	@Hide
 	private Point myPosition;
 	
 	private double myHeading;
 	private String myImagePath;
 	private double myImageSize;
+	//TODO: Talk to authoring about lists
 	@Hide
 	private List<String> myValidTerrains;
 	
@@ -47,12 +46,13 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	
 	public PhysicalComponent (PhysicalSystem PhysicalSystem, Router router, ComponentData data) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
-		router.distributeViewableComponent(this);
 		
 		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+		
+		router.distributeViewableComponent(this);
 	}
 
 	

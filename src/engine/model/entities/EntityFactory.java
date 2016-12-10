@@ -7,6 +7,7 @@ import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
+import engine.controller.waves.PathFollowerData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
 import engine.model.components.IModifiableComponent;
@@ -70,4 +71,5 @@ public class EntityFactory {
 
 		return entity;
 	}
+
 }
