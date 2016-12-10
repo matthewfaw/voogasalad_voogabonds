@@ -33,9 +33,6 @@ import javafx.scene.text.TextAlignment;
 
 public class EditEntityBox extends VBox {
     private static final int SPACING = 2;
-    private static final String UPDATE_CONFIRMATION = "Update confirmation";
-    private static final String ALREADY_EXISTS = "An entity with this name already exists";
-    private static final String ALERT_CONTENT = "Please give entity a unique name and try again.";
     
     private static final String NAME_CHANGE_ALERT = "Name changed";
     private static final String NAME_CHANGED = "The name of this Entity has been changed.";
@@ -156,50 +153,51 @@ public class EditEntityBox extends VBox {
         EventHandler<ActionEvent> finish = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
                 EntityData entity = createDataFromInput();
-                if (oldName != null && !oldName.equals(entity.getName())) {
-                    Alert changeNameAlert = new Alert(AlertType.CONFIRMATION);
-                    changeNameAlert.setTitle(NAME_CHANGE_ALERT);
-                    changeNameAlert.setHeaderText(NAME_CHANGED);
-                    changeNameAlert.setContentText(NAME_CONTENT);
-                    Optional<ButtonType> result = changeNameAlert.showAndWait();
-                    // Are you sure you want to change name of Entity?
-                    if (result.get() == ButtonType.OK) {
-                        myTab.removeEntity(oldName);
-                        myTab.addEntity(entity);
-                        myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
-                    } else {
-                        // User clicked cancel
-                    }
-                } else {
-                    if (myTab.addEntity(entity)) {
-                        System.out.println("Added Entity");
-                        for (String component : entity.getComponents().keySet()) {
-                            myComponentData.put(component, entity.getComponents().get(component));
-                        }
-                        //System.out.println("Entity has "+myComponentData.size()+" Components");
-                        myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
-                    } else {
-                        Alert alert = new Alert(AlertType.INFORMATION);
-                        alert.setTitle(UPDATE_CONFIRMATION);
-                        alert.setHeaderText(ALREADY_EXISTS);
-                        alert.setContentText(ALERT_CONTENT);
-                        Optional<ButtonType> result = alert.showAndWait();
+                if (oldName == null) {
+                    tryAddNewEntity(entity);
+                }
+                else {
+                    // editing existing entity
+                    if (!oldName.equals(entity.getName())) {
+                        // changed name of entity
+                        Optional<ButtonType> result = showNameChangeConfirmation();
                         if (result.get() == ButtonType.OK) {
-                            // user chose ok
-                            if (myTab.updateEntity(oldName, entity)) {
-                                System.out.println("Updated entity successfully.");
-                                myTab.getTilePane().getChildren().remove(EditEntityBox.this);
-                            }
-                        } else {
-                            // user chose cancel
-                            System.out.println("Canceled edit entity.");
-                            myTab.getTilePane().getChildren().remove(EditEntityBox.this);
+                            tryEditEntity(oldName, entity);
                         }
+                    } else {
+                        // overwrite data to existing name
+                        tryEditEntity(oldName, entity);
                     }
                 }
             }
         };
         return finish;
+    }
+    
+    private Optional<ButtonType> showNameChangeConfirmation() {
+        Alert changeNameAlert = new Alert(AlertType.CONFIRMATION);
+        changeNameAlert.setTitle(NAME_CHANGE_ALERT);
+        changeNameAlert.setHeaderText(NAME_CHANGED);
+        changeNameAlert.setContentText(NAME_CONTENT);
+        Optional<ButtonType> result = changeNameAlert.showAndWait();
+        return result;
+    }
+    
+    private void tryAddNewEntity(EntityData entity) {
+        if (myTab.addEntity(entity)) {
+            System.out.println("Added Entity");
+            for (String component : entity.getComponents().keySet()) {
+                myComponentData.put(component, entity.getComponents().get(component));
+            }
+            //System.out.println("Entity has "+myComponentData.size()+" Components");
+            myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
+        }
+    }
+    
+    private void tryEditEntity(String oldName, EntityData entity) {
+        if (myTab.updateEntity(oldName, entity)) {
+            myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
+        }
     }
     
     private EventHandler<ActionEvent> handleCancel() {
@@ -216,7 +214,7 @@ public class EditEntityBox extends VBox {
         EntityData entity = new EntityData();
         entity.setName(nameField.getCharacters().toString());
         for (String component : myComponentsView.getItems()) {
-            System.out.println(component+" component created: "+myComponentData.get(component));
+            //System.out.println(component+" component created: "+myComponentData.get(component));
             entity.addComponent(component, myComponentData.get(component));
         }
         return entity;
@@ -231,10 +229,10 @@ public class EditEntityBox extends VBox {
                     //System.out.println("Double Click: "+selectedAttribute);
                     EditComponentBox editComponent;
                     if (myComponentData.containsKey(selectedAttribute)) {
-                        System.out.println("Entity contains this key! (edit)");
+                        //System.out.println("Entity contains this key! (edit)");
                         editComponent = new EditComponentBox(EditEntityBox.this, myTab, selectedAttribute, myComponentData.get(selectedAttribute).getFields());
                     } else {
-                        System.out.println("Entity does not contain this key yet! (new)");
+                        //System.out.println("Entity does not contain this key yet! (new)");
                         editComponent = new EditComponentBox(EditEntityBox.this, myTab, selectedAttribute, fetcher.getComponentAttributeList(selectedAttribute));
                     }
                     
