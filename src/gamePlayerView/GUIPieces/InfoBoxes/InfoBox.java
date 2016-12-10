@@ -10,6 +10,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+
+/**
+ * 
+ * @author Guhan Muruganandam
+ *
+ */
+
 /**
  * UI feature for Statistics text box and Label
  */

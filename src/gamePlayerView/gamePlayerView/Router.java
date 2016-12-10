@@ -99,6 +99,15 @@ public class Router {
 	}
 	*/
 	
+	/*
+	 * public void distributeTowerData(IViewableTowerData)// Stuff like EnemiesKilledInfo. Might not be necessary. As it is called by lcik events
+	 * {
+	 * 
+	 * }
+	 *  
+	 *  
+	 */
+	
 	
 	/*
 	 * void distributeEnemy(IViewableEnemy aEnemy)

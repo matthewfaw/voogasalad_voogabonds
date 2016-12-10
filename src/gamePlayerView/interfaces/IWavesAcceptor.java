@@ -3,6 +3,10 @@ package gamePlayerView.interfaces;
 import engine.IObservable;
 
 /**
+ * @author Guhan Muruganandam
+ */
+
+/**
  * WavesBox interface utilised by the router.
  */
 
