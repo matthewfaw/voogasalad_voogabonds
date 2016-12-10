@@ -25,23 +25,20 @@ public class CreatorComponent implements IComponent, ICreator {
 	private ISpawningStrategy mySpawningStrategy;
 	private EntityFactory myEntityFactory;
 
+	@Override
+	public IEntity getEntity() {
+		return myEntity;
+	}
 
-	
 	//TODO:
 	/**
 	 * this method creates a new entity based on the
 	 * entity spawning strategy.  This entity will be launched
 	 * towards the target determined by the targeting strategy
 	 */
-
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
-
-	public void spawn(IPhysical location) {
-		if (myTimeSinceSpawning >= myTimeSinceSpawning && myTarget != null) {
-			mySpawningStrategy.spawn(myEntityFactory, myTarget, location, this);
+	public void spawn(IPhysical locationOfThis) {
+		if (myTimeSinceSpawning >= myTimeBetweenSpawns && myTarget != null) {
+			mySpawningStrategy.spawn(myEntityFactory, myTarget, locationOfThis, this);
 			myTimeSinceSpawning = 0;
 		} else
 			myTimeSinceSpawning++;
