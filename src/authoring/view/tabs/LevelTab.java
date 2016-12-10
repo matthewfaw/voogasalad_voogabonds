@@ -8,7 +8,6 @@ import authoring.controller.LevelDataContainer;
 import authoring.controller.WaveDataContainer;
 import authoring.model.LevelData;
 import authoring.model.WaveData;
-import engine.IObservable;
 import engine.IObserver;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +16,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class LevelTab extends ListTab<String> implements IObserver<Container>{
@@ -25,6 +25,9 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
     
 	private ArrayList<WaveData> myWaves = new ArrayList<WaveData>();
 	private LevelDataContainer myContainer;
+	private ArrayList<CheckBox> myWaveChecks;
+	private TextField myNameField;
+	private VBox myV;
 	
 	public LevelTab(String text, LevelDataContainer container) {
 		super(text, COLS);
@@ -42,53 +45,27 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
 	}
 	
 	private VBox setUpMenu(String name, List<WaveData> selectedWaves) {
-		VBox v = new VBox();
-		Label nameLabel = setUpLabel(getResources().getString("EnterName"));
-		TextField nameField = setUpTextInput(name);
-		nameLabel.setLabelFor(nameField);
+		myV = new VBox();
+		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		Label wavesLabel = setUpLabel(getResources().getString("SelectWaves"));
-		ArrayList<CheckBox> waveChecks = new ArrayList<CheckBox>();
+		myWaveChecks = new ArrayList<CheckBox>();
 		VBox checkV = new VBox();
 		for (WaveData wave: myWaves){
 			CheckBox check = new CheckBox(wave.getName());
 			if (selectedWaves != null && selectedWaves.contains(wave))
 				check.setSelected(true);
-			waveChecks.add(check);
+			myWaveChecks.add(check);
 			checkV.getChildren().add(check);
 		}
 		ScrollPane scroll = new ScrollPane();
 		scroll.setContent(checkV);
-		Button finish = setUpFinishButton(nameField, waveChecks, v);
-		v.getChildren().addAll(nameLabel, nameField, wavesLabel, scroll, finish);
-		return v;
-	}
-
-	private Button setUpFinishButton(TextField nameField, ArrayList<CheckBox> waveChecks, VBox root) {
-		Button finish = new Button(getResources().getString("Finish"));
-		finish.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent event){
-				LevelData level = new LevelData();
-				try {
-					level.setLevelName(nameField.getText());
-					for (CheckBox check: waveChecks){
-						if (check.isSelected())
-							for (WaveData wave: myWaves)
-								if (wave.getName().equals(check.getText())){
-									level.addWaveDataListToList(wave);
-									break;
-								}
-					}
-				} catch(Exception e){
-					showError(e.getMessage());
-					return;
-				}
-				myContainer.createNewLevelData(level);
-				getTilePane().getChildren().remove(root);
-				getObservableList().remove(level.getLevelName());
-				getObservableList().add(level.getLevelName());
-			}
-		});
-		return finish;
+		wavesLabel.setLabelFor(scroll);
+		Button finish = setUpFinishButton();
+		Button cancel = setUpCancelButton(myV);
+		HBox h = new HBox();
+		h.getChildren().addAll(finish, cancel);
+		myV.getChildren().addAll(wavesLabel, scroll, h);
+		return myV;
 	}
 
 	@Override
@@ -106,5 +83,34 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
 		LevelData level = myContainer.getLevelData(name);
 		VBox menu = setUpMenu(level.getLevelName(), level.getWaveDataList());
 		getTilePane().getChildren().add(menu);
+	}
+
+	@Override
+	protected Button setUpFinishButton() {
+		Button finish = new Button(getResources().getString("Finish"));
+		finish.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent event){
+				LevelData level = new LevelData();
+				try {
+					level.setLevelName(myNameField.getText());
+					for (CheckBox check: myWaveChecks){
+						if (check.isSelected())
+							for (WaveData wave: myWaves)
+								if (wave.getName().equals(check.getText())){
+									level.addWaveDataListToList(wave);
+									break;
+								}
+					}
+				} catch(Exception e){
+					showError(e.getMessage());
+					return;
+				}
+				myContainer.createNewLevelData(level);
+				getTilePane().getChildren().remove(myV);
+				getObservableList().remove(level.getLevelName());
+				getObservableList().add(level.getLevelName());
+			}
+		});
+		return finish;
 	}
 }

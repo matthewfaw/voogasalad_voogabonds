@@ -2,7 +2,7 @@ package engine.model.playerinfo;
 
 import engine.model.resourcestore.ResourceStore;
 
-public interface IModifiablePlayer {
+public interface IModifiablePlayer extends IViewablePlayer {
 	public void updateLivesRemaining(int deltaLives);
 	public void updateAvailableMoney(int deltaFunds);
 	

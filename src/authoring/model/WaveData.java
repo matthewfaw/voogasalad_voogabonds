@@ -57,7 +57,7 @@ public class WaveData implements IReadableData {
 		this.waveEntity = waveEnemy;
 	}
 	
-	public double getTimeBetweenEnemy() {
+	public double getTimeBetweenEntity() {
 		return timeBetweenEnemy;
 	}
 	
@@ -99,7 +99,7 @@ public class WaveData implements IReadableData {
 		this.timeUntilNextWave = timeBeforeWave;
 	}
 	
-	public int getNumEnemies(){
+	public int getNumEntities(){
 		return numEnemies;
 	}
 	

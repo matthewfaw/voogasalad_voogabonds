@@ -15,7 +15,7 @@ import engine.model.strategies.winlose.NeverWinStrategy;
  
 
 //TODO: Implement all unimplemented methods
-public class Player implements IViewablePlayer, IModifiablePlayer {
+public class Player implements IModifiablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;

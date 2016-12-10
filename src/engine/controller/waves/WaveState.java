@@ -20,7 +20,7 @@ public class WaveState {
 	public WaveState(WaveData aWaveData, double aCurrentTime)
 	{
 		myWaveData = aWaveData;
-		myUnreleasedEnemyCount = myWaveData.getNumEnemies();
+		myUnreleasedEnemyCount = myWaveData.getNumEntities();
 		myTimeSinceLastEnemyCreation = aCurrentTime;
 	}
 
@@ -73,7 +73,7 @@ public class WaveState {
 	 */
 	private boolean creationTimeoutHasBeenSatisfied(double aTotalElapsedTime)
 	{
-		double minimumValidTime = myTimeSinceLastEnemyCreation + myWaveData.getTimeBetweenEnemy();
+		double minimumValidTime = myTimeSinceLastEnemyCreation + myWaveData.getTimeBetweenEntity();
 		return aTotalElapsedTime > minimumValidTime;
 	}
 }
