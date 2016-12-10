@@ -210,7 +210,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
     }
 
 	@Override
-	public Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		// TODO Auto-generated method stub
 		return null;
 	}

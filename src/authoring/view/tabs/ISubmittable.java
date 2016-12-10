@@ -4,6 +4,6 @@ import javafx.scene.control.Button;
 
 public interface ISubmittable {
 	
-	public Button setUpFinishButton();
+	public Button setUpSubmitButton();
 
 }

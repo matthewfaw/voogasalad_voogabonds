@@ -74,7 +74,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 		mySpawnBox = setUpStringComboBoxWithLabel(getResources().getString("EnterSpawnPoint"),
 				spawn, mySpawnPoints, myV);
 		myName = name;
-		Button finish = setUpFinishButton();
+		Button finish = setUpSubmitButton();
 		Button cancel = setUpCancelButton(myV);
 		HBox h = new HBox();
 		h.getChildren().addAll(finish, cancel);
@@ -111,7 +111,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 		getTilePane().getChildren().add(menu);
 	}
 
-	public Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
 		finish.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){

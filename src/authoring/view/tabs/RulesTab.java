@@ -44,12 +44,12 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 				myWins, v);
 		myLoseBox = setUpStringComboBoxWithLabel(getResources().getString("EnterLose"), null,
 				myLosses, v);
-		Button applyChanges = setUpFinishButton();
+		Button applyChanges = setUpSubmitButton();
 		v.getChildren().add(applyChanges);
 		return v;
 	}
 
-	public Button setUpFinishButton() {
+	public Button setUpSubmitButton() {
 		Button applyChanges = new Button(getResources().getString("ApplyChanges"));
 		applyChanges.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
