@@ -101,7 +101,8 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		towerSettings.clear();
 		for(EntityData t : availableTowers){
 			ImageView towerPicture = new ImageView();
-			String imagePath = t.getImagePath();
+			//TODO: This is super hack-y.
+			String imagePath = t.getComponents().get("PhysicalComponent").getFields().get("myImagePath");
 			//TODO: make this cleaner--hard coded now
 			if (imagePath.substring(0, 4).equals("src/")) {
 				imagePath = imagePath.substring(4);
