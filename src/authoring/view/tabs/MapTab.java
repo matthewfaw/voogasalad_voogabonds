@@ -13,23 +13,21 @@ public class MapTab extends Tab {
 
 	private TabPane tbPane;
 	private Tab mapTab;
-	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 	private GameDisplay mapDisplay;
 	private BorderPane pane;
 	private Scene scene;
 	private MapDataContainer controller;
 	
 	public MapTab(TabPane tPain, Scene sc, MapDataContainer con, int mapX, int mapY) {
-		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
+		super("Map");
 		this.tbPane = tPain;
-		this.mapTab = new Tab(myResources.getString("MapTab"));
 		this.pane = new BorderPane();
 		this.scene = sc;
 		this.controller = con;
 		this.mapDisplay = new GameDisplay(pane, scene, con, mapX, mapY);
-		mapTab.setContent(mapDisplay.getTerrainBox());
-		tbPane.getTabs().add(mapTab);
+		this.setContent(mapDisplay.getTerrainBox());
 	}
 	
 }
