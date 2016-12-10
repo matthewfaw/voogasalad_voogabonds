@@ -136,11 +136,12 @@ public class BackendController {
 		constructPlayerData();
 		
 		constructLevelData();
+		constructMap();
 		constructSystems();
 		
 		constructEntityFactory(); //depends on constructing systems first
 		
-		constructMap(); // depends on constructing entity factory first
+		
 	}
 
 	private void constructEntityFactory() {
@@ -171,7 +172,7 @@ public class BackendController {
 			TerrainMap terrainMap = new TerrainMap(mapData);
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			MapMediator mapMediator = new MapMediator(mapData);
-			myMapDistributor = new MapDistributor(mapMediator, myEntityFactory);
+			myMapDistributor = new MapDistributor(mapMediator, myResourceStore, myEntityFactory);
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);
