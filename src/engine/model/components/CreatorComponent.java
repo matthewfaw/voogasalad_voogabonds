@@ -4,7 +4,6 @@ import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.ISpawningStrategy;
-import engine.model.systems.PhysicalSystem;
 
 /**
  * The purpose of this class is to manage the work necessary

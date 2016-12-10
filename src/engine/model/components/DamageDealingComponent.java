@@ -3,6 +3,7 @@ package engine.model.components;
 import engine.model.collision_detection.ICollidable;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IDamageStrategy;
+import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.weapons.DamageInfo;
 import utility.Damage;
@@ -29,12 +30,17 @@ public class DamageDealingComponent implements IComponent {
 	}
 	
 	/**
-	 * gets the amount of damage this entity inflicts
+	 * gets the amount of damage this entity inflicts on its target
 	 * @return the damage value
 	 */
-	public Damage getDamage()
+	public Damage getTargetDamage()
 	{
 		return myDamageStrategy.getTargetDamage(myDamage);
+	}
+	
+	public Damage getDamageTo(IPhysical dealer, IPhysical taker)
+	{
+		return myDamageStrategy.getAoEDamage(dealer, taker, myDamage);
 	}
 	
 	/**
