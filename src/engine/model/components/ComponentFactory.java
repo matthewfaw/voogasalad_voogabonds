@@ -60,6 +60,9 @@ public class ComponentFactory {
 			objectsToAttach.add(compdata);
 			
 		}
+		System.out.println(compdata.getComponentName());
+		System.out.println(arguments.toString());
+		System.out.println(objectsToAttach);
 		return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		
 	}

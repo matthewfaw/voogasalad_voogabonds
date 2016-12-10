@@ -54,7 +54,6 @@ public class EntityFactory {
 		return entity;
 	}
 	
-	@Deprecated //Can we use the one above instead?
 	public IEntity constructEntity(EntityData aEntityData) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException 
 	{
 		IEntity entity = new ConcreteEntity();
