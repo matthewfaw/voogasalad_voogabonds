@@ -1,14 +1,9 @@
 package engine.model.weapons;
 
-import java.util.List;
-
 import authoring.model.WeaponData;
 import engine.model.game_environment.MapMediator;
-import engine.model.machine.Machine;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.projectiles.ProjectileFactory;
-import engine.model.strategies.ITargetingStrategy;
-import engine.model.strategies.StrategyFactory;
 import utility.Point;
 
 /**
@@ -16,8 +11,10 @@ import utility.Point;
  * @author Weston
  *
  */
+@Deprecated
 public class Weapon implements IWeapon, IKillerOwner {
 	private IKillerOwner myMachine;
+	/*
 	private MapMediator myMap;
 	
 	private ProjectileFactory myProjectileFactory;
@@ -26,18 +23,21 @@ public class Weapon implements IWeapon, IKillerOwner {
 	private int myFireRate;
 	private int myTimeToFire;
 	private double myRange;
+	*/
 	
 	private double myCareerKills;
 	private double myCareerDamage;
 	private double myCareerEarnings;
 	
 	public Weapon(WeaponData data, IKillerOwner owner, ProjectileFactory projFactory, MapMediator map) {
+		/*
 		myRange = data.getRange();
 		myFireRate = data.getFireRate();
 		myProjectile = data.getProjectileName();
 		
 		myMachine = owner;
 		myProjectileFactory = projFactory;
+		*/
 		
 		//TODO: Get strategy name from data
 		//myTargetStrategy = StrategyFactory.targetStrategy("");
@@ -45,7 +45,7 @@ public class Weapon implements IWeapon, IKillerOwner {
 		myCareerKills = 0;
 		myCareerDamage = 0;
 		myCareerEarnings = 0;
-		myTimeToFire = 0;
+		//myTimeToFire = 0;
 	}
 
 	@Override
