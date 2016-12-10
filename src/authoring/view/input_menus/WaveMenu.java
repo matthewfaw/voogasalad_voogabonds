@@ -124,7 +124,7 @@ public class WaveMenu {
 			wave.setTimeBetweenEnemy(timeBetween);
 			wave.setTimeForWave(timeFor);
 			wave.setNumEnemies(number);
-			wave.setWaveEnemy(enemy);
+			wave.setWaveEntity(enemy);
 			wave.setSpawnPointName(spawn);
 		} catch(Exception e) {
 			myHelper.showError(e.getMessage());

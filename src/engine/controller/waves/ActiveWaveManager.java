@@ -23,18 +23,17 @@ import engine.model.data_stores.DataStore;
  *
  */
 public class ActiveWaveManager {
-	private static final double DEFAULT_START_TIME = 0.0;
 	private LevelData myLevelData;
-	private DataStore<EntityData> myEnemyDataStore;
+	private DataStore<EntityData> myEntityDataStore;
 	private List<WaveState> myWaveStates;
 	private double myCurrentTime;
 	private double myTimeToAddMoreWaves;
 //	private LinkedHashMap<WaveData, Integer> myUnreleasedEnemyCountForActiveWave;
 
 	
-	public ActiveWaveManager(DataStore<EntityData> aEnemyDataStore, LevelData aLevelData, double startTime)
+	public ActiveWaveManager(DataStore<EntityData> aEntityDataStore, LevelData aLevelData, double startTime)
 	{
-		myEnemyDataStore = aEnemyDataStore;
+		myEntityDataStore = aEntityDataStore;
 		myLevelData = aLevelData;
 //		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
 		myWaveStates = new ArrayList<WaveState>();
@@ -59,13 +58,13 @@ public class ActiveWaveManager {
 			setNextRoundOfWaveDataAsActive();
 		}
 		
-		//3. get all the enemies
+		//3. get all the entities
 		Map<EntityData, String> enemiesToConstruct = new HashMap<EntityData, String>();
 
 		for (Iterator<WaveState> iterator = myWaveStates.iterator(); iterator.hasNext();) {
 			WaveState activeWave = iterator.next();
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
-				EntityData enemy = myEnemyDataStore.getData(activeWave.releaseWaveEnemy(aTotalTimeElapsed));
+				EntityData enemy = myEntityDataStore.getData(activeWave.releaseWaveEntity(aTotalTimeElapsed));
 				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
 			} else {
 				iterator.remove();

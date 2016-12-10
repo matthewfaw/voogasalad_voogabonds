@@ -134,7 +134,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>{
 		WaveData wave = myContainer.getWaveData(name);
 		VBox menu = setUpMenu(wave.getName(), String.valueOf(wave.getTimeBetweenEnemy()), 
 				String.valueOf(wave.getTimeForWave()), String.valueOf(wave.getNumEnemies()), 
-				wave.getWaveEnemy(), wave.getSpawnPointName());
+				wave.getWaveEntity(), wave.getSpawnPointName());
 		getTilePane().getChildren().add(menu);
 	}
 }
