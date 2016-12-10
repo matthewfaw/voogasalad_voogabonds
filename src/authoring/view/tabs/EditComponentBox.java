@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class EditComponentBox extends VBox {
+public class EditComponentBox extends VBox implements ISubmittable {
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
@@ -138,5 +138,11 @@ public class EditComponentBox extends VBox {
         }
         return null;
     }
+
+	@Override
+	public Button setUpFinishButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

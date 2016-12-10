@@ -8,6 +8,7 @@ import authoring.model.EntityData;
 import engine.IObserver;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
@@ -108,12 +109,6 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
 	protected void edit(String name) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	protected Button setUpFinishButton() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

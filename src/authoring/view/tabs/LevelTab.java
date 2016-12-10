@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class LevelTab extends ListTab<String> implements IObserver<Container>{
+public class LevelTab extends ListTab<String> implements IObserver<Container>, ISubmittable{
 
     private static final int COLS = 2;
     
@@ -85,8 +85,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>{
 		getTilePane().getChildren().add(menu);
 	}
 
-	@Override
-	protected Button setUpFinishButton() {
+	public Button setUpFinishButton() {
 		Button finish = new Button(getResources().getString("Finish"));
 		finish.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent event){
