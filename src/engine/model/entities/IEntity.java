@@ -2,6 +2,7 @@ package engine.model.entities;
 
 import engine.IObservable;
 import engine.model.components.IComponent;
+import engine.model.components.IModifiableComponent;
 
 
 /**
@@ -28,9 +29,11 @@ public interface IEntity extends IObservable<IEntity> {
 	 * This is how entities are given new functionality
 	 * @param aComponent
 	 */
-	public void addComponent(IComponent aComponent);
+	public void addComponent(IModifiableComponent aComponent);
 	
 	
 	public void delete();
+
+	
 	
 }

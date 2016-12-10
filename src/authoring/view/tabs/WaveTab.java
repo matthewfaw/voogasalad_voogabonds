@@ -37,6 +37,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 	
 	private ObservableList<String> myEntities = FXCollections.observableList(new ArrayList<String>());
 	private ObservableList<String> mySpawnPoints = FXCollections.observableList(new ArrayList<String>());
+	private ObservableList<String> mySinkPoints = FXCollections.observableList(new ArrayList<String>());
 	
 	public WaveTab(String text, WaveDataContainer container){
 		super(text, COLS);
@@ -90,8 +91,12 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 	public void update(Container c){
 		if (c instanceof MapDataContainer){
 			mySpawnPoints.clear();
+			mySinkPoints.clear();
 			for (String spawnPoint: ((MapDataContainer) c).getSpawnPointMap().keySet()){
 				mySpawnPoints.add(spawnPoint);
+			}
+			for (String sinkPoint: ((MapDataContainer) c).getSinkPointMap().keySet()){
+				mySinkPoints.add(sinkPoint);
 			}
 		}else if(c instanceof EntityDataContainer){
 			myEntities.clear();

@@ -3,7 +3,7 @@ package engine.model.machine;
 import engine.IViewable;
 import utility.Point;
 
-
+@Deprecated
 public interface IViewableMachine extends IViewable {
 	abstract public double getHealth();
 	

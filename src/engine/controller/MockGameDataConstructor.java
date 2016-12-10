@@ -85,12 +85,13 @@ public class MockGameDataConstructor {
 			
 			// Entity data
 			EntityData ed  = new EntityData();
-			ed.setName("Awesome fun bullet probably");
+			ed.setName("Awesome Tower");
 			ComponentData cd1 = new ComponentData();
 			cd1.setComponentName("PhysicalComponent");
 			cd1.addField("myHeading", "0");
 			cd1.addField("myImagePath", "src/resources/cookie.png");
 			cd1.addField("myImageSize", "50");
+			cd1.addField("myValidTerrains", "grass, ice, steel, dark, fairy");
 			
 			ComponentData cd2 = new ComponentData();
 			cd2.setComponentName("CollidableComponent");
@@ -111,7 +112,7 @@ public class MockGameDataConstructor {
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
-			ed2.setName("SuPeR HaPpY AwEsOmE ToWeR");
+			ed2.setName("Awesome Tower");
 			ComponentData CD1 = new ComponentData();
 			CD1.setComponentName("PhysicalComponent");
 			CD1.addField("myHeading", "0");
@@ -173,11 +174,11 @@ public class MockGameDataConstructor {
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName()+1);
 			ser.serializeToFile(ed2, "exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2);
 			
-			derp.deserializeFromFile("src/SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
-			derp.deserializeFromFile("src/SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
-			derp.deserializeFromFile("src/SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
-			derp.deserializeFromFile("src/SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
-			derp.deserializeFromFile("src/SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			
 			TerrainMap terrainMap = new TerrainMap(md);
 //			terrainMap.getDestination();

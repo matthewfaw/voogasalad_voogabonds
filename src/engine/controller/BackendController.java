@@ -73,6 +73,7 @@ public class BackendController {
 	private RewardSystem myRewardSystem;
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
+	private TeamSystem myTeamSystem;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
@@ -91,15 +92,18 @@ public class BackendController {
 	}
 	
 	private void constructSystems() {
-		myCollisionDetectionSystem = new CollisionDetectionSystem();
-		myDamageDealingSystem = new DamageDealingSystem();
+		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		// ORDERING MATTERS for physical -> targeting -> movement
-		myPhysicalSystem = new PhysicalSystem(mapMediator);
-		myTargetingSystem = new TargetingSystem();
-		myMovementSystem = new MovementSystem(myPhysicalSystem, myTargetingSystem);
-		
 		myRewardSystem = new RewardSystem();
+		myDamageDealingSystem = new DamageDealingSystem();
+		
+		// ORDERING MATTERS for physical -> targeting -> collision -> movement
+		myPhysicalSystem = new PhysicalSystem(mapMediator);
+		
+		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
+		myCollisionDetectionSystem = new CollisionDetectionSystem(myPhysicalSystem);
+		
+		myMovementSystem = new MovementSystem(myPhysicalSystem, myCollisionDetectionSystem, myTargetingSystem);
 		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
 		
 	}
@@ -134,11 +138,14 @@ public class BackendController {
 	{
 		constructEntityDataStore();
 		constructPlayerData();
-		constructMap();
+		
 		constructLevelData();
+		constructMap();
 		constructSystems();
 		
 		constructEntityFactory(); //depends on constructing systems first
+		
+		
 	}
 
 	private void constructEntityFactory() {
@@ -168,8 +175,8 @@ public class BackendController {
 			MapDataContainer mapData = data.get(0);
 			TerrainMap terrainMap = new TerrainMap(mapData);
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-			MapMediator mapMediator = new MapMediator(terrainMap);
-			myMapDistributor = new MapDistributor(mapMediator, myEntityFactory);
+			MapMediator mapMediator = new MapMediator(mapData);
+			myMapDistributor = new MapDistributor(mapMediator, myResourceStore, myEntityFactory, myPlayerController);
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);

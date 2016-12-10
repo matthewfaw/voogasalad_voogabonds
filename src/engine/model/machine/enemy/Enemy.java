@@ -1,13 +1,5 @@
 package engine.model.machine.enemy;
 
-import authoring.model.EnemyData;
-import engine.controller.timeline.TimelineController;
-import engine.model.components.CollidableComponent;
-import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.weapons.WeaponFactory;
-import utility.Point;
-
 @Deprecated
 public class Enemy /*extends Machine*/ {
 	/*

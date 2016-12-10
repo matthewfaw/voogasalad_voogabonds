@@ -1,6 +1,5 @@
 package engine.model.components;
 
-import engine.model.entities.IEntity;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
@@ -13,11 +12,10 @@ import utility.Point;
  * @author matthewfaw, Weston
  *
  */
-public class MoveableComponent implements IComponent, IMovable {
+public class MoveableComponent extends AbstractComponent implements IMovable {
 
 	//replace with: PhysicalSystem
 //	private PhysicalComponent myPhysical;
-	private IEntity myEntity;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -33,12 +31,6 @@ public class MoveableComponent implements IComponent, IMovable {
 	
 	public Pair<Double, Point> getMove(IPhysical p) {
 		return myMovementCalc.nextMove(this, p);
-	}
-
-	//********************IComponent interface***********//
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
 	}
 
 	//********************IMovable interface***********//

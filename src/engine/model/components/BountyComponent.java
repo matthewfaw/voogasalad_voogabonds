@@ -13,10 +13,9 @@ import engine.model.systems.RewardSystem;
  * @author matthewfaw
  *
  */
-public class BountyComponent implements IComponent {
-	@Hide
-	private IEntity myEntity;
+public class BountyComponent extends AbstractComponent {
 	private int myBountyValue;
+	
 	@Hide
 	private RewardSystem myRewardSystem;
 	
@@ -34,9 +33,4 @@ public class BountyComponent implements IComponent {
 		return myBountyValue;
 	}
 
-	@Override
-	public IEntity getEntity()
-	{
-		return myEntity;
-	}
 }

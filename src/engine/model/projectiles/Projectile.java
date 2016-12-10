@@ -8,14 +8,10 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
-import engine.model.collision_detection.ICollidable;
-import engine.model.components.CollidableComponent;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
 import javafx.util.Pair;
-import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
 import engine.model.systems.IRegisterable;
@@ -36,11 +32,11 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	
 	private String myImagePath;
 	private IKillerOwner myOwner;
-	private IModifiablePlayer myPlayer;
+	//private IModifiablePlayer myPlayer;
 	private Machine myTarget;
-	private MapMediator myMap;
+	//private MapMediator myMap;
 	
-	private IMovementStrategy myMovementCalc;
+	//private IMovementStrategy myMovementCalc;
 	private double mySpeed;
 	private double myTurnSpeed;
 	private double myTraveled;
@@ -52,7 +48,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	private IDamageStrategy myDamageCalc;
 	private double myDamage;
 	private int myMaxRange;
-	private int myAoERadius;
+	//private int myAoERadius;
 	
 	List<String> myValidTerrain;
 	
@@ -67,10 +63,10 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
-		myPlayer = myOwner.getOwner();
-		myMap = map;
+		//myPlayer = myOwner.getOwner();
+		//myMap = map;
 		
-		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
+		//myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
 		myLocation = myOwner.getPosition();
 		myHeading = myOwner.getHeading();
 		myTraveled = 0;
@@ -81,7 +77,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myValidTerrain = data.getValidTerrains();
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
-		myAoERadius = data.getAreaOfEffectRadius();
+		//myAoERadius = data.getAreaOfEffectRadius();
 		myDamage = data.getDamage();	
 		
 		time.attach(this);
@@ -122,10 +118,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		advance();
 		
 		//TODO: Remove if goes too far off map
-		if (false) {
-			// destroySelf();
-			unregisterMyself();
-		}
 	}
 	
 	private Point advance() {
@@ -242,9 +234,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myObservers.forEach(observer -> observer.update(this));
 	}
 	
-	private void destroySelf() {
-		// TODO Auto-generated method stub
-	}
 	
 	//********** ISystem Interface Methods ************//
 //	@Override
