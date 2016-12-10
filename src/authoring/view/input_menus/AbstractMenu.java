@@ -28,6 +28,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Deprecated
 /**
  * @author Niklas Sjoquist
  * 

@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+@Deprecated
 /**
  * @author Niklas Sjoquist
  * 

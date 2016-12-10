@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@Deprecated
 /**
  * @author Niklas Sjoquist
  *

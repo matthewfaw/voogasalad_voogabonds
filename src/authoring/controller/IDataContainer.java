@@ -2,6 +2,7 @@ package authoring.controller;
 
 import authoring.model.IReadableData;
 
+@Deprecated
 /**
  * @author Niklas Sjoquist
  *

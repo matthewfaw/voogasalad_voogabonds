@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
+@Deprecated
 public class TerrainTab extends Tab {
 
 	private ResourceBundle myResources;

@@ -103,6 +103,7 @@ public class EditComponentBox extends VBox {
             public void handle(ActionEvent event){
                 String name = getName();
                 ComponentData entity = createDataFromInput();
+                System.out.println("Put Component ("+name+") in parent map");
                 parent.editComponent(name, entity);
                 grandparent.getTilePane().getChildren().remove(EditComponentBox.this); // this = reference of parent (i.e., this EditEntityBox class)
             }
@@ -130,6 +131,7 @@ public class EditComponentBox extends VBox {
     private String getName() {
         for (Label lbl : myLabels) {
             String text = lbl.getText();
+            System.out.println(text);
             if (text.equals("Name*")) {
                 return text;
             }
