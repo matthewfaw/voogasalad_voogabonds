@@ -176,6 +176,10 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		return sinkPoints.get(name);
 	}
 	
+	public HashMap<String, ArrayList<Point>> getSinkPointMap(){
+		return sinkPoints;
+	}
+	
 	/**
 	 * TERRAIN DATA FUNCTIONS
 	 */
