@@ -110,4 +110,10 @@ public class EntityTab extends ListTab<String> implements IObserver<Container>{
 		
 	}
 
+	@Override
+	protected Button setUpFinishButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
