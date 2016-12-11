@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.entities.IEntity;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
@@ -130,12 +131,21 @@ public class ApplicationController {
 		// TODO Auto-generated method stub
 //		return null;
 	}
-
+	
 	public void onSavePressed() {
 		// TODO Auto-generated method stub
 	//	return null;
 	}
 
+	public void  onEntitySelected(IEntity aEntity)
+	{
+//		myScene.makeEntityInfoBox()
+//			   .withUpgradeButton(...)
+//			   .withTargetInfo()
+//			   .with
+//			   .build()
+	}
+	
 	public void DisplayStats() throws Exception {
 		myScene.updateTowerStatisticsRow();
 	}

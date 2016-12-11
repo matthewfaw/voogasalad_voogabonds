@@ -19,8 +19,9 @@ import javafx.scene.layout.VBox;
 public class RightPane implements IGUIPiece,IViewPane {
 	private VBox myRightPane=new VBox();
 	private TowerColumn myTowerColumn;
-	
+	//private Pane myGamePlayer;
 	public RightPane(){
+		//myGamePlayer=gamePlayer;
 		setUpPane();
 		//myTowerColumn=new TowerColumn();
 		//myRightPane.getChildren().add(myTowerColumn.getView());
@@ -28,6 +29,8 @@ public class RightPane implements IGUIPiece,IViewPane {
 
 	@Override
 	public void setUpPane() {
+		//myRightPane.setPrefWidth(myGamePlayer.getWidth()*0.4);
+		//myRightPane.setPrefHeight(myGamePlayer.getHeight()*0.857);
 		myRightPane.setPrefWidth(200);
 		myRightPane.setPrefHeight(600);
 		myRightPane.setPadding(new Insets(10));
