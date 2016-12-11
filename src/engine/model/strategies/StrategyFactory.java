@@ -26,8 +26,8 @@ public class StrategyFactory {
 	private PhysicalSystem myPhysical;
 	public List<String> myMovementStrategies;
 	
-	public StrategyFactory(MovementSystem movement) {
-		myPhysical = movement.getPhysical();
+	public StrategyFactory(PhysicalSystem physical) {
+		myPhysical = physical;
 		
 		File[] folder = new File("src/engine/model/strategies/movement").listFiles();
 		myMovementStrategies = Arrays.stream(folder)

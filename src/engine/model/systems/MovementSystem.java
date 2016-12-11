@@ -24,8 +24,8 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		myStrategyFactory = new StrategyFactory(myPhysical);
 		
-		myStrategyFactory = new StrategyFactory(this);
 		time.attach(this);
 		
 	}
@@ -63,10 +63,4 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	public StrategyFactory getStrategyFactory() {
 		return myStrategyFactory;
 	}
-
-	public PhysicalSystem getPhysical() {
-		return myPhysical;
-	}
-
-
 }
