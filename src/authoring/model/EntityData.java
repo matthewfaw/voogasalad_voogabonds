@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import engine.model.components.PurchasableComponentData;
-import engine.model.components.SellableComponentData;
-import engine.model.components.UpgradableComponentData;
+import engine.model.components.concrete.PurchasableComponentData;
+import engine.model.components.concrete.SellableComponentData;
+import engine.model.components.concrete.UpgradableComponentData;
 
 /**
  * @author owenchung and alanguo

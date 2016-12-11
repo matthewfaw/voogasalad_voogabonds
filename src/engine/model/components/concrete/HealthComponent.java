@@ -1,7 +1,8 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.model.components.AbstractComponent;
 import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.HealthSystem;
@@ -53,7 +54,7 @@ public class HealthComponent extends AbstractComponent {
 		
 		double healthDelta = myCurrHealth - startingHealth;
 		int died = myCurrHealth <= 0 ? 1 : 0;
-		int bounty = myBounty.getBounty(this);
+		int bounty = myBounty.collectBounty(this);
 		
 		return new DamageInfo(healthDelta, died, bounty);		
 	}

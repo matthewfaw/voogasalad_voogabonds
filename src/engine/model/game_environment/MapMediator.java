@@ -10,7 +10,7 @@ import java.util.Queue;
 
 import authoring.controller.MapDataContainer;
 import authoring.model.map.TerrainData;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.game_environment.terrain.TerrainMap;

@@ -74,6 +74,7 @@ public class LoadAuthoringScreen {
 	private void populatePane() {
 		HBox optionArea = new HBox();
 		TableView<MenuTableItem> chooseProjectTable = new TableView<MenuTableItem>();
+		chooseProjectTable.setPrefWidth(screenWidth*0.3);
 		TableColumn<MenuTableItem, String> firstCol = new TableColumn<MenuTableItem, String>(myResources.getString("ProjectTitle"));
 		TableColumn<MenuTableItem, Date> secondCol = new TableColumn<MenuTableItem, Date>(myResources.getString("LastModified"));
 		String relativePath = new File("").getAbsolutePath();
@@ -122,13 +123,13 @@ public class LoadAuthoringScreen {
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				JSONDeserializer des = new JSONDeserializer();
-				MapDataContainer container;
 				GameStateLoader loader = new GameStateLoader();
 
 				loader.loadMapData(router, gameTitle);
 				loader.loadEntityData(router, gameTitle);
-
+				loader.loadLevelAndWaveData(router, gameTitle);
+				loader.loadPlayerData(router, gameTitle);
+				
 				initAuthoring();
 			}
 		});

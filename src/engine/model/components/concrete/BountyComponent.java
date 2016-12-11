@@ -1,8 +1,7 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
-import authoring.model.Hide;
-import engine.model.entities.IEntity;
-import engine.model.systems.RewardSystem;
+import engine.model.components.AbstractComponent;
+import engine.model.systems.BountySystem;
 
 /**
  * The purpose of this class is to manage the information
@@ -16,12 +15,8 @@ import engine.model.systems.RewardSystem;
 public class BountyComponent extends AbstractComponent {
 	private int myBountyValue;
 	
-	@Hide
-	private RewardSystem myRewardSystem;
-	
-	public BountyComponent (RewardSystem rewardSystem) {
-		myRewardSystem = rewardSystem;
-		myRewardSystem.attachComponent(this);
+	public BountyComponent (BountySystem bountySystem) {
+		bountySystem.attachComponent(this);
 	}
 	/**
 	 * A method to retrieve the bounty value associated with an entity

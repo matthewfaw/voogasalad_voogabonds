@@ -1,4 +1,4 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import java.util.HashMap;
 import java.util.Map;

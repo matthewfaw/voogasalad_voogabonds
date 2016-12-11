@@ -1,7 +1,8 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.model.components.AbstractComponent;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;

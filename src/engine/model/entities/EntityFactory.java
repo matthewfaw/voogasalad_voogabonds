@@ -12,7 +12,7 @@ import engine.controller.waves.PathFollowerData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
 import engine.model.components.IModifiableComponent;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
 import engine.model.strategies.IPosition;
