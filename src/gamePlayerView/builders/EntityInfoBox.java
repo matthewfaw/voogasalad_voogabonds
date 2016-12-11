@@ -1,5 +1,8 @@
 package gamePlayerView.builders;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
@@ -77,3 +80,4 @@ public class EntityInfoBox implements IGUIPiece {
 		}
 	}
 }
+
