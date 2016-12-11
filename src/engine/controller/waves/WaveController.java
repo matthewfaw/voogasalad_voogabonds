@@ -7,6 +7,8 @@ import java.util.List;
 import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
+import engine.model.components.MoveableComponent;
+import engine.model.components.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -67,8 +69,13 @@ public class WaveController {
 				Collections.shuffle(spawns);
 				Collections.shuffle(sinks);
 				
-				myPhysical.get(newEntity).setPosition(spawns.get(0));
-				myMovement.get(newEntity).setGoal(sinks.get(0));
+				PhysicalComponent p = myPhysical.get(newEntity);
+				if (p != null)
+					p.setPosition(spawns.get(0));
+				
+				MoveableComponent m = myMovement.get(newEntity);
+				if (m != null)
+					m.setGoal(sinks.get(0));
 				
 			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
 					| IllegalArgumentException | InvocationTargetException e) {

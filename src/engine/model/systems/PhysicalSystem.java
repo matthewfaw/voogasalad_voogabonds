@@ -1,5 +1,6 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.components.IComponent;
@@ -14,6 +15,7 @@ public class PhysicalSystem implements ISystem {
 	MapMediator myMap;
 	
 	public PhysicalSystem(MapMediator map) {
+		myComponents = new ArrayList<PhysicalComponent>();
 		myMap = map;
 	}
 	

@@ -1,10 +1,12 @@
 package engine.model.components;
 
+import authoring.model.ComponentData;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
+import engine.model.systems.MovementSystem;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -28,6 +30,14 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private double myMaxDistance;
 	private double myMovedDistance;
 
+	public MoveableComponent (MovementSystem movement, ComponentData data) {
+		myMovedDistance = 0;
+		
+		//TODO: get fields from data
+		
+		
+		movement.attachComponent(this);
+	}
 
 	
 	public Pair<Double, Point> getMove(IPhysical p) {
