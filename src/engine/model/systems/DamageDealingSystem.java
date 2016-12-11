@@ -3,9 +3,9 @@ package engine.model.systems;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.model.components.DamageDealingComponent;
-import engine.model.components.HealthComponent;
 import engine.model.components.IComponent;
+import engine.model.components.concrete.DamageDealingComponent;
+import engine.model.components.concrete.HealthComponent;
 import engine.model.entities.IEntity;
 import utility.Damage;
 

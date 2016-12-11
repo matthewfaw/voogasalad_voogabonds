@@ -1,5 +1,7 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
+import engine.model.components.AbstractComponent;
+import engine.model.components.ITargeting;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.systems.PhysicalSystem;

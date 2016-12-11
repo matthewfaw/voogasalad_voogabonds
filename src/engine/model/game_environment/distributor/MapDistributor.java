@@ -6,7 +6,7 @@ import java.util.List;
 
 import authoring.model.EntityData;
 import engine.controller.PlayerController;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
 import engine.model.playerinfo.Player;

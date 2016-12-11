@@ -3,8 +3,8 @@ package engine.model.systems;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.model.components.BountyComponent;
 import engine.model.components.IComponent;
+import engine.model.components.concrete.BountyComponent;
 import engine.model.entities.IEntity;
 
 public class BountySystem implements ISystem {

@@ -3,10 +3,10 @@ package engine.model.systems;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.model.components.CreatorComponent;
 import engine.model.components.IComponent;
-import engine.model.components.MoveableComponent;
-import engine.model.components.TargetingComponent;
+import engine.model.components.concrete.CreatorComponent;
+import engine.model.components.concrete.MoveableComponent;
+import engine.model.components.concrete.TargetingComponent;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
 

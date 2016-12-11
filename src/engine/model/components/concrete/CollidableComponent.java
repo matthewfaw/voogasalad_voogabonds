@@ -1,7 +1,8 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
+import engine.model.components.AbstractComponent;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;

@@ -5,9 +5,9 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.components.CollidableComponent;
 import engine.model.components.IComponent;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.CollidableComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.strategies.IPhysical;
 import utility.Point;
 

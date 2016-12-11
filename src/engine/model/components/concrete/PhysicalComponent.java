@@ -1,4 +1,4 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.IViewable;
+import engine.model.components.AbstractComponent;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
 import engine.model.systems.PhysicalSystem;

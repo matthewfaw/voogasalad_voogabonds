@@ -1,5 +1,7 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
+import engine.model.components.AbstractComponent;
+import engine.model.components.ICreator;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;

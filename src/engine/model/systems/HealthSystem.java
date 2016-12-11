@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.IObserver;
-import engine.model.components.CollidableComponent;
-import engine.model.components.DamageDealingComponent;
-import engine.model.components.HealthComponent;
 import engine.model.components.IComponent;
-import engine.model.components.MoveableComponent;
+import engine.model.components.concrete.CollidableComponent;
+import engine.model.components.concrete.DamageDealingComponent;
+import engine.model.components.concrete.HealthComponent;
+import engine.model.components.concrete.MoveableComponent;
 import engine.model.entities.IEntity;
 import engine.model.weapons.DamageInfo;
 import utility.Damage;

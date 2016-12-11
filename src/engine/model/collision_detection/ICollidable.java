@@ -1,6 +1,6 @@
 package engine.model.collision_detection;
 
-import engine.model.components.CollidableComponent;
+import engine.model.components.concrete.CollidableComponent;
 
 public interface ICollidable {
 

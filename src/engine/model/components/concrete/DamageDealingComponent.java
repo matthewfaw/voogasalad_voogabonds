@@ -1,9 +1,11 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import java.util.List;
 
 import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
+import engine.model.components.AbstractComponent;
+import engine.model.components.IComponent;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;

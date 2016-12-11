@@ -6,9 +6,9 @@ import java.util.Map;
 
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
-import engine.model.components.CreatorComponent;
 import engine.model.components.IComponent;
 import engine.model.components.ICreator;
+import engine.model.components.concrete.CreatorComponent;
 
 public class SpawningSystem implements ISystem, IObserver<TimelineController>{
 	private List<CreatorComponent> myComponents;

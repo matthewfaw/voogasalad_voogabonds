@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import engine.model.components.IComponent;
-import engine.model.components.MoveableComponent;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.MoveableComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.paths.PathManager;
