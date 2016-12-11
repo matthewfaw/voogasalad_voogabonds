@@ -254,10 +254,10 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 			mySystems.remove(s);
 		}
 	}
-	@Override
-	public IEntity getEntity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public IEntity getEntity() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
