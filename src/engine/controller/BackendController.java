@@ -16,7 +16,6 @@ import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
-import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
@@ -51,7 +50,6 @@ public class BackendController {
 	private DataStore<EntityData> myEntityDataStore;
 	private PlayerData myPlayerData;
 	private LevelDataContainer myLevelDataContainer;
-	private MapDistributor myMapDistributor;
 	private MapMediator myMapMediator;
 	
 	//Controllers to manage events
@@ -69,7 +67,7 @@ public class BackendController {
 	private HealthSystem myHealthSystem;
 	private MovementSystem myMovementSystem;
 	private PhysicalSystem myPhysicalSystem;
-	private RewardSystem myRewardSystem;
+	private BountySystem myBountySystem;
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
 	private TeamSystem myTeamSystem;
@@ -95,17 +93,17 @@ public class BackendController {
 	private void constructSystems() {
 		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		myRewardSystem = new RewardSystem();
+		myBountySystem = new BountySystem();
 		myDamageDealingSystem = new DamageDealingSystem();
 		
 		// ORDERING MATTERS for physical -> targeting -> collision -> movement
 		myPhysicalSystem = new PhysicalSystem(myMapMediator);
 		
-		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
+		myTargetingSystem = new TargetingSystem();
 		myCollisionDetectionSystem = new CollisionDetectionSystem();
 		
 		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
-		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
+		mySpawningSystem = new SpawningSystem();
 		
 	}
 	
@@ -156,9 +154,10 @@ public class BackendController {
 		mySystems.add(myHealthSystem);
 		mySystems.add(myMovementSystem);
 		mySystems.add(myPhysicalSystem);
-		mySystems.add(myRewardSystem);
+		mySystems.add(myBountySystem);
 		mySystems.add(mySpawningSystem);
 		mySystems.add(myTargetingSystem);
+		mySystems.add(myTeamSystem);
 		
 		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator);
 	}
@@ -178,7 +177,6 @@ public class BackendController {
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			myMapMediator = new MapMediator(mapData);
-			myMapDistributor = new MapDistributor(myMapMediator, myResourceStore, myEntityFactory, myPlayerController);
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);
