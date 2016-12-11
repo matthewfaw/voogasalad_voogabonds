@@ -59,13 +59,15 @@ public class LoadAuthoringScreen {
 		stage.setTitle(myResources.getString("LoadExistingAuthoringTitle"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
+		scene.getStylesheets().add("style.css");
+		pane.setId("background");
 		populatePane();
 		stage.setScene(scene);
 		stage.show();
 	}
 	
 	private void populatePane() {
-		HBox optionArea = new HBox(screenWidth*0.1);
+		HBox optionArea = new HBox();
 		TableView<MenuTableItem> chooseProjectTable = new TableView<MenuTableItem>();
 		TableColumn<MenuTableItem, String> firstCol = new TableColumn<MenuTableItem, String>(myResources.getString("ProjectTitle"));
 		TableColumn<MenuTableItem, Date> secondCol = new TableColumn<MenuTableItem, Date>(myResources.getString("LastModified"));
@@ -84,9 +86,11 @@ public class LoadAuthoringScreen {
 		chooseProjectTable.setItems(data);
 		chooseProjectTable.getColumns().addAll(firstCol, secondCol);
 		VBox boxRight = new VBox(screenHeight*0.1);
+		boxRight.setId("vbox");
 		showSelectedTitle.setPromptText(myResources.getString("ShowSelectedProject"));
 		showSelectedTitle.setEditable(false);
 		Button startAuthoring = new Button(myResources.getString("ConfirmAuthoringSetUp"));
+		startAuthoring.setId("button");
 		boxRight.getChildren().addAll(showSelectedTitle, startAuthoring);
 		optionArea.getChildren().addAll(chooseProjectTable, boxRight);
 		pane.setCenter(optionArea);
