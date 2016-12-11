@@ -172,13 +172,13 @@ public class Point implements IShape, IPosition {
 	}
 	
 	public double towards(Point p) {
-		Point vector = this.subtract(p);
+		Point vector = p.subtract(this);
 		
 		return Math.toDegrees(Math.atan(vector.myY/vector.myX));
 	}
 	
 	public Point moveAlongHeading(double distance, double heading) {
-		return new Point(myX + Math.cos(Math.toDegrees(heading)), myY + Math.sin(Math.toDegrees(heading)), myZ);
+		return new Point(myX + Math.cos(Math.toRadians(heading)), myY + Math.sin(Math.toRadians(heading)), myZ);
 	}
 	
 	public double getX(){

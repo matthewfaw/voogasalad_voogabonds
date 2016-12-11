@@ -19,7 +19,7 @@ public class TargetingSystem implements ISystem {
 	public IPhysical getTarget(IComponent c) {
 		TargetingComponent t = get(c);
 		if (t != null)
-			return t.getTarget(myPhysical.getMap(), myTeams, myPhysical.get(t));
+			return t.getTarget(myPhysical, myTeams, myPhysical.get(t));
 		return null;
 	}
 	

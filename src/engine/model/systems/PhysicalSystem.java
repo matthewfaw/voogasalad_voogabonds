@@ -2,15 +2,15 @@ package engine.model.systems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import engine.model.components.IComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
-import engine.model.strategies.IPhysical;
+import utility.Point;
 
 public class PhysicalSystem implements ISystem {
-	
 	List<PhysicalComponent> myComponents;
 	MapMediator myMap;
 	
@@ -40,5 +40,14 @@ public class PhysicalSystem implements ISystem {
 			if (p.getEntity().equals(entity))
 				return p;
 		return null;
+	}
+
+	public List<PhysicalComponent> withinRange(Point pos, double radius, double heading, double width) {
+		return myComponents.stream().filter(p -> isWithin(p, pos, radius, heading, width)).collect(Collectors.toList());
+	}
+
+	private boolean isWithin(PhysicalComponent p, Point pos, double radius, double heading, double width) {
+		return pos.getDistanceTo(p.getPosition()) <= radius &&
+				Math.abs(pos.towards(p.getPosition()) - heading) <= width;
 	}
 }

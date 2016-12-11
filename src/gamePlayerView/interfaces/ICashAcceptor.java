@@ -3,18 +3,10 @@ package gamePlayerView.interfaces;
 import engine.IObservable;
 import engine.model.playerinfo.IViewablePlayer;
 
+
 /**
- * Just a temporary interface for an example
- * This interface will be replaced by something 
- * more meaningful in terms of the backend soon
- * @author matthewfaw
- *
+ * @author Guhan Muruganandam
  */
-/*
-public interface ICashAcceptor {
-	public void acceptCash(IViewableCash aCash);
-}
-*/
 
 /**
  * CashBox interface utilised by the router.

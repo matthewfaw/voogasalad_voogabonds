@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 
 /**
  * @author Guhan Muruganandam
- * 
  */
 
 public class LeftPane implements IGUIPiece,IViewPane {
