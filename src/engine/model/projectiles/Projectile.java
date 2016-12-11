@@ -24,7 +24,7 @@ import engine.model.weapons.IKillerOwner;
  * @author Weston
  */
 @Deprecated
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, /*ICollidable,*/ ISystem, IRegisterable {
+public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineController>, /*ICollidable,*/ ISystem, IRegisterable {
 
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -82,18 +82,18 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		
 		time.attach(this);
 	}
-	@Override
-	public double getHeading() {
-		return myHeading;
-	}
-	@Override
-	public Point getPosition() {
-		return myLocation;
-	}
-	@Override
-	public String getImagePath() {
-		return myImagePath;
-	}
+//	@Override
+//	public double getHeading() {
+//		return myHeading;
+//	}
+//	@Override
+//	public Point getPosition() {
+//		return myLocation;
+//	}
+//	@Override
+//	public String getImagePath() {
+//		return myImagePath;
+//	}
 	@Override
 	public Point getGoal() {
 		return myTarget == null ? null : myTarget.getPosition();
@@ -183,12 +183,12 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myLocation = aLocation.getValue();
 		myHeading = aLocation.getKey();
 	}
-	*/
+	
 	@Override
 	public double getSize() {
 		return myCollisionRadius;
 	}
-	
+	*/
 	//********** ICollidable Interface Methods ************//
 	/*
 	@Override
@@ -221,6 +221,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 //		unmovedCollidable.collideInto(unmovedCollidable);
 //	}
 	//***************Observable interface****************//
+	/*
 	@Override
 	public void attach(IObserver<IViewable> aObserver) {
 		myObservers.add(aObserver);
@@ -233,7 +234,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
 	}
-	
+	*/
 	
 	//********** ISystem Interface Methods ************//
 //	@Override
@@ -253,10 +254,10 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 			mySystems.remove(s);
 		}
 	}
-	@Override
-	public IEntity getEntity() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public IEntity getEntity() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

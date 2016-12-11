@@ -25,6 +25,7 @@ import utility.Point;
  *
  */
 public class EntityFactory {
+	private static final Point DEFAULT_LOCATION = new Point(0,0);
 	private ComponentFactory myComponentFactory;
 	private List<ISystem> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
@@ -65,11 +66,16 @@ public class EntityFactory {
 		return entity;
 	}
 	
-	public IEntity constructEntity(EntityData aEntityData, IPosition aLocation) 
+	public IEntity constructEntity(EntityData aEntityData) 
+			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		return constructEntity(aEntityData, DEFAULT_LOCATION);
+	}
+	
+	public IEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
-		System.out.println("Constructing entity: "+aEntityData.getName());
 		IEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
@@ -101,7 +107,6 @@ public class EntityFactory {
 	private void distributeEntity(EntityData entityData, Point aLocation) {
 		if (hasPhysicalComponent(entityData)) {
 			String validTerrainsStr = entityData.getComponents().get("PhysicalComponent").getFields().get("myValidTerrains");
-			System.out.println("Valid Terrains: "+validTerrainsStr);
 			// parse valid terrains into list of terrain data
 			List<String> validTerrains = Arrays.asList(validTerrainsStr.split(", "));
 			
