@@ -120,6 +120,8 @@ public class MockGameDataConstructor {
 			cd3.addField("myCollisionRadius", "50");
 			cd3.addField("myTurnSpeed", "10");
 			cd3.addField("myMoveSpeed", "100");
+			cd3.addField("myMovementCalc", "greedy");
+	
 			ComponentData cd4 = new ComponentData();
 			cd4.setComponentName("DamageDealingComponent");
 			cd4.addField("myDamage", "50");

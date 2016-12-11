@@ -194,7 +194,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		terrainList.remove(terrain.getLoc());
 	}
 	
-	public Collection<TerrainData> getTerrainList(){
+	public HashSet<TerrainData> getTerrainList(){
 		return terrainList;
 	}
 	
