@@ -64,8 +64,6 @@ public class GameDisplay {
 		importMapData();
 		this.columns = mapData.getNumXCells();
 		this.rows = mapData.getNumYCells();
-		System.out.println("COLUMNS: " + columns);
-		System.out.println("ROWS: " + rows);
 		this.mapData.setDimensions(columns, rows);
 		if (screenWidth/columns < (screenHeight*0.82)/rows) {
 			this.tileSize = (int) (screenWidth/columns) - GAP;
