@@ -88,6 +88,9 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void setPosition(Pair<Double, Point> p) {
 		myHeading = p.getKey();
+		while (Math.abs(myHeading) > 180) {
+			myHeading -= 360 * (myHeading / Math.abs(myHeading));
+		}
 		myPosition = p.getValue();
 		notifyObservers();
 	}

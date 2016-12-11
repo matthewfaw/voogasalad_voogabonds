@@ -12,18 +12,27 @@ public class GreedyMovementStrategy extends AbstractMovementStrategy {
 	 * Move as close to straight towards your goal as possible.
 	 */
 	protected  Pair<Double, Point> nextMoveWithGoal(IMovable m, IPhysical p) {
-		
 		if (p.getPosition().equals(m.getGoal()))
 			return new Pair<Double, Point>(p.getHeading(), p.getPosition());
-		
+
 		double newHeading;
 		double deltaToTarget = p.getPosition().towards(m.getGoal()) -  p.getHeading();
+		
+		while (Math.abs(deltaToTarget) > 180) {
+			deltaToTarget -= 360 * (deltaToTarget / Math.abs(deltaToTarget));
+		}
+		
+		
+		System.out.println(p.getPosition().towards(m.getGoal()));
+		System.out.println(p.getHeading());
+		System.out.println(deltaToTarget);
+		System.out.println();
 		
 		if (Math.abs(deltaToTarget) <= Math.abs(m.getTurnSpeed()))
 			newHeading = p.getPosition().towards(m.getGoal());
 		else
 			//heading = currHeading + turnSpeed + (delta/|delta|)
-			newHeading = p.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
+			newHeading = p.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget)) ;
 
 		double distance = Math.min(m.getMoveSpeed(), p.getPosition().euclideanDistance(m.getGoal()));
 		
