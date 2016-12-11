@@ -129,6 +129,11 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
             for (String terrain: ((MapDataContainer) c).getValidTerrainMap().keySet()){
                 validTerrains.add(terrain);
             }
+        }else if(c instanceof EntityDataContainer){
+        	getList().clear();
+        	for (EntityData entity:  ((EntityDataContainer) c).getEntityDataMap().values()){
+        		getList().add(new EntityListView(entity));
+        	}
         }
     }
 
