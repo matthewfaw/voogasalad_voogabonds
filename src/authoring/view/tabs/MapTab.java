@@ -19,6 +19,7 @@ public class MapTab extends Tab {
 	private BorderPane pane;
 	private Scene scene;
 	private MapDataContainer controller;
+	private String mapDataFilePath;
 	
 	public MapTab(TabPane tPain, Scene sc, MapDataContainer con, int mapX, int mapY) {
 		super("Map");
