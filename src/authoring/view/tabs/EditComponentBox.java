@@ -1,22 +1,24 @@
 package authoring.view.tabs;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.model.ComponentData;
-import authoring.model.EntityData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
+/**
+ * @author Niklas Sjoquist
+ *
+ * A menu box that allows the user to edit a Component of an Entity.
+ *
+ */
 public class EditComponentBox extends VBox implements ISubmittable {
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
@@ -37,29 +39,16 @@ public class EditComponentBox extends VBox implements ISubmittable {
      */
     public EditComponentBox (EditEntityBox parent, EntityTab grandparent, String componentName, List<String> attributes) {
         super(SPACING);
-        this.setId("vbox");
-        this.parent = parent;
-        this.grandparent = grandparent;
-        myName = componentName;
+        init(parent, grandparent, componentName, attributes.size());
         
-        myLabels = new ArrayList<Label>(attributes.size());
-        myFields = new ArrayList<TextField>(attributes.size());
-        
+        // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
             Label lbl = new Label(attributes.get(i));
             TextField field = new TextField();
-            lbl.setLabelFor(field);
-            lbl.setId("label");
-            myLabels.add(lbl);
-            myFields.add(field);
-            this.getChildren().add(lbl);
-            this.getChildren().add(field);
+            setUpLabeledField(lbl, field);
         }
         
-        // Set up horizontal buttons
         HBox btns = getBottomButtons();
-
-        // Add nodes to Menu Box
         this.getChildren().add(btns);
     }
     
@@ -72,28 +61,35 @@ public class EditComponentBox extends VBox implements ISubmittable {
      */
     public EditComponentBox(EditEntityBox parent, EntityTab grandparent, String componentName, Map<String,String> retrievedData) {
         super(SPACING);
+        init(parent, grandparent, componentName, retrievedData.size());
+        
+        // Set up input fields
+        for (String attributeName : retrievedData.keySet()) {
+            Label lbl = new Label(attributeName);
+            TextField field = new TextField(retrievedData.get(attributeName));
+            setUpLabeledField(lbl, field);
+        }
+        
+        HBox btns = getBottomButtons();
+        this.getChildren().add(btns);
+    }
+    
+    private void init(EditEntityBox parent, EntityTab grandparent, String componentName, int numAttributes) {
         this.setId("vbox");
         this.parent = parent;
         this.grandparent = grandparent;
         myName = componentName;
-        
-        myLabels = new ArrayList<Label>(retrievedData.size());
-        myFields = new ArrayList<TextField>(retrievedData.size());
-        
-        for (String attributeName : retrievedData.keySet()) {
-            Label lbl = new Label(attributeName);
-            TextField field = new TextField(retrievedData.get(attributeName));
-            lbl.setLabelFor(field);
-            lbl.setId("label");
-            myLabels.add(lbl);
-            myFields.add(field);
-            this.getChildren().add(lbl);
-            this.getChildren().add(field);
-        }
-        
-        HBox btns = getBottomButtons();
-        // Add nodes to Menu Box
-        this.getChildren().add(btns);
+        myLabels = new ArrayList<Label>(numAttributes);
+        myFields = new ArrayList<TextField>(numAttributes);
+    }
+    
+    private void setUpLabeledField(Label lbl, TextField field) {
+        lbl.setLabelFor(field);
+        lbl.setId("label");
+        myLabels.add(lbl);
+        myFields.add(field);
+        this.getChildren().add(lbl);
+        this.getChildren().add(field);
     }
     
     private HBox getBottomButtons() {
