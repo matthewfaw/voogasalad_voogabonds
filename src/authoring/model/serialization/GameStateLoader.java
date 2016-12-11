@@ -16,6 +16,7 @@ public class GameStateLoader {
 	
 	public void loadMapData(Router r, String gameTitle){
 		String mapFilePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
+		System.out.println(mapFilePath);
 		try{
 			MapDataContainer newMapData = (MapDataContainer) deserializer.deserializeFromFile(mapFilePath, MapDataContainer.class);
 			MapDataContainer routerMapData = r.getMapDataContainer();
@@ -48,13 +49,16 @@ public class GameStateLoader {
 	}
 	
 	public void loadEntityData(Router r, String gameTitle){
-		String entityFilePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("EntityDataFilePath");
-		File directory = new File(entityFilePath);
-		File[] entityFiles = directory.listFiles();
+		String entityFilePath = "src/" + myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("EntityDataFilePath");
+		File dir = new File(entityFilePath);
+		
+		
+		File[] entityFiles = dir.listFiles();
 		try{
 			EntityDataContainer routerEntityData = r.getEntityDataContainer();
 			for (File f: entityFiles){
-				EntityData oldEntityData = (EntityData) deserializer.deserializeFromFile(f.toString(), EntityData.class);
+				String entityDataPath = f.toString().substring(4);
+				EntityData oldEntityData = (EntityData) deserializer.deserializeFromFile(entityDataPath, EntityData.class);
 				routerEntityData.createEntityData(oldEntityData);
 			}
 		}catch(Exception e){
