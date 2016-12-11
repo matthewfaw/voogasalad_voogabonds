@@ -47,6 +47,7 @@ public class GameDisplay {
 	
 	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller, int mapX, int mapY) {
 		setUpScreenResolution();
+		importMapData();
 		this.scene = scene;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainContainer = new VBox();
@@ -74,6 +75,10 @@ public class GameDisplay {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = (int) screenSize.getWidth();
 		screenHeight = (int) screenSize.getHeight();
+	}
+	
+	private void importMapData() {
+		
 	}
 	
 	private void populateGrid() {

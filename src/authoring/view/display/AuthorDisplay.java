@@ -30,13 +30,15 @@ public class AuthorDisplay {
     private Scene scene;
     private int mapXDim;
     private int mapYDim;
+    private String filePath;
     
-    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY) {
+    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY, String path) {
         // set title
         mainInit.setTitle(AUTHORING_TITLE);
         this.scene = scn;
         this.mapXDim = mapX;
         this.mapYDim = mapY;
+        this.filePath = path;
         // Set up BorderPane
         root = pane;
         // bind to take available space
