@@ -10,6 +10,8 @@ import authoring.model.serialization.GameStateSerializer;
 import authoring.model.serialization.JSONSerializer;
 import main.MainInitializer;
 import main.MainMenu;
+import mainmenu.screens.LoadAuthoringScreen;
+import utility.ErrorBox;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -68,6 +70,11 @@ public class FileMenu extends Menu {
 		openProject.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
 				//TODO: Deserialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
+				try {
+					LoadAuthoringScreen loadScreen = new LoadAuthoringScreen();
+				} catch (IOException e) {
+					ErrorBox.displayError(myResources.getString("MysteryError"));
+				}
 			}
 		});
 	}
