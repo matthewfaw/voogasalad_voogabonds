@@ -106,6 +106,7 @@ public class MapGrid extends Node {
     {
     	MoveableComponentView aComponent = new MoveableComponentView(aObservable);
     	sprites.add(aComponent);
+    	System.out.println("hey mom I am here");
     	myPane.getChildren().add(aComponent);
     }
     
