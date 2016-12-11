@@ -3,6 +3,11 @@ package engine.controller.waves;
 import authoring.model.WaveData;
 
 //TODO: move to the model
+/**
+ * A class intended to store the states of waves and WaveData 
+ * @author matthewfaw
+ *
+ */
 public class WaveState {
 	private WaveData myWaveData;
 	private int myUnreleasedEnemyCount;
@@ -15,7 +20,7 @@ public class WaveState {
 	public WaveState(WaveData aWaveData, double aCurrentTime)
 	{
 		myWaveData = aWaveData;
-		myUnreleasedEnemyCount = myWaveData.getNumEnemies();
+		myUnreleasedEnemyCount = myWaveData.getNumEntities();
 		myTimeSinceLastEnemyCreation = aCurrentTime;
 	}
 
@@ -37,11 +42,11 @@ public class WaveState {
 	 * @param aTotalElapsedTime
 	 * @return the name of the enemy to be created
 	 */
-	public String releaseWaveEnemy(double aTotalElapsedTime)
+	public String releaseWaveEntity(double aTotalElapsedTime)
 	{
 		myUnreleasedEnemyCount -= 1;
 		myTimeSinceLastEnemyCreation = aTotalElapsedTime;
-		return myWaveData.getWaveEnemy();
+		return myWaveData.getWaveEntity();
 	}
 
 	/**
@@ -56,7 +61,7 @@ public class WaveState {
 	 * Determines if there are enemies that can be released in the wave
 	 * @return true if there are, false otherwise
 	 */
-	private boolean hasEnemiesToRelease()
+	public boolean hasEnemiesToRelease()
 	{
 		return myUnreleasedEnemyCount > 0;
 	}
@@ -68,7 +73,7 @@ public class WaveState {
 	 */
 	private boolean creationTimeoutHasBeenSatisfied(double aTotalElapsedTime)
 	{
-		double minimumValidTime = myTimeSinceLastEnemyCreation + myWaveData.getTimeBetweenEnemy();
+		double minimumValidTime = myTimeSinceLastEnemyCreation + myWaveData.getTimeBetweenEntity();
 		return aTotalElapsedTime > minimumValidTime;
 	}
 }

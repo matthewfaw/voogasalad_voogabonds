@@ -19,23 +19,23 @@ public class JSONDeserializer {
 	// this should make our code more flexible
 	//String fileLoc = "src/SerializedFiles/";
 	
-	public Object Deserialize(JsonElement json, Class cls){
+	public Object Deserialize(String json, Class cls){
 		
 		gson = new Gson();
 		return (gson.fromJson(json, cls));
 		
 	}
 
-	public Object deserializeFromFile(String filepath, Class cls) throws Exception{
+	public Object deserializeFromFile(String filepath, Class cls) throws FileNotFoundException{
 		
 		try {
 			//The following lines look up a file relative to the project path
-			URL url = getClass().getClassLoader().getResource(filepath);
+			URL url = getUrl(filepath);
 			File file = new File(url.getPath());
 			scanner = new Scanner(file);
 			fileText = scanner.useDelimiter("\\A").next();
 		} catch (FileNotFoundException e) {
-			throw new Exception("File was unable to be deserialized correctly.");
+			throw new FileNotFoundException("File was unable to be deserialized correctly.");
 		} finally{
 			scanner.close();
 		}
@@ -45,5 +45,13 @@ public class JSONDeserializer {
 		return (gson.fromJson(fileText, cls));
 		
 	}
-
+	
+	private URL getUrl(String aFilepath)
+	{
+		//a filepath should not have . to represent folder paths for the getResource method
+//		aFilepath = aFilepath.replace('.', '/');
+//		System.out.println(aFilepath);
+//		System.out.println(getClass().getClassLoader().getResource(aFilepath));
+		return getClass().getClassLoader().getResource(aFilepath);
+	}
 }

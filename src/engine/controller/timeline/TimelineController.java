@@ -24,11 +24,13 @@ public class TimelineController implements IObservable<TimelineController> {
 
 	public TimelineController()
 	{
-		myTimeline = new Timeline();
 		myObservers = new ArrayList<IObserver<TimelineController>>();
 		
+		myTimeline = new Timeline();
+		myTimeline.setCycleCount(Timeline.INDEFINITE);
 		//TODO: maybe change this to another location?
-		myTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers()));
+		KeyFrame frame = new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers());
+		myTimeline.getKeyFrames().add(frame);
 	}
 	
 	/**
@@ -72,9 +74,10 @@ public class TimelineController implements IObservable<TimelineController> {
 	public void detach(IObserver<TimelineController> aObserver) {
 		myObservers.remove(aObserver);
 	}
-
+	// TODO: FIX POSSIBLE INDEX OUT OF BOUNDS
 	@Override
 	public void notifyObservers() {
+
 		//IMPORTANT: cannot write a foreach loop here because of JavaFX concurrency issues
 		for (int i=0; i<myObservers.size(); ++i) {
 			myObservers.get(i).update(this);

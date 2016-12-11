@@ -1,15 +1,17 @@
 package engine.model.game_environment.terrain;
 
+import java.util.Stack;
+
+import authoring.model.map.TerrainData;
 import utility.Index;
+import utility.Point;
 
 public class Terrain {
-	private Index myIndex;
-	private String myTerrainType;
+	private TerrainData myTerrainData;
 	
-	public Terrain(int aXIndex, int aYIndex, String aTerrainType)
+	public Terrain(TerrainData aTerrainData)
 	{
-		myIndex = new Index(aXIndex, aYIndex);
-		myTerrainType = aTerrainType;
+		myTerrainData = aTerrainData;
 	}
 	
 	/**
@@ -18,16 +20,24 @@ public class Terrain {
 	 */
 	public Index getIndexInMap()
 	{
-		return myIndex;
+		return new Index((int)myTerrainData.getLoc().getX(), (int)myTerrainData.getLoc().getY());
 	}
 	
 	/**
-	 * Returns the terrain type of this Terrain object
+	 * Returns the *top* terrain type of this Terrain object
 	 * @return
 	 */
 	public String getTerrainType()
 	{
-		return myTerrainType;
+		return myTerrainData.getName();
 	}
+	
+	public Point getCenter() {
+		int size = myTerrainData.getSize();
+		int x = (int) myTerrainData.getLoc().getX();
+		int y = (int) myTerrainData.getLoc().getY();
+		return new Point(size * (x + 0.5), size * (y + 0.5));
+	}
+	
 
 }

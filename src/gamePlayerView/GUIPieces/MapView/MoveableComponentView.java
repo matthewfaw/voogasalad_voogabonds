@@ -15,7 +15,8 @@ import javafx.scene.image.ImageView;
 
 public class MoveableComponentView extends ImageView implements IObserver<IViewable> {
 
-    public MoveableComponentView(IObservable<IViewable> aObservable){
+    public MoveableComponentView(IObservable<IViewable> aObservable) {
+    	
     }
 
 	@Override

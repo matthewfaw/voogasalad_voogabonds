@@ -5,29 +5,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import authoring.model.EnemyData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
-import authoring.model.WeaponData;
-import engine.controller.timeline.TimelineController;
 import engine.model.components.PhysicalComponent;
-import engine.model.data_stores.DataStore;
 import engine.model.game_environment.paths.PathFactory;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.machine.Machine;
 import engine.model.machine.MachineFactory;
-import engine.model.machine.enemy.Enemy;
 import engine.model.strategies.IPhysical;
-import javafx.util.Pair;
 import utility.Point;
 
+//TODO: update this class to ECS
+@Deprecated
 public class MapMediator {
 	private PathFactory myPathFactory;
 	
 	private TerrainMap myTerrainMap;
-	private ArrayList<IPhysical> myEntityManager;
-	private PathManager myPathManager;
+	private ArrayList<PhysicalComponent> myEntityManager;
 	private MachineFactory myAnarchosyndacalistCommune;
 	
 	//TODO: Change this constructor so that it hides away the terrain map
@@ -35,9 +28,8 @@ public class MapMediator {
 	// this makes the ownership model more explicit
 	public MapMediator(TerrainMap aTerrainMap) {
 		myTerrainMap = aTerrainMap;
-		myEntityManager = new ArrayList<IPhysical>();
-		myPathFactory = new PathFactory();
-		myPathManager = myPathFactory.constructPaths(myTerrainMap);
+		myEntityManager = new ArrayList<PhysicalComponent>();
+		myPathFactory = new PathFactory(myTerrainMap);
 
 	}
 	
@@ -50,11 +42,13 @@ public class MapMediator {
 	 */
 	public boolean attemptToPlaceEntity(Point aLocation, PhysicalComponent aPhysicalComponent)
 	{
+		/*
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
+		*/
 		return false;
 	}
 	
@@ -64,38 +58,40 @@ public class MapMediator {
 
 	public boolean attemptToPlaceEntity(Point aLocation, Machine aPhysicalComponent)
 	{
+		/*
 		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
 			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
 			accept(aPhysicalComponent, aLocation);
 			return true;
 		}
+		*/
 		return false;
 	}
 	
-	public List<Machine> withinRange(Point p, double radius){
-		Stream<IPhysical> s = myEntityManager.stream();
+	@Deprecated
+	public List<PhysicalComponent> withinRange(Point p, double radius){
+		Stream<PhysicalComponent> s = myEntityManager.stream();
 		
 		s.filter(e -> isEnemy(e) && isInRadius(e, p, radius));
 		
-		return s.map(e -> (Machine) e).collect(Collectors.toList());
+		return s.collect(Collectors.toList());
 		
 	}
 
 	private boolean isInRadius(IPhysical e, Point p, double radius) {
+		/*
 		return e.getPosition().euclideanDistance(p) - e.getCollisionRadius() - radius >= 0;
+		*/
+		return false;
 	}
 
+	@Deprecated //please don't use instanceof unless completely unavoidable. If necessary, please document why
 	private boolean isEnemy(IPhysical e) {
+		/*
 		return e instanceof Enemy;
+		*/
+		return false;
 	}
 
-	/**
-	 * Accepts entity to be tracked by map
-	 * @param aEntityToTrack
-	 */
-	private void accept(IPhysical aEntityToTrack, Point aLocation)
-	{
-		myEntityManager.add(aEntityToTrack);
-	}
 
 }

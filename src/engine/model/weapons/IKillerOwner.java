@@ -9,6 +9,7 @@ import utility.Point;
  * @author Weston
  *
  */
+@Deprecated
 public interface IKillerOwner {
 	
 	abstract public DamageInfo notifyDestroy(DamageInfo result);

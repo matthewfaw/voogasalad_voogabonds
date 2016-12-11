@@ -34,8 +34,9 @@ public class ApplicationController {
 	private BackendController myBackendController;
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
-	private Stage myStage; //////Guhan
-	private Pane myPane=new BorderPane();
+	private GamePlayerScene myScene;
+	//private Stage myStage; //////Guhan
+	//private Pane myPane=new BorderPane();
 
 	public ApplicationController()
 	{
@@ -48,9 +49,10 @@ public class ApplicationController {
 	 */
 	public void init(Stage aStage) throws Exception
 	{
-		myStage=aStage; ///Guhan 
-		GamePlayerScene scene = constructGUI(aStage);
-		Router router = new Router(scene);
+		//myStage=aStage; ///Guhan 
+		//GamePlayerScene scene = constructGUI(aStage);
+		myScene=constructGUI(aStage);
+		Router router = new Router(myScene);
 		constructBackend(router);
 	}
 	/**
@@ -96,11 +98,11 @@ public class ApplicationController {
 	}
 
 	public void onPlayButtonPressed() {
-		//AnimationController.play()
+		myBackendController.startTimeLine();
 	}
 
 	public void onPauseButtonPressed() {
-		//AnimationController.pause()
+		myBackendController.pauseTimeline();
 	}
 
 	public void onFastButtonPressed() {
@@ -121,7 +123,7 @@ public class ApplicationController {
 	
 	public void onTowerDropped(String aTowerName, Point aDropLocation)
 	{
-		myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
+		myBackendController.attemptToPlaceEntity(aTowerName, aDropLocation);
 	}
 
 	public void onSellButtonPressed(TowerData tower) {
@@ -133,13 +135,17 @@ public class ApplicationController {
 		// TODO Auto-generated method stub
 	//	return null;
 	}
+
+	public void DisplayStats() throws Exception {
+		myScene.updateTowerStatisticsRow();
+	}
 	
 	/*
 	public static void main(String[] args)
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
-//		appcont.constructMap();
+		appcont.constructMap();
 	}
 	*/
 	

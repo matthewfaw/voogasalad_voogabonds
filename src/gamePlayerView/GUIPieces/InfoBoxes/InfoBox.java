@@ -3,12 +3,20 @@ package gamePlayerView.GUIPieces.InfoBoxes;
 import com.sun.prism.paint.Color;
 
 import engine.IObservable;
+import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.IGUIPiece;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+
+
+/**
+ * 
+ * @author Guhan Muruganandam
+ *
+ */
 
 /**
  * UI feature for Statistics text box and Label

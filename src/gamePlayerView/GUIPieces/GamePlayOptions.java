@@ -6,8 +6,13 @@ import gamePlayerView.interfaces.IGUIPiece;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+/**
+ * 
+ * @author Guhan Muruganandam
+ *
+ */
 
 public class GamePlayOptions implements IGUIPiece,IButtonMaker {
 	private VBox myGamePlayOptions;

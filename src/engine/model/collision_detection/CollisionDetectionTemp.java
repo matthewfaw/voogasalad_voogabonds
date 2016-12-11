@@ -39,6 +39,7 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 	 * @return
 	 */
 	private boolean intersects(ICollidable a, ICollidable b) {
+		/*
 		double a_x = a.getPosition().getX();
 		double a_y = a.getPosition().getY();
 		double a_r = a.getCollisionRadius();
@@ -50,6 +51,8 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		return Math.pow(a_r - b_r, 2) <= 
 				Math.pow(a_x - b_x, 2) + 
 				Math.pow(a_y - b_y, 2);
+		*/
+		return false;
 	}
 	
 	

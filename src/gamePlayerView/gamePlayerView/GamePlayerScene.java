@@ -2,18 +2,20 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.TowerData;
-import authoring.model.map.MapData;
 import engine.controller.ApplicationController;
 import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
-import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
+import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
+import gamePlayerView.GUIPieces.MachineInfoView.TowerStatistics;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
@@ -31,6 +33,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -40,8 +44,8 @@ import javafx.stage.Stage;
  */
 
 public class GamePlayerScene {
+	private static final String GAME_PLAYER_PATH = "resources/textfiles";
 	private ApplicationController myAppController;
-	
 	private Stage myStage;
 	private BottomPane myBottomPane;
 	private LeftPane myLeftPane;
@@ -57,6 +61,7 @@ public class GamePlayerScene {
 	private List<IEnemiesKilledAcceptor> myEnemiesKilled;
 	private BorderPane myBorderPane;
 	private DisplayBoxFactory myBoxFactory;
+	private ResourceBundle myResourceBundle;
 	//private List<MoveableComponentView> mySprites;
 	
 
@@ -69,6 +74,7 @@ public class GamePlayerScene {
 		myStage=aStage;
 		myBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
+		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
@@ -111,12 +117,18 @@ public class GamePlayerScene {
 		setScene(aStage,myScene);
 	}*/
 
-	private void updateTowerStatisticsRow(TowerData tower) throws Exception {
+	public void updateTowerStatisticsRow(/*TowerData tower*/) throws Exception {
 		myBottomPane.clear();
 		Collection<Node> myCollection=new ArrayList<Node>();
-		TowerStatisticsandOptions myTowerOptions=new TowerStatisticsandOptions();
+		TowerStatistics myTowerStatistics=new TowerStatistics();
+		TargetingButtons myTargetingMechanism=new TargetingButtons();
+		VBox myTowerOptions=new VBox();
+		myTowerOptions.setSpacing(10);
+		myTowerOptions.getChildren().addAll(myTowerStatistics.getView(),myTargetingMechanism.getView());
 	    UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
-		myCollection.add(myTowerOptions.getView());
+	    MachineInfo myInfo=new MachineInfo();
+	    myCollection.add(myInfo.getView());
+		myCollection.add(myTowerOptions);
 		myCollection.add(myUpgradeandSell.getView());
 		myBottomPane.add(myCollection);
 		myBorderPane.setBottom(myBottomPane.getView());
@@ -144,6 +156,8 @@ public class GamePlayerScene {
 		BottomPane pane=new BottomPane();
 		Label l =new Label("Wassup");
 		Collection<Node> myCollection=new ArrayList<Node>();
+		//MachineInfo myInfo=new MachineInfo();
+		//myCollection.add(myInfo.getView());
 		myCollection.add(l);
 		pane.add(myCollection);
 		return pane;
@@ -162,8 +176,8 @@ public class GamePlayerScene {
 	private LeftPane createLeftPane() {
 		LeftPane pane=new LeftPane();
 		GamePlayOptions myGamePlayOptions=new GamePlayOptions(myAppController);
-		InfoBox myWallet=myBoxFactory.createBox("cash");
-		InfoBox myLife=myBoxFactory.createBox("lives");
+		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
+		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
 		myCash.add((ICashAcceptor) myWallet); ///FIX LATEER
 		myLives.add((ILivesAcceptor) myLife);//// FIX LATER
 		Collection<Node> myCollection=new ArrayList<Node>();
@@ -195,7 +209,7 @@ public class GamePlayerScene {
 		return myEnemiesKilled;
 	}
 	
-	public void giveMapData(MapData aMapData){
+	public void giveMapData(MapDataContainer aMapData){
 	        myMap.setMap(aMapData);
 	}
 	
@@ -214,5 +228,4 @@ public class GamePlayerScene {
 	//}
 	
 }
-
 

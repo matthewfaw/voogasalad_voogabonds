@@ -6,6 +6,7 @@ package utility;
  * @author Weston
  *
  */
+
 public class Damage {
 	double myDamage;
 	
