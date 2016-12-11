@@ -9,6 +9,7 @@ import authoring.controller.LevelDataContainer;
 import authoring.controller.Router;
 import authoring.model.LevelData;
 import authoring.model.WaveData;
+import engine.exceptions.SerializationException;
 
 public class GameStateSerializer {
 
@@ -28,8 +29,9 @@ public class GameStateSerializer {
 	 * Note: This code is ugly as hell but I'm refactoring as soon as basic is ok.
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
+	 * @throws SerializationException 
 	 */
-	public void saveGameState(String gameName) throws InstantiationException, IllegalAccessException{
+	public void saveGameState(String gameName) throws InstantiationException, IllegalAccessException, SerializationException{
 
 		createNewDirectory(gameName,"");
 
@@ -38,7 +40,7 @@ public class GameStateSerializer {
 			ser.serializeToFile(router.getEntityDataContainer(), gameName+"/"+"EntityData"+"/"+"EntityData");
 		}
 		catch(Exception e){
-			System.out.println("Entity Fail");
+			throw new SerializationException("System was unable to load previous entity data.");
 		}
 		try{
 			createNewDirectory("WaveData", gameName);
@@ -47,27 +49,26 @@ public class GameStateSerializer {
 			ser.serializeToFile(wavd.get(wavdName), "/"+gameName+"/"+"WaveData"+"/"+wavdName);
 			}
 		}catch(Exception e){
-			System.out.println("Wave fail");
+			throw new SerializationException("System was unable to load previous wave data.");
 		}
 		try{
 			createNewDirectory("LevelData", gameName);
 			List<LevelData> ldc = router.getLevelDataContainer().finalizeLevelDataMap();
 			ser.serializeToFile(ldc, gameName+"/"+"LevelData"+"/"+"LevelData");
 		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("Level fail");
+			throw new SerializationException("System was unable to load previous level data.");
 		}
 		try{
 			createNewDirectory("MapData", gameName);
 			ser.serializeToFile(router.getMapDataContainer(), gameName+"/"+"MapData"+"/"+"MapData");
 		}catch(Exception e){
-			System.out.println("Map fail");
+			throw new SerializationException("System was unable to load previous map data.");
 		}
 		try{
 			createNewDirectory("PlayerData", gameName);
 			ser.serializeToFile(router.getPlayerDataContainer().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"PlayerData");
 		}catch(Exception e){
-			System.out.println("Player fail");
+			throw new SerializationException("System was unable to load previous player data.");
 		}
 
 

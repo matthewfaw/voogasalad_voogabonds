@@ -9,8 +9,11 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import authoring.controller.MapDataContainer;
+import authoring.controller.Router;
 import authoring.model.serialization.GameStateDeserializer;
+import authoring.model.serialization.GameStateLoader;
 import authoring.model.serialization.JSONDeserializer;
+import authoring.view.display.AuthorDisplay;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.MainInitializer;
+import utility.ErrorBox;
 
 
 /**
@@ -38,7 +42,6 @@ public class LoadAuthoringScreen {
 
 	private Scene scene;
 	private Stage stage;
-	private MainInitializer initializer;
 	private BorderPane pane;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
@@ -50,12 +53,13 @@ public class LoadAuthoringScreen {
 					);
 	private GameStateDeserializer GSD;
 	private String selectedGame;
+	private Router router;
 	
-	public LoadAuthoringScreen() throws IOException {
+	public LoadAuthoringScreen(Router r) throws IOException {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.stage = new Stage();
-		this.initializer = new MainInitializer(stage);
+		this.router = r;
 		stage.setTitle(myResources.getString("LoadExistingAuthoringTitle"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
@@ -64,6 +68,7 @@ public class LoadAuthoringScreen {
 		populatePane();
 		stage.setScene(scene);
 		stage.show();
+
 	}
 	
 	private void populatePane() {
@@ -119,22 +124,21 @@ public class LoadAuthoringScreen {
 			public void handle(ActionEvent e) {
 				JSONDeserializer des = new JSONDeserializer();
 				MapDataContainer container;
-				try {
-					String filePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
-					System.out.println("FILEPATH IS: " + filePath);
-					container = (MapDataContainer) des.deserializeFromFile(filePath, MapDataContainer.class);
-					int mapXDim = container.getNumXCells();
-					System.out.println(mapXDim);
-					int mapYDim = container.getNumYCells();
-					initializer.initAuthoring(container);
-//					initializer.initAuthoring(mapXDim, mapYDim, showSelectedTitle.getText());
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				GameStateLoader loader = new GameStateLoader();
+
+				loader.loadMapData(router, gameTitle);
+				loader.loadEntityData(router, gameTitle);
+
+				initAuthoring();
 			}
 		});
 	}
+	
+	public void initAuthoring() {
+    AuthorDisplay authoring = new AuthorDisplay(pane, scene, router);
+//    this.AuthDisp = authoring;
+	stage.setScene(scene);
+}
 	
 	private void setUpScreenResolution() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

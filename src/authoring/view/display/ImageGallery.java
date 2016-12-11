@@ -35,12 +35,11 @@ public class ImageGallery {
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
-	public ImageGallery(GridToolBar tBar, String fPath) {
+	public ImageGallery(String fPath) {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.scrollPane = new ScrollPane();
 		this.terrainStage = new Stage();
-		this.toolBar = tBar;
 		this.container = new VBox(screenWidth*0.01);
 		imagePane = new TilePane();
 		scrollPane.setContent(imagePane);
@@ -53,6 +52,11 @@ public class ImageGallery {
 		terrainStage.setScene(scene);
 		terrainStage.show();
 		confirmImageHandler();
+	}
+	
+	public ImageGallery(GridToolBar tBar, String fPath) {
+		this(fPath);
+		this.toolBar = tBar;
 	}
 	
 	private void setUpScreenResolution() {
@@ -82,8 +86,15 @@ public class ImageGallery {
 		confirmImage.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				toolBar.setSelectedImagePath(selectedImagePath);
-				terrainStage.close();
+				try {
+					toolBar.setSelectedImagePath(selectedImagePath);
+					terrainStage.close();
+					System.out.println("HELLO1");
+				} catch (Exception e1) {
+					//TODO: ImageSplitter stuff
+					System.out.println("HELLO2");
+					terrainStage.close();
+				}
 			}
 		});
 	}

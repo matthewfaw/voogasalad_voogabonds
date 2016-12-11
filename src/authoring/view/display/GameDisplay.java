@@ -62,8 +62,8 @@ public class GameDisplay {
 		this.toolBar = new GridToolBar(terrainContainer, scene, controller);
 		this.mapData = controller;
 		importMapData();
-		this.columns = controller.getNumXCells();
-		this.rows = controller.getNumYCells();
+		this.columns = mapData.getNumXCells();
+		this.rows = mapData.getNumYCells();
 		this.mapData.setDimensions(columns, rows);
 		if (screenWidth/columns < (screenHeight*0.82)/rows) {
 			this.tileSize = (int) (screenWidth/columns) - GAP;

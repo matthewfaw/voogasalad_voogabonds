@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 import authoring.controller.MapDataContainer;
+import authoring.controller.Router;
 import authoring.model.serialization.GameStateSerializer;
 import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Christopher Lu
- * Initializes the VOOGASalad application to the Main Menu. Also responsible for switching to the in game scene.
+ * Initializes the VOOGASalad application to the Main Menu.
  */
 
 public class MainInitializer {
@@ -70,14 +71,11 @@ public class MainInitializer {
 		return scene;
 	}
 	
-	public void initAuthoring(MapDataContainer container) {
-//		String relativePath = new File("").getAbsolutePath();
-//		System.out.println(relativePath);
-//		String finalPath = relativePath.concat("\\" + authoringName);
-	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, container);
-	    this.AuthDisp = authoring;
-		stage.setScene(scene);
-	}
+//	public void initAuthoring(MapDataContainer container) {
+//	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene);
+//	    this.AuthDisp = authoring;
+//		stage.setScene(scene);
+//	}
 
 	public static GameStateSerializer setUpSerialization(){
 		return new GameStateSerializer(AuthDisp.getRouter());
