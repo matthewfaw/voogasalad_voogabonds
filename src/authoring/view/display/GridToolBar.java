@@ -104,7 +104,7 @@ public class GridToolBar {
 		sinkHandler(toggles);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
 		terrainChooser.setId("menu-combobox");
-		terrainChooser.setMinHeight(47);
+		terrainChooser.setMinHeight(screenHeight*0.04);
 		terrainHandler(terrainChooser);
 		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser);
 	}
@@ -202,7 +202,7 @@ public class GridToolBar {
 					createTerrain.initModality(Modality.APPLICATION_MODAL);
 					VBox choiceContainer = new VBox(screenHeight*0.02);
 					HBox choiceArea = new HBox(screenWidth*0.01);
-					HBox toggleArea = new HBox(screenWidth*0.01);
+					HBox toggleArea = new HBox(screenWidth*0.05);
 					ColorPicker colorChooser = new ColorPicker();
 					TextField terrainName = new TextField();
 					terrainName.setText(myResources.getString("TerrainName"));
@@ -214,17 +214,19 @@ public class GridToolBar {
 					fillImageHandler(toggles, imageMode, terrainName);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
 					choiceArea.getChildren().addAll(colorChooser, chooseImage, terrainName, confirmTerrain);
-					toggleArea.getChildren().addAll(imageMode);
+					Button setBackground = new Button(myResources.getString("SetBackground"));
+					toggleArea.getChildren().addAll(imageMode, setBackground);					
 					choiceContainer.getChildren().addAll(choiceArea, toggleArea);
+					setBackgroundHandler(setBackground);
 					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
 					Scene terrainChoiceScene = new Scene(choiceContainer, screenWidth*0.3, screenHeight*0.1);
 					createTerrain.setScene(terrainChoiceScene);
+					createTerrain.setWidth(screenWidth*0.5);
 					createTerrain.show();
 				}
 				else {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
 					imageStatus = boolToTerrain.get(terrains.getSelectionModel().getSelectedItem());
-					System.out.println(imageStatus);
 					if (imageStatus) {
 						selectedImagePath = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					}
@@ -233,6 +235,15 @@ public class GridToolBar {
 					}
 				}
 				terrains.getSelectionModel().clearSelection();
+			}
+		});
+	}
+	
+	private void setBackgroundHandler(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, myResources.getString("TerrainImageFilePath"));
 			}
 		});
 	}
