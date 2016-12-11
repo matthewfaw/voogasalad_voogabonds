@@ -37,7 +37,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		// Position?
-		myPosition = new Point(0,0);
 		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
@@ -45,7 +44,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		
 		physical.attachComponent(this);
 		router.distributeViewableComponent(this);
-		notifyObservers();
 	}
 
 	
