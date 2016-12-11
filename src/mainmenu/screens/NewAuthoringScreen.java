@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoring.controller.MapDataContainer;
 import authoring.controller.Router;
+import authoring.model.serialization.GameStateSerializer;
 import authoring.model.serialization.JSONSerializer;
 import authoring.view.display.AuthorDisplay;
 import javafx.event.ActionEvent;
@@ -89,9 +90,9 @@ public class NewAuthoringScreen {
 						Stage stage = new Stage();
 						File file = newGameSave.showSaveDialog(stage);
 						if (file != null) {
-							JSONSerializer json = new JSONSerializer();
+							GameStateSerializer GSS = new GameStateSerializer(router);
 							try {
-								json.serializeToFile(file, file.getName());
+								GSS.saveGameState(file.getName());
 								setAuthoringName(file.getName());
 							} catch (Exception exception) {
 								System.out.println("Cannot create new game.");

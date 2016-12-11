@@ -127,7 +127,6 @@ public class LoadAuthoringScreen {
 				String filePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
 				GameStateLoader loader = new GameStateLoader();
 				loader.loadMapData(filePath, router);
-				
 				initAuthoring();
 			}
 		});
