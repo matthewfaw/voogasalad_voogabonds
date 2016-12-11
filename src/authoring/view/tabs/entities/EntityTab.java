@@ -38,8 +38,6 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     public boolean addEntity(EntityData entity){
         try{
             myEntities.createEntityData(entity);
-            EntityListView entityView = new EntityListView(entity);
-            this.getList().add(entityView);
             return true;
         }catch(Exception e){
             this.showError(e.getMessage());
@@ -50,11 +48,6 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     public boolean updateEntity(EntityListView oldEntity, EntityData entity){
         try{
             myEntities.updateEntityData(oldEntity.getEntityName(), entity);
-            if (!oldEntity.equals(entity.getName())) {
-                this.getList().remove(oldEntity);
-                EntityListView updatedEntity = new EntityListView(entity);
-                this.getList().add(updatedEntity);
-            }
             return true;
         }catch(Exception e){
             this.showError(e.getMessage());
@@ -63,7 +56,14 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     }
     
     public boolean deleteEntity(EntityListView entity) {
-        return this.getList().remove(entity);
+        try {
+            myEntities.removeEntityData(entity.getEntityName());
+            return true;
+        }
+        catch (Exception e) {
+            this.showError(e.getMessage());
+            return false;
+        }
     }
 
     public EditEntityBox getNewEntityMenu() {
