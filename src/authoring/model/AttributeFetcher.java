@@ -38,7 +38,7 @@ public class AttributeFetcher {
 			try{
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
-				newCompName = newCompName.substring(1);
+				newCompName = newCompName.substring(1); // remove leading '.'
 				String componentName = separateCapitalizedWords(newCompName);
 				componentList.add(componentName);
 
@@ -59,6 +59,12 @@ public class AttributeFetcher {
 
 	}
 
+	/**
+	 * Code based from stackoverflow.com
+	 * 
+	 * @param smooshed
+	 * @return
+	 */
 	private String separateCapitalizedWords(String smooshed) {
 		return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
 	}
