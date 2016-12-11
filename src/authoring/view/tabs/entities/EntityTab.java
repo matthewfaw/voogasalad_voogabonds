@@ -77,6 +77,11 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
         return new EditEntityBox(this, ecFetcher, entityData, entityView);
     }
     
+    /**
+     * Customizes the ListView of Entities to include an image+name
+     * 
+     * @return
+     */
     private Callback<ListView<EntityListView>, ListCell<EntityListView>> getCustomCellFactory() {
         return new Callback<ListView<EntityListView>, ListCell<EntityListView>>() {
             @Override
