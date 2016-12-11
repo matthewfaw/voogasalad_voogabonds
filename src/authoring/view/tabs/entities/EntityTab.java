@@ -16,6 +16,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EntityTab extends ListTab<EntityListView> implements IObserver<Container>{
     public static final String TITLE = "Entities";
@@ -131,7 +134,9 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
             }
         }else if(c instanceof EntityDataContainer){
         	getList().clear();
-        	for (EntityData entity:  ((EntityDataContainer) c).getEntityDataMap().values()){
+        	List<EntityData> entityList = new ArrayList<EntityData>(((EntityDataContainer) c).getEntityDataMap().values());
+        	entityList = entityList.stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());
+        	for (EntityData entity: entityList){
         		getList().add(new EntityListView(entity));
         	}
         }
