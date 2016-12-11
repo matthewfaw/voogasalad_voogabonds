@@ -12,7 +12,7 @@ import engine.model.entities.IEntity;
 import utility.Damage;
 
 /**
- * 
+ * @author Weston
  * @author owenchung(edited)
  *
  */
