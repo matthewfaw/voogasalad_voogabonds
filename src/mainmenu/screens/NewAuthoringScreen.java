@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.serialization.JSONSerializer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -102,16 +103,15 @@ public class NewAuthoringScreen {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					setMapXDim(Integer.parseInt(xSize.getText()));
+					MapDataContainer container = new MapDataContainer();
+					container.setDimensions(Integer.parseInt(xSize.getText()), Integer.parseInt(ySize.getText()));
+					initializer.initAuthoring(container);
 				} catch(Exception e){
-					setMapXDim(40);
+					MapDataContainer container = new MapDataContainer();
+					container.setDimensions(40, 20);
+					initializer.initAuthoring(container);
 				}
-				try {
-					setMapYDim(Integer.parseInt(ySize.getText()));
-				} catch(Exception e){
-					setMapYDim(20);
-				}
-				initializer.initAuthoring(mapXDim, mapYDim, authoringName);
+
 			}
 		});
 	}

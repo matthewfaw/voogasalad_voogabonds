@@ -2,6 +2,7 @@ package engine.model.strategies.movement;
 
 import java.util.Random;
 
+import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
@@ -11,12 +12,16 @@ import utility.Point;
 
 public class PathMovementStrategy extends AbstractMovementStrategy{
 	private static final Random RANDOM = new Random();
+	private Point myPreviousGoalLocation;
+	private MapMediator myMap;
 	private PathManager myPath;
+	
 	
 	@Override
 	public  Pair<Double, Point> nextMove(IMovable m, IPhysical p) {
-		if (myPath == null) {
-			myPath = m.getPath();
+		if (myPath == null || myPreviousGoalLocation == null || myPreviousGoalLocation.equals(m.getGoal())) {
+			myPreviousGoalLocation = m.getGoal();
+			myMap.constructPaths(p, m);
 		}
 		return super.nextMove(m, p);
 	}

@@ -10,7 +10,7 @@ public class PathManager {
 	
 	private List<Point> myPath;
 	
-	PathManager(List<Terrain> aPathToFollow)
+	public PathManager(List<Terrain> aPathToFollow)
 	{
 		myPath = aPathToFollow.stream().map(t -> t.getCenter()).collect(Collectors.toList());
 	}

@@ -27,6 +27,8 @@ public class EntityData implements IReadableData {
 	public EntityData()
 	{
 		myComponents = new HashMap<String, ComponentData>();
+		myPurchaseData = new PurchasableComponentData();
+		mySellData = new SellableComponentData();
 	}
 	
 	public String getName(){
@@ -35,6 +37,30 @@ public class EntityData implements IReadableData {
 	
 	public void setName(String s){
 		this.myName = s;
+	}
+	
+	public void setSellableComponentData(SellableComponentData data) {
+		mySellData = data;
+	}
+	
+	public void setPurchasableComponentData(PurchasableComponentData data) {
+		myPurchaseData = data;
+	}
+	
+	/**
+	 * Sets the sell price for this entity.
+	 * @param price
+	 */
+	public void setSellPrice(int price) {
+		mySellData.setSellPrice(price);
+	}
+	
+	/**
+	 * Sets the buy price for this entity.
+	 * @param price
+	 */
+	public void setPurchasePrice(int price) {
+		myPurchaseData.setBuyPrice(price);
 	}
 	
 	public void addComponent(String aName, ComponentData comp){
