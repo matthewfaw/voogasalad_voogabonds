@@ -17,11 +17,14 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	private CollisionDetectionSystem myCollision;
 	
 	
-	public MovementSystem (PhysicalSystem physical, CollisionDetectionSystem collision, TargetingSystem targeting) {
+	public MovementSystem (PhysicalSystem physical, CollisionDetectionSystem collision, TargetingSystem targeting, 
+			TimelineController time) {
 		myMoveableComponents = new ArrayList<MoveableComponent>();
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		time.attach(this);
+		
 	}
 	
 	public MoveableComponent get(IEntity entity) {

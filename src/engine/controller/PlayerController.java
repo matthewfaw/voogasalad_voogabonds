@@ -46,6 +46,6 @@ public class PlayerController {
 	
 	public void addResourceStoreForAllPlayers(ResourceStore aResourceStore)
 	{
-		//myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
+		myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
 	}
 }
