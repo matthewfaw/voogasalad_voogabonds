@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.ComponentData;
+import authoring.model.Hide;
 import engine.model.entities.IEntity;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -15,6 +16,7 @@ import gamePlayerView.gamePlayerView.Router;
  *
  */
 public class ComponentFactory {
+        @Hide
 	private static final String COMPONENT_PATH = "engine.model.components.";
 	private List<ISystem> mySystems;
 	private Router myRouter;

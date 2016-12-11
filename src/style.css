@@ -72,3 +72,22 @@
 -fx-spacing: 20px;
 -fx-effect: dropshadow(gaussian, black, 10, 0.0, 2, 2);
 }
+
+#menu-combobox {
+-fx-color:black;
+-fx-fill:blue;
+-fx-label-padding: 1px;
+-fx-background-color: #5A6B7F;
+-fx-font-size: 20px;
+-fx-background-radius: 5px;
+-fx-effect: dropshadow(gaussian, black, 10, 0.0, 2, 2);
+}
+
+#combobox {
+-fx-color:black;
+-fx-fill:blue;
+-fx-label-padding: 1px;
+-fx-background-color: #5A6B7F;
+-fx-background-radius: 5px;
+-fx-effect: dropshadow(gaussian, black, 10, 0.0, 2, 2);
+}

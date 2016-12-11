@@ -106,6 +106,11 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 			for (String enemyName: ((EntityDataContainer) c).getEntityDataMap().keySet()){
 				myEntities.add(enemyName);
 			}
+		}else if (c instanceof WaveDataContainer){
+			getList().clear();
+			for (String waveName: ((WaveDataContainer) c).getWaveMap().keySet()){
+				getList().add(waveName);
+			}
 		}
 	}
 
@@ -141,11 +146,11 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 				if (isDefault)
 					myContainer.createNewWave(myNameField.getText(), wave);
 				else{
-					getObservableList().remove(myName);
+//					getObservableList().remove(myName);
 					myContainer.updateWave(wave, myName);
 				}
 				getTilePane().getChildren().remove(myV);
-				getObservableList().add(myNameField.getText());
+//				getObservableList().add(myNameField.getText());
 			}
 		});
 		return finish;

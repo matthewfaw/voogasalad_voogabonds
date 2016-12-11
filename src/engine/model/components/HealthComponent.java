@@ -1,6 +1,7 @@
 package engine.model.components;
 
 import authoring.model.ComponentData;
+import authoring.model.Hide;
 import engine.model.entities.IEntity;
 import engine.model.systems.HealthSystem;
 import utility.Damage;
@@ -15,6 +16,7 @@ import utility.Damage;
  *
  */
 public class HealthComponent extends AbstractComponent {
+        @Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	
 	//private HealthSystem myHealthSystem;

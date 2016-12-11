@@ -3,6 +3,7 @@ package engine.model.components;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
+import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
 
 /**
@@ -19,7 +20,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	
 	private int myTimeBetweenSpawns;
 	private int myTimeSinceSpawning;
-	private IPhysical myTarget;
+	private IPosition myTarget;
 
 	private ISpawningStrategy mySpawningStrategy;
 	private EntityFactory myEntityFactory;
@@ -40,7 +41,11 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	}
 
 	@Override
-	public void setTarget(IPhysical target) {
+	public void setTarget(IPosition target) {
 		myTarget = target;
+	}
+
+	public IPosition getGoal() {
+		return myTarget;
 	}
 }

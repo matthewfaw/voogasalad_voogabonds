@@ -104,6 +104,7 @@ public class GridToolBar {
 		mySink.setId("button");
 		sinkHandler(toggles);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
+		terrainChooser.setId("menu-combobox");
 		terrainChooser.setMinHeight(47);
 		terrainHandler(terrainChooser);
 		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser);

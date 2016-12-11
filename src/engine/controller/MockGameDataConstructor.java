@@ -120,7 +120,9 @@ public class MockGameDataConstructor {
 			cd3.addField("myCollisionRadius", "50");
 			cd3.addField("myTurnSpeed", "10");
 			cd3.addField("myMoveSpeed", "100");
+			cd3.addField("myMaxDistance", "100");
 			cd3.addField("myMovementCalc", "greedy");
+			
 	
 			ComponentData cd4 = new ComponentData();
 			cd4.setComponentName("DamageDealingComponent");
@@ -129,6 +131,7 @@ public class MockGameDataConstructor {
 			
 			ed.addComponent("PhysicalComponent",cd1);
 			ed.addComponent("CollidableComponent",cd2);
+			ed.addComponent("MoveableComponent",cd3);
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();

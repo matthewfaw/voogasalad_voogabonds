@@ -52,7 +52,7 @@ public class BackendController {
 	private PlayerData myPlayerData;
 	private LevelDataContainer myLevelDataContainer;
 	private MapDistributor myMapDistributor;
-	private MapMediator mapMediator;
+	private MapMediator myMapMediator;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
@@ -99,7 +99,7 @@ public class BackendController {
 		myDamageDealingSystem = new DamageDealingSystem();
 		
 		// ORDERING MATTERS for physical -> targeting -> collision -> movement
-		myPhysicalSystem = new PhysicalSystem(mapMediator);
+		myPhysicalSystem = new PhysicalSystem(myMapMediator);
 		
 		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
 		myCollisionDetectionSystem = new CollisionDetectionSystem(myPhysicalSystem);
@@ -177,8 +177,8 @@ public class BackendController {
 			myMapData = mapData;
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-			MapMediator mapMediator = new MapMediator(mapData);
-			myMapDistributor = new MapDistributor(mapMediator, myResourceStore, myEntityFactory, myPlayerController);
+			myMapMediator = new MapMediator(mapData);
+			myMapDistributor = new MapDistributor(myMapMediator, myResourceStore, myEntityFactory, myPlayerController);
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);

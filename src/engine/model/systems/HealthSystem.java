@@ -12,7 +12,7 @@ import engine.model.entities.IEntity;
 import utility.Damage;
 
 /**
- * 
+ * @author Weston
  * @author owenchung(edited)
  *
  */
@@ -24,7 +24,10 @@ public class HealthSystem implements ISystem{
 	}
 	public boolean isDead(IEntity entity) {
 		HealthComponent healthComponent = findHealthComponent(entity);
-		return healthComponent.getCurrentHealth() <= 0;
+		if (healthComponent == null)
+			return false;
+		else
+			return healthComponent.getCurrentHealth() <= 0;
 	}
 	
 	/**
@@ -32,10 +35,10 @@ public class HealthSystem implements ISystem{
 	 * @param entity to add health to
 	 * @param deltaHealth: change in health
 	 */
-	// TODO: What if entity does not have a health component?
 	public void takeDamage(IEntity entity, Damage dmg) {
 		HealthComponent healthComponent = findHealthComponent(entity);
-		healthComponent.takeDamage(dmg);
+		if (healthComponent != null)
+			healthComponent.takeDamage(dmg);
 	}
 	
 	/**

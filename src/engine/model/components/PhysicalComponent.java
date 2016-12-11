@@ -1,6 +1,7 @@
 package engine.model.components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import authoring.model.ComponentData;
@@ -39,7 +40,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
-		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myPosition = new Point(0, 0);
@@ -88,6 +89,9 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void setPosition(Pair<Double, Point> p) {
 		myHeading = p.getKey();
+		while (Math.abs(myHeading) > 180) {
+			myHeading -= 360 * (myHeading / Math.abs(myHeading));
+		}
 		myPosition = p.getValue();
 		notifyObservers();
 	}
