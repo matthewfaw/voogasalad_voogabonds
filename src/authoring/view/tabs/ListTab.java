@@ -133,11 +133,7 @@ public abstract class ListTab<A> extends AuthoringTab {
     public TilePane getTilePane(){
     	return myContent;
     }
-    
-    protected ObservableList<A> getObservableList(){
-    	return myList;
-    }
-    
+
     protected void setCellFactory(Callback<ListView<A>, ListCell<A>> factory) {
         myListView.setCellFactory(factory);
     }
