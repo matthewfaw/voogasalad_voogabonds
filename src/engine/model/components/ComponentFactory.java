@@ -5,11 +5,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.tracing.dtrace.ArgsAttributes;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.entities.IEntity;
+import engine.model.strategies.IPosition;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
+import utility.Point;
 /**
  * Creates all the components
  * @author owenchung
@@ -38,7 +42,7 @@ public class ComponentFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	public IModifiableComponent constructComponent(ComponentData compdata) 
+	public IModifiableComponent constructComponent(ComponentData compdata, IPosition location) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> tmpclass =  Class.forName(COMPONENT_PATH+compdata.getComponentName());
 		Constructor<?>[] constructors = tmpclass.getConstructors();
@@ -57,6 +61,10 @@ public class ComponentFactory {
 			Router routerToAdd = getRouterToAttach(arg);
 			if (routerToAdd != null) {
 				objectsToAttach.add(getRouterToAttach(arg));
+				continue;
+			}
+			if (IPosition.class.isAssignableFrom(arg)) {
+				objectsToAttach.add(location);
 				continue;
 			}
 			objectsToAttach.add(compdata);

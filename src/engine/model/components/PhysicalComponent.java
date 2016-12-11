@@ -9,6 +9,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.IViewable;
 import engine.model.strategies.IPhysical;
+import engine.model.strategies.IPosition;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
@@ -36,17 +37,18 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private double myHeading;
 
 	
-	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
+	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
-		myPosition = new Point(0, 0);
+
 		myHeading = 0;
 		
 		physical.attachComponent(this);
 		router.distributeViewableComponent(this);
+		setPosition(position);
 	}
 
 	
