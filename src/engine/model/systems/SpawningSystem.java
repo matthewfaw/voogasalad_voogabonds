@@ -2,7 +2,6 @@ package engine.model.systems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;

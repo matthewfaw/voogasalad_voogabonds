@@ -54,7 +54,7 @@ public class HealthComponent extends AbstractComponent {
 		
 		double healthDelta = myCurrHealth - startingHealth;
 		int died = myCurrHealth <= 0 ? 1 : 0;
-		int bounty = myBounty.getBounty(this);
+		int bounty = myBounty.collectBounty(this);
 		
 		return new DamageInfo(healthDelta, died, bounty);		
 	}
