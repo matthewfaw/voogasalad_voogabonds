@@ -102,9 +102,9 @@ public class BackendController {
 		myPhysicalSystem = new PhysicalSystem(myMapMediator);
 		
 		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
-		myCollisionDetectionSystem = new CollisionDetectionSystem(myPhysicalSystem);
+		myCollisionDetectionSystem = new CollisionDetectionSystem();
 		
-		myMovementSystem = new MovementSystem(myPhysicalSystem, myCollisionDetectionSystem, myTargetingSystem, myTimelineController);
+		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
 		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
 		
 	}
@@ -118,7 +118,7 @@ public class BackendController {
 	 */
 	public void attemptToPlaceEntity(String aEntityName, Point aLocation)
 	{
-//		myMapDistributor.distribute(aEntityName, aPlayerID, aLocation);
+		myEntityFactory.distributeEntity(aEntityName, aLocation);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -160,7 +160,7 @@ public class BackendController {
 		mySystems.add(mySpawningSystem);
 		mySystems.add(myTargetingSystem);
 		
-		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter);
+		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator);
 	}
 
 	/**

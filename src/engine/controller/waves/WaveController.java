@@ -7,8 +7,8 @@ import java.util.List;
 import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
-import engine.model.components.MoveableComponent;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.MoveableComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -60,8 +60,7 @@ public class WaveController {
 		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
 		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
 			PathFollowerData entityData = iterator.next();
-			try {
-				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData());
+			try {	
 				
 				List<Point> spawns = myMapData.getSpawnPoints(entityData.getSpawnPoint());
 				List<Point> sinks = myMapData.getSinkPoints(entityData.getSinkPoint());
@@ -69,9 +68,7 @@ public class WaveController {
 				Collections.shuffle(spawns);
 				Collections.shuffle(sinks);
 				
-				PhysicalComponent p = myPhysical.get(newEntity);
-				if (p != null)
-					p.setPosition(spawns.get(0));
+				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
 				
 				MoveableComponent m = myMovement.get(newEntity);
 				if (m != null)

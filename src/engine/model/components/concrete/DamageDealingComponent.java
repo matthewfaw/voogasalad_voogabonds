@@ -1,10 +1,16 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
+import java.util.List;
+
+import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
-import engine.model.entities.IEntity;
+import engine.model.components.AbstractComponent;
+import engine.model.components.IComponent;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
+import engine.model.systems.HealthSystem;
+import engine.model.systems.PhysicalSystem;
 import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
@@ -19,14 +25,22 @@ public class DamageDealingComponent extends AbstractComponent {
 	private IDamageStrategy myDamageStrategy;
 	private int myDamage;
 	private double myDamageRadius;
+	private double myDamageArc;
 	
-	private IEntity myEntity;
 
-	private DamageDealingSystem myDamageDealingSystem;
+	@Hide
+	private HealthSystem myHealthSystem;
+	@Hide
+	private PhysicalSystem myPhysicalSystem;
 	
-	public DamageDealingComponent(DamageDealingSystem damageDealingSystem) {
-		myDamageDealingSystem = damageDealingSystem;
-		myDamageDealingSystem.attachComponent(this);
+	public DamageDealingComponent(
+			DamageDealingSystem damageDealingSystem,
+			HealthSystem healthSysytem,
+			PhysicalSystem physicalSystem
+			) {
+		myHealthSystem = healthSysytem;
+		myPhysicalSystem = physicalSystem;
+		damageDealingSystem.attachComponent(this);
 	}
 	
 	/**
@@ -107,6 +121,22 @@ public class DamageDealingComponent extends AbstractComponent {
 		getOwner().updateAvailableMoney(result.getMoney());
 		*/
 		return null;
+	}
+
+	public DamageInfo explode(IComponent target) {
+		DamageInfo result = new DamageInfo();
+		
+		//Deal damage to target
+		result.add(myHealthSystem.dealDamageTo(target, getTargetDamage()));
+		
+		//Deal damage to anyone in blast radius
+		PhysicalComponent myPhysical = myPhysicalSystem.get(this);
+		if (myPhysicalSystem.get(this) != null) {
+			List<PhysicalComponent> inBlast = myPhysicalSystem.withinRange(myPhysical.getPosition(), myDamageRadius, myPhysical.getHeading(), myDamageArc);
+			for (PhysicalComponent p: inBlast)
+				result.add(myHealthSystem.dealDamageTo(p, getDamageTo(myPhysical, p)));
+		}
+		return result;
 	}
 
 }

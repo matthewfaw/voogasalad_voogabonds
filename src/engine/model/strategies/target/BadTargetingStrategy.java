@@ -1,7 +1,7 @@
 package engine.model.strategies.target;
 
-import engine.model.components.PhysicalComponent;
-import engine.model.components.TargetingComponent;
+import engine.model.components.concrete.PhysicalComponent;
+import engine.model.components.concrete.TargetingComponent;
 import engine.model.strategies.AbstractTargetingStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.PhysicalSystem;

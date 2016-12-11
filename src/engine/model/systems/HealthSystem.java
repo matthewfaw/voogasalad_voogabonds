@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.IObserver;
-import engine.model.components.CollidableComponent;
-import engine.model.components.DamageDealingComponent;
-import engine.model.components.HealthComponent;
-import engine.model.components.MoveableComponent;
+import engine.model.components.IComponent;
+import engine.model.components.concrete.CollidableComponent;
+import engine.model.components.concrete.DamageDealingComponent;
+import engine.model.components.concrete.HealthComponent;
+import engine.model.components.concrete.MoveableComponent;
 import engine.model.entities.IEntity;
+import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
 /**
@@ -35,10 +37,14 @@ public class HealthSystem implements ISystem{
 	 * @param entity to add health to
 	 * @param deltaHealth: change in health
 	 */
-	public void takeDamage(IEntity entity, Damage dmg) {
-		HealthComponent healthComponent = findHealthComponent(entity);
+	public void takeDamage(IComponent component, Damage dmg) {
+		HealthComponent healthComponent = get(component);
 		if (healthComponent != null)
 			healthComponent.takeDamage(dmg);
+	}
+	
+	private HealthComponent get(IComponent component) {
+		return findHealthComponent(component.getEntity());
 	}
 	
 	/**
@@ -63,6 +69,13 @@ public class HealthSystem implements ISystem{
 	}
 	public void detachComponent(HealthComponent aComponent) {
 		myHealthComponents.remove(aComponent);
+	}
+	public DamageInfo dealDamageTo(IComponent target, Damage damageToTake) {
+		HealthComponent health = get(target);
+		if (health != null) {
+			return health.takeDamage(damageToTake);
+		}
+		return new DamageInfo();
 	}
 	
 }

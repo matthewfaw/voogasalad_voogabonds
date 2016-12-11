@@ -16,7 +16,7 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.ApplicationController;
-import engine.model.components.MoveableComponent;
+import engine.model.components.concrete.MoveableComponent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

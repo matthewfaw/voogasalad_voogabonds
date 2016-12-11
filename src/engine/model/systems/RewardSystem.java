@@ -2,10 +2,10 @@ package engine.model.systems;
 
 import java.util.List;
 
-import engine.model.components.BountyComponent;
-import engine.model.components.CollidableComponent;
-import engine.model.components.DamageDealingComponent;
 import engine.model.components.IComponent;
+import engine.model.components.concrete.BountyComponent;
+import engine.model.components.concrete.CollidableComponent;
+import engine.model.components.concrete.DamageDealingComponent;
 import engine.model.entities.IEntity;
 import engine.model.playerinfo.IModifiablePlayer;
 

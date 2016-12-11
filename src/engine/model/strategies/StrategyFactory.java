@@ -3,17 +3,12 @@ package engine.model.strategies;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import engine.model.game_environment.paths.PathFactory;
+import engine.model.game_environment.MapMediator;
 import engine.model.strategies.damage.ExponentialDamageStrategy;
-import engine.model.strategies.movement.GreedyMovementStrategy;
-import engine.model.strategies.movement.NoMovementStrategy;
-import engine.model.systems.MovementSystem;
-import engine.model.systems.PhysicalSystem;
 import utility.ResouceAccess;
 
 /**
@@ -23,11 +18,11 @@ import utility.ResouceAccess;
  */
 public class StrategyFactory {
 	
-	private PhysicalSystem myPhysical;
+	private MapMediator myMap;
 	public List<String> myMovementStrategies;
 	
-	public StrategyFactory(PhysicalSystem physical) {
-		myPhysical = physical;
+	public StrategyFactory(MapMediator map) {
+		myMap = map;
 		
 		File[] folder = new File("src/engine/model/strategies/movement").listFiles();
 		myMovementStrategies = Arrays.stream(folder)
@@ -90,8 +85,8 @@ public class StrategyFactory {
 	}
 
 
-	public PhysicalSystem getPhysicalSystem() {
-		return myPhysical;
+	public MapMediator getMap() {
+		return myMap;
 	}
 
 }
