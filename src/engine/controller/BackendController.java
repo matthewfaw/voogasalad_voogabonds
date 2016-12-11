@@ -210,10 +210,11 @@ public class BackendController {
 		try {
 			List<EntityData> data = getData(myGameDataRelativePaths.getString("EntityPath"), EntityData.class);
 			myEntityDataStore = new DataStore<EntityData>(data);
+			myResourceStore = new ResourceStore(data);
 		} catch (FileNotFoundException e) {
 			myRouter.distributeErrors("The file for EntityData cannot be found!");
 		}
-//		myResourceStore = new ResourceStore(data);
+		
 	}
 	
 	/**

@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
@@ -47,12 +48,18 @@ public class MainMenu {
 		this.stage = s;
 		this.initializer = init;
 		this.pane = new BorderPane();
+		pane.setId("menu-background");
 		this.scene = new Scene(pane, init.getScreenWidth()/2, init.getScreenHeight()/2);
+		scene.getStylesheets().add("style.css");
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.tabContainer = new TabPane();
 		tabContainer.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		tabContainer.setId("background");
 		this.playTab = new PlayerTab(tabContainer, initializer);
 		this.authorTab = new AuthoringTab(tabContainer, initializer);
+		for (Tab tab: tabContainer.getTabs()){
+			tab.setId("tab");
+		}
 		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
 	}
 	
@@ -66,7 +73,6 @@ public class MainMenu {
 	private Text createText(String desiredText) {
 		Text t = new Text(desiredText);
 		t.setFont(Font.font("Verdana", 70));
-		t.setFill(Color.BLACK);
 		return t;
 	}
 	

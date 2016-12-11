@@ -62,6 +62,9 @@ public class GridToolBar {
 					"Add Terrain..."
 					);
 	private MapDataContainer controller;
+	private ToggleButton myDraw;
+	private ToggleButton mySpawn;
+	private ToggleButton mySink;
 	
 	public GridToolBar(VBox box, Scene sc, MapDataContainer controller) {
 		setUpScreenResolution();
@@ -88,37 +91,41 @@ public class GridToolBar {
 	
 	private void createToolBar() {
 		ToggleGroup toggles = new ToggleGroup();
-		ToggleButton drawMode = new ToggleButton(myResources.getString("DrawMode"));
-		drawMode.setToggleGroup(toggles);
-		drawMode.setId("button");
-		toggleHandler(toggles, drawMode);
-		ToggleButton setSpawnPoint = new ToggleButton(myResources.getString("SpawnPoint"));
-		setSpawnPoint.setToggleGroup(toggles);
-		setSpawnPoint.setId("button");
-		spawnHandler(toggles, setSpawnPoint);
-		ToggleButton setSinkPoint = new ToggleButton(myResources.getString("SinkPoint"));
-		setSinkPoint.setToggleGroup(toggles);
-		setSinkPoint.setId("button");
-		sinkHandler(toggles, setSinkPoint);
+		myDraw = new ToggleButton(myResources.getString("DrawMode"));
+		myDraw.setToggleGroup(toggles);
+		myDraw.setId("button");
+		toggleHandler(toggles);
+		mySpawn = new ToggleButton(myResources.getString("SpawnPoint"));
+		mySpawn.setToggleGroup(toggles);
+		mySpawn.setId("button");
+		spawnHandler(toggles);
+		mySink = new ToggleButton(myResources.getString("SinkPoint"));
+		mySink.setToggleGroup(toggles);
+		mySink.setId("button");
+		sinkHandler(toggles);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
-		terrainChooser.setMinHeight(40);
+		terrainChooser.setMinHeight(47);
 		terrainHandler(terrainChooser);
-		toolBar.getChildren().addAll(setSinkPoint, setSpawnPoint, drawMode, terrainChooser);
+		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser);
 	}
 	
 	/**
 	 * Sets toggleStatus to true if the draw mode toggle button is selected, or false if not.
 	 * @param drawMode
 	 */
-	private void toggleHandler(ToggleGroup drawGroup, ToggleButton drawMode)  {
+	private void toggleHandler(ToggleGroup drawGroup)  {
 		drawGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		            toggleStatus = false;
+		            myDraw.setId("button");
 		        }
 		        else {
-		        	if (drawGroup.getSelectedToggle().equals(drawMode)) {
+		        	if (drawGroup.getSelectedToggle().equals(myDraw)) {
+		        		myDraw.setId("button-selected");
+		        		mySpawn.setId("button");
+		        		mySink.setId("button");
 			            toggleStatus = true;
 			            spawnStatus = false;
 			            sinkStatus = false;
@@ -133,16 +140,20 @@ public class GridToolBar {
 		});
 	}
 	
-	private void spawnHandler(ToggleGroup spawnGroup, ToggleButton spawnMode) {
+	private void spawnHandler(ToggleGroup spawnGroup) {
 		spawnGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		    		spawnStatus = false;
 		    		scene.setCursor(Cursor.DEFAULT);
+		    		mySpawn.setId("button");
 		        }
 		        else {
-		        	if (spawnGroup.getSelectedToggle().equals(spawnMode)) {
+		        	if (spawnGroup.getSelectedToggle().equals(mySpawn)) {
+		        		myDraw.setId("button");
+		        		mySpawn.setId("button-selected");
+		        		mySink.setId("button");
 			        	toggleStatus = false;
 			        	spawnStatus = true;
 			        	sinkStatus = false;
@@ -153,16 +164,20 @@ public class GridToolBar {
 		});
 	}
 	
-	private void sinkHandler(ToggleGroup sinksGroup, ToggleButton sinkMode) {
+	private void sinkHandler(ToggleGroup sinksGroup) {
 		sinksGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		    		sinkStatus = false;
 		    		scene.setCursor(Cursor.DEFAULT);
+		    		mySink.setId("button");
 		        }
 		        else {
-		        	if (sinksGroup.getSelectedToggle().equals(sinkMode)) {
+		        	if (sinksGroup.getSelectedToggle().equals(mySink)) {
+		        		myDraw.setId("button");
+		        		mySpawn.setId("button");
+		        		mySink.setId("button-selected");
 			        	toggleStatus = false;
 			        	spawnStatus = false;
 			        	sinkStatus = true;
