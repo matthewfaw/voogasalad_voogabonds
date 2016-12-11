@@ -100,27 +100,23 @@ public class FileMenu extends Menu {
 	}
 	
 	private void performSaveAs(MenuItem saveAs) {
-		saveAs.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(final ActionEvent e) {
-					FileChooser newGameSave = new FileChooser();
-					newGameSave.setTitle("Save As");
-					newGameSave.setInitialDirectory(
-					           new File(System.getProperty("user.home"))
-					       ); 
-					Stage stage = new Stage();
-					File file = newGameSave.showSaveDialog(stage);
-					String gameName = file.getName();
-//					if (file != null) {
-						try {
-							//change "exampleGame to user input"
-							MainInitializer.setUpSerialization().saveGameState(gameName);
-						} catch (Exception e1) {
-							System.out.println("Unable to save current game state.");
+		saveAs.setOnAction(
+				new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(final ActionEvent e) {
+						FileChooser newGameSave = new FileChooser();
+						Stage stage = new Stage();
+						File file = newGameSave.showSaveDialog(stage);
+						if (file != null) {
+							GameStateSerializer GSS = new GameStateSerializer(router);
+							try {
+								GSS.saveGameState(file.getName());
+							} catch (Exception exception) {
+								System.out.println("Cannot save game.");
+							}
 						}
-//					}
-				}
-		});
+					}
+				});
 	}
 	
 }
