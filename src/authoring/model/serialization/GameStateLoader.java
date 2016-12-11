@@ -3,12 +3,14 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import authoring.controller.MapDataContainer;
+import authoring.controller.PlayerDataContainer;
 import authoring.controller.EntityDataContainer;
 import authoring.controller.LevelDataContainer;
 import authoring.controller.Router;
 import authoring.controller.WaveDataContainer;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
+import authoring.model.PlayerData;
 import authoring.model.WaveData;
 import authoring.model.map.TerrainData;
 import utility.ErrorBox;
@@ -60,6 +62,7 @@ public class GameStateLoader {
 			EntityDataContainer routerEntityData = r.getEntityDataContainer();
 			for (File f: entityFiles){
 				String entityDataPath = f.toString().substring(myResources.getString("SourceFilePath").length());
+				entityDataPath = entityDataPath.replace("\\", "/");
 				EntityData oldEntityData = (EntityData) deserializer.deserializeFromFile(entityDataPath, EntityData.class);
 				routerEntityData.createEntityData(oldEntityData);
 			}
@@ -69,11 +72,11 @@ public class GameStateLoader {
 	}
 	
 	public void loadLevelAndWaveData(Router r, String gameTitle){
-		String entityFilePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("LevelDataFilePath");
+		String levelFilePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("LevelDataFilePath");
 		LevelDataContainer routerLevelData = r.getLevelDataContainer();
 		WaveDataContainer routerWaveData = r.getWaveDataContainer();
 		try{
-			LevelDataContainer newLevelData = (LevelDataContainer) deserializer.deserializeFromFile(entityFilePath, LevelDataContainer.class);
+			LevelDataContainer newLevelData = (LevelDataContainer) deserializer.deserializeFromFile(levelFilePath, LevelDataContainer.class);
 			for (LevelData ld: newLevelData.finalizeLevelDataMap()){
 				routerLevelData.createNewLevelData(ld);
 				
@@ -88,7 +91,18 @@ public class GameStateLoader {
 	}
 	
 	public void loadPlayerData(Router r, String gameTitle){
+		String playerFilePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("PlayerDataFilePath");
+		PlayerData routerPlayerData = r.getPlayerDataContainer().getPlayerData();
 		
+		try{
+			PlayerData newPlayerData = (PlayerData) deserializer.deserializeFromFile(playerFilePath, PlayerData.class);
+			routerPlayerData.setLoseStrategyName(newPlayerData.getLoseStrategyName());
+			routerPlayerData.setStartingCash(newPlayerData.getStartingCash());
+			routerPlayerData.setStartingLives(newPlayerData.getStartingLives());
+			routerPlayerData.setWinStrategyName(newPlayerData.getWinStrategyName());
+		}catch(Exception e){
+			e.printStackTrace();
+			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+		}
 	}
-	
 }

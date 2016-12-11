@@ -5,7 +5,7 @@ package authoring.model;
  * @author philipfoo
  */
 
-public class PlayerData implements IReadableData {
+public class PlayerData implements IReadableData{
 	private String myName;
 
 	private int startingLives;

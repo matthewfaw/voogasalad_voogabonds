@@ -1,10 +1,10 @@
 package engine.model.components;
 
-import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
 
 public interface ICreator {
 
-	void setTarget(IPosition target);
+	abstract public void setTarget(IPosition target);
+	abstract public IPosition getTarget();
 
 }

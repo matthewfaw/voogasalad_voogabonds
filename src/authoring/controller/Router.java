@@ -2,6 +2,7 @@ package authoring.controller;
 import authoring.view.tabs.WaveTab;
 import authoring.view.tabs.entities.EntityTab;
 import authoring.view.tabs.LevelTab;
+import authoring.view.tabs.RulesTab;
 
 public class Router {
 	private MapDataContainer mdc = new MapDataContainer();

@@ -3,12 +3,11 @@ package engine.model.components.concrete;
 import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
+import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
-import engine.model.systems.RewardSystem;
-import utility.Damage;
 
 /**
  * The purpose of this class is to encapsulate the information relevant
@@ -25,19 +24,16 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private PhysicalSystem myPhysicalSystem;
 	@Hide
 	private DamageDealingSystem myDamageDealingSystem;
-	@Hide
-	private RewardSystem myRewardSystem;
 	
 	public CollidableComponent (
 			CollisionDetectionSystem collisionDetectionSystem, 
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
 			DamageDealingSystem damageDealingSystem, 
-			RewardSystem rewardSystem) {
+			BountySystem rewardSystem) {
 		
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
-		myRewardSystem = rewardSystem;
 		
 		collisionDetectionSystem.attachComponent(this);
 	}
