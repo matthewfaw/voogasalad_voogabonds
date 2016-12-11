@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import authoring.controller.MapDataContainer;
 import authoring.controller.Router;
 import authoring.model.serialization.GameStateDeserializer;
+import authoring.model.serialization.GameStateLoader;
 import authoring.model.serialization.JSONDeserializer;
 import authoring.view.display.AuthorDisplay;
 import javafx.collections.FXCollections;
@@ -123,20 +124,16 @@ public class LoadAuthoringScreen {
 			public void handle(ActionEvent e) {
 				JSONDeserializer des = new JSONDeserializer();
 				MapDataContainer container;
-				try {
-					String filePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
-					container = (MapDataContainer) des.deserializeFromFile(filePath, MapDataContainer.class);
-					int mapXDim = container.getNumXCells();
-					int mapYDim = container.getNumYCells();
-					initAuthoring(container);
-				} catch (FileNotFoundException e1) {
-					ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
-				}
+				String filePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
+				GameStateLoader loader = new GameStateLoader();
+				loader.loadMapData(filePath, router);
+				
+				initAuthoring();
 			}
 		});
 	}
 	
-	public void initAuthoring(MapDataContainer container) {
+	public void initAuthoring() {
     AuthorDisplay authoring = new AuthorDisplay(pane, scene, router);
 //    this.AuthDisp = authoring;
 	stage.setScene(scene);
