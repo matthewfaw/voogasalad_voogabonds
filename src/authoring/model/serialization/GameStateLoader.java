@@ -49,7 +49,7 @@ public class GameStateLoader {
 	}
 	
 	public void loadEntityData(Router r, String gameTitle){
-		String entityFilePath = "src/" + myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("EntityDataFilePath");
+		String entityFilePath = myResources.getString("SourceFilePath") + myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("EntityDataFilePath");
 		File dir = new File(entityFilePath);
 		
 		
@@ -57,7 +57,7 @@ public class GameStateLoader {
 		try{
 			EntityDataContainer routerEntityData = r.getEntityDataContainer();
 			for (File f: entityFiles){
-				String entityDataPath = f.toString().substring(4);
+				String entityDataPath = f.toString().substring(myResources.getString("SourceFilePath").length());
 				EntityData oldEntityData = (EntityData) deserializer.deserializeFromFile(entityDataPath, EntityData.class);
 				routerEntityData.createEntityData(oldEntityData);
 			}

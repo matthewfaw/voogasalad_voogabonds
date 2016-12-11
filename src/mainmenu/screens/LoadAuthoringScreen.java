@@ -125,9 +125,10 @@ public class LoadAuthoringScreen {
 				JSONDeserializer des = new JSONDeserializer();
 				MapDataContainer container;
 				GameStateLoader loader = new GameStateLoader();
+
 				loader.loadMapData(router, gameTitle);
 				loader.loadEntityData(router, gameTitle);
-				
+
 				initAuthoring();
 			}
 		});

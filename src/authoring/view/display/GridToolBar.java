@@ -47,6 +47,7 @@ public class GridToolBar {
 	private boolean spawnStatus;
 	private boolean sinkStatus;
 	private boolean imageStatus = false;
+	private boolean setBackground = false;
 	private Color selectedColor;
 	private String selectedTerrain;
 	private String selectedImagePath;
@@ -214,10 +215,8 @@ public class GridToolBar {
 					fillImageHandler(toggles, imageMode, terrainName);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
 					choiceArea.getChildren().addAll(colorChooser, chooseImage, terrainName, confirmTerrain);
-					Button setBackground = new Button(myResources.getString("SetBackground"));
-					toggleArea.getChildren().addAll(imageMode, setBackground);					
+					toggleArea.getChildren().addAll(imageMode);					
 					choiceContainer.getChildren().addAll(choiceArea, toggleArea);
-					setBackgroundHandler(setBackground);
 					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
 					Scene terrainChoiceScene = new Scene(choiceContainer, screenWidth*0.3, screenHeight*0.1);
 					createTerrain.setScene(terrainChoiceScene);
@@ -239,24 +238,17 @@ public class GridToolBar {
 		});
 	}
 	
-	private void setBackgroundHandler(Button button) {
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, myResources.getString("TerrainImageFilePath"));
-			}
-		});
-	}
-	
 	private void fillImageHandler(ToggleGroup group, ToggleButton button, TextField field) {
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		    		imageStatus = false;
+		    		setBackground = false;
 		        }
 		        else {
 		        	imageStatus = true;
+		        	setBackground = false;
 		        }
 		    }
 		});
