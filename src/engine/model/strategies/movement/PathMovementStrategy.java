@@ -7,21 +7,27 @@ import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IPhysical;
+import engine.model.strategies.StrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
 public class PathMovementStrategy extends AbstractMovementStrategy{
+
 	private static final Random RANDOM = new Random();
 	private Point myPreviousGoalLocation;
 	private MapMediator myMap;
 	private PathManager myPath;
 	
+	public PathMovementStrategy(StrategyFactory creator) {
+		super(creator);
+		myMap = creator.getPhysicalSystem().getMap();
+	}
 	
 	@Override
 	public  Pair<Double, Point> nextMove(IMovable m, IPhysical p) {
 		if (myPath == null || myPreviousGoalLocation == null || myPreviousGoalLocation.equals(m.getGoal())) {
 			myPreviousGoalLocation = m.getGoal();
-			myMap.constructPaths(p, m);
+			myPath = myMap.constructPaths(p, m);
 		}
 		return super.nextMove(m, p);
 	}
@@ -58,19 +64,4 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 		
 		return p.getPosition().moveAlongHeading(distance, heading);
 	}
-
-	
-	private double newHeadingTowards(Point goal, IMovable m, IPhysical p) {
-		double newHeading;
-		double deltaToTarget = p.getHeading() - p.getPosition().towards(m.getGoal());
-		
-		if (Math.abs(deltaToTarget) <= Math.abs(m.getTurnSpeed()))
-			newHeading = p.getHeading() + deltaToTarget;
-		else
-			//heading = currHeading + turnSpeed + (delta/|delta|)
-			newHeading = p.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
-		
-		return newHeading;
-	}
-
 }

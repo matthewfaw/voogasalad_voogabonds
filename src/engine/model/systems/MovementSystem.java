@@ -8,12 +8,14 @@ import engine.controller.timeline.TimelineController;
 import engine.model.components.MoveableComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
+import engine.model.strategies.StrategyFactory;
 
 public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	private List<MoveableComponent> myMoveableComponents;
 	private TargetingSystem myTargeting;
 	private PhysicalSystem myPhysical;
 	private CollisionDetectionSystem myCollision;
+	private StrategyFactory myStrategyFactory;
 	
 	
 	public MovementSystem (PhysicalSystem physical, CollisionDetectionSystem collision, TargetingSystem targeting, 
@@ -22,6 +24,8 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		
+		myStrategyFactory = new StrategyFactory(this);
 		time.attach(this);
 		
 	}
@@ -54,6 +58,14 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	@Override
 	public void update(TimelineController aChangedObject) {
 		updateNextMoves();
+	}
+
+	public StrategyFactory getStrategyFactory() {
+		return myStrategyFactory;
+	}
+
+	public PhysicalSystem getPhysical() {
+		return myPhysical;
 	}
 
 
