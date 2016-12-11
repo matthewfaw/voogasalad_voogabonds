@@ -34,8 +34,9 @@ public class ApplicationController {
 	private BackendController myBackendController;
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
-	private Stage myStage; //////Guhan
-	private Pane myPane=new BorderPane();
+	private GamePlayerScene myScene;
+	//private Stage myStage; //////Guhan
+	//private Pane myPane=new BorderPane();
 
 	public ApplicationController()
 	{
@@ -48,9 +49,10 @@ public class ApplicationController {
 	 */
 	public void init(Stage aStage) throws Exception
 	{
-		myStage=aStage; ///Guhan 
-		GamePlayerScene scene = constructGUI(aStage);
-		Router router = new Router(scene);
+		//myStage=aStage; ///Guhan 
+		//GamePlayerScene scene = constructGUI(aStage);
+		myScene=constructGUI(aStage);
+		Router router = new Router(myScene);
 		constructBackend(router);
 	}
 	/**
@@ -132,6 +134,10 @@ public class ApplicationController {
 	public void onSavePressed() {
 		// TODO Auto-generated method stub
 	//	return null;
+	}
+
+	public void DisplayStats() throws Exception {
+		myScene.updateTowerStatisticsRow();
 	}
 	
 	/*

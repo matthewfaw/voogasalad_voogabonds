@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class PauseMenu {
     private Pane myRoot;
     private Stage myStage;
+    private ControlsMenu controls;
     private Scene myWindow;
     
     public PauseMenu(){
@@ -53,6 +54,10 @@ public class PauseMenu {
             case "RESUME": 
                 kill();
                 break;
+            case "CONTROLS":
+                controls = new ControlsMenu();
+                kill();
+                controls.init();
             default:
                 break;
         }
@@ -62,6 +67,8 @@ public class PauseMenu {
         myStage.show();
         
     }
+    
+    //method to get controls
     
     public void kill(){
         myStage.close();
