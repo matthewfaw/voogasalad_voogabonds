@@ -104,7 +104,7 @@ public class NewAuthoringScreen {
 				try {
 					setMapXDim(Integer.parseInt(xSize.getText()));
 				} catch(Exception e){
-					setMapXDim(20);
+					setMapXDim(40);
 				}
 				try {
 					setMapYDim(Integer.parseInt(ySize.getText()));
