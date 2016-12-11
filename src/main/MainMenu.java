@@ -2,6 +2,8 @@ package main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
+
+import authoring.controller.Router;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -24,9 +26,7 @@ import mainmenu.tabs.NewGameTab;
 import mainmenu.tabs.PlayerTab;
 /**
  * @author ChristopherLu
- * This class generates the main menu that, in the future, will allow the user to choose between working on a new or previously saved object.
- * TODO: Implement TabPane allowing users to choose between new project or old project. If working on new project, have text fields prompting for save location and name of file.
- * For previous projects, allow users to choose from list of previous projects by title, sorted by most recently opened.
+ * This class generates the main menu that allows the user to choose between entering the player or the authoring environment.
  */
 public class MainMenu {
 	private Scene scene;
@@ -38,8 +38,6 @@ public class MainMenu {
 	private TabPane tabContainer;
 	private PlayerTab playTab;
 	private AuthoringTab authorTab;
-	private NewGameTab newTab;
-	private LoadGameTab loadTab;
 	private int screenWidth;
 	private int screenHeight;
 	

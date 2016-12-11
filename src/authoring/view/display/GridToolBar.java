@@ -231,7 +231,7 @@ public class GridToolBar {
 						selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					}
 				}
-//				terrains.getSelectionModel().clearSelection();
+				terrains.getSelectionModel().clearSelection();
 			}
 		});
 	}

@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import authoring.controller.MapDataContainer;
+import authoring.controller.Router;
 import authoring.model.serialization.JSONSerializer;
+import authoring.view.display.AuthorDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -39,12 +41,13 @@ public class NewAuthoringScreen {
 	private int mapXDim;
 	private int mapYDim;
 	private String authoringName;
+	private Router router;
 	
-	public NewAuthoringScreen() throws IOException {
+	public NewAuthoringScreen(Router r) throws IOException {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.stage = new Stage();
-		this.initializer = new MainInitializer(stage);
+		this.router = r;
 		stage.setTitle(myResources.getString("SetUpNewAuthoringTitle"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
@@ -105,15 +108,21 @@ public class NewAuthoringScreen {
 				try {
 					MapDataContainer container = new MapDataContainer();
 					container.setDimensions(Integer.parseInt(xSize.getText()), Integer.parseInt(ySize.getText()));
-					initializer.initAuthoring(container);
+					initAuthoring(container);
 				} catch(Exception e){
 					MapDataContainer container = new MapDataContainer();
 					container.setDimensions(40, 20);
-					initializer.initAuthoring(container);
+					initAuthoring(container);
 				}
 
 			}
 		});
+	}
+	
+	private void initAuthoring(MapDataContainer container) {
+	    AuthorDisplay authoring = new AuthorDisplay(pane, scene, router);
+//	    this.AuthDisp = authoring;
+		stage.setScene(scene);
 	}
 	
 	private void setUpScreenResolution() {
