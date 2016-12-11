@@ -76,7 +76,6 @@ public class EntityFactory {
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
-		System.out.println("Constructing entity: "+aEntityData.getName());
 		IEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
@@ -108,7 +107,6 @@ public class EntityFactory {
 	private void distributeEntity(EntityData entityData, Point aLocation) {
 		if (hasPhysicalComponent(entityData)) {
 			String validTerrainsStr = entityData.getComponents().get("PhysicalComponent").getFields().get("myValidTerrains");
-			System.out.println("Valid Terrains: "+validTerrainsStr);
 			// parse valid terrains into list of terrain data
 			List<String> validTerrains = Arrays.asList(validTerrainsStr.split(", "));
 			
