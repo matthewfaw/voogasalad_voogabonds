@@ -126,7 +126,9 @@ public class LoadAuthoringScreen {
 
 				loader.loadMapData(router, gameTitle);
 				loader.loadEntityData(router, gameTitle);
-
+				loader.loadLevelAndWaveData(router, gameTitle);
+				loader.loadPlayerData(router, gameTitle);
+				
 				initAuthoring();
 			}
 		});

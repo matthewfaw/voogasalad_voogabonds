@@ -1,9 +1,12 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.model.components.AbstractComponent;
 import engine.model.entities.IEntity;
+import engine.model.systems.BountySystem;
 import engine.model.systems.HealthSystem;
+import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
 /**
@@ -16,29 +19,18 @@ import utility.Damage;
  *
  */
 public class HealthComponent extends AbstractComponent {
-        @Hide
+	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
-	
+
+	private BountySystem myBounty;
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;
 	private Double myMaxHealth;
-	private IEntity myEntity;
-	/*
-	public HealthComponent(HealthSystem healthSystem, double maxHealth) {
-		//myEntity = entity;
-		
-		//myHealthSystem = healthSystem;
-		healthSystem.attachComponent(this);
-		
-		myCurrHealth = maxHealth;
-		myMaxHealth = maxHealth;
-	}
-	*/
+
+
 	
-	public HealthComponent(HealthSystem healthSystem, ComponentData componentdata) {
-		//myEntity = entity;
-		
-		//myHealthSystem = healthSystem;
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty,  ComponentData componentdata) {
+		myBounty = bounty;
 		healthSystem.attachComponent(this);
 		
 		myCurrHealth = DEFAULT_HEALTH;
@@ -49,7 +41,7 @@ public class HealthComponent extends AbstractComponent {
 		return myCurrHealth.intValue();
 	}
 	
-	public double takeDamage(Damage dmg) {
+	public DamageInfo takeDamage(Damage dmg) {
 		double startingHealth = myCurrHealth;
 		myCurrHealth -= dmg.getDamage();
 		
@@ -60,9 +52,11 @@ public class HealthComponent extends AbstractComponent {
 			myCurrHealth = myMaxHealth;
 		}
 		
-		//TODO: Manage death, perhaps with a strategy
-
-		return myCurrHealth - startingHealth;		
+		double healthDelta = myCurrHealth - startingHealth;
+		int died = myCurrHealth <= 0 ? 1 : 0;
+		int bounty = myBounty.getBounty(this);
+		
+		return new DamageInfo(healthDelta, died, bounty);		
 	}
 	
 	public void setMaxHealth(double m) {

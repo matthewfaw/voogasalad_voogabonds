@@ -1,8 +1,10 @@
 package engine.model.collision_detection;
 
-import engine.model.components.CollidableComponent;
+import engine.model.components.concrete.CollidableComponent;
 
 public interface ICollidable {
 
-	public void collideInto(CollidableComponent unmovedCollidable);
+	public void checkCollision(CollidableComponent unmovedCollidable);
+	public double getCollisionRadius();
+	
 }

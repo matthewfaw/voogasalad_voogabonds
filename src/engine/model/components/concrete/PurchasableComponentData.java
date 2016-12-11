@@ -1,4 +1,4 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 public class PurchasableComponentData {
 	private int myPurchaseValue;

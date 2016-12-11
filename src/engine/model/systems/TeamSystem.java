@@ -3,7 +3,7 @@ package engine.model.systems;
 import java.util.List;
 
 import engine.model.components.IComponent;
-import engine.model.components.TeamComponent;
+import engine.model.components.concrete.TeamComponent;
 
 public class TeamSystem implements ISystem {
 	private List<TeamComponent> myComponents;

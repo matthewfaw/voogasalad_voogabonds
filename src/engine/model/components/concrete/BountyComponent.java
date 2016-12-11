@@ -1,6 +1,7 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import authoring.model.Hide;
+import engine.model.components.AbstractComponent;
 import engine.model.entities.IEntity;
 import engine.model.systems.RewardSystem;
 

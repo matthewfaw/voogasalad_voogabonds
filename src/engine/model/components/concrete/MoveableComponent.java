@@ -1,13 +1,16 @@
-package engine.model.components;
+package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.model.components.AbstractComponent;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
-import engine.model.strategies.StrategyFactory;
+import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.MovementSystem;
+import engine.model.systems.PhysicalSystem;
+import engine.model.systems.TargetingSystem;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -17,9 +20,12 @@ import utility.Point;
  *
  */
 public class MoveableComponent extends AbstractComponent implements IMovable {
-
-	//replace with: PhysicalSystem
-//	private PhysicalComponent myPhysical;
+	@Hide
+	private PhysicalSystem myPhysical;
+	@Hide
+	private TargetingSystem myTargeting;
+	@Hide
+	private CollisionDetectionSystem myCollision;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -32,8 +38,20 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private double myMaxDistance;
 	@Hide
 	private double myMovedDistance;
+	
 
-	public MoveableComponent(MovementSystem movement, ComponentData data) throws ClassNotFoundException {
+	public MoveableComponent(
+			MovementSystem movement,
+			PhysicalSystem physical,
+			TargetingSystem targeting,
+			CollisionDetectionSystem collision,
+			ComponentData data
+			) throws ClassNotFoundException {
+		
+		myPhysical = physical;
+		myTargeting = targeting;
+		myCollision = collision;
+		
 		myMovedDistance = 0;
 		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
 		
@@ -69,6 +87,13 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	
 	public void setGoal(IPosition p) {
 		myGoal = p;
+	}
+
+	public void move() {
+		setGoal(myTargeting.getTarget(this));
+		PhysicalComponent p = myPhysical.get(this);
+		p.setPosition(getMove(p));
+		myCollision.checkCollision(p);
 	}
 
 }
