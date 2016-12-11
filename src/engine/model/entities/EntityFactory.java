@@ -25,6 +25,7 @@ import utility.Point;
  *
  */
 public class EntityFactory {
+	private static final Point DEFAULT_LOCATION = new Point(0,0);
 	private ComponentFactory myComponentFactory;
 	private List<ISystem> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
@@ -65,7 +66,13 @@ public class EntityFactory {
 		return entity;
 	}
 	
-	public IEntity constructEntity(EntityData aEntityData, IPosition aLocation) 
+	public IEntity constructEntity(EntityData aEntityData) 
+			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		return constructEntity(aEntityData, DEFAULT_LOCATION);
+	}
+	
+	public IEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
