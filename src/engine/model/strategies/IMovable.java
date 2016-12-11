@@ -1,6 +1,5 @@
 package engine.model.strategies;
 
-import engine.model.game_environment.paths.PathManager;
 import utility.Point;
 
 public interface IMovable {
