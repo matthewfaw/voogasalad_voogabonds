@@ -26,6 +26,7 @@ public class CollisionDetectionSystem implements ISystem, /*IObserver<MoveableCo
 	private PhysicalSystem myPhysicalSystem;
 	
 	public CollisionDetectionSystem(PhysicalSystem physical) {
+		myPhysicalSystem = physical;
 		myCollidableComponents = new ArrayList<CollidableComponent>();
 	}
 

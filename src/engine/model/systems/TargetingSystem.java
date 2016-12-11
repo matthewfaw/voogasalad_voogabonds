@@ -1,5 +1,6 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.components.IComponent;
@@ -7,11 +8,12 @@ import engine.model.components.TargetingComponent;
 import engine.model.strategies.IPhysical;
 
 public class TargetingSystem implements ISystem {
-	List<TargetingComponent> myTargetingComponents;
+	private List<TargetingComponent> myTargetingComponents;
 	private PhysicalSystem myPhysical;
 	private TeamSystem myTeams;
 	
 	public TargetingSystem(PhysicalSystem physical, TeamSystem teams) {
+		myTargetingComponents = new ArrayList<TargetingComponent>();
 		myPhysical = physical;
 		myTeams = teams;
 	}
