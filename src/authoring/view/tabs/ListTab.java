@@ -134,10 +134,6 @@ public abstract class ListTab<A> extends AuthoringTab {
     	return myContent;
     }
     
-    protected ObservableList<A> getObservableList(){
-    	return myList;
-    }
-    
     /**
      * Public to allow entity boxes access
      * 

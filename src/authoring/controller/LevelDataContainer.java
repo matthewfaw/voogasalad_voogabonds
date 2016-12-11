@@ -3,8 +3,11 @@ package authoring.controller;
 import java.util.*;
 
 import authoring.model.LevelData;
+import engine.IObservable;
+import engine.IObserver;
 
-public class LevelDataContainer {
+public class LevelDataContainer extends Container implements IObservable<Container>{
+	private transient ArrayList<IObserver<Container>> myObservers = new ArrayList<IObserver<Container>>();
 	
 	private List<LevelData> myLevelList;
 	
@@ -20,6 +23,7 @@ public class LevelDataContainer {
 	 */
 	public void createNewLevelData(LevelData ld){
 		myLevelList.add(ld);
+		notifyObservers();
 	}
 	
 	/**
@@ -64,6 +68,23 @@ public class LevelDataContainer {
 	public boolean hasLevel(int aLevel)
 	{
 		return aLevel < myLevelList.size();
+	}
+
+	@Override
+	public void attach(IObserver<Container> observer) {
+		myObservers.add(observer);
+	}
+
+	@Override
+	public void detach(IObserver<Container> observer) {
+		myObservers.remove(observer);	
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (IObserver<Container> observer: myObservers){
+			observer.update(this);
+		}
 	}
 
 }
