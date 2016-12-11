@@ -22,6 +22,12 @@ public class Router {
 		wadc.attach(l);
 		ldc.attach(l);
 		
+		
+		//Refresh upon loading of a new game
+		mdc.notifyObservers();
+		edc.notifyObservers();
+		wadc.notifyObservers();
+		ldc.notifyObservers();
 	}
 	
 	
