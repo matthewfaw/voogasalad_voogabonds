@@ -25,7 +25,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
-    
+
     private List<Label> myLabels;
     private List<TextField> myFields;
     private EditEntityBox parent;
@@ -43,11 +43,10 @@ public class EditComponentBox extends VBox implements ISubmittable {
         super(SPACING);
         List<String> attributes = fetcher.getComponentAttributeList(componentName);
         init(parent, grandparent, componentName, attributes.size());
-        
+
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
             Label lbl = new Label(cleanUpAttributeName(attributes.get(i)));
-            //Label lbl = new Label(attributes.get(i));
             TextField field = new TextField();
             setUpLabeledField(lbl, field);
             if (lbl.getText().equals("Image Path")) {
@@ -55,11 +54,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 this.getChildren().add(browse);
             }
         }
-        
+
         HBox btns = getBottomButtons();
         this.getChildren().add(btns);
     }
-    
+
     /**
      * Edit existing component.
      * @param parent
@@ -67,11 +66,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param componentName
      * @param retrievedData
      */
-    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, ComponentData componentData) {
+    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName, ComponentData componentData) {
         super(SPACING);
         Map<String,String> retrievedData = componentData.getFields();
-        init(parent, grandparent, componentData.getComponentName(), retrievedData.size());
-        
+        init(parent, grandparent, componentName, retrievedData.size());
+
         // Set up input fields
         for (String attributeName : retrievedData.keySet()) {
             String attribute = cleanUpAttributeName(attributeName);
@@ -83,11 +82,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 this.getChildren().add(browse);
             }
         }
-        
+
         HBox btns = getBottomButtons();
         this.getChildren().add(btns);
     }
-    
+
     private void init(EditEntityBox parent, EntityTab grandparent, String componentName, int numAttributes) {
         this.setId("vbox");
         this.parent = parent;
@@ -96,7 +95,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myLabels = new ArrayList<Label>(numAttributes);
         myFields = new ArrayList<TextField>(numAttributes);
     }
-    
+
     private String cleanUpAttributeName(String attribute) {
         // assume all attributes start with 'my', and separate words
         String cleanedName = attribute;
@@ -116,9 +115,9 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @return
      */
     private String separateCapitalizedWords(String smooshed) {
-            return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
+        return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
-    
+
     private void setUpLabeledField(Label lbl, TextField field) {
         lbl.setLabelFor(field);
         lbl.setId("label");
@@ -127,7 +126,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         this.getChildren().add(lbl);
         this.getChildren().add(field);
     }
-    
+
     private HBox getBottomButtons() {
         HBox btns = new HBox(SPACING);
         btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
@@ -139,20 +138,20 @@ public class EditComponentBox extends VBox implements ISubmittable {
         btns.getChildren().addAll(done,cancel);
         return btns;
     }
-    
+
     private EventHandler<ActionEvent> handleDone() {
         EventHandler<ActionEvent> finish = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
                 String name = getName();
                 ComponentData entity = createDataFromInput();
-                System.out.println("Put Component ("+name+") in parent map");
+                //System.out.println("Put Component ("+name+") in parent map");
                 parent.editComponent(name, entity);
                 grandparent.getTilePane().getChildren().remove(EditComponentBox.this); // this = reference of parent (i.e., this EditEntityBox class)
             }
         };
         return finish;
     }
-    
+
     private EventHandler<ActionEvent> handleCancel() {
         EventHandler<ActionEvent> cancel = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
@@ -172,17 +171,17 @@ public class EditComponentBox extends VBox implements ISubmittable {
         }
         return component;
     }
-    
+
     private String getName() {
         return myName;
     }
 
-	@Override
-	public Button setUpSubmitButton() {
-	        Button done = new Button(DONE);
-	        done.setOnAction(handleDone());
-	        done.setId("button");
-		return done;
-	}
+    @Override
+    public Button setUpSubmitButton() {
+        Button done = new Button(DONE);
+        done.setOnAction(handleDone());
+        done.setId("button");
+        return done;
+    }
 
 }

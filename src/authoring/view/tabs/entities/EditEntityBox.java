@@ -255,7 +255,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
                     EditComponentBox editComponent;
                     if (myComponentData.containsKey(selectedAttribute)) {
                         //System.out.println("Entity contains this key! (edit)");
-                        editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, myComponentData.get(selectedAttribute));
+                        editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, selectedAttribute, myComponentData.get(selectedAttribute));
                     } else {
                         //System.out.println("Entity does not contain this key yet! (new)");
                         editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, selectedAttribute);

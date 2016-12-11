@@ -13,7 +13,7 @@ public class AttributeFetcher {
 	public List<String> componentList;
 	public List<String> attributeList;
 	public List<String> attributeTypeList;
-	private final String PACKAGE = "engine/model/components";
+	private final String PACKAGE = "engine/model/components/concrete";
 	private final String EXTENSION = ".class";
 	private int index;
 
