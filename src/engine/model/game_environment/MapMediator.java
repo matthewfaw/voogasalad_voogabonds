@@ -10,7 +10,7 @@ import java.util.Queue;
 
 import authoring.controller.MapDataContainer;
 import authoring.model.map.TerrainData;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.game_environment.paths.PathManager;
 import engine.model.game_environment.terrain.Terrain;
 import engine.model.game_environment.terrain.TerrainMap;
@@ -30,22 +30,26 @@ public class MapMediator {
 
 	}
 	/**
-	 * Determines if an object can be placed on the map at the requested location.
+	 * Determines if a point is a valid terrain.
 	 * @param aLocation
 	 * @param validTerrains
 	 * @return
 	 */
-	public boolean attemptToPlaceEntity(Point aLocation, List<String> validTerrains) {
-		for (TerrainData terrainData: myMapData.getTerrainList()) {
-			if (terrainData.getLoc().equals(aLocation)) {
-				for (String validTerrain: validTerrains) {
-					if (validTerrain.equals(terrainData.getName())) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+	public boolean isAValidTerrain(Point aLocation, List<String> validTerrains) {
+		
+		return myTerrainMap.hasTerrain(validTerrains, aLocation);
+		
+//		for (TerrainData terrainData: myMapData.getTerrainList()) {
+//			if (terrainData.getLoc().equals(aLocation)) {
+//				System.out.println("The terrain at this point is: "+terrainData.getName());
+//				for (String validTerrain: validTerrains) {
+//					if (validTerrain.equals(terrainData.getName())) {
+//						return true;
+//					}
+//				}
+//			}
+//		}
+//		return false;
 	}
 	
 	/**
