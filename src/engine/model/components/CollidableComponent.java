@@ -5,6 +5,7 @@ import engine.model.collision_detection.ICollidable;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
+import engine.model.systems.PhysicalSystem;
 import engine.model.systems.RewardSystem;
 import utility.Damage;
 
@@ -20,25 +21,24 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private double myCollisionRadius;
 	
 	@Hide
-	private HealthSystem myHealthSystem;
+	private PhysicalSystem myPhysicalSystem;
 	@Hide
 	private DamageDealingSystem myDamageDealingSystem;
 	@Hide
 	private RewardSystem myRewardSystem;
-	@Hide
-	private CollisionDetectionSystem myCollisionDetectionSystem;
 	
-	public CollidableComponent (CollisionDetectionSystem collisionDetectionSystem, 
+	public CollidableComponent (
+			CollisionDetectionSystem collisionDetectionSystem, 
+			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
 			DamageDealingSystem damageDealingSystem, 
 			RewardSystem rewardSystem) {
 		
-		myCollisionDetectionSystem = collisionDetectionSystem;
-		myHealthSystem = healthSystem;
+		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
 		myRewardSystem = rewardSystem;
 		
-		myCollisionDetectionSystem.attachComponent(this);
+		collisionDetectionSystem.attachComponent(this);
 	}
 
 	//*******************ICollidable interface***********//
@@ -48,38 +48,40 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	}
 	
 	@Override
-	public void collideInto(CollidableComponent unmovedCollidable) {
+	public void checkCollision(CollidableComponent unmovedCollidable) {
+		if (intersects(unmovedCollidable))
+			collideInto(unmovedCollidable);
+	}
+	
+	/**
+	 * A method to determine if collidables a and b intersect
+	 * @param this: first entity
+	 * @param c: second entity
+	 * @return true if a and b are in either of each other's 
+	 * collision radii; false if not
+	 */
+	private boolean intersects(CollidableComponent c)
+	{
+		double a_x = myPhysicalSystem.get(this).getPosition().getX();
+		double a_y = myPhysicalSystem.get(this).getPosition().getY();
+		double b_x = myPhysicalSystem.get(c).getPosition().getX();
+		double b_y = myPhysicalSystem.get(c).getPosition().getY();
 		
-		// Have both components deal damage to each other
+		double a_r = getCollisionRadius();
+		double b_r = c.getCollisionRadius();
+
+		return Math.pow(a_r - b_r, 2) <= 
+				Math.pow(a_x - b_x, 2) + 
+				Math.pow(a_y - b_y, 2);
+	}
+	
+	private void collideInto(CollidableComponent unmovedCollidable) {
 		dealDamage(this, unmovedCollidable);
 		dealDamage(unmovedCollidable, this);
-		
-		//XXX: This feels like we're butting into health component/system's business
-		if (myHealthSystem.isDead(this.getEntity())) {
-			/* Money system needs to know: 
-			 * * who to give money to
-			 * * how much money to give
-			 */
-			//myRewardSystem.giveMoneyTo(myPlayer, this);
-			this.getEntity().delete();
-		}
-		if (myHealthSystem.isDead(unmovedCollidable.getEntity())) {
-			/* Money system needs to know: 
-			 * * who to give money to
-			 * * how much money to give
-			 */
-			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
-			unmovedCollidable.getEntity().delete();
-		}
-		
-		//TODO: Check if any explosions happen.
 	}
 
 	private void dealDamage(CollidableComponent a, CollidableComponent b) {
-		// Get damage dealt by a
-		Damage damage = myDamageDealingSystem.getDamageDealtToTarget(a.getEntity());
-		// Deal damage to b
-		myHealthSystem.takeDamage(b.getEntity(), damage);
+		myDamageDealingSystem.dealDamageToTarget(a, b);
+
 	}
-	
 }

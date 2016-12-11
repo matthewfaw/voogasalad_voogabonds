@@ -8,8 +8,8 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
+import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
-import engine.model.game_environment.paths.PathManager;
 import engine.model.machine.Machine;
 import javafx.util.Pair;
 import utility.Point;
@@ -253,6 +253,11 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 //			s.unregister(this);
 			mySystems.remove(s);
 		}
+	}
+	@Override
+	public IEntity getEntity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

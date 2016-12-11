@@ -4,5 +4,7 @@ import engine.model.components.CollidableComponent;
 
 public interface ICollidable {
 
-	public void collideInto(CollidableComponent unmovedCollidable);
+	public void checkCollision(CollidableComponent unmovedCollidable);
+	public double getCollisionRadius();
+	
 }
