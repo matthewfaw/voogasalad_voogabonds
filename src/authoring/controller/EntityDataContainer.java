@@ -19,13 +19,6 @@ public class EntityDataContainer extends Container implements IObservable<Contai
     ArrayList<IObserver<Container>> myObservers = new ArrayList<IObserver<Container>>();
 
     /**
-     * @return
-     */
-    public AbstractMap<String, EntityData> finalizeEntityDataMap(){
-        return myEntityDataMap;
-    }
-
-    /**
      * @param EntityData
      */
     public void createEntityData(EntityData entityData) throws Exception{
@@ -37,6 +30,21 @@ public class EntityDataContainer extends Container implements IObservable<Contai
     }
 
     /**
+     * @param EntityName
+     * @return
+     */
+    public EntityData getEntityData(String EntityName){
+        return myEntityDataMap.get(EntityName);
+    }
+    
+    public void removeEntityData(String entityName) throws Exception {
+        if (!myEntityDataMap.containsKey(entityName)) {
+            throw new Exception("An entity with this name does not exist.");
+        }
+        myEntityDataMap.remove(entityName);
+    }
+
+    /**
      * @return
      */
     public int getNumEntities() {
@@ -45,14 +53,6 @@ public class EntityDataContainer extends Container implements IObservable<Contai
     
     public AbstractMap<String, EntityData> getEntityDataMap(){
     	return myEntityDataMap;
-    }
-
-    /**
-     * @param EntityName
-     * @return
-     */
-    public EntityData getEntityData(String EntityName){
-        return myEntityDataMap.get(EntityName);
     }
 
     /**

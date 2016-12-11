@@ -11,6 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
         myEntities = entities;
         ecFetcher.fetch();
         this.setCellFactory(getCustomCellFactory());
+        this.setKeyboardAction(handleKeyPress());
     }
 
     public boolean addEntity(EntityData entity){
@@ -72,13 +76,29 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     
     private Callback<ListView<EntityListView>, ListCell<EntityListView>> getCustomCellFactory() {
         return new Callback<ListView<EntityListView>, ListCell<EntityListView>>() {
-            
             @Override
             public ListCell<EntityListView> call (ListView<EntityListView> param) {
                 return new EntityCell(EntityTab.this);
             }
-            
         };
+    }
+    
+    private EventHandler<KeyEvent> handleKeyPress() {
+        EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle (KeyEvent event) {
+                EntityListView selected = EntityTab.this.getListView().getSelectionModel().getSelectedItem();
+                if (selected != null && (event.getCode() == KeyCode.D || event.getCode() == KeyCode.BACK_SPACE)) {
+                    try {
+                        myEntities.removeEntityData(selected.getEntityName());
+                        EntityTab.this.getList().remove(selected);
+                    } catch (Exception e) {
+                        EntityTab.this.showError(e.getMessage());
+                    }
+                }
+            }
+        };
+        return handler;
     }
 
     @Override

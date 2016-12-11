@@ -26,10 +26,13 @@ public class EntityListView {
     }
     
     public ImageView getEntityImageView() {
+        if (myImagePath == null || myImagePath.equals("")) {
+            return null;
+        }
+        System.out.println(myImagePath+"/ \\"+myImagePath.length());
         String relativePath = myImagePath.substring(4);
         Image img = new Image(getClass().getClassLoader().getResourceAsStream(relativePath));
-        ImageView entityView = new ImageView(img);
-        return entityView;
+        return new ImageView(img);
     }
     
     private String getImagePath(EntityData entityData) {

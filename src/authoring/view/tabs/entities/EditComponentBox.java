@@ -106,9 +106,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         HBox btns = new HBox(SPACING);
         btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
         btns.setId("hbox");
-        Button done = new Button(DONE);
-        done.setOnAction(handleDone());
-        done.setId("button");
+        Button done = setUpSubmitButton();
         Button cancel = new Button(CANCEL);
         cancel.setOnAction(handleCancel());
         cancel.setId("button");
@@ -155,8 +153,10 @@ public class EditComponentBox extends VBox implements ISubmittable {
 
 	@Override
 	public Button setUpSubmitButton() {
-		// TODO Auto-generated method stub
-		return null;
+	        Button done = new Button(DONE);
+	        done.setOnAction(handleDone());
+	        done.setId("button");
+		return done;
 	}
 
 }

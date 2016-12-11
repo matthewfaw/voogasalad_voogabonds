@@ -95,11 +95,11 @@ public abstract class ListTab<A> extends AuthoringTab {
         myListView = new ListView<A>(myList);
         bindSize(scroll, myListView);
         myListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        	public void handle(MouseEvent event){
-        		if (event.getClickCount() == 2 && myListView.getSelectionModel().getSelectedItem()!=null){
+            public void handle(MouseEvent event){
+                if (event.getClickCount() == 2 && myListView.getSelectionModel().getSelectedItem()!=null){
                     edit(myListView.getSelectionModel().getSelectedItem());
                 }
-        	}
+            }
         });
         // Add Nodes to Tab
         scroll.setContent(myListView);

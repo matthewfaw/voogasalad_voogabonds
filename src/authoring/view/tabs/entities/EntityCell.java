@@ -22,18 +22,14 @@ public class EntityCell extends ListCell<EntityListView> {
     private static final String HAS_NO_IMAGE = "resources/noimage.png";
     
     private HBox cellBox = new HBox();
-    /**
-     * A pane which will hold the EntityListView (name + image)
-     */
-    private Pane cellPane = new Pane();
     private EntityListView entityView;
-    private Button deleteButton = new Button("X");
+    //private Button deleteButton = new Button("X");
     
     public EntityCell(EntityTab parent) {
         super();
-        cellBox.getChildren().addAll(cellPane,deleteButton);
+        //cellBox.getChildren().add(deleteButton);
         //HBox.setHgrow(cellPane, Priority.ALWAYS);
-        deleteButton.setOnAction(deleteEntity(parent));
+        //deleteButton.setOnAction(deleteEntity(parent));
     }
     
     @Override
@@ -53,15 +49,15 @@ public class EntityCell extends ListCell<EntityListView> {
         }
     }
     
-    private EventHandler<ActionEvent> deleteEntity(EntityTab parent) {
-        return new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle (ActionEvent event) {
-                parent.deleteEntity(entityView);
-            }
-            
-        };
-    }
+//    private EventHandler<ActionEvent> deleteEntity(EntityTab parent) {
+//        return new EventHandler<ActionEvent>() {
+//
+//            @Override
+//            public void handle (ActionEvent event) {
+//                parent.deleteEntity(entityView);
+//            }
+//            
+//        };
+//    }
     
 }
