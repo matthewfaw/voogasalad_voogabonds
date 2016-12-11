@@ -30,12 +30,20 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 		myLosses.addAll(getResources().getString("NeverLose"), getResources().getString("HpLose"),
 				getResources().getString("NoMoneyLose"));
 		myContainer = container;
-		VBox menu = setUpMenu();
+		VBox menu;
+		if (myContainer.getPlayerData() == null)
+			menu = setUpMenu(getResources().getString("DefaultLives"), 
+					getResources().getString("DefaultCash"), null, null);
+		else
+			menu = setUpMenu(String.valueOf(myContainer.getPlayerData().getStartingLives()), 
+					String.valueOf(myContainer.getPlayerData().getStartingCash()), 
+					myContainer.getPlayerData().getWinStrategyName(), 
+					myContainer.getPlayerData().getLoseStrategyName());
 		menu.setId("vbox");
 		setContent(menu);
 	}
 
-	private VBox setUpMenu() {
+	private VBox setUpMenu(String lives, String cash, String win, String lose) {
 		VBox v = new VBox();
 		myLivesField = setUpTextInputWithLabel(getResources().getString("EnterLives"), 
 				getResources().getString("DefaultLives"), v);
