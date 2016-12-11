@@ -6,25 +6,19 @@ import java.util.List;
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.MoveableComponent;
-import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
+import engine.model.game_environment.MapMediator;
 import engine.model.strategies.StrategyFactory;
 
 public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	private List<MoveableComponent> myMoveableComponents;
-	private TargetingSystem myTargeting;
-	private PhysicalSystem myPhysical;
-	private CollisionDetectionSystem myCollision;
 	private StrategyFactory myStrategyFactory;
 	
 	
-	public MovementSystem (PhysicalSystem physical, CollisionDetectionSystem collision, TargetingSystem targeting, 
+	public MovementSystem (MapMediator map, 
 			TimelineController time) {
 		myMoveableComponents = new ArrayList<MoveableComponent>();
-		myPhysical = physical;
-		myTargeting = targeting;
-		myCollision = collision;
-		myStrategyFactory = new StrategyFactory(myPhysical);
+		myStrategyFactory = new StrategyFactory(map);
 		
 		time.attach(this);
 		
@@ -39,10 +33,7 @@ public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	
 	private void updateNextMoves() {
 		for (MoveableComponent mc: myMoveableComponents) {
-			mc.setGoal(myTargeting.getTarget(mc));
-			PhysicalComponent p = myPhysical.get(mc);
-			p.setPosition(mc.getMove(p));
-			myCollision.checkCollision(p);
+			mc.move();
 		}
 	}
 	

@@ -26,7 +26,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private double myImageSize;
 	
 	//TODO: Talk to authoring about lists
-	@Hide
 	private List<String> myValidTerrains;
 	
 	@Hide
@@ -40,7 +39,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
-		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myPosition = new Point(0, 0);
