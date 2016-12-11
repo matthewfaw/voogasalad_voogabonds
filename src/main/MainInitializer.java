@@ -4,6 +4,7 @@ import gamePlayerView.Main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 
 import authoring.controller.MapDataContainer;
@@ -69,8 +70,11 @@ public class MainInitializer {
 		return scene;
 	}
 	
-	public void initAuthoring(int mapX, int mapY, String authoringName) {
-	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, mapX, mapY);
+	public void initAuthoring(MapDataContainer container) {
+//		String relativePath = new File("").getAbsolutePath();
+//		System.out.println(relativePath);
+//		String finalPath = relativePath.concat("\\" + authoringName);
+	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene, container);
 	    this.AuthDisp = authoring;
 		stage.setScene(scene);
 	}

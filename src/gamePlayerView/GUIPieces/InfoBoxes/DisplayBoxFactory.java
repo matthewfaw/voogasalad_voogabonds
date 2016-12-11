@@ -2,6 +2,12 @@ package gamePlayerView.GUIPieces.InfoBoxes;
 
 import java.util.ResourceBundle;
 
+/**
+ * 
+ * @author Guhan Muruganandam
+ *
+ */
+
 public class DisplayBoxFactory {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");

@@ -16,10 +16,13 @@ import engine.model.components.UpgradableComponentData;
 
 public class EntityData implements IReadableData {
 	private String myName;
-	Map<String, ComponentData> myComponents;
-	Optional<UpgradableComponentData> myUpgradeData;
-	Optional<SellableComponentData> mySellData;
-	Optional<PurchasableComponentData> myPurchaseData;
+	private Map<String, ComponentData> myComponents;
+//	Optional<UpgradableComponentData> myUpgradeData;
+//	Optional<SellableComponentData> mySellData;
+//	Optional<PurchasableComponentData> myPurchaseData;
+	private UpgradableComponentData myUpgradeData;
+	private SellableComponentData mySellData;
+	private PurchasableComponentData myPurchaseData;
 	
 	public EntityData()
 	{
@@ -43,15 +46,16 @@ public class EntityData implements IReadableData {
 	}
 
 	public int getBuyPrice() {
-		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
+		return myPurchaseData!=null ? myPurchaseData.getBuyPrice() : Integer.MAX_VALUE;
+//		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
 	}
 
 	public int getSellPrice() {
-		return mySellData.isPresent() ? mySellData.get().getSellValue() : 0;
+		return mySellData!=null ? mySellData.getSellValue() : 0;
 	}
 
 	public Map<String, Integer> getUpgrades() {
-		return myUpgradeData.isPresent() ? myUpgradeData.get().getUpgrades() : new HashMap<String, Integer>();
+		return myUpgradeData!=null ? myUpgradeData.getUpgrades() : new HashMap<String, Integer>();
 	}
 
 }

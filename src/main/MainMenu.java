@@ -53,8 +53,6 @@ public class MainMenu {
 		tabContainer.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		this.playTab = new PlayerTab(tabContainer, initializer);
 		this.authorTab = new AuthoringTab(tabContainer, initializer);
-//		this.newTab = new NewGameTab(tabContainer);
-//		this.loadTab = new LoadGameTab(tabContainer);
 		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
 	}
 	
@@ -62,10 +60,6 @@ public class MainMenu {
 		pane.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
 		pane.setTop(createText(myResources.getString("ApplicationTitle")));
 		pane.setCenter(tabContainer);
-//		Button b = createButton(myResources.getString("StartButton"));
-//		b.setPadding(new Insets(screenHeight*0.05, screenWidth*0.05, screenHeight*0.05, screenWidth*0.05));
-//		BorderPane.setAlignment(b, Pos.BASELINE_RIGHT);
-//		pane.setBottom(b);
 		return scene;
 	}
 	
@@ -75,17 +69,6 @@ public class MainMenu {
 		t.setFill(Color.BLACK);
 		return t;
 	}
-	
-//	private Button createButton(String label) {
-//		Button button = new Button(label);
-//		button.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(final ActionEvent e) {
-//				initializer.initAuthoring();
-//			}
-//		});
-//		return button;
-//	}
 	
 	private void setUpScreenResolution() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

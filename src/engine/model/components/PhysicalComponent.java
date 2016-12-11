@@ -25,40 +25,32 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	@Hide
-	private IEntity myEntity;
-	@Hide
 	private Point myPosition;
 	
 	private double myHeading;
 	private String myImagePath;
 	private double myImageSize;
+	//TODO: Talk to authoring about lists
 	@Hide
 	private List<String> myValidTerrains;
 	
-	/*
-	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router) {
-		myCollisionDetectionSystem = collisionDetectionSystem;
-		myCollisionDetectionSystem.attachComponent(this);
+	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
-		myRouter = router;
-		myRouter.distributeViewableComponent(this);
-	}
-	*/
-	
-	public PhysicalComponent (PhysicalSystem PhysicalSystem, Router router, ComponentData data) {
-		myObservers = new ArrayList<IObserver<IViewable>>();
-		router.distributeViewableComponent(this);
-		
+		// Position?
 		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+		
+		physical.attachComponent(this);
+		router.distributeViewableComponent(this);
 	}
 
 	
 	/******** Setters ********/
 	public void setPosition(Point position) {
 		myPosition = position;
+		notifyObservers();
 	}
 	
 	/******************IViewable interface********/

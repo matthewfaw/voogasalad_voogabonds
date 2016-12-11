@@ -3,11 +3,14 @@ package mainmenu.screens;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.serialization.GameStateDeserializer;
+import authoring.model.serialization.JSONDeserializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,6 +48,8 @@ public class LoadAuthoringScreen {
 	private ObservableList<MenuTableItem> data =
 			FXCollections.observableArrayList(
 					);
+	private GameStateDeserializer GSD;
+	private String selectedGame;
 	
 	public LoadAuthoringScreen() throws IOException {
 		setUpScreenResolution();
@@ -89,8 +94,11 @@ public class LoadAuthoringScreen {
 		    @Override 
 		    public void handle(MouseEvent event) {
 		        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-		        	GameStateDeserializer GSD = new GameStateDeserializer();
+		        	GSD = new GameStateDeserializer();
 		        	showSelectedTitle.setText(chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName());
+		        	selectedGame = chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName();
+		    		System.out.println("Selected Game is: " + selectedGame);
+		    		startHandler(startAuthoring, selectedGame);
 		        	try {
 						GSD.loadGameState("src/SerializedFiles/"+chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName().toString());
 					} catch (Exception e) {
@@ -99,7 +107,29 @@ public class LoadAuthoringScreen {
 		        }
 		    }
 		});
-
+	}
+	
+	private void startHandler(Button startButton, String gameTitle) {
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				JSONDeserializer des = new JSONDeserializer();
+				MapDataContainer container;
+				try {
+					String filePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
+					System.out.println("FILEPATH IS: " + filePath);
+					container = (MapDataContainer) des.deserializeFromFile(filePath, MapDataContainer.class);
+					int mapXDim = container.getNumXCells();
+					System.out.println(mapXDim);
+					int mapYDim = container.getNumYCells();
+					initializer.initAuthoring(container);
+//					initializer.initAuthoring(mapXDim, mapYDim, showSelectedTitle.getText());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	private void setUpScreenResolution() {

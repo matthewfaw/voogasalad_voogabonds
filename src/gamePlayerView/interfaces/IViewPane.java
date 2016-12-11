@@ -6,9 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 /**
- * 
  * @author Guhan Muruganandam
- *
  */
 
 public interface IViewPane {

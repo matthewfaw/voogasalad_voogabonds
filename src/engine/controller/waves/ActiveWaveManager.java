@@ -48,7 +48,7 @@ public class ActiveWaveManager {
 	 * 
 	 * TODO: This return type is kinda hacky... maybe make a custom class for this?
 	 */
-	public Map<EntityData, String> getEntitiesToConstruct(double aTotalTimeElapsed)
+	public List<PathFollowerData> getEntitiesToConstruct(double aTotalTimeElapsed)
 	{
 		//1. Update the current time
 		setCurrentTime(aTotalTimeElapsed);
@@ -59,13 +59,13 @@ public class ActiveWaveManager {
 		}
 		
 		//3. get all the entities
-		Map<EntityData, String> enemiesToConstruct = new HashMap<EntityData, String>();
+		List<PathFollowerData> enemiesToConstruct = new ArrayList<PathFollowerData>();
 
 		for (Iterator<WaveState> iterator = myWaveStates.iterator(); iterator.hasNext();) {
 			WaveState activeWave = iterator.next();
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
 				EntityData enemy = myEntityDataStore.getData(activeWave.releaseWaveEntity(aTotalTimeElapsed));
-				enemiesToConstruct.put(enemy, activeWave.getSpawnPointName());
+				enemiesToConstruct.add(new PathFollowerData(enemy, activeWave.getSpawnPointName(), activeWave.getSinkPointName()));
 			} else {
 				iterator.remove();
 //				myWaveStates.remove(activeWave);

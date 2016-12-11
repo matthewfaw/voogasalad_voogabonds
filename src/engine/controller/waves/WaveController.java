@@ -1,18 +1,20 @@
 package engine.controller.waves;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.Map;
-
-import authoring.controller.LevelDataContainer;
+import java.util.List;
+import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
-import authoring.model.GameLevelsData;
 import authoring.model.LevelData;
-import engine.IObserver;
-import engine.controller.timeline.TimelineController;
+import engine.model.components.MoveableComponent;
+import engine.model.components.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
-import engine.model.playerinfo.Player;
+import engine.model.entities.IEntity;
+import engine.model.systems.MovementSystem;
+import engine.model.systems.PhysicalSystem;
+import utility.Point;
 import utility.ResouceAccess;
 
 /**
@@ -29,19 +31,52 @@ import utility.ResouceAccess;
 public class WaveController {
 	private ActiveWaveManager myActiveWaveManager;
 	private EntityFactory myEntityFactory;
+	private MapDataContainer myMapData;
+	private PhysicalSystem myPhysical;
+	private MovementSystem myMovement;
 	
-	public WaveController (DataStore<EntityData> aEnemyDataStore, LevelData aLevelData, double startTime, EntityFactory aEntityFactory) {
+	
+	public WaveController (
+			DataStore<EntityData> aEnemyDataStore,
+			LevelData aLevelData,
+			double startTime,
+			EntityFactory aEntityFactory,
+			PhysicalSystem physical,
+			MovementSystem movement,
+			MapDataContainer mapData
+			) {
+		
+		myMapData = mapData;
+		myPhysical = physical;
+		myMovement = movement;
 		myActiveWaveManager = new ActiveWaveManager(aEnemyDataStore, aLevelData, startTime);
 		myEntityFactory = aEntityFactory;
+		
 	}
-	
+
+
 	public void distributeEntities(double aElapsedTime)
 	{
-		Map<EntityData, String> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
-		for (Iterator<EntityData> iterator = entitiesToConstruct.keySet().iterator(); iterator.hasNext();) {
-			EntityData entityData = iterator.next();
+		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
+		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
+			PathFollowerData entityData = iterator.next();
 			try {
-				myEntityFactory.constructEntity(entityData);
+				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData());
+				
+				List<Point> spawns = myMapData.getSpawnPoints(entityData.getSpawnPoint());
+				List<Point> sinks = myMapData.getSinkPoints(entityData.getSinkPoint());
+				
+				Collections.shuffle(spawns);
+				Collections.shuffle(sinks);
+				
+				PhysicalComponent p = myPhysical.get(newEntity);
+				if (p != null)
+					p.setPosition(spawns.get(0));
+				
+				MoveableComponent m = myMovement.get(newEntity);
+				if (m != null)
+					m.setGoal(sinks.get(0));
+				
 			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
 					| IllegalArgumentException | InvocationTargetException e) {
 				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
@@ -56,4 +91,11 @@ public class WaveController {
 	public boolean isLevelFinished() {
 		return !myActiveWaveManager.hasEnemiesToRelease();
 	}
+
+
+	public void newWave(DataStore<EntityData> store, LevelData levelData, double totalTimeElapsed) {
+		myActiveWaveManager = new ActiveWaveManager(store, levelData, totalTimeElapsed);
+		
+	}
+
 }

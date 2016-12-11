@@ -1,13 +1,11 @@
 package engine.model.components;
 
-import engine.model.entities.IEntity;
-import engine.model.game_environment.MapMediator;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.ITargetingStrategy;
+import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TeamSystem;
 
 public class TargetingComponent extends AbstractComponent implements ITargeting {
-	private IEntity myEntity;
 
 	private double mySightRange;
 	private double mySightWidth;
@@ -15,7 +13,7 @@ public class TargetingComponent extends AbstractComponent implements ITargeting 
 	private ITargetingStrategy myTargetingStrategy;
 	
 	@Override
-	public IPhysical getTarget(MapMediator map, TeamSystem teams, IPhysical location) {
+	public IPhysical getTarget(PhysicalSystem map, TeamSystem teams, IPhysical location) {
 		return myTargetingStrategy.target(map, teams, location, this);
 	}
 
