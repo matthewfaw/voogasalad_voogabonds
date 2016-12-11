@@ -23,6 +23,8 @@ import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
+import engine.model.components.PurchasableComponentData;
+import engine.model.components.SellableComponentData;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
 import utility.ResouceAccess;
@@ -88,10 +90,19 @@ public class MockGameDataConstructor {
 			//Map data
 			MapDataContainer md = this.getMockMapData();
 			
+			//Sell/Buy data
+			PurchasableComponentData pcd = new PurchasableComponentData();
+			pcd.setBuyPrice(50);
+			
+			SellableComponentData scd = new SellableComponentData();
+			scd.setSellPrice(25);
+			
 			// Entity data
 			EntityData ed  = new EntityData();
-			ed.setPurchasePrice(50);
-			ed.setSellPrice(25);
+			
+			ed.setPurchasableComponentData(pcd);
+			ed.setSellableComponentData(scd);
+			
 			ed.setName("Awesome Tower1");
 			ComponentData cd1 = new ComponentData();
 			cd1.setComponentName("PhysicalComponent");
@@ -119,8 +130,10 @@ public class MockGameDataConstructor {
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
-			ed.setPurchasePrice(50);
-			ed.setSellPrice(25);
+			
+			ed2.setPurchasableComponentData(pcd);
+			ed2.setSellableComponentData(scd);
+			
 			ed2.setName("Awesome Tower2");
 			ComponentData CD1 = new ComponentData();
 			CD1.setComponentName("PhysicalComponent");

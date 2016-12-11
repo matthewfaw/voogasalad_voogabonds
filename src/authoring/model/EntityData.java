@@ -39,6 +39,14 @@ public class EntityData implements IReadableData {
 		this.myName = s;
 	}
 	
+	public void setSellableComponentData(SellableComponentData data) {
+		mySellData = data;
+	}
+	
+	public void setPurchasableComponentData(PurchasableComponentData data) {
+		myPurchaseData = data;
+	}
+	
 	/**
 	 * Sets the sell price for this entity.
 	 * @param price
