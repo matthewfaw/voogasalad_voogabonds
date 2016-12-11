@@ -30,5 +30,4 @@ public class MapTab extends Tab {
 		this.mapDisplay = new GameDisplay(pane, scene, controller);
 		this.setContent(mapDisplay.getTerrainBox());
 	}
-	
 }
