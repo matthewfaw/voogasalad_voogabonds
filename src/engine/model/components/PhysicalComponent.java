@@ -26,7 +26,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private double myImageSize;
 	
 	//TODO: Talk to authoring about lists
-	@Hide
+	
 	private List<String> myValidTerrains;
 	
 	@Hide
