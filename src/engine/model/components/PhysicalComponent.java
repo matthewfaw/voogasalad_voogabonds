@@ -42,7 +42,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
-		myPosition = new Point(0, 0);
+		myPosition = new Point(2, 2);
 		myHeading = 0;
 		
 		physical.attachComponent(this);

@@ -12,7 +12,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import utility.Point;
-
+@Deprecated
 public class MapDistributor {
 	
 	private EntityFactory myEntityFactory;
@@ -30,17 +30,21 @@ public class MapDistributor {
 		myPlayerController = playerController;
 	}
 	
-	public void distribute(EntityData entityData, String playerID, Point aLocation) {
+	public void distribute(EntityData entityData, Point aLocation) {
 		String validTerrainsStr = entityData.getComponents().get("PhysicalComponent").getFields().get("myValidTerrains");
 		
 		// parse valid terrains into list of terrain data
 		List<String> validTerrains = Arrays.asList(validTerrainsStr.split(", "));
 		
-		boolean canPlace = myMapMediator.attemptToPlaceEntity(aLocation, validTerrains);
+		boolean canPlace = myMapMediator.isAValidTerrain(aLocation, validTerrains);
 		if (canPlace) {
 			createEntity(entityData);
 			deductCostFromPlayer(entityData.getBuyPrice());
 		}
+	}
+	
+	public void distribute(String entityDataName, Point aLocation) {
+		
 	}
 
 	private void createEntity(EntityData entityData) {

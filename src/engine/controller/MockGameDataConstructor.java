@@ -143,8 +143,9 @@ public class MockGameDataConstructor {
 			ComponentData CD1 = new ComponentData();
 			CD1.setComponentName("PhysicalComponent");
 			CD1.addField("myHeading", "0");
-			CD1.addField("myImagePath", "src/resources/cookie.png");
+			CD1.addField("myImagePath", "src/resources/cow.png");
 			CD1.addField("myImageSize", "50");
+			CD1.addField("myValidTerrains", "grass, ice, steel, dark");
 			
 			ComponentData CD2 = new ComponentData();
 			CD2.setComponentName("CollidableComponent");
