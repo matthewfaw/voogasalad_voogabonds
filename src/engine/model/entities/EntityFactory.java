@@ -58,9 +58,6 @@ public class EntityFactory {
 		Collection<ComponentData> componentMap = entityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
-			if (component instanceof PhysicalComponent) {
-				
-			}
 			entity.addComponent(component);	
 		}
 		return entity;
@@ -96,15 +93,28 @@ public class EntityFactory {
 		return componentMap.containsKey("PhysicalComponent");
 	}
 	
-	public void distributeEntity(String entityDataName, Point aLocation) {
+	/**
+	 * Tries to distribute an entity on the map by constructing it.
+	 * @param entityDataName
+	 * @param aLocation
+	 * @return true if succeeded in creating entity; else false
+	 */
+	public boolean distributeEntity(String entityDataName, Point aLocation) {
 		if (myEntityDataStore.hasKey(entityDataName)) {
-			distributeEntity(myEntityDataStore.getData(entityDataName), aLocation);
+			return distributeEntity(myEntityDataStore.getData(entityDataName), aLocation);
 		} else {
 			// Distribute error "No such entity name."
+			return false;
 		}
 	}
 	
-	private void distributeEntity(EntityData entityData, Point aLocation) {
+	/**
+	 * Tries to construct an entity with a physical component.
+	 * @param entityData
+	 * @param aLocation
+	 * @return true if successfully constructed an entity; false if not
+	 */
+	private boolean distributeEntity(EntityData entityData, Point aLocation) {
 		if (hasPhysicalComponent(entityData)) {
 			String validTerrainsStr = entityData.getComponents().get("PhysicalComponent").getFields().get("myValidTerrains");
 			// parse valid terrains into list of terrain data
@@ -114,14 +124,17 @@ public class EntityFactory {
 			if (canPlace) {
 				try {
 					constructEntity(entityData, aLocation);
+					return true;
 				} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
 						| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					return false;
 				}
 //				deductCostFromPlayer(entityData.getBuyPrice());
 			}
 		}
+		return false;
 	}
 
 }
