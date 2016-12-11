@@ -1,5 +1,6 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.components.DamageDealingComponent;
@@ -9,6 +10,10 @@ import utility.Damage;
 
 public class DamageDealingSystem implements ISystem{
 	private List<DamageDealingComponent> myDamageDealingComponents;
+	
+	public DamageDealingSystem() {
+		myDamageDealingComponents = new ArrayList<DamageDealingComponent>();
+	}
 	
 	/**
 	 * Given the input entity, returns the corresponding damage dealing component.

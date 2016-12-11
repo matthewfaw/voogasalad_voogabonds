@@ -10,6 +10,7 @@ import java.util.Set;
 
 import authoring.controller.MapDataContainer;
 import authoring.model.map.TerrainData;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;

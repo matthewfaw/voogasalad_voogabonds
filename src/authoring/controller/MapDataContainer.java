@@ -11,6 +11,7 @@ import javafx.collections.ObservableMap;
 import utility.Point;
 
 import java.util.Stack;
+import java.util.stream.Collectors;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -142,10 +143,14 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		}
 	}
 	
-	public ArrayList<Point> getSpawnPoints(String name){
-		return spawnPoints.get(name);
+	public List<Point> getSpawnPoints(String name){
+		return spawnPoints.get(name).stream().map(e -> midpoint(e)).collect(Collectors.toList());
 	}
 	
+	private Point midpoint(Point e) {
+		return e.scale(cellSize);
+	}
+
 	public HashMap<String, ArrayList<Point>> getSpawnPointMap(){
 		return spawnPoints;
 	}
@@ -174,8 +179,8 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		}
 	}
 	
-	public ArrayList<Point> getSinkPoints(String name){
-		return sinkPoints.get(name);
+	public List<Point> getSinkPoints(String name){
+		return sinkPoints.get(name).stream().map(e -> midpoint(e)).collect(Collectors.toList());
 	}
 	
 	public HashMap<String, ArrayList<Point>> getSinkPointMap(){
