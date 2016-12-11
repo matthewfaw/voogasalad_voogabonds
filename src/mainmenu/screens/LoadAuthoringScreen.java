@@ -122,8 +122,6 @@ public class LoadAuthoringScreen {
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				JSONDeserializer des = new JSONDeserializer();
-				MapDataContainer container;
 				GameStateLoader loader = new GameStateLoader();
 
 				loader.loadMapData(router, gameTitle);

@@ -63,7 +63,7 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 		applyChanges.setId("button");
 		applyChanges.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				PlayerData player = new PlayerData();
+				PlayerData player = myContainer.getPlayerData();
 				try {
 					player.setStartingLives(myLivesField.getText());
 					player.setStartingCash(myCashField.getText());
@@ -72,7 +72,6 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 				} catch(Exception e){
 					showError(e.getMessage());
 				}
-				myContainer.createPlayerData(player);
 			}
 		});
 		return applyChanges;
