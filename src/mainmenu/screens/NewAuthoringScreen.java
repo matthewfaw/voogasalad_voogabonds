@@ -106,11 +106,11 @@ public class NewAuthoringScreen {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					MapDataContainer container = new MapDataContainer();
+					MapDataContainer container = router.getMapDataContainer();
 					container.setDimensions(Integer.parseInt(xSize.getText()), Integer.parseInt(ySize.getText()));
 					initAuthoring(container);
 				} catch(Exception e){
-					MapDataContainer container = new MapDataContainer();
+					MapDataContainer container = router.getMapDataContainer();
 					container.setDimensions(40, 20);
 					initAuthoring(container);
 				}

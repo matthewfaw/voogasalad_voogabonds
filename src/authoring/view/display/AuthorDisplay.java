@@ -28,7 +28,6 @@ public class AuthorDisplay {
     private BorderPane root;
     private TabPane tabPane;
     private TopMenuBar topMenuBar;
-    private Router r;
     private EntityList el;
     private Scene scene;
     private Router router;
@@ -78,13 +77,13 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        MapDataContainer mapData = r.getMapDataContainer();
+        MapDataContainer mapData = router.getMapDataContainer();
         MapTab mapTab = new MapTab(tabPane, scene, mapData);
-        EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
-        RulesTab rulesTab = new RulesTab("Rules", r.getPlayerDataContainer());
-        WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
-        LevelTab levelTab = new LevelTab("Levels", r.getLevelDataContainer());
-        r.link(entityTab, levelTab, waveTab);
+        EntityTab entityTab = new EntityTab(router.getEntityDataContainer());
+        RulesTab rulesTab = new RulesTab("Rules", router.getPlayerDataContainer());
+        WaveTab waveTab = new WaveTab("Waves", router.getWaveDataContainer());
+        LevelTab levelTab = new LevelTab("Levels", router.getLevelDataContainer());
+        router.link(entityTab, levelTab, waveTab);
         // Add Tabs to list
         tabs.add(mapTab);
         tabs.add(entityTab);
@@ -97,7 +96,7 @@ public class AuthorDisplay {
     }
     
     public Router getRouter(){
-    	return r;
+    	return router;
     }
 
 }

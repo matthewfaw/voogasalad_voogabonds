@@ -27,7 +27,7 @@ public class MapTab extends Tab {
 		this.pane = new BorderPane();
 		this.scene = sc;
 		this.controller = con;
-		this.mapDisplay = new GameDisplay(pane, scene, con);
+		this.mapDisplay = new GameDisplay(pane, scene, controller);
 		this.setContent(mapDisplay.getTerrainBox());
 	}
 	

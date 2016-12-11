@@ -128,8 +128,6 @@ public class LoadAuthoringScreen {
 					container = (MapDataContainer) des.deserializeFromFile(filePath, MapDataContainer.class);
 					int mapXDim = container.getNumXCells();
 					int mapYDim = container.getNumYCells();
-					//TODO: Set router's MapDataContainer to container read via deserialization.
-					// initializer.initAuthoring(router containers);
 					initAuthoring(container);
 				} catch (FileNotFoundException e1) {
 					ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
