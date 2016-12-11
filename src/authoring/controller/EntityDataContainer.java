@@ -13,7 +13,7 @@ import engine.IObserver;
 import engine.IObservable;
 
 
-public class EntityDataContainer extends Container implements IDataContainer, IObservable<Container>{
+public class EntityDataContainer extends Container implements IObservable<Container>{
 	
     private AbstractMap<String, EntityData> myEntityDataMap = new HashMap<String, EntityData>();
     ArrayList<IObserver<Container>> myObservers = new ArrayList<IObserver<Container>>();
@@ -63,40 +63,6 @@ public class EntityDataContainer extends Container implements IDataContainer, IO
         myEntityDataMap.remove(originalName);
         createEntityData(updatedEntity);
         notifyObservers();
-    }
-
-    
-    /**
-     * 
-     *  not sure if casting to IReadableData is right way to go about this
-     *  
-     */
-    @Override
-    public IReadableData getObjectData (String name) {
-        return (IReadableData) getEntityData(name);
-    }
-
-    @Override
-    public void createObjectData (IReadableData data) throws Exception{
-        createEntityData((EntityData)data);
-    }
-
-    @Override
-    public void updateObjectData (String oldName, IReadableData data) throws Exception {
-        if (!myEntityDataMap.containsKey(oldName)) {
-            throw new Exception("This Entity has not been created.");
-        }
-        updateEntityData(oldName, (EntityData)data);
-    }
-
-    @Override
-    public boolean deleteObjectData (String name) {
-        if (!myEntityDataMap.containsKey(name)) {
-            return false;
-        }
-        myEntityDataMap.remove(name);
-        notifyObservers();
-        return true;
     }
     
 	/**
