@@ -1,19 +1,18 @@
 package engine.model.strategies.damage;
 
-import engine.model.projectiles.Projectile;
 import engine.model.strategies.IDamageStrategy;
+import engine.model.strategies.IPhysical;
 import utility.Damage;
-import utility.Point;
 
 public class BinaryDamageStrategy implements IDamageStrategy {
 
 	@Override
-	public Damage getAoEDamage(Projectile missile, Point location, double damage) {
+	public Damage getAoEDamage(IPhysical dealer, IPhysical taker, double damage) {
 		return new Damage(0);
 	}
 	
 	@Override
-	public Damage getAoEAllyDamage(Projectile missile, Point location, double damage) {
+	public Damage getAoEAllyDamage(IPhysical dealer, IPhysical taker, double damage) {
 		return new Damage(0);
 	}
 

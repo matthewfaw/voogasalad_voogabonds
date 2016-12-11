@@ -3,6 +3,7 @@ package authoring.model;
 import java.io.File;
 import java.util.List;
 
+@Deprecated
 public class ProjectileData implements IReadableData {
 
 	private String name;

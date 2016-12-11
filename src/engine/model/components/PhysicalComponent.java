@@ -3,106 +3,113 @@ package engine.model.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.ComponentData;
+import authoring.model.Hide;
 import engine.IObserver;
-import engine.model.collision_detection.ICollidable;
+import engine.IViewable;
 import engine.model.entities.IEntity;
-import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.projectiles.Projectile;
 import engine.model.strategies.IPhysical;
+import engine.model.systems.PhysicalSystem;
+import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
 import utility.Point;
 
-public class PhysicalComponent implements IComponent, IPhysical {
-	private List<IObserver<IComponent>> myObservers;
-
-	private IModifiablePlayer myOwner;
-	private List<String> myValidTerrains;
-	private Point myLocation;
-	private double myHeading;
-
+/**
+ * Manages the information relevant to the physical information of an entity
+ * Physical components contain information relevant to existing on a grid, and being displayed
+ * 
+ * @author matthewfaw
+ *
+ */
+public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
+	@Hide
+	private List<IObserver<IViewable>> myObservers;
+	@Hide
 	private IEntity myEntity;
+	@Hide
+	private Point myPosition;
 	
-	public PhysicalComponent(PhysicalComponentData aPhysicalComponentData)
-	{
-		//TODO
-		myObservers = new ArrayList<IObserver<IComponent>>();
+	private double myHeading;
+	private String myImagePath;
+	private double myImageSize;
+	@Hide
+	private List<String> myValidTerrains;
+	
+	/*
+	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router) {
+		myCollisionDetectionSystem = collisionDetectionSystem;
+		myCollisionDetectionSystem.attachComponent(this);
+		myObservers = new ArrayList<IObserver<IViewable>>();
+		myRouter = router;
+		myRouter.distributeViewableComponent(this);
 	}
-	PhysicalComponent(IEntity aEntity, List<String> aValidTerrainList, Point aLocation)
-	{
-		myEntity = aEntity;
+	*/
+	
+	public PhysicalComponent (PhysicalSystem PhysicalSystem, Router router, ComponentData data) {
+		myObservers = new ArrayList<IObserver<IViewable>>();
+		router.distributeViewableComponent(this);
+		
+		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
+		myImagePath = data.getFields().get("myImagePath");
+		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
+		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+	}
 
-		myValidTerrains = aValidTerrainList;
-		myLocation = aLocation;
+	
+	/******** Setters ********/
+	public void setPosition(Point position) {
+		myPosition = position;
 	}
 	
-
-
-	//********************IObservable interface***********//
+	/******************IViewable interface********/
 	@Override
-	public void attach(IObserver<IComponent> aObserver) {
+	public Point getPosition() {
+		return myPosition;
+	}
+
+	@Override
+	public double getHeading() {
+		return myHeading;
+	}
+
+	@Override
+	public double getSize()
+	{
+		return myImageSize;
+	}
+
+	@Override
+	public String getImagePath()
+	{
+		return myImagePath;
+	}
+	
+	/***************IPhysical interface************/
+	@Override
+	public List<String> getValidTerrains() {
+		return myValidTerrains;
+	}
+	
+	@Override
+	public void setPosition(Pair<Double, Point> p) {
+		myHeading = p.getKey();
+		myPosition = p.getValue();
+		notifyObservers();
+	}
+
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IComponent> aObserver) {
+	public void detach(IObserver<IViewable> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
-		myObservers.forEach(o -> o.update(this));
+		myObservers.forEach(observer -> observer.update(this));
 	}
-
-	//*******************IComponent interface***********//
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
-	
-	//*******************IPhysical interface***********//
-	/**
-	 * A method to get the valid terrains on which an entity may be placed
-	 * This assumes that every entity may be placed on a location
-	 * @return list of terrains on which the entity may be placed
-	 */
-	public List<String> getValidTerrains()
-	{
-		return myValidTerrains;
-	}
-	/**
-	 * A method to get the current location of the
-	 * corresponding entity
-	 * @return
-	 */
-	@Override
-	public Point getPosition() {
-		return myLocation;
-	}
-	@Override
-	public double getHeading() {
-		return myHeading;
-	}
-	@Override
-	public double getCollisionRadius() {
-		return 0;
-	}
-	
-	/**
-	 * A method to set the current location of an entity on the map
-	 * Assumes that all entities can be placed on the map
-	 * 
-	 * @param aLocation to place the entity
-	 */
-	@Override
-	public void setPosition(Pair<Double, Point> p) {
-		myLocation = p.getValue();
-		myHeading = p.getKey();
-		
-	}
-	@Override
-	public IModifiablePlayer getOwner() {
-		return myOwner;
-	}
-
 }

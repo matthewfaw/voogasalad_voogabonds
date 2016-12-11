@@ -1,121 +1,85 @@
 package engine.model.components;
 
-import java.util.List;
-
-import engine.IObserver;
+import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
-import engine.model.entities.IEntity;
-import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
-import engine.model.projectiles.Projectile;
-import javafx.util.Pair;
-import utility.Point;
+import engine.model.systems.CollisionDetectionSystem;
+import engine.model.systems.DamageDealingSystem;
+import engine.model.systems.HealthSystem;
+import engine.model.systems.RewardSystem;
+import utility.Damage;
 
-public class CollidableComponent implements IComponent, ICollidable {
-	private List<IObserver<IComponent>> myObservers;
-	private PhysicalComponent myPhysical;
+/**
+ * The purpose of this class is to encapsulate the information relevant
+ * to entities that can collide
+ * These entities will register with the CollisionDetectionSystem, and this
+ * class will define what happens when a collision occurs
+ * @author matthewfaw
+ *
+ */
+public class CollidableComponent extends AbstractComponent implements ICollidable {
+	private double myCollisionRadius;
 	
-	private boolean myDestroyOnCollision;
-	private ICollidable myCollidedWith;
+	@Hide
+	private HealthSystem myHealthSystem;
+	@Hide
+	private DamageDealingSystem myDamageDealingSystem;
+	@Hide
+	private RewardSystem myRewardSystem;
+	@Hide
+	private CollisionDetectionSystem myCollisionDetectionSystem;
 	
-//	private HealthSystem myHealthSystem;
-//	private MoneySystem myMoneySystem;
-
-	//*******************IObservable interface***********//
-	@Override
-	public void attach(IObserver<IComponent> aObserver) {
-		// TODO Auto-generated method stub
+	public CollidableComponent (CollisionDetectionSystem collisionDetectionSystem, 
+			HealthSystem healthSystem,
+			DamageDealingSystem damageDealingSystem, 
+			RewardSystem rewardSystem) {
 		
-	}
-
-	@Override
-	public void detach(IObserver<IComponent> aObserver) {
-		// TODO Auto-generated method stub
+		myCollisionDetectionSystem = collisionDetectionSystem;
+		myHealthSystem = healthSystem;
+		myDamageDealingSystem = damageDealingSystem;
+		myRewardSystem = rewardSystem;
 		
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	//*******************IComponent interface***********//
-	@Override
-	public IEntity getEntity() {
-		return myPhysical.getEntity();
-	}
-
-	//*******************IPhysical interface***********//
-	@Override
-	public Point getPosition() {
-		return myPhysical.getPosition();
-	}
-
-	@Override
-	public double getHeading() {
-		return myPhysical.getHeading();
-	}
-
-	@Override
-	public double getCollisionRadius() {
-		return myPhysical.getCollisionRadius();
-	}
-
-	@Override
-	public List<String> getValidTerrains() {
-		return myPhysical.getValidTerrains();
-	}
-
-	@Override
-	public IModifiablePlayer getOwner() {
-		return myPhysical.getOwner();
-	}
-
-	@Override
-	public void setPosition(Pair<Double, Point> p) {
-		myPhysical.setPosition(p);
+		myCollisionDetectionSystem.attachComponent(this);
 	}
 
 	//*******************ICollidable interface***********//
+	public double getCollisionRadius()
+	{
+		return myCollisionRadius;
+	}
+	
 	@Override
-	public void collideInto(ICollidable unmovedCollidable) {
-		/*
-		 * Health System needs to know:
-		 * * how much health to change
-		 * * which entity's health to change 
-		 */
-		// healthSystem.changeHealth(this, deltaHealth);
-		myCollidedWith = unmovedCollidable;
-		myObservers.forEach(o -> o.update(this));
-		if (myDestroyOnCollision) {
+	public void collideInto(CollidableComponent unmovedCollidable) {
+		
+		// Have both components deal damage to each other
+		dealDamage(this, unmovedCollidable);
+		dealDamage(unmovedCollidable, this);
+		
+		//XXX: This feels like we're butting into health component/system's business
+		if (myHealthSystem.isDead(this.getEntity())) {
+			/* Money system needs to know: 
+			 * * who to give money to
+			 * * how much money to give
+			 */
+			//myRewardSystem.giveMoneyTo(myPlayer, this);
+			this.getEntity().delete();
+		}
+		if (myHealthSystem.isDead(unmovedCollidable.getEntity())) {
 			/* Money system needs to know: 
 			 * * who to give money to
 			 * * how much money to give
 			 */
 			// myMoneySystem.giveMoneyTo(myPlayer, deltaMoney);
-			getEntity().delete();
+			unmovedCollidable.getEntity().delete();
 		}
-		myCollidedWith = null;
-	}
-	
-	public ICollidable getCollidedWith() {
-		return myCollidedWith;
-	}
-	
-	/*
-	 * The two following methods are unneeded using components
-	 * 
-	 */
-	@Override
-	public void collideInto(Machine unmovedCollidable) {
-		// TODO Auto-generated method stub
 		
-	}
-	@Override
-	public void collideInto(Projectile unmovedCollidable) {
-		// TODO Auto-generated method stub
-		
+		//TODO: Check if any explosions happen.
 	}
 
+	private void dealDamage(CollidableComponent a, CollidableComponent b) {
+		// Get damage dealt by a
+		Damage damage = myDamageDealingSystem.getDamageDealtToTarget(a.getEntity());
+		// Deal damage to b
+		myHealthSystem.takeDamage(b.getEntity(), damage);
+	}
+	
 }

@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -14,6 +14,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 
+@Deprecated
 /**
  * @author Christopher Lu
  * Creates the game display in the authoring environment, where the map is divided into clickable cells that allows the user
@@ -34,10 +35,13 @@ public class GameDisplay {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private MapDataController controller;
+	private MapDataContainer controller;
 	private Scene scene;
+	private int colWidth;
+	private int rowHeight;
+	private int tileSize;
 	
-	public GameDisplay(BorderPane root, Scene scene, MapDataController controller) {
+	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller, int mapX, int mapY) {
 		setUpScreenResolution();
 		this.scene = scene;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
@@ -46,14 +50,18 @@ public class GameDisplay {
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene, controller);
 		this.controller = controller;
-		terrainGrid.setPrefWidth(screenWidth*0.8);
-		terrainGrid.setMaxHeight(screenHeight*0.9);
+		this.columns = mapX;
+		this.rows = mapY;
+		this.controller.setDimensions(columns, rows);
+		if (screenWidth/columns < (screenHeight*0.82)/rows) {
+			this.tileSize = (int) (screenWidth/columns) - GAP;
+		}
+		else {
+			this.tileSize = (int) ((screenHeight*0.82)/rows) - GAP;
+		}
 		terrainArea.setContent(terrainGrid);
 		terrainContainer.getChildren().add(terrainArea);
 		root.setCenter(terrainContainer);
-		columns = (int) (screenWidth*0.8/(DEFAULT_TILE_SIZE + GAP));
-		rows = (int) (screenHeight*0.88/(DEFAULT_TILE_SIZE + GAP));
-		this.controller.setDimensions(columns, rows);
 		populateGrid();
 	}
 	
@@ -70,9 +78,9 @@ public class GameDisplay {
 		terrainGrid.setPrefColumns(columns);
 		for (int r = 0; r < rows; r++) {
 			for (int col = 0; col < columns; col++) {
-				TerrainCell cell = new TerrainCell(controller, toolBar, r, col);
-				cell.setWidth(DEFAULT_TILE_SIZE);
-				cell.setHeight(DEFAULT_TILE_SIZE);
+				TerrainCell cell = new TerrainCell(controller, toolBar, r, col, this);
+				cell.setWidth(tileSize);
+				cell.setHeight(tileSize);
 				cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
 				terrainGrid.getChildren().add(cell);
 			}
@@ -89,6 +97,14 @@ public class GameDisplay {
 		rows = numRows;
 		terrainGrid.setPrefRows(rows);
 		populateGrid();
+	}
+	
+	public VBox getTerrainBox() {
+		return terrainContainer;
+	}
+	
+	public int getTileSize() {
+		return tileSize;
 	}
 	
 }

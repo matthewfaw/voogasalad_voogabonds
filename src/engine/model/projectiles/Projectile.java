@@ -8,12 +8,10 @@ import authoring.model.ProjectileData;
 import engine.IObserver;
 import engine.IViewable;
 import engine.controller.timeline.TimelineController;
-import engine.model.collision_detection.ICollidable;
 import engine.model.game_environment.MapMediator;
+import engine.model.game_environment.paths.PathManager;
 import engine.model.machine.Machine;
-import engine.model.playerinfo.IModifiablePlayer;
 import javafx.util.Pair;
-import utility.Damage;
 import utility.Point;
 import engine.model.strategies.*;
 import engine.model.systems.IRegisterable;
@@ -25,7 +23,8 @@ import engine.model.weapons.IKillerOwner;
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
-public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, ICollidable, ISystem, IRegisterable {
+@Deprecated
+public class Projectile implements IViewable, IMovable, IObserver<TimelineController>, /*ICollidable,*/ ISystem, IRegisterable {
 
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
@@ -33,11 +32,11 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	
 	private String myImagePath;
 	private IKillerOwner myOwner;
-	private IModifiablePlayer myPlayer;
+	//private IModifiablePlayer myPlayer;
 	private Machine myTarget;
-	private MapMediator myMap;
+	//private MapMediator myMap;
 	
-	private IMovementStrategy myMovementCalc;
+	//private IMovementStrategy myMovementCalc;
 	private double mySpeed;
 	private double myTurnSpeed;
 	private double myTraveled;
@@ -49,7 +48,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 	private IDamageStrategy myDamageCalc;
 	private double myDamage;
 	private int myMaxRange;
-	private int myAoERadius;
+	//private int myAoERadius;
 	
 	List<String> myValidTerrain;
 	
@@ -64,10 +63,10 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myImagePath = data.getImagePath();
 		myTarget = target;
 		myOwner = owner;
-		myPlayer = myOwner.getOwner();
-		myMap = map;
+		//myPlayer = myOwner.getOwner();
+		//myMap = map;
 		
-		myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
+		//myMovementCalc = StrategyFactory.movementStrategy(data.getMovementStrategy());
 		myLocation = myOwner.getPosition();
 		myHeading = myOwner.getHeading();
 		myTraveled = 0;
@@ -78,7 +77,7 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myValidTerrain = data.getValidTerrains();
 		myDamageCalc = StrategyFactory.damageStrategy(data.getDamageStrategy());
 		myMaxRange = data.getMaxRange();
-		myAoERadius = data.getAreaOfEffectRadius();
+		//myAoERadius = data.getAreaOfEffectRadius();
 		myDamage = data.getDamage();	
 		
 		time.attach(this);
@@ -108,23 +107,21 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		return mySpeed;
 	}
 	
+	/*
 	@Override
 	public double getCollisionRadius() {
 		return myCollisionRadius;
 	}
+	*/
 	@Override
 	public void update(TimelineController aChangedObject) {
 		advance();
 		
 		//TODO: Remove if goes too far off map
-		if (false) {
-			// destroySelf();
-			unregisterMyself();
-		}
 	}
 	
 	private Point advance() {
-		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this);
+		Pair<Double, Point> nextMove = new Pair<Double, Point>(0.0, null);//myMovementCalc.nextMove(this, this);
 		
 		myTraveled += myLocation.euclideanDistance(nextMove.getValue());
 		myHeading = nextMove.getKey();
@@ -146,10 +143,11 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		result.add(explode());
 		
 		myOwner.notifyDestroy(result);
-		getOwner().updateAvailableMoney(result.getMoney());
+//		getOwner().updateAvailableMoney(result.getMoney());
 	}
 	
 	private DamageInfo explode() {
+		/*
 		List<Machine> targets = myMap.withinRange(getPosition(), myAoERadius);
 		
 		DamageInfo result = new DamageInfo();
@@ -157,21 +155,25 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		for (Machine m: targets) {
 
 			Damage toDeal;
-			if (getOwner().isAlly(m.getOwner()))
-				toDeal = myDamageCalc.getAoEAllyDamage(this, myTarget.getPosition(), myDamage);
-			else
-				toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition(), myDamage);
+//			if (getOwner().isAlly(m.getOwner()))
+//				toDeal = myDamageCalc.getAoEAllyDamage(this, myTarget.getPosition(), myDamage);
+//			else
+//				toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition(), myDamage);
 			
-			result = result.add(m.takeDamage(toDeal));
+//			result = result.add(m.takeDamage(toDeal));
 		}
 		// destroySelf();
 		// remove references
 		unregisterMyself();
 		return result;
 		
+		*/
+		return null;
+		
 		
 	}
 
+	/*
 	@Override
 	public List<String> getValidTerrains() {
 		return myValidTerrain;
@@ -181,26 +183,25 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myLocation = aLocation.getValue();
 		myHeading = aLocation.getKey();
 	}
+	*/
 	@Override
 	public double getSize() {
 		return myCollisionRadius;
 	}
 	
 	//********** ICollidable Interface Methods ************//
+	/*
 	@Override
 	public IModifiablePlayer getOwner() {
 		return myPlayer;
 	}
+	*/
 
 
 
 	/********** ICollidable Interface Methods ************/
-
-	@Override
-	public void collideInto(ICollidable movedCollidable) {
-		movedCollidable.collideInto(this);
-	}
 	
+	/*
 	@Override
 	public void collideInto(Machine unmoved) {
 		//This method is a bit of a mess; refactor?
@@ -213,11 +214,12 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 				//Projectile targets enemies, unmoved is an enemy
 				hitUnit((Machine) unmoved);
 	}
+	*/
 	
-	@Override
-	public void collideInto(Projectile unmovedCollidable) {
-		//Do nothing, probably
-	}
+//	@Override
+//	public void collideInto(CollidableComponent unmovedCollidable) {
+//		unmovedCollidable.collideInto(unmovedCollidable);
+//	}
 	//***************Observable interface****************//
 	@Override
 	public void attach(IObserver<IViewable> aObserver) {
@@ -232,9 +234,6 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 		myObservers.forEach(observer -> observer.update(this));
 	}
 	
-	private void destroySelf() {
-		// TODO Auto-generated method stub
-	}
 	
 	//********** ISystem Interface Methods ************//
 //	@Override
@@ -254,4 +253,9 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 			mySystems.remove(s);
 		}
 	}
+	@Override
+	public PathManager getPath() {
+		return null;
+	}
+
 }

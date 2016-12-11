@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -46,24 +46,29 @@ public class GridToolBar {
 	private boolean toggleStatus;
 	private boolean spawnStatus;
 	private boolean sinkStatus;
+	private boolean imageStatus;
 	private Color selectedColor;
 	private String selectedTerrain;
+	private String selectedImagePath;
+	private String selectedImage;
 	private Image mouseCursor;
 	private int screenHeight;
 	private int screenWidth;
 	private HashMap<String, Color> colorToTerrain;
+	private HashMap<String, String> imageToTerrain;
 	private ObservableList<String> terrainOptions = 
 			FXCollections.observableArrayList (
 					"Add Terrain..."
 					);
-	private MapDataController controller;
+	private MapDataContainer controller;
 	
-	public GridToolBar(VBox box, Scene sc, MapDataController controller) {
+	public GridToolBar(VBox box, Scene sc, MapDataContainer controller) {
 		setUpScreenResolution();
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
 		this.colorToTerrain = new HashMap<String, Color>();
+		this.imageToTerrain = new HashMap<String, String>();
 		selectedColor = Color.WHITE;
 		this.selectedTerrain = myResources.getString("DNE");
 		this.controller = controller;
@@ -177,8 +182,10 @@ public class GridToolBar {
 					ColorPicker colorChooser = new ColorPicker();
 					TextField terrainName = new TextField();
 					terrainName.setText(myResources.getString("TerrainName"));
+					Button chooseImage = new Button(myResources.getString("ChooseTerrainImage"));
+					confirmImageHandler(chooseImage);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
-					choiceArea.getChildren().addAll(colorChooser, terrainName, confirmTerrain);
+					choiceArea.getChildren().addAll(colorChooser, chooseImage, terrainName, confirmTerrain);
 					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
 					Scene terrainChoiceScene = new Scene(choiceArea, screenWidth*0.3, screenHeight*0.1);
 					createTerrain.setScene(terrainChoiceScene);
@@ -186,9 +193,23 @@ public class GridToolBar {
 				}
 				else {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
-					selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					if (imageStatus) {
+						selectedImage = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					}
+					else {
+						selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					}
 				}
 //				terrains.getSelectionModel().clearSelection();
+			}
+		});
+	}
+	
+	private void confirmImageHandler(Button chooseImage) {
+		chooseImage.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				ImageGallery terrainImages = new ImageGallery(GridToolBar.this, myResources.getString("TerrainImageFilePath"));
 			}
 		});
 	}
@@ -197,7 +218,12 @@ public class GridToolBar {
 		b.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle (ActionEvent event) {
 				terrainOptions.add(field.getText());
-				colorToTerrain.put(field.getText(), colors.getValue());
+				if (imageStatus) {
+					imageToTerrain.put(field.getText(), selectedImagePath);
+				}
+				else {
+					colorToTerrain.put(field.getText(), colors.getValue());
+				}
 				try {
 					controller.addValidTerrain(field.getText(), colors.getValue().toString());
 				} catch (Exception e) {
@@ -227,6 +253,19 @@ public class GridToolBar {
 	
 	public String getSelectedTerrain() {
 		return selectedTerrain;
+	}
+	
+	public String getSelectedImagePath() {
+		return selectedImagePath;
+	}
+	
+	public void setSelectedImagePath(String newPath) {
+		selectedImagePath = newPath;
+		imageStatus= true;
+	}
+	
+	public boolean getImageStatus() {
+		return imageStatus;
 	}
 	
 }

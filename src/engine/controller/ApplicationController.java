@@ -99,11 +99,11 @@ public class ApplicationController {
 	}
 
 	public void onPlayButtonPressed() {
-		//AnimationController.play()
+		myBackendController.startTimeLine();
 	}
 
 	public void onPauseButtonPressed() {
-		//AnimationController.pause()
+		myBackendController.pauseTimeline();
 	}
 
 	public void onFastButtonPressed() {
@@ -124,7 +124,7 @@ public class ApplicationController {
 	
 	public void onTowerDropped(String aTowerName, Point aDropLocation)
 	{
-		myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
+		myBackendController.attemptToPlaceEntity(aTowerName, aDropLocation);
 	}
 
 	public void onSellButtonPressed(TowerData tower) {
@@ -155,7 +155,7 @@ public class ApplicationController {
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
-//		appcont.constructMap();
+		appcont.constructMap();
 	}
 	*/
 	

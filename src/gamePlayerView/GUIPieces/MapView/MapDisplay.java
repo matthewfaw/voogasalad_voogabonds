@@ -1,6 +1,8 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
+
+import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.model.machine.IViewableMachine;
@@ -56,7 +58,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     	background.giveViewableComponent(aObservable);
     }
     
-    public void setMap(MapData aMapData){
+    public void setMap(MapDataContainer aMapData){
         background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here

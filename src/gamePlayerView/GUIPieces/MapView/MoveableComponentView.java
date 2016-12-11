@@ -15,11 +15,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class MoveableComponentView extends ImageView implements IObserver<IViewable> {
+
 	private ApplicationController myAppController;
 	
     public MoveableComponentView(IObservable<IViewable> aObservable, ApplicationController aAppController){
     	myAppController = aAppController;
-    }
+    }	
+    //public MoveableComponentView(IObservable<IViewable> aObservable) {
+    	//
+    //}
 
 	@Override
 	public void update(IViewable aChangedObject) {

@@ -9,5 +9,4 @@ public class EnemyData extends MachineData {
 	public void setKillReward(int killReward){
 		this.killReward = killReward;
 	}
-	
 }
