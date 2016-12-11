@@ -17,7 +17,6 @@ import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
-import engine.model.game_environment.terrain.TerrainMap;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
@@ -176,7 +175,7 @@ public class BackendController {
 			List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
 			MapDataContainer mapData = data.get(0);
 			myMapData = mapData;
-			TerrainMap terrainMap = new TerrainMap(mapData);
+			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			MapMediator mapMediator = new MapMediator(mapData);
 			myMapDistributor = new MapDistributor(mapMediator, myResourceStore, myEntityFactory, myPlayerController);

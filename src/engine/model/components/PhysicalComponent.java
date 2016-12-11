@@ -7,7 +7,6 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.IViewable;
-import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -22,25 +21,29 @@ import utility.Point;
  *
  */
 public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
-	@Hide
-	private List<IObserver<IViewable>> myObservers;
-	@Hide
-	private Point myPosition;
-	
-	private double myHeading;
 	private String myImagePath;
 	private double myImageSize;
+	
 	//TODO: Talk to authoring about lists
 	@Hide
 	private List<String> myValidTerrains;
 	
+	@Hide
+	private List<IObserver<IViewable>> myObservers;
+	@Hide
+	private Point myPosition;
+	@Hide
+	private double myHeading;
+
+	
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
-		myObservers = new ArrayList<IObserver<IViewable>>();
-		// Position?
-		myHeading = Double.parseDouble(data.getFields().get("myHeading"));
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		//myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").split(", "));
+		
+		myObservers = new ArrayList<IObserver<IViewable>>();
+		myPosition = new Point(0, 0);
+		myHeading = 0;
 		
 		physical.attachComponent(this);
 		router.distributeViewableComponent(this);

@@ -1,7 +1,5 @@
 package engine.model.game_environment.terrain;
 
-import java.util.Stack;
-
 import authoring.model.map.TerrainData;
 import utility.Index;
 import utility.Point;
@@ -37,6 +35,10 @@ public class Terrain {
 		int x = (int) myTerrainData.getLoc().getX();
 		int y = (int) myTerrainData.getLoc().getY();
 		return new Point(size * (x + 0.5), size * (y + 0.5));
+	}
+
+	public boolean contains(Point goal) {
+		return getCenter().rectilinearDistance(goal) <= myTerrainData.getSize();
 	}
 	
 
