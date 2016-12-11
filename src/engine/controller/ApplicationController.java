@@ -9,6 +9,7 @@ import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.builders.EntityInfoBox;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.scene.layout.BorderPane;
@@ -139,11 +140,13 @@ public class ApplicationController {
 
 	public void  onEntitySelected(IEntity aEntity)
 	{
-//		myScene.makeEntityInfoBox()
-//			   .withUpgradeButton(...)
-//			   .withTargetInfo()
-//			   .with
-//			   .build()
+		EntityInfoBox myStatisticsBox= new EntityInfoBox.EntityInfoBoxBuilder(myScene) 
+			//myScene.makeEntityInfoBox()
+			   .withMachineInfo()		
+			   .withUpgradeButton()
+			   .withTargetingMechanism()
+			   .build();
+		myScene.updateDisplay(myStatisticsBox);
 	}
 	
 	public void DisplayStats() throws Exception {
