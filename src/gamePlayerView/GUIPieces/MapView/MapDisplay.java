@@ -63,7 +63,8 @@ public class MapDisplay implements IObserver<TimelineController> {
         	myPane.getChildren().add(background.fillCell((int)terrainData.getLoc().getX(), 
         	                                             (int)terrainData.getLoc().getY(), 
         						terrainData.getSize(), 
-        						terrainData.getColor()));
+        						terrainData.getColor(),
+        						myRoot));
         }
         
         myRoot.getChildren().add(myPane);

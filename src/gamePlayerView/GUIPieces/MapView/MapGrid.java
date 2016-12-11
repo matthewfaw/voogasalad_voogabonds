@@ -51,14 +51,18 @@ public class MapGrid extends Node {
     	actualGrid = new Rectangle[numRows][numColumns];
     }
     
-    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
+    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue,Pane pane) {
 
     	Rectangle temp = new Rectangle();
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
+    	//temp.widthProperty().bind(pane.widthProperty().divide(numRows));
+    	//temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
     	temp.setHeight(aCellSize);
     	temp.setWidth(aCellSize);
+    	//temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
+    	//temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
     	temp.setX(row*aCellSize);
     	temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);
@@ -104,7 +108,7 @@ public class MapGrid extends Node {
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable,myAppController);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
