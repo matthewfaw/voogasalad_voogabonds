@@ -124,9 +124,9 @@ public class LoadAuthoringScreen {
 			public void handle(ActionEvent e) {
 				JSONDeserializer des = new JSONDeserializer();
 				MapDataContainer container;
-				String filePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("MapDataFilePath");
 				GameStateLoader loader = new GameStateLoader();
-				loader.loadMapData(filePath, router);
+				loader.loadMapData(router, gameTitle);
+				loader.loadEntityData(router, gameTitle);
 				
 				initAuthoring();
 			}
