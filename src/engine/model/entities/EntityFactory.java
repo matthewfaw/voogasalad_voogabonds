@@ -12,8 +12,10 @@ import engine.controller.waves.PathFollowerData;
 import engine.model.components.ComponentFactory;
 import engine.model.components.IComponent;
 import engine.model.components.IModifiableComponent;
+import engine.model.components.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
+import engine.model.strategies.IPosition;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
@@ -54,13 +56,16 @@ public class EntityFactory {
 		EntityData entityData = myEntityDataStore.getData(entityName);
 		Collection<ComponentData> componentMap = entityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata);
+			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
+			if (component instanceof PhysicalComponent) {
+				
+			}
 			entity.addComponent(component);	
 		}
 		return entity;
 	}
 	
-	public IEntity constructEntity(EntityData aEntityData) 
+	public IEntity constructEntity(EntityData aEntityData, IPosition aLocation) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
@@ -68,7 +73,7 @@ public class EntityFactory {
 		IEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata);
+			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
 			entity.addComponent(component);	
 		}
 		
@@ -103,7 +108,7 @@ public class EntityFactory {
 			boolean canPlace = myMapMediator.isAValidTerrain(aLocation, validTerrains);
 			if (canPlace) {
 				try {
-					constructEntity(entityData);
+					constructEntity(entityData, aLocation);
 				} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
 						| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					// TODO Auto-generated catch block
