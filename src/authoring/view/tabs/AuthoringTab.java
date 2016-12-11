@@ -77,6 +77,8 @@ public abstract class AuthoringTab extends Tab {
      */
     public ComboBox<String> setUpStringComboBox(ObservableList<String> choices, String value) {
         ComboBox<String> cb = new ComboBox<String>(choices);
+        cb.getStylesheets().add("style.css");
+        cb.setId("combobox");
         if (value != null)
         	cb.setValue(value);
         return cb;
@@ -94,6 +96,8 @@ public abstract class AuthoringTab extends Tab {
      */
     public Button setUpBrowseButton(TextField field, String extensionName, String extension) {
         Button browseButton = new Button(myResources.getString("Browse"));
+        browseButton.getStylesheets().add("style.css");
+        browseButton.setId("button");
         browseButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
                 FileChooser fileChooser = new FileChooser();
