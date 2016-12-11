@@ -30,7 +30,7 @@ import javafx.scene.shape.Rectangle;
 import utility.Point;
 
 public class MapGrid extends Node {
-	private ApplicationController myAppController;
+    private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
     private Rectangle[][] actualGrid;
@@ -51,14 +51,14 @@ public class MapGrid extends Node {
     	actualGrid = new Rectangle[numRows][numColumns];
     }
     
-    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
+    public Rectangle fillCell(Pane myPane2, int row, int col, int aCellSize, String aHexValue) {
 
     	Rectangle temp = new Rectangle();
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
-    	temp.setHeight(aCellSize);
-    	temp.setWidth(aCellSize);
+    	temp.widthProperty().bind(myPane2.widthProperty().divide(numRows));
+    	temp.heightProperty().bind(myPane2.heightProperty().divide(numColumns));
     	temp.setX(row*aCellSize);
     	temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);

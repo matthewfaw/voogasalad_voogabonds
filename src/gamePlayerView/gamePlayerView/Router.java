@@ -9,6 +9,7 @@ import engine.IObservable;
 import engine.IViewable;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
+import gamePlayerView.GUIPieces.InfoBoxes.ErrorPopup;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.ILivesAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -39,7 +40,7 @@ public class Router {
 	
 	public void distributeErrors(String aErrorMessage)
 	{
-		//TODO:
+	    ErrorPopup error = new ErrorPopup(aErrorMessage);
 	}
 	
 	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
