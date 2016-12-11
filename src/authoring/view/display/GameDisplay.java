@@ -45,7 +45,7 @@ public class GameDisplay {
 	private int rowHeight;
 	private int tileSize;
 	
-	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller, int mapX, int mapY) {
+	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller) {
 		setUpScreenResolution();
 		importMapData();
 		this.scene = scene;
@@ -56,8 +56,8 @@ public class GameDisplay {
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene, controller);
 		this.controller = controller;
-		this.columns = mapX;
-		this.rows = mapY;
+		this.columns = controller.getNumXCells();
+		this.rows = controller.getNumYCells();
 		this.controller.setDimensions(columns, rows);
 		if (screenWidth/columns < (screenHeight*0.82)/rows) {
 			this.tileSize = (int) (screenWidth/columns) - GAP;

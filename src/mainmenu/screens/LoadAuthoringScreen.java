@@ -126,7 +126,8 @@ public class LoadAuthoringScreen {
 					int mapXDim = container.getNumXCells();
 					System.out.println(mapXDim);
 					int mapYDim = container.getNumYCells();
-					initializer.initAuthoring(mapXDim, mapYDim, showSelectedTitle.getText());
+					initializer.initAuthoring(container);
+//					initializer.initAuthoring(mapXDim, mapYDim, showSelectedTitle.getText());
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
