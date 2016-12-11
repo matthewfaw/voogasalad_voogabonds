@@ -30,7 +30,7 @@ public abstract class AuthoringTab extends Tab {
         super(text);
     }
 	
-	protected ResourceBundle getResources(){
+	public ResourceBundle getResources(){
 		return myResources;
 	}
 	
@@ -42,7 +42,7 @@ public abstract class AuthoringTab extends Tab {
      * @param label
      * @return
      */
-    protected Label setUpLabel(String text) {
+    public Label setUpLabel(String text) {
         Label label = new Label(text);
         label.getStylesheets().add("style.css");
     	label.setId("label");
@@ -59,7 +59,7 @@ public abstract class AuthoringTab extends Tab {
      * @param value - initial value of the TextField input area
      * @return
      */
-    protected TextField setUpTextInput(String value) {
+    public TextField setUpTextInput(String value) {
         TextField textField = new TextField(value);
         return textField;
     }
@@ -75,7 +75,7 @@ public abstract class AuthoringTab extends Tab {
      * @param value - the default value of the ComboBox
      * @return ComboBox
      */
-    protected ComboBox<String> setUpStringComboBox(ObservableList<String> choices, String value) {
+    public ComboBox<String> setUpStringComboBox(ObservableList<String> choices, String value) {
         ComboBox<String> cb = new ComboBox<String>(choices);
         if (value != null)
         	cb.setValue(value);
@@ -92,7 +92,7 @@ public abstract class AuthoringTab extends Tab {
      * @param extension - format of expected file extension (e.g., '*.wav', '*.png', etc.)
      * @return
      */
-    protected Button setUpBrowseButton(TextField field, String extensionName, String extension) {
+    public Button setUpBrowseButton(TextField field, String extensionName, String extension) {
         Button browseButton = new Button(myResources.getString("Browse"));
         browseButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
@@ -119,7 +119,7 @@ public abstract class AuthoringTab extends Tab {
      * @param options - possible values of the check box
      * @return
      */
-    protected MenuButton setUpMenuButton(String value, ObservableList<String> options) {
+    public MenuButton setUpMenuButton(String value, ObservableList<String> options) {
         MenuButton menuBtn = new MenuButton(value);
         for (String terrain : options){ //changed from myTab.getTerrains() -> options
                 CheckBox checkBox = new CheckBox(terrain);
@@ -130,7 +130,7 @@ public abstract class AuthoringTab extends Tab {
         return menuBtn;
     }
     
-    protected TextField setUpTextInputWithLabel(String enter, String defaultText, VBox root){
+    public TextField setUpTextInputWithLabel(String enter, String defaultText, VBox root){
     	Label label = setUpLabel(enter);
     	TextField field = setUpTextInput(defaultText);
     	label.setLabelFor(field);
@@ -138,7 +138,7 @@ public abstract class AuthoringTab extends Tab {
     	return field;
     }
     
-    protected ComboBox<String> setUpStringComboBoxWithLabel(String select, String defaultText, 
+    public ComboBox<String> setUpStringComboBoxWithLabel(String select, String defaultText, 
     		ObservableList<String> values, VBox root){
     	Label label = setUpLabel(select);
     	ComboBox<String> box = setUpStringComboBox(values, defaultText);
