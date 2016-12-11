@@ -45,6 +45,8 @@ public class AuthoringTab extends Tab {
 	
 	private void populateBox() {
 		Button newProject = new Button(myResources.getString("AuthorNewProject"));
+		newProject.getStylesheets().add("style.css");
+		newProject.setId("button");
 		newProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override 
 			public void handle(ActionEvent e) {
@@ -56,6 +58,8 @@ public class AuthoringTab extends Tab {
 			}
 		});
 		Button loadProject = new Button(myResources.getString("AuthorOldProject"));
+		loadProject.getStylesheets().add("style.css");
+		loadProject.setId("button");
 		loadProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {

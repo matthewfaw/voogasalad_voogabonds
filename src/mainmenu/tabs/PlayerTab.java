@@ -46,6 +46,8 @@ public class PlayerTab extends Tab {
 	
 	private void populateBox() {
 		Button newGame = new Button(myResources.getString("PlayNewGame"));
+		newGame.getStylesheets().add("style.css");
+		newGame.setId("button");
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override 
 			public void handle(ActionEvent e) {
@@ -53,6 +55,8 @@ public class PlayerTab extends Tab {
 			}
 		});
 		Button loadGame = new Button(myResources.getString("PlayOldGame"));
+		loadGame.getStylesheets().add("style.css");
+		loadGame.setId("button");
 		loadGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {

@@ -47,6 +47,8 @@ public class NewAuthoringScreen {
 		stage.setTitle(myResources.getString("SetUpNewAuthoringTitle"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
+		scene.getStylesheets().add("style.css");
+		pane.setId("background");
 		populatePane();
 		stage.setScene(scene);
 		stage.show();
@@ -54,18 +56,21 @@ public class NewAuthoringScreen {
 	
 	private void populatePane() {
 		VBox authoringOptions = new VBox(screenHeight*0.1);
+		authoringOptions.setId("menu-vbox");
 		Button chooseNameSave = new Button(myResources.getString("ChooseNameSave"));
+		chooseNameSave.setId("button");
 		saveHandler(chooseNameSave);
 		HBox mapDimensionContainer = new HBox(screenWidth*0.05);
 		TextField mapXField = new TextField();
+		mapXField.setMinHeight(47);
 		mapXField.setPromptText(myResources.getString("SetMapX"));
 		TextField mapYField = new TextField();
+		mapYField.setMinHeight(47);
 		mapYField.setPromptText(myResources.getString("SetMapY"));
-		Button confirmMapSize = new Button(myResources.getString("ApplyChanges"));
-		mapSizeHandler(confirmMapSize, mapXField, mapYField);
 		Button startProject = new Button(myResources.getString("ConfirmAuthoringSetUp"));
-		startProjectHandler(startProject);
-		mapDimensionContainer.getChildren().addAll(mapXField, mapYField, confirmMapSize, startProject);	
+		startProject.setId("button");
+		startProjectHandler(startProject, mapXField, mapYField);
+		mapDimensionContainer.getChildren().addAll(mapXField, mapYField, startProject);	
 		authoringOptions.getChildren().addAll(chooseNameSave, mapDimensionContainer);
 		authoringOptions.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
 		pane.setCenter(authoringOptions);
@@ -92,20 +97,20 @@ public class NewAuthoringScreen {
 				});
 	}
 	
-	private void mapSizeHandler(Button confirmMapButton, TextField xSize, TextField ySize) {
-		confirmMapButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				setMapXDim(Integer.parseInt(xSize.getText()));
-				setMapYDim(Integer.parseInt(ySize.getText()));
-			}
-		});
-	}
-	
-	private void startProjectHandler(Button startProjectButton) {
+	private void startProjectHandler(Button startProjectButton, TextField xSize, TextField ySize) {
 		startProjectButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent e) {
+			public void handle(ActionEvent event) {
+				try {
+					setMapXDim(Integer.parseInt(xSize.getText()));
+				} catch(Exception e){
+					setMapXDim(20);
+				}
+				try {
+					setMapYDim(Integer.parseInt(ySize.getText()));
+				} catch(Exception e){
+					setMapYDim(20);
+				}
 				initializer.initAuthoring(mapXDim, mapYDim, authoringName);
 			}
 		});
