@@ -54,7 +54,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	//********************IMovable interface***********//
 	@Override
 	public Point getGoal() {
-		return myGoal == null ? null : myGoal.getPosition();
+		return (myGoal == null) ? null : myGoal.getPosition();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package engine.model.game_environment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,14 @@ public class MapMediator {
 		terrainQueue.add(source);
 
 		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), movement.getGoal());
+		for (Terrain path: paths.keySet()) {
+			System.out.println("("+path.getCenter().getX() +","+ path.getCenter().getY()+")"+ "<-" + "("+paths.get(path).getCenter().getX() +","+ paths.get(path).getCenter().getY()+")");
+		}
 		
+		//TODO: Fix the algorithm so this doesn't occur
+		if (paths.containsKey(source)) {
+			paths.remove(source);
+		}
 		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoal());
 		
 		PathManager pathManager = new PathManager(shortestPath);
@@ -108,7 +116,6 @@ public class MapMediator {
 	//TODO: Refactor this pls
 
 	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, List<String> aValidTerrains, Point goal)
-
 	{
 		HashMap<Terrain, Terrain> pathToFollow = new HashMap<Terrain, Terrain>();
 		while (!aQueue.isEmpty()) {
@@ -130,7 +137,17 @@ public class MapMediator {
 	}
 	
 	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {
-		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor.getTerrainType()));
+		if (neighbor == null || neighbor.getTerrainType() == null) {
+			return false;
+		}
+		for (Iterator<String> iterator = aValidTerrains.iterator(); iterator.hasNext();) {
+			String terrain = iterator.next();
+			if (terrain.equals(neighbor.getTerrainType())) {
+				return true;
+			}
+		}
+		return false;
+//		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor.getTerrainType()));
 	}
 	
 	private List<Terrain> constructShortestPath(Map<Terrain,Terrain> aPreviousPathMap, Point goal)
@@ -139,6 +156,7 @@ public class MapMediator {
 		
 		Terrain currentTerrain = myTerrainMap.getTerrain(goal);
 		while(aPreviousPathMap.containsKey(currentTerrain)) {
+//		while(true) {
 			shortestPath.add(0, currentTerrain);
 			currentTerrain = aPreviousPathMap.get(currentTerrain);
 		}

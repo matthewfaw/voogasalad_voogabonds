@@ -11,6 +11,7 @@ import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
+import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
@@ -145,8 +146,6 @@ public class BackendController {
 		constructSystems();
 		
 		constructEntityFactory(); //depends on constructing systems first
-		
-		
 	}
 
 	private void constructEntityFactory() {
@@ -264,13 +263,25 @@ public class BackendController {
 		myTimelineController.pause();
 	}
 	
+	public void save()
+	{
+		JSONSerializer js = new JSONSerializer();
+		try {
+			js.serializeToFile(new String("hi"), "derp");
+			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
+			System.out.println(s);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
-	/*
+	
 	public static void main(String[] args)
 	{
 		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
-		controller.getClass();
+//		controller.getClass();
+		controller.save();
 	}
-	*/
 	
 }

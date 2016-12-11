@@ -121,7 +121,7 @@ public class MockGameDataConstructor {
 			cd3.addField("myTurnSpeed", "10");
 			cd3.addField("myMoveSpeed", "100");
 			cd3.addField("myMaxDistance", "100");
-			cd3.addField("myMovementCalc", "greedy");
+			cd3.addField("myMovementCalc", "GreedyMovementStrategy");
 			
 	
 			ComponentData cd4 = new ComponentData();
