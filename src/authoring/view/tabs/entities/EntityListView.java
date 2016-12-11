@@ -1,5 +1,6 @@
 package authoring.view.tabs.entities;
 
+import java.io.File;
 import authoring.model.EntityData;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -13,6 +14,9 @@ public class EntityListView {
     private String myImagePath;
     
     public EntityListView(EntityData entityData) {
+        if (entityData == null) {
+            System.out.println("EntityData is null");
+        }
         myName = entityData.getName();
         myImagePath = getImagePath(entityData);
     }
@@ -22,7 +26,8 @@ public class EntityListView {
     }
     
     public ImageView getEntityImageView() {
-        Image img = new Image(myImagePath);
+        String relativePath = myImagePath.substring(4);
+        Image img = new Image(getClass().getClassLoader().getResourceAsStream(relativePath));
         ImageView entityView = new ImageView(img);
         return entityView;
     }

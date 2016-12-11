@@ -44,9 +44,14 @@ public class EditComponentBox extends VBox implements ISubmittable {
         
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
+            System.out.println(attributes.get(i));
             Label lbl = new Label(attributes.get(i));
             TextField field = new TextField();
             setUpLabeledField(lbl, field);
+            if (lbl.getText().equals("Image Path")) {
+                Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
+                this.getChildren().add(browse);
+            }
         }
         
         HBox btns = getBottomButtons();
@@ -69,6 +74,10 @@ public class EditComponentBox extends VBox implements ISubmittable {
             Label lbl = new Label(attributeName);
             TextField field = new TextField(retrievedData.get(attributeName));
             setUpLabeledField(lbl, field);
+            if (lbl.getText().equals("Image Path")) {
+                Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
+                this.getChildren().add(browse);
+            }
         }
         
         HBox btns = getBottomButtons();

@@ -75,14 +75,7 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
             
             @Override
             public ListCell<EntityListView> call (ListView<EntityListView> param) {
-                
-//                ListCell<EntityListView> cell = new ListCell<EntityListView>() {
-//                    @Override
-//                    protected void updateItem(EntityListView )
-//                };
-//                return cell;
-                return null;
-                
+                return new EntityCell(EntityTab.this);
             }
             
         };
