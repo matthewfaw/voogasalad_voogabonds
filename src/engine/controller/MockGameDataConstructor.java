@@ -90,6 +90,8 @@ public class MockGameDataConstructor {
 			
 			// Entity data
 			EntityData ed  = new EntityData();
+			ed.setPurchasePrice(50);
+			ed.setSellPrice(25);
 			ed.setName("Awesome Tower1");
 			ComponentData cd1 = new ComponentData();
 			cd1.setComponentName("PhysicalComponent");
@@ -117,6 +119,8 @@ public class MockGameDataConstructor {
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
+			ed.setPurchasePrice(50);
+			ed.setSellPrice(25);
 			ed2.setName("Awesome Tower2");
 			ComponentData CD1 = new ComponentData();
 			CD1.setComponentName("PhysicalComponent");
