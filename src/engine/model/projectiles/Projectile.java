@@ -253,9 +253,5 @@ public class Projectile implements IViewable, IMovable, IObserver<TimelineContro
 			mySystems.remove(s);
 		}
 	}
-	@Override
-	public PathManager getPath() {
-		return null;
-	}
 
 }
