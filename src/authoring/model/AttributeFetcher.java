@@ -38,9 +38,9 @@ public class AttributeFetcher {
 			try{
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
-				newCompName = newCompName.substring(1); // remove leading '.'
-				String componentName = separateCapitalizedWords(newCompName);
-				componentList.add(componentName);
+				//newCompName = newCompName.substring(1); // remove leading '.'
+				//String componentName = separateCapitalizedWords(newCompName);
+				componentList.add(newCompName);
 
 				//if field does not have custom annotation, add to map
 				for (Field f : cls.getDeclaredFields()){
@@ -49,8 +49,8 @@ public class AttributeFetcher {
 						attributeTypeList.add(f.getType().getSimpleName());
 					}
 				}
-				componentAttributeMap.put(componentName, attributeList);
-				componentAttributeTypeMap.put(componentName, attributeTypeList);
+				componentAttributeMap.put(newCompName, attributeList);
+				componentAttributeTypeMap.put(newCompName, attributeTypeList);
 			}
 			catch(ClassNotFoundException | SecurityException | IllegalArgumentException e){
 				throw new ClassNotFoundException(String.format("No such class: %s", tempString));
@@ -59,23 +59,13 @@ public class AttributeFetcher {
 
 	}
 
-	/**
-	 * Code based from stackoverflow.com
-	 * 
-	 * @param smooshed
-	 * @return
-	 */
-	private String separateCapitalizedWords(String smooshed) {
-		return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
-	}
-
 	private String fieldManipulator(Field f){	
 		String fieldString = f.toString();
 		fieldString = fieldString.substring(fieldString.lastIndexOf(".")+1, fieldString.length());
-		// Assuming all fields start with 'my'
-		fieldString = fieldString.substring(2);
-		String fieldStringSpaced = this.separateCapitalizedWords(fieldString);
-		return fieldStringSpaced;
+//		// Assuming all fields start with 'my'
+//		fieldString = fieldString.substring(2);
+//		String fieldStringSpaced = this.separateCapitalizedWords(fieldString);
+		return fieldString;
 	}
 
 	public List<String> getComponentList(){

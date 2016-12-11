@@ -3,6 +3,7 @@ package authoring.view.tabs.entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
 import javafx.event.ActionEvent;
@@ -38,14 +39,15 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param componentName
      * @param attributes
      */
-    public EditComponentBox (EditEntityBox parent, EntityTab grandparent, String componentName, List<String> attributes) {
+    public EditComponentBox (EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName) {
         super(SPACING);
+        List<String> attributes = fetcher.getComponentAttributeList(componentName);
         init(parent, grandparent, componentName, attributes.size());
         
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
-            System.out.println(attributes.get(i));
-            Label lbl = new Label(attributes.get(i));
+            Label lbl = new Label(cleanUpAttributeName(attributes.get(i)));
+            //Label lbl = new Label(attributes.get(i));
             TextField field = new TextField();
             setUpLabeledField(lbl, field);
             if (lbl.getText().equals("Image Path")) {
@@ -65,13 +67,15 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param componentName
      * @param retrievedData
      */
-    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, String componentName, Map<String,String> retrievedData) {
+    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, ComponentData componentData) {
         super(SPACING);
-        init(parent, grandparent, componentName, retrievedData.size());
+        Map<String,String> retrievedData = componentData.getFields();
+        init(parent, grandparent, componentData.getComponentName(), retrievedData.size());
         
         // Set up input fields
         for (String attributeName : retrievedData.keySet()) {
-            Label lbl = new Label(attributeName);
+            String attribute = cleanUpAttributeName(attributeName);
+            Label lbl = new Label(attribute);
             TextField field = new TextField(retrievedData.get(attributeName));
             setUpLabeledField(lbl, field);
             if (lbl.getText().equals("Image Path")) {
@@ -91,6 +95,28 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myName = componentName;
         myLabels = new ArrayList<Label>(numAttributes);
         myFields = new ArrayList<TextField>(numAttributes);
+    }
+    
+    private String cleanUpAttributeName(String attribute) {
+        // assume all attributes start with 'my', and separate words
+        String cleanedName = attribute;
+        if (cleanedName.startsWith("my")) {
+            cleanedName = cleanedName.substring(2);
+        }
+        if (!attribute.contains(" ")) {
+            cleanedName = this.separateCapitalizedWords(cleanedName);
+        }
+        return cleanedName;
+    }
+
+    /**
+     * Code based from stackoverflow.com
+     * 
+     * @param smooshed
+     * @return
+     */
+    private String separateCapitalizedWords(String smooshed) {
+            return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
     
     private void setUpLabeledField(Label lbl, TextField field) {
@@ -119,7 +145,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
             public void handle(ActionEvent event){
                 String name = getName();
                 ComponentData entity = createDataFromInput();
-                //System.out.println("Put Component ("+name+") in parent map");
+                System.out.println("Put Component ("+name+") in parent map");
                 parent.editComponent(name, entity);
                 grandparent.getTilePane().getChildren().remove(EditComponentBox.this); // this = reference of parent (i.e., this EditEntityBox class)
             }
