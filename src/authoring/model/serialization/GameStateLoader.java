@@ -62,7 +62,7 @@ public class GameStateLoader {
 			EntityDataContainer routerEntityData = r.getEntityDataContainer();
 			for (File f: entityFiles){
 				String entityDataPath = f.toString().substring(myResources.getString("SourceFilePath").length());
-				entityDataPath.replace("\\", "/");
+				entityDataPath = entityDataPath.replace("\\", "/");
 				EntityData oldEntityData = (EntityData) deserializer.deserializeFromFile(entityDataPath, EntityData.class);
 				routerEntityData.createEntityData(oldEntityData);
 			}
