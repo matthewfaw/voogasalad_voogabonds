@@ -34,16 +34,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Hide
 	private List<String> myValidTerrains;
 	
-	/*
-	public PhysicalComponent (CollisionDetectionSystem collisionDetectionSystem, Router router) {
-		myCollisionDetectionSystem = collisionDetectionSystem;
-		myCollisionDetectionSystem.attachComponent(this);
-		myObservers = new ArrayList<IObserver<IViewable>>();
-		myRouter = router;
-		myRouter.distributeViewableComponent(this);
-	}
-	*/
-	
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data) {
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		
@@ -54,7 +44,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		
 		physical.attachComponent(this);
 		router.distributeViewableComponent(this);
-		notifyObservers();
 	}
 
 	
