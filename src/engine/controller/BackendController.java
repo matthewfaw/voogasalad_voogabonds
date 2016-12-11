@@ -102,9 +102,9 @@ public class BackendController {
 		myPhysicalSystem = new PhysicalSystem(myMapMediator);
 		
 		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
-		myCollisionDetectionSystem = new CollisionDetectionSystem(myPhysicalSystem);
+		myCollisionDetectionSystem = new CollisionDetectionSystem();
 		
-		myMovementSystem = new MovementSystem(myPhysicalSystem, myCollisionDetectionSystem, myTargetingSystem, myTimelineController);
+		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
 		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
 		
 	}

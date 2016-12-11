@@ -60,8 +60,7 @@ public class WaveController {
 		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
 		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
 			PathFollowerData entityData = iterator.next();
-			try {
-				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData());
+			try {	
 				
 				List<Point> spawns = myMapData.getSpawnPoints(entityData.getSpawnPoint());
 				List<Point> sinks = myMapData.getSinkPoints(entityData.getSinkPoint());
@@ -69,9 +68,7 @@ public class WaveController {
 				Collections.shuffle(spawns);
 				Collections.shuffle(sinks);
 				
-				PhysicalComponent p = myPhysical.get(newEntity);
-				if (p != null)
-					p.setPosition(spawns.get(0));
+				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
 				
 				MoveableComponent m = myMovement.get(newEntity);
 				if (m != null)
