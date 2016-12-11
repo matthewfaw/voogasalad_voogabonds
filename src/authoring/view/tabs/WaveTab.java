@@ -31,6 +31,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 	private TextField myNumEnemiesField;
 	private ComboBox<String> myEnemyBox;
 	private ComboBox<String> mySpawnBox;
+	private ComboBox<String> mySinkBox;
 	private VBox myV;
 	private String myName;
 	
@@ -53,14 +54,14 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 				VBox menu = setUpMenu(getResources().getString("DefaultWaveName"), 
 						getResources().getString("DefaultTimeBetween"), 
 						getResources().getString("DefaultTimeFor"), 
-						getResources().getString("DefaultNumberEnemies"), null, null);
+						getResources().getString("DefaultNumberEnemies"), null, null, null);
 				getTilePane().getChildren().add(menu);
 			}
 		};
 	}
 	
 	private VBox setUpMenu(String name, String timeBetween, String timeFor, String numEnemies, 
-			String enemy, String spawn){
+			String enemy, String spawn, String sink){
 		myV = new VBox();
 		myV.setId("vbox");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
@@ -74,6 +75,8 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 				enemy, myEntities, myV);
 		mySpawnBox = setUpStringComboBoxWithLabel(getResources().getString("EnterSpawnPoint"),
 				spawn, mySpawnPoints, myV);
+		mySinkBox = setUpStringComboBoxWithLabel(getResources().getString("EnterSinkPoint"), sink, 
+				mySinkPoints, myV);
 		myName = name;
 		Button finish = setUpSubmitButton();
 		Button cancel = setUpCancelButton(myV);
@@ -113,7 +116,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 		WaveData wave = myContainer.getWaveData(name);
 		VBox menu = setUpMenu(wave.getName(), String.valueOf(wave.getTimeBetweenEntity()), 
 				String.valueOf(wave.getTimeUntilNextWave()), String.valueOf(wave.getNumEntities()), 
-				wave.getWaveEntity(), wave.getSpawnPointName());
+				wave.getWaveEntity(), wave.getSpawnPointName(), wave.getSinkPointName());
 		getTilePane().getChildren().add(menu);
 	}
 
@@ -130,6 +133,7 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 					wave.setNumEnemies(myNumEnemiesField.getText());
 					wave.setWaveEntity(myEnemyBox.getValue());
 					wave.setSpawnPointName(mySpawnBox.getValue());
+					wave.setSinkPointName(mySinkBox.getValue());
 				} catch(Exception e){
 					showError(e.getMessage());
 					return;

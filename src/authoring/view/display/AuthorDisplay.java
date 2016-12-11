@@ -3,6 +3,8 @@ package authoring.view.display;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import authoring.controller.MapDataContainer;
 import authoring.controller.Router;
 import authoring.model.EntityList;
 import authoring.view.menus.FileMenuBar;
@@ -30,15 +32,14 @@ public class AuthorDisplay {
     private Scene scene;
     private int mapXDim;
     private int mapYDim;
-    private String filePath;
+    private MapDataContainer mapData;
     
-    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, int mapX, int mapY, String path) {
+    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, MapDataContainer container) {
         // set title
         mainInit.setTitle(AUTHORING_TITLE);
         this.scene = scn;
-        this.mapXDim = mapX;
-        this.mapYDim = mapY;
-        this.filePath = path;
+
+        this.mapData = container;
         // Set up BorderPane
         root = pane;
         // bind to take available space
@@ -81,7 +82,7 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
-        MapTab mapTab = new MapTab(tabPane, scene, r.getMapDataContainer(), mapXDim, mapYDim);
+        MapTab mapTab = new MapTab(tabPane, scene, mapData);
         EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
         RulesTab rulesTab = new RulesTab("Rules", r.getPlayerDataContainer());
         WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());

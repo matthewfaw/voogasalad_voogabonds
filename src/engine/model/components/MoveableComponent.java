@@ -1,11 +1,12 @@
 package engine.model.components;
 
 import authoring.model.ComponentData;
-import engine.model.game_environment.paths.PathManager;
+import authoring.model.Hide;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
+import engine.model.strategies.StrategyFactory;
 import engine.model.systems.MovementSystem;
 import javafx.util.Pair;
 import utility.Point;
@@ -23,25 +24,31 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
+	
+	@Hide
 	private IPosition myGoal;
-	private PathManager myPath;
 	
 	//NOTE: So that entities can die after traveling a certain distance.
 	private double myMaxDistance;
+	@Hide
 	private double myMovedDistance;
 
 	public MoveableComponent (MovementSystem movement, ComponentData data) {
 		myMovedDistance = 0;
+		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
 		
-		//TODO: get fields from data
-		
+		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
+		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
+		myMovementCalc = StrategyFactory.movementStrategy(data.getFields().get("myMovementCalc"));
 		
 		movement.attachComponent(this);
 	}
-
 	
 	public Pair<Double, Point> getMove(IPhysical p) {
-		return myMovementCalc.nextMove(this, p);
+		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this, p);
+		myMovedDistance += nextMove.getValue().euclideanDistance(p.getPosition());
+		//If myMovedDistance >= myMaxDistance, do something.
+		return nextMove;
 	}
 
 	//********************IMovable interface***********//
@@ -58,11 +65,6 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	@Override
 	public double getMoveSpeed() {
 		return myMoveSpeed;
-	}
-
-	@Override
-	public PathManager getPath() {
-		return myPath;
 	}
 	
 	public void setGoal(IPosition p) {

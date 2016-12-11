@@ -19,7 +19,7 @@ import javafx.util.Callback;
 
 public abstract class ListTab<A> extends AuthoringTab {
     public static final String ADD = "Add";
-    private static final int OFFSET = 2;
+    private static final int OFFSET = 5;
     
     private ObservableList<A> myList;
     private ListView<A> myListView;

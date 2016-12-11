@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import engine.model.components.IComponent;
+import engine.model.components.MoveableComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
+import engine.model.game_environment.paths.PathManager;
 import utility.Point;
 
 public class PhysicalSystem implements ISystem {
@@ -17,6 +19,7 @@ public class PhysicalSystem implements ISystem {
 	public PhysicalSystem(MapMediator map) {
 		myComponents = new ArrayList<PhysicalComponent>();
 		myMap = map;
+		
 	}
 	
 	public PhysicalComponent get(IComponent c) {
@@ -46,8 +49,12 @@ public class PhysicalSystem implements ISystem {
 		return myComponents.stream().filter(p -> isWithin(p, pos, radius, heading, width)).collect(Collectors.toList());
 	}
 
-	private boolean isWithin(PhysicalComponent p, Point pos, double radius, double heading, double width) {
+	public boolean isWithin(PhysicalComponent p, Point pos, double radius, double heading, double width) {
 		return pos.getDistanceTo(p.getPosition()) <= radius &&
 				Math.abs(pos.towards(p.getPosition()) - heading) <= width;
+	}
+	
+	public PathManager findPath(MoveableComponent move) {
+		return myMap.constructPaths(get(move), move);
 	}
 }

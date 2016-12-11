@@ -2,22 +2,21 @@ package authoring.view.display;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import authoring.controller.MapDataContainer;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+import authoring.model.map.TerrainData;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import utility.Point;
 
 /**
  * @author Christopher Lu
@@ -39,15 +38,18 @@ public class GameDisplay {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private MapDataContainer controller;
+	private MapDataContainer mapData;
 	private Scene scene;
-	private int colWidth;
-	private int rowHeight;
 	private int tileSize;
+	private HashMap<String, ArrayList<Point>> spawnPoints;
+	private HashMap<String, ArrayList<Point>> sinkPoints;
+	private HashSet<TerrainData> terrainList;
+	private HashMap<String, String> validTerrain;
+	private ArrayList<Point> usefulSinkPoints = new ArrayList<Point>();
+	private ArrayList<Point> usefulSpawnPoints = new ArrayList<Point>();
 	
-	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller, int mapX, int mapY) {
+	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller) {
 		setUpScreenResolution();
-		importMapData();
 		this.scene = scene;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.terrainContainer = new VBox();
@@ -55,10 +57,11 @@ public class GameDisplay {
 		terrainArea.setId("background");
 		this.terrainGrid = new TilePane();
 		this.toolBar = new GridToolBar(terrainContainer, scene, controller);
-		this.controller = controller;
-		this.columns = mapX;
-		this.rows = mapY;
-		this.controller.setDimensions(columns, rows);
+		this.mapData = controller;
+		importMapData();
+		this.columns = controller.getNumXCells();
+		this.rows = controller.getNumYCells();
+		this.mapData.setDimensions(columns, rows);
 		if (screenWidth/columns < (screenHeight*0.82)/rows) {
 			this.tileSize = (int) (screenWidth/columns) - GAP;
 		}
@@ -68,6 +71,8 @@ public class GameDisplay {
 		terrainArea.setContent(terrainGrid);
 		terrainContainer.getChildren().add(terrainArea);
 		root.setCenter(terrainContainer);
+		makeUsefulSink();
+		makeUsefulSpawn();
 		populateGrid();
 	}
 	
@@ -78,7 +83,40 @@ public class GameDisplay {
 	}
 	
 	private void importMapData() {
-		
+		spawnPoints = mapData.getSpawnPointMap();
+		sinkPoints = mapData.getSinkPointMap();
+		terrainList = mapData.getTerrainList();
+		validTerrain = mapData.getValidTerrainMap();
+	}
+	
+	private void makeUsefulSink() {
+		Set<String> sinkNames = sinkPoints.keySet();
+		for (String s : sinkNames) {
+			usefulSinkPoints.add(sinkPoints.get(s).get(0));
+		}
+	}
+	
+	private void makeUsefulSpawn() {
+		Set<String> spawnNames = spawnPoints.keySet();
+		for (String s: spawnNames) {
+			usefulSpawnPoints.add(spawnPoints.get(s).get(0));
+		}
+	}
+	
+	private void makeSinkPoint(int row, int col) {
+		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
+		cell.setWidth(tileSize/2);
+		cell.setHeight(tileSize/2);
+		cell.setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
+		terrainGrid.getChildren().add(cell);
+	}
+	
+	private void makeSpawnPoint(int row, int col) {
+		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
+		cell.setWidth(tileSize/2);
+		cell.setHeight(tileSize/2);
+		cell.setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+		terrainGrid.getChildren().add(cell);
 	}
 	
 	private void populateGrid() {
@@ -88,11 +126,20 @@ public class GameDisplay {
 		terrainGrid.setPrefColumns(columns);
 		for (int r = 0; r < rows; r++) {
 			for (int col = 0; col < columns; col++) {
-				TerrainCell cell = new TerrainCell(controller, toolBar, r, col, this);
-				cell.setWidth(tileSize);
-				cell.setHeight(tileSize);
-				cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
-				terrainGrid.getChildren().add(cell);
+				Point currentPoint = new Point((double)col, (double)r);
+				if (usefulSinkPoints.contains(currentPoint)) {
+					makeSinkPoint(r, col);
+				}
+				else if (usefulSpawnPoints.contains(currentPoint)) {
+					makeSpawnPoint(r, col);
+				}
+				else {
+					TerrainCell cell = new TerrainCell(mapData, toolBar, r, col, this);
+					cell.setWidth(tileSize);
+					cell.setHeight(tileSize);
+					cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
+					terrainGrid.getChildren().add(cell);
+				}
 			}
 		}
 	}
