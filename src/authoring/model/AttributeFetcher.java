@@ -35,7 +35,9 @@ public class AttributeFetcher {
 			try{
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
-				componentList.add(newCompName);
+				newCompName = newCompName.substring(1);
+				String componentName = separateCapitalizedWords(newCompName);
+				componentList.add(componentName);
 				
 				//if field does not have custom annotation, add to map
 					for (Field f : cls.getDeclaredFields()){
@@ -43,7 +45,7 @@ public class AttributeFetcher {
 						attributeList.add(fieldManipulator(f));
 					}
 				}
-				componentAttributeMap.put(newCompName, attributeList);
+				componentAttributeMap.put(componentName, attributeList);
 			}
 			catch(ClassNotFoundException | SecurityException | IllegalArgumentException e){
 				throw new ClassNotFoundException(String.format("No such class: %s", tempString));
@@ -52,10 +54,17 @@ public class AttributeFetcher {
 
 	}
 	
+	private String separateCapitalizedWords(String smooshed) {
+	    return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
+	}
+	
 	private String fieldManipulator(Field f){	
 		String fieldString = f.toString();
 		fieldString = fieldString.substring(fieldString.lastIndexOf(".")+1, fieldString.length());
-		return fieldString;
+		// Assuming all fields start with 'my'
+		fieldString = fieldString.substring(2);
+		String fieldStringSpaced = this.separateCapitalizedWords(fieldString);
+		return fieldStringSpaced;
 	}
 
 	public List<String> getComponentList(){

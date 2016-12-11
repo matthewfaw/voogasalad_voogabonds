@@ -8,7 +8,6 @@ import engine.controller.timeline.TimelineController;
 import engine.model.components.MoveableComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
-import engine.model.strategies.IPhysical;
 
 public class MovementSystem implements IObserver<TimelineController>, ISystem {
 	private List<MoveableComponent> myMoveableComponents;
