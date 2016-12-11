@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
+import authoring.controller.Router;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
@@ -21,10 +22,12 @@ public class TopMenuBar {
 	private MenuBar topMenu;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private Router router;
 	
-	public TopMenuBar(BorderPane root) {
+	public TopMenuBar(BorderPane root, Router r) {
 		topMenu = new MenuBar();
-		Menu fileMenu = new FileMenu(topMenu);
+		this.router = r;
+		Menu fileMenu = new FileMenu(topMenu, router);
 		Menu editMenu = new EditMenu(topMenu);
 		Menu personalizeMenu = new PersonalizeMenu(topMenu, root);
 		Menu playMenu = new PlayMenu(topMenu);

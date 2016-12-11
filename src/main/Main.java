@@ -2,15 +2,16 @@ package main;
 
 import java.io.IOException;
 
-
+/**
+ * @author Christopher Lu
+ * This is the main class. This starts up the VoogaSalad Program by calling MainInitializer.
+ */
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import engine.controller.MockGameDataConstructor;
-import engine.exceptions.SerializationException;
 
 public class Main extends Application{
-
+	
 	private MainInitializer controller;
 	
 	@Override

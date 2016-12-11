@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import authoring.controller.Router;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -29,6 +30,7 @@ public class AuthoringTab extends Tab {
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private HBox authorOptions;
 	private MainInitializer initializer;
+	private Router router;
 
 	public AuthoringTab(TabPane mainMenuTab, MainInitializer init) {
 		setUpScreenResolution();
@@ -37,6 +39,7 @@ public class AuthoringTab extends Tab {
 		this.authorTab = new Tab(myResources.getString("EnterAuthorMode"));
 		this.authorOptions = new HBox(2);
 		this.initializer = init;
+		this.router = new Router();
 		populateTab();
 		root.getTabs().add(authorTab);
 	}
@@ -81,11 +84,11 @@ public class AuthoringTab extends Tab {
 	}
 	
 	private void handleNewProject() throws IOException {
-		NewAuthoringScreen newScreen = new NewAuthoringScreen();
+		NewAuthoringScreen newScreen = new NewAuthoringScreen(router);
 	}
 	
 	private void handleOldProject() throws IOException {
-		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen();
+		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router);
 	}
 	
 	private void setUpScreenResolution() {

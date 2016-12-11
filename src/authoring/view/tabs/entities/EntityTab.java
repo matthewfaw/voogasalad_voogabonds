@@ -16,6 +16,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EntityTab extends ListTab<EntityListView> implements IObserver<Container>{
     public static final String TITLE = "Entities";
@@ -38,8 +41,6 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     public boolean addEntity(EntityData entity){
         try{
             myEntities.createEntityData(entity);
-            EntityListView entityView = new EntityListView(entity);
-            this.getList().add(entityView);
             return true;
         }catch(Exception e){
             this.showError(e.getMessage());
@@ -50,11 +51,6 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     public boolean updateEntity(EntityListView oldEntity, EntityData entity){
         try{
             myEntities.updateEntityData(oldEntity.getEntityName(), entity);
-            if (!oldEntity.equals(entity.getName())) {
-                this.getList().remove(oldEntity);
-                EntityListView updatedEntity = new EntityListView(entity);
-                this.getList().add(updatedEntity);
-            }
             return true;
         }catch(Exception e){
             this.showError(e.getMessage());
@@ -63,7 +59,14 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
     }
     
     public boolean deleteEntity(EntityListView entity) {
-        return this.getList().remove(entity);
+        try {
+            myEntities.removeEntityData(entity.getEntityName());
+            return true;
+        }
+        catch (Exception e) {
+            this.showError(e.getMessage());
+            return false;
+        }
     }
 
     public EditEntityBox getNewEntityMenu() {
@@ -129,6 +132,13 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
             for (String terrain: ((MapDataContainer) c).getValidTerrainMap().keySet()){
                 validTerrains.add(terrain);
             }
+        }else if(c instanceof EntityDataContainer){
+        	getList().clear();
+        	List<EntityData> entityList = new ArrayList<EntityData>(((EntityDataContainer) c).getEntityDataMap().values());
+        	entityList = entityList.stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());
+        	for (EntityData entity: entityList){
+        		getList().add(new EntityListView(entity));
+        	}
         }
     }
 

@@ -33,13 +33,13 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	@Hide
 	private double myMovedDistance;
 
-	public MoveableComponent (MovementSystem movement, ComponentData data) {
+	public MoveableComponent(MovementSystem movement, ComponentData data) throws ClassNotFoundException {
 		myMovedDistance = 0;
 		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
 		
 		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
-		myMovementCalc = StrategyFactory.movementStrategy(data.getFields().get("myMovementCalc"));
+		myMovementCalc = movement.getStrategyFactory().movementStrategy(data.getFields().get("myMovementCalc"));
 		
 		movement.attachComponent(this);
 	}

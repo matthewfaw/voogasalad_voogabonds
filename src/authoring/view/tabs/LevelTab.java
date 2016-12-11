@@ -71,10 +71,16 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 
 	@Override
 	public void update(Container c) {
-		myWaves.clear();
 		if (c instanceof WaveDataContainer){
+			myWaves.clear();
 			for (WaveData wave: ((WaveDataContainer) c).getWaveMap().values()){
 				myWaves.add(wave);
+			}
+		}else if (c instanceof LevelDataContainer){
+			getList().clear();
+			for (LevelData level: ((LevelDataContainer) c).finalizeLevelDataMap()){
+				String name = level.getLevelName();
+				getList().add(name);
 			}
 		}
 	}
@@ -108,8 +114,8 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 				}
 				myContainer.createNewLevelData(level);
 				getTilePane().getChildren().remove(myV);
-				getObservableList().remove(level.getLevelName());
-				getObservableList().add(level.getLevelName());
+//				getObservableList().remove(level.getLevelName());
+//				getObservableList().add(level.getLevelName());
 			}
 		});
 		return finish;

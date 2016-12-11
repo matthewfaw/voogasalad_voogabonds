@@ -13,15 +13,21 @@ public class Router {
 	public void link(EntityTab e, LevelTab l, WaveTab w){
 		//Listeners for EntityTab
 		mdc.attach(e); //Entity listener
-		
+		edc.attach(e);
 		//Listeners for WaveTab
 		mdc.attach(w); //Terrain listener
 		edc.attach(w); //Entity listener
-
+		wadc.attach(w);
 		//Listeners for levelTab
 		wadc.attach(l);
+		ldc.attach(l);
 		
 		
+		//Refresh upon loading of a new game
+		mdc.notifyObservers();
+		edc.notifyObservers();
+		wadc.notifyObservers();
+		ldc.notifyObservers();
 	}
 	
 	

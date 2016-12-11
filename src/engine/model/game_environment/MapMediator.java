@@ -133,8 +133,8 @@ public class MapMediator {
 		return null;
 	}
 	
-	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {	
-		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor));
+	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {
+		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor.getTerrainType()));
 	}
 	
 	private List<Terrain> constructShortestPath(Map<Terrain,Terrain> aPreviousPathMap, Point goal)
