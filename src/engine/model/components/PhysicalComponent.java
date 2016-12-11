@@ -54,12 +54,14 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		
 		physical.attachComponent(this);
 		router.distributeViewableComponent(this);
+		notifyObservers();
 	}
 
 	
 	/******** Setters ********/
 	public void setPosition(Point position) {
 		myPosition = position;
+		notifyObservers();
 	}
 	
 	/******************IViewable interface********/

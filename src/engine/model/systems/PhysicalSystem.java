@@ -8,7 +8,6 @@ import engine.model.components.IComponent;
 import engine.model.components.PhysicalComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
-import engine.model.strategies.IPhysical;
 import utility.Point;
 
 public class PhysicalSystem implements ISystem {
