@@ -46,6 +46,7 @@ public class GameDisplay {
 	private HashSet<TerrainData> terrainList;
 	private HashMap<String, String> validTerrain;
 	private ArrayList<Point> usefulSinkPoints = new ArrayList<Point>();
+	private ArrayList<Point> usefulSpawnPoints = new ArrayList<Point>();
 	
 	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller) {
 		setUpScreenResolution();
@@ -71,6 +72,7 @@ public class GameDisplay {
 		terrainContainer.getChildren().add(terrainArea);
 		root.setCenter(terrainContainer);
 		makeUsefulSink();
+		makeUsefulSpawn();
 		populateGrid();
 	}
 	
@@ -94,11 +96,26 @@ public class GameDisplay {
 		}
 	}
 	
+	private void makeUsefulSpawn() {
+		Set<String> spawnNames = spawnPoints.keySet();
+		for (String s: spawnNames) {
+			usefulSpawnPoints.add(spawnPoints.get(s).get(0));
+		}
+	}
+	
 	private void makeSinkPoint(int row, int col) {
 		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
 		cell.setWidth(tileSize/2);
 		cell.setHeight(tileSize/2);
 		cell.setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
+		terrainGrid.getChildren().add(cell);
+	}
+	
+	private void makeSpawnPoint(int row, int col) {
+		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
+		cell.setWidth(tileSize/2);
+		cell.setHeight(tileSize/2);
+		cell.setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
 		terrainGrid.getChildren().add(cell);
 	}
 	
@@ -112,6 +129,9 @@ public class GameDisplay {
 				Point currentPoint = new Point((double)col, (double)r);
 				if (usefulSinkPoints.contains(currentPoint)) {
 					makeSinkPoint(r, col);
+				}
+				else if (usefulSpawnPoints.contains(currentPoint)) {
+					makeSpawnPoint(r, col);
 				}
 				else {
 					TerrainCell cell = new TerrainCell(mapData, toolBar, r, col, this);
