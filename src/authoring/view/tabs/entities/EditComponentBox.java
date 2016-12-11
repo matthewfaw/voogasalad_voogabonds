@@ -1,9 +1,10 @@
-package authoring.view.tabs;
+package authoring.view.tabs.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import authoring.model.ComponentData;
+import authoring.view.tabs.ISubmittable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
