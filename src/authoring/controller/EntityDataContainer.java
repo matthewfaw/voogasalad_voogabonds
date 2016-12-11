@@ -42,6 +42,7 @@ public class EntityDataContainer extends Container implements IObservable<Contai
             throw new Exception("An entity with this name does not exist.");
         }
         myEntityDataMap.remove(entityName);
+        notifyObservers();
     }
 
     /**
