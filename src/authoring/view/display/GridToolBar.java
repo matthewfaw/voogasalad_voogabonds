@@ -50,7 +50,6 @@ public class GridToolBar {
 	private Color selectedColor;
 	private String selectedTerrain;
 	private String selectedImagePath;
-	private String selectedImage;
 	private Image mouseCursor;
 	private int screenHeight;
 	private int screenWidth;
@@ -225,8 +224,9 @@ public class GridToolBar {
 				else {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
 					imageStatus = boolToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+					System.out.println(imageStatus);
 					if (imageStatus) {
-						selectedImage = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+						selectedImagePath = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					}
 					else {
 						selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
@@ -267,14 +267,19 @@ public class GridToolBar {
 				boolToTerrain.put(field.getText(), imageStatus);
 				if (imageStatus) {
 					imageToTerrain.put(field.getText(), selectedImagePath);
+					try {
+						controller.addValidTerrain(field.getText(), selectedImagePath);
+					} catch (Exception e) {
+						ErrorBox.displayError(myResources.getString("TerrainError"));
+					}
 				}
 				else {
 					colorToTerrain.put(field.getText(), colors.getValue());
-				}
-				try {
-					controller.addValidTerrain(field.getText(), colors.getValue().toString());
-				} catch (Exception e) {
-					ErrorBox.displayError(myResources.getString("TerrainError"));
+					try {
+						controller.addValidTerrain(field.getText(), colors.getValue().toString());
+					} catch (Exception e) {
+						ErrorBox.displayError(myResources.getString("TerrainError"));
+					}
 				}
 				createTerrain.close();
 			}
@@ -294,7 +299,6 @@ public class GridToolBar {
 	}
 		
 	public Color getSelectedColor() {
-		System.out.println(selectedColor);
 		return selectedColor;
 	}
 	
