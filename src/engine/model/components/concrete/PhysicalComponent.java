@@ -48,18 +48,12 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
 
+		myPosition = new Point(0, 0);
 		myHeading = 0;
 		
 		physical.attachComponent(this);
 		router.distributeViewableComponent(this);
 		setPosition(position);
-	}
-
-	
-	/******** Setters ********/
-	public void setPosition(Point position) {
-		myPosition = position;
-		notifyObservers();
 	}
 	
 	/******************IViewable interface********/
@@ -92,12 +86,19 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	}
 	
 	@Override
+	public void setPosition(Point position) {
+		myPosition = position;
+		notifyObservers();
+	}
+	
+	@Override
 	public void setPosition(Pair<Double, Point> p) {
 		myHeading = p.getKey();
 		while (Math.abs(myHeading) > 180) {
 			myHeading -= 360 * (myHeading / Math.abs(myHeading));
 		}
-		myPosition = p.getValue();
+		if (myPosition != null)
+			myPosition = p.getValue();
 		notifyObservers();
 	}
 
@@ -122,6 +123,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	public void delete() {
 		mySystem.detachComponent(this);
 		myPosition = null;
-		//TODO: Notify observers
+		myObservers.forEach(observer -> observer.update(this));
 	}
 }
