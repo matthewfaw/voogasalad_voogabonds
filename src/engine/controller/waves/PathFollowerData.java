@@ -1,7 +1,6 @@
 package engine.controller.waves;
 
 import authoring.model.EntityData;
-import utility.Point;
 /**
  * This is a wrapper class to wrap entitydata, and spawning and sink point
  * @author Weston
