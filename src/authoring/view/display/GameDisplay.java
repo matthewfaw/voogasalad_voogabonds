@@ -13,9 +13,11 @@ import authoring.model.map.TerrainData;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import utility.Point;
 
@@ -135,7 +137,13 @@ public class GameDisplay {
 		cell.setWidth(tileSize);
 		cell.setHeight(tileSize);
 		int index = usefulTerrainPoints.indexOf(currentPoint);
-		cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
+		try {
+			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
+		} catch (Exception e) {
+			Image image = new Image(usefulTerrainFills.get(index));
+			ImagePattern pattern = new ImagePattern(image);
+			cell.setFill(pattern);
+		}
 		terrainGrid.getChildren().add(cell);
 	}
 	

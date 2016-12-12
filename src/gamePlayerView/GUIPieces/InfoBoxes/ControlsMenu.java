@@ -30,7 +30,7 @@ public class ControlsMenu{
         myRoot = new Pane();
         myStage = new Stage();
         myStage.setTitle("Select Controls");
-        myWindow = new Scene(myRoot, 400,400);
+        myWindow = new Scene(myRoot, 400,450);
         myWindow.setFill(Color.DODGERBLUE);
         myStage.setScene(myWindow);
         //can't make a new controls here... have to get from gameplayer
@@ -51,7 +51,7 @@ public class ControlsMenu{
     private void addApplyButton () {
         Button apply = new Button();
         apply.setLayoutX(150);
-        apply.setLayoutY(330);
+        apply.setLayoutY(385);
         apply.setText("APPLY");
         apply.setStyle(buttonCSS);
         apply.setOnMouseClicked(e -> saveControls());

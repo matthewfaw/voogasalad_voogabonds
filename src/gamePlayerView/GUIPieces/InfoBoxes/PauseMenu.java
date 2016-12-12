@@ -42,8 +42,27 @@ public class PauseMenu {
         buttonList.setLayoutY(10);
         buttonList.getChildren().add(makeButton("RESUME"));
         buttonList.getChildren().add(makeButton("CONTROLS"));
-        buttonList.getChildren().add(makeButton("MAIN MENU"));
+        Button b = makeButton("MAIN MENU");
+        buttonHandler(b);
+        buttonList.getChildren().add(b);
         return buttonList;
+    }
+    
+    public void buttonHandler(Button b){
+        b.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                stageToKill.close();
+                kill();
+                try {
+                    MainMenu main = new MainMenu(new MainInitializer(myStage), myStage);
+                }
+                catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
     }
     
     public Button makeButton(String text){
@@ -63,16 +82,9 @@ public class PauseMenu {
             case "CONTROLS":
                 kill();
                 controls.init();
-            case "MAIN MENU":
-                stageToKill.close();
-                kill();
-                try {
-                    MainMenu main = new MainMenu(new MainInitializer(myStage), myStage);
-                }
-                catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+//            case "MAIN MENU":
+//                stageToKill.close();
+//                kill();
             default:
                 break;
         }

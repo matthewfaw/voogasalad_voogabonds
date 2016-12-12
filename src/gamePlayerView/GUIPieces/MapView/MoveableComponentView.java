@@ -1,10 +1,10 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import engine.IObservable;
+
 import engine.IObserver;
-import engine.IViewable;
 import engine.controller.ApplicationController;
-import javafx.scene.Node;
+import engine.model.components.viewable_interfaces.IViewable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -21,15 +21,17 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 	@Override
 	public void update(IViewable aChangedObject) {
-		String imagePath = aChangedObject.getImagePath();
-		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
-		this.setImage(image);
-		this.setLayoutX(aChangedObject.getPosition().getX());
-		this.setLayoutY(aChangedObject.getPosition().getY());
-		this.setFitWidth(aChangedObject.getSize());
-		this.setFitHeight(aChangedObject.getSize());
-		this.setRotate(aChangedObject.getHeading());
+
 		
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
+//		String imagePath = aChangedObject.getImagePath();
+//		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
+//		this.setImage(image);
+//		this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
+//		this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);
+//		this.setFitWidth(aChangedObject.getSize());
+//		this.setFitHeight(aChangedObject.getSize());
+//		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
+//		this.setRotate(aChangedObject.getHeading());
 	}
 }

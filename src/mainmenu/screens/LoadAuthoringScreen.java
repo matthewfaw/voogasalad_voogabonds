@@ -111,7 +111,7 @@ public class LoadAuthoringScreen {
 		    		startHandler(startAuthoring, selectedGame);
 		        	try {
 						GSD.loadGameState("src/SerializedFiles/"+chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName().toString());
-					} catch (Exception e) {
+		        	} catch (Exception e) {
 						//TODO: add error checking to more appropriate place in package
 					}
 		        }
@@ -124,12 +124,10 @@ public class LoadAuthoringScreen {
 			@Override
 			public void handle(ActionEvent e) {
 				GameStateLoader loader = new GameStateLoader();
-
 				loader.loadMapData(router, gameTitle);
 				loader.loadEntityData(router, gameTitle);
 				loader.loadLevelAndWaveData(router, gameTitle);
 				loader.loadPlayerData(router, gameTitle);
-				
 				initAuthoring();
 			}
 		});

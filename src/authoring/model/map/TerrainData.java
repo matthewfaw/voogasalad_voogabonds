@@ -16,6 +16,10 @@ public class TerrainData implements IReadableData {
 	private String myColor;
 	private int mySize;
 	
+	public TerrainData(String type) {
+		this.type = type;
+	}
+	
 	//TODO: add error checking for what the hex string looks like
 	public TerrainData(String type, int x, int y, int aSize, String aHexValue){
 		this.type = type;

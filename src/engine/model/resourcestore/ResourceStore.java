@@ -6,7 +6,8 @@ import authoring.model.EntityData;
 
 /**
  * This class is the store that keeps all available resources
- * @author Owen Chung and matthewfaw
+ * @author owenchung
+ * @author matthewfaw
  */
 public class ResourceStore implements /*IModifiableStore, */ IViewableStore {
 

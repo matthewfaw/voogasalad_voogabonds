@@ -85,10 +85,14 @@ public class AuthoringTab extends Tab {
 	
 	private void handleNewProject() throws IOException {
 		NewAuthoringScreen newScreen = new NewAuthoringScreen(router);
+        System.out.println("NUMXCELLS: " + router.getMapDataContainer().getNumXCells());
+        System.out.println("NUMYCELLS: " + router.getMapDataContainer().getNumYCells());
 	}
 	
 	private void handleOldProject() throws IOException {
 		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router);
+        System.out.println("NUMXCELLS: " + router.getMapDataContainer().getNumXCells());
+        System.out.println("NUMYCELLS: " + router.getMapDataContainer().getNumYCells());
 	}
 	
 	private void setUpScreenResolution() {

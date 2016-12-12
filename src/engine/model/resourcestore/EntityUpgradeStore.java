@@ -12,7 +12,8 @@ import engine.model.entities.EntityNode;
 
 /**
  * Entity Upgrade Store that stores the hierarchies among entities
- * @author Owen Chung and matthewfaw
+ * @author owenchung 
+ * @author matthewfaw
  */
 
 
