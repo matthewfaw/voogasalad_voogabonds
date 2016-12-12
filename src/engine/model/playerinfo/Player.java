@@ -16,7 +16,8 @@ import engine.model.strategies.winlose.NeverWinStrategy;
  
 /**
  * 
- * @author owenchung and matthewfaw
+ * @author owenchung 
+ * @author matthewfaw
  *
  */
 //TODO: Implement all unimplemented methods

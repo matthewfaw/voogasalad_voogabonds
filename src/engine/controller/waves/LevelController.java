@@ -10,7 +10,7 @@ import engine.model.entities.EntityFactory;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 /**
- * 
+ * LevelController listens to timelinecontroller and updates the levels of the waves
  * @author owenchung
  *
  */
