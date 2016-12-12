@@ -3,6 +3,7 @@ package authoring.controller;
 import java.util.*;
 
 import authoring.model.LevelData;
+import authoring.model.WaveData;
 import engine.IObservable;
 import engine.IObserver;
 
@@ -22,8 +23,30 @@ public class LevelDataContainer extends Container implements IObservable<Contain
 	 * Adds new LevelData object to list of LevelData
 	 */
 	public void createNewLevelData(LevelData ld){
+		for (LevelData level: myLevelList){
+			if (ld.getLevelName().equals(level.getLevelName())){
+				myLevelList.remove(level);
+				break;
+			}
+		}
 		myLevelList.add(ld);
 		notifyObservers();
+	}
+	
+	public void updateLevel(LevelData level, LevelData originalLevel){
+		myLevelList.remove(originalLevel);
+		myLevelList.add(level);
+		notifyObservers();
+	}
+	
+	public void removeLevelData(String levelName) throws Exception{
+		for (LevelData level: myLevelList){
+			if (level.getLevelName().equals(levelName)){
+				myLevelList.remove(level);
+				return;
+			}
+		}
+		throw new Exception("Level not in list");
 	}
 	
 	/**
