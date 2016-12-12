@@ -107,17 +107,26 @@ public class MapGrid extends Node {
         //get info to come up on click
         //m.getInfo();
     	//myAppController.DisplayStats();
-        myAppController.onEntityClicked();
+        myAppController.onEntityClicked(m.getEntityID());
     	//System.out.println("hi");
     }
     
-    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
+//    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
+//    {
+//    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane);
+//    	aObservable.attach(aComponent);
+//    	sprites.add(aComponent);
+//    	myPane.getChildren().add(aComponent);
+//    }
+    
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable, String id)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane, id);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
     }
+    
     
     private void loadTerrainData(Rectangle temp, int row, int col, MapData aMapData){
         //Set this up later
