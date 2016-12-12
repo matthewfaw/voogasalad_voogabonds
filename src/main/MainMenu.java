@@ -66,7 +66,6 @@ public class MainMenu {
 			tab.setId("tab");
 		}
 		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
-		BoomBox.playMusic("DEADPOOL.mp3");
 	}
 	
 	public Scene init() {
