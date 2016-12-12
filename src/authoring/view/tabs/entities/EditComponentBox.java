@@ -103,9 +103,12 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     }
                     
                     fileList = fr.getFileNames("/");
-                    ComboBox<String> strategyChoice = new ComboBox<String>(FXCollections.observableArrayList(fileList));
+                    List<String> strategies = new ArrayList<String>(fileList.size());
+                    fileList.forEach((path) -> strategies.add(stripStrategyClassPath(path)));
+                    ComboBox<String> strategyChoice = new ComboBox<String>(FXCollections.observableArrayList(strategies));
                     lbl.setLabelFor(strategyChoice);
                     lbl.setId("label");
+                    myLabels.add(lbl);
                     strategyChoice.setId("combobox");
                     this.getChildren().addAll(lbl, strategyChoice);
                 }
@@ -181,18 +184,55 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(checkbox);
                 }
             } else {
-                //System.out.println("Clean: "+retrievedData.get(cleanedAttributeName)+"\tUgly: "+retrievedData.get(uglyAttributeName));
-                TextField field = new TextField(retrievedData.get(uglyAttributeName));
-                setUpLabeledField(lbl, field);
-                if (lbl.getText().equals(IMAGE_PATH)) {
-                    Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
-                    this.getChildren().add(browse);
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+                    // TODO: Make ComboBox for Strategies!
+                    
+                    List<String> fileList = new ArrayList<String>();
+                    FileRetriever fr;
+                    
+                    if (uglyAttributeName.toLowerCase().contains(DAMAGE)) {
+                        fr = new FileRetriever(PACKAGE+DAMAGE);
+                    } else if (uglyAttributeName.toLowerCase().contains(MOVEMENT)) {
+                        fr = new FileRetriever(PACKAGE+MOVEMENT);
+                    } else if (uglyAttributeName.toLowerCase().contains(SPAWNING)) {
+                        fr = new FileRetriever(PACKAGE+SPAWNING);
+                    } else if (uglyAttributeName.toLowerCase().contains(TARGET)) {
+                        fr = new FileRetriever(PACKAGE+TARGET);
+                    } else if (uglyAttributeName.toLowerCase().contains(WIN) || uglyAttributeName.toLowerCase().contains(LOSE)) {
+                        fr = new FileRetriever(PACKAGE+WIN+LOSE);
+                    } else {
+                        fr = new FileRetriever(PACKAGE+MOVEMENT);
+                    }
+                    
+                    fileList = fr.getFileNames("/");
+                    List<String> strategies = new ArrayList<String>(fileList.size());
+                    fileList.forEach((path) -> strategies.add(stripStrategyClassPath(path)));
+                    ComboBox<String> strategyChoice = new ComboBox<String>(FXCollections.observableArrayList(strategies));
+                    strategyChoice.setValue(retrievedData.get(uglyAttributeName));
+                    lbl.setLabelFor(strategyChoice);
+                    lbl.setId("label");
+                    myLabels.add(lbl);
+                    strategyChoice.setId("combobox");
+                    this.getChildren().addAll(lbl, strategyChoice);
+                }
+                else {
+                    TextField field = new TextField(retrievedData.get(uglyAttributeName));
+                    setUpLabeledField(lbl, field);
+                    if (lbl.getText().equals(IMAGE_PATH)) {
+                        Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
+                        this.getChildren().add(browse);
+                    }
                 }
             }
         }
 
         HBox btns = getBottomButtons();
         this.getChildren().add(btns);
+    }
+    
+    private String stripStrategyClassPath(String strategyClassPath) {
+        int lastSlash = strategyClassPath.lastIndexOf("/");
+        return strategyClassPath.substring(lastSlash+1,strategyClassPath.length()-EXTENSION.length());
     }
 
     private void init(EditEntityBox parent, EntityTab grandparent, String componentName, int numAttributes) {
@@ -301,9 +341,8 @@ public class EditComponentBox extends VBox implements ISubmittable {
             String attributeName = lbl.getText();
             Node input = lbl.getLabelFor();
             if (input.getClass()==TextField.class) {
-                String attributeValue = myFields.get(i).getCharacters().toString();
-                //System.out.println("Attribute Name: "+attributeName+"\tAttribute Value: "+attributeValue);
-                component.addField(attributeName, attributeValue);
+                String value = ((TextField) input).getText();
+                component.addField(attributeName, value);
             } else if (input.getClass()==MenuButton.class) {
                 MenuButton checkbox = (MenuButton) input;
                 List<String> selectedItems = new ArrayList<String>();
@@ -316,6 +355,10 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 String list = ListStringManipulator.listToString(selectedItems);
                 //System.out.println(list);
                 component.addField(attributeName, list);
+            } else if (input.getClass()==ComboBox.class) {
+                ComboBox<String> combo = (ComboBox<String>) input;
+                //System.out.println("ComboBox value: "+combo.getValue());
+                component.addField(attributeName, combo.getValue());
             }
         }
         return component;
