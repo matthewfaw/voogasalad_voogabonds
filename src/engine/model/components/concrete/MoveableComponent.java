@@ -44,6 +44,8 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private double myMaxDistance;
 	@Hide
 	private double myMovedDistance;
+	private boolean removeOnGoal;
+	private boolean explodesOnGoal;
 
 	
 
@@ -66,6 +68,9 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
 		explodesAtMaxDistance = Boolean.parseBoolean(data.getFields().get("explodesAtMaxDistance"));
 		
+		explodesOnGoal = Boolean.parseBoolean(data.getFields().get("explodesOnGoal"));
+		removeOnGoal = Boolean.parseBoolean(data.getFields().get("removeOnGoal"));
+		
 		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
 		myMovementCalc = movement.getStrategyFactory().newStrategy(data.getFields().get("myMovementCalc"));
@@ -74,7 +79,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	}
 	
 	private Pair<Double, Point> getMove(IPhysical p) {
-		if (myMovedDistance - myMaxDistance < myMoveSpeed)
+		if (myMaxDistance - myMovedDistance < myMoveSpeed)
 			myMoveSpeed = Math.max(0.0, myMovedDistance - myMaxDistance);
 		
 		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this, p);
@@ -105,11 +110,18 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
 		PhysicalComponent p = myPhysical.get(this);
-		p.setPosition(getMove(p));
+		if (p != null)
+			p.setPosition(getMove(p));
+		
 		myCollision.checkCollision(p);
 		
-		if (myMovedDistance >= myMaxDistance && explodesAtMaxDistance) {
+		if ((myMovedDistance >= myMaxDistance && explodesAtMaxDistance) || (explodesOnGoal && atGoal())) {
 			myDamage.explode(this);
+		}
+		
+		if (removeOnGoal && atGoal()) {
+			//subtract player's lives
+			getEntity().delete();
 		}
 	}
 
@@ -118,4 +130,11 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		myMovement.detachComponent(this);
 	}
 
+	private boolean atGoal() {
+		IPhysical p = myPhysical.get(this);
+		if (p != null)
+			return myPhysical.get(this).getPosition().equals(getGoal());
+		else
+			return false;
+	}
 }
