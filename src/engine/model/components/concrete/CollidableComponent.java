@@ -8,7 +8,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableCollidable;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
@@ -121,6 +120,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
 
 	@Override
 	public void delete() {

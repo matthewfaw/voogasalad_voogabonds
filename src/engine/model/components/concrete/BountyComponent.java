@@ -8,7 +8,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableBounty;
 import engine.model.systems.BountySystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -28,11 +27,15 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	@Hide
 	private List<IObserver<IViewableBounty>> myObservers;
 	
+	@Hide
+	private BountySystem myBountySystem;
+	
 	public BountyComponent (BountySystem bountySystem, ComponentData data, Router router) {
 		super(router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
 		myObservers = new ArrayList<IObserver<IViewableBounty>>();
-		bountySystem.attachComponent(this);
+		myBountySystem = bountySystem;
+		myBountySystem.attachComponent(this);
 	}
 	/**
 	 * A method to retrieve the bounty value associated with an entity
@@ -72,7 +75,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	}
 
 	public void delete() {
-		myBounty.detachComponent(this);
+		myBountySystem.detachComponent(this);
 	}
 	
 	

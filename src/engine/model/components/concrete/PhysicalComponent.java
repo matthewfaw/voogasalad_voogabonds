@@ -9,7 +9,6 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.PhysicalSystem;
@@ -44,8 +43,8 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 
 		
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
-		mySystem = physical;
 		super(router);
+		mySystem = physical;
 		
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
@@ -128,7 +127,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void distributeInfo() {
 		getRouter().distributeViewableComponent(this);
-
+	}
 
 	@Override
 	public void delete() {
