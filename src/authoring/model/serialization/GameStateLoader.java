@@ -50,6 +50,7 @@ public class GameStateLoader {
 			}
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			e.printStackTrace();
 		}
 	}
 	
@@ -72,6 +73,7 @@ public class GameStateLoader {
 			}
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			e.printStackTrace();
 		}
 	}
 	
@@ -86,7 +88,7 @@ public class GameStateLoader {
 			}
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	
@@ -105,6 +107,7 @@ public class GameStateLoader {
 			}
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			e.printStackTrace();
 		}
 	}
 	
@@ -120,6 +123,7 @@ public class GameStateLoader {
 			routerPlayerData.setWinStrategyName(newPlayerData.getWinStrategyName());
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			e.printStackTrace();
 		}
 	}
 }
