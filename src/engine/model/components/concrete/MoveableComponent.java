@@ -127,8 +127,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 
 	@Override

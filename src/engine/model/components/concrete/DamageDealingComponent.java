@@ -105,8 +105,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 
 	@Override

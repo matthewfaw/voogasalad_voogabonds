@@ -81,8 +81,7 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 
 

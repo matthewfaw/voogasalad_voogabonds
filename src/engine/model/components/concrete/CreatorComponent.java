@@ -104,8 +104,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 
 	@Override

@@ -122,7 +122,6 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 }

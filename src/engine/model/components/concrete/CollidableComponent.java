@@ -101,8 +101,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 
 	/******************IObservable interface********/

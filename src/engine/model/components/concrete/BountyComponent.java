@@ -46,8 +46,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	
 	@Override
 	public void distributeInfo() {
-		// TODO Auto-generated method stub
-		
+		getRouter().distributeViewableComponent(this);
 	}
 	
 	/******************IObservable interface********/
