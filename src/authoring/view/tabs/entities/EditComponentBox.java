@@ -42,11 +42,17 @@ public class EditComponentBox extends VBox implements ISubmittable {
     public EditComponentBox (EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName) {
         super(SPACING);
         List<String> attributes = fetcher.getComponentAttributeList(componentName);
+        List<String> attributeTypes = fetcher.getComponentAttributeTypeList(componentName);
         init(parent, grandparent, componentName, attributes.size());
 
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
-            Label lbl = new Label(cleanUpAttributeName(attributes.get(i)));
+            String uglyAttributeName = attributes.get(i);
+            String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
+            Label lbl = new Label(cleanedAttributeName);
+            if (attributeTypes.get(i).equals("List")) {
+                // TODO: set up combo box of choices
+            }
             TextField field = new TextField();
             setUpLabeledField(lbl, field);
             if (lbl.getText().equals("Image Path")) {
