@@ -122,7 +122,7 @@ public class GameDisplay {
 		cell.setWidth(tileSize*0.9);
 		cell.setHeight(tileSize*0.9);
 		cell.setStrokeWidth(tileSize*0.1);
-		int index = usefulTerrainPoints.indexOf(currentPoint);
+		int index = usefulSinkPoints.indexOf(currentPoint);
 		try {
 			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
 		} catch (Exception e) {
@@ -139,7 +139,7 @@ public class GameDisplay {
 		cell.setWidth(tileSize*0.9);
 		cell.setHeight(tileSize*0.9);
 		cell.setStrokeWidth(tileSize*0.1);
-		int index = usefulTerrainPoints.indexOf(currentPoint);
+		int index = usefulSpawnPoints.indexOf(currentPoint);
 		try {
 			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
 		} catch (Exception e) {
