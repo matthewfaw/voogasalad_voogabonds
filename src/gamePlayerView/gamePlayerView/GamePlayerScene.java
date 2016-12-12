@@ -26,7 +26,7 @@ import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.builders.EntityInfoBox;
-import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.builders.EntityInfoBoxBuilder;
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -226,11 +226,6 @@ public class GamePlayerScene {
 	public MapDisplay getMapDisplay()
 	{
 		return myMap;
-	}
-
-	public EntityInfoBoxBuilder makeEntityInfoBox()
-	{
-		return new EntityInfoBoxBuilder(this);
 	}
 	
 	public List<IResourceAcceptor> getResources() {

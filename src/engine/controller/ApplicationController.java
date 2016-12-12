@@ -10,6 +10,7 @@ import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.builders.EntityInfoBox;
+import gamePlayerView.builders.EntityInfoBoxBuilder;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.scene.layout.BorderPane;
@@ -137,11 +138,11 @@ public class ApplicationController {
 		myBackendController.save();
 	}
 	public void onEntityClicked(){
-	EntityInfoBox myStatisticsBox= new EntityInfoBox.EntityInfoBoxBuilder(myScene) 
+	EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(myScene) 
 			//myScene.makeEntityInfoBox()
-			   .withMachineInfo()		
-			   .withUpgradeButton()
+			   .withMachineInfo()
 			   .withTargetingMechanism()
+			   .withUpgradeButton()
 			   .build();
 			myScene.updateDisplay(myStatisticsBox);
 	}

@@ -18,65 +18,16 @@ public class EntityInfoBox implements IGUIPiece {
 	private final TargetingButtons myTargetingButtons;
 	private HBox Hbox=new HBox();
 	
-	private EntityInfoBox(EntityInfoBoxBuilder builder){
-		this.myMachineInfo=builder.myMachineInfo;
-		this.myUpgradeOrSell=builder.myUpgradeOrSell;
-		this.myTargetingButtons=builder.myTargetingButtons;
-		Hbox.getChildren().addAll(myMachineInfo.getView(),myUpgradeOrSell.getView(),myTargetingButtons.getView());
+	public EntityInfoBox(EntityInfoBoxBuilder builder){
+		this.myMachineInfo=builder.getMyMachineInfo();
+		this.myUpgradeOrSell=builder.getMyUpgradeOrSell();
+		this.myTargetingButtons=builder.getMyTargetingButtons();
+		Hbox.setSpacing(10);
+		Hbox.getChildren().addAll(myMachineInfo.getView(),myTargetingButtons.getView(),myUpgradeOrSell.getView());
 	}
 	
 	@Override
 	public Node getView() {
 		return Hbox;
-	}
-	
-	public static class EntityInfoBoxBuilder {
-		//private EntityInfoBox myEntityInfoBox;
-		private MachineInfo myMachineInfo;
-		private UpgradeOrSell myUpgradeOrSell;
-		private TargetingButtons myTargetingButtons;
-		private HBox myEntityInfoBox;
-		private  GamePlayerScene  myGamePlayerScene;
-		//private final String temp;
-		
-		public EntityInfoBoxBuilder(GamePlayerScene aGamePlayerScene)
-		{
-			//myEntityInfoBox = new EntityInfoBox();
-			myEntityInfoBox=new HBox();
-			myGamePlayerScene = aGamePlayerScene;
-		}
-		
-		public EntityInfoBoxBuilder withMachineInfo()
-		{
-			//null check before constructing
-			//add upgrade button to  the info box
-			this.myMachineInfo=new MachineInfo();
-			myEntityInfoBox.getChildren().add(myMachineInfo.getView());
-			return this;
-		}
-		
-		public EntityInfoBoxBuilder withUpgradeButton()
-		{
-			//null check before constructing
-			//add upgrade button to  the info box
-			this.myUpgradeOrSell=new UpgradeOrSell();
-			myEntityInfoBox.getChildren().add(myUpgradeOrSell.getView());
-			return this;
-		}
-		
-		public EntityInfoBoxBuilder withTargetingMechanism()
-		{
-			//null check before constructing
-			//add upgrade button to  the info box
-			this.myTargetingButtons=new TargetingButtons();
-			myEntityInfoBox.getChildren().add(myTargetingButtons.getView());
-			return this;
-		}
-		
-		public EntityInfoBox build()
-		{
-			return new EntityInfoBox(this);
-			//myGamePlayerScene.addEntityInfoBox(myEntityInfoBox);
-		}
 	}
 }
