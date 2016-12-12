@@ -3,6 +3,7 @@ package authoring.view.display;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import utility.ErrorBox;
 
@@ -45,6 +46,8 @@ public class TerrainCell extends Rectangle {
 	private int DEFAULT_TILE_SIZE;
 	private Point point;
 	private GameDisplay gameDisplay;
+	private String[] splitPath;
+	private String relPath = "";
 	
 	public TerrainCell(MapDataContainer c, GridToolBar tools, int row, int column, GameDisplay disp) {	
 		setUpScreenResolution();
@@ -70,14 +73,27 @@ public class TerrainCell extends Rectangle {
 							ErrorBox.displayError("Please Choose a Valid Terrain to use.");
 							mouseEvent.consume();
 						}
+						
 						else if (toolBar.getImageStatus()){
+							
+							splitPath = toolBar.getSelectedImagePath().toString().split("/");
+							relPath = "";
+							if (toolBar.getImageStatus()) {
+								for (int i = 7; i < splitPath.length; i++) {
+									relPath += splitPath[i]+"/";
+								}
+								System.out.println("THISISTHERELATIVEPATH: " + relPath);
+							}
+							
 							Image image = new Image(toolBar.getSelectedImagePath());
 							ImagePattern imagePattern = new ImagePattern(image);
 							setFill(imagePattern);
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedImagePath()));
+							
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), relPath));
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
-						}
+							}
 						else {
+							
 							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
 							setFill(toolBar.getSelectedColor());
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
@@ -257,11 +273,17 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
+			splitPath = toolBar.getSelectedImagePath().toString().split("/");
+			relPath = "";
 			if (toolBar.getImageStatus()) {
-				controller.addValidTerrain(terrainType, toolBar.getSelectedImagePath().toString());
+				for (int i = 7; i < splitPath.length; i++) {
+					relPath += splitPath[i]+"/";
+				}
+				System.out.println("THISISTHERELATIVEPATH: " + relPath);
+				controller.addValidTerrain(terrainType, relPath);
 			}
 			else {
-				controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
+				controller.addValidTerrain(terrainType, relPath);
 			}
 		} catch (Exception e) {
 			ErrorBox.displayError(myResources.getString("TerrainError"));
