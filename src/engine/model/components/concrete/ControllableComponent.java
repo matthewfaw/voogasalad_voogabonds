@@ -8,6 +8,7 @@ import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 /**
  * 
@@ -20,6 +21,7 @@ public class ControllableComponent extends AbstractComponent{
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	private DamageDealingSystem myDamageDealingSystem;
 	private MovementSystem myMovementSystem;
+	private Router router;
 	
 	public ControllableComponent(ControllableSystem controllableSystem, 
 			CollisionDetectionSystem collisionDetectionSystem, 
@@ -27,7 +29,9 @@ public class ControllableComponent extends AbstractComponent{
 			HealthSystem healthSystem,
 			MovementSystem movementSystem,
 			DamageDealingSystem damageDealingSystem, 
-			ComponentData componentData) {
+			ComponentData componentData,
+			Router router) {
+		super(router);
 		myPhysicalSystem = physicalSystem;
 		myCollisionDetectionSystem = collisionDetectionSystem;
 		myDamageDealingSystem = damageDealingSystem;
@@ -70,6 +74,13 @@ public class ControllableComponent extends AbstractComponent{
 	@Override
 	public void delete() {
 		myControllableSystem.detachComponent(this);
+	}
+
+
+	@Override
+	public void distributeInfo() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

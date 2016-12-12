@@ -9,7 +9,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ICreator;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableCreator;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -60,7 +59,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableCreator>> myObservers;
 	
 	public CreatorComponent(SpawningSystem spawning,
 			PhysicalSystem physical,
@@ -70,7 +69,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 			ComponentData data,
 			Router router) {
 		super(router);
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableCreator>>();
 		myPhysical = physical;
 		myTargeting = targeting;
 		myMovement = movement;
@@ -130,12 +129,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableCreator> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableCreator> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -152,6 +151,11 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Override
 	public DamageInfo getStats() {
 		return myStats;
+	}
+	
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
 	}
 
 	@Override

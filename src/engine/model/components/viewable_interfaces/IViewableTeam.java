@@ -1,5 +1,7 @@
 package engine.model.components.viewable_interfaces;
 
-public interface IViewableTeam extends IViewable{
+import engine.IObservable;
+
+public interface IViewableTeam extends IViewable, IObservable<IViewableTeam> {
 	public String getTeamID();
 }

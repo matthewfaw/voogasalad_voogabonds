@@ -1,4 +1,6 @@
 package gamePlayerView.builders;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
+import engine.model.components.viewable_interfaces.IViewableTargeting;
 import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
@@ -21,7 +23,7 @@ public class EntityInfoBoxBuilder {
 			myGamePlayerScene = aGamePlayerScene;
 		}
 		
-		public EntityInfoBoxBuilder withMachineInfo()
+		public EntityInfoBoxBuilder withMachineInfo(IViewablePhysical aComponent)
 		{
 			//null check before constructing
 			//add upgrade button to  the info box
@@ -39,7 +41,7 @@ public class EntityInfoBoxBuilder {
 			return this;
 		}
 		
-		public EntityInfoBoxBuilder withTargetingMechanism()
+		public EntityInfoBoxBuilder withTargetingMechanism(IViewableTargeting aComponent)
 		{
 			//null check before constructing
 			//add upgrade button to  the info box

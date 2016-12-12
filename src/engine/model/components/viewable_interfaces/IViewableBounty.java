@@ -1,6 +1,8 @@
 package engine.model.components.viewable_interfaces;
 
-public interface IViewableBounty extends IViewable{
+import engine.IObservable;
+
+public interface IViewableBounty extends IViewable, IObservable<IViewableBounty>{
 	/**
 	 * Gets fields that are viewable for front end to display.
 	 * @return

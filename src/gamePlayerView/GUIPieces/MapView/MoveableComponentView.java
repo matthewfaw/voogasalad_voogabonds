@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 public class MoveableComponentView extends ImageView implements IObserver<IViewablePhysical> {
 
 	private Pane myPane;
-	
+	private AppController myAppController;
     public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController){
     	myAppController = aAppController;
     }	

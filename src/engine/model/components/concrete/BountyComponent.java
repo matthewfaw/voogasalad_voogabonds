@@ -8,7 +8,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableBounty;
 import engine.model.systems.BountySystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -26,13 +25,17 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	private int myBountyValue;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableBounty>> myObservers;
+	
+	@Hide
+	private BountySystem myBountySystem;
 	
 	public BountyComponent (BountySystem bountySystem, ComponentData data, Router router) {
 		super(router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
-		myObservers = new ArrayList<IObserver<IViewable>>();
-		bountySystem.attachComponent(this);
+		myObservers = new ArrayList<IObserver<IViewableBounty>>();
+		myBountySystem = bountySystem;
+		myBountySystem.attachComponent(this);
 	}
 	/**
 	 * A method to retrieve the bounty value associated with an entity
@@ -53,12 +56,12 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableBounty> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableBounty> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -66,9 +69,13 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
 	}
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
 
 	public void delete() {
-		myBounty.detachComponent(this);
+		myBountySystem.detachComponent(this);
 	}
 	
 	

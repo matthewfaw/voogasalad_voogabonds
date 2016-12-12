@@ -8,7 +8,6 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableTeam;
 import gamePlayerView.gamePlayerView.Router;
 import engine.model.systems.TeamSystem;
@@ -24,15 +23,15 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	private String myTeamID;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
-	
+	private List<IObserver<IViewableTeam>> myObservers;
 
+	@Hide
 	private TeamSystem mySystem;
 	
-	public TeamComponent(TeamSystem teams, ComponentData componentData) {
+	public TeamComponent(TeamSystem teams, ComponentData componentData, Router router) {
 	    super(router);
 		myTeamID = componentData.getFields().get("myTeamID");
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableTeam>>();
 	}
 	
 	@Override
@@ -47,21 +46,27 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableTeam> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableTeam> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+	
 	public void delete() {
 		mySystem.detachComponent(this);
 	}
 	
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
 
 }
