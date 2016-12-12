@@ -15,12 +15,13 @@ import utility.Point;
  *
  */
 public class ControllableComponent extends AbstractComponent{
+	private ControllableSystem myControllableSystem;
 	private PhysicalSystem myPhysicalSystem;
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	private DamageDealingSystem myDamageDealingSystem;
 	private MovementSystem myMovementSystem;
 	
-	public ControllableComponent(ControllableSystem controllable, 
+	public ControllableComponent(ControllableSystem controllableSystem, 
 			CollisionDetectionSystem collisionDetectionSystem, 
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
@@ -42,10 +43,13 @@ public class ControllableComponent extends AbstractComponent{
 		p.setPosition(nextposition);
 		myCollisionDetectionSystem.checkCollision(p);
 	}
+	
+	public void fire() {
+		
+	}
 
 
 	private Point getNextPosition(PhysicalComponent p, MoveableComponent m, String movement) {
-		// TODO Auto-generated method stub
 		Point nextposition;
 		switch (movement) {
 			case "Right":  nextposition =  new Point(p.getPosition().getX() + m.getMoveSpeed(), p.getPosition().getY());
@@ -65,8 +69,7 @@ public class ControllableComponent extends AbstractComponent{
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
-		
+		myControllableSystem.detachComponent(this);
 	}
 	
 }
