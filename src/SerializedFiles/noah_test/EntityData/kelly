@@ -1,1 +1,0 @@
-{"myName":"kelly","myComponents":{"DamageDealingComponent":{"myFields":{"explodesOnEnemies":"True","myDamageRadius":"5","explodesOnAllies":"False","diesOnExplosion":"True","myDamageArc":"5","myDamage":"5","myDamageStrategy":"BinaryDamageStrategy"}}},"mySellData":{"mySellValue":0},"myPurchaseData":{"myPurchaseValue":0}}

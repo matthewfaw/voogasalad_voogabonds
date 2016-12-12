@@ -76,12 +76,10 @@ public class TerrainCell extends Rectangle {
 						
 						else if (toolBar.getImageStatus()){
 							
-							splitPath = toolBar.getSelectedImagePath().toString().split("/");
+							splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 							relPath = "";
 							if (toolBar.getImageStatus()) {
-								for (int i = 7; i < splitPath.length; i++) {
-									relPath += splitPath[i]+"/";
-								}
+								relPath += splitPath[1] + "/";
 								System.out.println("THISISTHERELATIVEPATH: " + relPath);
 							}
 							
@@ -273,12 +271,10 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
-			splitPath = toolBar.getSelectedImagePath().toString().split("/");
+			splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 			relPath = "";
 			if (toolBar.getImageStatus()) {
-				for (int i = 7; i < splitPath.length; i++) {
-					relPath += splitPath[i]+"/";
-				}
+				relPath += splitPath[1]+"/";
 				System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				controller.addValidTerrain(terrainType, relPath);
 			}
