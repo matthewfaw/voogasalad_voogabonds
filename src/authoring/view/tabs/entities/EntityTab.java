@@ -68,6 +68,10 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
             return false;
         }
     }
+    
+    public List<String> getTerrains() {
+        return validTerrains;
+    }
 
     public EditEntityBox getNewEntityMenu() {
         return new EditEntityBox(this, ecFetcher);

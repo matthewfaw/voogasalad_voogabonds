@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import engine.model.strategies.ISpawningStrategy;
 import engine.model.strategies.spawning.BasicSpawnStrategy;
-import utility.ResouceAccess;
 
 public class SpawningStrategyFactory extends AbstractStrategyFactory<ISpawningStrategy> {
 	private static final String FOLDER_NAME = new String("spawning");

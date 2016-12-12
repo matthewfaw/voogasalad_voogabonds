@@ -11,6 +11,7 @@ import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
+import engine.model.systems.TeamSystem;
 import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
@@ -26,16 +27,22 @@ public class DamageDealingComponent extends AbstractComponent {
 	private double myDamageArc;
 	private double myDamageRadius;
 	private IDamageStrategy myDamageStrategy;
+	
+	private boolean explodesOnEnemies;
+	private boolean explodesOnAllies;
 
 
 	@Hide
 	private HealthSystem myHealthSystem;
 	@Hide
 	private PhysicalSystem myPhysicalSystem;
+	@Hide
+	private TeamSystem myTeams;
 	
 	public DamageDealingComponent(
 			DamageDealingSystem damageDealingSystem,
 			HealthSystem healthSysytem,
+			TeamSystem teams,
 			PhysicalSystem physicalSystem,
 			ComponentData data
 			) {
@@ -46,6 +53,9 @@ public class DamageDealingComponent extends AbstractComponent {
 		myDamageArc = Double.parseDouble(data.getFields().get("myDamageArc"));
 		myDamageRadius = Double.parseDouble(data.getFields().get("myDamageRadius"));
 		myDamageStrategy = damageDealingSystem.newStrategy(data.getFields().get("myDamageStrategy"));
+		
+		explodesOnEnemies = Boolean.parseBoolean(data.getFields().get("explodesOnEnemies"));
+		explodesOnAllies = Boolean.parseBoolean(data.getFields().get("explodesOnAllies"));
 		
 		damageDealingSystem.attachComponent(this);
 	}
@@ -76,9 +86,16 @@ public class DamageDealingComponent extends AbstractComponent {
 	public DamageInfo explode(IComponent target) {
 		DamageInfo result = new DamageInfo();
 		
-		//Deal damage to target
-		result.add(myHealthSystem.dealDamageTo(target, getTargetDamage()));
-		
+		if ((explodesOnEnemies && myTeams.areEnemies(this, target)) || (explodesOnAllies && myTeams.areAllies(this, target))) {
+			result.add(myHealthSystem.dealDamageTo(target, getTargetDamage()));
+			result.add(explode());
+		}
+		return result;
+	}
+
+	public DamageInfo explode() {
+		DamageInfo result = new DamageInfo();
+
 		//Deal damage to anyone in blast radius
 		PhysicalComponent myPhysical = myPhysicalSystem.get(this);
 		if (myPhysicalSystem.get(this) != null) {

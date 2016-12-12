@@ -140,12 +140,10 @@ public class GameDisplay {
 		try {
 			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
 		} catch (Exception e) {
-			System.out.println(usefulTerrainFills.get(index));
 			Image image = new Image(usefulTerrainFills.get(index));
 			ImagePattern pattern = new ImagePattern(image);
 			cell.setFill(pattern);
 		}
-		
 		terrainGrid.getChildren().add(cell);
 	}
 	
