@@ -2,16 +2,15 @@ package engine.model.strategies;
 
 import java.util.List;
 
-import engine.model.playerinfo.IModifiablePlayer;
+import javafx.util.Pair;
 import utility.Point;
 
-public interface IPhysical {
+public interface IPhysical extends IPosition {
 
-	abstract public Point getPosition();
-	abstract public double getHeading();
-	abstract public double getCollisionRadius();
-	abstract public List<String> getValidTerrains();
-	abstract public void setPosition(Point p);
-	abstract public IModifiablePlayer getOwner();
+	public Point getPosition();
+	public double getHeading();
+	public List<String> getValidTerrains();
+	public void setPosition(Pair<Double, Point> p);
+	public void setPosition(Point position);
 	
 }

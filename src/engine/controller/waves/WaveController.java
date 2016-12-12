@@ -1,12 +1,19 @@
 package engine.controller.waves;
 
-import java.util.Map;
-
-import authoring.model.EnemyData;
-import engine.IObserver;
-import engine.controller.timeline.TimelineController;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import authoring.controller.MapDataContainer;
+import authoring.model.EntityData;
+import authoring.model.LevelData;
+import engine.model.components.concrete.MoveableComponent;
 import engine.model.data_stores.DataStore;
-import engine.model.game_environment.distributors.MapDistributor;
+import engine.model.entities.EntityFactory;
+import engine.model.entities.IEntity;
+import engine.model.systems.MovementSystem;
+import engine.model.systems.PhysicalSystem;
+import utility.Point;
+import utility.ResouceAccess;
 
 /**
  * A class to handle which wave the game is currently in,
@@ -16,30 +23,71 @@ import engine.model.game_environment.distributors.MapDistributor;
  * at a given clock tick
  * It also depends on the MapDistributor 
  * 
- * @author matthewfaw
+ * @author matthewfaw and owenchung
  *
  */
-public class WaveController implements IObserver<TimelineController>{
-	private MapDistributor myMapDistributor;
+public class WaveController {
 	private ActiveWaveManager myActiveWaveManager;
+	private EntityFactory myEntityFactory;
+	private MapDataContainer myMapDataContainer;
+	private PhysicalSystem myPhysicalSystem;
+	private MovementSystem myMovementSystem;
 	
-	public WaveController(MapDistributor aMapDistributor, DummyWaveOperationData aWaveOperationData, DataStore<EnemyData> aEnemyDataStore)
-	{
-		myMapDistributor = aMapDistributor;
-		myActiveWaveManager = new ActiveWaveManager(aWaveOperationData, aEnemyDataStore);
+	
+	public WaveController (
+			DataStore<EntityData> enemyDataStore,
+			LevelData levelData,
+			double startTime,
+			EntityFactory entityFactory,
+			PhysicalSystem physicalSystem,
+			MovementSystem movementSystem,
+			MapDataContainer mapDataContainer
+			) {
+		
+		myMapDataContainer = mapDataContainer;
+		myPhysicalSystem = physicalSystem;
+		myMovementSystem = movementSystem;
+		myActiveWaveManager = new ActiveWaveManager(enemyDataStore, levelData, startTime);
+		myEntityFactory = entityFactory;
+		
 	}
 
-	//*******************Observer interface***************//
-	@Override
-	public void update(TimelineController aChangedObject) {
-		//TODO: check if we should spawn a new enemy
-		// if true, then distribute the enemy through the mediator
-		Map<EnemyData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct(aChangedObject.getTotalTimeElapsed());
-		for (EnemyData enemyData: enemiesToConstruct.keySet()) {
-			//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
-			//TODO: Change to a better way?
-			myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
+
+	public void distributeEntities(double aElapsedTime)
+	{
+		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
+		
+		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
+			PathFollowerData entityData = iterator.next();
+			try {	
+				
+				List<Point> spawns = myMapDataContainer.getSpawnPoints(entityData.getSpawnPoint());
+				List<Point> sinks = myMapDataContainer.getSinkPoints(entityData.getSinkPoint());
+				
+				Collections.shuffle(spawns);
+				Collections.shuffle(sinks);
+				//System.out.println("trying to spawn");
+				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
+				//System.out.println("after");
+				MoveableComponent m = myMovementSystem.get(newEntity);
+				if (m != null)
+					m.setGoal(sinks.get(0));
+				
+			} catch (UnsupportedOperationException e) {
+				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity") + e.getMessage(), e);
+			}
+			
 		}
-		//TODO: check if we should transition to the next wave
 	}
+
+	public boolean isLevelFinished() {
+		return !myActiveWaveManager.hasEnemiesToRelease();
+	}
+
+
+	public void newWave(DataStore<EntityData> store, LevelData levelData, double totalTimeElapsed) {
+		myActiveWaveManager = new ActiveWaveManager(store, levelData, totalTimeElapsed);
+		
+	}
+
 }

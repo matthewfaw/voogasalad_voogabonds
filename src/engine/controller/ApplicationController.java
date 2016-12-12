@@ -4,8 +4,19 @@ import java.util.ResourceBundle;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.IComponent;
+import engine.model.entities.EntityManager;
+import engine.model.entities.IEntity;
+import gamePlayerView.GUIPieces.MapView.MapDisplay;
+import gamePlayerView.ScenePanes.BottomPane;
+import gamePlayerView.ScenePanes.LeftPane;
+import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.builders.EntityInfoBox;
+import gamePlayerView.builders.EntityInfoBoxBuilder;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utility.Point;
 
@@ -28,6 +39,10 @@ public class ApplicationController {
 	private BackendController myBackendController;
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
+	private GamePlayerScene myScene;
+	private EntityManager myEntityManager; 
+	//private Stage myStage; //////Guhan
+	//private Pane myPane=new BorderPane();
 
 	public ApplicationController()
 	{
@@ -38,11 +53,13 @@ public class ApplicationController {
 	 * A method to be called to initialize the frontend and backend
 	 * @throws Exception 
 	 */
-	public void init(Stage aStage) throws Exception
+	public void init(Stage aStage,String gameTitle) throws Exception
 	{
-		GamePlayerScene scene = constructGUI(aStage);
-		Router router = new Router(scene);
-		constructBackend(router);
+		//myStage=aStage; ///Guhan 
+		//GamePlayerScene scene = constructGUI(aStage);
+		myScene=constructGUI(aStage);
+		Router router = new Router(myScene);
+		constructBackend(router,gameTitle);
 	}
 	/**
 	 * Helper method to create the view object
@@ -62,19 +79,37 @@ public class ApplicationController {
 	 * This method establishes the link between the frontend and backend
 	 * through the Router class
 	 * @param aRouter
+	 * @param gameTitle 
 	 */
-	private void constructBackend(Router aRouter)
+	private void constructBackend(Router aRouter, String gameTitle)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
+		myBackendController = new BackendController(myGameOptions.getString(gameTitle), aRouter);
+	}
+	private BorderPane constructBorderPane(){
+		/*myPane= new BorderPane();
+		LeftPane myLeftPane=new LeftPane(this);
+		RightPane myRightPane=new RightPane();
+	    MapDisplay myMap = new MapDisplay(this);
+		BottomPane myBottomPane = new BottomPane(this);
+		//myCash.add(myLeftPane.getCash());
+		//myLives.add(myLeftPane.getLives());
+		//myResources.add(myRightPane.getTowerColumn());
+		//mySprites.add(myMap.getSprites());
+		borderpane.setRight(myRightPane.getView());
+		borderpane.setBottom(myBottomPane.getView());
+		borderpane.setCenter(myMap.getView());
+		borderpane.setLeft(myLeftPane.getView());
+		myMap.setupDragging(myScene);*/
+		return null;
 	}
 
 	public void onPlayButtonPressed() {
-		//AnimationController.play()
+		myBackendController.startTimeLine();
 	}
 
 	public void onPauseButtonPressed() {
-		//AnimationController.pause()
+		myBackendController.pauseTimeline();
 	}
 
 	public void onFastButtonPressed() {
@@ -84,6 +119,28 @@ public class ApplicationController {
 	public void onSlowButtonPressed() {
 		//AnimationController.slow()
 	}
+	
+	public void onFireButtonPressed() {
+		
+	}
+	
+	public void onRightButtonPressed() {
+		myBackendController.moveControllables("Right");
+	}
+	
+	public void onLeftButtonPressed() {
+		myBackendController.moveControllables("Left");
+	}
+	
+	public void onUpButtonPressed() {
+		myBackendController.moveControllables("Up");
+	}
+	
+	public void onDownButtonPressed() {
+		myBackendController.moveControllables("Down");
+	}
+	
+	
 
 	public void onUpgradeButtonPressed() {
 		//
@@ -95,7 +152,40 @@ public class ApplicationController {
 	
 	public void onTowerDropped(String aTowerName, Point aDropLocation)
 	{
-		boolean towerPlaced = myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
+		myBackendController.attemptToPlaceEntity(aTowerName, aDropLocation);
+	}
+
+	public void onSellButtonPressed(TowerData tower) {
+		// TODO Auto-generated method stub
+//		return null;
+	}
+	
+	public void onSavePressed() {
+		myBackendController.save();
+	}
+	
+	/**
+	 * Given an entity ID, will route entity component information back to front end for observing.
+	 * @param entityID
+	 */
+	public void onEntityClicked(String entityID) {
+		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+		for (IComponent component: clickedEntity.getComponents()) {
+			component.distributeInfo();
+		}
+		myScene.buildEntityInfoBox();
+	}
+	
+	public void DisplayStats() throws Exception {
+		myScene.updateTowerStatisticsRow();
+	}
+
+	public void onFirstPressed() {
+		// TODO Auto-generated method stub
+	}
+
+	public void onLastPressed() {
+		// TODO Auto-generated method stub
 	}
 	
 	/*
@@ -103,7 +193,7 @@ public class ApplicationController {
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
-//		appcont.constructMap();
+		appcont.constructMap();
 	}
 	*/
 	

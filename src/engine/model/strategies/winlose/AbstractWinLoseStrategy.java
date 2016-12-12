@@ -31,5 +31,10 @@ abstract public class AbstractWinLoseStrategy<A> implements IObserver<A>, IWinLo
 		myPlayers.remove(p);
 		
 	}
+	
+	@Override
+	public void remove(A observed) {
+		update(observed);
+	}
 
 }

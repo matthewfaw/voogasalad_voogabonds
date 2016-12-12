@@ -1,19 +1,44 @@
 package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import authoring.model.map.MapData;
+import java.util.ResourceBundle;
+
+import authoring.controller.MapDataContainer;
+import authoring.model.TowerData;
 import engine.controller.ApplicationController;
-import gamePlayerView.GUIPieces.MapDisplay;
-import gamePlayerView.GUIPieces.StatisticsRow;
+import gamePlayerView.Resources;
+import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
-import gamePlayerView.interfaces.ICashAcceptor;
-import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.GUIPieces.InfoBoxes.Controls;
+import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
+import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
+import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
+import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
+import gamePlayerView.GUIPieces.MachineInfoView.TowerStatistics;
+import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
+import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
+import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
+import gamePlayerView.GUIPieces.MapView.MapDisplay;
+import gamePlayerView.ScenePanes.BottomPane;
+import gamePlayerView.ScenePanes.LeftPane;
+import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.builders.EntityInfoBox;
+import gamePlayerView.builders.EntityInfoBoxBuilder;
+//import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
-import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -23,32 +48,49 @@ import javafx.stage.Stage;
  */
 
 public class GamePlayerScene {
+	private static final String GAME_PLAYER_PATH = "resources/textfiles";
 	private ApplicationController myAppController;
-	
 	private Stage myStage;
-	private TowerColumn myTowerColumn;
-	private StatisticsRow myStatisticsRow;
+	private BottomPane myBottomPane;
+	private LeftPane myLeftPane;
+	private RightPane myRightPane;
 	private MapDisplay myMap;
+	private PauseMenu pause;
 	private Scene myScene;
-	private List<ICashAcceptor> myCash;
-	private List<ILivesAcceptor> myLives; 
-	private List<IWavesAcceptor> myWaves;
+	private Controls myControls;
+	private Pane myGamePlayer;
+	private List<IPlayerAcceptor> myCash;
+	private List<IPlayerAcceptor> myLives; 
+	private List<IPlayerAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
+	private List<IEnemiesKilledAcceptor> myEnemiesKilled;
+	private BorderPane myBorderPane;
+	private DisplayBoxFactory myBoxFactory;
+	private ResourceBundle myResourceBundle;
+	private EntityInfoBoxBuilder myBuilder;
 	//private List<MoveableComponentView> mySprites;
 	
+
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
-		//myStage=stage;
     	myAppController = aAppController;
-		myCash = new ArrayList<ICashAcceptor>();
-		myLives = new ArrayList<ILivesAcceptor>();
-		myWaves = new ArrayList<IWavesAcceptor>();
+    	myControls = new Controls();
+		myCash = new ArrayList<IPlayerAcceptor>();
+		myLives = new ArrayList<IPlayerAcceptor>();
+		myWaves = new ArrayList<IPlayerAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
+		myStage=aStage;
+		myStage.setResizable(false);
+		myBoxFactory=new DisplayBoxFactory();
+		myBorderPane=new BorderPane();
+		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
+		myBuilder=new EntityInfoBoxBuilder(this,myAppController);
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
 
 	public void init(Stage s) throws Exception {
 		Scene myScene=build(s);
+	        myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));               
 		setScene(s,myScene);
 	}
 
@@ -71,49 +113,129 @@ public class GamePlayerScene {
 	*/
 
 	public Scene build(Stage stage) throws Exception {
-		Group gameplayer =new Group();
-		myScene = new Scene(gameplayer, 900, 700);
-		gameplayer.getChildren().add(setScreen());
+		//myGamePlayer =new Pane();
+		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
+		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
+		myScene=new Scene(myBorderPane);
+		setScreen();
+		//myGamePlayer.getChildren().add(myBorderPane);
 		return myScene;
 	}
-	
-	public BorderPane setScreen() throws Exception{
-		myTowerColumn   = new TowerColumn();
-	    myMap = new MapDisplay(myAppController);
-		myStatisticsRow = new StatisticsRow(myAppController);
-		myCash.add(myStatisticsRow.getCash());
-		myLives.add(myStatisticsRow.getLives());
-		myResources.add(myTowerColumn);
-		//mySprites.add(myMap.getSprites());
-		BorderPane borderpane=new BorderPane();
-		borderpane.setRight(myTowerColumn.getView());
-		borderpane.setBottom(myStatisticsRow.getView());
-		borderpane.setCenter(myMap.getView());
-		myMap.setupDragging(myScene);
-		return borderpane;
+	//This might be called by controller
+	/*public void rebuild(Stage aStage,BorderPane aPane) {
+		myScene = new Scene(myGamePlayer, 1000, 700);
+		myGamePlayer.getChildren().clear();
+		myGamePlayer.getChildren().add(updateScreen(aPane));
+		setScene(aStage,myScene);
+	}*/
+
+	public void updateTowerStatisticsRow(/*TowerData tower*/) throws Exception {
+		myBottomPane.clear();
+		Collection<Node> myCollection=new ArrayList<Node>();
+		TowerStatistics myTowerStatistics=new TowerStatistics();
+		TargetingButtons myTargetingMechanism=new TargetingButtons(myAppController);
+		VBox myTowerOptions=new VBox();
+		myTowerOptions.setSpacing(10);
+		myTowerOptions.getChildren().addAll(myTowerStatistics.getView(),myTargetingMechanism.getView());
+	    //UpgradeUI myUpgradeandSell=new UpgradeUI();
+	    //MachineInfo myInfo=new MachineInfo();
+	   // myCollection.add(myInfo.getView());
+		myCollection.add(myTowerOptions);
+		//myCollection.add(myUpgradeandSell.getView());
+		myBottomPane.add(myCollection);
+		myBorderPane.setBottom(myBottomPane.getView());
 	}
+
+	public void setScreen() throws Exception{
+		//myTowerColumn   = new TowerColumn();
+		//myGamePlayOptions=new GamePlayOptions(myAppController);
+		myLeftPane=createLeftPane();
+		myRightPane=createRightPane();
+		myBottomPane=createBottomPane();
+	        myMap = new MapDisplay(myAppController);
+	        myMap.getControls(myControls);
+		//mySprites.add(myMap.getSprites());
+	        pause = new PauseMenu();
+	        makePauseMenu();
+	        myBorderPane.setCenter(myMap.getView());
+		myBorderPane.setRight(myRightPane.getView());
+		myBorderPane.setBottom(myBottomPane.getView());
+		
+		myBorderPane.setLeft(myLeftPane.getView());
+		myMap.setupDragging(myScene);
+		//return borderpane;
+	}
+	private BottomPane createBottomPane() {
+		BottomPane pane=new BottomPane();
+		Label l =new Label("Wassup");
+		Collection<Node> myCollection=new ArrayList<Node>();
+		//MachineInfo myInfo=new MachineInfo();
+		//myCollection.add(myInfo.getView());
+		myCollection.add(l);
+		pane.add(myCollection);
+		return pane;
+	}
+
+	private RightPane createRightPane() {
+		RightPane pane=new RightPane();
+		TowerColumn myTowerColumn=new TowerColumn();
+		Collection<Node> myCollection=new ArrayList<Node>();
+		myCollection.add(myTowerColumn.getView());
+		myResources.add(myTowerColumn);
+		pane.add(myCollection);
+		
+		return pane;
+	}
+
+	private LeftPane createLeftPane() {
+		LeftPane pane=new LeftPane();
+		GamePlayOptions myGamePlayOptions=new GamePlayOptions(myAppController);
+		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
+		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
+		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
+		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
+		Collection<Node> myCollection=new ArrayList<Node>();
+		myCollection.add(myGamePlayOptions.getView());
+		myCollection.add(myWallet.getView());
+		myCollection.add(myLife.getView());
+		pane.add(myCollection);
+		return pane;
+	}
+
+
+	public void makePauseMenu(){ 
+	    pause.getControls(myControls);
+	    pause.getStage(myStage);
+            //myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
+    }
 	
-	public List<ICashAcceptor> getCash() {
+	public List<IPlayerAcceptor> getCash() {
 		return myCash;
 	}
 
-	public List<ILivesAcceptor> getLives() {
+	public List<IPlayerAcceptor> getLives() {
 		return myLives;
 	}
 
-	public List<IWavesAcceptor> getWaves() {
+	public List<IPlayerAcceptor> getWaves() {
 		return myWaves;
 	}
 	
-	public void giveMapData(MapData aMapData){
+	public List<IEnemiesKilledAcceptor> getEnemiesKilled() {
+		return myEnemiesKilled;
+	}
+	
+	public void giveMapData(MapDataContainer aMapData){
 	        myMap.setMap(aMapData);
+	        //myScene.setOnKeyPressed(e -> myMap.handleKeyInput(e.getCode()));    
+
 	}
 	
 	public MapDisplay getMapDisplay()
 	{
 		return myMap;
 	}
-
+	
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
 		return myResources;
@@ -123,6 +245,51 @@ public class GamePlayerScene {
 		//return mySprites;
 	//}
 	
+	public EntityInfoBoxBuilder getBuilder(){
+		return myBuilder;
+	}
+	public void buildEntityInfoBox(){
+		EntityInfoBox myStatisticsBox= myBuilder.build();
+		updateDisplay(myStatisticsBox);
+	}
+	
+	//public void buildEntityInfoBox() {
+		//EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(this) 
+				////myScene.makeEntityInfoBox()
+			//	   .withMachineInfo()
+			//	   .withTargetingMechanism()
+				  // .withUpgradeButton()
+				   //.build();
+			//updateDisplay(myStatisticsBox);
+	//}
+	
+	public void updateDisplay(EntityInfoBox myStatisticsBox) {
+		myBottomPane.clear();
+		Collection<Node> myCollection=new ArrayList<Node>();
+		myCollection.add(myStatisticsBox.getView());
+		myBottomPane.add(myCollection);
+	}
+	
+	    public void handleKeyInput(KeyCode code) {
+	       
+	        if(code.getName().equals(myControls.getControlFor("Up"))){
+	            System.out.println("Going up");
+	        }
+	        else if(code.getName().equals(myControls.getControlFor("Pause"))){
+	            pause.init();
+	        }
+	        else if(code.getName().equals(myControls.getControlFor("Down"))){
+                    System.out.println("Going down");
+                }
+	        else if(code.getName().equals(myControls.getControlFor("Left"))){
+                    System.out.println("Going left");
+                }
+	        else if(code.getName().equals(myControls.getControlFor("Right"))){
+                    System.out.println("Going right");
+                }
+	        else if(code.getName().equals("Space")){
+                    System.out.println("Firing");
+                }
+	    }
+	
 }
-
-

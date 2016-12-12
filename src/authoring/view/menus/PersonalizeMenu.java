@@ -2,6 +2,7 @@ package authoring.view.menus;
 
 import java.util.ResourceBundle;
 
+import authoring.view.display.ImageGallery;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
  * @author Christopher Lu
  * Creates the personalization menu that allows the user to customize their workspace.
  */
-
+@Deprecated
 public class PersonalizeMenu extends Menu {
 	
 	private ResourceBundle myResources;
@@ -44,8 +45,8 @@ public class PersonalizeMenu extends Menu {
 	}
 	
 	private void personalizeOptions(Menu personalize) {
-		MenuItem workspaceColor = new MenuItem(myResources.getString("WorkspaceColorLabel"));
-		performChangeColor(workspaceColor);
+		MenuItem workspaceColor = new MenuItem(myResources.getString("WorkspaceBackgroundLabel"));
+		performChangeBackground(workspaceColor);
 		MenuItem showGrid = new MenuItem(myResources.getString("ShowGridLabel"));
 		performShowGrid(showGrid);
 		MenuItem hideGrid = new MenuItem(myResources.getString("HideGridLabel"));
@@ -53,25 +54,10 @@ public class PersonalizeMenu extends Menu {
 		personalize.getItems().addAll(workspaceColor, showGrid, hideGrid);
 	}
 	
-	private void performChangeColor(MenuItem workspaceColor) {
+	private void performChangeBackground(MenuItem workspaceColor) {
 		workspaceColor.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
-				Stage stage = new Stage();
-				VBox root = new VBox();
-				Scene scene = new Scene(root, 200, 200);
-				ColorPicker cp = new ColorPicker(Color.WHITE);
-				Button button = new Button(myResources.getString("Finish"));
-				button.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event){
-						myRoot.setBackground(new Background(new BackgroundFill(cp.getValue(), 
-								CornerRadii.EMPTY, Insets.EMPTY)));
-						stage.close();
-					}
-				});
-				root.getChildren().addAll(cp, button);
-				stage.setScene(scene);
-				stage.setTitle(myResources.getString("PickColor"));
-				stage.show();
+				ImageGallery gallery = new ImageGallery(myResources.getString("TerrainImageFilePath"));
 			}
 		});
 	}

@@ -1,6 +1,10 @@
 package engine.model.entities;
 
+import java.util.List;
+
+import engine.IObservable;
 import engine.model.components.IComponent;
+import engine.model.components.IModifiableComponent;
 
 
 /**
@@ -14,18 +18,29 @@ import engine.model.components.IComponent;
  * @author matthewfaw
  *
  */
-public interface IEntity {
+public interface IEntity extends IObservable<IEntity> {
 
 	/**
 	 * a method to get the unique identifier corresponding to the entity
 	 * @return Unique object ID
 	 */
-	public int getId();
+	public String getId();
 
 	/**
 	 * Add a component to an entity
 	 * This is how entities are given new functionality
 	 * @param aComponent
 	 */
-	public void addComponent(IComponent aComponent);
+	public void addComponent(IModifiableComponent aComponent);
+	
+	/**
+	 * Use this method to set a unique ID for each entity on creation.
+	 * @param uniqueID
+	 */
+	public void setId(String uniqueID);
+	
+	public void delete();
+
+	public List<IComponent> getComponents();
+	
 }

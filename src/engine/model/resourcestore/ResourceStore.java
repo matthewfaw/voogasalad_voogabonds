@@ -2,23 +2,28 @@ package engine.model.resourcestore;
 
 import java.util.List;
 
-import authoring.model.TowerData;
-import engine.model.machine.tower.TowerUpgradeStore;
+import authoring.model.EntityData;
 
 /**
  * This class is the store that keeps all available resources
- * @author Owen Chung and matthewfaw
+ * @author owenchung
+ * @author matthewfaw
  */
 public class ResourceStore implements /*IModifiableStore, */ IViewableStore {
 
-	private TowerUpgradeStore myUpgradeStore;
+	private EntityUpgradeStore myUpgradeStore;
 	
-	public ResourceStore(List<TowerData> aTowerInfoList) {
-		myUpgradeStore = new TowerUpgradeStore(aTowerInfoList);
+	public ResourceStore(List<EntityData> aEntityInfoList) {
+		myUpgradeStore = new EntityUpgradeStore(aEntityInfoList);
 	}
 	
 	@Override
-	public List<TowerData> getAvailableTowers() {
-		return myUpgradeStore.getBaseTowersData();
+	public List<EntityData> getAvailableEntities() {
+		return myUpgradeStore.getBaseEntitesData();
+	}
+	
+	public int getTowerPrice(String aEntityName)
+	{
+		return myUpgradeStore.getPrice(aEntityName);
 	}
 }

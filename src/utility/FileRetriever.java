@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The purpose of this class is to retrieve all files in a given file path
  * This class can be used by the GameEngine to get all the files that it needs to construct
@@ -21,7 +20,7 @@ public class FileRetriever {
 //		aDefaultPath = aDefaultPath.replace(DEFAULT_PATH_SEPARATOR,File.separatorChar);
 		myDefaultPath = aDefaultPath;
 	}
-	
+
 	/**
 	 * Given a directory relative to the default path constructed, 
 	 * list all of the files contained in that directory
@@ -37,6 +36,7 @@ public class FileRetriever {
 		URL url = getClass().getClassLoader().getResource(myDefaultPath + aDirectory);
 		File folder = new File(url.getPath());
 		File[] files = folder.listFiles();
+		
 		ArrayList<String> filesInDirectory = new ArrayList<String>();
 		for (File aFile: files){
 			if (aFile.isFile()) {
@@ -63,8 +63,8 @@ public class FileRetriever {
 	/*
 	public static void main(String[] args)
 	{
-		FileRetriever fr = new FileRetriever("src/SerializedFiles");
-		List<String> l = fr.getFileNames("/towers");
+		FileRetriever fr = new FileRetriever("engine/model/components");
+		List<String> l = fr.getFileNames("/");
 		System.out.println(l);
 	}
 	*/

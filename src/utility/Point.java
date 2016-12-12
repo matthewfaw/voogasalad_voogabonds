@@ -2,12 +2,16 @@ package utility;
 
 import java.util.List;
 
+import engine.model.strategies.IPosition;
+
 /**
  * A class that represents 2 and 3D points, as well as supporting some math between them. (Distance calculations, vector math, etc.)
  * @author Weston
  *
  */
-public class Point implements IShape {
+public class Point implements IShape, IPosition {
+	private static final double ERROR_TOLERANCE = Math.exp(-6);
+	
 	private double myX;
 	private double myY;
 	private double myZ;
@@ -168,13 +172,13 @@ public class Point implements IShape {
 	}
 	
 	public double towards(Point p) {
-		Point vector = this.subtract(p);
+		Point vector = p.subtract(this);
 		
-		return Math.toDegrees(Math.atan(vector.myY/vector.myX));
+		return Math.toDegrees(Math.atan2(vector.myY, vector.myX));
 	}
 	
 	public Point moveAlongHeading(double distance, double heading) {
-		return new Point(myX + Math.cos(Math.toDegrees(heading)), myY + Math.sin(Math.toDegrees(heading)), myZ);
+		return new Point(myX + distance * Math.cos(Math.toRadians(heading)), myY + distance * Math.sin(Math.toRadians(heading)), myZ);
 	}
 	
 	public double getX(){
@@ -236,9 +240,9 @@ public class Point implements IShape {
 	
 	private boolean equals(Point p) {
 		return
-				myX == p.myX &&
-				myY == p.myY &&
-				myZ == p.myZ;
+				Math.abs(myX - p.myX) <= ERROR_TOLERANCE &&
+				Math.abs(myY - p.myY) <= ERROR_TOLERANCE &&
+				Math.abs(myZ - p.myZ) <= ERROR_TOLERANCE;
 	}
 
 	@Override
@@ -250,6 +254,49 @@ public class Point implements IShape {
 	public Point closestTo(IShape s) {
 		return new Point(this);
 	}
+
+	public boolean onLine(Point a, Point b) {
+		if (equals(a))
+			return true;
+		
+		Point ab =  b.subtract(a);
+		Point ap = subtract(a);
+		
+		return (ab.dot(ab) > ap.dot(ap) && ap.collinear(ab));
+	}
+
+	public boolean collinear(Point p) {
+		return normalize().equals(p.normalize());
+	}
 	
+	public Point normalize() {
+		return scale(1 / Math.sqrt(dot(this)));
+	}
 	
+	public Point scale(double scale) {
+		return new Point(myX * scale, myY * scale, myZ * scale);
+	}
+
+	@Override
+	public Point getPosition() {
+		return this;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("(%f, %f, %f", myX, myY, myZ);
+	}
+	
+	/*
+	public static void main(String[] args) {
+		Point a = new Point(4, 3);
+		Point b = new Point(6, 4.5);
+		Point c = new Point(22, 5);
+		Point d = new Point(1, 3);
+		Point e = new Point(5, 2);
+		Point f = new Point(6, 3);
+		
+		System.out.println(b.onLine(a, f));
+	}
+	*/
 }

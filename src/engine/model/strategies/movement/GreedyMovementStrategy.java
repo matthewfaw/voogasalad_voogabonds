@@ -1,37 +1,41 @@
 package engine.model.strategies.movement;
 
+import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
+import engine.model.strategies.IMovementStrategy;
+import engine.model.strategies.IPhysical;
+import engine.model.strategies.factories.AbstractStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
 public class GreedyMovementStrategy extends AbstractMovementStrategy {
 
+	public GreedyMovementStrategy(AbstractStrategyFactory<IMovementStrategy> creator) {
+		super(creator);
+	}
+
 	/**
 	 * Move as close to straight towards your goal as possible.
 	 */
-	protected  Pair<Double, Point> nextMoveWithGoal(IMovable m) {
-		double newHeading;
-		double deltaToTarget = m.getHeading() - m.getPosition().towards(m.getGoal());
-		
-		if (Math.abs(deltaToTarget) <= Math.abs(m.getTurnSpeed()))
-			newHeading = m.getHeading() + deltaToTarget;
-		else
-			//heading = currHeading + turnSpeed + (delta/|delta|)
-			newHeading = m.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
+	protected  Pair<Double, Point> nextMoveWithGoal(IMovable m, IPhysical p) {
+		if (p.getPosition().equals(m.getGoal()))
+			return new Pair<Double, Point>(p.getHeading(), p.getPosition());
 
-		double distance = Math.min(m.getMoveSpeed(), m.getPosition().euclideanDistance(m.getGoal()));
+		double newHeading = newHeadingTowards(m.getGoal(), m, p);
+
+		double distance = Math.min(m.getMoveSpeed(), p.getPosition().euclideanDistance(m.getGoal()));
 		
-		return new Pair<Double, Point>(newHeading, m.getPosition().moveAlongHeading(distance, newHeading));
+		return new Pair<Double, Point>(newHeading, p.getPosition().moveAlongHeading(distance, newHeading));
 	}
 	
 	/**
 	 * Just move straight ahead.
 	 */
-	protected Pair<Double, Point> nextMoveNoGoal(IMovable m) {
-		double heading = m.getHeading();
+	protected Pair<Double, Point> nextMoveNoGoal(IMovable m, IPhysical p) {
+		double heading = p.getHeading();
 		double speed = m.getMoveSpeed();
 		
-		Point newLoc = m.getPosition().moveAlongHeading(speed, heading);
+		Point newLoc = p.getPosition().moveAlongHeading(speed, heading);
 		
 		return new Pair<Double, Point>(heading, newLoc);
 	}

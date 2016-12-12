@@ -1,19 +1,23 @@
 package engine.model.strategies.damage;
 
-import engine.model.projectiles.Projectile;
 import engine.model.strategies.IDamageStrategy;
+import engine.model.strategies.IPhysical;
+import engine.model.strategies.factories.AbstractStrategyFactory;
 import utility.Damage;
-import utility.Point;
 
 public class ExponentialDamageStrategy implements IDamageStrategy {
 
-	@Override
-	public Damage getAoEDamage(Projectile missile, Point location, double damage) {
-		return new Damage(damage * Math.exp(-(location.euclideanDistance(missile.getPosition()))));
+	public ExponentialDamageStrategy(AbstractStrategyFactory<IDamageStrategy> factory) {
+		//Do nothing.
 	}
 	
 	@Override
-	public Damage getAoEAllyDamage(Projectile missile, Point location, double damage) {
+	public Damage getAoEDamage(IPhysical dealer, IPhysical taker, double damage) {
+		return new Damage(damage * Math.exp(-(dealer.getPosition().euclideanDistance(taker.getPosition()))));
+	}
+	
+	@Override
+	public Damage getAoEAllyDamage(IPhysical dealer, IPhysical taker, double damage) {
 		return new Damage(0);
 	}
 

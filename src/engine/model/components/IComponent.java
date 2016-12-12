@@ -1,6 +1,5 @@
 package engine.model.components;
 
-import engine.IObservable;
 import engine.model.entities.IEntity;
 
 /**
@@ -14,11 +13,19 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public interface IComponent extends IObservable<IComponent> {
+public interface IComponent {
 	/**
 	 * Gets the Entity object which owns this component
 	 * Assumes that component is owned by a entity
 	 * @return
 	 */
 	public IEntity getEntity();
+
+	/**
+	 * Distributes the data for different components to the router
+	 * for the front end to observe, view, and display.
+	 */
+	public void distributeInfo();
+
+	public void delete();
 }

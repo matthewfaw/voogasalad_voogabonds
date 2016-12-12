@@ -2,27 +2,29 @@ package engine.model.game_environment.terrain;
 
 import java.util.List;
 
-import authoring.model.map.MapData;
+import authoring.controller.MapDataContainer;
 import utility.Index;
 import utility.Point;
 
 public class TerrainMap {
 	private TerrainGridFactory  myMapFactory; 
-	
 	private Terrain[][] myMap;
 
 	//TODO: set these up
 	private double myTerrainWidth;
 	private double myTerrainHeight;
-	private double myMapWidth;
-	private double myMapHeight;
+	//private double myMapWidth;
+	//private double myMapHeight;
 	
 	private INeighborStrategy<Terrain> myNeighborStrategy;
 	
-	public TerrainMap(MapData aTerrainMapData)
+	public TerrainMap(MapDataContainer aTerrainMapData)
 	{
 		myMapFactory = new TerrainGridFactory();
-		myMap = myMapFactory.constructTerrainMap(aTerrainMapData);
+		myMap = myMapFactory.constructTerrainMap(aTerrainMapData, aTerrainMapData.getCellSize());
+		
+		myTerrainWidth = aTerrainMapData.getCellSize();
+		myTerrainHeight = aTerrainMapData.getCellSize();
 		
 		//TODO: Change this to be constructed in a factory, perhaps
 		myNeighborStrategy = new AdjacentNeighborStrategy(this);
@@ -47,28 +49,13 @@ public class TerrainMap {
 	public boolean hasTerrain(List<String> list, Point aLocation) {
 		Terrain terrain = getTerrain(aLocation);
 		
-		return list.stream()
-				.map(t -> terrain.getTerrainType().equals(t))
-				.reduce(true, (a, b) -> a && b);
-	}
-	
-	/**
-	 * A method to get the source of the map--the location where all enemies spawn
-	 * @return
-	 */
-	@Deprecated
-	public Terrain getSource()
-	{
-		return myMap[0][0];
-	}
-	/**
-	 * A method to get the sink of the map-- the location where all enemies complete
-	 * @return
-	 */
-	@Deprecated
-	public Terrain getDestination()
-	{
-		return myMap[1][1];
+		for (String terrainName: list) {
+			if (terrain.getTerrainType().equals(terrainName)) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 	/**
 	 * A method to get the terrain object corresponding to the requested location on the map

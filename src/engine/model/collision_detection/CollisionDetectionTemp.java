@@ -6,7 +6,6 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
 
 /**
@@ -14,12 +13,13 @@ import engine.model.systems.ISystem;
  * NOT IObservables.
  *
  */
+@Deprecated
 public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {
 	
 	private ICollisionHandler collisionHandler;
 	private List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
-	private List<IRegisterable> myRegisterables;
+	//private List<IRegisterable> myRegisterables;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
@@ -29,7 +29,7 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		//TODO: initialize collision handler
 		collisionHandler = new CollisionHandler();
 		// Init registerables
-		myRegisterables = new ArrayList<IRegisterable>();
+		//myRegisterables = new ArrayList<IRegisterable>();
 	}
 
 	/**
@@ -39,6 +39,7 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 	 * @return
 	 */
 	private boolean intersects(ICollidable a, ICollidable b) {
+		/*
 		double a_x = a.getPosition().getX();
 		double a_y = a.getPosition().getY();
 		double a_r = a.getCollisionRadius();
@@ -50,6 +51,8 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		return Math.pow(a_r - b_r, 2) <= 
 				Math.pow(a_x - b_x, 2) + 
 				Math.pow(a_y - b_y, 2);
+		*/
+		return false;
 	}
 	
 	
@@ -86,16 +89,21 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		myObservers.forEach(observer -> observer.update(this));
 	}
 
+	@Override
+	public void remove(ICollidable aRemovedObject) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	//************************************ISystem interface****************************//
-	@Override
-	public void register(IRegisterable registerable) {
-		myRegisterables.add(registerable);
-	}
-
-	@Override
-	public void unregister(IRegisterable registerable) {
-		myRegisterables.remove(registerable);
-	}
+//	@Override
+//	public void register(IRegisterable registerable) {
+//		myRegisterables.add(registerable);
+//	}
+//
+//	@Override
+//	public void unregister(IRegisterable registerable) {
+//		myRegisterables.remove(registerable);
+//	}
 
 }

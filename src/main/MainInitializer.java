@@ -1,13 +1,18 @@
 package main;
 
+import gamePlayerView.Main;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 
-import authoring.controller.MapDataController;
+import authoring.controller.MapDataContainer;
+import authoring.controller.Router;
+import authoring.model.serialization.GameStateSerializer;
+import authoring.view.display.AuthorDisplay;
 import authoring.view.display.GameDisplay;
 import authoring.view.menus.TopMenuBar;
-import authoring.view.side_panel.InfoTabs;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -15,7 +20,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Christopher Lu
- * Initializes the VOOGASalad application to the Main Menu. Also responsible for switching to the in game scene.
+ * Initializes the VOOGASalad application to the Main Menu.
  */
 
 public class MainInitializer {
@@ -26,6 +31,7 @@ public class MainInitializer {
 	private String title;
 	private Scene scene;
 	private BorderPane root;
+	private static AuthorDisplay AuthDisp;
 
 	public MainInitializer(Stage s) throws IOException {
 		this.stage = s;
@@ -34,6 +40,7 @@ public class MainInitializer {
 		MainMenu menu = new MainMenu(this, s);
 		Scene mainMenu = menu.init();
 		scene = new Scene(root, screenWidth, screenHeight, Color.WHITE);
+		scene.getStylesheets().add("style.css");
 		stage.setScene(mainMenu);
 		stage.show();
 	}
@@ -64,10 +71,26 @@ public class MainInitializer {
 		return scene;
 	}
 	
-	public void initSim() {
-		TopMenuBar menuBar = new TopMenuBar(this, root);
-		InfoTabs infoTab = new InfoTabs(root, scene);
-		stage.setScene(scene);
+//	public void initAuthoring(MapDataContainer container) {
+//	    AuthorDisplay authoring = new AuthorDisplay(this, root, scene);
+//	    this.AuthDisp = authoring;
+//		stage.setScene(scene);
+//	}
+
+	public static GameStateSerializer setUpSerialization(){
+		return new GameStateSerializer(AuthDisp.getRouter());
+	}
+	public void initPlayer() {
+		//TODO: Initialize a game player. Will need to pass in some sort of identifier that indicates which game is being played
+		// so that game state and game type can be deserialized.
+		try{
+			Stage s = new Stage();
+			Main playInstance = new Main();
+			playInstance.start(s);
+		}
+		catch(Exception e){
+			System.out.println("Unable to start new game.");
+		}
 	}
 	
 }
