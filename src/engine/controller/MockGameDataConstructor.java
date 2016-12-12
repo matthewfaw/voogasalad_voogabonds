@@ -118,6 +118,12 @@ public class MockGameDataConstructor {
 			cd4.addField("myDamage", "50");
 			cd4.addField("myDamageRadius", "2");
 			
+			ComponentData cd5 = new ComponentData();
+			cd5.setComponentName("CreatorComponent");
+			cd5.addField("mySpawningStrategy", "BasicSpawningStrategy");
+			cd4.addField("myTimeBetweenSpawns", "10");
+			
+			
 			ed.addComponent("PhysicalComponent",cd1);
 			ed.addComponent("CollidableComponent",cd2);
 			ed.addComponent("MoveableComponent",cd3);

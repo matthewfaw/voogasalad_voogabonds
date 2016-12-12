@@ -7,6 +7,7 @@ import engine.model.components.ICreator;
 import engine.model.entities.EntityFactory;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
+import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
@@ -36,10 +37,13 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	private PhysicalSystem myPhysical;
 	@Hide
 	private TargetingSystem myTargeting;
+	@Hide
+	private MovementSystem myMovement;
 	
-	public CreatorComponent(SpawningSystem spawning, PhysicalSystem physical, TargetingSystem targeting, EntityFactory factory, ComponentData data) {
+	public CreatorComponent(SpawningSystem spawning, PhysicalSystem physical, TargetingSystem targeting, MovementSystem movement, EntityFactory factory, ComponentData data) {
 		myPhysical = physical;
 		myTargeting = targeting;
+		myMovement = movement;
 		myEntityFactory = factory;
 		
 		myTimeBetweenSpawns = Integer.parseInt(data.getFields().get("myTimeBetweenSpawns"));
@@ -55,7 +59,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	 */
 	public void spawnIfReady() {
 		if (myTimeSinceSpawning >= myTimeBetweenSpawns && myTarget != null && myPhysical.get(this) != null) {
-			mySpawningStrategy.spawn(myEntityFactory, myTarget, myPhysical.get(this), this);
+			mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this);
 			myTimeSinceSpawning = 0;
 		} else
 			myTimeSinceSpawning++;

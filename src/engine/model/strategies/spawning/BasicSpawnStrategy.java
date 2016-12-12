@@ -1,19 +1,32 @@
 package engine.model.strategies.spawning;
 
-import engine.model.components.ICreator;
+import engine.model.components.concrete.CreatorComponent;
 import engine.model.entities.EntityFactory;
-import engine.model.strategies.IPhysical;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
+import engine.model.systems.MovementSystem;
+import engine.model.systems.PhysicalSystem;
+import utility.ResouceAccess;
 
 public class BasicSpawnStrategy implements ISpawningStrategy {
-	//private String mySpawnName;
-
+	private String mySpawnName;
+	
 	@Override
-	public void spawn(EntityFactory entityFactory, IPosition target, IPhysical location, ICreator creator) {
-		//TODO: make this shit work
-		//entityFactory.constructEntity(mySpawnName);
-
+	public IEntity spawn(EntityFactory myEntityFactory, IPosition myTarget, MovementSystem myMovement,
+			PhysicalSystem myPhysical, CreatorComponent creatorComponent) {
+		try {
+			if (myPhysical.get(creatorComponent) != null) {
+				IEntity spawn = myEntityFactory.constructEntity(mySpawnName);
+				myMovement.get(spawn).setGoal(myTarget);
+				myPhysical.get(spawn).setPosition(myPhysical.get(creatorComponent).getPosition());
+				return spawn;
+			} else 
+				return null;
+		} catch (IllegalArgumentException e) {
+			throw new UnsupportedOperationException(ResouceAccess.getError("NoSpawn"), e);
+		}
 	}
+
 
 }

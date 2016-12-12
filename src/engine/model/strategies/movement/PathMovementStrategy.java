@@ -7,7 +7,7 @@ import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.StrategyFactory;
+import engine.model.strategies.factories.MovementStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -18,7 +18,7 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	private MapMediator myMap;
 	private PathManager myPath;
 	
-	public PathMovementStrategy(StrategyFactory creator) {
+	public PathMovementStrategy(MovementStrategyFactory creator) {
 		super(creator);
 		myMap = creator.getMap();
 	}
