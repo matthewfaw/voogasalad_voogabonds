@@ -1,6 +1,8 @@
 package main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import authoring.controller.Router;
@@ -16,10 +18,13 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import mainmenu.tabs.AuthoringTab;
 import mainmenu.tabs.LoadGameTab;
 import mainmenu.tabs.NewGameTab;
@@ -40,6 +45,7 @@ public class MainMenu {
 	private AuthoringTab authorTab;
 	private int screenWidth;
 	private int screenHeight;
+	private static MediaPlayer mp;
 	
 	public MainMenu(MainInitializer init, Stage s) {
 		setUpScreenResolution();
@@ -59,13 +65,30 @@ public class MainMenu {
 			tab.setId("tab");
 		}
 		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
+		playMusic();
 	}
 	
 	public Scene init() {
 		pane.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
 		pane.setTop(createText(myResources.getString("ApplicationTitle")));
 		pane.setCenter(tabContainer);
+		
 		return scene;
+	}
+	
+	private static void playMusic(){
+		String initialPath = new File("").getAbsolutePath().replace('\\', '/');
+		
+		String music = Paths.get(initialPath+"/src/resources/background_music/DEADPOOL.mp3").toUri().toString();
+		Media hit = new Media(music);
+		mp = new MediaPlayer(hit);
+		
+		mp.setOnEndOfMedia(new Runnable() {
+		       public void run() {
+		         mp.seek(Duration.ZERO);
+		       }
+		   });
+		  mp.play();
 	}
 	
 	private Text createText(String desiredText) {
