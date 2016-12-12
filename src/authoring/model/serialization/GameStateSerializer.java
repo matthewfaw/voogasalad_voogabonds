@@ -7,6 +7,7 @@ import java.util.Map;
 
 import authoring.controller.LevelDataContainer;
 import authoring.controller.Router;
+import authoring.model.EntityData;
 import authoring.model.LevelData;
 import authoring.model.WaveData;
 import engine.exceptions.SerializationException;
@@ -37,7 +38,11 @@ public class GameStateSerializer {
 
 		try{
 			createNewDirectory("EntityData", gameName);
-			ser.serializeToFile(router.getEntityDataContainer(), gameName+"/"+"EntityData"+"/"+"EntityData");
+			AbstractMap<String, EntityData> entd = router.getEntityDataContainer().getEntityDataMap();
+			for (String entity: entd.keySet()){
+			    ser.serializeToFile(entd.get(entity), "/"+gameName+"/"+"EntityData"+"/"+entity);
+			}
+			//ser.serializeToFile(router.getEntityDataContainer(), gameName+"/"+"EntityData"+"/"+"EntityData");
 		}
 		catch(Exception e){
 			throw new SerializationException("System was unable to load previous entity data.");
@@ -53,7 +58,7 @@ public class GameStateSerializer {
 		}
 		try{
 			createNewDirectory("LevelData", gameName);
-			List<LevelData> ldc = router.getLevelDataContainer().finalizeLevelDataMap();
+			LevelDataContainer ldc = router.getLevelDataContainer();
 			ser.serializeToFile(ldc, gameName+"/"+"LevelData"+"/"+"LevelData");
 		}catch(Exception e){
 			throw new SerializationException("System was unable to load previous level data.");

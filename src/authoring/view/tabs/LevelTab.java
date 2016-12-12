@@ -64,8 +64,10 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 			check.setId("checkbox");
 			if (selectedWaves != null)
 				for (WaveData selectedWave: selectedWaves)
-					if (selectedWave.getName().equals(wave.getName()))
+					if (selectedWave.getName().equals(wave.getName())){
 						check.setSelected(true);
+						break;
+					}
 			myWaveChecks.add(check);
 			checkV.getChildren().add(check);
 		}
@@ -149,5 +151,10 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
                 }
 			}
 		};
+	}
+
+	@Override
+	public void remove(Container aRemovedObject) {
+		// Do nothing
 	}
 }

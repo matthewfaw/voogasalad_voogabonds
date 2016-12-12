@@ -2,11 +2,13 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.List;
 
+
 import authoring.controller.MapDataContainer;
 import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import engine.IObservable;
-import engine.IViewable;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.GUIPieces.InfoBoxes.ErrorPopup;
@@ -88,7 +90,7 @@ public class Router {
 	 * A method to distribute viewable game elements
 	 * @param aComponent
 	 */
-	public void distributeViewableComponent(IObservable<IViewable> aComponent)
+	public void distributeViewableComponent(IObservable<IViewablePhysical> aComponent)
 	{
 		//TODO: give all viewable components the new component
 		myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
