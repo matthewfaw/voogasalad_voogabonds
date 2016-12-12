@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 public class MoveableComponentView extends ImageView implements IObserver<IViewablePhysical> {
 
 	private Pane myPane;
-	private AppController myAppController;
+	private ApplicationController myAppController;
     public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController){
     	myAppController = aAppController;
     }	
@@ -23,7 +23,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 	@Override
 	public void update(IViewablePhysical aChangedObject) {
-		
+		String id=aChangedObject.getEntityID();
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
 		String imagePath = aChangedObject.getImagePath();
 		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
