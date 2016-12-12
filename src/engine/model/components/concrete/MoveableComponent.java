@@ -123,6 +123,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 			//subtract player's lives
 			getEntity().delete();
 		}
+		
 	}
 
 	@Override
