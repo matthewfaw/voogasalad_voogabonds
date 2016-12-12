@@ -27,7 +27,7 @@ public class DamageDealingComponent extends AbstractComponent {
 	private int myDamage;
 	private double myDamageArc;
 	private double myDamageRadius;
-	private IDamageStrategy myDamageStrategy;
+	private transient IDamageStrategy myDamageStrategy;
 	
 	private boolean explodesOnEnemies;
 	private boolean explodesOnAllies;
@@ -35,15 +35,15 @@ public class DamageDealingComponent extends AbstractComponent {
 
 
 	@Hide
-	private HealthSystem myHealthSystem;
+	private transient HealthSystem myHealthSystem;
 	@Hide
-	private PhysicalSystem myPhysicalSystem;
+	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
-	private DamageDealingSystem myDamageSystem;
+	private transient DamageDealingSystem myDamageSystem;
 	@Hide
-	private SpawningSystem myCreators;
+	private transient SpawningSystem myCreators;
 	@Hide
-	private TeamSystem myTeams;
+	private transient TeamSystem myTeams;
 	
 	public DamageDealingComponent(
 			DamageDealingSystem damageDealingSystem,

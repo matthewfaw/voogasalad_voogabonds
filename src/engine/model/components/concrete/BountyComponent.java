@@ -18,7 +18,7 @@ public class BountyComponent extends AbstractComponent {
 	private int myBountyValue;
 	
 	@Hide
-	private BountySystem myBounty;
+	private transient BountySystem myBounty;
 	
 	public BountyComponent (BountySystem bountySystem, ComponentData data) {
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));

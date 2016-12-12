@@ -3,7 +3,7 @@ package engine.model.components;
 import engine.model.entities.IEntity;
 
 abstract public class AbstractComponent implements IModifiableComponent{
-	private IEntity myEntity;
+	private transient IEntity myEntity;
 
 	@Override
 	public IEntity getEntity() {

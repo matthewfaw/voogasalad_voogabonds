@@ -18,10 +18,10 @@ import utility.Point;
 public class ComponentFactory {
         @Hide
 	private static final String COMPONENT_PATH = "engine.model.components.concrete.";
-	private List<ISystem> mySystems;
+	private List<ISystem<?>> mySystems;
 	private Router myRouter;
 
-	public ComponentFactory(List<ISystem> systems, Router router) {
+	public ComponentFactory(List<ISystem<?>> systems, Router router) {
 		mySystems = systems;
 		myRouter = router;
 	}
@@ -43,7 +43,7 @@ public class ComponentFactory {
 			List<Object> objectsToAttach = new ArrayList<Object>();
 			for (Class<?> arg : arguments) {
 				// attach appropriate system to argument
-				ISystem sysToAdd = getSystemToAttach(arg);
+				ISystem<?> sysToAdd = getSystemToAttach(arg);
 				if (sysToAdd != null) {
 					objectsToAttach.add(getSystemToAttach(arg));
 					continue;
@@ -84,8 +84,8 @@ public class ComponentFactory {
 	}
 
 
-	private ISystem getSystemToAttach(Class<?> arg) {
-		for (ISystem sys : mySystems) {
+	private ISystem<?> getSystemToAttach(Class<?> arg) {
+		for (ISystem<?> sys : mySystems) {
 			if ( arg.isInstance(sys) ) {
 				return sys;
 			}
@@ -101,7 +101,7 @@ public class ComponentFactory {
 		return null;
 	}
 	
-	public void addSystem(ISystem systemToAdd) {
+	public void addSystem(ISystem<?> systemToAdd) {
 		mySystems.add(systemToAdd);
 	}
 }

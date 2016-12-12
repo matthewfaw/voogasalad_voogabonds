@@ -1,6 +1,8 @@
 package engine.model.entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /**
  * This class wraps a map of entity's id and entity itself
@@ -8,20 +10,20 @@ import java.util.Map;
  *
  */
 public class EntityManager implements IModifiableEntityManager {
-	Map<Integer,IEntity> myEntityMap;
+	private Map<Integer,ConcreteEntity> myEntityMap;
 
 	public EntityManager() {
-		myEntityMap = new HashMap<Integer, IEntity>();
+		myEntityMap = new HashMap<Integer, ConcreteEntity>();
 	}
 	
 	
 	
-	public Map<Integer, IEntity> getEntityMap() {
+	public Map<Integer, ConcreteEntity> getEntityMap() {
 		return myEntityMap;
 	}
 	
 	@Override
-	public void addEntity(Integer id, IEntity entity) {
+	public void addEntity(Integer id, ConcreteEntity entity) {
 		myEntityMap.put(id, entity);
 	}
 	

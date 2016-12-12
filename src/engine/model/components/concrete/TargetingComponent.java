@@ -15,14 +15,14 @@ public class TargetingComponent extends AbstractComponent implements ITargeting 
 	private double mySightRange;
 	private double mySightWidth;
 	private boolean myTargetsEnemies;
-	private ITargetingStrategy myTargetingStrategy;
+	private transient ITargetingStrategy myTargetingStrategy;
 	
 	@Hide
-	private PhysicalSystem myPhysical;
+	private transient PhysicalSystem myPhysical;
 	@Hide
-	private TargetingSystem myTargeting;
+	private transient TargetingSystem myTargeting;
 	@Hide
-	private TeamSystem myTeams;
+	private transient TeamSystem myTeams;
 	
 	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
 		myTargeting = target;

@@ -43,6 +43,7 @@ import utility.Point;
 public class BackendController {
 	private static final String GAME_DATA_PATH = "resources/game_data_relative_paths/relative_paths";
 	private static final int DEFAULT_STARTING_LEVEL=0;
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 
 	//Utilities
 	private transient ResourceBundle myGameDataRelativePaths;
@@ -61,9 +62,9 @@ public class BackendController {
 	private transient MapMediator myMapMediator;
 	
 	//Controllers to manage events
-	private TimelineController myTimelineController;
-	private PlayerController myPlayerController;
-	private LevelController myLevelController;
+	private transient TimelineController myTimelineController;
+	private transient PlayerController myPlayerController;
+	private transient LevelController myLevelController;
 	private transient Router myRouter;
 	
 	//Factories
@@ -83,8 +84,7 @@ public class BackendController {
 	// EntityManager
 	private EntityManager myEntityManager;
 	
-	private ResourceBundle myResources;
-	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private transient ResourceBundle myResources;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
@@ -179,7 +179,7 @@ public class BackendController {
 	}
 
 	private void constructEntityFactory() {
-		List<ISystem> mySystems = new ArrayList<ISystem>();
+		List<ISystem<?>> mySystems = new ArrayList<ISystem<?>>();
 		mySystems.add(myCollisionDetectionSystem);
 		mySystems.add(myDamageDealingSystem);
 		mySystems.add(myHealthSystem);
@@ -311,12 +311,13 @@ public class BackendController {
 		}
 	}
 	
-	
+	/*
 	public static void main(String[] args)
 	{
 		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
 //		controller.getClass();
 		controller.save();
 	}
+	*/
 	
 }

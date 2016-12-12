@@ -11,8 +11,8 @@ import engine.model.components.IModifiableComponent;
  *
  */
 public class ConcreteEntity implements IEntity {
-	private ArrayList<IObserver<IEntity>> myObservers;
-	private ArrayList<IComponent> myComponents;
+	private transient ArrayList<IObserver<IEntity>> myObservers;
+	private transient ArrayList<IComponent> myComponents;
 	
 	/**
 	 * This object should only be constructed in this

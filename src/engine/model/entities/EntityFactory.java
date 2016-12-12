@@ -23,19 +23,19 @@ import utility.Point;
 public class EntityFactory {
 	private static final Point DEFAULT_LOCATION = new Point(0,0);
 	private ComponentFactory myComponentFactory;
-	@SuppressWarnings("unused")
-	private List<ISystem> mySystems;
+//	@SuppressWarnings("unused")
+//	private List<ISystem<?>> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
 	private Router myRouter;
 	private MapMediator myMapMediator;
 	private IModifiableEntityManager myEntityManager;
 
-	public EntityFactory(List<ISystem> systems, 
+	public EntityFactory(List<ISystem<?>> systems, 
 			DataStore<EntityData> entityDataStore, 
 			Router router, 
 			MapMediator mapMediator,
 			IModifiableEntityManager entityManager) {
-		mySystems = systems;
+//		mySystems = systems;
 		myEntityDataStore = entityDataStore;
 		myRouter = router;
 		myComponentFactory = new ComponentFactory(systems, myRouter); // depends on router initialization
@@ -50,16 +50,9 @@ public class EntityFactory {
 	 * @return the constructed entity
 	 * @throws ComponentCreationException  
 	 */
-	public IEntity constructEntity(String entityName) throws UnsupportedOperationException {
-		IEntity entity = new ConcreteEntity();
+	public ConcreteEntity constructEntity(String entityName, Point p) throws UnsupportedOperationException {
 		EntityData entityData = myEntityDataStore.getData(entityName);
-		Collection<ComponentData> componentMap = entityData.getComponents().values();
-		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
-			entity.addComponent(component);	
-		}
-		
-		return entity;
+		return constructEntity(entityData, p);
 	}
 	
 	public IEntity constructEntity(EntityData aEntityData) 
@@ -67,14 +60,14 @@ public class EntityFactory {
 		return constructEntity(aEntityData, DEFAULT_LOCATION);
 	}
 	
-	public IEntity constructEntity(EntityData aEntityData, Point aLocation) 
+	public ConcreteEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws UnsupportedOperationException
 	{
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?
 		//3. return the fully constructed object
-		IEntity entity = new ConcreteEntity();
+		ConcreteEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);

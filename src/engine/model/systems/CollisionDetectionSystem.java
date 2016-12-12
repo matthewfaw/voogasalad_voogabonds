@@ -1,8 +1,12 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.model.components.IComponent;
 import engine.model.components.concrete.CollidableComponent;
 import engine.model.components.concrete.PhysicalComponent;
+import engine.model.entities.IEntity;
 
 /**
  * A system to manage collision detection in the game
@@ -14,9 +18,11 @@ import engine.model.components.concrete.PhysicalComponent;
  * This class is observable by any system
  *
  */
-public class CollisionDetectionSystem extends AbstractSystem<CollidableComponent> {
+public class CollisionDetectionSystem implements ISystem<CollidableComponent> {
+	private List<CollidableComponent> myComponents;
+
 	public CollisionDetectionSystem() {
-		
+		myComponents = new ArrayList<CollidableComponent>();
 	}
 	/**
 	 * Checks if a physical component collides with anything in
@@ -33,6 +39,33 @@ public class CollisionDetectionSystem extends AbstractSystem<CollidableComponent
 	
 	public CollidableComponent get(IComponent c) {
 		return getComponent(c);
+	}
+	
+	/**************ISystem interface*******************/
+	@Override
+	public List<CollidableComponent> getComponents() {
+		return myComponents;
+	}
+	@Override
+	public CollidableComponent getComponent(IComponent component) {
+		return getComponent(component.getEntity());
+	}
+	@Override
+	public CollidableComponent getComponent(IEntity entity) {
+		for (CollidableComponent component: myComponents) {
+			if (component.getEntity().equals(entity)) {
+				return component;
+			}
+		}
+		return null;
+	}
+	@Override
+	public void attachComponent(CollidableComponent aComponet) {
+		myComponents.add(aComponet);
+	}
+	@Override
+	public void detachComponent(CollidableComponent aComponent) {
+		myComponents.remove(aComponent);
 	}
 
 }

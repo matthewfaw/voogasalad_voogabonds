@@ -16,7 +16,7 @@ public class TeamComponent extends AbstractComponent {
 	private String myTeamID;
 	
 	@Hide
-	private TeamSystem mySystem;
+	private transient TeamSystem mySystem;
 	
 	public TeamComponent(TeamSystem teams, ComponentData componentData) {
 		myTeamID = componentData.getFields().get("myTeamID");
