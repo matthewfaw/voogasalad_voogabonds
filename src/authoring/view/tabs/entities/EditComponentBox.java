@@ -3,6 +3,7 @@ package authoring.view.tabs.entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
-    
+
     private List<Label> myLabels;
     private List<TextField> myFields;
     private EditEntityBox parent;
@@ -38,14 +39,14 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param componentName
      * @param attributes
      */
-    public EditComponentBox (EditEntityBox parent, EntityTab grandparent, String componentName, List<String> attributes) {
+    public EditComponentBox (EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName) {
         super(SPACING);
+        List<String> attributes = fetcher.getComponentAttributeList(componentName);
         init(parent, grandparent, componentName, attributes.size());
-        
+
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
-            System.out.println(attributes.get(i));
-            Label lbl = new Label(attributes.get(i));
+            Label lbl = new Label(cleanUpAttributeName(attributes.get(i)));
             TextField field = new TextField();
             setUpLabeledField(lbl, field);
             if (lbl.getText().equals("Image Path")) {
@@ -53,11 +54,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 this.getChildren().add(browse);
             }
         }
-        
+
         HBox btns = getBottomButtons();
         this.getChildren().add(btns);
     }
-    
+
     /**
      * Edit existing component.
      * @param parent
@@ -65,13 +66,15 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param componentName
      * @param retrievedData
      */
-    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, String componentName, Map<String,String> retrievedData) {
+    public EditComponentBox(EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName, ComponentData componentData) {
         super(SPACING);
+        Map<String,String> retrievedData = componentData.getFields();
         init(parent, grandparent, componentName, retrievedData.size());
-        
+
         // Set up input fields
         for (String attributeName : retrievedData.keySet()) {
-            Label lbl = new Label(attributeName);
+            String attribute = cleanUpAttributeName(attributeName);
+            Label lbl = new Label(attribute);
             TextField field = new TextField(retrievedData.get(attributeName));
             setUpLabeledField(lbl, field);
             if (lbl.getText().equals("Image Path")) {
@@ -79,11 +82,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 this.getChildren().add(browse);
             }
         }
-        
+
         HBox btns = getBottomButtons();
         this.getChildren().add(btns);
     }
-    
+
     private void init(EditEntityBox parent, EntityTab grandparent, String componentName, int numAttributes) {
         this.setId("vbox");
         this.parent = parent;
@@ -92,7 +95,29 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myLabels = new ArrayList<Label>(numAttributes);
         myFields = new ArrayList<TextField>(numAttributes);
     }
-    
+
+    private String cleanUpAttributeName(String attribute) {
+        // assume all attributes start with 'my', and separate words
+        String cleanedName = attribute;
+        if (cleanedName.startsWith("my")) {
+            cleanedName = cleanedName.substring(2);
+        }
+        if (!attribute.contains(" ")) {
+            cleanedName = this.separateCapitalizedWords(cleanedName);
+        }
+        return cleanedName;
+    }
+
+    /**
+     * Code based from stackoverflow.com
+     * 
+     * @param smooshed
+     * @return
+     */
+    private String separateCapitalizedWords(String smooshed) {
+        return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
+    }
+
     private void setUpLabeledField(Label lbl, TextField field) {
         lbl.setLabelFor(field);
         lbl.setId("label");
@@ -101,7 +126,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         this.getChildren().add(lbl);
         this.getChildren().add(field);
     }
-    
+
     private HBox getBottomButtons() {
         HBox btns = new HBox(SPACING);
         btns.setPadding(new Insets(SPACING,SPACING,SPACING,SPACING));
@@ -113,7 +138,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         btns.getChildren().addAll(done,cancel);
         return btns;
     }
-    
+
     private EventHandler<ActionEvent> handleDone() {
         EventHandler<ActionEvent> finish = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
@@ -126,7 +151,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         };
         return finish;
     }
-    
+
     private EventHandler<ActionEvent> handleCancel() {
         EventHandler<ActionEvent> cancel = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event){
@@ -146,17 +171,17 @@ public class EditComponentBox extends VBox implements ISubmittable {
         }
         return component;
     }
-    
+
     private String getName() {
         return myName;
     }
 
-	@Override
-	public Button setUpSubmitButton() {
-	        Button done = new Button(DONE);
-	        done.setOnAction(handleDone());
-	        done.setId("button");
-		return done;
-	}
+    @Override
+    public Button setUpSubmitButton() {
+        Button done = new Button(DONE);
+        done.setOnAction(handleDone());
+        done.setId("button");
+        return done;
+    }
 
 }
