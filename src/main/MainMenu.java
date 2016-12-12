@@ -5,6 +5,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import utility.BoomBox;
 import authoring.controller.Router;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,7 +66,7 @@ public class MainMenu {
 			tab.setId("tab");
 		}
 		this.initializer.setTitle(myResources.getString("MainMenuTitle"));
-		playMusic();
+		BoomBox.playMusic("DEADPOOL.mp3");
 	}
 	
 	public Scene init() {
@@ -74,21 +75,6 @@ public class MainMenu {
 		pane.setCenter(tabContainer);
 		
 		return scene;
-	}
-	
-	private static void playMusic(){
-		String initialPath = new File("").getAbsolutePath().replace('\\', '/');
-		
-		String music = Paths.get(initialPath+"/src/resources/background_music/DEADPOOL.mp3").toUri().toString();
-		Media hit = new Media(music);
-		mp = new MediaPlayer(hit);
-		
-		mp.setOnEndOfMedia(new Runnable() {
-		       public void run() {
-		         mp.seek(Duration.ZERO);
-		       }
-		   });
-		  mp.play();
 	}
 	
 	private Text createText(String desiredText) {
