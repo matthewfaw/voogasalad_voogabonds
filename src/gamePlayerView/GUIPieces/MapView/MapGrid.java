@@ -103,8 +103,9 @@ public class MapGrid extends Node {
     private void setClickForComponent(MoveableComponentView m) throws Exception {
         //get info to come up on click
         //m.getInfo();
-    	myAppController.DisplayStats();
-        //System.out.println("hi");
+    	//myAppController.DisplayStats();
+        myAppController.onEntityClicked();
+    	System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)

@@ -25,8 +25,8 @@ import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
-import gamePlayerView.builders.EntityInfoBoxBuilder;
-//import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.builders.EntityInfoBox;
+import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -241,6 +241,11 @@ public class GamePlayerScene {
 	//public List<ISprite> getSprites(){
 		//return mySprites;
 	//}
+		public void updateDisplay(EntityInfoBox myStatisticsBox) {
+			myBottomPane.clear();
+			Collection<Node> myCollection=new ArrayList<Node>();
+			myCollection.add(myStatisticsBox.getView());
+			myBottomPane.add(myCollection);
+		}
 	
 }
-
