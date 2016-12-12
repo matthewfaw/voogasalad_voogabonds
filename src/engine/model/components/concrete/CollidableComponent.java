@@ -9,6 +9,7 @@ import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
+import utility.Point;
 
 /**
  * The purpose of this class is to encapsulate the information relevant
@@ -25,6 +26,8 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private PhysicalSystem myPhysicalSystem;
 	@Hide
 	private DamageDealingSystem myDamageDealingSystem;
+	@Hide
+	private CollisionDetectionSystem myCollidable;
 	
 	public CollidableComponent (
 			CollisionDetectionSystem collisionDetectionSystem, 
@@ -34,10 +37,11 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			BountySystem rewardSystem,
 			ComponentData data) {
 		
+		myCollidable = collisionDetectionSystem;
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
 		
-		myCollisionRadius = Double.parseDouble("myCollisionRadius");
+		myCollisionRadius = Double.parseDouble(data.getFields().get("myCollisionRadius"));
 		
 		collisionDetectionSystem.attachComponent(this);
 	}
@@ -61,19 +65,17 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	 * @return true if a and b are in either of each other's 
 	 * collision radii; false if not
 	 */
-	private boolean intersects(CollidableComponent c)
-	{
-		double a_x = myPhysicalSystem.get(this).getPosition().getX();
-		double a_y = myPhysicalSystem.get(this).getPosition().getY();
-		double b_x = myPhysicalSystem.get(c).getPosition().getX();
-		double b_y = myPhysicalSystem.get(c).getPosition().getY();
-		
-		double a_r = getCollisionRadius();
-		double b_r = c.getCollisionRadius();
-
-		return Math.pow(a_r - b_r, 2) <= 
-				Math.pow(a_x - b_x, 2) + 
-				Math.pow(a_y - b_y, 2);
+	private boolean intersects(CollidableComponent c) {
+			Point a = myPhysicalSystem.get(this).getPosition();
+			Point b = myPhysicalSystem.get(c).getPosition();
+			
+			double a_r = getCollisionRadius();
+			double b_r = c.getCollisionRadius();
+	
+		if (myCollisionRadius > 0)
+			return (a_r + b_r) >= a.euclideanDistance(b);
+		else
+			return a.equals(b);
 	}
 	
 	private void collideInto(CollidableComponent unmovedCollidable) {
@@ -85,5 +87,10 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 		
 		myDamageDealingSystem.dealDamageToTarget(a, b);
 
+	}
+	
+	@Override
+	public void delete() {
+		myCollidable.detachComponent(this);
 	}
 }

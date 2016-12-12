@@ -31,19 +31,25 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private BountySystem myBounty;
 	@Hide
 	private DamageDealingSystem myDamage;
-	//private HealthSystem myHealthSystem;
+	@Hide
+	private HealthSystem myHealthSystem;
+
 	private Double myCurrHealth;
 	private Double myMaxHealth;
+	private boolean explodeOnDeath;
 	
 	@Hide
 	private List<IObserver<IViewableHealth>> myObservers;
 	
+	
 	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
+		myHealthSystem = healthSystem;
 		myBounty = bounty;
 		myDamage = damage;
 		
 		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
+		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
 		
 		myObservers = new ArrayList<IObserver<IViewableHealth>>();
 		
@@ -75,7 +81,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		int died = myCurrHealth <= 0 ? 1 : 0;
 		int bounty = myBounty.collectBounty(this);
 		
-		myDamage.explode(this);
+		if (died == 1 && explodeOnDeath)
+			myDamage.explode(this);
 		
 		return new DamageInfo(dmg.getDamage(), died, bounty);		
 	}
@@ -113,6 +120,12 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Override
 	public double getCurrHealth() {
 		return myCurrHealth;
+	}
+
+	@Override
+	public void delete() {
+		myHealthSystem.detachComponent(this);
+		myObservers.forEach(observer -> observer.remove(this));
 	}
 
 	

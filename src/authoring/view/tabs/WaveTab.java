@@ -155,4 +155,10 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 		});
 		return finish;
 	}
+
+
+	@Override
+	public void remove(Container aRemovedObject) {
+		//Do nothing.
+	}
 }

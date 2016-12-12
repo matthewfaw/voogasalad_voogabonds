@@ -20,9 +20,12 @@ public class TargetingComponent extends AbstractComponent implements ITargeting 
 	@Hide
 	private PhysicalSystem myPhysical;
 	@Hide
+	private TargetingSystem myTargeting;
+	@Hide
 	private TeamSystem myTeams;
 	
 	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
+		myTargeting = target;
 		myPhysical = physical;
 		myTeams = teams;
 		
@@ -56,6 +59,8 @@ public class TargetingComponent extends AbstractComponent implements ITargeting 
 		return myTargetsEnemies;
 	}
 
-
-	
+	@Override
+	public void delete() {
+		myTargeting.detachComponent(this);
+	}	
 }

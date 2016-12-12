@@ -2,16 +2,18 @@ package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
-import engine.model.strategies.IPhysical;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.ControllableSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
-import javafx.util.Pair;
 import utility.Point;
-
+/**
+ * 
+ * @author owenchung
+ *
+ */
 public class ControllableComponent extends AbstractComponent{
 	private PhysicalSystem myPhysicalSystem;
 	private CollisionDetectionSystem myCollisionDetectionSystem;
@@ -57,6 +59,13 @@ public class ControllableComponent extends AbstractComponent{
 			default     :  nextposition =  new Point(p.getPosition().getX() , p.getPosition().getY());
 		}
 		return nextposition;
+		
+	}
+
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
 		
 	}
 	

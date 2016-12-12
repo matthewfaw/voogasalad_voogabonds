@@ -74,7 +74,7 @@ public class WaveController {
 					m.setGoal(sinks.get(0));
 				
 			} catch (UnsupportedOperationException e) {
-				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
+				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity") + e.getMessage(), e);
 			}
 			
 		}

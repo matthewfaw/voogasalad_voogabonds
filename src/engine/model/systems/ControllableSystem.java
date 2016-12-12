@@ -2,6 +2,11 @@ package engine.model.systems;
 
 import engine.model.components.concrete.ControllableComponent;
 
+/**
+ * 
+ * @author owenchung
+ *
+ */
 public class ControllableSystem extends AbstractSystem<ControllableComponent>{
 	
 	

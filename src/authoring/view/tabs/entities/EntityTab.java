@@ -151,4 +151,9 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
         }
     }
 
+	@Override
+	public void remove(Container aRemovedObject) {
+		//Do nothing.
+	}
+
 }
