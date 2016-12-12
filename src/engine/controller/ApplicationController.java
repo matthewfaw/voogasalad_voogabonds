@@ -113,6 +113,28 @@ public class ApplicationController {
 	public void onSlowButtonPressed() {
 		//AnimationController.slow()
 	}
+	
+	public void onFireButtonPressed() {
+		
+	}
+	
+	public void onRightButtonPressed() {
+		myBackendController.moveControllables("Right");
+	}
+	
+	public void onLeftButtonPressed() {
+		myBackendController.moveControllables("Left");
+	}
+	
+	public void onUpButtonPressed() {
+		myBackendController.moveControllables("Up");
+	}
+	
+	public void onDownButtonPressed() {
+		myBackendController.moveControllables("Down");
+	}
+	
+	
 
 	public void onUpgradeButtonPressed() {
 		//
