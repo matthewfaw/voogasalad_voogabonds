@@ -97,9 +97,9 @@ public class MapMediator {
 		terrainQueue.add(source);
 
 		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), movement.getGoal());
-		for (Terrain path: paths.keySet()) {
-			System.out.println("("+path.getCenter().getX() +","+ path.getCenter().getY()+")"+ "<-" + "("+paths.get(path).getCenter().getX() +","+ paths.get(path).getCenter().getY()+")");
-		}
+		//for (Terrain path: paths.keySet()) {
+			//System.out.println("("+path.getCenter().getX() +","+ path.getCenter().getY()+")"+ "<-" + "("+paths.get(path).getCenter().getX() +","+ paths.get(path).getCenter().getY()+")");
+		//}
 		
 		//TODO: Fix the algorithm so this doesn't occur
 		if (paths.containsKey(source)) {

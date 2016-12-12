@@ -28,7 +28,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 		this.setY(aChangedObject.getPosition().getY());
 		this.setFitWidth(aChangedObject.getSize());
 		this.setFitHeight(aChangedObject.getSize());
-		
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
+		this.setRotate(aChangedObject.getHeading());
 	}
 }
