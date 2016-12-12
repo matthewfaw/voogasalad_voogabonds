@@ -32,6 +32,7 @@ public class JSONDeserializer {
 			//The following lines look up a file relative to the project path
 			URL url = getUrl(filepath);
 			File file = new File(url.getPath());
+			System.out.println(filepath);
 			scanner = new Scanner(file);
 			fileText = scanner.useDelimiter("\\A").next();
 		} catch (FileNotFoundException e) {

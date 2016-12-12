@@ -1,14 +1,9 @@
 package engine.model.systems;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import engine.IObserver;
-import engine.model.components.CollidableComponent;
-import engine.model.components.DamageDealingComponent;
-import engine.model.components.HealthComponent;
-import engine.model.components.MoveableComponent;
+import engine.model.components.IComponent;
+import engine.model.components.concrete.HealthComponent;
 import engine.model.entities.IEntity;
+import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
 /**
@@ -16,14 +11,10 @@ import utility.Damage;
  * @author owenchung(edited)
  *
  */
-public class HealthSystem implements ISystem{
-	private List<HealthComponent> myHealthComponents;
-	
-	public HealthSystem () {
-		myHealthComponents = new ArrayList<HealthComponent>();
-	}
+public class HealthSystem extends AbstractSystem<HealthComponent> {
+
 	public boolean isDead(IEntity entity) {
-		HealthComponent healthComponent = findHealthComponent(entity);
+		HealthComponent healthComponent = getComponent(entity);
 		if (healthComponent == null)
 			return false;
 		else
@@ -35,34 +26,19 @@ public class HealthSystem implements ISystem{
 	 * @param entity to add health to
 	 * @param deltaHealth: change in health
 	 */
-	public void takeDamage(IEntity entity, Damage dmg) {
-		HealthComponent healthComponent = findHealthComponent(entity);
+	public void takeDamage(IComponent component, Damage dmg) {
+		HealthComponent healthComponent = getComponent(component);
 		if (healthComponent != null)
 			healthComponent.takeDamage(dmg);
 	}
 	
-	/**
-	 * Given the input entity, returns the corresponding health component.
-	 * 
-	 * @param entityQuery
-	 * @return health component that the input entity owns
-	 */
-	private HealthComponent findHealthComponent(IEntity entityQuery) {
-		HealthComponent found = null;
-		for(HealthComponent hc: myHealthComponents) {
-			if (entityQuery == hc.getEntity()) {
-				found = hc;
-			}
-		}
-		return found;
-	}
 	
-	/************ Attach and detach component methods ************/
-	public void attachComponent(HealthComponent aComponent) {
-		myHealthComponents.add(aComponent);
-	}
-	public void detachComponent(HealthComponent aComponent) {
-		myHealthComponents.remove(aComponent);
+	public DamageInfo dealDamageTo(IComponent target, Damage damageToTake) {
+		HealthComponent health = getComponent(target);
+		if (health != null) {
+			return health.takeDamage(damageToTake);
+		}
+		return new DamageInfo();
 	}
 	
 }

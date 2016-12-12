@@ -3,7 +3,7 @@ package engine.model.strategies;
 import java.util.List;
 
 import engine.model.components.ITargeting;
-import engine.model.components.PhysicalComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.game_environment.MapMediator;
 import engine.model.systems.PhysicalSystem;
 

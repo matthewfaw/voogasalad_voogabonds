@@ -2,6 +2,7 @@ package authoring.controller;
 import authoring.view.tabs.WaveTab;
 import authoring.view.tabs.entities.EntityTab;
 import authoring.view.tabs.LevelTab;
+import authoring.view.tabs.RulesTab;
 
 public class Router {
 	private MapDataContainer mdc = new MapDataContainer();
@@ -22,6 +23,12 @@ public class Router {
 		wadc.attach(l);
 		ldc.attach(l);
 		
+		
+		//Refresh upon loading of a new game
+		mdc.notifyObservers();
+		edc.notifyObservers();
+		wadc.notifyObservers();
+		ldc.notifyObservers();
 	}
 	
 	

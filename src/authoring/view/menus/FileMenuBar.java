@@ -2,6 +2,8 @@ package authoring.view.menus;
 
 import java.util.Arrays;
 import java.util.List;
+
+import authoring.controller.Router;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
@@ -15,9 +17,11 @@ import javafx.scene.layout.BorderPane;
  */
 public class FileMenuBar extends MenuBar {
     private List<Menu> myMenus;
+    private Router router;
     
-    public FileMenuBar (BorderPane root) {
+    public FileMenuBar (BorderPane root, Router r) {
         myMenus = getMenus(root);
+        this.router = r;
         this.setId("hbox");
         for (Menu menu: this.getMenus()){
         	menu.setId("menu");
@@ -26,7 +30,7 @@ public class FileMenuBar extends MenuBar {
     }
 
     public List<Menu> getMenus(BorderPane root) {
-        FileMenu fileMenu = new FileMenu(this);
+        FileMenu fileMenu = new FileMenu(this, router);
         EditMenu editMenu = new EditMenu(this);
         PersonalizeMenu personalizeMenu = new PersonalizeMenu(this, root);
         PlayMenu playMenu = new PlayMenu(this);
