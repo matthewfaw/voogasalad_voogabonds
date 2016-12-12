@@ -3,6 +3,7 @@ package authoring.view.display;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import utility.ErrorBox;
 
@@ -258,7 +259,13 @@ public class TerrainCell extends Rectangle {
 		terrainType = newType;
 		try { 
 			if (toolBar.getImageStatus()) {
-				controller.addValidTerrain(terrainType, toolBar.getSelectedImagePath().toString());
+				String[] splitPath = toolBar.getSelectedImagePath().toString().split("/");
+				String relPath = "";
+				for (int i = 7; i < splitPath.length; i++) {
+					relPath += splitPath[i]+"/";
+				}
+				System.out.println("THISISTHERELATIVEPATH: " + relPath);
+				controller.addValidTerrain(terrainType, relPath);
 			}
 			else {
 				controller.addValidTerrain(terrainType, toolBar.getSelectedColor().toString());
