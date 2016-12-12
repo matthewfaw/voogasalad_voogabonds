@@ -6,14 +6,21 @@ import java.util.Map;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import utility.ListStringManipulator;
 
 /**
  * @author Niklas Sjoquist
@@ -22,12 +29,14 @@ import javafx.scene.layout.VBox;
  *
  */
 public class EditComponentBox extends VBox implements ISubmittable {
+    public static final String IMAGE_PATH = "Image Path";
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
 
     private List<Label> myLabels;
     private List<TextField> myFields;
+    private List<MenuButton> myComboCheckBoxes;
     private EditEntityBox parent;
     private EntityTab grandparent;
     private String myName;
@@ -42,16 +51,32 @@ public class EditComponentBox extends VBox implements ISubmittable {
     public EditComponentBox (EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName) {
         super(SPACING);
         List<String> attributes = fetcher.getComponentAttributeList(componentName);
+        List<String> attributeTypes = fetcher.getComponentAttributeTypeList(componentName);
         init(parent, grandparent, componentName, attributes.size());
 
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
-            Label lbl = new Label(cleanUpAttributeName(attributes.get(i)));
-            TextField field = new TextField();
-            setUpLabeledField(lbl, field);
-            if (lbl.getText().equals("Image Path")) {
-                Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
-                this.getChildren().add(browse);
+            String attributeType = attributeTypes.get(i);
+            String uglyAttributeName = attributes.get(i);
+            String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
+            //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
+            Label lbl = new Label(cleanedAttributeName);
+            if (attributeType.toLowerCase().equals("list")) {
+                // TODO: set up combo box of choices
+                MenuButton checkbox = null;
+                if (uglyAttributeName.toLowerCase().contains("terrains")) {
+                    checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
+                } //else if ()
+                if (checkbox != null) {
+                    this.getChildren().add(checkbox);
+                }
+            } else {
+                TextField field = new TextField();
+                setUpLabeledField(lbl, field);
+                if (lbl.getText().equals(IMAGE_PATH)) {
+                    Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
+                    this.getChildren().add(browse);
+                }
             }
         }
 
@@ -68,18 +93,61 @@ public class EditComponentBox extends VBox implements ISubmittable {
      */
     public EditComponentBox(EditEntityBox parent, EntityTab grandparent, AttributeFetcher fetcher, String componentName, ComponentData componentData) {
         super(SPACING);
+        String uglyComponentName = this.convertBackToFieldName(componentName);
+        List<String> attributes = fetcher.getComponentAttributeList(uglyComponentName);
+        List<String> attributeTypes = fetcher.getComponentAttributeTypeList(uglyComponentName);
         Map<String,String> retrievedData = componentData.getFields();
         init(parent, grandparent, componentName, retrievedData.size());
 
         // Set up input fields
-        for (String attributeName : retrievedData.keySet()) {
-            String attribute = cleanUpAttributeName(attributeName);
-            Label lbl = new Label(attribute);
-            TextField field = new TextField(retrievedData.get(attributeName));
-            setUpLabeledField(lbl, field);
-            if (lbl.getText().equals("Image Path")) {
-                Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
-                this.getChildren().add(browse);
+        for (int i = 0; i < attributes.size(); i++) {
+            String attributeType = attributeTypes.get(i);
+            String uglyAttributeName = attributes.get(i);
+            String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
+            //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
+            Label lbl = new Label(cleanedAttributeName);
+            if (attributeType.toLowerCase().equals("list")) {
+                // TODO: set up combo box of choices
+                MenuButton checkbox = null;
+                if (uglyAttributeName.toLowerCase().contains("terrains")) {
+                    checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
+                    String terrainData = componentData.getFields().get(cleanedAttributeName);
+                    //System.out.println("Terrains: "+terrainData);
+                    List<String> terrains;
+                    try {
+                        terrains = ListStringManipulator.stringToList(terrainData);
+                    }
+                    catch (Exception e) {
+                        terrains = null;
+                        //System.out.println("Terrains is null");
+                    }
+                    // Initialize valid terrains
+                    if (terrains != null && terrains.size() > 0) {
+                        for (MenuItem item : checkbox.getItems()) {
+                            CheckBox check = (CheckBox) ((CustomMenuItem) item).getContent();
+                            if (terrains.contains(check.getText())) {
+                                check.setSelected(true);
+                            }
+                        }
+                    }
+                } //else if () other checkboxes
+                if (checkbox != null) {
+                    lbl.setId("label");
+                    lbl.setLabelFor(checkbox);
+                    checkbox.setId("combobox");
+                    myLabels.add(lbl);
+                    myComboCheckBoxes.add(checkbox);
+                    this.getChildren().add(lbl);
+                    this.getChildren().add(checkbox);
+                }
+            } else {
+                //System.out.println("Clean: "+retrievedData.get(cleanedAttributeName)+"\tUgly: "+retrievedData.get(uglyAttributeName));
+                TextField field = new TextField(retrievedData.get(cleanedAttributeName));
+                setUpLabeledField(lbl, field);
+                if (lbl.getText().equals(IMAGE_PATH)) {
+                    Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
+                    this.getChildren().add(browse);
+                }
             }
         }
 
@@ -94,6 +162,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myName = componentName;
         myLabels = new ArrayList<Label>(numAttributes);
         myFields = new ArrayList<TextField>(numAttributes);
+        myComboCheckBoxes = new ArrayList<MenuButton>();
     }
 
     private String cleanUpAttributeName(String attribute) {
@@ -117,10 +186,28 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private String separateCapitalizedWords(String smooshed) {
         return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
+    
+    /**
+     * Converts name back into form stored in AttributeFetcher.
+     * 
+     * Converts from the form: 'Physical Component'
+     * To the form: '.PhysicalComponent'
+     * 
+     * @param cleanedName
+     * @return
+     */
+    private String convertBackToFieldName(String cleanedName) {
+        return "."+smoosh(cleanedName);
+    }
+    
+    private String smoosh(String spaced) {
+        return spaced.replaceAll("\\s", "");
+    }
 
     private void setUpLabeledField(Label lbl, TextField field) {
         lbl.setLabelFor(field);
         lbl.setId("label");
+        field.setId("textfield");
         myLabels.add(lbl);
         myFields.add(field);
         this.getChildren().add(lbl);
@@ -164,10 +251,26 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private ComponentData createDataFromInput () {
         ComponentData component = new ComponentData();
         for (int i = 0; i < myLabels.size(); i++) {
-            String attributeName = myLabels.get(i).getText();
-            String attributeValue = myFields.get(i).getCharacters().toString();
-            //System.out.println("Attribute Name: "+attributeName+"\tAttribute Value: "+attributeValue);
-            component.addField(attributeName, attributeValue);
+            Label lbl = myLabels.get(i);
+            String attributeName = lbl.getText();
+            Node input = lbl.getLabelFor();
+            if (input.getClass()==TextField.class) {
+                String attributeValue = myFields.get(i).getCharacters().toString();
+                //System.out.println("Attribute Name: "+attributeName+"\tAttribute Value: "+attributeValue);
+                component.addField(attributeName, attributeValue);
+            } else if (input.getClass()==MenuButton.class) {
+                MenuButton checkbox = (MenuButton) input;
+                List<String> selectedItems = new ArrayList<String>();
+                for (MenuItem item : checkbox.getItems()) {
+                    CheckBox check = (CheckBox) ((CustomMenuItem) item).getContent();
+                    if (check.isSelected()) {
+                        selectedItems.add(check.getText());
+                    }
+                }
+                String list = ListStringManipulator.listToString(selectedItems);
+                //System.out.println(list);
+                component.addField(attributeName, list);
+            }
         }
         return component;
     }

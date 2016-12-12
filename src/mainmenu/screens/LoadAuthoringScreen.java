@@ -111,7 +111,7 @@ public class LoadAuthoringScreen {
 		    		startHandler(startAuthoring, selectedGame);
 		        	try {
 						GSD.loadGameState("src/SerializedFiles/"+chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName().toString());
-					} catch (Exception e) {
+		        	} catch (Exception e) {
 						//TODO: add error checking to more appropriate place in package
 					}
 		        }
