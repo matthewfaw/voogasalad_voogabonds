@@ -23,13 +23,9 @@ public class EntityCell extends ListCell<EntityListView> {
     
     private HBox cellBox = new HBox();
     private EntityListView entityView;
-    //private Button deleteButton = new Button("X");
     
     public EntityCell(EntityTab parent) {
         super();
-        //cellBox.getChildren().add(deleteButton);
-        //HBox.setHgrow(cellPane, Priority.ALWAYS);
-        //deleteButton.setOnAction(deleteEntity(parent));
     }
     
     @Override
@@ -48,16 +44,5 @@ public class EntityCell extends ListCell<EntityListView> {
             }
         }
     }
-    
-//    private EventHandler<ActionEvent> deleteEntity(EntityTab parent) {
-//        return new EventHandler<ActionEvent>() {
-//
-//            @Override
-//            public void handle (ActionEvent event) {
-//                parent.deleteEntity(entityView);
-//            }
-//            
-//        };
-//    }
     
 }

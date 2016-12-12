@@ -1,6 +1,7 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
+
 import java.util.Set;
 //import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;

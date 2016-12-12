@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 public class EntityListView {
     private static final String PHYSICAL_COMPONENT = "Physical Component";
     private static final String IMAGE_ATTRIBUTE = "Image Path";
+    private static final String IMAGE_ATTRIBUTE_2 = "myImagePath";
     
     private String myName;
     private String myImagePath;
@@ -39,7 +40,7 @@ public class EntityListView {
         for (String component : entityData.getComponents().keySet()) {
             if (component.equals(PHYSICAL_COMPONENT)) {
                 for (String attribute : entityData.getComponents().get(component).getFields().keySet()) {
-                    if (attribute.equals(IMAGE_ATTRIBUTE)) {
+                    if (attribute.equals(IMAGE_ATTRIBUTE) || attribute.equals(IMAGE_ATTRIBUTE_2)) {
                         imagePath = entityData.getComponents().get(component).getFields().get(attribute);
                     }
                 }

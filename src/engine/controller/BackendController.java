@@ -17,6 +17,8 @@ import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
+import engine.model.game_environment.distributor.MapDistributor;
+import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
@@ -117,7 +119,25 @@ public class BackendController {
 	 */
 	public void attemptToPlaceEntity(String aEntityName, Point aLocation)
 	{
-		myEntityFactory.distributeEntity(aEntityName, aLocation);
+		boolean success = myEntityFactory.distributeEntity(aEntityName, aLocation);
+		if (success) {
+			EntityData entityData = myEntityDataStore.getData(aEntityName);
+			if (entityData != null) {
+				int cost = entityData.getBuyPrice();
+				// TODO: change if implementing multiplayer
+				deductCostFromPlayer(cost, 0); // hard coded as 0th player
+			}
+			
+		}
+	}
+	
+	/**
+	 * Deducts the cost of an entity from a player.
+	 * @param buyPrice
+	 */
+	private void deductCostFromPlayer(int buyPrice, int playerID) {
+		Player myPlayer = myPlayerController.getPlayer(playerID);
+		myPlayer.updateAvailableMoney(-1*buyPrice);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring

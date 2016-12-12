@@ -1,24 +1,13 @@
 package engine.controller;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
 import authoring.model.ComponentData;
-import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
 import authoring.model.PlayerData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
 import authoring.model.WaveData;
-import authoring.model.WeaponData;
-import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
@@ -153,11 +142,12 @@ public class MockGameDataConstructor {
 			
 			ComponentData CD3 = new ComponentData();
 			CD3.setComponentName("HealthComponent");
-			CD3.addField("myHealth", "9000");
+			CD3.addField("myCurrentHealth", "9000");
+			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);
 			ed2.addComponent("CollidableComponent",CD2);
-			ed2.addComponent("CollidableComponent",CD3);
+			ed2.addComponent("HealthComponent",CD3);
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();
@@ -205,9 +195,9 @@ public class MockGameDataConstructor {
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName()+1);
 			ser.serializeToFile(ed2, "exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2);
 			
-			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+"MapData", MapDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+"LevelData", LevelDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			
