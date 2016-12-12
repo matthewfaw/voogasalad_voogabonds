@@ -1,8 +1,11 @@
 package main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import utility.BoomBox;
 import authoring.controller.Router;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,10 +19,13 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import mainmenu.tabs.AuthoringTab;
 import mainmenu.tabs.LoadGameTab;
 import mainmenu.tabs.NewGameTab;
@@ -40,6 +46,7 @@ public class MainMenu {
 	private AuthoringTab authorTab;
 	private int screenWidth;
 	private int screenHeight;
+	private static MediaPlayer mp;
 	
 	public MainMenu(MainInitializer init, Stage s) {
 		setUpScreenResolution();
@@ -65,6 +72,7 @@ public class MainMenu {
 		pane.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
 		pane.setTop(createText(myResources.getString("ApplicationTitle")));
 		pane.setCenter(tabContainer);
+		
 		return scene;
 	}
 	

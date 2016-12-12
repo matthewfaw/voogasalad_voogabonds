@@ -11,9 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +38,7 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
         ecFetcher.fetch();
         this.setCellFactory(getCustomCellFactory());
         this.setKeyboardAction(handleKeyPress());
+        //setDragFunctionality(this.getListView());
     }
 
     public boolean addEntity(EntityData entity){
@@ -112,6 +115,16 @@ public class EntityTab extends ListTab<EntityListView> implements IObserver<Cont
         };
         return handler;
     }
+    
+//    private void setDragFunctionality(ListView<EntityListView> entities) {
+//        entities.setOnDragDetected(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle (MouseEvent event) {
+//                Dragboard db = entities.startDragAndDrop(TransferMode.COPY);
+//                Clipboard
+//            }
+//        });
+//    }
 
     @Override
     protected EventHandler<ActionEvent> handleAddNewObject () {

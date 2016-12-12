@@ -6,7 +6,10 @@ import java.util.Map;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -40,6 +43,8 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private final String WIN = "win";
     private final String LOSE = "lose";
     private final String EXTENSION = ".class";
+    private final String TERRAINS = "Terrains";
+    private final String CALC = "calc";
     public static final String IMAGE_PATH = "myImagePath";
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
@@ -75,16 +80,52 @@ public class EditComponentBox extends VBox implements ISubmittable {
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
                 MenuButton checkbox = null;
-                if (uglyAttributeName.toLowerCase().contains("terrains")) {
-                    checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
+                if (uglyAttributeName.toLowerCase().contains(TERRAINS.toLowerCase())) {
+                    checkbox = grandparent.setUpMenuButton(TERRAINS, FXCollections.observableArrayList(grandparent.getTerrains()));
                 } //else if ()
                 if (checkbox != null) {
                     this.getChildren().add(checkbox);
                 }
-            } else {
-                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
-                    // TODO: Make ComboBox for Strategies!
-                    
+            } else if (attributeType.toLowerCase().equals("boolean")) {
+                ObservableList<String> choices = FXCollections.observableArrayList("True", "False");
+                ComboBox<String> boolCombo = new ComboBox<>(choices);
+                lbl.setLabelFor(boolCombo);
+                lbl.setId("label");
+                boolCombo.setId("combobox");
+                myLabels.add(lbl);
+                this.getChildren().addAll(lbl, boolCombo);
+            } else if (attributeType.toLowerCase().equals("int")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces numeric input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d*")) {
+                            numericField.setText(newValue.replaceAll("[^\\d]",""));
+                        }
+                    }
+                });
+            } else if (attributeType.toLowerCase().equals("double")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces double input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d+\\.\\d+")) {
+                            numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
+                        }
+                    }
+                });
+            }
+            else {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
+                    // TODO: replace if/else
                     List<String> fileList = new ArrayList<String>();
                     FileRetriever fr;
                     
@@ -183,8 +224,48 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(lbl);
                     this.getChildren().add(checkbox);
                 }
-            } else {
-                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+            } else if (attributeType.toLowerCase().equals("boolean")) {
+                // TODO: Set combo box for booleans
+                ObservableList<String> choices = FXCollections.observableArrayList("True", "False");
+                ComboBox<String> boolCombo = new ComboBox<>(choices);
+                lbl.setLabelFor(boolCombo);
+                lbl.setId("label");
+                boolCombo.setValue(retrievedData.get(uglyAttributeName));
+                boolCombo.setId("combobox");
+                myLabels.add(lbl);
+                this.getChildren().addAll(lbl, boolCombo);
+            } else if (attributeType.toLowerCase().equals("int")) {
+                System.out.println("NUMERIC FIELD");
+                TextField numericField = new TextField(retrievedData.get(uglyAttributeName));
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces numeric input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d*")) {
+                            numericField.setText(newValue.replaceAll("[^\\d]",""));
+                        }
+                    }
+                });
+            } else if (attributeType.toLowerCase().equals("double")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces double input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d+\\.\\d+")) {
+                            numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
+                        }
+                    }
+                });
+            }
+            else {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
                     List<String> fileList = new ArrayList<String>();
@@ -245,6 +326,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myComboCheckBoxes = new ArrayList<MenuButton>();
     }
 
+    @Deprecated
     private String cleanUpAttributeName(String attribute) {
         // assume all attributes start with 'my', and separate words
         String cleanedName = attribute;
@@ -259,6 +341,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         return cleanedName;
     }
     
+    @Deprecated
     private String capitalizeFirstLetter(String str) {
         return str.substring(0,1).toUpperCase() + str.substring(1);
     }
@@ -269,6 +352,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param smooshed
      * @return
      */
+    @Deprecated
     private String separateCapitalizedWords(String smooshed) {
         return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
@@ -353,11 +437,9 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     }
                 }
                 String list = ListStringManipulator.listToString(selectedItems);
-                //System.out.println(list);
                 component.addField(attributeName, list);
             } else if (input.getClass()==ComboBox.class) {
                 ComboBox<String> combo = (ComboBox<String>) input;
-                //System.out.println("ComboBox value: "+combo.getValue());
                 component.addField(attributeName, combo.getValue());
             }
         }
