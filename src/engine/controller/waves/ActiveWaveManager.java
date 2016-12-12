@@ -66,7 +66,7 @@ public class ActiveWaveManager {
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
 				EntityData enemy = myEntityDataStore.getData(activeWave.releaseWaveEntity(aTotalTimeElapsed));
 				enemiesToConstruct.add(new PathFollowerData(enemy, activeWave.getSpawnPointName(), activeWave.getSinkPointName()));
-			} else {
+			} else if (!activeWave.hasEnemiesToRelease()){
 				iterator.remove();
 //				myWaveStates.remove(activeWave);
 			}
