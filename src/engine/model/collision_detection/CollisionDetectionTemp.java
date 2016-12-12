@@ -6,7 +6,6 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
-import engine.model.systems.IRegisterable;
 import engine.model.systems.ISystem;
 
 /**
@@ -14,12 +13,13 @@ import engine.model.systems.ISystem;
  * NOT IObservables.
  *
  */
+@Deprecated
 public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservable<ISystem>, ISystem {
 	
 	private ICollisionHandler collisionHandler;
 	private List<ICollidable> myCollidables;
 	private List<IObserver<ISystem>> myObservers;
-	private List<IRegisterable> myRegisterables;
+	//private List<IRegisterable> myRegisterables;
 	
 	public CollisionDetectionTemp() {
 		//TODO: initialize all collidables
@@ -29,7 +29,7 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		//TODO: initialize collision handler
 		collisionHandler = new CollisionHandler();
 		// Init registerables
-		myRegisterables = new ArrayList<IRegisterable>();
+		//myRegisterables = new ArrayList<IRegisterable>();
 	}
 
 	/**

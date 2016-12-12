@@ -7,10 +7,11 @@ import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
 
 public class BasicSpawnStrategy implements ISpawningStrategy {
-	private String mySpawnName;
+	//private String mySpawnName;
 
 	@Override
 	public void spawn(EntityFactory entityFactory, IPosition target, IPhysical location, ICreator creator) {
+		//TODO: make this shit work
 		//entityFactory.constructEntity(mySpawnName);
 
 	}

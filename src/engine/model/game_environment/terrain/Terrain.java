@@ -38,7 +38,24 @@ public class Terrain {
 	}
 
 	public boolean contains(Point goal) {
-		return getCenter().rectilinearDistance(goal) <= myTerrainData.getSize();
+		Point center = getCenter();
+		double halfSizeOfCell = ((double)myTerrainData.getSize()) / 2.0;
+		double xMin = center.getX() - halfSizeOfCell;
+		double xMax = center.getX() + halfSizeOfCell;
+		double yMax = center.getY() + halfSizeOfCell;
+		double yMin = center.getY() - halfSizeOfCell;
+		
+		double goalX = goal.getX() + halfSizeOfCell;
+		double goalY = goal.getY() + halfSizeOfCell;
+		
+		return withinBound(goalX, xMin, xMax) && withinBound(goalY, yMin, yMax);
+
+//		return getCenter().rectilinearDistance(goal) <= myTerrainData.getSize();
+	}
+	
+	private boolean withinBound(double value, double minBound, double maxBound)
+	{
+		return value >= minBound && value <= maxBound;
 	}
 	
 

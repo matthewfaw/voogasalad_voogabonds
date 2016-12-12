@@ -3,8 +3,8 @@ package gamePlayerView.GUIPieces.InfoBoxes;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
-import gamePlayerView.interfaces.ICashAcceptor;
-import gamePlayerView.interfaces.IScoreAcceptor;
+//import gamePlayerView.interfaces.ICashAcceptor;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 
 /**
  * @author Guhan Muruganandam
@@ -13,13 +13,13 @@ import gamePlayerView.interfaces.IScoreAcceptor;
 /**
  * UI feature for Cash text box and Label
  */
-public class ScoreBox extends InfoBox implements IObserver<IViewablePlayer>,IScoreAcceptor {
+public class ScoreBox extends InfoBox implements IObserver<IViewablePlayer>,IPlayerAcceptor {
 	
 	public ScoreBox(){
 		myDisplay=makeDisplay("Score:  ");
 	}
 
-	public void acceptScore(IObservable<IViewablePlayer> aPlayer) {
+	public void acceptPlayer(IObservable<IViewablePlayer> aPlayer) {
 		aPlayer.attach(this);
 		//update(aPlayer);
 	}

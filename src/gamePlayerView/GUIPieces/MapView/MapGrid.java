@@ -1,6 +1,7 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
+
 import java.util.Set;
 //import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;
@@ -30,7 +31,7 @@ import javafx.scene.shape.Rectangle;
 import utility.Point;
 
 public class MapGrid extends Node {
-	private ApplicationController myAppController;
+    private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
     private Rectangle[][] actualGrid;
@@ -51,16 +52,20 @@ public class MapGrid extends Node {
     	actualGrid = new Rectangle[numRows][numColumns];
     }
     
-    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue) {
+    public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue,Pane pane) {
 
     	Rectangle temp = new Rectangle();
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
-    	temp.setHeight(aCellSize);
-    	temp.setWidth(aCellSize);
-    	temp.setX(row*aCellSize);
-    	temp.setY(col*aCellSize);
+    	temp.widthProperty().bind(pane.widthProperty().divide(numRows));
+    	temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
+    	//temp.setHeight(aCellSize);
+    	//temp.setWidth(aCellSize);
+    	temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
+    	temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
+    	//temp.setX(row*aCellSize);
+    	//temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);
 
     	temp.setOnDragDropped(new EventHandler<DragEvent>() {
@@ -99,12 +104,13 @@ public class MapGrid extends Node {
         //get info to come up on click
         //m.getInfo();
     	myAppController.DisplayStats();
-        System.out.println("hi");
+        //System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable,myAppController);
+    	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
     }
@@ -129,9 +135,9 @@ public class MapGrid extends Node {
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 Rectangle temp = actualGrid[i][j];
-                if(calculateDistance(x, y, temp.getX(), temp.getY()) < minDist)
+                if(calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth()) < minDist)
                         {
-                            minDist = calculateDistance(x, y, temp.getX(), temp.getY());
+                            minDist = calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth());
                             closest = temp;
                         }
                 else
@@ -142,9 +148,9 @@ public class MapGrid extends Node {
         return closest;
     }
     
-    private double calculateDistance (double x, double y, double x2, double y2) {
-        return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
-                         + Math.pow((y - (y2 + myCellSize/2)), 2));
+    private double calculateDistance (double x, double y, double x2, double y2, double tempHeight, double tempWidth) {
+        return Math.sqrt(Math.pow((x - (x2+tempWidth/2)), 2)
+                         + Math.pow((y - (y2 + tempWidth/2)), 2));
     }
    
 
