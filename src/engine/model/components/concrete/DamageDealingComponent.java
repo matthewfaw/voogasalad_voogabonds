@@ -39,6 +39,8 @@ public class DamageDealingComponent extends AbstractComponent {
 	@Hide
 	private PhysicalSystem myPhysicalSystem;
 	@Hide
+	private DamageDealingSystem myDamageSystem;
+	@Hide
 	private SpawningSystem myCreators;
 	@Hide
 	private TeamSystem myTeams;
@@ -50,6 +52,7 @@ public class DamageDealingComponent extends AbstractComponent {
 			PhysicalSystem physicalSystem,
 			ComponentData data
 			) {
+		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
 		
@@ -98,7 +101,7 @@ public class DamageDealingComponent extends AbstractComponent {
 		
 		myCreators.updateStats(this, result);
 		if (diesOnExplosion) {
-			//getEntity().die();
+			getEntity().delete();
 		}
 		return result;
 	}
@@ -108,7 +111,7 @@ public class DamageDealingComponent extends AbstractComponent {
 		
 		myCreators.updateStats(this, result);
 		if (diesOnExplosion) {
-			//getEntity().die();
+			getEntity().delete();
 		}
 		return result;
 	}
@@ -124,6 +127,11 @@ public class DamageDealingComponent extends AbstractComponent {
 				result.add(myHealthSystem.dealDamageTo(p, getDamageTo(myPhysical, p)));
 		}
 		return result;
+	}
+
+	@Override
+	public void delete() {
+		myDamageSystem.detachComponent(this);
 	}
 
 }

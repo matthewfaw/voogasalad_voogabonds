@@ -22,6 +22,8 @@ import utility.Point;
  */
 public class MoveableComponent extends AbstractComponent implements IMovable {
 	@Hide
+	private MovementSystem myMovement;
+	@Hide
 	private PhysicalSystem myPhysical;
 	@Hide
 	private TargetingSystem myTargeting;
@@ -54,6 +56,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 			ComponentData data
 			) throws ClassNotFoundException {
 		
+		myMovement = movement;
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
@@ -108,6 +111,11 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		if (myMovedDistance >= myMaxDistance && explodesAtMaxDistance) {
 			myDamage.explode(this);
 		}
+	}
+
+	@Override
+	public void delete() {
+		myMovement.detachComponent(this);
 	}
 
 }

@@ -47,9 +47,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	@Hide
 	private MovementSystem myMovement;
 	@Hide
+	private SpawningSystem mySpawning;
+	@Hide
 	private List<IEntity> myChildren;
 	@Hide
 	private DamageInfo myStats;
+
 	
 	public CreatorComponent(SpawningSystem spawning,
 			PhysicalSystem physical,
@@ -57,6 +60,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 			MovementSystem movement,
 			EntityFactory factory,
 			ComponentData data) {
+		mySpawning = spawning;
 		myPhysical = physical;
 		myTargeting = targeting;
 		myMovement = movement;
@@ -112,5 +116,10 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	@Override
 	public DamageInfo getStats() {
 		return myStats;
+	}
+
+	@Override
+	public void delete() {
+		mySpawning.detachComponent(this);
 	}
 }

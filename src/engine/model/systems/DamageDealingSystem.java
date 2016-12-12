@@ -30,7 +30,7 @@ public class DamageDealingSystem extends AbstractSystem<DamageDealingComponent> 
 		if(dmg != null)
 			dmg.explode();
 		else {
-		//c.getEntity().die();
+		c.getEntity().delete();
 		}
 	}
 }
