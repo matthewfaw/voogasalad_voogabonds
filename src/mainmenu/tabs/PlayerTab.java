@@ -33,7 +33,7 @@ public class PlayerTab extends Tab {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private TilePane playOptions;
+	private HBox playOptions;
 	private MainInitializer initializer;
 	
 	public PlayerTab(TabPane mainMenuTab, MainInitializer init) {
@@ -41,7 +41,7 @@ public class PlayerTab extends Tab {
 		this.root = mainMenuTab;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.playerTab = new Tab(myResources.getString("EnterPlayerMode"));
-		this.playOptions = new TilePane();
+		this.playOptions = new HBox(3);
 		playOptions.setId("background");
 		this.initializer = init;
 		populateTab();
