@@ -11,6 +11,7 @@ import engine.controller.ApplicationController;
 import gamePlayerView.Resources;
 import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
+import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
@@ -25,8 +26,12 @@ import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.builders.EntityInfoBox;
+<<<<<<< HEAD
 import gamePlayerView.builders.EntityInfoBoxBuilder;
 //import gamePlayerView.interfaces.ICashAcceptor;
+=======
+import gamePlayerView.interfaces.ICashAcceptor;
+>>>>>>> c2ec37ebde29318e490987877aa101aba04fc87b
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -55,6 +60,7 @@ public class GamePlayerScene {
 	private MapDisplay myMap;
 	private PauseMenu pause;
 	private Scene myScene;
+	private Controls myControls;
 	private Pane myGamePlayer;
 	private List<IPlayerAcceptor> myCash;
 	private List<IPlayerAcceptor> myLives; 
@@ -69,6 +75,7 @@ public class GamePlayerScene {
 
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
     	myAppController = aAppController;
+    	       myControls = new Controls();
 		myCash = new ArrayList<IPlayerAcceptor>();
 		myLives = new ArrayList<IPlayerAcceptor>();
 		myWaves = new ArrayList<IPlayerAcceptor>();
@@ -147,7 +154,8 @@ public class GamePlayerScene {
 		myLeftPane=createLeftPane();
 		myRightPane=createRightPane();
 		myBottomPane=createBottomPane();
-	    myMap = new MapDisplay(myAppController);
+	        myMap = new MapDisplay(myAppController);
+	        myMap.getControls(myControls);
 		//mySprites.add(myMap.getSprites());
 	    pause = new PauseMenu();
         makePauseMenu();
@@ -196,6 +204,7 @@ public class GamePlayerScene {
 
 
 	public void makePauseMenu(){ 
+	    pause.getControls(myControls);
             myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
     }
 	
@@ -238,6 +247,7 @@ public class GamePlayerScene {
 	//public List<ISprite> getSprites(){
 		//return mySprites;
 	//}
+<<<<<<< HEAD
 
 	public void updateDisplay(EntityInfoBox myStatisticsBox) {
 		myBottomPane.clear();
@@ -245,6 +255,13 @@ public class GamePlayerScene {
 		myCollection.add(myStatisticsBox.getView());
 		myBottomPane.add(myCollection);
 	}
+=======
+		public void updateDisplay(EntityInfoBox myStatisticsBox) {
+			myBottomPane.clear();
+			Collection<Node> myCollection=new ArrayList<Node>();
+			myCollection.add(myStatisticsBox.getView());
+			myBottomPane.add(myCollection);
+		}
+>>>>>>> c2ec37ebde29318e490987877aa101aba04fc87b
 	
 }
-

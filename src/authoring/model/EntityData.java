@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import engine.model.components.PurchasableComponentData;
-import engine.model.components.SellableComponentData;
-import engine.model.components.UpgradableComponentData;
+import engine.model.components.concrete.PurchasableComponentData;
+import engine.model.components.concrete.SellableComponentData;
+import engine.model.components.concrete.UpgradableComponentData;
 
 /**
  * @author owenchung and alanguo
@@ -16,14 +16,19 @@ import engine.model.components.UpgradableComponentData;
 
 public class EntityData implements IReadableData {
 	private String myName;
-	Map<String, ComponentData> myComponents;
-	Optional<UpgradableComponentData> myUpgradeData;
-	Optional<SellableComponentData> mySellData;
-	Optional<PurchasableComponentData> myPurchaseData;
+	private Map<String, ComponentData> myComponents;
+//	Optional<UpgradableComponentData> myUpgradeData;
+//	Optional<SellableComponentData> mySellData;
+//	Optional<PurchasableComponentData> myPurchaseData;
+	private UpgradableComponentData myUpgradeData;
+	private SellableComponentData mySellData;
+	private PurchasableComponentData myPurchaseData;
 	
 	public EntityData()
 	{
 		myComponents = new HashMap<String, ComponentData>();
+		myPurchaseData = new PurchasableComponentData();
+		mySellData = new SellableComponentData();
 	}
 	
 	public String getName(){
@@ -32,6 +37,30 @@ public class EntityData implements IReadableData {
 	
 	public void setName(String s){
 		this.myName = s;
+	}
+	
+	public void setSellableComponentData(SellableComponentData data) {
+		mySellData = data;
+	}
+	
+	public void setPurchasableComponentData(PurchasableComponentData data) {
+		myPurchaseData = data;
+	}
+	
+	/**
+	 * Sets the sell price for this entity.
+	 * @param price
+	 */
+	public void setSellPrice(int price) {
+		mySellData.setSellPrice(price);
+	}
+	
+	/**
+	 * Sets the buy price for this entity.
+	 * @param price
+	 */
+	public void setPurchasePrice(int price) {
+		myPurchaseData.setBuyPrice(price);
 	}
 	
 	public void addComponent(String aName, ComponentData comp){
@@ -43,15 +72,16 @@ public class EntityData implements IReadableData {
 	}
 
 	public int getBuyPrice() {
-		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
+		return myPurchaseData!=null ? myPurchaseData.getBuyPrice() : Integer.MAX_VALUE;
+//		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
 	}
 
 	public int getSellPrice() {
-		return mySellData.isPresent() ? mySellData.get().getSellValue() : 0;
+		return mySellData!=null ? mySellData.getSellValue() : 0;
 	}
 
 	public Map<String, Integer> getUpgrades() {
-		return myUpgradeData.isPresent() ? myUpgradeData.get().getUpgrades() : new HashMap<String, Integer>();
+		return myUpgradeData!=null ? myUpgradeData.getUpgrades() : new HashMap<String, Integer>();
 	}
 
 }

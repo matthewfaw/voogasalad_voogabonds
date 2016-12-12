@@ -46,29 +46,35 @@ public class GridToolBar {
 	private boolean toggleStatus;
 	private boolean spawnStatus;
 	private boolean sinkStatus;
-	private boolean imageStatus;
+	private boolean imageStatus = false;
+	private boolean setBackground = false;
 	private Color selectedColor;
 	private String selectedTerrain;
 	private String selectedImagePath;
-	private String selectedImage;
 	private Image mouseCursor;
 	private int screenHeight;
 	private int screenWidth;
 	private HashMap<String, Color> colorToTerrain;
 	private HashMap<String, String> imageToTerrain;
+	private HashMap<String, Boolean> boolToTerrain;
 	private ObservableList<String> terrainOptions = 
 			FXCollections.observableArrayList (
 					"Add Terrain..."
 					);
 	private MapDataContainer controller;
+	private ToggleButton myDraw;
+	private ToggleButton mySpawn;
+	private ToggleButton mySink;
 	
 	public GridToolBar(VBox box, Scene sc, MapDataContainer controller) {
 		setUpScreenResolution();
 		this.scene = sc;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.toolBar = new HBox();
+		toolBar.setId("hbox");
 		this.colorToTerrain = new HashMap<String, Color>();
 		this.imageToTerrain = new HashMap<String, String>();
+		this.boolToTerrain = new HashMap<String, Boolean>();
 		selectedColor = Color.WHITE;
 		this.selectedTerrain = myResources.getString("DNE");
 		this.controller = controller;
@@ -85,33 +91,42 @@ public class GridToolBar {
 	
 	private void createToolBar() {
 		ToggleGroup toggles = new ToggleGroup();
-		ToggleButton drawMode = new ToggleButton(myResources.getString("DrawMode"));
-		drawMode.setToggleGroup(toggles);
-		toggleHandler(toggles, drawMode);
-		ToggleButton setSpawnPoint = new ToggleButton(myResources.getString("SpawnPoint"));
-		setSpawnPoint.setToggleGroup(toggles);
-		spawnHandler(toggles, setSpawnPoint);
-		ToggleButton setSinkPoint = new ToggleButton(myResources.getString("SinkPoint"));
-		setSinkPoint.setToggleGroup(toggles);
-		sinkHandler(toggles, setSinkPoint);
+		myDraw = new ToggleButton(myResources.getString("DrawMode"));
+		myDraw.setToggleGroup(toggles);
+		myDraw.setId("button");
+		toggleHandler(toggles);
+		mySpawn = new ToggleButton(myResources.getString("SpawnPoint"));
+		mySpawn.setToggleGroup(toggles);
+		mySpawn.setId("button");
+		spawnHandler(toggles);
+		mySink = new ToggleButton(myResources.getString("SinkPoint"));
+		mySink.setToggleGroup(toggles);
+		mySink.setId("button");
+		sinkHandler(toggles);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
+		terrainChooser.setId("menu-combobox");
+		terrainChooser.setMinHeight(screenHeight*0.04);
 		terrainHandler(terrainChooser);
-		toolBar.getChildren().addAll(setSinkPoint, setSpawnPoint, drawMode, terrainChooser);
+		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser);
 	}
 	
 	/**
 	 * Sets toggleStatus to true if the draw mode toggle button is selected, or false if not.
 	 * @param drawMode
 	 */
-	private void toggleHandler(ToggleGroup drawGroup, ToggleButton drawMode)  {
+	private void toggleHandler(ToggleGroup drawGroup)  {
 		drawGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		            toggleStatus = false;
+		            myDraw.setId("button");
 		        }
 		        else {
-		        	if (drawGroup.getSelectedToggle().equals(drawMode)) {
+		        	if (drawGroup.getSelectedToggle().equals(myDraw)) {
+		        		myDraw.setId("button-selected");
+		        		mySpawn.setId("button");
+		        		mySink.setId("button");
 			            toggleStatus = true;
 			            spawnStatus = false;
 			            sinkStatus = false;
@@ -126,16 +141,20 @@ public class GridToolBar {
 		});
 	}
 	
-	private void spawnHandler(ToggleGroup spawnGroup, ToggleButton spawnMode) {
+	private void spawnHandler(ToggleGroup spawnGroup) {
 		spawnGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		    		spawnStatus = false;
 		    		scene.setCursor(Cursor.DEFAULT);
+		    		mySpawn.setId("button");
 		        }
 		        else {
-		        	if (spawnGroup.getSelectedToggle().equals(spawnMode)) {
+		        	if (spawnGroup.getSelectedToggle().equals(mySpawn)) {
+		        		myDraw.setId("button");
+		        		mySpawn.setId("button-selected");
+		        		mySink.setId("button");
 			        	toggleStatus = false;
 			        	spawnStatus = true;
 			        	sinkStatus = false;
@@ -146,16 +165,20 @@ public class GridToolBar {
 		});
 	}
 	
-	private void sinkHandler(ToggleGroup sinksGroup, ToggleButton sinkMode) {
+	private void sinkHandler(ToggleGroup sinksGroup) {
 		sinksGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 		    public void changed(ObservableValue<? extends Toggle> ov,
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		    		sinkStatus = false;
 		    		scene.setCursor(Cursor.DEFAULT);
+		    		mySink.setId("button");
 		        }
 		        else {
-		        	if (sinksGroup.getSelectedToggle().equals(sinkMode)) {
+		        	if (sinksGroup.getSelectedToggle().equals(mySink)) {
+		        		myDraw.setId("button");
+		        		mySpawn.setId("button");
+		        		mySink.setId("button-selected");
 			        	toggleStatus = false;
 			        	spawnStatus = false;
 			        	sinkStatus = true;
@@ -178,30 +201,56 @@ public class GridToolBar {
 				if (selectedItem.equals(myResources.getString("DefaultTerrainOption"))) {
 					Stage createTerrain = new Stage();
 					createTerrain.initModality(Modality.APPLICATION_MODAL);
+					VBox choiceContainer = new VBox(screenHeight*0.02);
 					HBox choiceArea = new HBox(screenWidth*0.01);
+					HBox toggleArea = new HBox(screenWidth*0.05);
 					ColorPicker colorChooser = new ColorPicker();
 					TextField terrainName = new TextField();
 					terrainName.setText(myResources.getString("TerrainName"));
 					Button chooseImage = new Button(myResources.getString("ChooseTerrainImage"));
 					confirmImageHandler(chooseImage);
+					ToggleGroup toggles = new ToggleGroup();
+					ToggleButton imageMode = new ToggleButton(myResources.getString("ImageMode"));
+					imageMode.setToggleGroup(toggles);
+					fillImageHandler(toggles, imageMode, terrainName);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
 					choiceArea.getChildren().addAll(colorChooser, chooseImage, terrainName, confirmTerrain);
+					toggleArea.getChildren().addAll(imageMode);					
+					choiceContainer.getChildren().addAll(choiceArea, toggleArea);
 					confirmTerrainHandler(createTerrain, terrainName, confirmTerrain, colorChooser);
-					Scene terrainChoiceScene = new Scene(choiceArea, screenWidth*0.3, screenHeight*0.1);
+					Scene terrainChoiceScene = new Scene(choiceContainer, screenWidth*0.3, screenHeight*0.1);
 					createTerrain.setScene(terrainChoiceScene);
+					createTerrain.setWidth(screenWidth*0.5);
 					createTerrain.show();
 				}
 				else {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
+					imageStatus = boolToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					if (imageStatus) {
-						selectedImage = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
+						selectedImagePath = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					}
 					else {
 						selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					}
 				}
-//				terrains.getSelectionModel().clearSelection();
+				terrains.getSelectionModel().clearSelection();
 			}
+		});
+	}
+	
+	private void fillImageHandler(ToggleGroup group, ToggleButton button, TextField field) {
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+		    public void changed(ObservableValue<? extends Toggle> ov,
+		        Toggle toggle, Toggle new_toggle) {		 
+		    	if (new_toggle == null) {
+		    		imageStatus = false;
+		    		setBackground = false;
+		        }
+		        else {
+		        	imageStatus = true;
+		        	setBackground = false;
+		        }
+		    }
 		});
 	}
 	
@@ -218,16 +267,22 @@ public class GridToolBar {
 		b.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle (ActionEvent event) {
 				terrainOptions.add(field.getText());
+				boolToTerrain.put(field.getText(), imageStatus);
 				if (imageStatus) {
 					imageToTerrain.put(field.getText(), selectedImagePath);
+					try {
+						controller.addValidTerrain(field.getText(), selectedImagePath);
+					} catch (Exception e) {
+						ErrorBox.displayError(myResources.getString("TerrainError"));
+					}
 				}
 				else {
 					colorToTerrain.put(field.getText(), colors.getValue());
-				}
-				try {
-					controller.addValidTerrain(field.getText(), colors.getValue().toString());
-				} catch (Exception e) {
-					ErrorBox.displayError(myResources.getString("TerrainError"));
+					try {
+						controller.addValidTerrain(field.getText(), colors.getValue().toString());
+					} catch (Exception e) {
+						ErrorBox.displayError(myResources.getString("TerrainError"));
+					}
 				}
 				createTerrain.close();
 			}
@@ -247,7 +302,6 @@ public class GridToolBar {
 	}
 		
 	public Color getSelectedColor() {
-		System.out.println(selectedColor);
 		return selectedColor;
 	}
 	
@@ -261,7 +315,6 @@ public class GridToolBar {
 	
 	public void setSelectedImagePath(String newPath) {
 		selectedImagePath = newPath;
-		imageStatus= true;
 	}
 	
 	public boolean getImageStatus() {

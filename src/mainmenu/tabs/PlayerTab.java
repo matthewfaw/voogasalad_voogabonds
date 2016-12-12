@@ -4,11 +4,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
 
+import authoring.controller.Router;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.MainInitializer;
 
@@ -18,6 +20,8 @@ import main.MainInitializer;
  */
 
 public class PlayerTab extends Tab {
+	private static final int SIZE = 255;
+	private static final int EXTRA_WIDTH = 72;
 	
 	private TabPane root;
 	private Tab playerTab;
@@ -25,7 +29,7 @@ public class PlayerTab extends Tab {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private VBox playOptions;
+	private HBox playOptions;
 	private MainInitializer initializer;
 	
 	public PlayerTab(TabPane mainMenuTab, MainInitializer init) {
@@ -33,7 +37,7 @@ public class PlayerTab extends Tab {
 		this.root = mainMenuTab;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.playerTab = new Tab(myResources.getString("EnterPlayerMode"));
-		this.playOptions = new VBox(screenHeight*0.1);
+		this.playOptions = new HBox(2);
 		this.initializer = init;
 		populateTab();
 		root.getTabs().add(playerTab);
@@ -46,6 +50,10 @@ public class PlayerTab extends Tab {
 	
 	private void populateBox() {
 		Button newGame = new Button(myResources.getString("PlayNewGame"));
+		newGame.getStylesheets().add("style.css");
+		newGame.setId("button");
+		newGame.setMinHeight(SIZE);
+		newGame.setMinWidth(SIZE + EXTRA_WIDTH);
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override 
 			public void handle(ActionEvent e) {
@@ -53,6 +61,10 @@ public class PlayerTab extends Tab {
 			}
 		});
 		Button loadGame = new Button(myResources.getString("PlayOldGame"));
+		loadGame.getStylesheets().add("style.css");
+		loadGame.setId("button");
+		loadGame.setMinHeight(SIZE);
+		loadGame.setMinWidth(SIZE + EXTRA_WIDTH);
 		loadGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {

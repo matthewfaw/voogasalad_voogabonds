@@ -6,7 +6,7 @@ package engine.model.weapons;
  * @author Weston
  *
  */
-@Deprecated
+
 public class DamageInfo {
 	private double myDamage;
 	private double myHealing;
@@ -22,6 +22,19 @@ public class DamageInfo {
 	
 	public DamageInfo() {
 		this(0, 0, 0, 0);
+	}
+
+	public DamageInfo(double healthDelta, int moneyGained, int unitsKilled) {
+		if (healthDelta > 0) {
+			myDamage = healthDelta;
+			myHealing = 0;
+		} else {
+			myDamage = 0;
+			myHealing = -healthDelta;
+		}
+		
+		myMoney = moneyGained;
+		myKills = unitsKilled;
 	}
 
 	public int getDamage(){

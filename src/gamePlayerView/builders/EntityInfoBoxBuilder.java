@@ -6,14 +6,13 @@ import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import javafx.scene.layout.HBox;
 
-public static class EntityInfoBoxBuilder {
+public class EntityInfoBoxBuilder {
 	//private EntityInfoBox myEntityInfoBox;
 	private final MachineInfo myMachineInfo;
 	private final UpgradeOrSell myUpgradeOrSell;
 	private final TargetingButtons myTargetingMechanism;
 	private HBox myEntityInfoBox;
 	private  GamePlayerScene  myGamePlayerScene;
-	private final String temp;
 	
 	public EntityInfoBoxBuilder(GamePlayerScene aGamePlayerScene)
 	{

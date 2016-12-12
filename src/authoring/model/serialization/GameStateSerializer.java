@@ -2,8 +2,14 @@ package authoring.model.serialization;
 
 import java.io.File;
 import java.util.AbstractMap;
+import java.util.List;
+import java.util.Map;
+
+import authoring.controller.LevelDataContainer;
 import authoring.controller.Router;
+import authoring.model.LevelData;
 import authoring.model.WaveData;
+import engine.exceptions.SerializationException;
 
 public class GameStateSerializer {
 
@@ -23,56 +29,18 @@ public class GameStateSerializer {
 	 * Note: This code is ugly as hell but I'm refactoring as soon as basic is ok.
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
+	 * @throws SerializationException 
 	 */
-	public void saveGameState(String gameName) throws InstantiationException, IllegalAccessException{
+	public void saveGameState(String gameName) throws InstantiationException, IllegalAccessException, SerializationException{
 
 		createNewDirectory(gameName,"");
 
-//		try {
-//			createNewDirectory("EnemyData", gameName);
-//			AbstractMap<String, EnemyData> ed = router.getEnemyDataController().finalizeEnemyDataMap();
-//			for (String edName : ed.keySet()){
-//				ser.serializeToFile(ed.get(edName), gameName+"/"+"EnemyData"+"/"+edName);
-//			}
-//		}catch(Exception e){
-//			System.out.println("Enemy fail");
-//		}
-//		try{
-//			createNewDirectory("TowerData", gameName);
-//			AbstractMap<String, TowerData> td = router.getTowerDataController().finalizeTowerDataMap();
-//			System.out.println(td);
-//			for (String tdName : td.keySet()){
-//				System.out.println(tdName);
-//				System.out.println(td.keySet());
-//			ser.serializeToFile(td.get(tdName), gameName+"/"+"TowerData"+"/"+tdName);
-//			}
-//		}catch(Exception e1){
-//			System.out.println("Tower fail");
-//		}
-//		try{
-//			createNewDirectory("WeaponData", gameName);
-//			AbstractMap<String, WeaponData> wd = router.getWeaponDataController().finalizeWeaponDataMap();
-//			for (String wdName : wd.keySet()){
-//			ser.serializeToFile(wd.get(wdName), "/"+gameName+"/"+"WeaponData"+"/"+wdName);
-//			}
-//			}catch(Exception e){
-//			System.out.println("Weapon fail");
-//		}
-//		try{
-//			createNewDirectory("ProjectileData", gameName);
-//			AbstractMap<String, ProjectileData> pd = router.getProjectileDataController().getProjectileDataMap();
-//			for (String pdName : pd.keySet()){
-//			ser.serializeToFile(pd.get(pdName), "/"+gameName+"/"+"ProjectileData"+"/"+pdName);
-//			}
-//		}catch(Exception e){
-//			System.out.println("Projectile fail");
-//		}
 		try{
 			createNewDirectory("EntityData", gameName);
 			ser.serializeToFile(router.getEntityDataContainer(), gameName+"/"+"EntityData"+"/"+"EntityData");
 		}
 		catch(Exception e){
-			System.out.println("Entity Fail");
+			throw new SerializationException("System was unable to load previous entity data.");
 		}
 		try{
 			createNewDirectory("WaveData", gameName);
@@ -81,19 +49,26 @@ public class GameStateSerializer {
 			ser.serializeToFile(wavd.get(wavdName), "/"+gameName+"/"+"WaveData"+"/"+wavdName);
 			}
 		}catch(Exception e){
-			System.out.println("Wave fail");
+			throw new SerializationException("System was unable to load previous wave data.");
+		}
+		try{
+			createNewDirectory("LevelData", gameName);
+			List<LevelData> ldc = router.getLevelDataContainer().finalizeLevelDataMap();
+			ser.serializeToFile(ldc, gameName+"/"+"LevelData"+"/"+"LevelData");
+		}catch(Exception e){
+			throw new SerializationException("System was unable to load previous level data.");
 		}
 		try{
 			createNewDirectory("MapData", gameName);
-			ser.serializeToFile(router.getMapDataContainer(), gameName+"/"+"MapDataContainer"+"/"+"MapData");
+			ser.serializeToFile(router.getMapDataContainer(), gameName+"/"+"MapData"+"/"+"MapData");
 		}catch(Exception e){
-			System.out.println("Map fail");
+			throw new SerializationException("System was unable to load previous map data.");
 		}
 		try{
 			createNewDirectory("PlayerData", gameName);
 			ser.serializeToFile(router.getPlayerDataContainer().getPlayerData(), gameName+"/"+"PlayerData"+"/"+"PlayerData");
 		}catch(Exception e){
-			System.out.println("Player fail");
+			throw new SerializationException("System was unable to load previous player data.");
 		}
 
 

@@ -46,6 +46,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 	
 	private VBox setUpMenu(String name, List<WaveData> selectedWaves) {
 		myV = new VBox();
+		myV.setId("vbox");
 		myNameField = setUpTextInputWithLabel(getResources().getString("EnterName"), name, myV);
 		Label wavesLabel = setUpLabel(getResources().getString("SelectWaves"));
 		myWaveChecks = new ArrayList<CheckBox>();
@@ -70,10 +71,16 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 
 	@Override
 	public void update(Container c) {
-		myWaves.clear();
 		if (c instanceof WaveDataContainer){
+			myWaves.clear();
 			for (WaveData wave: ((WaveDataContainer) c).getWaveMap().values()){
 				myWaves.add(wave);
+			}
+		}else if (c instanceof LevelDataContainer){
+			getList().clear();
+			for (LevelData level: ((LevelDataContainer) c).finalizeLevelDataMap()){
+				String name = level.getLevelName();
+				getList().add(name);
 			}
 		}
 	}
@@ -87,6 +94,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 
 	public Button setUpSubmitButton() {
 		Button finish = new Button(getResources().getString("Finish"));
+		finish.setId("button");
 		finish.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent event){
 				LevelData level = new LevelData();
@@ -106,8 +114,8 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 				}
 				myContainer.createNewLevelData(level);
 				getTilePane().getChildren().remove(myV);
-				getObservableList().remove(level.getLevelName());
-				getObservableList().add(level.getLevelName());
+//				getObservableList().remove(level.getLevelName());
+//				getObservableList().add(level.getLevelName());
 			}
 		});
 		return finish;

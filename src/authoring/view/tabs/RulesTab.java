@@ -30,11 +30,20 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 		myLosses.addAll(getResources().getString("NeverLose"), getResources().getString("HpLose"),
 				getResources().getString("NoMoneyLose"));
 		myContainer = container;
-		VBox menu = setUpMenu();
+		VBox menu;
+		if (myContainer.getPlayerData() == null)
+			menu = setUpMenu(getResources().getString("DefaultLives"), 
+					getResources().getString("DefaultCash"), null, null);
+		else
+			menu = setUpMenu(String.valueOf(myContainer.getPlayerData().getStartingLives()), 
+					String.valueOf(myContainer.getPlayerData().getStartingCash()), 
+					myContainer.getPlayerData().getWinStrategyName(), 
+					myContainer.getPlayerData().getLoseStrategyName());
+		menu.setId("vbox");
 		setContent(menu);
 	}
 
-	private VBox setUpMenu() {
+	private VBox setUpMenu(String lives, String cash, String win, String lose) {
 		VBox v = new VBox();
 		myLivesField = setUpTextInputWithLabel(getResources().getString("EnterLives"), 
 				getResources().getString("DefaultLives"), v);
@@ -51,9 +60,10 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 
 	public Button setUpSubmitButton() {
 		Button applyChanges = new Button(getResources().getString("ApplyChanges"));
+		applyChanges.setId("button");
 		applyChanges.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				PlayerData player = new PlayerData();
+				PlayerData player = myContainer.getPlayerData();
 				try {
 					player.setStartingLives(myLivesField.getText());
 					player.setStartingCash(myCashField.getText());
@@ -62,7 +72,6 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 				} catch(Exception e){
 					showError(e.getMessage());
 				}
-				myContainer.createPlayerData(player);
 			}
 		});
 		return applyChanges;

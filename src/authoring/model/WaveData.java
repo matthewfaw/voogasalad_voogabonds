@@ -36,6 +36,11 @@ public class WaveData implements IReadableData {
 	 */
 	private String spawnPointName;
 	
+	/**
+	 * A String corresponding to the sink point name, which should have an entry in the map.
+	 */
+	private String sinkPointName;
+	
 	@Override
 	public String getName(){
 		return name;
@@ -128,6 +133,16 @@ public class WaveData implements IReadableData {
 			throw new Exception("Spawn point name must be specified.");
 		}
 		this.spawnPointName = spawnPointName;
+	}
+	
+	public String getSinkPointName() {
+		return sinkPointName;
+	}
+	public void setSinkPointName(String sinkPointName) throws Exception{
+		if (sinkPointName == null || sinkPointName.length() == 0){
+			throw new Exception("Sink point name must be specified.");
+		}
+		this.sinkPointName = sinkPointName;
 	}
 	
 }

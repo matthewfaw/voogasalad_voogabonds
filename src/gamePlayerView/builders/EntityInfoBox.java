@@ -80,4 +80,3 @@ public class EntityInfoBox implements IGUIPiece {
 		}
 	}
 }
-
