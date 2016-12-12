@@ -29,11 +29,13 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	private ApplicationController myAppController;
 	private HBox myBottomPane=new HBox();
 	private ApplicationController myApplicationController;
+	//private Pane myGamePlayer;
 	
 	public BottomPane(){
     	//myAppController = aAppController;
+		//myGamePlayer=gamePlayer;
     	setUpPane();
-		myBottomPane.setPrefHeight(110);
+		//myBottomPane.setPrefHeight(110);
 		//myApplicationController=applicationController;
 	}
 	
@@ -41,8 +43,10 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	 * Creates the object that will actually be returned
 	 */
 	public void setUpPane() {
+		//myBottomPane.setPrefWidth(myGamePlayer.getWidth()*0.9);
+		//myBottomPane.setPrefHeight(myGamePlayer.getHeight()*0.14285);
 		myBottomPane.setPrefWidth(900);
-		myBottomPane.setMaxHeight(100);
+		myBottomPane.setPrefHeight(100);
 		myBottomPane.setPadding(new Insets(10, 10,10, 10));
 		myBottomPane.setSpacing(10);
 		myBottomPane.setStyle("-fx-background-color: #993384;");
