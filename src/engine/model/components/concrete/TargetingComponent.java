@@ -1,5 +1,6 @@
 package engine.model.components.concrete;
 
+import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ITargeting;
 import engine.model.strategies.IPosition;
@@ -17,9 +18,12 @@ public class TargetingComponent extends AbstractComponent implements ITargeting 
 	private PhysicalSystem myPhysical;
 	private TeamSystem myTeams;
 	
-	public TargetingComponent(PhysicalSystem physical, TeamSystem teams) {
+	public TargetingComponent(PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
 		myPhysical = physical;
 		myTeams = teams;
+		mySightRange = Double.parseDouble(componentData.getFields().get("mySightRange"));
+		mySightWidth = Double.parseDouble(componentData.getFields().get("mySightWidth"));
+		myTargetsEnemies = Boolean.parseBoolean(componentData.getFields().get("myTargestEnemies"));
 	}
 	
 	@Override
