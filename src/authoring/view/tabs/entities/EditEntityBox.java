@@ -20,6 +20,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -156,15 +158,15 @@ public class EditEntityBox extends VBox implements ISubmittable{
         return cleanedName;
     }
 
-    /**
-     * Code based from stackoverflow.com
-     * 
-     * @param smooshed
-     * @return
-     */
-    private String separateCapitalizedWords(String smooshed) {
-            return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
-    }
+//    /**
+//     * Code based from stackoverflow.com
+//     * 
+//     * @param smooshed
+//     * @return
+//     */
+//    private String separateCapitalizedWords(String smooshed) {
+//            return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
+//    }
 
     private void setUpComponentListView(AttributeFetcher fetcher, Set<String> components) {
         if (components != null) {
@@ -174,6 +176,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
         }
         myComponentsView = new ListView<String>(myComponents);
         myComponentsView.setOnMouseClicked(handleEditComponent(fetcher));
+        myComponentsView.setOnKeyPressed(handleKeyPress());
     }
 
     private HBox setUpButtonContainer(EntityListView entityView) {
@@ -266,6 +269,23 @@ public class EditEntityBox extends VBox implements ISubmittable{
             }
         };
         return handleEdit;
+    }
+    
+    private EventHandler<KeyEvent> handleKeyPress() {
+        EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle (KeyEvent event) {
+                String selected = myComponentsView.getSelectionModel().getSelectedItem();
+                if (selected != null && (event.getCode() == KeyCode.D || event.getCode() == KeyCode.BACK_SPACE)) {
+                    try {
+                        myComponents.remove(selected);
+                    } catch (Exception e) {
+                        myTab.showError(e.getMessage());
+                    }
+                }
+            }
+        };
+        return handler;
     }
 
     @Override
