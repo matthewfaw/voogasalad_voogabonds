@@ -107,16 +107,22 @@ public class MockGameDataConstructor {
 			ComponentData cd3 = new ComponentData();
 			cd3.setComponentName("MoveableComponent");
 			cd3.addField("myCollisionRadius", "50");
-			cd3.addField("myTurnSpeed", "10");
-			cd3.addField("myMoveSpeed", "100");
+			cd3.addField("myTurnSpeed", "1");
+			cd3.addField("myMoveSpeed", "1");
 			cd3.addField("myMaxDistance", "100");
-			cd3.addField("myMovementCalc", "PathMovementStrategy");
+			cd3.addField("myMovementCalc", "GreedyMovementStrategy");
 			
 	
 			ComponentData cd4 = new ComponentData();
 			cd4.setComponentName("DamageDealingComponent");
 			cd4.addField("myDamage", "50");
 			cd4.addField("myDamageRadius", "2");
+			
+			ComponentData cd5 = new ComponentData();
+			cd5.setComponentName("CreatorComponent");
+			cd5.addField("mySpawningStrategy", "BasicSpawningStrategy");
+			cd4.addField("myTimeBetweenSpawns", "10");
+			
 			
 			ed.addComponent("PhysicalComponent",cd1);
 			ed.addComponent("CollidableComponent",cd2);
@@ -142,7 +148,7 @@ public class MockGameDataConstructor {
 			
 			ComponentData CD3 = new ComponentData();
 			CD3.setComponentName("HealthComponent");
-			CD3.addField("myCurrentHealth", "9000");
+			CD3.addField("myCurrHealth", "9000");
 			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);
@@ -159,7 +165,7 @@ public class MockGameDataConstructor {
 			//Level data
 			WaveData wad1 = new WaveData();
 			wad1.setName("Cool wave");
-			wad1.setNumEnemies(10);
+			wad1.setNumEnemies(1);
 			wad1.setSpawnPointName("spawnPoint");
 			wad1.setSinkPointName("sinkPoint");
 			wad1.setTimeBetweenEnemy(20);
@@ -183,8 +189,8 @@ public class MockGameDataConstructor {
 			wad3.setWaveEntity("Awesome Tower2");
 			LevelData ld = new LevelData();
 			ld.addWaveDataListToList(wad1);
-			ld.addWaveDataListToList(wad2);
-			ld.addWaveDataListToList(wad3);
+			//ld.addWaveDataListToList(wad2);
+			//ld.addWaveDataListToList(wad3);
 			ld.setLevelName("0");
 			LevelDataContainer ldc = new LevelDataContainer();
 			ldc.createNewLevelData(ld);
@@ -195,9 +201,9 @@ public class MockGameDataConstructor {
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName()+1);
 			ser.serializeToFile(ed2, "exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2);
 			
-			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+"MapData", MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+"LevelData", LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			

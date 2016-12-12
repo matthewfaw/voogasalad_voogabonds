@@ -1,6 +1,5 @@
 package engine.model.game_environment.distributor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,8 +49,7 @@ public class MapDistributor {
 	private void createEntity(EntityData entityData) {
 		try {
 			myEntityFactory.constructEntity(entityData.getName());
-		} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e) {
+		} catch (UnsupportedOperationException e) {
 			e.printStackTrace();
 			// Router.distributeError("Can't construct entity.");
 		}

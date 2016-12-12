@@ -1,7 +1,7 @@
 package engine.model.components.concrete;
 
+import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
-import engine.model.entities.IEntity;
 
 /**
  * The purpose of this class is to manage which team an entity belongs to
@@ -11,16 +11,17 @@ import engine.model.entities.IEntity;
  *
  */
 public class TeamComponent extends AbstractComponent {
-	private IEntity myEntity;
 	private String myTeamID;
+	
+	public TeamComponent(ComponentData componentData) {
+		myTeamID = componentData.getFields().get("myTeamID");
+		
+	}
 	
 	public String getTeamID()
 	{
 		return myTeamID;
 	}
 	
-	@Override
-	public IEntity getEntity() {
-		return myEntity;
-	}
+
 }

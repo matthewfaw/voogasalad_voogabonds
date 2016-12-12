@@ -12,7 +12,9 @@ import utility.Damage;
  *
  */
 public class HealthSystem extends AbstractSystem<HealthComponent> {
-
+	public HealthSystem() {
+		
+	}
 	public boolean isDead(IEntity entity) {
 		HealthComponent healthComponent = getComponent(entity);
 		if (healthComponent == null)

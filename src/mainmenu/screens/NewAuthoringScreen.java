@@ -137,14 +137,6 @@ public class NewAuthoringScreen {
 		screenHeight = (int) screenSize.getHeight();
 	}
 	
-	private void setMapXDim(int newXDim) {
-		mapXDim = newXDim;
-	}
-	
-	private void setMapYDim(int newYDim) {
-		mapYDim = newYDim;
-	}
-	
 	private void setAuthoringName(String newName) {
 		authoringName = newName;
 	}
