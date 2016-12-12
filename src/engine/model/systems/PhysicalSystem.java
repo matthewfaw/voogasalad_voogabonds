@@ -10,7 +10,7 @@ import engine.model.game_environment.MapMediator;
 import utility.Point;
 
 public class PhysicalSystem extends AbstractSystem<PhysicalComponent> {
-	MapMediator myMap;
+	private transient MapMediator myMap;
 	
 	public PhysicalSystem(MapMediator map) {
 		myMap = map;

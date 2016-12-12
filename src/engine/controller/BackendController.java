@@ -68,15 +68,15 @@ public class BackendController {
 	private transient EntityFactory myEntityFactory;
 	
 	//Systems
-	private transient CollisionDetectionSystem myCollisionDetectionSystem;
-	private transient DamageDealingSystem myDamageDealingSystem;
-	private transient HealthSystem myHealthSystem;
-	private transient MovementSystem myMovementSystem;
-	private transient PhysicalSystem myPhysicalSystem;
-	private transient BountySystem myBountySystem;
-	private transient SpawningSystem mySpawningSystem;
-	private transient TargetingSystem myTargetingSystem;
-	private transient TeamSystem myTeamSystem;
+	private CollisionDetectionSystem myCollisionDetectionSystem;
+	private DamageDealingSystem myDamageDealingSystem;
+	private HealthSystem myHealthSystem;
+	private MovementSystem myMovementSystem;
+	private PhysicalSystem myPhysicalSystem;
+	private BountySystem myBountySystem;
+	private SpawningSystem mySpawningSystem;
+	private TargetingSystem myTargetingSystem;
+	private TeamSystem myTeamSystem;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{

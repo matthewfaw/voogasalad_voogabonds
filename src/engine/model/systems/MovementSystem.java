@@ -8,7 +8,7 @@ import engine.model.game_environment.MapMediator;
 import engine.model.strategies.StrategyFactory;
 
 public class MovementSystem extends AbstractSystem<MoveableComponent> implements IObserver<TimelineController> {
-	private StrategyFactory myStrategyFactory;
+	private transient StrategyFactory myStrategyFactory;
 	
 	
 	public MovementSystem (MapMediator map, TimelineController time) {
