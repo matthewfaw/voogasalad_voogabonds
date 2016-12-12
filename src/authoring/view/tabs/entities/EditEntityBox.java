@@ -67,6 +67,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
         retrieveEntityData(entityData);
         this.entityView = entityView;
         nameField = parent.setUpTextInputWithLabel(myTab.getResources().getString("EnterName"), entityName, this);
+        nameField.setId("textfield");
         setUpComponentBox(parent, fetcher);
         setUpComponentListView(fetcher, entityData.getComponents().keySet());
         HBox buttons = setUpButtonContainer(entityView);
