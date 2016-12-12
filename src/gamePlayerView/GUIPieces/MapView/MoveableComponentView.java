@@ -17,12 +17,12 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	private IObservable<IViewablePhysical> myObservable;
 	private String entityID;
 	
-    public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane, String id){
+    public MoveableComponentView(
+    		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane){
 
     	myAppController = aAppController;
     	myObservable = aObservable;
     	myPane = pane;
-    	entityID = id;
     }	
     
     public String getEntityID() {
@@ -31,7 +31,6 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 	@Override
 	public void update(IViewablePhysical aChangedObject) {
-		
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
 		String imagePath = aChangedObject.getImagePath();
 		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));

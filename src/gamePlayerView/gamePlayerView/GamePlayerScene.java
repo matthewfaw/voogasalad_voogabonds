@@ -157,9 +157,10 @@ public class GamePlayerScene {
 		//mySprites.add(myMap.getSprites());
 	        pause = new PauseMenu();
 	        makePauseMenu();
+	        myBorderPane.setCenter(myMap.getView());
 		myBorderPane.setRight(myRightPane.getView());
 		myBorderPane.setBottom(myBottomPane.getView());
-		myBorderPane.setCenter(myMap.getView());
+		
 		myBorderPane.setLeft(myLeftPane.getView());
 		myMap.setupDragging(myScene);
 		//return borderpane;

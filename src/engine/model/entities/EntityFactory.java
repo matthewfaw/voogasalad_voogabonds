@@ -65,6 +65,7 @@ public class EntityFactory {
 	public IEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws UnsupportedOperationException
 	{
+		System.out.println("Contructing an entity.");
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?
@@ -73,6 +74,7 @@ public class EntityFactory {
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
+//			component.setEntity(entity);
 			entity.addComponent(component);	
 		}
 		entity.setId(UUID.randomUUID().toString());
