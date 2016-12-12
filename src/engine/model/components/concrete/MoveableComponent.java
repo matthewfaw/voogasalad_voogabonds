@@ -150,7 +150,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	}
 
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 	

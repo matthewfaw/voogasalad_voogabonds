@@ -150,4 +150,9 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	public DamageInfo getStats() {
 		return myStats;
 	}
+	
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
 }

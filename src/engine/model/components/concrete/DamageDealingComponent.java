@@ -173,7 +173,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	}
 
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 }

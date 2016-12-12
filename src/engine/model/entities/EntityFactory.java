@@ -1,9 +1,11 @@
 package engine.model.entities;
 
 import java.util.Arrays;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
@@ -59,6 +61,8 @@ public class EntityFactory {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
 			entity.addComponent(component);	
 		}
+		// give entity a unique id
+		entity.setId(UUID.randomUUID().toString());
 		
 		return entity;
 	}

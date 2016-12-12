@@ -71,7 +71,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		//notifyObservers();
 	}
 	
-	public DamageInfo takeDamage(Damage dmg) {
+	public String takeDamage(Damage dmg) {
 		double newCurrHealth = myCurrHealth - dmg.getDamage();
 		
 		if (newCurrHealth < 0) {

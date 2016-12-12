@@ -122,7 +122,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	}
 
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 }

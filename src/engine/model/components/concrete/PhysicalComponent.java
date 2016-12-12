@@ -126,7 +126,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	}
 	
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 }

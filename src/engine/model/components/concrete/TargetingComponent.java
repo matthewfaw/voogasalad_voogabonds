@@ -92,7 +92,7 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	}
 
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 	

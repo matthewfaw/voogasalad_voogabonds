@@ -14,6 +14,7 @@ import engine.model.components.IModifiableComponent;
 public class ConcreteEntity implements IEntity {
 	private List<IObserver<IEntity>> myObservers;
 	private List<IComponent> myComponents;
+	private String myID;
 	
 	/**
 	 * This object should only be constructed in this
@@ -27,8 +28,13 @@ public class ConcreteEntity implements IEntity {
 	}
 
 	@Override
-	public int getId() {
-		return hashCode();
+	public String getId() {
+		return myID;
+	}
+	
+	@Override
+	public void setId(String uniqueID) {
+		myID = uniqueID;
 	}
 
 	@Override
@@ -63,7 +69,5 @@ public class ConcreteEntity implements IEntity {
 	public void notifyObservers() {
 		myObservers.stream().forEach(o -> o.update(this));
 	}
-
-	
 
 }

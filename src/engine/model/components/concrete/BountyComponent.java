@@ -65,7 +65,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 		myObservers.forEach(observer -> observer.update(this));
 	}
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 

@@ -14,5 +14,5 @@ public interface IViewable {
 	 * Returns the entity ID associated with this viewable.
 	 * @return
 	 */
-	public Integer getEntityID();
+	public String getEntityID();
 }

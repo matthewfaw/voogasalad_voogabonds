@@ -58,7 +58,7 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	}
 	
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
 
