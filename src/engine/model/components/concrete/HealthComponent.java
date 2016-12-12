@@ -24,16 +24,8 @@ import utility.Point;
  * manages how an entity should take damage
  * @author matthewfaw
  * @author Weston
-<<<<<<< HEAD
- * @author owenchung (edit)
- *
-||||||| merged common ancestors
- * @author owenchung (edits)
- *
-=======
  * @author owenchung (edits)
  * @author alanguo (edits)
->>>>>>> health
  */
 public class HealthComponent extends AbstractComponent implements IViewableHealth{
 	@Hide
