@@ -136,11 +136,9 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	
 	
 	public void removeSpawnPoints(String name){
-		if (spawnPoints.containsKey(name)){
 			spawnPoints.remove(name);
 			notifyObservers();
 			System.out.println("Removed Spawn Point " + name);
-		}
 	}
 	
 	public List<Point> getSpawnPoints(String name){
@@ -172,11 +170,9 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	}
 	
 	public void removeSinkPoint(String name){
-		if (sinkPoints.containsKey(name)){
 			sinkPoints.remove(name);
 			notifyObservers();
 			System.out.println("Removed Sink Point " + name);
-		}
 	}
 	
 	public List<Point> getSinkPoints(String name){
