@@ -56,6 +56,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myHeading = 0;
 		
 		physical.attachComponent(this);
+		System.out.println("Routing a physical component.");
 		router.createNewViewableComponent(this);
 		setPosition(position);
 	}
@@ -119,7 +120,8 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 
 	@Override
 	public void notifyObservers() {
-		myObservers.forEach(observer -> observer.update(this));
+		for (IObserver<IViewablePhysical> o: myObservers)
+			o.update(this);
 	}
 
 	/***** Component interface ******/

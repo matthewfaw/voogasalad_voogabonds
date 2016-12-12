@@ -28,4 +28,8 @@ public class TerrainImage extends ImageView {
 		});
 	}
 	
+	public String getImagePath(){
+		return imagePath;
+	}
+	
 }

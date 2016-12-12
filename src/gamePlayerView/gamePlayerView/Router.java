@@ -53,7 +53,7 @@ public class Router {
 	 * Should happen whenever a new PhysicalComponent is constructed.
 	 */
 	public void createNewViewableComponent(IViewablePhysical physicalComponent) {
-		myGamePlayerScene.getMapDisplay().giveViewableComponent(physicalComponent, physicalComponent.getEntityID());
+		myGamePlayerScene.getMapDisplay().giveViewableComponent(physicalComponent);
 	}
 	
 	public void distributeErrors(String aErrorMessage)

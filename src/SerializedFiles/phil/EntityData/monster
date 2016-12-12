@@ -1,1 +1,0 @@
-{"myName":"monster","myComponents":{"Health Component":{"myFields":{"Curr Health":"100","Max Health":"100","explode On Death":"Yes"}},"Creator Component":{"myFields":{"Spawn Name":"Poop on a stick","Time Between Spawns":"20","Spawning Strategy":"Spawning Strategy 1"}}},"mySellData":{"mySellValue":0},"myPurchaseData":{"myPurchaseValue":0}}

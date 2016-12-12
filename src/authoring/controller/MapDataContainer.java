@@ -32,6 +32,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	private int numXCells;
 	private int numYCells;
 	private int cellSize;
+	private String myTune;
 	
 	private transient ArrayList<IObserver<Container>> myListeners = new ArrayList<IObserver<Container>>();
 	
@@ -70,6 +71,24 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	public String getName()
 	{
 		return myName;
+	}
+	
+	/**
+	 * @return name of sound file
+	 */
+	public String getTune() {
+	    return myTune;
+	}
+	
+	/**
+	 * @param soundFile - .mp3 or .wav file
+	 */
+	public void setTune(String soundFile) throws Exception {
+	    if (soundFile.endsWith(".mp3") || soundFile.endsWith(".wav")) {
+	        myTune = soundFile;
+	    } else {
+	        throw new Exception("Invalid sound file. Please enter an MP3 or WAV file.");
+	    }
 	}
 	
 	/**
@@ -136,11 +155,9 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	
 	
 	public void removeSpawnPoints(String name){
-		if (spawnPoints.containsKey(name)){
 			spawnPoints.remove(name);
 			notifyObservers();
 			System.out.println("Removed Spawn Point " + name);
-		}
 	}
 	
 	public List<Point> getSpawnPoints(String name){
@@ -172,11 +189,9 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	}
 	
 	public void removeSinkPoint(String name){
-		if (sinkPoints.containsKey(name)){
 			sinkPoints.remove(name);
 			notifyObservers();
 			System.out.println("Removed Sink Point " + name);
-		}
 	}
 	
 	public List<Point> getSinkPoints(String name){
