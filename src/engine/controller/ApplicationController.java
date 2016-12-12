@@ -179,6 +179,14 @@ public class ApplicationController {
 	public void DisplayStats() throws Exception {
 		myScene.updateTowerStatisticsRow();
 	}
+
+	public void onFirstPressed() {
+		// TODO Auto-generated method stub
+	}
+
+	public void onLastPressed() {
+		// TODO Auto-generated method stub
+	}
 	
 	/*
 	public static void main(String[] args)

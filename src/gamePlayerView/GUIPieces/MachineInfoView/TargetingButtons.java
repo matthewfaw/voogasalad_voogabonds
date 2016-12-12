@@ -1,5 +1,6 @@
 package gamePlayerView.GUIPieces.MachineInfoView;
 
+import engine.controller.ApplicationController;
 import gamePlayerView.interfaces.IGUIPiece;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,16 +13,17 @@ import javafx.scene.layout.HBox;
 
 public class TargetingButtons implements IGUIPiece {
 	private HBox targetOptions;
-	public TargetingButtons(){
+	private ApplicationController myAppController;
+	public TargetingButtons(ApplicationController appController){
 		targetOptions=makeTargetingButtons();
+		myAppController=appController;
 	}
 	
 	private HBox makeTargetingButtons() {
 		Button b1= makeButton("First");
-		//b1.setOnAction(e->myAppController.onFirstPressed());
-		//b1.setOnAction(e->b1.setStyle("-fx-background-color: linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
+		b1.setOnAction(e->myAppController.onFirstPressed());
 		Button b2= makeButton("Last");
-		//b2.setOnAction(e->myAppController.onFirstPressed());
+		b2.setOnAction(e->myAppController.onLastPressed());
 		Button b3= makeButton("Strongest");
 		//b3.setOnAction(e->myAppController.onFirstPressed());
 		Button b4= makeButton("Weakest");

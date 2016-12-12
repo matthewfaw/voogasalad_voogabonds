@@ -5,6 +5,7 @@ import java.util.List;
 
 import authoring.model.TowerData;
 import engine.controller.ApplicationController;
+import engine.model.components.viewable_interfaces.IViewableUpgrade;
 import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.IGUIPiece;
 import javafx.collections.FXCollections;
@@ -28,14 +29,14 @@ import javafx.scene.text.Font;
  * 
  */
 
-public class UpgradeOrSell implements IGUIPiece {
+public class UpgradeUI implements IGUIPiece {
 	private HBox myDisplay;
 	private ApplicationController myAppController;
 	private HashMap towerMapping;
 	private HBox myUpgradeSet;
 	private ListView<ImageView> upgradeInfo;
 	
-	public UpgradeOrSell(/*TowerData tower,ApplicationController applicationController*/){
+	public UpgradeUI(IViewableUpgrade aComponent/*TowerData tower,ApplicationController applicationController*/){
 		//myDisplay=makeDisplay(tower);
 		//myAppController=applicationController;
 		towerMapping=new HashMap<ImageView,TowerData>();
@@ -44,17 +45,12 @@ public class UpgradeOrSell implements IGUIPiece {
 
 	private HBox buildHBox() {
 		
-		VBox upgradeOrSell=new VBox();
-		upgradeOrSell.setSpacing(10);
-		Button SellButton=new Button("Sell");
-		SellButton.setPrefSize(100, 20);
-		SellButton.setStyle("-fx-background-color: linear-gradient(#f0aa35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
-		SellButton.setOnAction(e->myAppController.onSellButtonPressed());
+		VBox upgrade=new VBox();
 		Button UpgradeButton=new Button("Upgrade");
 		UpgradeButton.setStyle("-fx-background-color: linear-gradient(#f0aa35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
 		UpgradeButton.setPrefSize(100, 20);
 		UpgradeButton.setOnAction(e->myAppController.onUpgradeButtonPressed());
-		upgradeOrSell.getChildren().addAll(SellButton,UpgradeButton);
+		upgrade.getChildren().add(UpgradeButton);
 		
 		HBox hbox=new HBox();
 		hbox.setSpacing(10);
@@ -66,8 +62,7 @@ public class UpgradeOrSell implements IGUIPiece {
 	    resourceTabs.getTabs().add(buildTab(upgradeInfo,"Path 2"));
 	    //resourceTabs.getTabs().add(buildTab(upgradeInfo,"Path 3"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-	    
-	    hbox.getChildren().addAll(resourceTabs,upgradeOrSell);
+	    hbox.getChildren().addAll(resourceTabs,upgrade);
 	    
 	    return hbox;
 	}

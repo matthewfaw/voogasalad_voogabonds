@@ -49,7 +49,7 @@ public class GamePlayOptions implements IGUIPiece,IButtonMaker {
 		return vbox;
 	}
 	
-	private Button makeButton(String string) {
+	public Button makeButton(String string) {
 		Button b= new Button(string);
 		b.setPrefSize(80, 20);
 		//b.setId(value);
@@ -60,11 +60,5 @@ public class GamePlayOptions implements IGUIPiece,IButtonMaker {
 	@Override
 	public Node getView() {
 		return myGamePlayOptions;
-	}
-
-	@Override
-	public Button makeButton() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

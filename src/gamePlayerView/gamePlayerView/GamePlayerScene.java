@@ -19,7 +19,7 @@ import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatistics;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
-import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
+import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
@@ -73,7 +73,7 @@ public class GamePlayerScene {
 
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
     	myAppController = aAppController;
-    	       myControls = new Controls();
+    	myControls = new Controls();
 		myCash = new ArrayList<IPlayerAcceptor>();
 		myLives = new ArrayList<IPlayerAcceptor>();
 		myWaves = new ArrayList<IPlayerAcceptor>();
@@ -83,7 +83,7 @@ public class GamePlayerScene {
 		myBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
-		myBuilder=new EntityInfoBoxBuilder(this);
+		myBuilder=new EntityInfoBoxBuilder(this,myAppController);
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
@@ -133,15 +133,15 @@ public class GamePlayerScene {
 		myBottomPane.clear();
 		Collection<Node> myCollection=new ArrayList<Node>();
 		TowerStatistics myTowerStatistics=new TowerStatistics();
-		TargetingButtons myTargetingMechanism=new TargetingButtons();
+		TargetingButtons myTargetingMechanism=new TargetingButtons(myAppController);
 		VBox myTowerOptions=new VBox();
 		myTowerOptions.setSpacing(10);
 		myTowerOptions.getChildren().addAll(myTowerStatistics.getView(),myTargetingMechanism.getView());
-	    UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
-	    MachineInfo myInfo=new MachineInfo();
-	    myCollection.add(myInfo.getView());
+	    //UpgradeUI myUpgradeandSell=new UpgradeUI();
+	    //MachineInfo myInfo=new MachineInfo();
+	   // myCollection.add(myInfo.getView());
 		myCollection.add(myTowerOptions);
-		myCollection.add(myUpgradeandSell.getView());
+		//myCollection.add(myUpgradeandSell.getView());
 		myBottomPane.add(myCollection);
 		myBorderPane.setBottom(myBottomPane.getView());
 	}

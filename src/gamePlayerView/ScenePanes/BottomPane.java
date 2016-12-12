@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import engine.controller.ApplicationController;
 import gamePlayerView.Styles;
-import gamePlayerView.GUIPieces.MachineInfoView.UpgradeOrSell;
+import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
 import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
