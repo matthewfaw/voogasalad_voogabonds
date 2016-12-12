@@ -39,9 +39,6 @@ public class AuthorDisplay {
         this.router = r;
         // Set up BorderPane
         root = pane;
-        // bind to take available space
-//        root.prefHeightProperty().bind(pane.heightProperty());
-//        root.prefWidthProperty().bind(pane.widthProperty());
         
         // Set up Top Toolbar
         topMenuBar = new TopMenuBar(pane, router);
