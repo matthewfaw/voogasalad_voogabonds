@@ -103,7 +103,7 @@ public class MapGrid extends Node {
         //get info to come up on click
         //m.getInfo();
     	myAppController.DisplayStats();
-        System.out.println("hi");
+        //System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)
@@ -134,9 +134,9 @@ public class MapGrid extends Node {
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 Rectangle temp = actualGrid[i][j];
-                if(calculateDistance(x, y, temp.getX(), temp.getY()) < minDist)
+                if(calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth()) < minDist)
                         {
-                            minDist = calculateDistance(x, y, temp.getX(), temp.getY());
+                            minDist = calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth());
                             closest = temp;
                         }
                 else
@@ -147,9 +147,9 @@ public class MapGrid extends Node {
         return closest;
     }
     
-    private double calculateDistance (double x, double y, double x2, double y2) {
-        return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
-                         + Math.pow((y - (y2 + myCellSize/2)), 2));
+    private double calculateDistance (double x, double y, double x2, double y2, double tempHeight, double tempWidth) {
+        return Math.sqrt(Math.pow((x - (x2+tempWidth/2)), 2)
+                         + Math.pow((y - (y2 + tempWidth/2)), 2));
     }
    
 

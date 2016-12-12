@@ -21,6 +21,7 @@ public class PauseMenu {
         myStage = new Stage();
         myStage.setTitle("Pause");
         myWindow = new Scene(myRoot, 220,200);
+        controls = new ControlsMenu();
         myWindow.setFill(Color.DODGERBLUE);
         myStage.setScene(myWindow);
     }
@@ -29,9 +30,6 @@ public class PauseMenu {
         switch(code){
             case P:
                 init();
-                break;
-            case SPACE:
-                ErrorPopup e = new ErrorPopup("Hey! It's a popup!");
                 break;
             default:
                 return;
@@ -65,7 +63,7 @@ public class PauseMenu {
                 kill();
                 break;
             case "CONTROLS":
-                controls = new ControlsMenu();
+               
                 kill();
                 controls.init();
             default:
@@ -77,7 +75,9 @@ public class PauseMenu {
         myStage.show();
     }
   
-    
+    public void getControls(Controls cont){
+        controls.getControlsToDisplay(cont);
+    }
     //method to get controls
     
     public void kill(){

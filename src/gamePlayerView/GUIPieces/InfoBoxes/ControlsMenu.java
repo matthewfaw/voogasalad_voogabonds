@@ -3,6 +3,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import javafx.event.EventHandler;
@@ -23,7 +25,6 @@ public class ControlsMenu{
     private VBox labels;
     private Controls myControls;
     private String buttonCSS = "-fx-font: 22 arial; -fx-base: #6de894;";
-
     
     public ControlsMenu(){
         myRoot = new Pane();
@@ -36,6 +37,7 @@ public class ControlsMenu{
         myControls = new Controls();
         buttons = new VBox();
         labels = new VBox();
+        
     }
     
     public void init(){
@@ -44,7 +46,8 @@ public class ControlsMenu{
         addApplyButton();
         myStage.show();
     }
-    
+
+
     private void addApplyButton () {
         Button apply = new Button();
         apply.setLayoutX(150);
@@ -58,13 +61,11 @@ public class ControlsMenu{
     
     
     private void saveControls () {
-//        ArrayList<String> newControls = new ArrayList<String>();
-//        for(int i = 0; i < buttons.getChildren().size(); i++){
-//            newControls.add(buttons.getChildren().get(i).toString().substring(48));
-//            newControls.set(i, newControls.get(i).substring(0, newControls.get(i).length()-1));
-//            System.out.println(newControls.get(i));
-//        }
-//        myControls.setControls(newControls);
+        
+        myControls.setControls(myControls.getControls());
+        kill();
+//        System.out.println(myControls.getFunctions());
+//        System.out.println(myControls.getControls());
     }
     
     public void displayFunctions(){
@@ -82,6 +83,13 @@ public class ControlsMenu{
         labels.setLayoutX(50);
         labels.setLayoutY(30);
         myRoot.getChildren().add(labels);
+    }
+    
+    public void kill(){
+        myRoot.getChildren().clear();
+        labels.getChildren().clear();
+        buttons.getChildren().clear();
+        myStage.close();
     }
     
     public void displayControls(){
@@ -107,10 +115,22 @@ public class ControlsMenu{
             myWindow.setOnKeyPressed(e -> 
                 handleKeyInput(e.getCode(), myButton));
     }
+    
     private void handleKeyInput(KeyCode code, ToggleButton myButton){
        if(myButton.isSelected()){
+           myControls.setControlFor(myControls.getFunctions()
+                                 .get(myControls.getControls().
+                                      indexOf(myButton.getText())), code.getName());
+//           System.out.println(myControls.getControlFor(myControls.getFunctions()
+//                              .get(myControls.getControls()
+//                               .indexOf(myButton.getText()))));
            myButton.setText(code.getName());
            myButton.setSelected(false);
+           
        }
+    }
+
+    public void getControlsToDisplay(Controls cont) {
+        myControls = cont;
     }
 }
