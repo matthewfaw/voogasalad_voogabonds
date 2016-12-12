@@ -32,7 +32,6 @@
 #label {
 -fx-text-fill: #2D3640;
 -fx-font-size: 20px;
--fx-effect: dropshadow(gaussian, black, 10, 0.0, 2, 2);
 }
 
 #hbox {
