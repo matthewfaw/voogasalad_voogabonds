@@ -1,9 +1,15 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewableCollidable;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
@@ -18,13 +24,16 @@ import engine.model.systems.PhysicalSystem;
  * @author matthewfaw
  *
  */
-public class CollidableComponent extends AbstractComponent implements ICollidable {
+public class CollidableComponent extends AbstractComponent implements ICollidable, IViewableCollidable {
 	private double myCollisionRadius;
 	
 	@Hide
 	private PhysicalSystem myPhysicalSystem;
 	@Hide
 	private DamageDealingSystem myDamageDealingSystem;
+	
+	@Hide
+	private List<IObserver<IViewable>> myObservers;
 	
 	public CollidableComponent (
 			CollisionDetectionSystem collisionDetectionSystem, 
@@ -33,7 +42,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			DamageDealingSystem damageDealingSystem, 
 			BountySystem rewardSystem,
 			ComponentData data) {
-		
+		myObservers = new ArrayList<IObserver<IViewable>>();
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
 		
@@ -43,6 +52,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	}
 
 	//*******************ICollidable interface***********//
+	@Override
 	public double getCollisionRadius()
 	{
 		return myCollisionRadius;
@@ -84,5 +94,27 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private void dealDamage(CollidableComponent a, CollidableComponent b) {
 		myDamageDealingSystem.dealDamageToTarget(a, b);
 
+	}
+
+	@Override
+	public void distributeInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
 	}
 }

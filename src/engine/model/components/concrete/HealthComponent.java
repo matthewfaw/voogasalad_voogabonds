@@ -122,7 +122,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 
 	@Override
 	public void distributeInfo() {
-		myRouter.distributeViewableComponent(this);
+		// TODO: pass router this
+//		myRouter.distributeViewableComponent(this);
 	}
 	
 }
