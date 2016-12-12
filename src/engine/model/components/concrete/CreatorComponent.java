@@ -42,7 +42,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	@Hide
 	private MovementSystem myMovement;
 	
-	public CreatorComponent(SpawningSystem spawning, PhysicalSystem physical, TargetingSystem targeting, MovementSystem movement, EntityFactory factory, ComponentData data) {
+	public CreatorComponent(SpawningSystem spawning,
+			PhysicalSystem physical,
+			TargetingSystem targeting,
+			MovementSystem movement,
+			EntityFactory factory,
+			ComponentData data) {
 		myPhysical = physical;
 		myTargeting = targeting;
 		myMovement = movement;

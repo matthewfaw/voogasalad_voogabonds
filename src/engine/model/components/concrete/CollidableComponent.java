@@ -1,5 +1,6 @@
 package engine.model.components.concrete;
 
+import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
@@ -30,10 +31,13 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
 			DamageDealingSystem damageDealingSystem, 
-			BountySystem rewardSystem) {
+			BountySystem rewardSystem,
+			ComponentData data) {
 		
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
+		
+		myCollisionRadius = Double.parseDouble("myCollisionRadius");
 		
 		collisionDetectionSystem.attachComponent(this);
 	}
