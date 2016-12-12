@@ -31,6 +31,14 @@ public class Router {
 		ldc.notifyObservers();
 	}
 	
+	public void clearContainers(){
+		mdc = new MapDataContainer();
+		edc = new EntityDataContainer();
+		pldc = new PlayerDataContainer();
+		ldc = new LevelDataContainer();
+		wadc = new WaveDataContainer();
+	}
+	
 	
 	public MapDataContainer getMapDataContainer(){
 		return mdc;
