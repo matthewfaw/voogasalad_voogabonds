@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
  * Sets up the top menu bar that will allow the user to perform multiple actions, including accessing a help menu, oepning and closing workspaces, playing the game,
  * deleting towers, adding enemies, and personalize the workspace among multiple other things.
  */
+@Deprecated
 public class FileMenuBar extends MenuBar {
     private List<Menu> myMenus;
     private Router router;
