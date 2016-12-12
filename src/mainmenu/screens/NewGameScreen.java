@@ -60,7 +60,7 @@ public class NewGameScreen {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.stage = new Stage();
-		stage.setTitle(myResources.getString("NEW GAME"));
+		stage.setTitle(myResources.getString("PlayNewGame"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
 		scene.getStylesheets().add("style.css");
