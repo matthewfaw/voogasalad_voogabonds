@@ -4,7 +4,6 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
-import gamePlayerView.interfaces.ILivesAcceptor;
 
 /**
  * @author Guhan Muruganandam

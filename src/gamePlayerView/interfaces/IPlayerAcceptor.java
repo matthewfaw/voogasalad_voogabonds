@@ -3,19 +3,20 @@ package gamePlayerView.interfaces;
 import engine.IObservable;
 import engine.model.playerinfo.IViewablePlayer;
 
-/*
+
+/**
  * @author Guhan Muruganandam
  */
 
 /**
- * LivesBox interface utilised by the router.
+ *  interface utilised by the router.
  */
 
-public interface ILivesAcceptor{
+public interface IPlayerAcceptor{
 	
  /**
  * Allows router to establish connection between backend and frontend object 
  */
-	public void acceptLives(IObservable<IViewablePlayer> aPlayer);
+	public void acceptPlayer(IObservable<IViewablePlayer> aPlayer);
 	
 }
