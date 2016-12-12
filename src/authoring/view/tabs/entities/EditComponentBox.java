@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -36,7 +37,8 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private final String MOVEMENT = "movement";
     private final String SPAWNING = "spawning";
     private final String TARGET = "target";
-    private final String WIN_LOSE = "winlose";
+    private final String WIN = "win";
+    private final String LOSE = "lose";
     private final String EXTENSION = ".class";
     public static final String IMAGE_PATH = "myImagePath";
     public static final String DONE = "Done";
@@ -87,11 +89,22 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     FileRetriever fr;
                     
                     if (uglyAttributeName.toLowerCase().contains(DAMAGE)) {
-                        // Damage
                         fr = new FileRetriever(PACKAGE+DAMAGE);
-                        fileList = fr.getFileNames("/");
-                        //grandparent.setUpStringComboBoxWithLabel(select, defaultText, values, root)
+                    } else if (uglyAttributeName.toLowerCase().contains(MOVEMENT)) {
+                        fr = new FileRetriever(PACKAGE+MOVEMENT);
+                    } else if (uglyAttributeName.toLowerCase().contains(SPAWNING)) {
+                        fr = new FileRetriever(PACKAGE+SPAWNING);
+                    } else if (uglyAttributeName.toLowerCase().contains(TARGET)) {
+                        fr = new FileRetriever(PACKAGE+TARGET);
+                    } else if (uglyAttributeName.toLowerCase().contains(WIN) || uglyAttributeName.toLowerCase().contains(LOSE)) {
+                        fr = new FileRetriever(PACKAGE+WIN+LOSE);
+                    } else {
+                        fr = new FileRetriever(PACKAGE+MOVEMENT);
                     }
+                    
+                    fileList = fr.getFileNames("/");
+                    ComboBox<String> strategyChoice = grandparent.setUpStringComboBoxWithLabel(lbl.getText(), null, FXCollections.observableArrayList(fileList), this);
+                    
                 }
                 TextField field = new TextField();
                 setUpLabeledField(lbl, field);
