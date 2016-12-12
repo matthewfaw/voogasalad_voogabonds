@@ -80,17 +80,19 @@ public class MockGameDataConstructor {
 			MapDataContainer md = this.getMockMapData();
 			
 			//Sell/Buy data
-			PurchasableComponentData pcd = new PurchasableComponentData();
-			pcd.setBuyPrice(50);
+			ComponentData pcd = new ComponentData();
+			pcd.setComponentName("PurchasableComponentData");
+			pcd.addField("myPurchacePrice", "50");
 			
-			SellableComponentData scd = new SellableComponentData();
-			scd.setSellPrice(25);
+			ComponentData scd = new ComponentData();
+			scd.setComponentName("SellableComponentData");
+			scd.addField("mySellPrice", "50");
 			
 			// Entity data
 			EntityData ed  = new EntityData();
 			
-			ed.setPurchasableComponentData(pcd);
-			ed.setSellableComponentData(scd);
+			ed.addComponent("PurchasableComponentData", pcd);
+			ed.addComponent("SellableComponentData", scd);
 			
 			ed.setName("Awesome Tower1");
 			ComponentData cd1 = new ComponentData();
@@ -135,8 +137,8 @@ public class MockGameDataConstructor {
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
 			
-			ed2.setPurchasableComponentData(pcd);
-			ed2.setSellableComponentData(scd);
+			ed2.addComponent("PurchasableComponentData", pcd);
+			ed2.addComponent("SellableComponentData", scd);
 			
 			ed2.setName("Awesome Tower2");
 			ComponentData CD1 = new ComponentData();

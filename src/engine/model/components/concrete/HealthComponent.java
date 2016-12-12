@@ -35,7 +35,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private DamageDealingSystem myDamage;
 	@Hide
 	private HealthSystem myHealthSystem;
-
+	@Hide
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private boolean explodeOnDeath;
