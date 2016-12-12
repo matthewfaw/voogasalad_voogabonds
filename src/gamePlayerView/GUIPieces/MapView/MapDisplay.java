@@ -1,9 +1,12 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
+
+import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.model.machine.IViewableMachine;
+import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import engine.IObservable;
 import engine.IObserver;
 import engine.IViewable;
@@ -17,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -34,6 +38,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     private Pane myPane;
     private MapGrid background;
     private ArrayList<MoveableComponentView> sprites;
+    private Controls myControls;
     private static boolean isPlaying;
     private static final int FRAMES_PER_SECOND = 60;
     private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -47,6 +52,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         sprites = new ArrayList<MoveableComponentView>();
         myRoot = new Pane();
         myPane = new Pane();
+        myControls = new Controls();
         init();
         isPlaying = false;
     }
@@ -56,18 +62,20 @@ public class MapDisplay implements IObserver<TimelineController> {
     	background.giveViewableComponent(aObservable);
     }
     
-    public void setMap(MapData aMapData){
+    public void setMap(MapDataContainer aMapData){
         background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
-        	myPane.getChildren().add(background.fillCell((int)terrainData.getLoc().getX(), 
+        	myPane.getChildren().add (background.fillCell((int)terrainData.getLoc().getX(), 
         	                                             (int)terrainData.getLoc().getY(), 
         						terrainData.getSize(), 
-        						terrainData.getColor()));
+        						terrainData.getColor(),
+        						myRoot));
         }
         
         myRoot.getChildren().add(myPane);
         background.setRoot(myRoot);
+        myRoot.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
     }
     
     //TODO: Use timeline controller instead
@@ -135,5 +143,15 @@ public class MapDisplay implements IObserver<TimelineController> {
     @Override
     public void update(TimelineController aChangedObject) {
         //TODO:
+    }
+    
+    public void handleKeyInput(KeyCode code){
+        if(code.getName() == myControls.getControlFor("UP")){
+            System.out.println("Up!");
+        }
+    }
+
+    public void getControls(Controls cont) {
+        myControls = cont;
     }
 }

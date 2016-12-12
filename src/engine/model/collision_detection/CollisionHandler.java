@@ -1,5 +1,6 @@
 package engine.model.collision_detection;
 
+@Deprecated
 public class CollisionHandler implements ICollisionHandler{
 
 	/**
@@ -8,9 +9,11 @@ public class CollisionHandler implements ICollisionHandler{
 	 */
 	@Override
 	public void handleCollision(ICollidable moved, ICollidable unmoved) {
+		/*
 		if (! (moved.getCollisionRadius() == 0 || unmoved.getCollisionRadius() == 0) ) {
 			unmoved.collideInto(moved);
 		}
+		*/
 	}
 
 }

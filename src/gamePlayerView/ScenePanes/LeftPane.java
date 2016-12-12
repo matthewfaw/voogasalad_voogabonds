@@ -6,7 +6,7 @@ import engine.controller.ApplicationController;
 import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
-import gamePlayerView.interfaces.ICashAcceptor;
+//import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IViewPane;
 import javafx.geometry.Insets;
@@ -23,8 +23,10 @@ public class LeftPane implements IGUIPiece,IViewPane {
 	private VBox myLeftPane=new VBox();
 	private CashBox myWallet;
 	private LivesBox myLives;
+	//private Pane myGamePlayer; 
 	
 	public LeftPane(){
+		//myGamePlayer=gamePlayer;
 		setUpPane();
 	//	GamePlayOptions myGamePlayOptions=new GamePlayOptions(appcontrol);
 	//	myWallet=new CashBox();
@@ -32,6 +34,8 @@ public class LeftPane implements IGUIPiece,IViewPane {
 	//	myLeftPane.getChildren().addAll(myGamePlayOptions.getView(),myWallet.getView(),myLives.getView()); ///////////////////// 
 	}
 	public void setUpPane() {
+		//myLeftPane.setPrefWidth(myGamePlayer.getWidth()*0.1);
+		//myLeftPane.setPrefHeight(myGamePlayer.getHeight());
 		myLeftPane.setPrefWidth(100);
 		myLeftPane.setMaxHeight(700);
 	    myLeftPane.setPadding(new Insets(10, 10,10, 10));

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import authoring.model.EntityData;
 import authoring.model.TowerData;
 import engine.IObservable;
 import engine.IObserver;
@@ -50,7 +51,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
 	private VBox myTowerColumn;
 	private ImageView towerToBeDragged;
-	private Map<ImageView,TowerData> towerSettings= new HashMap<ImageView,TowerData>();
+	private Map<ImageView,EntityData> towerSettings= new HashMap<ImageView,EntityData>();
 	private TextArea towerDataDisplay;
 	private ListView<ImageView> towerInfo;
 	//private VBox myColumn;
@@ -60,9 +61,9 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		myTowerColumn= buildVBox();
 	}
 	
-	public TowerData getTowerData(String aTowerName)
+	public EntityData getTowerData(String aTowerName)
 	{
-		for (TowerData data: towerSettings.values()) {
+		for (EntityData data: towerSettings.values()) {
 			if (data.getName().equals(aTowerName)) {
 				return data;
 			}
@@ -93,14 +94,15 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	 * Creates ListView for the selected towerData
 	 */
 	private void populateTowerInfo(IViewablePlayer aPlayer) {
-		List<TowerData> availableTowers = aPlayer.getAvailableTowers();
-		List<TowerData> affordableTowers = aPlayer.getAffordableTowers();
+		List<EntityData> availableTowers = aPlayer.getAvailableTowers();
+		List<EntityData> affordableTowers = aPlayer.getAffordableTowers();
 		
 		ObservableList<ImageView> items =FXCollections.observableArrayList();
 		towerSettings.clear();
-		for(TowerData t : availableTowers){
+		for(EntityData t : availableTowers){
 			ImageView towerPicture = new ImageView();
-			String imagePath = t.getImagePath();
+			//TODO: This is super hack-y.
+			String imagePath = t.getComponents().get("PhysicalComponent").getFields().get("myImagePath");
 			//TODO: make this cleaner--hard coded now
 			if (imagePath.substring(0, 4).equals("src/")) {
 				imagePath = imagePath.substring(4);
@@ -133,7 +135,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 		towerSet.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
                 ImageView towerChosen = towerSet.getSelectionModel().getSelectedItem();
-                TowerData tower=towerSettings.get(towerChosen);
+                EntityData tower=towerSettings.get(towerChosen);
                 PopulateTowerDataDisplay(tower,towerDataDisplay);
             }  
         });
@@ -141,18 +143,13 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	/*
 	 * Allows Text Area to display attributes based on the Tower selected in the ListView
 	 */
-	private void PopulateTowerDataDisplay(TowerData tower,TextArea towerDataDisplay) {
+	private void PopulateTowerDataDisplay(EntityData tower,TextArea towerDataDisplay) {
 		towerDataDisplay.clear();
 		towerDataDisplay.setEditable(false);
-		String namelabel=new String("TOWER NAME: ");
 		String name= new String(tower.getName());
-		String newline=new String("\n");
-		String costlabel=new String("COST: ");
 		String cost=new String(Integer.toString(tower.getBuyPrice()));
-		String weaponlabel=new String("WEAPON NAME: ");
-		String weapon= new String(tower.getWeaponName());
 		
-		towerDataDisplay.setText(namelabel+name+newline+costlabel+cost+newline+weaponlabel+weapon);
+		towerDataDisplay.setText(String.format("TOWER NAME: %s\nCOST: %s\n", name, cost));
 	}
 	
 	private void setDragFunctionality(ListView<ImageView> towerSet) {

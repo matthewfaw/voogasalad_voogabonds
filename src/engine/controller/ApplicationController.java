@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.entities.IEntity;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
@@ -99,11 +100,11 @@ public class ApplicationController {
 	}
 
 	public void onPlayButtonPressed() {
-		//AnimationController.play()
+		myBackendController.startTimeLine();
 	}
 
 	public void onPauseButtonPressed() {
-		//AnimationController.pause()
+		myBackendController.pauseTimeline();
 	}
 
 	public void onFastButtonPressed() {
@@ -124,17 +125,16 @@ public class ApplicationController {
 	
 	public void onTowerDropped(String aTowerName, Point aDropLocation)
 	{
-		myBackendController.attemptToPlaceTower(aTowerName, aDropLocation);
+		myBackendController.attemptToPlaceEntity(aTowerName, aDropLocation);
 	}
 
 	public void onSellButtonPressed(TowerData tower) {
 		// TODO Auto-generated method stub
 //		return null;
 	}
-
+	
 	public void onSavePressed() {
-		// TODO Auto-generated method stub
-	//	return null;
+		myBackendController.save();
 	}
 	public void onEntityClicked(){
 	EntityInfoBox myStatisticsBox= new EntityInfoBox.EntityInfoBoxBuilder(myScene) 
@@ -154,7 +154,7 @@ public class ApplicationController {
 	{
 		ApplicationController appcont = new ApplicationController();
 		appcont.init();
-//		appcont.constructMap();
+		appcont.constructMap();
 	}
 	*/
 	

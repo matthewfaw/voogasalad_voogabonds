@@ -15,20 +15,24 @@ import javafx.util.Duration;
  * A class used to encapsulate the Timeline object
  * Any object can observe the timeline, and perform it's updates accordingly
  * 
- * @author matthewfaw
+ * @author matthewfaw (owenchung edited)
  *
  */
 public class TimelineController implements IObservable<TimelineController> {
 	private Timeline myTimeline;
 	private List<IObserver<TimelineController>> myObservers;
+	private long myStartTime;
 
 	public TimelineController()
 	{
-		myTimeline = new Timeline();
 		myObservers = new ArrayList<IObserver<TimelineController>>();
 		
+		myTimeline = new Timeline();
+		myTimeline.setCycleCount(Timeline.INDEFINITE);
+		
 		//TODO: maybe change this to another location?
-		myTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers()));
+		KeyFrame frame = new KeyFrame(Duration.millis(Resources.MILLISECOND_DELAY), e -> notifyObservers());
+		myTimeline.getKeyFrames().add(frame);
 	}
 	
 	/**
@@ -39,6 +43,7 @@ public class TimelineController implements IObservable<TimelineController> {
 	{
 		if (!myTimeline.getStatus().equals(Status.RUNNING)) {
 			myTimeline.play();
+			myStartTime = System.nanoTime();
 		}
 	}
 	
@@ -57,9 +62,13 @@ public class TimelineController implements IObservable<TimelineController> {
 	 * A method to get the total number of milliseconds elapsed by the timeline
 	 * @return
 	 */
-	public double getTotalTimeElapsed()
-	{
-		return myTimeline.getTotalDuration().toMillis();
+	//TODO: getTotalDuration will return INDEFINITE
+	public double getTotalTimeElapsed() {
+		return convertNanoToMill(System.nanoTime() - myStartTime );
+	}
+	
+	private double convertNanoToMill(long nanotime) {
+		return nanotime / 1000000;
 	}
 	
 	//*********************Observable interface******************//
@@ -72,9 +81,10 @@ public class TimelineController implements IObservable<TimelineController> {
 	public void detach(IObserver<TimelineController> aObserver) {
 		myObservers.remove(aObserver);
 	}
-
+	// TODO: FIX POSSIBLE INDEX OUT OF BOUNDS
 	@Override
 	public void notifyObservers() {
+
 		//IMPORTANT: cannot write a foreach loop here because of JavaFX concurrency issues
 		for (int i=0; i<myObservers.size(); ++i) {
 			myObservers.get(i).update(this);
