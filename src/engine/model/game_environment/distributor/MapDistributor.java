@@ -37,7 +37,7 @@ public class MapDistributor {
 		
 		boolean canPlace = myMapMediator.isAValidTerrain(aLocation, validTerrains);
 		if (canPlace) {
-			createEntity(entityData);
+//			createEntity(entityData);
 			deductCostFromPlayer(entityData.getBuyPrice());
 		}
 	}
@@ -45,15 +45,16 @@ public class MapDistributor {
 	public void distribute(String entityDataName, Point aLocation) {
 		
 	}
-
+	/*
 	private void createEntity(EntityData entityData) {
 		try {
 			myEntityFactory.constructEntity(entityData.getName());
 		} catch (UnsupportedOperationException e) {
-			e.printStackTrace();
-			// Router.distributeError("Can't construct entity.");
+//			e.printStackTrace();
+//			 myRouter.distributeError("Can't construct entity.");
 		}
 	}
+	*/
 
 	/**
 	 * Changes active player's money by negative buy price.

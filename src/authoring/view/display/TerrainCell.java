@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import utility.ErrorBox;
 
 import authoring.controller.MapDataContainer;
+import authoring.model.map.TerrainData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -82,15 +83,17 @@ public class TerrainCell extends Rectangle {
 								Image image = new Image(toolBar.getSelectedImagePath());
 								ImagePattern imagePattern = new ImagePattern(image);
 								setFill(imagePattern);
+								controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedImagePath()));
 								System.out.println("Image Path is: " + toolBar.getSelectedImagePath());
 							}
 							else {
-								System.out.println("Hello");
+								controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
 								setFill(toolBar.getSelectedColor());
 							}
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 							setWidth(gameDisplay.getTileSize());
 							setHeight(gameDisplay.getTileSize());
+							
 						}
 					}
 					else if (toolBar.getSpawnStatus()) {
@@ -99,6 +102,8 @@ public class TerrainCell extends Rectangle {
 								controller.removeSinkPoint(cellName);
 							}
 						}
+						ArrayList<Point> points = new ArrayList<Point>();
+						points.add(new Point(TerrainCell.this.getX(), TerrainCell.this.getY()));
 						setWidth(gameDisplay.getTileSize()/2);
 						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
@@ -110,6 +115,8 @@ public class TerrainCell extends Rectangle {
 								controller.removeSpawnPoints(cellName);
 							}
 						}
+						ArrayList<Point> points = new ArrayList<Point>();
+						points.add(new Point(TerrainCell.this.getX(), TerrainCell.this.getY()));
 						setWidth(gameDisplay.getTileSize()/2);
 						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));

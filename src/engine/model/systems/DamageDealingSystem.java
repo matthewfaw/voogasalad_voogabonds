@@ -24,4 +24,13 @@ public class DamageDealingSystem extends AbstractSystem<DamageDealingComponent> 
 	public IDamageStrategy newStrategy(String name) {
 		return myStrategyFactory.newStrategy(name);
 	}
+
+	public void explode(IComponent c) {
+		DamageDealingComponent dmg = get(c);
+		if(dmg != null)
+			dmg.explode();
+		else {
+		//c.getEntity().die();
+		}
+	}
 }

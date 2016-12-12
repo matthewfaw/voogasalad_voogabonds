@@ -1,6 +1,7 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import authoring.model.ComponentData;
@@ -13,6 +14,7 @@ import engine.model.components.viewable_interfaces.IViewableTargeting;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.systems.PhysicalSystem;
+import engine.model.systems.TargetingSystem;
 import engine.model.systems.TeamSystem;
 import gamePlayerView.gamePlayerView.Router;
 
@@ -31,14 +33,19 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	
-	public TargetingComponent(PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
+	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
 		super(router);
 		myObservers = new ArrayList<IObserver<IViewable>>();
+		
 		myPhysical = physical;
 		myTeams = teams;
+		
 		mySightRange = Double.parseDouble(componentData.getFields().get("mySightRange"));
 		mySightWidth = Double.parseDouble(componentData.getFields().get("mySightWidth"));
 		myTargetsEnemies = Boolean.parseBoolean(componentData.getFields().get("myTargestEnemies"));
+		myTargetingStrategy = target.newStrategy(componentData.getFields().get("myTargetingStrategy"));
+				
+		target.attachComponent(this);
 	}
 	
 	@Override

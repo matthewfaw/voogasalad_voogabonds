@@ -13,8 +13,8 @@ import engine.model.entities.IEntity;
 public class SellableComponentData {
 	private int mySellValue;
 	
-	public SellableComponentData(ComponentData componentData) {
-		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
+	public SellableComponentData(/*ComponentData componentData*/) {
+//		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
 	}
 	public int getSellValue()
 	{

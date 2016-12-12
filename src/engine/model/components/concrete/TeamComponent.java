@@ -1,11 +1,11 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
-import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewable;
@@ -32,8 +32,7 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	}
 	
 	@Override
-	public String getTeamID()
-	{
+	public String getTeamID() {
 		return myTeamID;
 	}
 

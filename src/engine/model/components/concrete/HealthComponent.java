@@ -2,56 +2,64 @@ package engine.model.components.concrete;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
-import engine.IObservable;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableHealth;
 import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
+import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.weapons.DamageInfo;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Damage;
-import utility.Point;
 
 /**
  * The purpose of this class is to manage the health information
  * relevant to an entity
  * manages how an entity should take damage
  * @author matthewfaw
- * @author Weston=
+ * @author Weston
  * @author owenchung (edits)
  * @author alanguo (edits)
  */
-public class HealthComponent extends AbstractComponent implements IViewableHealth{
+public class HealthComponent extends AbstractComponent implements IViewableHealth {
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
 	private BountySystem myBounty;
+	@Hide
+	private DamageDealingSystem myDamage;
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;
 	private Double myMaxHealth;
+	private boolean explodeOnDeath;
 	
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	
-	public HealthComponent(/*HealthSystem healthSystem, */BountySystem bounty,  ComponentData componentdata, Router router) {
+	@Hide
+	private Router myRouter;
+
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, 
+			ComponentData componentdata, Router router) {
 		super(router);
 		myBounty = bounty;
+		myDamage = damage;
+		
 		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
+		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		
-//		healthSystem.attachComponent(this);
+		healthSystem.attachComponent(this);
 		
-		myCurrHealth = DEFAULT_HEALTH;
-		myMaxHealth = DEFAULT_HEALTH;
 	}
 		
 	public int getCurrentHealth() {
@@ -75,6 +83,9 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		
 		int died = myCurrHealth <= 0 ? 1 : 0;
 		int bounty = myBounty.collectBounty(this);
+		
+		if (died == 1 && explodeOnDeath)
+			myDamage.explode(this);
 		
 		return new DamageInfo(dmg.getDamage(), died, bounty);		
 	}

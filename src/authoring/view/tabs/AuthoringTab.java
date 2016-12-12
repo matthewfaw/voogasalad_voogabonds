@@ -61,6 +61,8 @@ public abstract class AuthoringTab extends Tab {
      */
     public TextField setUpTextInput(String value) {
         TextField textField = new TextField(value);
+        textField.getStylesheets().add("style.css");
+        textField.setId("textfield");
         return textField;
     }
     
@@ -116,7 +118,7 @@ public abstract class AuthoringTab extends Tab {
     /**
      * Helper method to create a CheckBox dropdown menu.
      * 
-     * This adds a dropdown box to the Menu's view, and returns a reference to the MenuButton.
+     * This returns a reference to the MenuButton.
      * 
      * @param root
      * @param value - default value of check box
