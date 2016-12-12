@@ -29,6 +29,7 @@ import utility.ListStringManipulator;
  *
  */
 public class EditComponentBox extends VBox implements ISubmittable {
+    public static final String IMAGE_PATH = "Image Path";
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
@@ -58,7 +59,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
             String attributeType = attributeTypes.get(i);
             String uglyAttributeName = attributes.get(i);
             String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
-            System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
+            //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
             Label lbl = new Label(cleanedAttributeName);
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
@@ -72,7 +73,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
             } else {
                 TextField field = new TextField();
                 setUpLabeledField(lbl, field);
-                if (lbl.getText().equals("Image Path")) {
+                if (lbl.getText().equals(IMAGE_PATH)) {
                     Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
                     this.getChildren().add(browse);
                 }
@@ -97,17 +98,13 @@ public class EditComponentBox extends VBox implements ISubmittable {
         List<String> attributeTypes = fetcher.getComponentAttributeTypeList(uglyComponentName);
         Map<String,String> retrievedData = componentData.getFields();
         init(parent, grandparent, componentName, retrievedData.size());
-        
-//        if (attributes.size() != attributeTypes.size() || attributes.size() != retrievedData.size()) {
-//            System.out.println("Error retrieving data: fetched attributes different from stored attributes.");
-//        }
 
         // Set up input fields
         for (int i = 0; i < attributes.size(); i++) {
             String attributeType = attributeTypes.get(i);
             String uglyAttributeName = attributes.get(i);
             String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
-            System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
+            //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
             Label lbl = new Label(cleanedAttributeName);
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
@@ -115,27 +112,25 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 if (uglyAttributeName.toLowerCase().contains("terrains")) {
                     checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
                     String terrainData = componentData.getFields().get(cleanedAttributeName);
-                    System.out.println("Terrains: "+terrainData);
+                    //System.out.println("Terrains: "+terrainData);
                     List<String> terrains;
                     try {
                         terrains = ListStringManipulator.stringToList(terrainData);
                     }
                     catch (Exception e) {
                         terrains = null;
-                        System.out.println("Terrains is null");
-                        //e.printStackTrace();
+                        //System.out.println("Terrains is null");
                     }
                     // Initialize valid terrains
                     if (terrains != null && terrains.size() > 0) {
                         for (MenuItem item : checkbox.getItems()) {
                             CheckBox check = (CheckBox) ((CustomMenuItem) item).getContent();
-                            System.out.println("CheckBox Text: "+check.getText());
                             if (terrains.contains(check.getText())) {
                                 check.setSelected(true);
                             }
                         }
                     }
-                } //else if ()
+                } //else if () other checkboxes
                 if (checkbox != null) {
                     lbl.setId("label");
                     lbl.setLabelFor(checkbox);
@@ -149,7 +144,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 //System.out.println("Clean: "+retrievedData.get(cleanedAttributeName)+"\tUgly: "+retrievedData.get(uglyAttributeName));
                 TextField field = new TextField(retrievedData.get(cleanedAttributeName));
                 setUpLabeledField(lbl, field);
-                if (lbl.getText().equals("Image Path")) {
+                if (lbl.getText().equals(IMAGE_PATH)) {
                     Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
                     this.getChildren().add(browse);
                 }
