@@ -282,6 +282,11 @@ public class Point implements IShape, IPosition {
 		return this;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("(%f, %f, %f", myX, myY, myZ);
+	}
+	
 	/*
 	public static void main(String[] args) {
 		Point a = new Point(4, 3);

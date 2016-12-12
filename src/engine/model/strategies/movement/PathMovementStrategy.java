@@ -25,7 +25,7 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	
 	@Override
 	public  Pair<Double, Point> nextMove(IMovable m, IPhysical p) {
-		if (myPath == null || myPreviousGoalLocation == null || myPreviousGoalLocation.equals(m.getGoal())) {
+		if (m.getGoal() != null && (myPath == null || myPreviousGoalLocation == null || !myPreviousGoalLocation.equals(m.getGoal()))) {
 			myPreviousGoalLocation = m.getGoal();
 			myPath = myMap.constructPaths(p, m);
 		}
@@ -41,6 +41,7 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	@Override
 	protected Pair<Double, Point> nextMoveWithGoal(IMovable m, IPhysical p) {
 		Point subGoal = myPath.getNextVertex(p.getPosition());
+		System.out.println(subGoal);
 		
 		//Check if we aren't on the path anymore
 		if (subGoal == null)

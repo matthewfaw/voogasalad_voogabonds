@@ -45,7 +45,7 @@ public class LevelController implements IObserver<TimelineController> {
 	@Override
 	//*******************Observer interface***************//
 	public void update(TimelineController aChangedObject) {
-		System.out.println("updating with elapsedTime: " + aChangedObject.getTotalTimeElapsed()); 
+		//System.out.println("updating with elapsedTime: " + aChangedObject.getTotalTimeElapsed()); 
 		if (myWaveController.isLevelFinished()) {
 			myCurrentLevel ++;
 			if (myLevelDataContainer.hasLevel(myCurrentLevel)) {
