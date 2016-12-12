@@ -26,12 +26,8 @@ import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.builders.EntityInfoBox;
-<<<<<<< HEAD
 import gamePlayerView.builders.EntityInfoBoxBuilder;
 //import gamePlayerView.interfaces.ICashAcceptor;
-=======
-import gamePlayerView.interfaces.ICashAcceptor;
->>>>>>> c2ec37ebde29318e490987877aa101aba04fc87b
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
@@ -232,12 +228,6 @@ public class GamePlayerScene {
 	{
 		return myMap;
 	}
-
-	public EntityInfoBox makeEntityInfoBox()
-	{
-		return null;
-		//return new EntityInfoBox.EntityInfoBoxBuilder(this);
-	}
 	
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
@@ -247,21 +237,11 @@ public class GamePlayerScene {
 	//public List<ISprite> getSprites(){
 		//return mySprites;
 	//}
-<<<<<<< HEAD
-
 	public void updateDisplay(EntityInfoBox myStatisticsBox) {
 		myBottomPane.clear();
 		Collection<Node> myCollection=new ArrayList<Node>();
 		myCollection.add(myStatisticsBox.getView());
 		myBottomPane.add(myCollection);
 	}
-=======
-		public void updateDisplay(EntityInfoBox myStatisticsBox) {
-			myBottomPane.clear();
-			Collection<Node> myCollection=new ArrayList<Node>();
-			myCollection.add(myStatisticsBox.getView());
-			myBottomPane.add(myCollection);
-		}
->>>>>>> c2ec37ebde29318e490987877aa101aba04fc87b
 	
 }
