@@ -1,13 +1,17 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.components.IViewableHealth;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewableHealth;
+import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -39,11 +43,16 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private boolean explodeOnDeath;
 	
 	@Hide
-	private List<IObserver<IViewableHealth>> myObservers;
+	private List<IObserver<IViewable>> myObservers;
 	
-	
+	@Hide
+	private Router myRouter;
+
+
 	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
 		myHealthSystem = healthSystem;
+				super(router);
+
 		myBounty = bounty;
 		myDamage = damage;
 		
@@ -51,12 +60,10 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
 		
-		myObservers = new ArrayList<IObserver<IViewableHealth>>();
+		myObservers = new ArrayList<IObserver<IViewable>>();
 		
 		healthSystem.attachComponent(this);
 		
-		//TODO
-		//myRouter.distributeViewableHealthComponent(this);
 	}
 		
 	public int getCurrentHealth() {
@@ -98,12 +105,12 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	/********* Observable Interface **********/
 
 	@Override
-	public void attach(IObserver<IViewableHealth> aObserver) {
+	public void attach(IObserver<IViewable> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewableHealth> aObserver) {
+	public void detach(IObserver<IViewable> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -123,10 +130,14 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	}
 
 	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+
 	public void delete() {
 		myHealthSystem.detachComponent(this);
 		myObservers.forEach(observer -> observer.remove(this));
 	}
 
-	
+
 }

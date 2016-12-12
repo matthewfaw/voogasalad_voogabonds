@@ -1,9 +1,10 @@
-package engine;
+package engine.model.components.viewable_interfaces;
 
+import engine.IObservable;
 import engine.model.entities.IEntity;
 import utility.Point;
 
-public interface IViewable extends IObservable<IViewable> {
+public interface IViewablePhysical extends IViewable, IObservable<IViewablePhysical> {
 	
 	/**
 	 * A method to get the size of the image to display
@@ -26,10 +27,11 @@ public interface IViewable extends IObservable<IViewable> {
 	 * @return the path to the image to display
 	 */
 	public String getImagePath();
-	/**
-	 * Returns the entity associated with the viewable
-	 * @return the corresponding entity
-	 */
-	public IEntity getEntity();
+	
+//	/**
+//	 * Returns the entity associated with the viewable
+//	 * @return the corresponding entity
+//	 */
+//	public IEntity getEntity();
 
 }
