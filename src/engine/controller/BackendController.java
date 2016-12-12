@@ -14,9 +14,11 @@ import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
+import engine.model.components.IComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.EntityManager;
+import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.playerinfo.Player;
@@ -113,6 +115,17 @@ public class BackendController {
 		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
 		mySpawningSystem = new SpawningSystem();
 		
+	}
+	
+	/**
+	 * Given an entity ID, will route entity component information back to front end for observing.
+	 * @param entityID
+	 */
+	public void onEntityClicked(Integer entityID) {
+		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+		for (IComponent component: clickedEntity.getComponents()) {
+			component.distributeInfo();
+		}
 	}
 	
 	//TODO
