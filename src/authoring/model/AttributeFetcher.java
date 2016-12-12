@@ -4,7 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import utility.FileRetriever;
+import utility.file_io.FileRetriever;
 
 public class AttributeFetcher {
 

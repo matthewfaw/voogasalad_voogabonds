@@ -24,7 +24,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import utility.FileRetriever;
+import utility.file_io.FileRetriever;
 import utility.ListStringManipulator;
 
 /**

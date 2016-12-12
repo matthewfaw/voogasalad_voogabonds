@@ -26,8 +26,10 @@ import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
 import utility.ErrorBox;
-import utility.FileRetriever;
+import utility.file_io.FileRetriever;
+
 import utility.Point;
+import utility.file_io.FileRetriever;
 
 /**
  * The primary gateway into the game engine
