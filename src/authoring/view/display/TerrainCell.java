@@ -74,13 +74,15 @@ public class TerrainCell extends Rectangle {
 							Image image = new Image(toolBar.getSelectedImagePath());
 							ImagePattern imagePattern = new ImagePattern(image);
 							setFill(imagePattern);
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedImagePath()));
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedImagePath()));
+							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
 						}
 						else {
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
 							setFill(toolBar.getSelectedColor());
+							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 						}
-						setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
+
 						try {
 							TerrainCell.this.getStroke().equals(Paint.valueOf("Red"));
 							setWidth(gameDisplay.getTileSize()*0.9);
@@ -99,7 +101,7 @@ public class TerrainCell extends Rectangle {
 						}
 						ArrayList<Point> points = new ArrayList<Point>();
 						points.add(new Point(colLocation, rowLocation));
-						controller.addSpawnPoints(cellName, points);
+//						controller.addSpawnPoints(cellName, points);
 						setWidth(gameDisplay.getTileSize()*0.9);
 						setHeight(gameDisplay.getTileSize()*0.9);
 						setStroke(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
@@ -115,7 +117,7 @@ public class TerrainCell extends Rectangle {
 						}
 						ArrayList<Point> points = new ArrayList<Point>();
 						points.add(new Point(colLocation, rowLocation));
-						controller.addSinkPoints(cellName, points);
+//						controller.addSinkPoints(cellName, points);
 						setWidth(gameDisplay.getTileSize()*0.9);
 						setHeight(gameDisplay.getTileSize()*0.9);
 						setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
@@ -255,7 +257,6 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
-
 			if (toolBar.getImageStatus()) {
 				controller.addValidTerrain(terrainType, toolBar.getSelectedImagePath().toString());
 			}
