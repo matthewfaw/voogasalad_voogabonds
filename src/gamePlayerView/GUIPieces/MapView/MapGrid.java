@@ -109,12 +109,13 @@ public class MapGrid extends Node {
 //    	myPane.getChildren().add(aComponent);
 //    }
     
-    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable, String id)
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane, id);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
+    	System.out.println("Add a physical to the pane.");
     }
     
     
