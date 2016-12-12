@@ -8,6 +8,7 @@ import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.builders.EntityInfoBox;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.scene.layout.BorderPane;
@@ -135,7 +136,15 @@ public class ApplicationController {
 		// TODO Auto-generated method stub
 	//	return null;
 	}
-
+	public void onEntityClicked(){
+	EntityInfoBox myStatisticsBox= new EntityInfoBox.EntityInfoBoxBuilder(myScene) 
+			//myScene.makeEntityInfoBox()
+			   .withMachineInfo()		
+			   .withUpgradeButton()
+			   .withTargetingMechanism()
+			   .build();
+			myScene.updateDisplay(myStatisticsBox);
+	}
 	public void DisplayStats() throws Exception {
 		myScene.updateTowerStatisticsRow();
 	}
