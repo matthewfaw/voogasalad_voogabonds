@@ -136,25 +136,16 @@ public class ApplicationController {
 	public void onSavePressed() {
 		myBackendController.save();
 	}
-<<<<<<< HEAD
-
-	public void  onEntitySelected(IEntity aEntity)
-	{
-		EntityInfoBox myStatisticsBox= new EntityInfoBox.EntityInfoBoxBuilder(myScene) 
-=======
+	
 	public void onEntityClicked(){
 	EntityInfoBox myStatisticsBox= new EntityInfoBox.EntityInfoBoxBuilder(myScene) 
->>>>>>> c2ec37ebde29318e490987877aa101aba04fc87b
 			//myScene.makeEntityInfoBox()
 			   .withMachineInfo()		
 			   .withUpgradeButton()
 			   .withTargetingMechanism()
 			   .build();
-<<<<<<< HEAD
 		myScene.updateDisplay(myStatisticsBox);
-=======
-			myScene.updateDisplay(myStatisticsBox);
->>>>>>> c2ec37ebde29318e490987877aa101aba04fc87b
+
 	}
 	public void DisplayStats() throws Exception {
 		myScene.updateTowerStatisticsRow();
