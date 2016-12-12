@@ -28,4 +28,10 @@ public class CashBox extends InfoBox implements IObserver<IViewablePlayer>,IPlay
 	public void update(IViewablePlayer aChangedObject) {
 		myOutput.setText(Integer.toString(aChangedObject.getAvailableMoney()));
 	}
+
+	@Override
+	public void remove(IViewablePlayer aRemovedObject) {
+		myOutput.setText(Integer.toString(0));
+
+	}
 }

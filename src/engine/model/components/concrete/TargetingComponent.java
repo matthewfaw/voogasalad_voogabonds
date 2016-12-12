@@ -9,7 +9,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ITargeting;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableTargeting;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ITargetingStrategy;
@@ -28,6 +27,8 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	@Hide
 	private PhysicalSystem myPhysical;
 	@Hide
+	private TargetingSystem myTargeting;
+	@Hide
 	private TeamSystem myTeams;
 	
 	@Hide
@@ -35,6 +36,7 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	
 	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
 		super(router);
+		myTargeting = target;
 		myObservers = new ArrayList<IObserver<IViewableTargeting>>();
 		
 		myPhysical = physical;
@@ -96,4 +98,8 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 		return getEntity().getId();
 	}
 	
+	@Override
+	public void delete() {
+		myTargeting.detachComponent(this);
+	}	
 }

@@ -9,7 +9,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ICreator;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableCreator;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -52,9 +51,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Hide
 	private MovementSystem myMovement;
 	@Hide
+	private SpawningSystem mySpawning;
+	@Hide
 	private List<IEntity> myChildren;
 	@Hide
 	private DamageInfo myStats;
+
 	
 	@Hide
 	private List<IObserver<IViewableCreator>> myObservers;
@@ -154,5 +156,10 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Override
 	public String getEntityID() {
 		return getEntity().getId();
+	}
+
+	@Override
+	public void delete() {
+		mySpawning.detachComponent(this);
 	}
 }

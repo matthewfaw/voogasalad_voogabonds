@@ -9,7 +9,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableDamageDealer;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
@@ -48,6 +47,8 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	@Hide
 	private PhysicalSystem myPhysicalSystem;
 	@Hide
+	private DamageDealingSystem myDamageSystem;
+	@Hide
 	private SpawningSystem myCreators;
 	@Hide
 	private TeamSystem myTeams;
@@ -63,6 +64,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		super(router);
 		
 		myObservers = new ArrayList<IObserver<IViewableDamageDealer>>();
+		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
 		
@@ -112,7 +114,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		
 		myCreators.updateStats(this, result);
 		if (diesOnExplosion) {
-			//getEntity().die();
+			getEntity().delete();
 		}
 		return result;
 	}
@@ -122,7 +124,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		
 		myCreators.updateStats(this, result);
 		if (diesOnExplosion) {
-			//getEntity().die();
+			getEntity().delete();
 		}
 		return result;
 	}
@@ -170,6 +172,10 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	public void delete() {
+		myDamageSystem.detachComponent(this);
 	}
 
 	@Override

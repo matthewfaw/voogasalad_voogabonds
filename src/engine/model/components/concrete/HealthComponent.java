@@ -9,9 +9,7 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableHealth;
-import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -35,7 +33,9 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private BountySystem myBounty;
 	@Hide
 	private DamageDealingSystem myDamage;
-	//private HealthSystem myHealthSystem;
+	@Hide
+	private HealthSystem myHealthSystem;
+
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private boolean explodeOnDeath;
@@ -45,10 +45,11 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	
 	@Hide
 	private Router myRouter;
-
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, 
-			ComponentData componentdata, Router router) {
+	
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
 		super(router);
+		myHealthSystem = healthSystem;
+		
 		myBounty = bounty;
 		myDamage = damage;
 		
@@ -71,7 +72,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		//notifyObservers();
 	}
 	
-	public String takeDamage(Damage dmg) {
+	public DamageInfo takeDamage(Damage dmg) {
 		double newCurrHealth = myCurrHealth - dmg.getDamage();
 		
 		if (newCurrHealth < 0) {
@@ -131,7 +132,13 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	}
 	
 	@Override
-	public Integer getEntityID() {
+	public String getEntityID() {
 		return getEntity().getId();
 	}
+
+	public void delete() {
+		myHealthSystem.detachComponent(this);
+		myObservers.forEach(observer -> observer.remove(this));
+	}
+
 }

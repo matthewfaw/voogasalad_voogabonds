@@ -11,6 +11,7 @@ import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableTeam;
 import gamePlayerView.gamePlayerView.Router;
+import engine.model.systems.TeamSystem;
 
 /**
  * The purpose of this class is to manage which team an entity belongs to
@@ -25,8 +26,11 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	@Hide
 	private List<IObserver<IViewableTeam>> myObservers;
 	
-	public TeamComponent(ComponentData componentData, Router router) {
-		super(router);
+
+	private TeamSystem mySystem;
+	
+	public TeamComponent(TeamSystem teams, ComponentData componentData) {
+	    super(router);
 		myTeamID = componentData.getFields().get("myTeamID");
 		myObservers = new ArrayList<IObserver<IViewableTeam>>();
 	}
@@ -55,6 +59,8 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	public void delete() {
+		mySystem.detachComponent(this);
 	}
 	
 	@Override

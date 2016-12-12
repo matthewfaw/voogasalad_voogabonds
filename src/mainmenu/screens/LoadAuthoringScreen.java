@@ -124,9 +124,12 @@ public class LoadAuthoringScreen {
 			@Override
 			public void handle(ActionEvent e) {
 				GameStateLoader loader = new GameStateLoader();
+				router.clearContainers();
+				
 				loader.loadMapData(router, gameTitle);
 				loader.loadEntityData(router, gameTitle);
-				loader.loadLevelAndWaveData(router, gameTitle);
+				loader.loadLevelData(router, gameTitle);
+				loader.loadWaveData(router, gameTitle);
 				loader.loadPlayerData(router, gameTitle);
 				initAuthoring();
 			}

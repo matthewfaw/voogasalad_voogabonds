@@ -52,7 +52,6 @@ public class EntityFactory {
 	 * @return the constructed entity
 	 * @throws ComponentCreationException  
 	 */
-	@Deprecated
 	public IEntity constructEntity(String entityName) throws UnsupportedOperationException {
 		IEntity entity = new ConcreteEntity();
 		EntityData entityData = myEntityDataStore.getData(entityName);

@@ -7,6 +7,7 @@ import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.machine.IViewableMachine;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import engine.IObservable;
@@ -58,7 +59,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         isPlaying = false;
     }
     
-    public void giveViewableComponent(IObservable<IViewable> aObservable)
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
     	background.giveViewableComponent(aObservable);
     }
@@ -76,7 +77,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         
         myRoot.getChildren().add(myPane);
         background.setRoot(myRoot);
-        myRoot.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+
     }
     
     //TODO: Use timeline controller instead
@@ -147,12 +148,26 @@ public class MapDisplay implements IObserver<TimelineController> {
     }
     
     public void handleKeyInput(KeyCode code){
-        if(code.getName() == myControls.getControlFor("UP")){
-            System.out.println("Up!");
+        System.out.println("hey");
+        System.out.println(myControls.getControlFor("Left"));
+        System.out.println(code);
+        switch (code)
+        {
+            case LEFT:
+                System.out.println("WOO!");
+            break;
+            default:
+                break;
+                
         }
     }
 
     public void getControls(Controls cont) {
         myControls = cont;
     }
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing.
+	}
 }

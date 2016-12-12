@@ -1,8 +1,7 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
-
-
+import java.util.ResourceBundle;
 import java.util.Set;
 //import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;
@@ -18,7 +17,9 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.controller.ApplicationController;
 import engine.model.components.concrete.MoveableComponent;
+import javafx.beans.property.DoubleProperty;
 import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -29,6 +30,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import utility.ErrorBox;
 import utility.Point;
 
 public class MapGrid extends Node {
@@ -40,10 +42,13 @@ public class MapGrid extends Node {
     private ArrayList<MoveableComponentView> sprites;
     private int myCellSize;
     private Rectangle closest; 
+    private ResourceBundle myResources;
+	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
     
     //XXX: maybe remove this--just a quick fix
     public MapGrid(int rows, int cols, int aCellSize, ApplicationController aAppController){
     	myAppController = aAppController;
+    	this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
     	myPane = new Pane();
     	closest = new Rectangle();
     	sprites = new ArrayList<MoveableComponentView>();
@@ -59,27 +64,24 @@ public class MapGrid extends Node {
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
-    	//temp.widthProperty().bind(pane.widthProperty().divide(numRows));
-    	//temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
+//    	temp.widthProperty().bind(pane.widthProperty().divide(numRows));
+//    	temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
     	temp.setHeight(aCellSize);
     	temp.setWidth(aCellSize);
-    	//temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
-    	//temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
+//    	temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
+//    	temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
     	temp.setX(row*aCellSize);
     	temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);
 
-    	temp.setOnDragDropped(new EventHandler<DragEvent>() {
+    	temp.setOnDragDropped(new EventHandler<DragEvent>(){
     		public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 //				TowerData data = myTowerColumn.getTowerData(db.getString());
 //				System.out.println(data.getBuyPrice());
-//    			if(!isFull(temp)){
-				Rectangle closestRectangle = findDropLocation(event.getX(),event.getY());
-//    			}
-				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
+				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
+				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX() + myCellSize / 2, closestRectangle.getY() + myCellSize / 2));
 				setClickAction();
-
 				event.consume();
     		}
     	});
@@ -95,7 +97,7 @@ public class MapGrid extends Node {
 					setClickForComponent(m);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					ErrorBox.displayError(myResources.getString("CannotMoveObject"));
 				}
 			});
         }
@@ -106,12 +108,12 @@ public class MapGrid extends Node {
         //m.getInfo();
     	//myAppController.DisplayStats();
         myAppController.onEntityClicked();
-    	System.out.println("hi");
+    	//System.out.println("hi");
     }
     
-    public void giveViewableComponent(IObservable<IViewable> aObservable)
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable,myAppController);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
@@ -133,13 +135,14 @@ public class MapGrid extends Node {
     
     public Rectangle findDropLocation(double x, double y){
         closest = new Rectangle();
+                
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 Rectangle temp = actualGrid[i][j];
-                if(calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth()) < minDist)
-                        {
-                            minDist = calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth());
+                if(calculateDistance(x, y, temp.getX(), temp.getY()) < minDist)
+                        {                        
+                            minDist = calculateDistance(x, y, temp.getX(), temp.getY());
                             closest = temp;
                         }
                 else
@@ -150,9 +153,10 @@ public class MapGrid extends Node {
         return closest;
     }
     
-    private double calculateDistance (double x, double y, double x2, double y2, double tempHeight, double tempWidth) {
-        return Math.sqrt(Math.pow((x - (x2+tempWidth/2)), 2)
-                         + Math.pow((y - (y2 + tempWidth/2)), 2));
+    private double calculateDistance (double x, double y, double x2, double y2) {
+       
+        return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
+                         + Math.pow((y - (y2 + myCellSize/2)), 2));
     }
    
 

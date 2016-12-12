@@ -2,6 +2,7 @@ package engine.model.game_environment.distributor;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import authoring.model.EntityData;
 import engine.controller.PlayerController;
@@ -10,6 +11,7 @@ import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
 import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
+import utility.ErrorBox;
 import utility.Point;
 @Deprecated
 public class MapDistributor {
@@ -19,10 +21,13 @@ public class MapDistributor {
 	private MapMediator myMapMediator;
 	private List<PhysicalComponent> myPhysicalComponents;
 	private PlayerController myPlayerController;
+	private ResourceBundle myResources;
+	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	
 	public MapDistributor(MapMediator mapMediator, ResourceStore resourceStore, 
 			EntityFactory entityFactory, PlayerController playerController)
 	{
+		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
 		myEntityFactory = entityFactory;
 		myMapMediator = mapMediator;
 		myResourceStore = resourceStore;
@@ -50,7 +55,8 @@ public class MapDistributor {
 		try {
 			myEntityFactory.constructEntity(entityData.getName());
 		} catch (UnsupportedOperationException e) {
-//			e.printStackTrace();
+			ErrorBox.displayError(myResources.getString("CannotConstructEntity"));
+			// Router.distributeError("Can't construct entity.");
 //			 myRouter.distributeError("Can't construct entity.");
 		}
 	}
