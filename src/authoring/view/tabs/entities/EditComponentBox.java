@@ -40,6 +40,8 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private final String WIN = "win";
     private final String LOSE = "lose";
     private final String EXTENSION = ".class";
+    private final String TERRAINS = "Terrains";
+    private final String CALC = "calc";
     public static final String IMAGE_PATH = "myImagePath";
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
@@ -75,14 +77,14 @@ public class EditComponentBox extends VBox implements ISubmittable {
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
                 MenuButton checkbox = null;
-                if (uglyAttributeName.toLowerCase().contains("terrains")) {
-                    checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
+                if (uglyAttributeName.toLowerCase().contains(TERRAINS.toLowerCase())) {
+                    checkbox = grandparent.setUpMenuButton(TERRAINS, FXCollections.observableArrayList(grandparent.getTerrains()));
                 } //else if ()
                 if (checkbox != null) {
                     this.getChildren().add(checkbox);
                 }
             } else {
-                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
                     List<String> fileList = new ArrayList<String>();
@@ -184,7 +186,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(checkbox);
                 }
             } else {
-                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
                     List<String> fileList = new ArrayList<String>();
@@ -245,6 +247,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myComboCheckBoxes = new ArrayList<MenuButton>();
     }
 
+    @Deprecated
     private String cleanUpAttributeName(String attribute) {
         // assume all attributes start with 'my', and separate words
         String cleanedName = attribute;
@@ -259,6 +262,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         return cleanedName;
     }
     
+    @Deprecated
     private String capitalizeFirstLetter(String str) {
         return str.substring(0,1).toUpperCase() + str.substring(1);
     }
@@ -269,6 +273,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param smooshed
      * @return
      */
+    @Deprecated
     private String separateCapitalizedWords(String smooshed) {
         return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
@@ -353,11 +358,9 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     }
                 }
                 String list = ListStringManipulator.listToString(selectedItems);
-                //System.out.println(list);
                 component.addField(attributeName, list);
             } else if (input.getClass()==ComboBox.class) {
                 ComboBox<String> combo = (ComboBox<String>) input;
-                //System.out.println("ComboBox value: "+combo.getValue());
                 component.addField(attributeName, combo.getValue());
             }
         }
