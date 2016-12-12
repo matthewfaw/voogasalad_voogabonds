@@ -77,10 +77,10 @@ public class NewGameScreen {
 		chooseProjectTable.setPrefWidth(screenWidth*0.3);
 		TableColumn<MenuTableItem, String> firstCol = new TableColumn<MenuTableItem, String>(myResources.getString("ProjectTitle"));
 		TableColumn<MenuTableItem, Date> secondCol = new TableColumn<MenuTableItem, Date>(myResources.getString("LastModified"));
-		String relativePath = new File("").getAbsolutePath();
-		String finalPath = relativePath.concat(myResources.getString("ExistingAuthoringFiles"));
-		File directory = new File(finalPath);
-		for (File f : directory.listFiles()) {
+		String path = myResources.getString("ExistingAuthoringFiles").substring(1);
+		File file = new File(path);
+		File[] fileList = file.listFiles();
+		for (File f : fileList) {
 			Date date = new Date(f.lastModified());
 			MenuTableItem item = new MenuTableItem(f.getName(), date);
 			data.add(item);

@@ -72,9 +72,8 @@ public class ImageGallery {
 	}
 	
 	private void populatePane() {
-		String relativePath = new File("").getAbsolutePath();
-		String finalPath = relativePath.concat(filePath);
-		File file = new File(finalPath);
+		String path = myResources.getString("TerrainImageFilePath").substring(1);
+		File file = new File(path);
 		File[] fileList = file.listFiles();
 		for (int i = 0; i < fileList.length; i++) {
 			TerrainImage image  = new TerrainImage(fileList[i].toURI().toString(), this);
