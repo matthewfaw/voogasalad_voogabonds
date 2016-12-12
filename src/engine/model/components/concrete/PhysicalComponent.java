@@ -34,7 +34,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private List<String> myValidTerrains;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewablePhysical>> myObservers;
 	@Hide
 	private Point myPosition;
 	@Hide
@@ -47,7 +47,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
 		
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewablePhysical>>();
 
 		myHeading = 0;
 		
@@ -104,12 +104,12 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewablePhysical> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewablePhysical> aObserver) {
 		myObservers.remove(aObserver);
 	}
 

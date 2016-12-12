@@ -7,6 +7,7 @@ import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.machine.IViewableMachine;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import engine.IObservable;
@@ -58,7 +59,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         isPlaying = false;
     }
     
-    public void giveViewableComponent(IObservable<IViewable> aObservable)
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
     	background.giveViewableComponent(aObservable);
     }
