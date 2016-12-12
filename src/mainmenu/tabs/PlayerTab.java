@@ -2,6 +2,7 @@ package mainmenu.tabs;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 import authoring.controller.Router;
@@ -13,6 +14,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.MainInitializer;
+import mainmenu.screens.LoadAuthoringScreen;
+import mainmenu.screens.NewGameScreen;
+import utility.ErrorBox;
 
 /**
  * @author Christopher Lu
@@ -57,7 +61,11 @@ public class PlayerTab extends Tab {
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override 
 			public void handle(ActionEvent e) {
-				handleNewGame();
+				try {
+					handleNewGame();
+				} catch (IOException e1) {
+					ErrorBox.displayError(myResources.getString("NewPlayerError"));
+				}
 			}
 		});
 		Button loadGame = new Button(myResources.getString("PlayOldGame"));
@@ -74,8 +82,8 @@ public class PlayerTab extends Tab {
 		playOptions.getChildren().addAll(newGame, loadGame);
 	}
 	
-	private void handleNewGame() {
-		
+	private void handleNewGame() throws IOException {
+		NewGameScreen newGameScreen = new NewGameScreen();
 	}
 	
 	private void handleOldGame() {

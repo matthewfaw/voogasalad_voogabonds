@@ -59,14 +59,14 @@ public class MapGrid extends Node {
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
-    	temp.widthProperty().bind(pane.widthProperty().divide(numRows));
-    	temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
-    	//temp.setHeight(aCellSize);
-    	//temp.setWidth(aCellSize);
-    	temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
-    	temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
-    	//temp.setX(row*aCellSize);
-    	//temp.setY(col*aCellSize);
+    	//temp.widthProperty().bind(pane.widthProperty().divide(numRows));
+    	//temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
+    	temp.setHeight(aCellSize);
+    	temp.setWidth(aCellSize);
+    	//temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
+    	//temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
+    	temp.setX(row*aCellSize);
+    	temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);
 
     	temp.setOnDragDropped(new EventHandler<DragEvent>() {
@@ -75,7 +75,7 @@ public class MapGrid extends Node {
 //				TowerData data = myTowerColumn.getTowerData(db.getString());
 //				System.out.println(data.getBuyPrice());
 //    			if(!isFull(temp)){
-				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
+				Rectangle closestRectangle = findDropLocation(event.getX(),event.getY());
 //    			}
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
 				setClickAction();
@@ -104,8 +104,9 @@ public class MapGrid extends Node {
     private void setClickForComponent(MoveableComponentView m) throws Exception {
         //get info to come up on click
         //m.getInfo();
-    	myAppController.DisplayStats();
-        //System.out.println("hi");
+    	//myAppController.DisplayStats();
+        myAppController.onEntityClicked();
+    	System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)
