@@ -2,11 +2,9 @@ package engine.model.strategies.factories;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
 import engine.model.game_environment.MapMediator;
 import engine.model.strategies.IMovementStrategy;
-import utility.ResouceAccess;
+import engine.model.strategies.movement.GreedyMovementStrategy;
 
 /**
  * A class to pick the right strategy from a given Strategy name
@@ -27,7 +25,7 @@ public class MovementStrategyFactory extends AbstractStrategyFactory<IMovementSt
 	}
 
 	@Override
-	protected IMovementStrategy constructStrategy(String strategyName) throws ClassNotFoundException {
+	protected IMovementStrategy constructStrategy(String strategyName) {
 		IMovementStrategy result;
 		try {
 			Class<?> strategyType = Class.forName(strategyName);
@@ -41,7 +39,7 @@ public class MovementStrategyFactory extends AbstractStrategyFactory<IMovementSt
 				IllegalArgumentException |
 				InvocationTargetException |
 				IllegalAccessException e) {
-			throw new ClassNotFoundException(String.format(ResouceAccess.getError("BadStrategy"), strategyName), e);
+			result = new GreedyMovementStrategy(this);
 		}
 		return result;
 	}

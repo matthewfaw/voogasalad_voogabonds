@@ -148,7 +148,7 @@ public class MockGameDataConstructor {
 			
 			ComponentData CD3 = new ComponentData();
 			CD3.setComponentName("HealthComponent");
-			CD3.addField("myCurrentHealth", "9000");
+			CD3.addField("myCurrHealth", "9000");
 			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);

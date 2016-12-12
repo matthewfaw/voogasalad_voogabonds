@@ -25,6 +25,7 @@ import engine.model.data_stores.DataStore;
  */
 public class ActiveWaveManager {
 	private LevelData myLevelData;
+	private List<WaveData> myWaveDataList;
 	private DataStore<EntityData> myEntityDataStore;
 	private List<WaveState> myWaveStates;
 	private double myCurrentTime;
@@ -36,6 +37,7 @@ public class ActiveWaveManager {
 	{
 		myEntityDataStore = aEntityDataStore;
 		myLevelData = aLevelData;
+		myWaveDataList = myLevelData.getWaveDataList();
 //		myUnreleasedEnemyCountForActiveWave = new LinkedHashMap<WaveData, Integer>();
 		myWaveStates = new ArrayList<WaveState>();
 		setCurrentTime(startTime);
@@ -81,8 +83,8 @@ public class ActiveWaveManager {
 	 * Assumes that multiple waves can be active at the same time
 	 */
 	private void setNextRoundOfWaveDataAsActive() {
-		while (!myLevelData.isEmpty()) {
-			WaveData waveData = myLevelData.popNextWaveData();
+		while (!myWaveDataList.isEmpty()) {
+			WaveData waveData = myWaveDataList.remove(0);
 			myWaveStates.add(new WaveState(waveData, myCurrentTime));
 			if (waveData.getTimeUntilNextWave() != 0) {
 				updateTimeUntilNextTransition(waveData.getTimeUntilNextWave());

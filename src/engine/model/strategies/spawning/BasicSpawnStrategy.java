@@ -5,19 +5,23 @@ import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
+import engine.model.strategies.factories.AbstractStrategyFactory;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import utility.ResouceAccess;
 
 public class BasicSpawnStrategy implements ISpawningStrategy {
-	private String mySpawnName;
 	
+	public BasicSpawnStrategy(AbstractStrategyFactory<ISpawningStrategy> factory) {
+		//Do nothing
+	}
+
 	@Override
 	public IEntity spawn(EntityFactory myEntityFactory, IPosition myTarget, MovementSystem myMovement,
 			PhysicalSystem myPhysical, CreatorComponent creatorComponent) {
 		try {
 			if (myPhysical.get(creatorComponent) != null) {
-				IEntity spawn = myEntityFactory.constructEntity(mySpawnName);
+				IEntity spawn = myEntityFactory.constructEntity(creatorComponent.getSpawnName());
 				myMovement.get(spawn).setGoal(myTarget);
 				myPhysical.get(spawn).setPosition(myPhysical.get(creatorComponent).getPosition());
 				return spawn;

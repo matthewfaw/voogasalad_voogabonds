@@ -64,7 +64,6 @@ public class LevelController implements IObserver<TimelineController> {
 				myWaveController.newWave(myEntityDataStore, myLevelDataContainer.getLevelData(myCurrentLevel), aChangedObject.getTotalTimeElapsed());
 			}
 		}
-		System.out.println("distributing Entities");
 		myWaveController.distributeEntities(aChangedObject.getTotalTimeElapsed());
 	}
 }

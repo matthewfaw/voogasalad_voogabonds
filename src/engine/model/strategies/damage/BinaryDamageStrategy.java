@@ -2,12 +2,12 @@ package engine.model.strategies.damage;
 
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.factories.DamageStrategyFactory;
+import engine.model.strategies.factories.AbstractStrategyFactory;
 import utility.Damage;
 
 public class BinaryDamageStrategy implements IDamageStrategy {
 	
-	public BinaryDamageStrategy(DamageStrategyFactory factory) {
+	public BinaryDamageStrategy(AbstractStrategyFactory<IDamageStrategy> factory) {
 		//Do nothing.
 	}
 

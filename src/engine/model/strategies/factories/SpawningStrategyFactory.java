@@ -3,6 +3,7 @@ package engine.model.strategies.factories;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import engine.model.strategies.ISpawningStrategy;
+import engine.model.strategies.spawning.BasicSpawnStrategy;
 import utility.ResouceAccess;
 
 public class SpawningStrategyFactory extends AbstractStrategyFactory<ISpawningStrategy> {
@@ -13,7 +14,7 @@ public class SpawningStrategyFactory extends AbstractStrategyFactory<ISpawningSt
 	}
 
 	@Override
-	protected ISpawningStrategy constructStrategy(String strategyName) throws ClassNotFoundException {
+	protected ISpawningStrategy constructStrategy(String strategyName) {
 		ISpawningStrategy result;
 		try {
 			Class<?> strategyType = Class.forName(strategyName);
@@ -27,7 +28,7 @@ public class SpawningStrategyFactory extends AbstractStrategyFactory<ISpawningSt
 				IllegalArgumentException |
 				InvocationTargetException |
 				IllegalAccessException e) {
-			throw new ClassNotFoundException(String.format(ResouceAccess.getError("BadStrategy"), strategyName), e);
+			result = new BasicSpawnStrategy(this);
 		}
 		return result;
 	}

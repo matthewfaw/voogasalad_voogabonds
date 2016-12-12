@@ -28,7 +28,7 @@ abstract public class AbstractStrategyFactory<A> {
 	 * @return strategy with name movementStrategy
 	 * @throws ClassNotFoundException 
 	 */
-	public A newStrategy(String strategyName) throws ClassNotFoundException {
+	public A newStrategy(String strategyName) {
 		//TODO: Users see names from a resource file (resource key is class name)
 		
 		strategyName = String.format("%s%s", myFolderPath, strategyName);
@@ -37,6 +37,6 @@ abstract public class AbstractStrategyFactory<A> {
 	}
 
 
-	abstract protected A constructStrategy(String strategyName) throws ClassNotFoundException;
+	abstract protected A constructStrategy(String strategyName);
 
 }

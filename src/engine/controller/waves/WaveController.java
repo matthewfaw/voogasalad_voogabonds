@@ -1,6 +1,5 @@
 package engine.controller.waves;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +7,6 @@ import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
 import engine.model.components.concrete.MoveableComponent;
-import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -58,7 +56,7 @@ public class WaveController {
 	public void distributeEntities(double aElapsedTime)
 	{
 		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
-		System.out.println("trying to spawn");
+		
 		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
 			PathFollowerData entityData = iterator.next();
 			try {	
@@ -68,8 +66,9 @@ public class WaveController {
 				
 				Collections.shuffle(spawns);
 				Collections.shuffle(sinks);
-				
+				System.out.println("trying to spawn");
 				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
+				System.out.println("after");
 				MoveableComponent m = myMovementSystem.get(newEntity);
 				if (m != null)
 					m.setGoal(sinks.get(0));

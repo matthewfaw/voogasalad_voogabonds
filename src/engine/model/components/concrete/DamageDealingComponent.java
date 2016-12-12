@@ -2,6 +2,7 @@ package engine.model.components.concrete;
 
 import java.util.List;
 
+import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
@@ -21,11 +22,11 @@ import utility.Damage;
  *
  */
 public class DamageDealingComponent extends AbstractComponent {
-	private IDamageStrategy myDamageStrategy;
 	private int myDamage;
-	private double myDamageRadius;
 	private double myDamageArc;
-	
+	private double myDamageRadius;
+	private IDamageStrategy myDamageStrategy;
+
 
 	@Hide
 	private HealthSystem myHealthSystem;
@@ -35,10 +36,17 @@ public class DamageDealingComponent extends AbstractComponent {
 	public DamageDealingComponent(
 			DamageDealingSystem damageDealingSystem,
 			HealthSystem healthSysytem,
-			PhysicalSystem physicalSystem
+			PhysicalSystem physicalSystem,
+			ComponentData data
 			) {
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
+		
+		myDamage = Integer.parseInt(data.getFields().get("myDamage"));
+		myDamageArc = Double.parseDouble(data.getFields().get("myDamageArc"));
+		myDamageRadius = Double.parseDouble(data.getFields().get("myDamageRadius"));
+		myDamageStrategy = damageDealingSystem.newStrategy(data.getFields().get("myDamageStrategy"));
+		
 		damageDealingSystem.attachComponent(this);
 	}
 	
