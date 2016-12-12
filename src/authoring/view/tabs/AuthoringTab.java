@@ -61,6 +61,8 @@ public abstract class AuthoringTab extends Tab {
      */
     public TextField setUpTextInput(String value) {
         TextField textField = new TextField(value);
+        textField.getStylesheets().add("style.css");
+        textField.setId("textfield");
         return textField;
     }
     

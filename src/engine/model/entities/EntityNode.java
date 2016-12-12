@@ -8,7 +8,11 @@ import java.util.Map;
 import authoring.model.EntityData;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
-
+/**
+ * 
+ * @author owenchung
+ * @author matthewfaw
+ */
 public class EntityNode {
 	private EntityData myEntityData;
 

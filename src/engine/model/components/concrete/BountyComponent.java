@@ -1,5 +1,6 @@
 package engine.model.components.concrete;
 
+import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
 import engine.model.systems.BountySystem;
 
@@ -15,7 +16,9 @@ import engine.model.systems.BountySystem;
 public class BountyComponent extends AbstractComponent {
 	private int myBountyValue;
 	
-	public BountyComponent (BountySystem bountySystem) {
+	public BountyComponent (BountySystem bountySystem, ComponentData data) {
+		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
+		
 		bountySystem.attachComponent(this);
 	}
 	/**

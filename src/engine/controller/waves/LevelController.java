@@ -10,7 +10,7 @@ import engine.model.entities.EntityFactory;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 /**
- * 
+ * LevelController listens to timelinecontroller and updates the levels of the waves
  * @author owenchung
  *
  */
@@ -46,6 +46,7 @@ public class LevelController implements IObserver<TimelineController> {
 	@Override
 	//*******************Observer interface***************//
 	public void update(TimelineController aChangedObject) {
+
 		if (myWaveController == null) {
 			myWaveController = new WaveController(
 					myEntityDataStore,
@@ -56,13 +57,13 @@ public class LevelController implements IObserver<TimelineController> {
 					myMovementSystem,
 					myMapDataContainer);
 		}
+
 		if (myWaveController.isLevelFinished()) {
 			myCurrentLevel ++;
 			if (myLevelDataContainer.hasLevel(myCurrentLevel)) {
 				myWaveController.newWave(myEntityDataStore, myLevelDataContainer.getLevelData(myCurrentLevel), aChangedObject.getTotalTimeElapsed());
 			}
 		}
-		System.out.println("distributing Entities");
 		myWaveController.distributeEntities(aChangedObject.getTotalTimeElapsed());
 	}
 }

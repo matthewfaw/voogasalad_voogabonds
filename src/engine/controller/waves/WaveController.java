@@ -1,6 +1,5 @@
 package engine.controller.waves;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +7,6 @@ import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
 import engine.model.components.concrete.MoveableComponent;
-import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -31,26 +29,26 @@ import utility.ResouceAccess;
 public class WaveController {
 	private ActiveWaveManager myActiveWaveManager;
 	private EntityFactory myEntityFactory;
-	private MapDataContainer myMapData;
-	private PhysicalSystem myPhysical;
-	private MovementSystem myMovement;
+	private MapDataContainer myMapDataContainer;
+	private PhysicalSystem myPhysicalSystem;
+	private MovementSystem myMovementSystem;
 	
 	
 	public WaveController (
-			DataStore<EntityData> aEnemyDataStore,
-			LevelData aLevelData,
+			DataStore<EntityData> enemyDataStore,
+			LevelData levelData,
 			double startTime,
-			EntityFactory aEntityFactory,
-			PhysicalSystem physical,
-			MovementSystem movement,
-			MapDataContainer mapData
+			EntityFactory entityFactory,
+			PhysicalSystem physicalSystem,
+			MovementSystem movementSystem,
+			MapDataContainer mapDataContainer
 			) {
 		
-		myMapData = mapData;
-		myPhysical = physical;
-		myMovement = movement;
-		myActiveWaveManager = new ActiveWaveManager(aEnemyDataStore, aLevelData, startTime);
-		myEntityFactory = aEntityFactory;
+		myMapDataContainer = mapDataContainer;
+		myPhysicalSystem = physicalSystem;
+		myMovementSystem = movementSystem;
+		myActiveWaveManager = new ActiveWaveManager(enemyDataStore, levelData, startTime);
+		myEntityFactory = entityFactory;
 		
 	}
 
@@ -58,30 +56,26 @@ public class WaveController {
 	public void distributeEntities(double aElapsedTime)
 	{
 		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
-		System.out.println("trying to spawn");
+		
 		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
 			PathFollowerData entityData = iterator.next();
 			try {	
 				
-				List<Point> spawns = myMapData.getSpawnPoints(entityData.getSpawnPoint());
-				List<Point> sinks = myMapData.getSinkPoints(entityData.getSinkPoint());
+				List<Point> spawns = myMapDataContainer.getSpawnPoints(entityData.getSpawnPoint());
+				List<Point> sinks = myMapDataContainer.getSinkPoints(entityData.getSinkPoint());
 				
 				Collections.shuffle(spawns);
 				Collections.shuffle(sinks);
-				
+				System.out.println("trying to spawn");
 				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
-				System.out.println("spawning one enemy");
-				MoveableComponent m = myMovement.get(newEntity);
+				System.out.println("after");
+				MoveableComponent m = myMovementSystem.get(newEntity);
 				if (m != null)
 					m.setGoal(sinks.get(0));
 				
-			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-					| IllegalArgumentException | InvocationTargetException e) {
+			} catch (UnsupportedOperationException e) {
 				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
 			}
-		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
-		//TODO: Change to a better way?
-		//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
 			
 		}
 	}

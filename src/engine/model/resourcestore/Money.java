@@ -1,4 +1,5 @@
 package engine.model.resourcestore;
+
 /**
  * An implementation of the IMoney interface, one kind of currency.
  * @author owenchung
