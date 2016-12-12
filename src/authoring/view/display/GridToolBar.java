@@ -81,8 +81,8 @@ public class GridToolBar {
 		selectedColor = Color.WHITE;
 		this.selectedTerrain = myResources.getString("DNE");
 		this.controller = controller;
-		createToolBar();
 		importTerrains();
+		createToolBar();
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
 	}
