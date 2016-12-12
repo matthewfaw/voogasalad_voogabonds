@@ -10,7 +10,7 @@ public class DamageDealingSystem extends AbstractSystem<DamageDealingComponent> 
 	}
 
 	public void dealDamageToTarget(IComponent a, IComponent b) {
-		get(a).explode(b);
-		
+		if (get(a) != null && !a.equals(b))
+			get(a).explode(b);
 	}
 }
