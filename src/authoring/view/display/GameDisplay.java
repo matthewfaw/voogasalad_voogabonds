@@ -52,6 +52,7 @@ public class GameDisplay {
 	private ArrayList<Point> usefulSpawnPoints = new ArrayList<Point>();
 	private ArrayList<Point> usefulTerrainPoints = new ArrayList<Point>();
 	private ArrayList<String> usefulTerrainFills = new ArrayList<String>();
+	private Set<String> spawnNames;
 	
 	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller) {
 		setUpScreenResolution();
@@ -102,7 +103,7 @@ public class GameDisplay {
 	}
 	
 	private void makeUsefulSpawn() {
-		Set<String> spawnNames = spawnPoints.keySet();
+		spawnNames = spawnPoints.keySet();
 		for (String s: spawnNames) {
 			usefulSpawnPoints.add(spawnPoints.get(s).get(0));
 		}
@@ -146,6 +147,9 @@ public class GameDisplay {
 			ImagePattern pattern = new ImagePattern(image);
 			cell.setFill(pattern);
 		}
+//		for (String name: spawnNames) {
+//			if (spawnPoints.get(name).equals(o))
+//		}
 		terrainGrid.getChildren().add(cell);
 	}
 	
@@ -191,6 +195,7 @@ public class GameDisplay {
 			}
 		}
 	}
+
 
 	public void setCols(int numCols) {
 		columns = numCols;
