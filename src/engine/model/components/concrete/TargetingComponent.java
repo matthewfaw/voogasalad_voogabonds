@@ -31,11 +31,11 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	private TeamSystem myTeams;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableTargeting>> myObservers;
 	
 	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
 		super(router);
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableTargeting>>();
 		
 		myPhysical = physical;
 		myTeams = teams;
@@ -72,12 +72,12 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableTargeting> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableTargeting> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -91,6 +91,9 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 		getRouter().distributeViewableComponent(this);
 	}
 
-
+	@Override
+	public Integer getEntityID() {
+		return getEntity().getId();
+	}
 	
 }

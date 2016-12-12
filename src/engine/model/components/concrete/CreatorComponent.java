@@ -57,7 +57,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	private DamageInfo myStats;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableCreator>> myObservers;
 	
 	public CreatorComponent(SpawningSystem spawning,
 			PhysicalSystem physical,
@@ -67,7 +67,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 			ComponentData data,
 			Router router) {
 		super(router);
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableCreator>>();
 		myPhysical = physical;
 		myTargeting = targeting;
 		myMovement = movement;
@@ -127,12 +127,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableCreator> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableCreator> aObserver) {
 		myObservers.remove(aObserver);
 	}
 

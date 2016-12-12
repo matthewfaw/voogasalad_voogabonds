@@ -25,12 +25,12 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	private int myBountyValue;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableBounty>> myObservers;
 	
 	public BountyComponent (BountySystem bountySystem, ComponentData data, Router router) {
 		super(router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableBounty>>();
 		bountySystem.attachComponent(this);
 	}
 	/**
@@ -51,18 +51,22 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableBounty> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableBounty> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+	@Override
+	public Integer getEntityID() {
+		return getEntity().getId();
 	}
 
 }

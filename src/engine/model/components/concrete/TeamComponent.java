@@ -23,12 +23,12 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	private String myTeamID;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableTeam>> myObservers;
 	
 	public TeamComponent(ComponentData componentData, Router router) {
 		super(router);
 		myTeamID = componentData.getFields().get("myTeamID");
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableTeam>>();
 	}
 	
 	@Override
@@ -43,12 +43,12 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableTeam> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableTeam> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -57,5 +57,9 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 		myObservers.forEach(observer -> observer.update(this));
 	}
 	
+	@Override
+	public Integer getEntityID() {
+		return getEntity().getId();
+	}
 
 }

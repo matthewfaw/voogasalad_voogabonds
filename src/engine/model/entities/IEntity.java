@@ -24,7 +24,7 @@ public interface IEntity extends IObservable<IEntity> {
 	 * a method to get the unique identifier corresponding to the entity
 	 * @return Unique object ID
 	 */
-	public int getId();
+	public Integer getId();
 
 	/**
 	 * Add a component to an entity

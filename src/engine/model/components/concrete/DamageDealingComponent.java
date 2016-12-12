@@ -36,7 +36,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private IDamageStrategy myDamageStrategy;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableDamageDealer>> myObservers;
 	
 	private boolean explodesOnEnemies;
 	private boolean explodesOnAllies;
@@ -62,7 +62,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 			) {
 		super(router);
 		
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableDamageDealer>>();
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
 		
@@ -158,12 +158,12 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableDamageDealer> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableDamageDealer> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -172,4 +172,8 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		myObservers.forEach(observer -> observer.update(this));
 	}
 
+	@Override
+	public Integer getEntityID() {
+		return getEntity().getId();
+	}
 }

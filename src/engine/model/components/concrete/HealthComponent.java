@@ -41,7 +41,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private boolean explodeOnDeath;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableHealth>> myObservers;
 	
 	@Hide
 	private Router myRouter;
@@ -56,7 +56,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
 		
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableHealth>>();
 		
 		healthSystem.attachComponent(this);
 		
@@ -101,12 +101,12 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	/********* Observable Interface **********/
 
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableHealth> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableHealth> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -130,4 +130,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		getRouter().distributeViewableComponent(this);
 	}
 	
+	@Override
+	public Integer getEntityID() {
+		return getEntity().getId();
+	}
 }
