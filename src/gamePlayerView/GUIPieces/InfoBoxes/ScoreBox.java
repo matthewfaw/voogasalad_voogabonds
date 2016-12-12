@@ -28,4 +28,9 @@ public class ScoreBox extends InfoBox implements IObserver<IViewablePlayer>,IPla
 	public void update(IViewablePlayer aChangedObject) {
 		myOutput.setText(Integer.toString(aChangedObject.getAvailableMoney()));
 	}
+
+	@Override
+	public void remove(IViewablePlayer aRemovedObject) {
+		update(aRemovedObject);
+	}
 }

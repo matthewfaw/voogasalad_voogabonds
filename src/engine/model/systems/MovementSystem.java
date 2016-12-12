@@ -31,4 +31,9 @@ public class MovementSystem extends AbstractSystem<MoveableComponent> implements
 			mc.move();
 		}
 	}
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing.
+	}
 }
