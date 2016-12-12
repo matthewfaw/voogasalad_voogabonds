@@ -19,7 +19,8 @@ import engine.model.data_stores.DataStore;
  * A class intended to manage which waves are currently active
  * Provides a simple interface to retrieve which Enemies to be constructed
  * at a given time step 
- * @author matthewfaw and owenchung
+ * @author matthewfaw 
+ * @author owenchung
  *
  */
 public class ActiveWaveManager {
@@ -66,7 +67,7 @@ public class ActiveWaveManager {
 			if (activeWave.canReleaseEnemy(aTotalTimeElapsed)) {
 				EntityData enemy = myEntityDataStore.getData(activeWave.releaseWaveEntity(aTotalTimeElapsed));
 				enemiesToConstruct.add(new PathFollowerData(enemy, activeWave.getSpawnPointName(), activeWave.getSinkPointName()));
-			} else {
+			} else if (!activeWave.hasEnemiesToRelease()){
 				iterator.remove();
 //				myWaveStates.remove(activeWave);
 			}
