@@ -7,6 +7,7 @@ import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -83,10 +84,18 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 if (checkbox != null) {
                     this.getChildren().add(checkbox);
                 }
-            } else {
+            } else if (attributeType.toLowerCase().equals("boolean")) {
+                ObservableList<String> choices = FXCollections.observableArrayList("True", "False");
+                ComboBox<String> boolCombo = new ComboBox<>(choices);
+                lbl.setLabelFor(boolCombo);
+                lbl.setId("label");
+                boolCombo.setId("combobox");
+                myLabels.add(lbl);
+                this.getChildren().addAll(lbl, boolCombo);
+            }
+            else {
                 if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
-                    // TODO: Make ComboBox for Strategies!
-                    
+                    // TODO: replace if/else
                     List<String> fileList = new ArrayList<String>();
                     FileRetriever fr;
                     
@@ -185,7 +194,18 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(lbl);
                     this.getChildren().add(checkbox);
                 }
-            } else {
+            } else if (attributeType.toLowerCase().equals("boolean")) {
+                // TODO: Set combo box for booleans
+                ObservableList<String> choices = FXCollections.observableArrayList("True", "False");
+                ComboBox<String> boolCombo = new ComboBox<>(choices);
+                lbl.setLabelFor(boolCombo);
+                lbl.setId("label");
+                boolCombo.setValue(retrievedData.get(uglyAttributeName));
+                boolCombo.setId("combobox");
+                myLabels.add(lbl);
+                this.getChildren().addAll(lbl, boolCombo);
+            }
+            else {
                 if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
