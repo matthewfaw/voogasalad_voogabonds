@@ -50,8 +50,7 @@ public class MapDistributor {
 	private void createEntity(EntityData entityData) {
 		try {
 			myEntityFactory.constructEntity(entityData.getName());
-		} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e) {
+		} catch (UnsupportedOperationException e) {
 			e.printStackTrace();
 			// Router.distributeError("Can't construct entity.");
 		}
