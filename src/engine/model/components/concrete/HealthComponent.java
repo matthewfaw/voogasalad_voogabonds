@@ -9,6 +9,7 @@ import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IViewableHealth;
 import engine.model.systems.BountySystem;
+import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.weapons.DamageInfo;
 import gamePlayerView.gamePlayerView.Router;
@@ -28,6 +29,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
 	private BountySystem myBounty;
+	@Hide
+	private DamageDealingSystem myDamage;
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;
 	private Double myMaxHealth;
@@ -35,8 +38,10 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private List<IObserver<IViewableHealth>> myObservers;
 	
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty,  ComponentData componentdata, Router router) {
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
 		myBounty = bounty;
+		myDamage = damage;
+		
 		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		
@@ -44,6 +49,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		
 		healthSystem.attachComponent(this);
 		
+		//TODO
 		//myRouter.distributeViewableHealthComponent(this);
 	}
 		
@@ -68,6 +74,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		
 		int died = myCurrHealth <= 0 ? 1 : 0;
 		int bounty = myBounty.collectBounty(this);
+		
+		myDamage.explode(this);
 		
 		return new DamageInfo(dmg.getDamage(), died, bounty);		
 	}

@@ -82,6 +82,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	}
 
 	private void dealDamage(CollidableComponent a, CollidableComponent b) {
+		
 		myDamageDealingSystem.dealDamageToTarget(a, b);
 
 	}

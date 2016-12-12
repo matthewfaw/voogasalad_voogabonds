@@ -23,18 +23,6 @@ public class HealthSystem extends AbstractSystem<HealthComponent> {
 			return healthComponent.getCurrentHealth() <= 0;
 	}
 	
-	/**
-	 * Adds the change in health to the entity's health.
-	 * @param entity to add health to
-	 * @param deltaHealth: change in health
-	 */
-	public void takeDamage(IComponent component, Damage dmg) {
-		HealthComponent healthComponent = getComponent(component);
-		if (healthComponent != null)
-			healthComponent.takeDamage(dmg);
-	}
-	
-	
 	public DamageInfo dealDamageTo(IComponent target, Damage damageToTake) {
 		HealthComponent health = getComponent(target);
 		if (health != null) {
