@@ -107,7 +107,7 @@ public class MockGameDataConstructor {
 			ComponentData cd3 = new ComponentData();
 			cd3.setComponentName("MoveableComponent");
 			cd3.addField("myCollisionRadius", "50");
-			cd3.addField("myTurnSpeed", "10");
+			cd3.addField("myTurnSpeed", "1");
 			cd3.addField("myMoveSpeed", "1");
 			cd3.addField("myMaxDistance", "100");
 			cd3.addField("myMovementCalc", "GreedyMovementStrategy");
@@ -159,7 +159,7 @@ public class MockGameDataConstructor {
 			//Level data
 			WaveData wad1 = new WaveData();
 			wad1.setName("Cool wave");
-			wad1.setNumEnemies(10);
+			wad1.setNumEnemies(1);
 			wad1.setSpawnPointName("spawnPoint");
 			wad1.setSinkPointName("sinkPoint");
 			wad1.setTimeBetweenEnemy(20);
@@ -183,8 +183,8 @@ public class MockGameDataConstructor {
 			wad3.setWaveEntity("Awesome Tower2");
 			LevelData ld = new LevelData();
 			ld.addWaveDataListToList(wad1);
-			ld.addWaveDataListToList(wad2);
-			ld.addWaveDataListToList(wad3);
+			//ld.addWaveDataListToList(wad2);
+			//ld.addWaveDataListToList(wad3);
 			ld.setLevelName("0");
 			LevelDataContainer ldc = new LevelDataContainer();
 			ldc.createNewLevelData(ld);

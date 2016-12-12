@@ -46,6 +46,7 @@ public class LevelController implements IObserver<TimelineController> {
 	@Override
 	//*******************Observer interface***************//
 	public void update(TimelineController aChangedObject) {
+
 		if (myWaveController == null) {
 			myWaveController = new WaveController(
 					myEntityDataStore,
@@ -56,6 +57,7 @@ public class LevelController implements IObserver<TimelineController> {
 					myMovementSystem,
 					myMapDataContainer);
 		}
+
 		if (myWaveController.isLevelFinished()) {
 			myCurrentLevel ++;
 			if (myLevelDataContainer.hasLevel(myCurrentLevel)) {
