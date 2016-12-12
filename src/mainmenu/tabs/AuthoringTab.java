@@ -28,7 +28,7 @@ public class AuthoringTab extends Tab {
 	private int screenHeight;
 	private ResourceBundle myResources;
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	private TilePane authorOptions;
+	private HBox authorOptions;
 	private MainInitializer initializer;
 	private Router router;
 
@@ -37,7 +37,7 @@ public class AuthoringTab extends Tab {
 		this.root = mainMenuTab;
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.authorTab = new Tab(myResources.getString("EnterAuthorMode"));
-		this.authorOptions = new TilePane();
+		this.authorOptions = new HBox(3);
 		authorOptions.setId("background");
 		this.initializer = init;
 		this.router = new Router();

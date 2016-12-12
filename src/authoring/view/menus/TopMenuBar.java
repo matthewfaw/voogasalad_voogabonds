@@ -29,8 +29,8 @@ public class TopMenuBar {
 		topMenu.setId("background");
 		this.router = r;
 		Menu fileMenu = new FileMenu(topMenu, router);
-		Menu editMenu = new EditMenu(topMenu);
-		Menu personalizeMenu = new PersonalizeMenu(topMenu, root);
+//		Menu editMenu = new EditMenu(topMenu);
+//		Menu personalizeMenu = new PersonalizeMenu(topMenu, root);
 		Menu playMenu = new PlayMenu(topMenu);
 		for (Menu menu: topMenu.getMenus()){
 			menu.setId("menu");

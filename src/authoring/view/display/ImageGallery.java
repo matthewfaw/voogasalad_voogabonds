@@ -89,6 +89,7 @@ public class ImageGallery {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
+					selectedImagePath = imagePane.getSelectionModel().getSelectedItem().getImagePath();
 					toolBar.setSelectedImagePath(selectedImagePath);
 					terrainStage.close();
 					System.out.println("HELLO1");
