@@ -34,7 +34,6 @@ import javafx.scene.text.Font;
  * @author Guhan Muruganandam & Grayson Wise
  * 
  */
-@Deprecated
 public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>, IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");

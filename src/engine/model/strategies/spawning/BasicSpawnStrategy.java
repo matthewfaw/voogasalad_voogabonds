@@ -21,9 +21,9 @@ public class BasicSpawnStrategy implements ISpawningStrategy {
 			PhysicalSystem myPhysical, CreatorComponent creatorComponent) {
 		try {
 			if (myPhysical.get(creatorComponent) != null) {
-				IEntity spawn = myEntityFactory.constructEntity(creatorComponent.getSpawnName());
-				myMovement.get(spawn).setGoal(myTarget);
-				myPhysical.get(spawn).setPosition(myPhysical.get(creatorComponent).getPosition());
+				IEntity spawn = myEntityFactory.constructEntity(creatorComponent.getSpawnName(), myPhysical.get(creatorComponent).getPosition());
+				if (myMovement.get(spawn) != null)
+					myMovement.get(spawn).setGoal(myTarget);
 				return spawn;
 			} else 
 				return null;

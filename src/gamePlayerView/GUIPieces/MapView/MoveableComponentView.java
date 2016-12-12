@@ -13,9 +13,11 @@ import javafx.scene.layout.Pane;
 public class MoveableComponentView extends ImageView implements IObserver<IViewablePhysical> {
 
 	private Pane myPane;
-	private AppController myAppController;
-    public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController){
+	private ApplicationController myAppController;
+	
+    public MoveableComponentView(IObservable<IViewablePhysical> aObservable, Pane pane, ApplicationController aAppController){
     	myAppController = aAppController;
+    	myPane = pane;
     }	
     public MoveableComponentView(IObservable<IViewable> aObservable) {
     	
@@ -37,8 +39,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	}
 
 	@Override
-	public void remove(IViewable aRemovedObject) {
-		// TODO Auto-generated method stub
+	public void remove(IViewablePhysical aRemovedObject) {
 		myPane.getChildren().remove(this);
 	}
 }

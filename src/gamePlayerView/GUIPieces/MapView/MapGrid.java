@@ -107,13 +107,13 @@ public class MapGrid extends Node {
         //get info to come up on click
         //m.getInfo();
     	//myAppController.DisplayStats();
-        myAppController.onEntityClicked();
+        //myAppController.onEntityClicked();
     	//System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane, myAppController);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
