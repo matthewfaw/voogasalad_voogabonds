@@ -64,8 +64,8 @@ public class MapDisplay implements IObserver<TimelineController> {
 //    	background.giveViewableComponent(aObservable);
 //    }
     
-    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable, String id) {
-    	background.giveViewableComponent(aObservable, id);
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable) {
+    	background.giveViewableComponent(aObservable);
     }
     
     public void setMap(MapDataContainer aMapData){

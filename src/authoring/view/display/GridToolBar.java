@@ -33,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -113,9 +114,30 @@ public class GridToolBar {
 		terrainChooser.setId("menu-combobox");
 		terrainChooser.setMinHeight(screenHeight*0.04);
 		terrainHandler(terrainChooser);
-		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser);
+		Button music = new Button(myResources.getString("SelectMusic"));
+		music.setId("button");
+		musicHandler(music);
+		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser, music);
 	}
 	
+	private void musicHandler(Button music) {
+		music.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event){
+				FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"), new FileChooser.ExtensionFilter("WAV", "*.wav"));
+                File file = fileChooser.showOpenDialog(new Stage());
+                if (file != null){
+                	String fileName = file.getName();
+                	try {
+						controller.setTune(fileName);
+					} catch (Exception e) {
+						ErrorBox.displayError(e.getMessage());
+					}
+                }
+			}
+		});
+	}
+
 	private void importTerrains() {
 		HashMap<String, String> terrainList = controller.getValidTerrainMap();
 		for (String terrainName : terrainList.keySet()) {
