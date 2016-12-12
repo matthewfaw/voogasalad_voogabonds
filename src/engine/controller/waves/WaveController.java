@@ -58,6 +58,7 @@ public class WaveController {
 	public void distributeEntities(double aElapsedTime)
 	{
 		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
+		System.out.println("trying to spawn");
 		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
 			PathFollowerData entityData = iterator.next();
 			try {	
@@ -69,7 +70,7 @@ public class WaveController {
 				Collections.shuffle(sinks);
 				
 				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
-				
+				System.out.println("spawning one enemy");
 				MoveableComponent m = myMovement.get(newEntity);
 				if (m != null)
 					m.setGoal(sinks.get(0));
