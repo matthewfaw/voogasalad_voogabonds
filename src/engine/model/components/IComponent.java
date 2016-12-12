@@ -20,10 +20,12 @@ public interface IComponent {
 	 * @return
 	 */
 	public IEntity getEntity();
-	
+
 	/**
 	 * Distributes the data for different components to the router
 	 * for the front end to observe, view, and display.
 	 */
 	public void distributeInfo();
+
+	public void delete();
 }

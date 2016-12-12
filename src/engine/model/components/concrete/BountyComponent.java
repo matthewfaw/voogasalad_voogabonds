@@ -6,6 +6,7 @@ import java.util.List;
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
+
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableBounty;
@@ -41,6 +42,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	@Override
 	public int getBounty()
 	{
+
 		return myBountyValue;
 	}
 	
@@ -64,5 +66,11 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
 	}
+
+	public void delete() {
+		myBounty.detachComponent(this);
+	}
+	
+	
 
 }

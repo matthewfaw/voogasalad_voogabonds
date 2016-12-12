@@ -165,4 +165,9 @@ public class MapDisplay implements IObserver<TimelineController> {
     public void getControls(Controls cont) {
         myControls = cont;
     }
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing.
+	}
 }

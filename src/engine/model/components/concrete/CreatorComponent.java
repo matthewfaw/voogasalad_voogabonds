@@ -52,9 +52,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Hide
 	private MovementSystem myMovement;
 	@Hide
+	private SpawningSystem mySpawning;
+	@Hide
 	private List<IEntity> myChildren;
 	@Hide
 	private DamageInfo myStats;
+
 	
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
@@ -149,5 +152,10 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Override
 	public DamageInfo getStats() {
 		return myStats;
+	}
+
+	@Override
+	public void delete() {
+		mySpawning.detachComponent(this);
 	}
 }

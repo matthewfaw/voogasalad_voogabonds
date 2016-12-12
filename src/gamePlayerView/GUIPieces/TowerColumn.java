@@ -1,15 +1,10 @@
 
 package gamePlayerView.GUIPieces;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-
 import authoring.model.EntityData;
-import authoring.model.TowerData;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
@@ -18,9 +13,7 @@ import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -29,23 +22,19 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-//import resources.AppResources;
-import javafx.scene.text.Text;
 
 
 /**
  * @author Guhan Muruganandam & Grayson Wise
  * 
  */
+@Deprecated
 public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>, IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
@@ -187,6 +176,12 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	@Override
 	public void update(IViewablePlayer aChangedObject) {
 		populateTowerInfo(aChangedObject);
+	}
+
+	@Override
+	public void remove(IViewablePlayer aRemovedObject) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*

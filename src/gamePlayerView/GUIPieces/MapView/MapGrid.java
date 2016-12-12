@@ -1,8 +1,7 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
-
-
+import java.util.ResourceBundle;
 import java.util.Set;
 //import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;
@@ -31,6 +30,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import utility.ErrorBox;
 import utility.Point;
 
 public class MapGrid extends Node {
@@ -42,10 +42,13 @@ public class MapGrid extends Node {
     private ArrayList<MoveableComponentView> sprites;
     private int myCellSize;
     private Rectangle closest; 
+    private ResourceBundle myResources;
+	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
     
     //XXX: maybe remove this--just a quick fix
     public MapGrid(int rows, int cols, int aCellSize, ApplicationController aAppController){
     	myAppController = aAppController;
+    	this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
     	myPane = new Pane();
     	closest = new Rectangle();
     	sprites = new ArrayList<MoveableComponentView>();
@@ -94,7 +97,7 @@ public class MapGrid extends Node {
 					setClickForComponent(m);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					ErrorBox.displayError(myResources.getString("CannotMoveObject"));
 				}
 			});
         }
@@ -110,7 +113,7 @@ public class MapGrid extends Node {
     
     public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable,myAppController);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);

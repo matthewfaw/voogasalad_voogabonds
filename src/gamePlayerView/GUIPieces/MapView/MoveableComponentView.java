@@ -8,10 +8,11 @@ import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class MoveableComponentView extends ImageView implements IObserver<IViewablePhysical> {
 
-	private ApplicationController myAppController;
+	private Pane myPane;
 	
     public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController){
     	myAppController = aAppController;
@@ -33,5 +34,11 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 		this.setFitHeight(aChangedObject.getSize());
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
 		this.setRotate(aChangedObject.getHeading());
+	}
+
+	@Override
+	public void remove(IViewable aRemovedObject) {
+		// TODO Auto-generated method stub
+		myPane.getChildren().remove(this);
 	}
 }
