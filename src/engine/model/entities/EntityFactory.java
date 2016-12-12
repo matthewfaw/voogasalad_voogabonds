@@ -8,14 +8,10 @@ import java.util.Map;
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
-import engine.controller.waves.PathFollowerData;
 import engine.model.components.ComponentFactory;
-import engine.model.components.IComponent;
 import engine.model.components.IModifiableComponent;
-import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
-import engine.model.strategies.IPosition;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;

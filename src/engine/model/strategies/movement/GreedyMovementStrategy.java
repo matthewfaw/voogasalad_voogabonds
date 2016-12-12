@@ -3,13 +3,13 @@ package engine.model.strategies.movement;
 import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.StrategyFactory;
+import engine.model.strategies.factories.MovementStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
 public class GreedyMovementStrategy extends AbstractMovementStrategy {
 
-	public GreedyMovementStrategy(StrategyFactory creator) {
+	public GreedyMovementStrategy(MovementStrategyFactory creator) {
 		super(creator);
 	}
 

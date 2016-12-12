@@ -57,7 +57,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		
 		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
-		myMovementCalc = movement.getStrategyFactory().movementStrategy(data.getFields().get("myMovementCalc"));
+		myMovementCalc = movement.getStrategyFactory().newStrategy(data.getFields().get("myMovementCalc"));
 		
 		movement.attachComponent(this);
 	}

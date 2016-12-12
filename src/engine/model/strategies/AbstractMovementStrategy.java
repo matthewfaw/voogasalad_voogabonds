@@ -1,11 +1,12 @@
 package engine.model.strategies;
 
+import engine.model.strategies.factories.MovementStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
 abstract public class AbstractMovementStrategy implements IMovementStrategy {
 	
-	public AbstractMovementStrategy(StrategyFactory creator) {
+	public AbstractMovementStrategy(MovementStrategyFactory creator) {
 	}
 	
 	@Override
