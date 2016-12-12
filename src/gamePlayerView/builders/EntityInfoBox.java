@@ -24,6 +24,7 @@ public class EntityInfoBox implements IGUIPiece {
 		this.myTargetingButtons=builder.getMyTargetingButtons();
 		Hbox.setSpacing(10);
 		Hbox.getChildren().addAll(myMachineInfo.getView(),myTargetingButtons.getView(),myUpgradeOrSell.getView());
+		//Hbox.getChildren().
 	}
 	
 	@Override

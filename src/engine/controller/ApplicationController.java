@@ -50,13 +50,13 @@ public class ApplicationController {
 	 * A method to be called to initialize the frontend and backend
 	 * @throws Exception 
 	 */
-	public void init(Stage aStage) throws Exception
+	public void init(Stage aStage,String gameTitle) throws Exception
 	{
 		//myStage=aStage; ///Guhan 
 		//GamePlayerScene scene = constructGUI(aStage);
 		myScene=constructGUI(aStage);
 		Router router = new Router(myScene);
-		constructBackend(router);
+		constructBackend(router,gameTitle);
 	}
 	/**
 	 * Helper method to create the view object
@@ -76,11 +76,12 @@ public class ApplicationController {
 	 * This method establishes the link between the frontend and backend
 	 * through the Router class
 	 * @param aRouter
+	 * @param gameTitle 
 	 */
-	private void constructBackend(Router aRouter)
+	private void constructBackend(Router aRouter, String gameTitle)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
+		myBackendController = new BackendController(myGameOptions.getString(gameTitle), aRouter);
 	}
 	private BorderPane constructBorderPane(){
 		/*myPane= new BorderPane();
