@@ -8,7 +8,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableCollidable;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
@@ -37,7 +36,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private CollisionDetectionSystem myCollidable;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableCollidable>> myObservers;
 	
 	public CollidableComponent (
 			CollisionDetectionSystem collisionDetectionSystem, 
@@ -48,8 +47,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			ComponentData data,
 			Router router) {
 		super(router);
-		myObservers = new ArrayList<IObserver<IViewable>>();
-
+		myObservers = new ArrayList<IObserver<IViewableCollidable>>();
 		myCollidable = collisionDetectionSystem;
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
@@ -110,21 +108,27 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableCollidable> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableCollidable> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
 
 	@Override
 	public void delete() {
 		myCollidable.detachComponent(this);
+	}
+
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
 	}
 }

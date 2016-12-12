@@ -1,5 +1,7 @@
 package engine.model.components.viewable_interfaces;
 
-public interface IViewableTargeting extends IViewable{
+import engine.IObservable;
+
+public interface IViewableTargeting extends IViewable, IObservable<IViewableTargeting>{
 
 }

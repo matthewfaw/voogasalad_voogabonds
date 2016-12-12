@@ -9,7 +9,6 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableDamageDealer;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
@@ -36,7 +35,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private IDamageStrategy myDamageStrategy;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableDamageDealer>> myObservers;
 	
 	private boolean explodesOnEnemies;
 	private boolean explodesOnAllies;
@@ -64,7 +63,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 			) {
 		super(router);
 		
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableDamageDealer>>();
 		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
@@ -161,21 +160,26 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableDamageDealer> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableDamageDealer> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
 
 	public void delete() {
 		myDamageSystem.detachComponent(this);
 	}
 
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
 }

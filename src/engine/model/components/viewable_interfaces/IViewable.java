@@ -8,5 +8,11 @@ public interface IViewable {
 	 * Returns the entity associated with the viewable
 	 * @return the corresponding entity
 	 */
-	public IEntity getEntity();
+//	public IEntity getEntity();
+	
+	/**
+	 * Returns the entity ID associated with this viewable.
+	 * @return
+	 */
+	public String getEntityID();
 }

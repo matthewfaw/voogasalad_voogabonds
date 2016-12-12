@@ -8,6 +8,15 @@ import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import engine.IObservable;
 import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewableBounty;
+import engine.model.components.viewable_interfaces.IViewableCollidable;
+import engine.model.components.viewable_interfaces.IViewableCreator;
+import engine.model.components.viewable_interfaces.IViewableDamageDealer;
+import engine.model.components.viewable_interfaces.IViewableHealth;
+import engine.model.components.viewable_interfaces.IViewableMovable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
+import engine.model.components.viewable_interfaces.IViewableTargeting;
+import engine.model.components.viewable_interfaces.IViewableTeam;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
@@ -90,10 +99,56 @@ public class Router {
 	 * A method to distribute viewable game elements
 	 * @param aComponent
 	 */
+	//public void distributeViewableComponent(IObservable<IViewable> aComponent)
+	//{
+		//TODO: give all viewable components the new component
+		//myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
+	//}
+	
+	public void distributeViewableComponent(IViewableTargeting aComponent)
+	{
+		//TODO: give all viewable components the new component
+		myGamePlayerScene.getBuilder().withTargetingMechanism(aComponent);
+		//myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
+	}
+	
+	public void distributeViewableComponent(IViewableDamageDealer aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
+	
+	public void distributeViewableComponent(IViewableCollidable aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
+	
+	public void distributeViewableComponent(IViewableCreator aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
+	public void distributeViewableComponent(IViewablePhysical aComponent)
+	{
+		//myGamePlayerScene.getBuilder().withMachineInfo(aComponent);
+	}
+	public void distributeViewableComponent(IViewableMovable aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
+	public void distributeViewableComponent(IViewableTeam aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
+	public void distributeViewableComponent(IViewableBounty aComponent)
+	{
+		//TODO: give all viewable components the new component
+	}
+	public void distributeViewableComponent(IViewableHealth aComponent)
+	{
+		
+	}
 	public void distributeViewableComponent(IObservable<IViewablePhysical> aComponent)
 	{
 		//TODO: give all viewable components the new component
-		myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
 	}
 	
 	/**

@@ -7,7 +7,6 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableMovable;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
@@ -56,7 +55,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewableMovable>> myObservers;
 
 	public MoveableComponent(
 			MovementSystem movement,
@@ -86,7 +85,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
 		myMovementCalc = movement.getStrategyFactory().newStrategy(data.getFields().get("myMovementCalc"));
 		
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewableMovable>>();
 		
 		movement.attachComponent(this);
 	}
@@ -141,12 +140,12 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewableMovable> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewableMovable> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
@@ -165,6 +164,11 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		return myMovementCalc;
 	}
 
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
+	
 	@Override
 	public void delete() {
 		myMovement.detachComponent(this);
