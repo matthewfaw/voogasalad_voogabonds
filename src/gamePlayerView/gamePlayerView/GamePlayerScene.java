@@ -25,6 +25,7 @@ import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.builders.EntityInfoBox;
 import gamePlayerView.builders.EntityInfoBoxBuilder;
 //import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
@@ -232,11 +233,6 @@ public class GamePlayerScene {
 	{
 		return myMap;
 	}
-
-	public EntityInfoBoxBuilder makeEntityInfoBox()
-	{
-		return new EntityInfoBoxBuilder(this);
-	}
 	
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
@@ -246,6 +242,12 @@ public class GamePlayerScene {
 	//public List<ISprite> getSprites(){
 		//return mySprites;
 	//}
+	public void updateDisplay(EntityInfoBox myStatisticsBox) {
+		myBottomPane.clear();
+		Collection<Node> myCollection=new ArrayList<Node>();
+		myCollection.add(myStatisticsBox.getView());
+		myBottomPane.add(myCollection);
+	}
 	
 	    public void handleKeyInput(KeyCode code) {
 	       
@@ -270,4 +272,3 @@ public class GamePlayerScene {
 	    }
 	
 }
-

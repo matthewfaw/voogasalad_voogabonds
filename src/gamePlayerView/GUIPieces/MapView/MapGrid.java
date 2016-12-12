@@ -79,6 +79,7 @@ public class MapGrid extends Node {
 				Rectangle closestRectangle = findDropLocation(event.getSceneX()-100, event.getSceneY());
 //    			}      
 
+
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getLayoutX(), closestRectangle.getLayoutY()));
 				setClickAction();
 				event.consume();
@@ -105,8 +106,9 @@ public class MapGrid extends Node {
     private void setClickForComponent(MoveableComponentView m) throws Exception {
         //get info to come up on click
         //m.getInfo();
-    	myAppController.DisplayStats();
-        //System.out.println("hi");
+    	//myAppController.DisplayStats();
+        myAppController.onEntityClicked();
+    	System.out.println("hi");
     }
     
     public void giveViewableComponent(IObservable<IViewable> aObservable)
