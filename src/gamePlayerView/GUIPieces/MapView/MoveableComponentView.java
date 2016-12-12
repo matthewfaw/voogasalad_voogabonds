@@ -14,13 +14,19 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 	private Pane myPane;
 	private ApplicationController myAppController;
+	private IObservable<IViewablePhysical> myObservable;
+	private String entityID;
 	
-    public MoveableComponentView(IObservable<IViewablePhysical> aObservable, Pane pane, ApplicationController aAppController){
+    public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane, String id){
+
     	myAppController = aAppController;
+    	myObservable = aObservable;
     	myPane = pane;
+    	entityID = id;
     }	
-    public MoveableComponentView(IObservable<IViewable> aObservable) {
-    	
+    
+    public String getEntityID() {
+    	return entityID;
     }
 
 	@Override
