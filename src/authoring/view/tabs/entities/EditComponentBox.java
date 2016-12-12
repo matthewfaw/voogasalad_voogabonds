@@ -420,6 +420,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
 
     private ComponentData createDataFromInput () {
         ComponentData component = new ComponentData();
+        component.setComponentName(myName);
         for (int i = 0; i < myLabels.size(); i++) {
             Label lbl = myLabels.get(i);
             String attributeName = lbl.getText();
