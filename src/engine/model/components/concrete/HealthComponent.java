@@ -15,7 +15,7 @@ import utility.Damage;
  * manages how an entity should take damage
  * @author matthewfaw
  * @author Weston
- * @author owenchung (edits)
+ * @author owenchung (edit)
  *
  */
 public class HealthComponent extends AbstractComponent {
@@ -29,12 +29,11 @@ public class HealthComponent extends AbstractComponent {
 
 
 	
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty,  ComponentData componentdata) {
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, ComponentData componentdata) {
 		myBounty = bounty;
 		healthSystem.attachComponent(this);
-		
-		myCurrHealth = DEFAULT_HEALTH;
-		myMaxHealth = DEFAULT_HEALTH;
+		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
+		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));;
 	}
 		
 	public int getCurrentHealth() {

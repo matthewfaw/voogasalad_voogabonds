@@ -74,8 +74,7 @@ public class WaveController {
 				if (m != null)
 					m.setGoal(sinks.get(0));
 				
-			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-					| IllegalArgumentException | InvocationTargetException e) {
+			} catch (UnsupportedOperationException e) {
 				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
 			}
 			
