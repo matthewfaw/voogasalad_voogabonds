@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  * @author Christopher Lu
  * Creates the personalization menu that allows the user to customize their workspace.
  */
-
+@Deprecated
 public class PersonalizeMenu extends Menu {
 	
 	private ResourceBundle myResources;
