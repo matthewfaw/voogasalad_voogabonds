@@ -8,6 +8,7 @@ import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
 import engine.model.systems.CollisionDetectionSystem;
+import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TargetingSystem;
@@ -21,11 +22,15 @@ import utility.Point;
  */
 public class MoveableComponent extends AbstractComponent implements IMovable {
 	@Hide
+	private MovementSystem myMovement;
+	@Hide
 	private PhysicalSystem myPhysical;
 	@Hide
 	private TargetingSystem myTargeting;
 	@Hide
 	private CollisionDetectionSystem myCollision;
+	@Hide
+	private DamageDealingSystem myDamage;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -35,9 +40,11 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private IPosition myGoal;
 	
 	//NOTE: So that entities can die after traveling a certain distance.
+	private boolean explodesAtMaxDistance;
 	private double myMaxDistance;
 	@Hide
 	private double myMovedDistance;
+
 	
 
 	public MoveableComponent(
@@ -45,15 +52,19 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
+			DamageDealingSystem damage,
 			ComponentData data
 			) throws ClassNotFoundException {
 		
+		myMovement = movement;
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		myDamage = damage;
 		
 		myMovedDistance = 0;
 		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
+		explodesAtMaxDistance = Boolean.parseBoolean(data.getFields().get("explodesAtMaxDistance"));
 		
 		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
@@ -62,10 +73,12 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		movement.attachComponent(this);
 	}
 	
-	public Pair<Double, Point> getMove(IPhysical p) {
+	private Pair<Double, Point> getMove(IPhysical p) {
+		if (myMovedDistance - myMaxDistance < myMoveSpeed)
+			myMoveSpeed = Math.max(0.0, myMovedDistance - myMaxDistance);
+		
 		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this, p);
 		myMovedDistance += nextMove.getValue().euclideanDistance(p.getPosition());
-		//If myMovedDistance >= myMaxDistance, do something.
 		return nextMove;
 	}
 
@@ -94,6 +107,15 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		PhysicalComponent p = myPhysical.get(this);
 		p.setPosition(getMove(p));
 		myCollision.checkCollision(p);
+		
+		if (myMovedDistance >= myMaxDistance && explodesAtMaxDistance) {
+			myDamage.explode(this);
+		}
+	}
+
+	@Override
+	public void delete() {
+		myMovement.detachComponent(this);
 	}
 
 }

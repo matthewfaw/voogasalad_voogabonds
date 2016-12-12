@@ -4,6 +4,7 @@ import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
+import engine.model.systems.AbstractSystem;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
@@ -25,6 +26,8 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private PhysicalSystem myPhysicalSystem;
 	@Hide
 	private DamageDealingSystem myDamageDealingSystem;
+	@Hide
+	private CollisionDetectionSystem myCollidable;
 	
 	public CollidableComponent (
 			CollisionDetectionSystem collisionDetectionSystem, 
@@ -34,6 +37,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			BountySystem rewardSystem,
 			ComponentData data) {
 		
+		myCollidable = collisionDetectionSystem;
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
 		
@@ -85,5 +89,10 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 		
 		myDamageDealingSystem.dealDamageToTarget(a, b);
 
+	}
+	
+	@Override
+	public void delete() {
+		myCollidable.detachComponent(this);
 	}
 }

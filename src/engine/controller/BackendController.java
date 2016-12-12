@@ -299,8 +299,10 @@ public class BackendController {
 			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
 			System.out.println(s);
 		} catch (Exception e) {
+
 			// TODO Auto-generated catch block
 			ErrorBox.displayError(myResources.getString("CannotSave"));
+			myRouter.distributeErrors(e.toString());
 		}
 	}
 	
