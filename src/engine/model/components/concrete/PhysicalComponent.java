@@ -1,14 +1,16 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
-import engine.IViewable;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
 import engine.model.systems.PhysicalSystem;
@@ -24,7 +26,7 @@ import utility.Point;
  * @author owenchung (edits)
  *
  */
-public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
+public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewablePhysical {
 	private String myImagePath;
 	private double myImageSize;
 	
@@ -49,7 +51,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myHeading = 0;
 		
 		physical.attachComponent(this);
-		router.distributeViewableComponent(this);
+//		router.distributeViewableComponent(this);
 		setPosition(position);
 	}
 
@@ -113,5 +115,13 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+	
+	/***** Component interface ******/
+
+	@Override
+	public void distributeInfo() {
+		// TODO Auto-generated method stub
+		
 	}
 }
