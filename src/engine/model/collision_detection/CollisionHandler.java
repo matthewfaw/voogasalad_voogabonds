@@ -1,5 +1,6 @@
 package engine.model.collision_detection;
 
+@Deprecated
 public class CollisionHandler implements ICollisionHandler{
 
 	/**

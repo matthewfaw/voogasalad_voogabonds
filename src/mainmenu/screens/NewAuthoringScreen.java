@@ -6,7 +6,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
+import authoring.controller.Router;
+import authoring.model.serialization.GameStateSerializer;
 import authoring.model.serialization.JSONSerializer;
+import authoring.view.display.AuthorDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,15 +42,18 @@ public class NewAuthoringScreen {
 	private int mapXDim;
 	private int mapYDim;
 	private String authoringName;
+	private Router router;
 	
-	public NewAuthoringScreen() throws IOException {
+	public NewAuthoringScreen(Router r) throws IOException {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.stage = new Stage();
-		this.initializer = new MainInitializer(stage);
+		this.router = r;
 		stage.setTitle(myResources.getString("SetUpNewAuthoringTitle"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
+		scene.getStylesheets().add("style.css");
+		pane.setId("background");
 		populatePane();
 		stage.setScene(scene);
 		stage.show();
@@ -54,18 +61,21 @@ public class NewAuthoringScreen {
 	
 	private void populatePane() {
 		VBox authoringOptions = new VBox(screenHeight*0.1);
+		authoringOptions.setId("menu-vbox");
 		Button chooseNameSave = new Button(myResources.getString("ChooseNameSave"));
+		chooseNameSave.setId("button");
 		saveHandler(chooseNameSave);
 		HBox mapDimensionContainer = new HBox(screenWidth*0.05);
 		TextField mapXField = new TextField();
+		mapXField.setMinHeight(47);
 		mapXField.setPromptText(myResources.getString("SetMapX"));
 		TextField mapYField = new TextField();
+		mapYField.setMinHeight(47);
 		mapYField.setPromptText(myResources.getString("SetMapY"));
-		Button confirmMapSize = new Button(myResources.getString("ApplyChanges"));
-		mapSizeHandler(confirmMapSize, mapXField, mapYField);
 		Button startProject = new Button(myResources.getString("ConfirmAuthoringSetUp"));
-		startProjectHandler(startProject);
-		mapDimensionContainer.getChildren().addAll(mapXField, mapYField, confirmMapSize, startProject);	
+		startProject.setId("button");
+		startProjectHandler(startProject, mapXField, mapYField);
+		mapDimensionContainer.getChildren().addAll(mapXField, mapYField, startProject);	
 		authoringOptions.getChildren().addAll(chooseNameSave, mapDimensionContainer);
 		authoringOptions.setPadding(new Insets(screenHeight*0.01, screenWidth*0.01, screenHeight*0.01, screenWidth*0.01));
 		pane.setCenter(authoringOptions);
@@ -80,9 +90,9 @@ public class NewAuthoringScreen {
 						Stage stage = new Stage();
 						File file = newGameSave.showSaveDialog(stage);
 						if (file != null) {
-							JSONSerializer json = new JSONSerializer();
+							GameStateSerializer GSS = new GameStateSerializer(router);
 							try {
-								json.serializeToFile(file, file.getName());
+								GSS.saveGameState(file.getName());
 								setAuthoringName(file.getName());
 							} catch (Exception exception) {
 								System.out.println("Cannot create new game.");
@@ -92,23 +102,28 @@ public class NewAuthoringScreen {
 				});
 	}
 	
-	private void mapSizeHandler(Button confirmMapButton, TextField xSize, TextField ySize) {
-		confirmMapButton.setOnAction(new EventHandler<ActionEvent>() {
+	private void startProjectHandler(Button startProjectButton, TextField xSize, TextField ySize) {
+		startProjectButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent e) {
-				setMapXDim(Integer.parseInt(xSize.getText()));
-				setMapYDim(Integer.parseInt(ySize.getText()));
+			public void handle(ActionEvent event) {
+				try {
+					MapDataContainer container = router.getMapDataContainer();
+					container.setDimensions(Integer.parseInt(xSize.getText()), Integer.parseInt(ySize.getText()));
+					initAuthoring(container);
+				} catch(Exception e){
+					MapDataContainer container = router.getMapDataContainer();
+					container.setDimensions(40, 20);
+					initAuthoring(container);
+				}
+
 			}
 		});
 	}
 	
-	private void startProjectHandler(Button startProjectButton) {
-		startProjectButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				initializer.initAuthoring(mapXDim, mapYDim, authoringName);
-			}
-		});
+	private void initAuthoring(MapDataContainer container) {
+	    AuthorDisplay authoring = new AuthorDisplay(pane, scene, router);
+//	    this.AuthDisp = authoring;
+		stage.setScene(scene);
 	}
 	
 	private void setUpScreenResolution() {

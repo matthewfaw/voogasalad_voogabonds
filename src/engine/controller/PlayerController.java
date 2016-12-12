@@ -38,6 +38,16 @@ public class PlayerController {
 		myRouter.distributePlayer(player);
 	}
 	
+	/**
+	 * Gets a player from the list of players at the
+	 * specific player ID.
+	 * @param playerID
+	 * @return the player at player ID
+	 */
+	public Player getPlayer(int playerID) {
+		return myPlayers.get(playerID);
+	}
+	
 	@Deprecated //only temporary
 	public Player getActivePlayer()
 	{
@@ -46,6 +56,6 @@ public class PlayerController {
 	
 	public void addResourceStoreForAllPlayers(ResourceStore aResourceStore)
 	{
-		//myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
+		myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
 	}
 }

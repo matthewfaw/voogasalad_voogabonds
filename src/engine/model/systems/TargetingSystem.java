@@ -1,43 +1,23 @@
 package engine.model.systems;
 
-import java.util.List;
+import engine.model.components.concrete.CreatorComponent;
+import engine.model.components.concrete.MoveableComponent;
+import engine.model.components.concrete.TargetingComponent;
+import engine.model.strategies.IPosition;
 
-import engine.model.components.IComponent;
-import engine.model.components.TargetingComponent;
-import engine.model.strategies.IPhysical;
-
-public class TargetingSystem implements ISystem {
-	List<TargetingComponent> myTargetingComponents;
-	private PhysicalSystem myPhysical;
-	private TeamSystem myTeams;
+public class TargetingSystem extends AbstractSystem<TargetingComponent> {
 	
-	public TargetingSystem(PhysicalSystem physical, TeamSystem teams) {
-		myPhysical = physical;
-		myTeams = teams;
-	}
-	
-	public IPhysical getTarget(IComponent c) {
-		TargetingComponent t = get(c);
+	public IPosition getTarget(MoveableComponent c) {
+		TargetingComponent t = getComponent(c);
 		if (t != null)
-			return t.getTarget(myPhysical.getMap(), myTeams, myPhysical.get(t));
-		return null;
+			return t.getTarget();
+		return c.getGoal();
 	}
 	
-	/************ Attach and detach component methods ************/
-	public void attachComponent(TargetingComponent aComponent) {
-		myTargetingComponents.add(aComponent);
+	public IPosition getTarget(CreatorComponent c) {
+		TargetingComponent t = getComponent(c);
+		if (t != null)
+			return t.getTarget();
+		return c.getTarget();
 	}
-	public void detachComponent(TargetingComponent aComponent) {
-		myTargetingComponents.remove(aComponent);
-	}
-	
-	private TargetingComponent get(IComponent c) {
-		for (TargetingComponent t: myTargetingComponents)
-			if (t.getEntity().equals(c.getEntity()))
-				return t;
-		return null;
-	}
-	
-	
-
 }

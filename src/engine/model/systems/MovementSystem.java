@@ -1,50 +1,34 @@
 package engine.model.systems;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
-import engine.model.components.MoveableComponent;
-import engine.model.components.PhysicalComponent;
-import engine.model.strategies.IPhysical;
+import engine.model.components.concrete.MoveableComponent;
+import engine.model.entities.IEntity;
+import engine.model.game_environment.MapMediator;
+import engine.model.strategies.StrategyFactory;
 
-public class MovementSystem implements IObserver<TimelineController>, ISystem {
-	private List<MoveableComponent> myMoveableComponents;
-	private TargetingSystem myTargeting;
-	private PhysicalSystem myPhysical;
-	private CollisionDetectionSystem myCollision;
+public class MovementSystem extends AbstractSystem<MoveableComponent> implements IObserver<TimelineController> {
+	private StrategyFactory myStrategyFactory;
 	
 	
-	public MovementSystem (PhysicalSystem physical, CollisionDetectionSystem collision, TargetingSystem targeting) {
-		myMoveableComponents = new ArrayList<MoveableComponent>();
-		myPhysical = physical;
-		myTargeting = targeting;
-		myCollision = collision;
+	public MovementSystem (MapMediator map, TimelineController time) {
+		myStrategyFactory = new StrategyFactory(map);
+		time.attach(this);
 	}
 	
-	private void updateNextMoves() {
-		for (MoveableComponent mc: myMoveableComponents) {
-			mc.setGoal(myTargeting.getTarget(mc));
-			PhysicalComponent p = myPhysical.get(mc);
-			p.setPosition(mc.getMove(p));
-			myCollision.checkCollision(p);
-		}
+	public MoveableComponent get(IEntity entity) {
+		return getComponent(entity);
 	}
 	
-	/************ Attach and detach component methods ************/
-	public void attachComponent(MoveableComponent aComponent) {
-		myMoveableComponents.add(aComponent);
-	}
-	public void detachComponent(MoveableComponent aComponent) {
-		myMoveableComponents.remove(aComponent);
+	public StrategyFactory getStrategyFactory() {
+		return myStrategyFactory;
 	}
 	
 	/********* Observer interface ***********/
 	@Override
 	public void update(TimelineController aChangedObject) {
-		updateNextMoves();
+		for (MoveableComponent mc: getComponents()) {
+			mc.move();
+		}
 	}
-
-
 }

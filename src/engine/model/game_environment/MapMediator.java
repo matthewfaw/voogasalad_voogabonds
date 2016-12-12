@@ -1,36 +1,56 @@
 package engine.model.game_environment;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Map;
+import java.util.Queue;
 
-import engine.model.components.PhysicalComponent;
-import engine.model.game_environment.paths.PathFactory;
+import authoring.controller.MapDataContainer;
+import authoring.model.map.TerrainData;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.game_environment.paths.PathManager;
+import engine.model.game_environment.terrain.Terrain;
 import engine.model.game_environment.terrain.TerrainMap;
-import engine.model.machine.Machine;
-import engine.model.machine.MachineFactory;
+import engine.model.strategies.IMovable;
 import engine.model.strategies.IPhysical;
 import utility.Point;
 
-//TODO: update this class to ECS
-@Deprecated
 public class MapMediator {
-	private PathFactory myPathFactory;
+//	private PathFactory myPathFactory;
 	
 	private TerrainMap myTerrainMap;
-	private ArrayList<PhysicalComponent> myEntityManager;
-	private MachineFactory myAnarchosyndacalistCommune;
+	private MapDataContainer myMapData;
 	
-	//TODO: Change this constructor so that it hides away the terrain map
-	// so constructor could take in terrain map data instead of terrain map
-	// this makes the ownership model more explicit
-	public MapMediator(TerrainMap aTerrainMap) {
-		myTerrainMap = aTerrainMap;
-		myEntityManager = new ArrayList<PhysicalComponent>();
-		myPathFactory = new PathFactory(myTerrainMap);
+	public MapMediator(MapDataContainer mapData) {
+		myMapData = mapData;
+		myTerrainMap = new TerrainMap(mapData);
 
+	}
+	/**
+	 * Determines if a point is a valid terrain.
+	 * @param aLocation
+	 * @param validTerrains
+	 * @return
+	 */
+	public boolean isAValidTerrain(Point aLocation, List<String> validTerrains) {
+		
+		return myTerrainMap.hasTerrain(validTerrains, aLocation);
+		
+//		for (TerrainData terrainData: myMapData.getTerrainList()) {
+//			if (terrainData.getLoc().equals(aLocation)) {
+//				System.out.println("The terrain at this point is: "+terrainData.getName());
+//				for (String validTerrain: validTerrains) {
+//					if (validTerrain.equals(terrainData.getName())) {
+//						return true;
+//					}
+//				}
+//			}
+//		}
+//		return false;
 	}
 	
 	/**
@@ -41,57 +61,111 @@ public class MapMediator {
 	 * @return true if the entity was placed, false otherwise
 	 */
 	public boolean attemptToPlaceEntity(Point aLocation, PhysicalComponent aPhysicalComponent)
-	{
+	{		
 		/*
-		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
-			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
-			accept(aPhysicalComponent, aLocation);
-			return true;
+		 * Find terrain data at input point, then see if that data is a valid terrain for the 
+		 * physical component. If so, place physical component.
+		 */
+		
+		List<String> physicalComponentTerrains = aPhysicalComponent.getValidTerrains();
+		Collection<TerrainData> terrainList = myMapData.getTerrainList();
+		for (TerrainData terrainData: terrainList) {
+			if (terrainData.getLoc().equals(aLocation)) {
+				// found the terrain data at input location
+				for (String physicalTerrain: physicalComponentTerrains) {
+					if (physicalTerrain.equals(terrainData.getName())) {
+						// terrain data at input location matches valid terrain type
+						
+						// Set heading to 0 and position as input point
+						aPhysicalComponent.setPosition(aLocation);
+//						accept(aPhysicalComponent, aLocation);
+						return true;
+					}
+				}
+			}
 		}
-		*/
+		
 		return false;
 	}
 	
-	private void accept(PhysicalComponent aPhysicalComponent, Point aLocation) {
-		// TODO Auto-generated method stub
-	}
-
-	public boolean attemptToPlaceEntity(Point aLocation, Machine aPhysicalComponent)
+	public PathManager constructPaths(IPhysical physical, IMovable movement)
 	{
-		/*
-		if (myTerrainMap.hasTerrain(aPhysicalComponent.getValidTerrains(), aLocation)) {
-			aPhysicalComponent.setPosition(new Pair<Double, Point>(0.0, aLocation));
-			accept(aPhysicalComponent, aLocation);
-			return true;
+		Terrain source = myTerrainMap.getTerrain(physical.getPosition());
+		
+		Queue<Terrain> terrainQueue = new LinkedList<Terrain>();
+		
+		terrainQueue.add(source);
+
+		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), movement.getGoal());
+		for (Terrain path: paths.keySet()) {
+			System.out.println("("+path.getCenter().getX() +","+ path.getCenter().getY()+")"+ "<-" + "("+paths.get(path).getCenter().getX() +","+ paths.get(path).getCenter().getY()+")");
 		}
-		*/
-		return false;
+		
+		//TODO: Fix the algorithm so this doesn't occur
+		if (paths.containsKey(source)) {
+			paths.remove(source);
+		}
+		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoal());
+		
+		PathManager pathManager = new PathManager(shortestPath);
+		return pathManager;
 	}
 	
-	@Deprecated
-	public List<PhysicalComponent> withinRange(Point p, double radius){
-		Stream<PhysicalComponent> s = myEntityManager.stream();
-		
-		s.filter(e -> isEnemy(e) && isInRadius(e, p, radius));
-		
-		return s.collect(Collectors.toList());
-		
-	}
+	/**
+	 * Helper method 
+	 * @param aQueue
+	 * @param aTerrainMap
+	 * @return a map from terrain nodes to their previous node on the path
+	 */
+	//TODO: Refactor this pls
 
-	private boolean isInRadius(IPhysical e, Point p, double radius) {
-		/*
-		return e.getPosition().euclideanDistance(p) - e.getCollisionRadius() - radius >= 0;
-		*/
+	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, List<String> aValidTerrains, Point goal)
+	{
+		HashMap<Terrain, Terrain> pathToFollow = new HashMap<Terrain, Terrain>();
+		while (!aQueue.isEmpty()) {
+			Terrain currentTerrain = aQueue.poll();
+			for (Terrain neighbor: myTerrainMap.getNeighbors(currentTerrain)) {
+				if (!pathToFollow.containsKey(neighbor)) {//node is unmarked
+					if (hasValidTerrainType(aValidTerrains, neighbor)) {
+						pathToFollow.put(neighbor, currentTerrain);
+						aQueue.add(neighbor);
+						if (neighbor.contains(goal)) { 
+							return pathToFollow;
+						}
+					}
+				}
+			}
+		}
+		//TODO: Throw error-->No path from source to destination!
+		return null;
+	}
+	
+	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {
+		if (neighbor == null || neighbor.getTerrainType() == null) {
+			return false;
+		}
+		for (Iterator<String> iterator = aValidTerrains.iterator(); iterator.hasNext();) {
+			String terrain = iterator.next();
+			if (terrain.equals(neighbor.getTerrainType())) {
+				return true;
+			}
+		}
 		return false;
+//		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor.getTerrainType()));
 	}
-
-	@Deprecated //please don't use instanceof unless completely unavoidable. If necessary, please document why
-	private boolean isEnemy(IPhysical e) {
-		/*
-		return e instanceof Enemy;
-		*/
-		return false;
+	
+	private List<Terrain> constructShortestPath(Map<Terrain,Terrain> aPreviousPathMap, Point goal)
+	{
+		List<Terrain> shortestPath = new ArrayList<Terrain>();
+		
+		Terrain currentTerrain = myTerrainMap.getTerrain(goal);
+		while(aPreviousPathMap.containsKey(currentTerrain)) {
+//		while(true) {
+			shortestPath.add(0, currentTerrain);
+			currentTerrain = aPreviousPathMap.get(currentTerrain);
+		}
+		shortestPath.add(0,currentTerrain); //adds the source
+		return shortestPath;
 	}
-
 
 }

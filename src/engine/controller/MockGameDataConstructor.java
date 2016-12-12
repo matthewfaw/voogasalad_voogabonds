@@ -1,28 +1,19 @@
 package engine.controller;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
 import authoring.model.ComponentData;
-import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.LevelData;
 import authoring.model.PlayerData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
 import authoring.model.WaveData;
-import authoring.model.WeaponData;
-import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
+import engine.model.components.concrete.PurchasableComponentData;
+import engine.model.components.concrete.SellableComponentData;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
 import utility.ResouceAccess;
@@ -61,7 +52,12 @@ public class MockGameDataConstructor {
 		ArrayList<Point> spawnPoints = new ArrayList<Point>();
 		spawnPoints.add(new Point(1, 1));
 		mapData.addSpawnPoints("spawnPoint", spawnPoints);
-		mapData.addSinkPoints("sinkPoint",new ArrayList<Point>(Arrays.asList(new Point(x-1, 1))));
+		
+		ArrayList<Point> sinkPoints = new ArrayList<Point>();
+		sinkPoints.add(new Point(4, 4));
+		mapData.addSinkPoints("sinkPoint", sinkPoints);
+		
+		
 		mapData.cellSize(50);
 //			mapData.addValidTerrain(terrain1.getName(), "exampleColor 1");
 //			mapData.addValidTerrain(terrain2.getName(), "exampleColor 2");
@@ -83,9 +79,20 @@ public class MockGameDataConstructor {
 			//Map data
 			MapDataContainer md = this.getMockMapData();
 			
+			//Sell/Buy data
+			PurchasableComponentData pcd = new PurchasableComponentData();
+			pcd.setBuyPrice(50);
+			
+			SellableComponentData scd = new SellableComponentData();
+			scd.setSellPrice(25);
+			
 			// Entity data
 			EntityData ed  = new EntityData();
-			ed.setName("Awesome Tower");
+			
+			ed.setPurchasableComponentData(pcd);
+			ed.setSellableComponentData(scd);
+			
+			ed.setName("Awesome Tower1");
 			ComponentData cd1 = new ComponentData();
 			cd1.setComponentName("PhysicalComponent");
 			cd1.addField("myHeading", "0");
@@ -102,6 +109,10 @@ public class MockGameDataConstructor {
 			cd3.addField("myCollisionRadius", "50");
 			cd3.addField("myTurnSpeed", "10");
 			cd3.addField("myMoveSpeed", "100");
+			cd3.addField("myMaxDistance", "100");
+			cd3.addField("myMovementCalc", "PathMovementStrategy");
+			
+	
 			ComponentData cd4 = new ComponentData();
 			cd4.setComponentName("DamageDealingComponent");
 			cd4.addField("myDamage", "50");
@@ -109,15 +120,21 @@ public class MockGameDataConstructor {
 			
 			ed.addComponent("PhysicalComponent",cd1);
 			ed.addComponent("CollidableComponent",cd2);
+			ed.addComponent("MoveableComponent",cd3);
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
-			ed2.setName("Awesome Tower");
+			
+			ed2.setPurchasableComponentData(pcd);
+			ed2.setSellableComponentData(scd);
+			
+			ed2.setName("Awesome Tower2");
 			ComponentData CD1 = new ComponentData();
 			CD1.setComponentName("PhysicalComponent");
 			CD1.addField("myHeading", "0");
-			CD1.addField("myImagePath", "src/resources/cookie.png");
+			CD1.addField("myImagePath", "src/resources/cow.png");
 			CD1.addField("myImageSize", "50");
+			CD1.addField("myValidTerrains", "grass, ice, steel, dark");
 			
 			ComponentData CD2 = new ComponentData();
 			CD2.setComponentName("CollidableComponent");
@@ -125,11 +142,12 @@ public class MockGameDataConstructor {
 			
 			ComponentData CD3 = new ComponentData();
 			CD3.setComponentName("HealthComponent");
-			CD3.addField("myHealth", "9000");
+			CD3.addField("myCurrentHealth", "9000");
+			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);
 			ed2.addComponent("CollidableComponent",CD2);
-			ed2.addComponent("CollidableComponent",CD3);
+			ed2.addComponent("HealthComponent",CD3);
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();
@@ -142,24 +160,27 @@ public class MockGameDataConstructor {
 			WaveData wad1 = new WaveData();
 			wad1.setName("Cool wave");
 			wad1.setNumEnemies(10);
-			wad1.setSpawnPointName("Cool spawn point");
+			wad1.setSpawnPointName("spawnPoint");
+			wad1.setSinkPointName("sinkPoint");
 			wad1.setTimeBetweenEnemy(20);
 			wad1.setTimeForWave(0);
-			wad1.setWaveEntity("Awesome Tower");
+			wad1.setWaveEntity("Awesome Tower1");
 			WaveData wad2 = new WaveData();
 			wad2.setName("Awesome wave");
 			wad2.setNumEnemies(20);
-			wad2.setSpawnPointName("Awesome spawn point");
+			wad2.setSpawnPointName("spawnPoint");
+			wad2.setSinkPointName("sinkPoint");
 			wad2.setTimeBetweenEnemy(50);
 			wad2.setTimeForWave(1);
-			wad2.setWaveEntity("Awesome Tower");
+			wad2.setWaveEntity("Awesome Tower1");
 			WaveData wad3 = new WaveData();
 			wad3.setName("Dumb wave");
 			wad3.setNumEnemies(30);
-			wad3.setSpawnPointName("Dumb spawn point");
+			wad3.setSpawnPointName("spawnPoint");
+			wad3.setSinkPointName("sinkPoint");
 			wad3.setTimeBetweenEnemy(60);
 			wad3.setTimeForWave(6);
-			wad3.setWaveEntity("Awesome Tower");
+			wad3.setWaveEntity("Awesome Tower2");
 			LevelData ld = new LevelData();
 			ld.addWaveDataListToList(wad1);
 			ld.addWaveDataListToList(wad2);
@@ -174,9 +195,9 @@ public class MockGameDataConstructor {
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName()+1);
 			ser.serializeToFile(ed2, "exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2);
 			
-			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+"MapData", MapDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+"LevelData", LevelDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			

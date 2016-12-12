@@ -19,7 +19,7 @@ public class JSONDeserializer {
 	// this should make our code more flexible
 	//String fileLoc = "src/SerializedFiles/";
 	
-	public Object Deserialize(String json, Class cls){
+	public Object deserialize(String json, Class cls){
 		
 		gson = new Gson();
 		return (gson.fromJson(json, cls));
@@ -32,6 +32,7 @@ public class JSONDeserializer {
 			//The following lines look up a file relative to the project path
 			URL url = getUrl(filepath);
 			File file = new File(url.getPath());
+			System.out.println(filepath);
 			scanner = new Scanner(file);
 			fileText = scanner.useDelimiter("\\A").next();
 		} catch (FileNotFoundException e) {

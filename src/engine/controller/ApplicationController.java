@@ -133,8 +133,7 @@ public class ApplicationController {
 	}
 	
 	public void onSavePressed() {
-		// TODO Auto-generated method stub
-	//	return null;
+		myBackendController.save();
 	}
 
 	public void  onEntitySelected(IEntity aEntity)

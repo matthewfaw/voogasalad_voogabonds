@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
@@ -14,10 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public abstract class ListTab<A> extends AuthoringTab {
     public static final String ADD = "Add";
-    private static final int OFFSET = 2;
+    private static final int OFFSET = 5;
     
     private ObservableList<A> myList;
     private ListView<A> myListView;
@@ -67,14 +69,20 @@ public abstract class ListTab<A> extends AuthoringTab {
         Dimension screenSize = retrieveScreenSize();
         // Set up content
         myContent = new TilePane();
+        myContent.getStylesheets().add("style.css");
+        myContent.setId("background");
         myContent.setPrefColumns(prefColumns);
         VBox left = new VBox();
+        left.getStylesheets().add("style.css");
+        left.setId("vbox");
         ScrollPane scroll = new ScrollPane();
         bindSize(left, scroll);
         left.setPrefWidth(screenSize.getWidth()/prefColumns - OFFSET);
         left.setPrefHeight(screenSize.getHeight()/1.5);
         // Set up add button
         Button add = new Button(ADD);
+        add.getStylesheets().add("style.css");
+        add.setId("button");
         add.setOnAction(handleAddNewObject());
         bindWidth(left, add);
         
@@ -87,11 +95,11 @@ public abstract class ListTab<A> extends AuthoringTab {
         myListView = new ListView<A>(myList);
         bindSize(scroll, myListView);
         myListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        	public void handle(MouseEvent event){
-        		if (event.getClickCount() == 2 && myListView.getSelectionModel().getSelectedItem()!=null){
+            public void handle(MouseEvent event){
+                if (event.getClickCount() == 2 && myListView.getSelectionModel().getSelectedItem()!=null){
                     edit(myListView.getSelectionModel().getSelectedItem());
                 }
-        	}
+            }
         });
         // Add Nodes to Tab
         scroll.setContent(myListView);
@@ -122,12 +130,12 @@ public abstract class ListTab<A> extends AuthoringTab {
     
     protected abstract void edit(A name);
     
-    protected TilePane getTilePane(){
+    public TilePane getTilePane(){
     	return myContent;
     }
-    
-    protected ObservableList<A> getObservableList(){
-    	return myList;
+
+    protected void setCellFactory(Callback<ListView<A>, ListCell<A>> factory) {
+        myListView.setCellFactory(factory);
     }
     
     /**
@@ -138,6 +146,8 @@ public abstract class ListTab<A> extends AuthoringTab {
      */
     public Button setUpCancelButton(VBox v){
     	Button cancel = new Button(getResources().getString("Cancel"));
+    	cancel.getStylesheets().add("style.css");
+    	cancel.setId("button");
     	cancel.setOnAction(new EventHandler<ActionEvent>() {
     		public void handle(ActionEvent event){
     			getTilePane().getChildren().remove(v);

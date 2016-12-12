@@ -3,15 +3,12 @@ package engine.model.strategies;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import engine.model.game_environment.paths.PathFactory;
+import engine.model.game_environment.MapMediator;
 import engine.model.strategies.damage.ExponentialDamageStrategy;
-import engine.model.strategies.movement.GreedyMovementStrategy;
-import engine.model.strategies.movement.NoMovementStrategy;
 import utility.ResouceAccess;
 
 /**
@@ -21,12 +18,11 @@ import utility.ResouceAccess;
  */
 public class StrategyFactory {
 	
-	private PathFactory myPathMaker;
+	private MapMediator myMap;
 	public List<String> myMovementStrategies;
 	
-	public StrategyFactory(PathFactory pathMaker) {
-		myPathMaker = pathMaker;
-		
+	public StrategyFactory(MapMediator map) {
+		myMap = map;
 		
 		File[] folder = new File("src/engine/model/strategies/movement").listFiles();
 		myMovementStrategies = Arrays.stream(folder)
@@ -34,14 +30,6 @@ public class StrategyFactory {
 											.collect(Collectors.toList());
 	}
 	
-	@Deprecated
-	public StrategyFactory() {
-		
-		File[] folder = new File("src/engine/model/strategies/movement").listFiles();
-		myMovementStrategies = Arrays.stream(folder)
-											.map(e -> e.getName().replaceAll(".java", ""))
-											.collect(Collectors.toList());
-	}
 
 	/**
 	 * Gets a new instance of the movement strategy named movementStrategy.
@@ -50,7 +38,7 @@ public class StrategyFactory {
 	 * @return strategy with name movementStrategy
 	 * @throws ClassNotFoundException 
 	 */
-	public IMovementStrategy movementStrategy(String movementStrategy, List<String> validTerrains) throws ClassNotFoundException {
+	public IMovementStrategy movementStrategy(String movementStrategy) throws ClassNotFoundException {
 		//TODO: Users see names from a resource file (resource key is class name)
 		
 		movementStrategy = String.format("engine.model.strategies.movement.%s", movementStrategy);
@@ -58,8 +46,8 @@ public class StrategyFactory {
 		IMovementStrategy result;
 		try {
 			Class<?> strategyType = Class.forName(movementStrategy);
-			Constructor<?> construct = strategyType.getConstructor();
-			result = (IMovementStrategy) construct.newInstance();
+			Constructor<?> construct = strategyType.getConstructor(this.getClass());
+			result = (IMovementStrategy) construct.newInstance(this);
 		} catch (
 				ClassNotFoundException |
 				NoSuchMethodException |
@@ -75,17 +63,6 @@ public class StrategyFactory {
 		return result;
 	}
 	
-	public static IMovementStrategy movementStrategy(String movementStrategy) {
-		
-		switch (movementStrategy.toLowerCase()) {
-		case "greedy":
-			return new GreedyMovementStrategy();
-		case "fast as fuck":
-			return new NoMovementStrategy();
-		}
-
-		return new GreedyMovementStrategy();
-	}
 
 	/**
 	 * Gets a new instance of the damage strategy named damageStrategy.
@@ -106,12 +83,10 @@ public class StrategyFactory {
 	public ITargetingStrategy targetStrategy(String targetStrategy) {
 		return null;
 	}
-	
-	public static void main(String[] args) throws ClassNotFoundException {
-		StrategyFactory f = new StrategyFactory();
-		
-		f.myMovementStrategies.stream().forEach(e -> System.out.println(e));
-		f.movementStrategy("GreedyMovementStrategy", new ArrayList<String>());
+
+
+	public MapMediator getMap() {
+		return myMap;
 	}
 
 }

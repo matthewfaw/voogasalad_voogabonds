@@ -3,7 +3,6 @@ package engine.model.strategies.damage;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
 import utility.Damage;
-import utility.Point;
 
 public class ExponentialDamageStrategy implements IDamageStrategy {
 
