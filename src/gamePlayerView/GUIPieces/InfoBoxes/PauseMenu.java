@@ -1,6 +1,9 @@
 package gamePlayerView.GUIPieces.InfoBoxes;
 import java.awt.List;
+import java.io.IOException;
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -10,11 +13,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.MainInitializer;
+import main.MainMenu;
 public class PauseMenu {
     private Pane myRoot;
     private Stage myStage;
     private ControlsMenu controls;
     private Scene myWindow;
+    private Stage stageToKill;
     
     public PauseMenu(){
         myRoot = new Pane();
@@ -24,17 +30,10 @@ public class PauseMenu {
         controls = new ControlsMenu();
         myWindow.setFill(Color.DODGERBLUE);
         myStage.setScene(myWindow);
+        myRoot.setStyle("-fx-base: #000000; -fx-stroke: #6de894;");
     }
     
-    public void handleKeyInput(KeyCode code) {
-        switch(code){
-            case P:
-                init();
-                break;
-            default:
-                return;
-        }
-    }
+
     
     private VBox addButtons(){
         VBox buttonList = new VBox();
@@ -43,9 +42,27 @@ public class PauseMenu {
         buttonList.setLayoutY(10);
         buttonList.getChildren().add(makeButton("RESUME"));
         buttonList.getChildren().add(makeButton("CONTROLS"));
-        buttonList.getChildren().add(makeButton("HELP"));
-        
+        Button b = makeButton("MAIN MENU");
+        buttonHandler(b);
+        buttonList.getChildren().add(b);
         return buttonList;
+    }
+    
+    public void buttonHandler(Button b){
+        b.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                stageToKill.close();
+                kill();
+                try {
+                    MainMenu main = new MainMenu(new MainInitializer(myStage), myStage);
+                }
+                catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
     }
     
     public Button makeButton(String text){
@@ -63,9 +80,11 @@ public class PauseMenu {
                 kill();
                 break;
             case "CONTROLS":
-               
                 kill();
                 controls.init();
+//            case "MAIN MENU":
+//                stageToKill.close();
+//                kill();
             default:
                 break;
         }
@@ -82,5 +101,11 @@ public class PauseMenu {
     
     public void kill(){
         myStage.close();
+    }
+
+
+
+    public void getStage(Stage myStage2) {
+        stageToKill = myStage2;
     }
 }
