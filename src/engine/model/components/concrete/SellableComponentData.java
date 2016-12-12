@@ -1,5 +1,6 @@
 package engine.model.components.concrete;
 
+import authoring.model.ComponentData;
 import engine.model.entities.IEntity;
 
 /**
@@ -12,6 +13,9 @@ import engine.model.entities.IEntity;
 public class SellableComponentData {
 	private int mySellValue;
 	
+	public SellableComponentData(/*ComponentData componentData*/) {
+//		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
+	}
 	public int getSellValue()
 	{
 		return mySellValue;

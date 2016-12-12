@@ -88,6 +88,12 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 		// TODO Auto-generated method stub
 		myObservers.forEach(observer -> observer.update(this));
 	}
+
+	@Override
+	public void remove(ICollidable aRemovedObject) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	//************************************ISystem interface****************************//
 //	@Override

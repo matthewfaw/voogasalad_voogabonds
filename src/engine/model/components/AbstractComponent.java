@@ -14,5 +14,4 @@ abstract public class AbstractComponent implements IModifiableComponent{
 	public void setEntity(IEntity e) {
 		myEntity = e;
 	}
-
 }

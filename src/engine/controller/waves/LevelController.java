@@ -10,7 +10,7 @@ import engine.model.entities.EntityFactory;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 /**
- * 
+ * LevelController listens to timelinecontroller and updates the levels of the waves
  * @author owenchung
  *
  */
@@ -20,39 +20,55 @@ public class LevelController implements IObserver<TimelineController> {
 	private WaveController myWaveController;
 	private DataStore<EntityData> myEntityDataStore;
 	private int myCurrentLevel;
-
+	private EntityFactory myEntityFactory;
+	private PhysicalSystem myPhysicalSystem;
+	private MovementSystem myMovementSystem;
+	private MapDataContainer myMapDataContainer;
+	
 	public LevelController(
 			LevelDataContainer aGameLevelsData,
 			int aStartingLevel,
 			DataStore<EntityData> aEntityDataStore,
 			EntityFactory aEntityFactory,
-			PhysicalSystem physical,
-			MovementSystem movement,
-			MapDataContainer mapData) {
+			PhysicalSystem aPhysicalSystem,
+			MovementSystem aMovementSystem,
+			MapDataContainer aMapDataContainer) {
 		myLevelDataContainer = aGameLevelsData;
 		myEntityDataStore = aEntityDataStore;
-		
-		myWaveController = new WaveController(
-				aEntityDataStore,
-				aGameLevelsData.getLevelData(aStartingLevel),
-				DEFAULT_START_TIME,
-				aEntityFactory,
-				physical,
-				movement,
-				mapData);
+		myCurrentLevel = aStartingLevel;
+		myEntityFactory = aEntityFactory;
+		myPhysicalSystem = aPhysicalSystem;
+		myMovementSystem = aMovementSystem;
+		myMapDataContainer = aMapDataContainer;
+	
 	}
 
 	@Override
 	//*******************Observer interface***************//
 	public void update(TimelineController aChangedObject) {
-		System.out.println("updating with elapsedTime: " + aChangedObject.getTotalTimeElapsed()); 
+
+		if (myWaveController == null) {
+			myWaveController = new WaveController(
+					myEntityDataStore,
+					myLevelDataContainer.getLevelData(myCurrentLevel),
+					DEFAULT_START_TIME,
+					myEntityFactory,
+					myPhysicalSystem,
+					myMovementSystem,
+					myMapDataContainer);
+		}
+
 		if (myWaveController.isLevelFinished()) {
 			myCurrentLevel ++;
 			if (myLevelDataContainer.hasLevel(myCurrentLevel)) {
 				myWaveController.newWave(myEntityDataStore, myLevelDataContainer.getLevelData(myCurrentLevel), aChangedObject.getTotalTimeElapsed());
 			}
 		}
-		
 		myWaveController.distributeEntities(aChangedObject.getTotalTimeElapsed());
+	}
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing
 	}
 }

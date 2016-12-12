@@ -2,8 +2,8 @@ package engine.model.components.concrete;
 
 import java.util.List;
 
+import authoring.model.ComponentData;
 import authoring.model.Hide;
-import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
 import engine.model.strategies.IDamageStrategy;
@@ -11,6 +11,8 @@ import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
+import engine.model.systems.SpawningSystem;
+import engine.model.systems.TeamSystem;
 import engine.model.weapons.DamageInfo;
 import utility.Damage;
 
@@ -22,24 +24,47 @@ import utility.Damage;
  *
  */
 public class DamageDealingComponent extends AbstractComponent {
-	private IDamageStrategy myDamageStrategy;
 	private int myDamage;
-	private double myDamageRadius;
 	private double myDamageArc;
+	private double myDamageRadius;
+	private IDamageStrategy myDamageStrategy;
 	
+	private boolean explodesOnEnemies;
+	private boolean explodesOnAllies;
+	private boolean diesOnExplosion;
+
 
 	@Hide
 	private HealthSystem myHealthSystem;
 	@Hide
 	private PhysicalSystem myPhysicalSystem;
+	@Hide
+	private DamageDealingSystem myDamageSystem;
+	@Hide
+	private SpawningSystem myCreators;
+	@Hide
+	private TeamSystem myTeams;
 	
 	public DamageDealingComponent(
 			DamageDealingSystem damageDealingSystem,
 			HealthSystem healthSysytem,
-			PhysicalSystem physicalSystem
+			TeamSystem teams,
+			PhysicalSystem physicalSystem,
+			ComponentData data
 			) {
+		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
+		
+		myDamage = Integer.parseInt(data.getFields().get("myDamage"));
+		myDamageArc = Double.parseDouble(data.getFields().get("myDamageArc"));
+		myDamageRadius = Double.parseDouble(data.getFields().get("myDamageRadius"));
+		myDamageStrategy = damageDealingSystem.newStrategy(data.getFields().get("myDamageStrategy"));
+		
+		explodesOnEnemies = Boolean.parseBoolean(data.getFields().get("explodesOnEnemies"));
+		explodesOnAllies = Boolean.parseBoolean(data.getFields().get("explodesOnAllies"));
+		diesOnExplosion = Boolean.parseBoolean(data.getFields().get("diesOnExplosion"));
+		
 		damageDealingSystem.attachComponent(this);
 	}
 	
@@ -66,69 +91,34 @@ public class DamageDealingComponent extends AbstractComponent {
 		return myDamageRadius;
 	}
 
-	/*
-	@Override
-	public void update(IComponent aChangedObject) {
-		//TODO: Is there a better way to only update when called by a CollidableComponent?
-		if (aChangedObject instanceof CollidableComponent) {
-			CollidableComponent c = (CollidableComponent) aChangedObject;
-			
-			if (	myTargetsEnemies && !c.getOwner().isAlly(myOwner) ||
-					!myTargetsEnemies && c.getOwner().isAlly(myOwner)) {
-				explode(c.getCollidedWith());
-			}
-		}
-		if (aChangedObject instanceof MoveableComponent) {
-			explode();
-		}
-		
-	}
-	*/
-
-	//TODO: This should envoke the damage dealing strategy
-	private DamageInfo explode() {
-		/*
-		List<PhysicalComponent> targets = myMap.withinRange(getPosition(), myAoERadius);
-		
-		DamageInfo result = new DamageInfo();
-		
-		for (PhysicalComponent p: targets) {
-
-			Damage toDeal;
-			if (myOwner.isAlly(p.getOwner()))
-				toDeal = myDamageCalc.getAoEAllyDamage(this, myTarget.getPosition(), myDamage);
-			else
-				toDeal = myDamageCalc.getAoEDamage(this, myTarget.getPosition(), myDamage);
-			
-			result = result.add(p.takeDamage(toDeal));
-		}
-		// destroySelf();
-		// remove references
-		unregisterMyself();
-		return result;
-		*/
-		return null;
-	}
-
-	private DamageInfo explode(ICollidable collidedWith) {
-		/*
-		DamageInfo result = new DamageInfo();
-		
-		result.add(collidedWith.takeDamage(myDamageCalc.getTargetDamage(myDamage)));
-		result.add(explode());
-		
-		myOwner.notifyDestroy(result);
-		getOwner().updateAvailableMoney(result.getMoney());
-		*/
-		return null;
-	}
-
 	public DamageInfo explode(IComponent target) {
 		DamageInfo result = new DamageInfo();
 		
-		//Deal damage to target
-		result.add(myHealthSystem.dealDamageTo(target, getTargetDamage()));
+		if ((explodesOnEnemies && myTeams.areEnemies(this, target)) || (explodesOnAllies && myTeams.areAllies(this, target))) {
+			result.add(myHealthSystem.dealDamageTo(target, getTargetDamage()));
+			result.add(explodeNoTarget());
+		}
 		
+		myCreators.updateStats(this, result);
+		if (diesOnExplosion) {
+			getEntity().delete();
+		}
+		return result;
+	}
+
+	public DamageInfo explode() {
+		DamageInfo result = explodeNoTarget();
+		
+		myCreators.updateStats(this, result);
+		if (diesOnExplosion) {
+			getEntity().delete();
+		}
+		return result;
+	}
+	
+	private DamageInfo explodeNoTarget() {
+		DamageInfo result = new DamageInfo();
+
 		//Deal damage to anyone in blast radius
 		PhysicalComponent myPhysical = myPhysicalSystem.get(this);
 		if (myPhysicalSystem.get(this) != null) {
@@ -137,6 +127,11 @@ public class DamageDealingComponent extends AbstractComponent {
 				result.add(myHealthSystem.dealDamageTo(p, getDamageTo(myPhysical, p)));
 		}
 		return result;
+	}
+
+	@Override
+	public void delete() {
+		myDamageSystem.detachComponent(this);
 	}
 
 }

@@ -7,7 +7,7 @@ import engine.model.game_environment.paths.PathManager;
 import engine.model.strategies.AbstractMovementStrategy;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.StrategyFactory;
+import engine.model.strategies.factories.MovementStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -18,14 +18,14 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	private MapMediator myMap;
 	private PathManager myPath;
 	
-	public PathMovementStrategy(StrategyFactory creator) {
+	public PathMovementStrategy(MovementStrategyFactory creator) {
 		super(creator);
 		myMap = creator.getMap();
 	}
 	
 	@Override
 	public  Pair<Double, Point> nextMove(IMovable m, IPhysical p) {
-		if (myPath == null || myPreviousGoalLocation == null || myPreviousGoalLocation.equals(m.getGoal())) {
+		if (m.getGoal() != null && (myPath == null || myPreviousGoalLocation == null || !myPreviousGoalLocation.equals(m.getGoal()))) {
 			myPreviousGoalLocation = m.getGoal();
 			myPath = myMap.constructPaths(p, m);
 		}
@@ -41,6 +41,7 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	@Override
 	protected Pair<Double, Point> nextMoveWithGoal(IMovable m, IPhysical p) {
 		Point subGoal = myPath.getNextVertex(p.getPosition());
+		System.out.println(subGoal);
 		
 		//Check if we aren't on the path anymore
 		if (subGoal == null)

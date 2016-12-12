@@ -16,12 +16,14 @@ import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
+import engine.model.entities.EntityManager;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
+import utility.ErrorBox;
 import utility.FileRetriever;
 import utility.Point;
 
@@ -76,6 +78,12 @@ public class BackendController {
 	private TeamSystem myTeamSystem;
 	private MapDataContainer myMapData;
 	
+	// EntityManager
+	private EntityManager myEntityManager;
+	
+	private ResourceBundle myResources;
+	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
 		myRouter = aRouter;
@@ -83,9 +91,11 @@ public class BackendController {
 		myFileRetriever = new FileRetriever(aGameDataPath);
 		myJsonDeserializer = new JSONDeserializer();
 
+		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
 		
+		myEntityManager = new EntityManager();
 		//Must construct static before dynamic.
 		constructStaticBackendObjects();
 		myPlayerController.addPlayer(myPlayerData);
@@ -178,7 +188,7 @@ public class BackendController {
 		mySystems.add(myTargetingSystem);
 		mySystems.add(myTeamSystem);
 		
-		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator);
+		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
 	}
 
 	/**
@@ -289,8 +299,10 @@ public class BackendController {
 			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
 			System.out.println(s);
 		} catch (Exception e) {
+
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorBox.displayError(myResources.getString("CannotSave"));
+			myRouter.distributeErrors(e.toString());
 		}
 	}
 	
