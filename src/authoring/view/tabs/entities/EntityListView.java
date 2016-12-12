@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class EntityListView {
-    private static final String PHYSICAL_COMPONENT = "Physical Component";
-    private static final String IMAGE_ATTRIBUTE = "Image Path";
+    private static final String PHYSICAL_COMPONENT = "PhysicalComponent";
+    private static final String IMAGE_ATTRIBUTE = "myImagePath";
     private static final int IMAGE_HEIGHT = 50;
     
     private String myName;

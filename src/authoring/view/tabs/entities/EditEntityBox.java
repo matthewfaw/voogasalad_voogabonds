@@ -152,7 +152,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
     private String cleanUpComponentName(String component) {
         // remove leading '.' and separate words
         String cleanedName = component.substring(1);
-        cleanedName = this.separateCapitalizedWords(cleanedName);
+        //cleanedName = this.separateCapitalizedWords(cleanedName);
         return cleanedName;
     }
 
