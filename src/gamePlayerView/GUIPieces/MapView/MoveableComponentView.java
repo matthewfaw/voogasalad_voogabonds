@@ -18,6 +18,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	private String entityID;
 	
     public MoveableComponentView(IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane, String id){
+
     	myAppController = aAppController;
     	myObservable = aObservable;
     	myPane = pane;
@@ -45,7 +46,6 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 	@Override
 	public void remove(IViewablePhysical aRemovedObject) {
-		// TODO Auto-generated method stub
 		myPane.getChildren().remove(this);
 	}
 }

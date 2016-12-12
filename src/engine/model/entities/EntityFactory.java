@@ -52,18 +52,9 @@ public class EntityFactory {
 	 * @return the constructed entity
 	 * @throws ComponentCreationException  
 	 */
-	public IEntity constructEntity(String entityName) throws UnsupportedOperationException {
-		IEntity entity = new ConcreteEntity();
+	public IEntity constructEntity(String entityName, Point aLocation) throws UnsupportedOperationException {
 		EntityData entityData = myEntityDataStore.getData(entityName);
-		Collection<ComponentData> componentMap = entityData.getComponents().values();
-		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
-			entity.addComponent(component);	
-		}
-		// give entity a unique id
-		entity.setId(UUID.randomUUID().toString());
-		
-		return entity;
+		return constructEntity(entityData, aLocation);
 	}
 	
 	public IEntity constructEntity(EntityData aEntityData) 
@@ -84,9 +75,10 @@ public class EntityFactory {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
 			entity.addComponent(component);	
 		}
+		entity.setId(UUID.randomUUID().toString());
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
-	
+
 
 		return entity;
 	}

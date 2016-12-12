@@ -2,7 +2,6 @@ package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Set;
 //import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;
 import com.sun.javafx.geom.transform.BaseTransform;
@@ -10,21 +9,12 @@ import com.sun.javafx.jmx.MXNodeAlgorithm;
 import com.sun.javafx.jmx.MXNodeAlgorithmContext;
 import com.sun.javafx.sg.prism.NGNode;
 
-import authoring.model.TowerData;
 import authoring.model.map.MapData;
-import authoring.model.map.TerrainData;
 import engine.IObservable;
-import engine.IObserver;
 import engine.controller.ApplicationController;
-import engine.model.components.concrete.MoveableComponent;
-import javafx.beans.property.DoubleProperty;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.layout.Pane;
@@ -108,7 +98,7 @@ public class MapGrid extends Node {
         //m.getInfo();
     	//myAppController.DisplayStats();
         myAppController.onEntityClicked(m.getEntityID());
-    	//System.out.println("hi");
+
     }
     
 //    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)

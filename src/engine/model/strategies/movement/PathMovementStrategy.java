@@ -41,7 +41,6 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	@Override
 	protected Pair<Double, Point> nextMoveWithGoal(IMovable m, IPhysical p) {
 		Point subGoal = myPath.getNextVertex(p.getPosition());
-		System.out.println(subGoal);
 		
 		//Check if we aren't on the path anymore
 		if (subGoal == null)

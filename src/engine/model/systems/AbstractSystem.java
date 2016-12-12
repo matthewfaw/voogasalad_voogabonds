@@ -24,7 +24,7 @@ public class AbstractSystem<A extends IComponent> implements ISystem {
 	}
 	
 	protected A getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return (component != null) ? getComponent(component.getEntity()) : null;
 	}
 	
 	protected A getComponent(IEntity entity) {

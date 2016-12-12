@@ -24,7 +24,7 @@ public class Main extends Application {
 	public void start(Stage s) throws Exception {
 		//TODO:
 		ApplicationController appController = new ApplicationController();
-		//appController.init(s);
+		appController.init(s, "ExampleGame");
 		//GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
 		//gamePlayerScene.init(s);
 		//Router myRouter = new Router(gamePlayerScene);
