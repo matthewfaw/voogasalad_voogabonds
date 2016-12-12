@@ -246,6 +246,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         myComboCheckBoxes = new ArrayList<MenuButton>();
     }
 
+    @Deprecated
     private String cleanUpAttributeName(String attribute) {
         // assume all attributes start with 'my', and separate words
         String cleanedName = attribute;
@@ -260,6 +261,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
         return cleanedName;
     }
     
+    @Deprecated
     private String capitalizeFirstLetter(String str) {
         return str.substring(0,1).toUpperCase() + str.substring(1);
     }
@@ -270,6 +272,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
      * @param smooshed
      * @return
      */
+    @Deprecated
     private String separateCapitalizedWords(String smooshed) {
         return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
