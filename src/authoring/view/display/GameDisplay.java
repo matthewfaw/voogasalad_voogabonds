@@ -116,19 +116,37 @@ public class GameDisplay {
 		}
 	}
 	
-	private void makeSinkPoint(int row, int col) {
+	private void makeSinkPoint(int row, int col, Point currentPoint) {
 		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
-		cell.setWidth(tileSize/2);
-		cell.setHeight(tileSize/2);
-		cell.setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
+		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
+		cell.setWidth(tileSize*0.9);
+		cell.setHeight(tileSize*0.9);
+		cell.setStrokeWidth(tileSize*0.1);
+		int index = usefulTerrainPoints.indexOf(currentPoint);
+		try {
+			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
+		} catch (Exception e) {
+			Image image = new Image(usefulTerrainFills.get(index));
+			ImagePattern pattern = new ImagePattern(image);
+			cell.setFill(pattern);
+		}
 		terrainGrid.getChildren().add(cell);
 	}
 	
-	private void makeSpawnPoint(int row, int col) {
+	private void makeSpawnPoint(int row, int col, Point currentPoint) {
 		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
-		cell.setWidth(tileSize/2);
-		cell.setHeight(tileSize/2);
-		cell.setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+		cell.setWidth(tileSize*0.9);
+		cell.setHeight(tileSize*0.9);
+		cell.setStrokeWidth(tileSize*0.1);
+		int index = usefulTerrainPoints.indexOf(currentPoint);
+		try {
+			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
+		} catch (Exception e) {
+			Image image = new Image(usefulTerrainFills.get(index));
+			ImagePattern pattern = new ImagePattern(image);
+			cell.setFill(pattern);
+		}
 		terrainGrid.getChildren().add(cell);
 	}
 	
@@ -156,10 +174,10 @@ public class GameDisplay {
 			for (int col = 0; col < columns; col++) {
 				Point currentPoint = new Point((double)col, (double)r);
 				if (usefulSinkPoints.contains(currentPoint)) {
-					makeSinkPoint(r, col);
+					makeSinkPoint(r, col, currentPoint);
 				}
 				else if (usefulSpawnPoints.contains(currentPoint)) {
-					makeSpawnPoint(r, col);
+					makeSpawnPoint(r, col, currentPoint);
 				}
 				else if (usefulTerrainPoints.contains(currentPoint)) {
 					makeTerrainPoint(r, col, currentPoint);
