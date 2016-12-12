@@ -1,16 +1,13 @@
 package authoring.view.tabs.entities;
 
-import java.io.File;
 import authoring.model.EntityData;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class EntityListView {
     private static final String PHYSICAL_COMPONENT = "Physical Component";
-    private static final String PHYSICAL_COMPONENT_2 = "PhysicalComponent";
     private static final String IMAGE_ATTRIBUTE = "Image Path";
-    private static final String IMAGE_ATTRIBUTE_2 = "myImagePath";
+    private static final int IMAGE_HEIGHT = 50;
     
     private String myName;
     private String myImagePath;
@@ -31,17 +28,20 @@ public class EntityListView {
         if (myImagePath == null || myImagePath.equals("")) {
             return null;
         }
-        String relativePath = myImagePath.substring(4);
+        String relativePath = myImagePath.substring(4); // remove leading 'src/'
         Image img = new Image(getClass().getClassLoader().getResourceAsStream(relativePath));
-        return new ImageView(img);
+        ImageView view = new ImageView(img);
+        view.setPreserveRatio(true);
+        view.setFitHeight(IMAGE_HEIGHT);
+        return view;
     }
     
     private String getImagePath(EntityData entityData) {
         String imagePath = null;
         for (String component : entityData.getComponents().keySet()) {
-            if (component.equals(PHYSICAL_COMPONENT) || component.equals(PHYSICAL_COMPONENT_2)) {
+            if (component.equals(PHYSICAL_COMPONENT)) {
                 for (String attribute : entityData.getComponents().get(component).getFields().keySet()) {
-                    if (attribute.equals(IMAGE_ATTRIBUTE) || attribute.equals(IMAGE_ATTRIBUTE_2)) {
+                    if (attribute.equals(IMAGE_ATTRIBUTE)) {
                         imagePath = entityData.getComponents().get(component).getFields().get(attribute);
                     }
                 }
