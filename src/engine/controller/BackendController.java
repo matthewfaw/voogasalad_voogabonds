@@ -117,7 +117,7 @@ public class BackendController {
 		myCollisionDetectionSystem = new CollisionDetectionSystem();
 		
 		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
-		mySpawningSystem = new SpawningSystem();
+		mySpawningSystem = new SpawningSystem(myTimelineController);
 		
 		myControllableSystem = new ControllableSystem();
 		
@@ -196,6 +196,7 @@ public class BackendController {
 		mySystems.add(myTeamSystem);
 		mySystems.add(myControllableSystem);
 		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
+		mySpawningSystem.setEntityFactory(myEntityFactory);
 	}
 
 	/**
@@ -304,7 +305,7 @@ public class BackendController {
 		try {
 			js.serializeToFile(new String("hi"), "derp");
 			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
-			System.out.println(s);
+			//System.out.println(s);
 		} catch (Exception e) {
 
 			// TODO Auto-generated catch block

@@ -50,16 +50,10 @@ public class EntityFactory {
 	 * @return the constructed entity
 	 * @throws ComponentCreationException  
 	 */
-	public IEntity constructEntity(String entityName) throws UnsupportedOperationException {
-		IEntity entity = new ConcreteEntity();
+	public IEntity constructEntity(String entityName, Point aLocation) throws UnsupportedOperationException {
 		EntityData entityData = myEntityDataStore.getData(entityName);
-		Collection<ComponentData> componentMap = entityData.getComponents().values();
-		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
-			entity.addComponent(component);	
-		}
 		
-		return entity;
+		return constructEntity(entityData, aLocation);
 	}
 	
 	public IEntity constructEntity(EntityData aEntityData) 

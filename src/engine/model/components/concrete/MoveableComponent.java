@@ -120,7 +120,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		}
 		
 		if (removeOnGoal && atGoal()) {
-			//subtract player's lives
+			//TODO: subtract player's lives
 			getEntity().delete();
 		}
 		
