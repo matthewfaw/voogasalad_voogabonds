@@ -24,7 +24,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 		
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
-//		String imagePath = aChangedObject.getImagePath();
+	//	String imagePath = aChangedObject.getImagePath();
 //		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
 //		this.setImage(image);
 //		this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);

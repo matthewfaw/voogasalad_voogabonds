@@ -67,6 +67,7 @@ public class GamePlayerScene {
 	private BorderPane myBorderPane;
 	private DisplayBoxFactory myBoxFactory;
 	private ResourceBundle myResourceBundle;
+	private EntityInfoBoxBuilder myBuilder;
 	//private List<MoveableComponentView> mySprites;
 	
 
@@ -81,6 +82,7 @@ public class GamePlayerScene {
 		myBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
+		myBuilder=new EntityInfoBoxBuilder(this);
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
@@ -113,9 +115,6 @@ public class GamePlayerScene {
 		//myGamePlayer =new Pane();
 		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
 		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
-		//myGamePlayer.setPrefWidth(Resources.SCREEN_WIDTH);
-		//myGamePlayer.setPrefHeight(Resources.SCREEN_HEIGHT);
-		//myScene = new Scene(myGamePlayer);
 		myScene=new Scene(myBorderPane);
 		setScreen();
 		//myGamePlayer.getChildren().add(myBorderPane);
@@ -242,6 +241,25 @@ public class GamePlayerScene {
 	//public List<ISprite> getSprites(){
 		//return mySprites;
 	//}
+	
+	public EntityInfoBoxBuilder getBuilder(){
+		return myBuilder;
+	}
+	public void buildEntityInfoBox(){
+		EntityInfoBox myStatisticsBox= myBuilder.build();
+		updateDisplay(myStatisticsBox);
+	}
+	
+	//public void buildEntityInfoBox() {
+		//EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(this) 
+				////myScene.makeEntityInfoBox()
+			//	   .withMachineInfo()
+			//	   .withTargetingMechanism()
+				  // .withUpgradeButton()
+				   //.build();
+			//updateDisplay(myStatisticsBox);
+	//}
+	
 	public void updateDisplay(EntityInfoBox myStatisticsBox) {
 		myBottomPane.clear();
 		Collection<Node> myCollection=new ArrayList<Node>();

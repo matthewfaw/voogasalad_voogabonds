@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.IComponent;
+import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
@@ -38,6 +40,7 @@ public class ApplicationController {
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
 	private GamePlayerScene myScene;
+	private EntityManager myEntityManager; 
 	//private Stage myStage; //////Guhan
 	//private Pane myPane=new BorderPane();
 
@@ -139,16 +142,18 @@ public class ApplicationController {
 		myBackendController.save();
 	}
 	
-	public void onEntityClicked(){
-	EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(myScene) 
-			//myScene.makeEntityInfoBox()
-			   .withMachineInfo()
-			   .withTargetingMechanism()
-			   .withUpgradeButton()
-			   .build();
-		myScene.updateDisplay(myStatisticsBox);
-
+	/**
+	 * Given an entity ID, will route entity component information back to front end for observing.
+	 * @param entityID
+	 */
+	public void onEntityClicked(Integer entityID) {
+		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+		for (IComponent component: clickedEntity.getComponents()) {
+			component.distributeInfo();
+		}
+		myScene.buildEntityInfoBox();
 	}
+	
 	public void DisplayStats() throws Exception {
 		myScene.updateTowerStatisticsRow();
 	}
