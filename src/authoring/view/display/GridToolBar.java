@@ -123,31 +123,17 @@ public class GridToolBar {
 	private void musicHandler(Button music) {
 		music.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
-				Stage musicStage = new Stage();
-				VBox v = new VBox();
-				v.setId("vbox");
-				Scene musicScene = new Scene(v);
-				musicScene.getStylesheets().add("style.css");
-				Button browse = new Button(myResources.getString("Browse"));
-				browse.setId("button");
-				browse.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event){
-						FileChooser fileChooser = new FileChooser();
-		                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"), new FileChooser.ExtensionFilter("WAV", "*.wav"));
-		                File file = fileChooser.showOpenDialog(new Stage());
-		                if (file != null){
-		                	String fileName = file.getName();
-		                	try {
-								controller.setTune(fileName);
-							} catch (Exception e) {
-								ErrorBox.displayError(e.getMessage());
-							}
-		                }
+				FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"), new FileChooser.ExtensionFilter("WAV", "*.wav"));
+                File file = fileChooser.showOpenDialog(new Stage());
+                if (file != null){
+                	String fileName = file.getName();
+                	try {
+						controller.setTune(fileName);
+					} catch (Exception e) {
+						ErrorBox.displayError(e.getMessage());
 					}
-				});
-				v.getChildren().add(browse);
-				musicStage.setScene(musicScene);
-				musicStage.show();
+                }
 			}
 		});
 	}
