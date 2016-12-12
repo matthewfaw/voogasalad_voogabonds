@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import utility.ErrorBox;
 
 import authoring.controller.MapDataContainer;
+import authoring.model.map.TerrainData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -91,6 +92,7 @@ public class TerrainCell extends Rectangle {
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 							setWidth(gameDisplay.getTileSize());
 							setHeight(gameDisplay.getTileSize());
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), (int) TerrainCell.this.getX(), (int) TerrainCell.this.getY(), (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
 						}
 					}
 					else if (toolBar.getSpawnStatus()) {
@@ -99,6 +101,9 @@ public class TerrainCell extends Rectangle {
 								controller.removeSinkPoint(cellName);
 							}
 						}
+						ArrayList<Point> points = new ArrayList<Point>();
+						points.add(new Point(TerrainCell.this.getX(), TerrainCell.this.getY()));
+						controller.addSpawnPoints(TerrainCell.this.getName(), points);
 						setWidth(gameDisplay.getTileSize()/2);
 						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
@@ -110,6 +115,9 @@ public class TerrainCell extends Rectangle {
 								controller.removeSpawnPoints(cellName);
 							}
 						}
+						ArrayList<Point> points = new ArrayList<Point>();
+						points.add(new Point(TerrainCell.this.getX(), TerrainCell.this.getY()));
+						controller.addSinkPoints(TerrainCell.this.getName(), points);
 						setWidth(gameDisplay.getTileSize()/2);
 						setHeight(gameDisplay.getTileSize()/2);
 						setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));

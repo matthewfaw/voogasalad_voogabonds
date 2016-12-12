@@ -2,10 +2,14 @@ package authoring.view.display;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import authoring.controller.MapDataContainer;
+import authoring.model.map.TerrainData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -47,7 +51,6 @@ public class GridToolBar {
 	private boolean spawnStatus;
 	private boolean sinkStatus;
 	private boolean imageStatus = false;
-	private boolean setBackground = false;
 	private Color selectedColor;
 	private String selectedTerrain;
 	private String selectedImagePath;
@@ -79,6 +82,7 @@ public class GridToolBar {
 		this.selectedTerrain = myResources.getString("DNE");
 		this.controller = controller;
 		createToolBar();
+		importTerrains();
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
 	}
@@ -108,6 +112,21 @@ public class GridToolBar {
 		terrainChooser.setMinHeight(screenHeight*0.04);
 		terrainHandler(terrainChooser);
 		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser);
+	}
+	
+	private void importTerrains() {
+		HashMap<String, String> terrainList = controller.getValidTerrainMap();
+		for (String terrainName : terrainList.keySet()) {
+			File f = new File(terrainList.get(terrainName));
+			if (f.exists()) {
+				boolToTerrain.put(terrainName, true);
+				imageToTerrain.put(terrainName, terrainList.get(terrainName));
+			}
+			else {
+				boolToTerrain.put(terrainName, false);
+				colorToTerrain.put(terrainName, Color.valueOf(terrainList.get(terrainName)));
+			}
+		}
 	}
 	
 	/**
@@ -244,11 +263,9 @@ public class GridToolBar {
 		        Toggle toggle, Toggle new_toggle) {		 
 		    	if (new_toggle == null) {
 		    		imageStatus = false;
-		    		setBackground = false;
 		        }
 		        else {
 		        	imageStatus = true;
-		        	setBackground = false;
 		        }
 		    }
 		});
