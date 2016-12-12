@@ -130,8 +130,8 @@ public class MockGameDataConstructor {
 			cd4.addField("myDamageRadius", "2");
 			
 			ed.addComponent("PhysicalComponent",cd1);
-//			ed.addComponent("CollidableComponent",cd2);
-//			ed.addComponent("MoveableComponent",cd3);
+			ed.addComponent("CollidableComponent",cd2);
+			ed.addComponent("MoveableComponent",cd3);
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
@@ -157,8 +157,8 @@ public class MockGameDataConstructor {
 			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);
-//			ed2.addComponent("CollidableComponent",CD2);
-//			ed2.addComponent("HealthComponent",CD3);
+			ed2.addComponent("CollidableComponent",CD2);
+			ed2.addComponent("HealthComponent",CD3);
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();

@@ -17,7 +17,7 @@ import utility.Point;
  */
 public class ComponentFactory {
         @Hide
-	private static final String COMPONENT_PATH = "engine.model.components.";
+	private static final String COMPONENT_PATH = "engine.model.components.concrete.";
 	private List<ISystem> mySystems;
 	private Router myRouter;
 
