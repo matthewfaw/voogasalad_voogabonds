@@ -1,7 +1,8 @@
 package authoring.model.serialization;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import authoring.controller.MapDataContainer;
 import authoring.controller.PlayerDataContainer;
 import authoring.controller.EntityDataContainer;
@@ -26,8 +27,7 @@ public class GameStateLoader {
 			MapDataContainer newMapData = (MapDataContainer) deserializer.deserializeFromFile(mapFilePath, MapDataContainer.class);
 			MapDataContainer routerMapData = r.getMapDataContainer();
 			
-			routerMapData.setDimensions(newMapData.getNumXCells(), newMapData.getNumYCells()); //Set dimensions
-			routerMapData.cellSize(newMapData.getCellSize());                                  //Set cell size
+			routerMapData.setDimensions(newMapData.getNumXCells(), newMapData.getNumYCells()); //Set dimensions                               
 			
 			//Load spawn points
 			for (String spawnName: newMapData.getSpawnPointMap().keySet()){
@@ -81,6 +81,7 @@ public class GameStateLoader {
 		WaveDataContainer routerWaveData = r.getWaveDataContainer();
 		try{
 			LevelDataContainer newLevelData = (LevelDataContainer) deserializer.deserializeFromFile(levelFilePath, LevelDataContainer.class);
+//			ArrayList<LevelData> listLevelData = (ArrayList<LevelData>) deserializer.deserializeFromFile(levelFilePath, ArrayList.class);
 			for (LevelData ld: newLevelData.finalizeLevelDataMap()){
 				routerLevelData.createNewLevelData(ld);
 				
@@ -91,6 +92,7 @@ public class GameStateLoader {
 			}
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			e.printStackTrace();
 		}
 	}
 	
