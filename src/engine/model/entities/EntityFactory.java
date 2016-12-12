@@ -1,9 +1,11 @@
 package engine.model.entities;
 
 import java.util.Arrays;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
@@ -52,7 +54,6 @@ public class EntityFactory {
 	 */
 	public IEntity constructEntity(String entityName, Point aLocation) throws UnsupportedOperationException {
 		EntityData entityData = myEntityDataStore.getData(entityName);
-		
 		return constructEntity(entityData, aLocation);
 	}
 	
@@ -74,9 +75,10 @@ public class EntityFactory {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
 			entity.addComponent(component);	
 		}
+		entity.setId(UUID.randomUUID().toString());
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
-	
+
 
 		return entity;
 	}

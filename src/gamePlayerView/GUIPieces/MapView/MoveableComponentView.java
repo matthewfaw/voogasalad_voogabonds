@@ -1,28 +1,34 @@
 package gamePlayerView.GUIPieces.MapView;
 
 import engine.IObservable;
+
 import engine.IObserver;
-import engine.IViewable;
 import engine.controller.ApplicationController;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class MoveableComponentView extends ImageView implements IObserver<IViewable> {
+public class MoveableComponentView extends ImageView implements IObserver<IViewablePhysical> {
 
 	private Pane myPane;
+	private ApplicationController myAppController;
 	
-    public MoveableComponentView(IObservable<IViewable> aObservable, Pane aPane){
-    	myPane = aPane;
+    public MoveableComponentView(IObservable<IViewablePhysical> aObservable, Pane pane, ApplicationController aAppController){
+    	myAppController = aAppController;
+    	myPane = pane;
     }	
-    //public MoveableComponentView(IObservable<IViewable> aObservable) {
-    	//
-    //}
+    public MoveableComponentView(IObservable<IViewable> aObservable) {
+    	
+    }
 
 	@Override
-	public void update(IViewable aChangedObject) {
-		String imagePath = aChangedObject.getImagePath().substring(4);
-		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
+	public void update(IViewablePhysical aChangedObject) {
+		
+		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
+		String imagePath = aChangedObject.getImagePath();
+		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
 		this.setImage(image);
 		this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
 		this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);
@@ -33,8 +39,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	}
 
 	@Override
-	public void remove(IViewable aRemovedObject) {
-		// TODO Auto-generated method stub
+	public void remove(IViewablePhysical aRemovedObject) {
 		myPane.getChildren().remove(this);
 	}
 }

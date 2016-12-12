@@ -1,9 +1,16 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
+
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewableBounty;
 import engine.model.systems.BountySystem;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * The purpose of this class is to manage the information
@@ -14,29 +21,61 @@ import engine.model.systems.BountySystem;
  * @author matthewfaw
  *
  */
-public class BountyComponent extends AbstractComponent {
+public class BountyComponent extends AbstractComponent implements IViewableBounty {
 	private int myBountyValue;
 	
 	@Hide
-	private BountySystem myBounty;
+	private List<IObserver<IViewableBounty>> myObservers;
 	
-	public BountyComponent (BountySystem bountySystem, ComponentData data) {
+	@Hide
+	private BountySystem myBountySystem;
+	
+	public BountyComponent (BountySystem bountySystem, ComponentData data, Router router) {
+		super(router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
-		
-		bountySystem.attachComponent(this);
+		myObservers = new ArrayList<IObserver<IViewableBounty>>();
+		myBountySystem = bountySystem;
+		myBountySystem.attachComponent(this);
 	}
 	/**
 	 * A method to retrieve the bounty value associated with an entity
 	 * 
 	 * @return the bounty value
 	 */
-	public int getBounty() {
+	@Override
+	public int getBounty()
+	{
+
 		return myBountyValue;
 	}
 	
 	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+	
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewableBounty> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewableBounty> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
+
 	public void delete() {
-		myBounty.detachComponent(this);
+		myBountySystem.detachComponent(this);
 	}
 	
 	

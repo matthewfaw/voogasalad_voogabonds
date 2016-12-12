@@ -8,6 +8,7 @@ import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 /**
  * 
@@ -15,18 +16,22 @@ import utility.Point;
  *
  */
 public class ControllableComponent extends AbstractComponent{
+	private ControllableSystem myControllableSystem;
 	private PhysicalSystem myPhysicalSystem;
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	private DamageDealingSystem myDamageDealingSystem;
 	private MovementSystem myMovementSystem;
+	private Router router;
 	
-	public ControllableComponent(ControllableSystem controllable, 
+	public ControllableComponent(ControllableSystem controllableSystem, 
 			CollisionDetectionSystem collisionDetectionSystem, 
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
 			MovementSystem movementSystem,
 			DamageDealingSystem damageDealingSystem, 
-			ComponentData componentData) {
+			ComponentData componentData,
+			Router router) {
+		super(router);
 		myPhysicalSystem = physicalSystem;
 		myCollisionDetectionSystem = collisionDetectionSystem;
 		myDamageDealingSystem = damageDealingSystem;
@@ -42,10 +47,13 @@ public class ControllableComponent extends AbstractComponent{
 		p.setPosition(nextposition);
 		myCollisionDetectionSystem.checkCollision(p);
 	}
+	
+	public void fire() {
+		
+	}
 
 
 	private Point getNextPosition(PhysicalComponent p, MoveableComponent m, String movement) {
-		// TODO Auto-generated method stub
 		Point nextposition;
 		switch (movement) {
 			case "Right":  nextposition =  new Point(p.getPosition().getX() + m.getMoveSpeed(), p.getPosition().getY());
@@ -65,6 +73,12 @@ public class ControllableComponent extends AbstractComponent{
 
 	@Override
 	public void delete() {
+		myControllableSystem.detachComponent(this);
+	}
+
+
+	@Override
+	public void distributeInfo() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,13 +1,14 @@
 package engine.model.machine;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import authoring.model.MachineData;
 import engine.IObserver;
-import engine.IViewable;
 import engine.controller.timeline.TimelineController;
 import engine.model.collision_detection.ICollidable;
+import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.playerinfo.IModifiablePlayer;
 import engine.model.strategies.IMovable;
 import engine.model.systems.IRegisterable;
@@ -85,13 +86,13 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 		Pair<Double, Point> nextMove = new Pair<Double, Point>(0.0, null);//myMoveCalc.nextMove(this);
 		myPosition = nextMove.getValue();
 		myHeading = nextMove.getKey();
-		notifyObservers();
+//		notifyObservers();
 	}
 	
-	@Override
-	public String getImagePath() {
-		return myImagePath;
-	}
+//	@Override
+//	public String getImagePath() {
+//		return myImagePath;
+//	}
 	@Override
 	public double getHeading() {
 		return myHeading;
@@ -171,22 +172,22 @@ abstract public class Machine implements IViewableMachine, IModifiableMachine, I
 	*/
 	
 	/************** IObservable interface ****************/
-	@Override
-	public void attach(IObserver<IViewable> aObserver)
-	{
-		myObservers.add(aObserver);
-		notifyObservers();
-	}
-	@Override
-	public void detach(IObserver<IViewable> aObserver)
-	{
-		myObservers.remove(aObserver);
-	}
-	@Override
-	public void notifyObservers()
-	{
-		myObservers.forEach(observer -> observer.update(this));
-	}
+//	@Override
+//	public void attach(IObserver<IViewable> aObserver)
+//	{
+//		myObservers.add(aObserver);
+//		notifyObservers();
+//	}
+//	@Override
+//	public void detach(IObserver<IViewable> aObserver)
+//	{
+//		myObservers.remove(aObserver);
+//	}
+//	@Override
+//	public void notifyObservers()
+//	{
+//		myObservers.forEach(observer -> observer.update(this));
+//	}
 
 	
 	/********** ICollidable Interface Methods ************/

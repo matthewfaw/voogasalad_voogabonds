@@ -17,7 +17,9 @@ public class ControllableSystem extends AbstractSystem<ControllableComponent>{
 	}
 	
 	public void fire() {
-		
+		for (ControllableComponent component : getComponents() ){
+			component.fire();
+		}
 	}
 	
 	

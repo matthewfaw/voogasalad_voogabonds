@@ -1,6 +1,7 @@
 package engine.model.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import engine.IObserver;
 import engine.model.components.IComponent;
@@ -11,8 +12,9 @@ import engine.model.components.IModifiableComponent;
  *
  */
 public class ConcreteEntity implements IEntity {
-	private ArrayList<IObserver<IEntity>> myObservers;
-	private ArrayList<IComponent> myComponents;
+	private List<IObserver<IEntity>> myObservers;
+	private List<IComponent> myComponents;
+	private String myID;
 	
 	/**
 	 * This object should only be constructed in this
@@ -26,8 +28,13 @@ public class ConcreteEntity implements IEntity {
 	}
 
 	@Override
-	public int getId() {
-		return hashCode();
+	public String getId() {
+		return myID;
+	}
+	
+	@Override
+	public void setId(String uniqueID) {
+		myID = uniqueID;
 	}
 
 	@Override
@@ -43,6 +50,11 @@ public class ConcreteEntity implements IEntity {
 		
 		myComponents.removeAll(myComponents);
 		
+	}
+	
+	@Override
+	public List<IComponent> getComponents() {
+		return myComponents;
 	}
 
 	//********************IObservable interface***********//

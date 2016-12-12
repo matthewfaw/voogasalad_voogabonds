@@ -1,12 +1,15 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ICreator;
+import engine.model.components.viewable_interfaces.IViewableCreator;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
@@ -15,6 +18,7 @@ import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
+import gamePlayerView.gamePlayerView.Router;
 import engine.model.weapons.DamageInfo;
 import utility.Point;
 
@@ -28,7 +32,7 @@ import utility.Point;
  * @author Weston
  *
  */
-public class CreatorComponent extends AbstractComponent implements ICreator {
+public class CreatorComponent extends AbstractComponent implements ICreator, IViewableCreator {
 
 	private ISpawningStrategy mySpawningStrategy;
 	private int myTimeBetweenSpawns;
@@ -53,14 +57,19 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	private List<IEntity> myChildren;
 	@Hide
 	private DamageInfo myStats;
-
+	@Hide
+	private List<IObserver<IViewableCreator>> myObservers;
 	
-	public CreatorComponent(
-			SpawningSystem spawning,
+	public CreatorComponent(SpawningSystem spawning,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			MovementSystem movement,
-			ComponentData data) {
+			ComponentData data,
+			Router router) {
+		super(router);
+		
+		myObservers = new ArrayList<IObserver<IViewableCreator>>();
+		
 		mySpawning = spawning;
 		myPhysical = physical;
 		myTargeting = targeting;
@@ -113,6 +122,32 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	}
 
 	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+
+	@Override
+	public int getTimeBetweenSpawns() {
+		return myTimeBetweenSpawns;
+	}
+
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewableCreator> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewableCreator> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	@Override
 	public void updateStats(DamageInfo data) {
 		myStats.add(data);
 	}
@@ -120,6 +155,11 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	@Override
 	public DamageInfo getStats() {
 		return myStats;
+	}
+	
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
 	}
 
 	@Override

@@ -1,13 +1,15 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.components.IViewableHealth;
+import engine.model.components.viewable_interfaces.IViewableHealth;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -41,9 +43,13 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private List<IObserver<IViewableHealth>> myObservers;
 	
+	@Hide
+	private Router myRouter;
 	
 	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
+		super(router);
 		myHealthSystem = healthSystem;
+		
 		myBounty = bounty;
 		myDamage = damage;
 		
@@ -55,8 +61,6 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		
 		healthSystem.attachComponent(this);
 		
-		//TODO
-		//myRouter.distributeViewableHealthComponent(this);
 	}
 		
 	public int getCurrentHealth() {
@@ -123,10 +127,18 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	}
 
 	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+	
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
+
 	public void delete() {
 		myHealthSystem.detachComponent(this);
 		myObservers.forEach(observer -> observer.remove(this));
 	}
 
-	
 }

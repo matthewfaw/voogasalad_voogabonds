@@ -38,8 +38,6 @@ public class AttributeFetcher {
 			try{
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
-				//newCompName = newCompName.substring(1); // remove leading '.'
-				//String componentName = separateCapitalizedWords(newCompName);
 				componentList.add(newCompName);
 
 				//if field does not have custom annotation, add to map
@@ -62,9 +60,6 @@ public class AttributeFetcher {
 	private String fieldManipulator(Field f){	
 		String fieldString = f.toString();
 		fieldString = fieldString.substring(fieldString.lastIndexOf(".")+1, fieldString.length());
-//		// Assuming all fields start with 'my'
-//		fieldString = fieldString.substring(2);
-//		String fieldStringSpaced = this.separateCapitalizedWords(fieldString);
 		return fieldString;
 	}
 
