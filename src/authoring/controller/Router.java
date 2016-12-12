@@ -1,62 +1,54 @@
 package authoring.controller;
-import authoring.view.side_panel.*;
+import authoring.view.tabs.WaveTab;
+import authoring.view.tabs.entities.EntityTab;
+import authoring.view.tabs.LevelTab;
+import authoring.view.tabs.RulesTab;
 
 public class Router {
-	private EnemyDataController edc = new EnemyDataController();
-	private MapDataController mdc = new MapDataController();
-	private PlayerDataController pldc = new PlayerDataController();
-	private ProjectileDataController prdc = new ProjectileDataController();
-	private TowerDataController tdc = new TowerDataController();
-	private WaveDataController wadc = new WaveDataController();
-	private WeaponDataController wedc = new WeaponDataController();
+	private MapDataContainer mdc = new MapDataContainer();
+	private EntityDataContainer edc = new EntityDataContainer();
+	private PlayerDataContainer pldc = new PlayerDataContainer();
+	private LevelDataContainer ldc = new LevelDataContainer();
+	private WaveDataContainer wadc = new WaveDataContainer();
 	
-	public void link(TowerTab tTab, EnemyTab eTab, WaveLevelTab wTab, GameTab gTab){
-		/**
-		 * CONNECTIONS TO BE CREATED:
-		 * MAP WILL NEED TO LISTEN TO: TERRAIN (SetChangeListener)
-		 */
+	public void link(EntityTab e, LevelTab l, WaveTab w){
+		//Listeners for EntityTab
+		mdc.attach(e); //Entity listener
+		edc.attach(e);
+		//Listeners for WaveTab
+		mdc.attach(w); //Terrain listener
+		edc.attach(w); //Entity listener
+		wadc.attach(w);
+		//Listeners for levelTab
+		wadc.attach(l);
+		ldc.attach(l);
 		
-		//Listeners for WaveLevelTab
-		edc.attach(wTab); //Enemy data listener
-		mdc.attach(wTab); //Spawn point listener
 		
-		//Listeners for EnemyTab
-		mdc.attach(eTab); //Terrain listener
-		wedc.attach(eTab); //Weapon listener
-
-                //TowerTab
-		wedc.attach(tTab); //Weapon listener
-		mdc.attach(tTab); //Terrain listener
-		
-		//GameTab
-		
+		//Refresh upon loading of a new game
+		mdc.notifyObservers();
+		edc.notifyObservers();
+		wadc.notifyObservers();
+		ldc.notifyObservers();
 	}
 	
-	public EnemyDataController getEnemyDataController(){
-		return edc;
-	}
 	
-	public MapDataController getMapDataController(){
+	public MapDataContainer getMapDataContainer(){
 		return mdc;
 	}
 	
-	public PlayerDataController getPlayerDataController(){
+	public PlayerDataContainer getPlayerDataContainer(){
 		return pldc;
 	}
 	
-	public ProjectileDataController getProjectileDataController(){
-		return prdc;
-	}
-	
-	public TowerDataController getTowerDataController(){
-		return tdc;
-	}
-	
-	public WaveDataController getWaveDataController(){
+	public WaveDataContainer getWaveDataContainer(){
 		return wadc;
 	}
 	
-	public WeaponDataController getWeaponDataController(){
-		return wedc;
+	public LevelDataContainer getLevelDataContainer(){
+		return ldc;
+	}
+	
+	public EntityDataContainer getEntityDataContainer(){
+		return edc;
 	}
 }

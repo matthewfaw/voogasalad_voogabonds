@@ -2,6 +2,7 @@ package engine.model.playerinfo;
 
 import java.util.List;
 
+import authoring.model.EntityData;
 import authoring.model.TowerData;
 import engine.IObservable;
 
@@ -26,10 +27,10 @@ public interface IViewablePlayer extends IObservable<IViewablePlayer> {
 	 * Get all the towers that are available to the player
 	 * @return the available towers
 	 */
-	public List<TowerData> getAvailableTowers();
+	public List<EntityData> getAvailableTowers();
 	/**
 	 * Get all towers that the player can afford
 	 * @return all the affordable towers
 	 */
-	public List<TowerData> getAffordableTowers();
+	public List<EntityData> getAffordableTowers();
 }

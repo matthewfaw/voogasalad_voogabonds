@@ -2,16 +2,16 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.TowerData;
-import authoring.model.map.MapData;
 import engine.controller.ApplicationController;
+import gamePlayerView.Resources;
 import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
-import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
+import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
@@ -28,9 +28,8 @@ import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.builders.EntityInfoBox;
 import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
-import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
-import gamePlayerView.interfaces.IWavesAcceptor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -56,10 +55,11 @@ public class GamePlayerScene {
 	private MapDisplay myMap;
 	private PauseMenu pause;
 	private Scene myScene;
-	private Group myGamePlayer;
-	private List<ICashAcceptor> myCash;
-	private List<ILivesAcceptor> myLives; 
-	private List<IWavesAcceptor> myWaves;
+	private Controls myControls;
+	private Pane myGamePlayer;
+	private List<IPlayerAcceptor> myCash;
+	private List<IPlayerAcceptor> myLives; 
+	private List<IPlayerAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
 	private List<IEnemiesKilledAcceptor> myEnemiesKilled;
 	private BorderPane myBorderPane;
@@ -70,9 +70,10 @@ public class GamePlayerScene {
 
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
     	myAppController = aAppController;
-		myCash = new ArrayList<ICashAcceptor>();
-		myLives = new ArrayList<ILivesAcceptor>();
-		myWaves = new ArrayList<IWavesAcceptor>();
+    	       myControls = new Controls();
+		myCash = new ArrayList<IPlayerAcceptor>();
+		myLives = new ArrayList<IPlayerAcceptor>();
+		myWaves = new ArrayList<IPlayerAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
 		myStage=aStage;
 		myBoxFactory=new DisplayBoxFactory();
@@ -106,10 +107,15 @@ public class GamePlayerScene {
 	*/
 
 	public Scene build(Stage stage) throws Exception {
-		myGamePlayer =new Group();
-		myScene = new Scene(myGamePlayer, 1000, 700);
+		//myGamePlayer =new Pane();
+		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
+		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
+		//myGamePlayer.setPrefWidth(Resources.SCREEN_WIDTH);
+		//myGamePlayer.setPrefHeight(Resources.SCREEN_HEIGHT);
+		//myScene = new Scene(myGamePlayer);
+		myScene=new Scene(myBorderPane);
 		setScreen();
-		myGamePlayer.getChildren().add(myBorderPane);
+		//myGamePlayer.getChildren().add(myBorderPane);
 		return myScene;
 	}
 	//This might be called by controller
@@ -135,7 +141,6 @@ public class GamePlayerScene {
 		myCollection.add(myUpgradeandSell.getView());
 		myBottomPane.add(myCollection);
 		myBorderPane.setBottom(myBottomPane.getView());
-		
 	}
 
 	public void setScreen() throws Exception{
@@ -144,7 +149,8 @@ public class GamePlayerScene {
 		myLeftPane=createLeftPane();
 		myRightPane=createRightPane();
 		myBottomPane=createBottomPane();
-	    myMap = new MapDisplay(myAppController);
+	        myMap = new MapDisplay(myAppController);
+	        myMap.getControls(myControls);
 		//mySprites.add(myMap.getSprites());
 	    pause = new PauseMenu();
         makePauseMenu();
@@ -181,8 +187,8 @@ public class GamePlayerScene {
 		GamePlayOptions myGamePlayOptions=new GamePlayOptions(myAppController);
 		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
 		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
-		myCash.add((ICashAcceptor) myWallet); ///FIX LATEER
-		myLives.add((ILivesAcceptor) myLife);//// FIX LATER
+		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
+		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
 		Collection<Node> myCollection=new ArrayList<Node>();
 		myCollection.add(myGamePlayOptions.getView());
 		myCollection.add(myWallet.getView());
@@ -193,18 +199,19 @@ public class GamePlayerScene {
 
 
 	public void makePauseMenu(){ 
-            myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));
-        }
+	    pause.getControls(myControls);
+            myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
+    }
 	
-	public List<ICashAcceptor> getCash() {
+	public List<IPlayerAcceptor> getCash() {
 		return myCash;
 	}
 
-	public List<ILivesAcceptor> getLives() {
+	public List<IPlayerAcceptor> getLives() {
 		return myLives;
 	}
 
-	public List<IWavesAcceptor> getWaves() {
+	public List<IPlayerAcceptor> getWaves() {
 		return myWaves;
 	}
 	
@@ -212,7 +219,7 @@ public class GamePlayerScene {
 		return myEnemiesKilled;
 	}
 	
-	public void giveMapData(MapData aMapData){
+	public void giveMapData(MapDataContainer aMapData){
 	        myMap.setMap(aMapData);
 	}
 	
@@ -221,6 +228,11 @@ public class GamePlayerScene {
 		return myMap;
 	}
 
+	public EntityInfoBoxBuilder makeEntityInfoBox()
+	{
+		return new EntityInfoBoxBuilder(this);
+	}
+	
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
 		return myResources;
@@ -237,5 +249,3 @@ public class GamePlayerScene {
 		}
 	
 }
-
-

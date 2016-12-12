@@ -1,22 +1,23 @@
 package gamePlayerView.GUIPieces.MapView;
 
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
-
 import engine.IObservable;
 import engine.IObserver;
 import engine.IViewable;
+import engine.controller.ApplicationController;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class MoveableComponentView extends ImageView implements IObserver<IViewable> {
 
-    public MoveableComponentView(IObservable<IViewable> aObservable){
-    }
+	private ApplicationController myAppController;
+	
+    public MoveableComponentView(IObservable<IViewable> aObservable, ApplicationController aAppController){
+    	myAppController = aAppController;
+    }	
+    //public MoveableComponentView(IObservable<IViewable> aObservable) {
+    	//
+    //}
 
 	@Override
 	public void update(IViewable aChangedObject) {
@@ -27,5 +28,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 		this.setY(aChangedObject.getPosition().getY());
 		this.setFitWidth(aChangedObject.getSize());
 		this.setFitHeight(aChangedObject.getSize());
+		
+		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
 	}
 }

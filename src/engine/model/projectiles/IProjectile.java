@@ -9,6 +9,7 @@ import utility.Point;
  * This interface provides the model with access to the advance method to that the projectile can move when the game ticks.
  * @author Weston
  */
+@Deprecated
 public interface IProjectile extends IObserver<TimelineController>, IMovable {
 	
 	/**

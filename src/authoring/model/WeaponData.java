@@ -1,5 +1,6 @@
 package authoring.model;
 
+@Deprecated
 public class WeaponData implements IReadableData {
 
 	private String name;
@@ -30,7 +31,7 @@ public class WeaponData implements IReadableData {
 		return projectileName;
 	}
 	
-	public void setRange(int range) throws Exception{
+	public void setRange(double range) throws Exception{
 		if (range < 0){
 			throw new Exception("Range cannot be a negative number.");
 		}

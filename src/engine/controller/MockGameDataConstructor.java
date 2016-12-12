@@ -1,20 +1,22 @@
 package engine.controller;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import authoring.model.EnemyData;
+import authoring.controller.LevelDataContainer;
+import authoring.controller.MapDataContainer;
+import authoring.model.ComponentData;
+import authoring.model.EntityData;
+import authoring.model.LevelData;
 import authoring.model.PlayerData;
-import authoring.model.ProjectileData;
-import authoring.model.TowerData;
-import authoring.model.WeaponData;
-import authoring.model.map.MapData;
+import authoring.model.WaveData;
 import authoring.model.map.TerrainData;
 import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.exceptions.SerializationException;
+import engine.model.components.concrete.PurchasableComponentData;
+import engine.model.components.concrete.SellableComponentData;
 import engine.model.game_environment.terrain.TerrainMap;
 import utility.Point;
+import utility.ResouceAccess;
 
 /**
  * A class to construct some mock game data for testing
@@ -22,48 +24,48 @@ import utility.Point;
  * @author matthewfaw
  *
  */
-class MockGameDataConstructor {
-	MockGameDataConstructor()
+public class MockGameDataConstructor {
+	public MockGameDataConstructor()
 	{
 	}
 	
-	MapData getMockMapData()
+	MapDataContainer getMockMapData()
 	{
-		MapData mapData = new MapData();
-		try {
-			int x = 14;
-			int y = 12;
-			int xmin = x/3;
-			int xmax = 2*x/3;
-			int ymax = y/2;
-			mapData.setNumXCells(x);
-			mapData.setNumYCells(y);
-			for (int i=0; i<x; ++i) {
-				for (int j=0; j<y; ++j) {
-					TerrainData terrain;
-					if (i > xmin && i < xmax && j < ymax) {
-						terrain = new TerrainData("water", i, j, 50, "0x0000ff");
-					} else {
-						terrain = new TerrainData("grass", i, j, 50, "0x008000");
-					}
-					mapData.addTerrainData(terrain);
+		MapDataContainer mapData = new MapDataContainer();
+		int x = 14;
+		int y = 12;
+		int xmin = x/3;
+		int xmax = 2*x/3;
+		int ymax = y/2;
+		mapData.setDimensions(x,y);
+		for (int i=0; i<x; ++i) {
+			for (int j=0; j<y; ++j) {
+				TerrainData terrain;
+				if (i > xmin && i < xmax && j < ymax) {
+					terrain = new TerrainData("water", i, j, 50, "0x0000ff");
+				} else {
+					terrain = new TerrainData("grass", i, j, 50, "0x008000");
 				}
+				mapData.addTerrainData(terrain);
 			}
-			ArrayList<Point> spawnPoints = new ArrayList<Point>();
-			spawnPoints.add(new Point(1, 1));
-			mapData.addSpawnPoints("spawnPoint", spawnPoints);
-			mapData.addSinkPoint(new Point(x-1, 1));
-			mapData.cellSize(50);
+		}
+		ArrayList<Point> spawnPoints = new ArrayList<Point>();
+		spawnPoints.add(new Point(1, 1));
+		mapData.addSpawnPoints("spawnPoint", spawnPoints);
+		
+		ArrayList<Point> sinkPoints = new ArrayList<Point>();
+		sinkPoints.add(new Point(4, 4));
+		mapData.addSinkPoints("sinkPoint", sinkPoints);
+		
+		
+		mapData.cellSize(50);
 //			mapData.addValidTerrain(terrain1.getName(), "exampleColor 1");
 //			mapData.addValidTerrain(terrain2.getName(), "exampleColor 2");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return mapData;
 	}
 	
-	private void constructMockData() throws SerializationException
+	public void constructMockData() throws SerializationException
 	{
 		JSONDeserializer derp = new JSONDeserializer(); 
 		
@@ -74,49 +76,78 @@ class MockGameDataConstructor {
 		
 		try {
 			
-			// Terrain Data 
-			TerrainData terrain1 = new TerrainData("grass", 0, 0, 50, "0x008000");
-			TerrainData terrain2 = new TerrainData("water", 0, 1, 50, "0x0000ff");
-			List<String> terrainList = new ArrayList<String>();
-			terrainList.add(terrain1.getName());
-			terrainList.add(terrain2.getName());
-			// Tower Data
-			TowerData tow = new TowerData();
-			tow.setTerrainList(terrainList);
-			tow.setWeaponName("weapon 1");
-			tow.setBuyPrice(40);
-			tow.setCollisionRadius(2);
-			tow.setImagePath("src/resources/boss.png");
-			tow.setMaxHealth(1000);
-			tow.setMoveStrategyName("fast as fuck");
-			tow.setName("tower 1");
-			tow.setSellPrice(100);
+			//Map data
+			MapDataContainer md = this.getMockMapData();
 			
-			// Enemy Data
-			EnemyData ed = new EnemyData();
-			ed.setCollisionRadius(5);
-			ed.setImagePath("src/resources/boss.png");
-			ed.setKillReward(100);
-			ed.setMaxHealth(100);
-			ed.setName("enemy 1");
-			ed.setMoveSpeed(10);
-			ed.setWeaponName("weapon 1");
+			//Sell/Buy data
+			PurchasableComponentData pcd = new PurchasableComponentData();
+			pcd.setBuyPrice(50);
 			
-			// Weapon Data
-			WeaponData wd = new WeaponData();
-			wd.setFireRate(10);
-			wd.setName("weapon 1");
-			wd.setProjectileName("projectile 1");
-			wd.setRange(100);
+			SellableComponentData scd = new SellableComponentData();
+			scd.setSellPrice(25);
 			
-			// Projectile Data
-			ProjectileData pd = new ProjectileData();
-			pd.setAreaOfEffectRadius(10);
-			pd.setDamageStrategy("damage");
-			pd.setImagePath("src/resources/boss.png");
-			pd.setMaxRange(10);
-			pd.setMovementStrategy("fast as fuck");
-			pd.setName("projectile 1");
+			// Entity data
+			EntityData ed  = new EntityData();
+			
+			ed.setPurchasableComponentData(pcd);
+			ed.setSellableComponentData(scd);
+			
+			ed.setName("Awesome Tower1");
+			ComponentData cd1 = new ComponentData();
+			cd1.setComponentName("PhysicalComponent");
+			cd1.addField("myHeading", "0");
+			cd1.addField("myImagePath", "src/resources/cookie.png");
+			cd1.addField("myImageSize", "50");
+			cd1.addField("myValidTerrains", "grass, ice, steel, dark, fairy");
+			
+			ComponentData cd2 = new ComponentData();
+			cd2.setComponentName("CollidableComponent");
+			cd2.addField("myCollisionRadius", "50");
+
+			ComponentData cd3 = new ComponentData();
+			cd3.setComponentName("MoveableComponent");
+			cd3.addField("myCollisionRadius", "50");
+			cd3.addField("myTurnSpeed", "10");
+			cd3.addField("myMoveSpeed", "100");
+			cd3.addField("myMaxDistance", "100");
+			cd3.addField("myMovementCalc", "PathMovementStrategy");
+			
+	
+			ComponentData cd4 = new ComponentData();
+			cd4.setComponentName("DamageDealingComponent");
+			cd4.addField("myDamage", "50");
+			cd4.addField("myDamageRadius", "2");
+			
+			ed.addComponent("PhysicalComponent",cd1);
+			ed.addComponent("CollidableComponent",cd2);
+			ed.addComponent("MoveableComponent",cd3);
+			
+			// 2nd entity data
+			EntityData ed2  = new EntityData();
+			
+			ed2.setPurchasableComponentData(pcd);
+			ed2.setSellableComponentData(scd);
+			
+			ed2.setName("Awesome Tower2");
+			ComponentData CD1 = new ComponentData();
+			CD1.setComponentName("PhysicalComponent");
+			CD1.addField("myHeading", "0");
+			CD1.addField("myImagePath", "src/resources/cow.png");
+			CD1.addField("myImageSize", "50");
+			CD1.addField("myValidTerrains", "grass, ice, steel, dark");
+			
+			ComponentData CD2 = new ComponentData();
+			CD2.setComponentName("CollidableComponent");
+			CD2.addField("myCollisionRadius", "50");
+			
+			ComponentData CD3 = new ComponentData();
+			CD3.setComponentName("HealthComponent");
+			CD3.addField("myCurrentHealth", "9000");
+			CD3.addField("myMaxHealth", "9000");
+			
+			ed2.addComponent("PhysicalComponent",CD1);
+			ed2.addComponent("CollidableComponent",CD2);
+			ed2.addComponent("HealthComponent",CD3);
 			
 			// Player Data
 			PlayerData pdd = new PlayerData();
@@ -125,34 +156,57 @@ class MockGameDataConstructor {
 			pdd.setWinStrategyName("win strategy 1");
 			pdd.setStartingLives(5);
 			
-			// Map Data
-			MapData md = new MapData();
-			md.setNumXCells(2);
-			md.setNumYCells(2);
-			md.addTerrainData(terrain1);
-			md.addTerrainData(terrain2);
-			ArrayList<Point> spawnPoints = new ArrayList<Point>();
-			spawnPoints.add(new Point(1, 1));
-			md.addSpawnPoints("spawnPoint", spawnPoints);
-			md.addSinkPoint(new Point(1, 0));
-			md.addValidTerrain(terrain1.getName(), "exampleColor 1");
-			md.addValidTerrain(terrain2.getName(), "exampleColor 2");
+			//Level data
+			WaveData wad1 = new WaveData();
+			wad1.setName("Cool wave");
+			wad1.setNumEnemies(10);
+			wad1.setSpawnPointName("spawnPoint");
+			wad1.setSinkPointName("sinkPoint");
+			wad1.setTimeBetweenEnemy(20);
+			wad1.setTimeForWave(0);
+			wad1.setWaveEntity("Awesome Tower1");
+			WaveData wad2 = new WaveData();
+			wad2.setName("Awesome wave");
+			wad2.setNumEnemies(20);
+			wad2.setSpawnPointName("spawnPoint");
+			wad2.setSinkPointName("sinkPoint");
+			wad2.setTimeBetweenEnemy(50);
+			wad2.setTimeForWave(1);
+			wad2.setWaveEntity("Awesome Tower1");
+			WaveData wad3 = new WaveData();
+			wad3.setName("Dumb wave");
+			wad3.setNumEnemies(30);
+			wad3.setSpawnPointName("spawnPoint");
+			wad3.setSinkPointName("sinkPoint");
+			wad3.setTimeBetweenEnemy(60);
+			wad3.setTimeForWave(6);
+			wad3.setWaveEntity("Awesome Tower2");
+			LevelData ld = new LevelData();
+			ld.addWaveDataListToList(wad1);
+			ld.addWaveDataListToList(wad2);
+			ld.addWaveDataListToList(wad3);
+			ld.setLevelName("0");
+			LevelDataContainer ldc = new LevelDataContainer();
+			ldc.createNewLevelData(ld);
+
+			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
+			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(ldc, "exampleGame/LevelData/"+ldc.getClass().getSimpleName());
+			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName()+1);
+			ser.serializeToFile(ed2, "exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2);
 			
-//			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
-//			ser.serializeToFile(terrain1, "exampleGame/TerrainData/"+terrain1.getClass().getSimpleName()+"1");
-//			ser.serializeToFile(terrain2, "exampleGame/TerrainData/"+terrain2.getClass().getSimpleName()+"2");
-			ser.serializeToFile(tow, "exampleGame/TowerData/"+tow.getClass().getSimpleName());
-//			ser.serializeToFile(ed, "exampleGame/EnemyData/"+ed.getClass().getSimpleName());
-//			ser.serializeToFile(wd, "exampleGame/WeaponData/"+wd.getClass().getSimpleName());
-//			ser.serializeToFile(pd, "exampleGame/ProjectileData/"+pd.getClass().getSimpleName());
-//			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
-			
+			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+"MapData", MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+"LevelData", LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			
 			TerrainMap terrainMap = new TerrainMap(md);
-			terrainMap.getDestination();
+//			terrainMap.getDestination();
 		} catch (Exception e) {
 			//TODO add more meaningful error message
-			throw new SerializationException("Could not serialize");
+			throw new SerializationException(ResouceAccess.getError("NoSerialize"));
+
 		}
 	}
 	public static void main(String[] args) throws SerializationException

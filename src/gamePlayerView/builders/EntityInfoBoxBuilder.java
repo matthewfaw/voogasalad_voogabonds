@@ -6,6 +6,7 @@ import gamePlayerView.gamePlayerView.GamePlayerScene;
 import javafx.scene.layout.HBox;
 
 public class EntityInfoBoxBuilder {
+
 		//private EntityInfoBox myEntityInfoBox;
 		private MachineInfo myMachineInfo;
 		private UpgradeOrSell myUpgradeOrSell;
@@ -65,3 +66,4 @@ public class EntityInfoBoxBuilder {
 		}
 
 	}
+

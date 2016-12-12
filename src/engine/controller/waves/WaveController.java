@@ -1,12 +1,21 @@
 package engine.controller.waves;
 
-import java.util.Map;
-
-import authoring.model.EnemyData;
-import engine.IObserver;
-import engine.controller.timeline.TimelineController;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import authoring.controller.MapDataContainer;
+import authoring.model.EntityData;
+import authoring.model.LevelData;
+import engine.model.components.concrete.MoveableComponent;
+import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
-import engine.model.game_environment.distributors.MapDistributor;
+import engine.model.entities.EntityFactory;
+import engine.model.entities.IEntity;
+import engine.model.systems.MovementSystem;
+import engine.model.systems.PhysicalSystem;
+import utility.Point;
+import utility.ResouceAccess;
 
 /**
  * A class to handle which wave the game is currently in,
@@ -16,30 +25,74 @@ import engine.model.game_environment.distributors.MapDistributor;
  * at a given clock tick
  * It also depends on the MapDistributor 
  * 
- * @author matthewfaw
+ * @author matthewfaw and owenchung
  *
  */
-public class WaveController implements IObserver<TimelineController>{
-	private MapDistributor myMapDistributor;
+public class WaveController {
 	private ActiveWaveManager myActiveWaveManager;
+	private EntityFactory myEntityFactory;
+	private MapDataContainer myMapData;
+	private PhysicalSystem myPhysical;
+	private MovementSystem myMovement;
 	
-	public WaveController(MapDistributor aMapDistributor, DummyWaveOperationData aWaveOperationData, DataStore<EnemyData> aEnemyDataStore)
-	{
-		myMapDistributor = aMapDistributor;
-		myActiveWaveManager = new ActiveWaveManager(aWaveOperationData, aEnemyDataStore);
+	
+	public WaveController (
+			DataStore<EntityData> aEnemyDataStore,
+			LevelData aLevelData,
+			double startTime,
+			EntityFactory aEntityFactory,
+			PhysicalSystem physical,
+			MovementSystem movement,
+			MapDataContainer mapData
+			) {
+		
+		myMapData = mapData;
+		myPhysical = physical;
+		myMovement = movement;
+		myActiveWaveManager = new ActiveWaveManager(aEnemyDataStore, aLevelData, startTime);
+		myEntityFactory = aEntityFactory;
+		
 	}
 
-	//*******************Observer interface***************//
-	@Override
-	public void update(TimelineController aChangedObject) {
-		//TODO: check if we should spawn a new enemy
-		// if true, then distribute the enemy through the mediator
-		Map<EnemyData, String> enemiesToConstruct = myActiveWaveManager.getEnemiesToConstruct(aChangedObject.getTotalTimeElapsed());
-		for (EnemyData enemyData: enemiesToConstruct.keySet()) {
-			//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
-			//TODO: Change to a better way?
-			myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
+
+	public void distributeEntities(double aElapsedTime)
+	{
+		List<PathFollowerData> entitiesToConstruct = myActiveWaveManager.getEntitiesToConstruct(aElapsedTime);
+		for (Iterator<PathFollowerData> iterator = entitiesToConstruct.iterator(); iterator.hasNext();) {
+			PathFollowerData entityData = iterator.next();
+			try {	
+				
+				List<Point> spawns = myMapData.getSpawnPoints(entityData.getSpawnPoint());
+				List<Point> sinks = myMapData.getSinkPoints(entityData.getSinkPoint());
+				
+				Collections.shuffle(spawns);
+				Collections.shuffle(sinks);
+				
+				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
+				
+				MoveableComponent m = myMovement.get(newEntity);
+				if (m != null)
+					m.setGoal(sinks.get(0));
+				
+			} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+					| IllegalArgumentException | InvocationTargetException e) {
+				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity"), e);
+			}
+		//XXX: Not sure if I wanna pass the Timeline Controller here... there's probably a better way
+		//TODO: Change to a better way?
+		//myMapDistributor.distribute(enemyData, enemiesToConstruct.get(enemyData), aChangedObject);
+			
 		}
-		//TODO: check if we should transition to the next wave
 	}
+
+	public boolean isLevelFinished() {
+		return !myActiveWaveManager.hasEnemiesToRelease();
+	}
+
+
+	public void newWave(DataStore<EntityData> store, LevelData levelData, double totalTimeElapsed) {
+		myActiveWaveManager = new ActiveWaveManager(store, levelData, totalTimeElapsed);
+		
+	}
+
 }

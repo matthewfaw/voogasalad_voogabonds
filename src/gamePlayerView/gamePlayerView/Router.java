@@ -2,16 +2,17 @@ package gamePlayerView.gamePlayerView;
 
 import java.util.List;
 
+import authoring.controller.MapDataContainer;
 import authoring.model.TowerData;
 import authoring.model.map.MapData;
 import engine.IObservable;
 import engine.IViewable;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
-import gamePlayerView.interfaces.ICashAcceptor;
-import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.GUIPieces.InfoBoxes.ErrorPopup;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
-import gamePlayerView.interfaces.IWavesAcceptor;
+
 
 /**
  * @author Guhan Muruganandam
@@ -19,9 +20,9 @@ import gamePlayerView.interfaces.IWavesAcceptor;
 public class Router {
 	private GamePlayerScene  myGamePlayerScene;
 	//TODO: Change these box objects to instead be acceptor interfaces
-	private List<ICashAcceptor> myCash;
-	private List<ILivesAcceptor> myLives; 
-	private List<IWavesAcceptor> myWaves;
+	private List<IPlayerAcceptor> myCash;
+	private List<IPlayerAcceptor> myLives; 
+	private List<IPlayerAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
 	//List<ISprites> mySprites;
 	
@@ -34,6 +35,11 @@ public class Router {
 		myWaves=myGamePlayerScene.getWaves();
 		myResources=myGamePlayerScene.getResources();
 		//mySprites = myGamePlayerScene.getSprites();
+	}
+	
+	public void distributeErrors(String aErrorMessage)
+	{
+	    ErrorPopup error = new ErrorPopup(aErrorMessage);
 	}
 	
 	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
@@ -55,14 +61,14 @@ public class Router {
 	}
 
 	private void distributeLives(IObservable<IViewablePlayer> aPlayer) {
-		for(ILivesAcceptor l : myLives){
-			l.acceptLives(aPlayer);
+		for(IPlayerAcceptor l : myLives){
+			l.acceptPlayer(aPlayer);
 		}
 	}
 
 	private void distributeCash(IObservable<IViewablePlayer> aPlayer) {
-		for(ICashAcceptor c : myCash){
-			c.acceptCash(aPlayer);
+		for(IPlayerAcceptor c : myCash){
+			c.acceptPlayer(aPlayer);
 		}
 	}
 	//TODO: What is the input argument for this?
@@ -72,7 +78,7 @@ public class Router {
 		//}		
 	//}
 
-	public void distributeMapData(MapData aMapData)
+	public void distributeMapData(MapDataContainer aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
 	    myGamePlayerScene.giveMapData(aMapData);
