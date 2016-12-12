@@ -9,7 +9,7 @@ import engine.IObservable;
 import engine.IObserver;
 import engine.IViewable;
 import engine.model.components.AbstractComponent;
-import engine.model.components.IViewableHealth;
+import engine.model.components.viewable_interfaces.IViewableHealth;
 import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.HealthSystem;

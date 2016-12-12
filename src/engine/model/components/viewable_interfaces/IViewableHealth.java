@@ -1,4 +1,4 @@
-package engine.model.components;
+package engine.model.components.viewable_interfaces;
 
 import engine.IObservable;
 
