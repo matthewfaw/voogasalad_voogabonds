@@ -1,8 +1,14 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewableMovable;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
@@ -12,6 +18,7 @@ import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TargetingSystem;
+import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -20,7 +27,7 @@ import utility.Point;
  * @author matthewfaw, Weston
  *
  */
-public class MoveableComponent extends AbstractComponent implements IMovable {
+public class MoveableComponent extends AbstractComponent implements IMovable, IViewableMovable {
 	@Hide
 	private MovementSystem myMovement;
 	@Hide
@@ -48,15 +55,19 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private boolean explodesOnGoal;
 
 	
+	@Hide
+	private List<IObserver<IViewable>> myObservers;
 
 	public MoveableComponent(
 			MovementSystem movement,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
+			Router router,
 			DamageDealingSystem damage,
 			ComponentData data
 			) throws ClassNotFoundException {
+		super(router);
 		
 		myMovement = movement;
 		myPhysical = physical;
@@ -74,6 +85,8 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
 		myMovementCalc = movement.getStrategyFactory().newStrategy(data.getFields().get("myMovementCalc"));
+		
+		myObservers = new ArrayList<IObserver<IViewable>>();
 		
 		movement.attachComponent(this);
 	}
@@ -124,6 +137,32 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 			getEntity().delete();
 		}
 		
+	}
+	
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+
+	@Override
+	public IMovementStrategy getMovementStrategy() {
+		return myMovementCalc;
 	}
 
 	@Override

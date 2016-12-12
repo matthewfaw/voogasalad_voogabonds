@@ -9,6 +9,8 @@ import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.builders.EntityInfoBox;
+import gamePlayerView.builders.EntityInfoBoxBuilder;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.scene.layout.BorderPane;
@@ -48,13 +50,13 @@ public class ApplicationController {
 	 * A method to be called to initialize the frontend and backend
 	 * @throws Exception 
 	 */
-	public void init(Stage aStage) throws Exception
+	public void init(Stage aStage,String gameTitle) throws Exception
 	{
 		//myStage=aStage; ///Guhan 
 		//GamePlayerScene scene = constructGUI(aStage);
 		myScene=constructGUI(aStage);
 		Router router = new Router(myScene);
-		constructBackend(router);
+		constructBackend(router,gameTitle);
 	}
 	/**
 	 * Helper method to create the view object
@@ -74,11 +76,12 @@ public class ApplicationController {
 	 * This method establishes the link between the frontend and backend
 	 * through the Router class
 	 * @param aRouter
+	 * @param gameTitle 
 	 */
-	private void constructBackend(Router aRouter)
+	private void constructBackend(Router aRouter, String gameTitle)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString("ExampleGame"), aRouter);
+		myBackendController = new BackendController(myGameOptions.getString(gameTitle), aRouter);
 	}
 	private BorderPane constructBorderPane(){
 		/*myPane= new BorderPane();
@@ -157,16 +160,17 @@ public class ApplicationController {
 	public void onSavePressed() {
 		myBackendController.save();
 	}
-
-	public void  onEntitySelected(IEntity aEntity)
-	{
-//		myScene.makeEntityInfoBox()
-//			   .withUpgradeButton(...)
-//			   .withTargetInfo()
-//			   .with
-//			   .build()
-	}
 	
+	public void onEntityClicked(){
+	EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(myScene) 
+			//myScene.makeEntityInfoBox()
+			   .withMachineInfo()
+			   .withTargetingMechanism()
+			   .withUpgradeButton()
+			   .build();
+		myScene.updateDisplay(myStatisticsBox);
+
+	}
 	public void DisplayStats() throws Exception {
 		myScene.updateTowerStatisticsRow();
 	}

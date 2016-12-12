@@ -1,5 +1,7 @@
 package engine.model.entities;
 
+import java.util.List;
+
 import engine.IObservable;
 import engine.model.components.IModifiableComponent;
 
@@ -33,7 +35,6 @@ public interface IEntity extends IObservable<IEntity> {
 	
 	public void delete();
 
-
-	
+	public List<IComponent> getComponents();
 	
 }
