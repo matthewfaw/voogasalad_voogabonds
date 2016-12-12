@@ -2,6 +2,7 @@ package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 
+
 import java.util.Set;
 //import javax.media.j3d.Group;
 import com.sun.javafx.geom.BaseBounds;
@@ -15,9 +16,9 @@ import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.IObservable;
 import engine.IObserver;
-import engine.IViewable;
 import engine.controller.ApplicationController;
 import engine.model.components.concrete.MoveableComponent;
+import engine.model.components.viewable_interfaces.IViewable;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

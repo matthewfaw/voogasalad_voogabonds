@@ -67,10 +67,10 @@ public class NewAuthoringScreen {
 		saveHandler(chooseNameSave);
 		HBox mapDimensionContainer = new HBox(screenWidth*0.05);
 		TextField mapXField = new TextField();
-		mapXField.setMinHeight(47);
+		mapXField.setId("menu-textfield");
 		mapXField.setPromptText(myResources.getString("SetMapX"));
 		TextField mapYField = new TextField();
-		mapYField.setMinHeight(47);
+		mapYField.setId("menu-textfield");
 		mapYField.setPromptText(myResources.getString("SetMapY"));
 		Button startProject = new Button(myResources.getString("ConfirmAuthoringSetUp"));
 		startProject.setId("button");
@@ -121,9 +121,14 @@ public class NewAuthoringScreen {
 	}
 	
 	private void initAuthoring(MapDataContainer container) {
-	    AuthorDisplay authoring = new AuthorDisplay(pane, scene, router);
+		BorderPane bpane = new BorderPane();
+		Scene authorScene = new Scene(bpane, 
+	    		Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 
+	    		Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+		authorScene.getStylesheets().add("style.css");
+	    AuthorDisplay authoring = new AuthorDisplay(bpane, authorScene, router);
 //	    this.AuthDisp = authoring;
-		stage.setScene(scene);
+		stage.setScene(authorScene);
 	}
 	
 	private void setUpScreenResolution() {

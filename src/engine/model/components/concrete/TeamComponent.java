@@ -1,7 +1,16 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+
+import java.util.List;
+
+import authoring.model.ComponentData;
+import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.components.AbstractComponent;
-import engine.model.entities.IEntity;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewableTeam;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * The purpose of this class is to manage which team an entity belongs to
@@ -10,17 +19,43 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class TeamComponent extends AbstractComponent {
-	private IEntity myEntity;
+public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	private String myTeamID;
 	
-	public String getTeamID()
-	{
-		return myTeamID;
+	@Hide
+	private List<IObserver<IViewable>> myObservers;
+	
+	public TeamComponent(ComponentData componentData, Router router) {
+		super(router);
+		myTeamID = componentData.getFields().get("myTeamID");
+		myObservers = new ArrayList<IObserver<IViewable>>();
 	}
 	
 	@Override
-	public IEntity getEntity() {
-		return myEntity;
+	public String getTeamID() {
+		return myTeamID;
 	}
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+	
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+	
+
 }

@@ -1,14 +1,16 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
-import engine.IViewable;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
 import engine.model.systems.PhysicalSystem;
@@ -21,9 +23,10 @@ import utility.Point;
  * Physical components contain information relevant to existing on a grid, and being displayed
  * 
  * @author matthewfaw
+ * @author owenchung (edits)
  *
  */
-public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
+public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewablePhysical {
 	private String myImagePath;
 	private double myImageSize;
 	
@@ -38,7 +41,8 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private double myHeading;
 
 	
-	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
+	public PhysicalComponent (PhysicalSystem physical, ComponentData data, Point position, Router router) {
+		super(router);
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
@@ -112,5 +116,12 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+	
+	/***** Component interface ******/
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
 	}
 }

@@ -51,14 +51,17 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 		Label wavesLabel = setUpLabel(getResources().getString("SelectWaves"));
 		myWaveChecks = new ArrayList<CheckBox>();
 		VBox checkV = new VBox();
+		checkV.setId("check-vbox");
 		for (WaveData wave: myWaves){
 			CheckBox check = new CheckBox(wave.getName());
+			check.setId("checkbox");
 			if (selectedWaves != null && selectedWaves.contains(wave))
 				check.setSelected(true);
 			myWaveChecks.add(check);
 			checkV.getChildren().add(check);
 		}
 		ScrollPane scroll = new ScrollPane();
+		scroll.setId("scrollpane");
 		scroll.setContent(checkV);
 		wavesLabel.setLabelFor(scroll);
 		Button finish = setUpSubmitButton();
@@ -114,8 +117,6 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 				}
 				myContainer.createNewLevelData(level);
 				getTilePane().getChildren().remove(myV);
-//				getObservableList().remove(level.getLevelName());
-//				getObservableList().add(level.getLevelName());
 			}
 		});
 		return finish;

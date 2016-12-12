@@ -1,12 +1,22 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+
+
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewableHealth;
 import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
+import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.weapons.DamageInfo;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Damage;
 
 /**
@@ -16,47 +26,68 @@ import utility.Damage;
  * @author matthewfaw
  * @author Weston
  * @author owenchung (edits)
- *
+ * @author alanguo (edits)
  */
-public class HealthComponent extends AbstractComponent {
+public class HealthComponent extends AbstractComponent implements IViewableHealth {
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
 	private BountySystem myBounty;
+	@Hide
+	private DamageDealingSystem myDamage;
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;
 	private Double myMaxHealth;
-
-
+	private boolean explodeOnDeath;
 	
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty,  ComponentData componentdata) {
+	@Hide
+	private List<IObserver<IViewable>> myObservers;
+	
+	@Hide
+	private Router myRouter;
+
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, 
+			ComponentData componentdata, Router router) {
+		super(router);
 		myBounty = bounty;
+		myDamage = damage;
+		
+		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
+		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
+		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
+		
+		myObservers = new ArrayList<IObserver<IViewable>>();
+		
 		healthSystem.attachComponent(this);
 		
-		myCurrHealth = DEFAULT_HEALTH;
-		myMaxHealth = DEFAULT_HEALTH;
 	}
 		
 	public int getCurrentHealth() {
 		return myCurrHealth.intValue();
 	}
 	
+	public void setCurrentHealth(double newHealthValue) {
+		myCurrHealth = newHealthValue;
+		//notifyObservers();
+	}
+	
 	public DamageInfo takeDamage(Damage dmg) {
-		double startingHealth = myCurrHealth;
-		myCurrHealth -= dmg.getDamage();
+		double newCurrHealth = myCurrHealth - dmg.getDamage();
 		
-		if (myCurrHealth < 0) {
-			myCurrHealth = 0.0;
+		if (newCurrHealth < 0) {
+			setCurrentHealth(0);
 		}
-		if (myCurrHealth > myMaxHealth) {
-			myCurrHealth = myMaxHealth;
+		if (newCurrHealth > myMaxHealth) {
+			setCurrentHealth(myMaxHealth);
 		}
 		
-		double healthDelta = myCurrHealth - startingHealth;
 		int died = myCurrHealth <= 0 ? 1 : 0;
 		int bounty = myBounty.collectBounty(this);
 		
-		return new DamageInfo(healthDelta, died, bounty);		
+		if (died == 1 && explodeOnDeath)
+			myDamage.explode(this);
+		
+		return new DamageInfo(dmg.getDamage(), died, bounty);		
 	}
 	
 	public void setMaxHealth(double m) {
@@ -66,4 +97,37 @@ public class HealthComponent extends AbstractComponent {
 			myCurrHealth = myMaxHealth;
 		}
 	}
+	
+	/********* Observable Interface **********/
+
+	@Override
+	public void attach(IObserver<IViewable> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	@Override
+	public double getMaxHealth() {
+		return myMaxHealth;
+	}
+
+	@Override
+	public double getCurrHealth() {
+		return myCurrHealth;
+	}
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+	
 }

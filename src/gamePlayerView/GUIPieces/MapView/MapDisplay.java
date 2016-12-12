@@ -2,14 +2,15 @@ package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 
+
 import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
+import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.machine.IViewableMachine;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import engine.IObservable;
 import engine.IObserver;
-import engine.IViewable;
 import engine.controller.ApplicationController;
 import engine.controller.timeline.TimelineController;
 import javafx.animation.Animation;

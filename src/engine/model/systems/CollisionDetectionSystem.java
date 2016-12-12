@@ -15,7 +15,9 @@ import engine.model.components.concrete.PhysicalComponent;
  *
  */
 public class CollisionDetectionSystem extends AbstractSystem<CollidableComponent> {
-	
+	public CollisionDetectionSystem() {
+		
+	}
 	/**
 	 * Checks if a physical component collides with anything in
 	 * it's collision radius.
