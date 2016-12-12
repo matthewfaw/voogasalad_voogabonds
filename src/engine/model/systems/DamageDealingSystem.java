@@ -5,6 +5,10 @@ import engine.model.components.concrete.DamageDealingComponent;
 
 public class DamageDealingSystem extends AbstractSystem<DamageDealingComponent> {
 	
+	public DamageDealingSystem() {
+		
+	}
+	
 	public DamageDealingComponent get(IComponent c) {
 		return getComponent(c);
 	}
