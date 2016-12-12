@@ -125,7 +125,7 @@ public class MockGameDataConstructor {
 			
 			
 			ed.addComponent("PhysicalComponent",cd1);
-			ed.addComponent("CollidableComponent",cd2);
+			//ed.addComponent("CollidableComponent",cd2);
 			ed.addComponent("MoveableComponent",cd3);
 			
 			// 2nd entity data
@@ -152,7 +152,7 @@ public class MockGameDataConstructor {
 			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);
-			ed2.addComponent("CollidableComponent",CD2);
+			//ed2.addComponent("CollidableComponent",CD2);
 			ed2.addComponent("HealthComponent",CD3);
 			
 			// Player Data

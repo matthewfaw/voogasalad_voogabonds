@@ -74,7 +74,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	}
 	
 	private Pair<Double, Point> getMove(IPhysical p) {
-		if (myMovedDistance - myMaxDistance < myMoveSpeed)
+		if (myMaxDistance - myMovedDistance < myMoveSpeed)
 			myMoveSpeed = Math.max(0.0, myMovedDistance - myMaxDistance);
 		
 		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this, p);
