@@ -1,10 +1,15 @@
 package utility;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.IllegalFormatException;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
+/**
+ * @author Niklas Sjoquist
+ * 
+ * This class converts a list of strings to a comma-separated string
+ *
+ */
 public class ListStringManipulator {
     
     public static String listToString(List<String> list) {
@@ -25,58 +30,20 @@ public class ListStringManipulator {
      * Converts lists in String form to a List of Strings.
      * 
      * Format (must be consistent): 
-     * Strings can be separated by spaces, commas, or a comma followed by one space.
+     * Strings must be separated by a comma followed by one space.
      * 
      * @param str - comma- or space-separated list
      * @return
      * @throws Exception 
      */
-    public static List<String> stringToList(String str) throws Exception {
-        int numCommaSpaces = countSubstringOccurences(str, ", ");
-        int numCommas = countSubstringOccurences(str, ",");
-        int numSpaces = countSubstringOccurences(str, " ");
-        
-        if (numCommas > 0 && numCommaSpaces > 0) {
-            throw new Exception("More than one format used. Please be consistent.");
-        } else if (numCommaSpaces < 1 && numCommas < 1) {
-            throw new Exception("The string can not be separated. Please format the string correctly.");
-        }
-        
+    public static List<String> stringToList(String str) throws PatternSyntaxException {
         String[] list;
-        if (numCommaSpaces > 0) {
+        try {
             list = str.split(", ");
-        } else if (numCommas > 0) {
-            list = str.split(",");
-        } else {
-            list = str.split(" ");
+        } catch (PatternSyntaxException pse) {
+            throw pse;
         }
-        
         return Arrays.asList(list);
-    }
-    
-    public static int countSubstringOccurences(String str, String findStr) {
-        int lastIndex = 0;
-        int count = 0;
-        while (lastIndex != -1) {
-            lastIndex = str.indexOf(findStr,lastIndex);
-            if(lastIndex != -1){
-                count ++;
-                lastIndex += findStr.length();
-            }
-        }
-        return count;
-    }
-    
-    private void checkStringError(String str) throws Exception {
-        int numCommaSpaces = countSubstringOccurences(str, ", ");
-        int numCommas = countSubstringOccurences(str, ",");
-        int numSpaces = countSubstringOccurences(str, " ");
-        
-        if (numCommas > 0 && numCommaSpaces > 0) {
-            throw new Exception("More than one format used. Please be consistent.");
-        } else if (numCommaSpaces < 1 && numCommas < 1 && numSpaces <1) {
-            throw new Exception("The string can not be separated. Please format the string correctly.");
-        }
     }
 
 }
