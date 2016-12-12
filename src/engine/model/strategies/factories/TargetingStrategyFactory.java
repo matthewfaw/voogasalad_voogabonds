@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import engine.model.strategies.ITargetingStrategy;
+import engine.model.strategies.target.BadTargetingStrategy;
 import utility.ResouceAccess;
 
 public class TargetingStrategyFactory extends AbstractStrategyFactory<ITargetingStrategy> {
@@ -14,7 +15,7 @@ public class TargetingStrategyFactory extends AbstractStrategyFactory<ITargeting
 	}
 
 	@Override
-	protected ITargetingStrategy constructStrategy(String strategyName) throws ClassNotFoundException {
+	protected ITargetingStrategy constructStrategy(String strategyName) {
 		ITargetingStrategy result;
 		try {
 			Class<?> strategyType = Class.forName(strategyName);
@@ -28,7 +29,7 @@ public class TargetingStrategyFactory extends AbstractStrategyFactory<ITargeting
 				IllegalArgumentException |
 				InvocationTargetException |
 				IllegalAccessException e) {
-			throw new ClassNotFoundException(String.format(ResouceAccess.getError("BadStrategy"), strategyName), e);
+			return new BadTargetingStrategy(this);
 		}
 		return result;
 	}

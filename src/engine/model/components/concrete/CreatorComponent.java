@@ -26,6 +26,8 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 
 	private ISpawningStrategy mySpawningStrategy;
 	private int myTimeBetweenSpawns;
+	private String mySpawnName;
+
 	@Hide
 	private IPosition myTarget;
 	@Hide
@@ -46,6 +48,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 		myMovement = movement;
 		myEntityFactory = factory;
 		
+		mySpawnName = data.getFields().get("mySpawnName");
 		myTimeBetweenSpawns = Integer.parseInt(data.getFields().get("myTimeBetweenSpawns"));
 		
 		myTimeSinceSpawning = 0;
@@ -74,5 +77,10 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	@Override
 	public IPosition getTarget() {
 		return myTarget;
+	}
+
+	@Override
+	public String getSpawnName() {
+		return mySpawnName;
 	}
 }

@@ -1,12 +1,13 @@
 package engine.model.strategies;
 
+import engine.model.strategies.factories.AbstractStrategyFactory;
 import engine.model.strategies.factories.MovementStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
 abstract public class AbstractMovementStrategy implements IMovementStrategy {
 	
-	public AbstractMovementStrategy(MovementStrategyFactory creator) {
+	public AbstractMovementStrategy(AbstractStrategyFactory<IMovementStrategy> creator) {
 	}
 	
 	@Override
@@ -35,9 +36,7 @@ abstract public class AbstractMovementStrategy implements IMovementStrategy {
 		double newHeading;
 		double deltaToTarget = p.getPosition().towards(goal) -  p.getHeading();
 		if (p.getHeading() == 1.0) {
-			System.out.println("here");
 		}
-		System.out.println(String.format("%f\t%f\t%f", p.getPosition().towards(goal), p.getHeading(), deltaToTarget));
 		
 		
 		while (Math.abs(deltaToTarget) > 180) {
@@ -50,7 +49,6 @@ abstract public class AbstractMovementStrategy implements IMovementStrategy {
 			//heading = currHeading + turnSpeed + (delta/|delta|)
 			newHeading = p.getHeading() + m.getTurnSpeed() * (deltaToTarget/Math.abs(deltaToTarget));
 		
-		System.out.println(String.format("%f\t%f", p.getHeading(), newHeading));
 		return newHeading;
 	}
 

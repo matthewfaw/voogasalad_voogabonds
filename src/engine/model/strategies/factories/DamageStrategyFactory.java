@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import engine.model.strategies.IDamageStrategy;
-import utility.ResouceAccess;
+import engine.model.strategies.damage.BinaryDamageStrategy;
 
 public class DamageStrategyFactory extends AbstractStrategyFactory<IDamageStrategy> {
 	private static final String FOLDER_NAME = new String("damage");
@@ -14,7 +14,7 @@ public class DamageStrategyFactory extends AbstractStrategyFactory<IDamageStrate
 	}
 
 	@Override
-	protected IDamageStrategy constructStrategy(String strategyName) throws ClassNotFoundException {
+	protected IDamageStrategy constructStrategy(String strategyName) {
 		IDamageStrategy result;
 		try {
 			Class<?> strategyType = Class.forName(strategyName);
@@ -28,7 +28,7 @@ public class DamageStrategyFactory extends AbstractStrategyFactory<IDamageStrate
 				IllegalArgumentException |
 				InvocationTargetException |
 				IllegalAccessException e) {
-			throw new ClassNotFoundException(String.format(ResouceAccess.getError("BadStrategy"), strategyName), e);
+			result = new BinaryDamageStrategy(this);
 		}
 		return result;
 	}

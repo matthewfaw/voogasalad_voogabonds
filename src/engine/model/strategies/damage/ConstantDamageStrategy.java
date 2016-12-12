@@ -2,12 +2,12 @@ package engine.model.strategies.damage;
 
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.factories.DamageStrategyFactory;
+import engine.model.strategies.factories.AbstractStrategyFactory;
 import utility.Damage;
 
 public class ConstantDamageStrategy implements IDamageStrategy {
 
-	public ConstantDamageStrategy(DamageStrategyFactory factory) {
+	public ConstantDamageStrategy(AbstractStrategyFactory<IDamageStrategy> factory) {
 		//Do nothing.
 	}
 	
