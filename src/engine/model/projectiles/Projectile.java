@@ -1,38 +1,19 @@
 package engine.model.projectiles;
 
-import java.util.ArrayList;
-
-
-import java.util.List;
-import authoring.model.ProjectileData;
-import engine.IObserver;
-import engine.IViewable;
-import engine.controller.timeline.TimelineController;
-import engine.model.entities.IEntity;
-import engine.model.game_environment.MapMediator;
-import engine.model.machine.Machine;
-import javafx.util.Pair;
-import utility.Point;
-import engine.model.strategies.*;
-import engine.model.systems.IRegisterable;
-import engine.model.systems.ISystem;
-import engine.model.weapons.DamageInfo;
-import engine.model.weapons.IKillerOwner;
-
 /**
  * This class contains the information a projectile needs to move, deal damage to enemies, and be represented in the View.
  * @author Weston
  */
 @Deprecated
-public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineController>, /*ICollidable,*/ ISystem, IRegisterable {
-
+public class Projectile /* implements IViewable, IMovable, IObserver<TimelineController>, ICollidable, ISystem, IRegisterable*/ {
+	/*
 	private static final double COLLISION_ERROR_TOLERANCE = Math.exp(-6);
 	
-	private List<IObserver<IViewable>> myObservers;
+	//private List<IObserver<IViewable>> myObservers;
 	
 	private String myImagePath;
 	private IKillerOwner myOwner;
-	//private IModifiablePlayer myPlayer;
+	private IModifiablePlayer myPlayer;
 	private Machine myTarget;
 	//private MapMediator myMap;
 	
@@ -107,12 +88,10 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 		return mySpeed;
 	}
 	
-	/*
 	@Override
 	public double getCollisionRadius() {
 		return myCollisionRadius;
 	}
-	*/
 	@Override
 	public void update(TimelineController aChangedObject) {
 		advance();
@@ -147,7 +126,6 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 	}
 	
 	private DamageInfo explode() {
-		/*
 		List<Machine> targets = myMap.withinRange(getPosition(), myAoERadius);
 		
 		DamageInfo result = new DamageInfo();
@@ -167,13 +145,11 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 		unregisterMyself();
 		return result;
 		
-		*/
 		return null;
 		
 		
 	}
 
-	/*
 	@Override
 	public List<String> getValidTerrains() {
 		return myValidTerrain;
@@ -188,20 +164,11 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 	public double getSize() {
 		return myCollisionRadius;
 	}
-	*/
-	//********** ICollidable Interface Methods ************//
-	/*
 	@Override
 	public IModifiablePlayer getOwner() {
 		return myPlayer;
 	}
-	*/
 
-
-
-	/********** ICollidable Interface Methods ************/
-	
-	/*
 	@Override
 	public void collideInto(Machine unmoved) {
 		//This method is a bit of a mess; refactor?
@@ -214,14 +181,12 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 				//Projectile targets enemies, unmoved is an enemy
 				hitUnit((Machine) unmoved);
 	}
-	*/
 	
 //	@Override
 //	public void collideInto(CollidableComponent unmovedCollidable) {
 //		unmovedCollidable.collideInto(unmovedCollidable);
 //	}
-	//***************Observable interface****************//
-	/*
+
 	@Override
 	public void attach(IObserver<IViewable> aObserver) {
 		myObservers.add(aObserver);
@@ -234,9 +199,7 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
 	}
-	*/
 	
-	//********** ISystem Interface Methods ************//
 //	@Override
 //	public void register(IRegisterable registerable) {
 //		myRegisterables.add(registerable);
@@ -246,7 +209,6 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 //		myRegisterables.remove(registerable);
 //	}
 	
-	//********** IRegisterable Interface Methods ************//
 	@Override
 	public void unregisterMyself() {
 		for(ISystem s: mySystems) {
@@ -259,5 +221,5 @@ public class Projectile implements /*IViewable,*/ IMovable, IObserver<TimelineCo
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-
+	*/
 }

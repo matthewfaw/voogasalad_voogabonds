@@ -18,13 +18,13 @@ import utility.ResouceAccess;
 public class ProjectileFactory {
 	private static final String NO_SUCH_PROJECTILE = "NoSuchProjectile";
 	private DataStore<ProjectileData> myProjectiles;
-	private TimelineController myTime;
-	private MapMediator myMap;
+	//private TimelineController myTime;
+	//private MapMediator myMap;
 	
 	public ProjectileFactory(DataStore<ProjectileData> projMap, TimelineController time, MapMediator map) {
-		myTime = time;
+		//myTime = time;
 		myProjectiles = projMap;
-		myMap = map;
+		//myMap = map;
 		
 	}
 
@@ -37,7 +37,7 @@ public class ProjectileFactory {
 	 */
 	public Projectile newProjectile(String name, Machine target, IKillerOwner owner) {
 		if (myProjectiles.hasKey(name))
-			return new Projectile(myProjectiles.getData(name), target, owner, myTime, myMap);
+			return null; //new Projectile(myProjectiles.getData(name), target, owner, myTime, myMap);
 		else
 			throw new UnsupportedOperationException(ResouceAccess.getError(NO_SUCH_PROJECTILE) + name);
 	}
