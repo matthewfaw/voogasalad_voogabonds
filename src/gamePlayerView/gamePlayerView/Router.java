@@ -17,6 +17,7 @@ import engine.model.components.viewable_interfaces.IViewableMovable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.components.viewable_interfaces.IViewableTargeting;
 import engine.model.components.viewable_interfaces.IViewableTeam;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.GUIPieces.InfoBoxes.ErrorPopup;
@@ -142,6 +143,10 @@ public class Router {
 		//TODO: give all viewable components the new component
 	}
 	public void distributeViewableComponent(IViewableHealth aComponent)
+	{
+		
+	}
+	public void distributeViewableComponent(IObservable<IViewablePhysical> aComponent)
 	{
 		//TODO: give all viewable components the new component
 	}

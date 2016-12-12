@@ -121,4 +121,9 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 		});
 		return finish;
 	}
+
+	@Override
+	public void remove(Container aRemovedObject) {
+		//Do nothing.
+	}
 }

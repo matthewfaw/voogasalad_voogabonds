@@ -79,6 +79,7 @@ public class GamePlayerScene {
 		myWaves = new ArrayList<IPlayerAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
 		myStage=aStage;
+		myStage.setResizable(false);
 		myBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
@@ -181,6 +182,7 @@ public class GamePlayerScene {
 		myCollection.add(myTowerColumn.getView());
 		myResources.add(myTowerColumn);
 		pane.add(myCollection);
+		
 		return pane;
 	}
 

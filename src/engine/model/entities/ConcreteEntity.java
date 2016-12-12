@@ -39,6 +39,7 @@ public class ConcreteEntity implements IEntity {
 
 	@Override
 	public void delete() {
+		myComponents.stream().forEach(c -> c.delete());
 		myComponents.removeAll(myComponents);
 		
 	}

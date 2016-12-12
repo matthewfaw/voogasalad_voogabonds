@@ -1,17 +1,22 @@
 package gamePlayerView;
 
-import engine.IObservable;
 import engine.IObserver;
 
 /**
  * @author Guhan Muruganandam
  */
-
-public class EnemyView implements IObserver{
+@Deprecated
+public class EnemyView implements IObserver {
 
 	@Override
 	public void update(Object aChangedObject) {
 		//TODO
+	}
+
+	@Override
+	public void remove(Object aRemovedObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

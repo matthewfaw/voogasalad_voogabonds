@@ -25,4 +25,9 @@ public class SpawningSystem extends AbstractSystem<CreatorComponent> implements 
 			if (parent.isParent(c.getEntity()))
 				parent.updateStats(data);
 	}
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing.
+	}
 }

@@ -1,0 +1,1 @@
+{"myName":"Cow","myComponents":{"Health Component":{"myFields":{"Curr Health":"10","Max Health":"100"}},"Physical Component":{"myFields":{"Image Path":"src/resources/cow.png","Image Size":"10","Valid Terrains":"Grass"}}},"mySellData":{"mySellValue":0},"myPurchaseData":{"myPurchaseValue":0}}

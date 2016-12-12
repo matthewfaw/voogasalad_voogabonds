@@ -4,7 +4,7 @@ import engine.IObservable;
 import engine.model.entities.IEntity;
 import utility.Point;
 
-public interface IViewablePhysical extends IViewable {
+public interface IViewablePhysical extends IViewable, IObservable<IViewablePhysical> {
 	
 	/**
 	 * A method to get the size of the image to display

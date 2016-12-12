@@ -35,7 +35,9 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private BountySystem myBounty;
 	@Hide
 	private DamageDealingSystem myDamage;
-	//private HealthSystem myHealthSystem;
+	@Hide
+	private HealthSystem myHealthSystem;
+
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private boolean explodeOnDeath;
@@ -46,9 +48,11 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private Router myRouter;
 
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, 
-			ComponentData componentdata, Router router) {
-		super(router);
+
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
+		myHealthSystem = healthSystem;
+				super(router);
+
 		myBounty = bounty;
 		myDamage = damage;
 		
@@ -129,5 +133,11 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	public void distributeInfo() {
 		getRouter().distributeViewableComponent(this);
 	}
-	
+
+	public void delete() {
+		myHealthSystem.detachComponent(this);
+		myObservers.forEach(observer -> observer.remove(this));
+	}
+
+
 }

@@ -28,15 +28,20 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	@Hide
 	private PhysicalSystem myPhysical;
 	@Hide
+	private TargetingSystem myTargeting;
+	@Hide
 	private TeamSystem myTeams;
 	
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	
-	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
+
+		
+
+	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
+		myTargeting = target;
 		super(router);
 		myObservers = new ArrayList<IObserver<IViewable>>();
-		
 		myPhysical = physical;
 		myTeams = teams;
 		
@@ -93,4 +98,8 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 
 
 	
+	@Override
+	public void delete() {
+		myTargeting.detachComponent(this);
+	}	
 }
