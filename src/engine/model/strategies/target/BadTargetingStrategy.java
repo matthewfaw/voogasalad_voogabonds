@@ -4,7 +4,6 @@ import engine.model.components.concrete.PhysicalComponent;
 import engine.model.components.concrete.TargetingComponent;
 import engine.model.strategies.AbstractTargetingStrategy;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.ISpawningStrategy;
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.strategies.factories.AbstractStrategyFactory;
 import engine.model.systems.PhysicalSystem;

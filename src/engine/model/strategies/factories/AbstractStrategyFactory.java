@@ -1,10 +1,11 @@
 package engine.model.strategies.factories;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import utility.ResouceAccess;
 
 abstract public class AbstractStrategyFactory<A> {
 	private static final String STRATEGY_PATH = new String("src/engine/model/strategies/");
@@ -30,6 +31,10 @@ abstract public class AbstractStrategyFactory<A> {
 	 */
 	public A newStrategy(String strategyName) {
 		//TODO: Users see names from a resource file (resource key is class name)
+		
+		if (!myAtypeStrategies.contains(strategyName)) {
+			throw new IllegalArgumentException(String.format("%s%s", ResouceAccess.getError("BadStrategy"), strategyName));
+		}
 		
 		strategyName = String.format("%s%s", myFolderPath, strategyName);
 		A result = constructStrategy(strategyName);

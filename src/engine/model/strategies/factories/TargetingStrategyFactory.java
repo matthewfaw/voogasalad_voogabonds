@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.strategies.target.BadTargetingStrategy;
-import utility.ResouceAccess;
 
 public class TargetingStrategyFactory extends AbstractStrategyFactory<ITargetingStrategy> {
 	private static final String FOLDER_NAME = new String("target");

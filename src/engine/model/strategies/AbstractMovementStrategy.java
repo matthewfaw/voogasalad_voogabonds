@@ -1,7 +1,6 @@
 package engine.model.strategies;
 
 import engine.model.strategies.factories.AbstractStrategyFactory;
-import engine.model.strategies.factories.MovementStrategyFactory;
 import javafx.util.Pair;
 import utility.Point;
 
