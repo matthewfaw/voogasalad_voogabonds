@@ -1,7 +1,5 @@
 package engine.model.strategies.spawning;
 
-import java.lang.reflect.InvocationTargetException;
-
 import engine.model.components.concrete.CreatorComponent;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -25,7 +23,7 @@ public class BasicSpawnStrategy implements ISpawningStrategy {
 				return spawn;
 			} else 
 				return null;
-		} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (IllegalArgumentException e) {
 			throw new UnsupportedOperationException(ResouceAccess.getError("NoSpawn"), e);
 		}
 	}
