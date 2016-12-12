@@ -41,6 +41,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
     private final String LOSE = "lose";
     private final String EXTENSION = ".class";
     private final String TERRAINS = "Terrains";
+    private final String CALC = "calc";
     public static final String IMAGE_PATH = "myImagePath";
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
@@ -83,7 +84,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(checkbox);
                 }
             } else {
-                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
                     List<String> fileList = new ArrayList<String>();
@@ -185,7 +186,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(checkbox);
                 }
             } else {
-                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
                     List<String> fileList = new ArrayList<String>();
