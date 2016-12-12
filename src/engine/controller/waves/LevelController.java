@@ -66,4 +66,9 @@ public class LevelController implements IObserver<TimelineController> {
 		}
 		myWaveController.distributeEntities(aChangedObject.getTotalTimeElapsed());
 	}
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing
+	}
 }

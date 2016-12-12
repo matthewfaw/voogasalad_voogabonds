@@ -28,4 +28,10 @@ public class EnemiesKilledBox extends InfoBox implements IObserver<IViewablePlay
 		
 	}
 
+	@Override
+	public void remove(IViewablePlayer aRemovedObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -30,4 +30,9 @@ public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, IPl
 		myOutput.setText(Integer.toString(aChangedObject.getLivesRemaining()));
 	}
 
+	@Override
+	public void remove(IViewablePlayer aRemovedObject) {
+		myOutput.setText("-");
+	}
+
 }

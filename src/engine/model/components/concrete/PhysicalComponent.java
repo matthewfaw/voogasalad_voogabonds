@@ -10,7 +10,6 @@ import engine.IObserver;
 import engine.IViewable;
 import engine.model.components.AbstractComponent;
 import engine.model.strategies.IPhysical;
-import engine.model.strategies.IPosition;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
@@ -21,14 +20,13 @@ import utility.Point;
  * Physical components contain information relevant to existing on a grid, and being displayed
  * 
  * @author matthewfaw
+ * @author Weston
  * @author owenchung (edits)
  *
  */
 public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
 	private String myImagePath;
 	private double myImageSize;
-	
-	//TODO: Talk to authoring about lists
 	private List<String> myValidTerrains;
 	
 	@Hide
@@ -37,9 +35,13 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private Point myPosition;
 	@Hide
 	private double myHeading;
+	@Hide
+	private PhysicalSystem mySystem;
 
 	
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
+		mySystem = physical;
+		
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
@@ -113,5 +115,13 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
+	}
+
+
+	@Override
+	public void delete() {
+		mySystem.detachComponent(this);
+		myPosition = null;
+		//TODO: Notify observers
 	}
 }

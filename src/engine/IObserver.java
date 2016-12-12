@@ -19,4 +19,13 @@ public interface IObserver<A> {
 	 */
 	public void update(A aChangedObject);
 	
+	/**
+	 * A method to update a subscriber of a change that a specific
+	 * publisher is no longer going to be sending updates. The
+	 * most likely scenario is that the publisher was deleted.
+	 * 
+	 * @param aObjectToUpdate: the object which has changed
+	 */
+	public void remove(A aRemovedObject);
+	
 }

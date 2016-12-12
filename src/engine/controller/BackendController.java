@@ -23,6 +23,7 @@ import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
+import utility.ErrorBox;
 import utility.FileRetriever;
 import utility.Point;
 
@@ -80,6 +81,9 @@ public class BackendController {
 	// EntityManager
 	private EntityManager myEntityManager;
 	
+	private ResourceBundle myResources;
+	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
 		myRouter = aRouter;
@@ -87,6 +91,7 @@ public class BackendController {
 		myFileRetriever = new FileRetriever(aGameDataPath);
 		myJsonDeserializer = new JSONDeserializer();
 
+		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
 		
@@ -294,8 +299,10 @@ public class BackendController {
 			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
 			System.out.println(s);
 		} catch (Exception e) {
+
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ErrorBox.displayError(myResources.getString("CannotSave"));
+			myRouter.distributeErrors(e.toString());
 		}
 	}
 	

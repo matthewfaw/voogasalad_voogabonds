@@ -11,6 +11,7 @@ import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
+import engine.model.systems.SpawningSystem;
 import engine.model.systems.TeamSystem;
 import engine.model.weapons.DamageInfo;
 import utility.Damage;
@@ -30,12 +31,17 @@ public class DamageDealingComponent extends AbstractComponent {
 	
 	private boolean explodesOnEnemies;
 	private boolean explodesOnAllies;
+	private boolean diesOnExplosion;
 
 
 	@Hide
 	private HealthSystem myHealthSystem;
 	@Hide
 	private PhysicalSystem myPhysicalSystem;
+	@Hide
+	private DamageDealingSystem myDamageSystem;
+	@Hide
+	private SpawningSystem myCreators;
 	@Hide
 	private TeamSystem myTeams;
 	
@@ -46,6 +52,7 @@ public class DamageDealingComponent extends AbstractComponent {
 			PhysicalSystem physicalSystem,
 			ComponentData data
 			) {
+		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
 		
@@ -56,6 +63,7 @@ public class DamageDealingComponent extends AbstractComponent {
 		
 		explodesOnEnemies = Boolean.parseBoolean(data.getFields().get("explodesOnEnemies"));
 		explodesOnAllies = Boolean.parseBoolean(data.getFields().get("explodesOnAllies"));
+		diesOnExplosion = Boolean.parseBoolean(data.getFields().get("diesOnExplosion"));
 		
 		damageDealingSystem.attachComponent(this);
 	}
@@ -88,12 +96,27 @@ public class DamageDealingComponent extends AbstractComponent {
 		
 		if ((explodesOnEnemies && myTeams.areEnemies(this, target)) || (explodesOnAllies && myTeams.areAllies(this, target))) {
 			result.add(myHealthSystem.dealDamageTo(target, getTargetDamage()));
-			result.add(explode());
+			result.add(explodeNoTarget());
+		}
+		
+		myCreators.updateStats(this, result);
+		if (diesOnExplosion) {
+			getEntity().delete();
 		}
 		return result;
 	}
 
 	public DamageInfo explode() {
+		DamageInfo result = explodeNoTarget();
+		
+		myCreators.updateStats(this, result);
+		if (diesOnExplosion) {
+			getEntity().delete();
+		}
+		return result;
+	}
+	
+	private DamageInfo explodeNoTarget() {
 		DamageInfo result = new DamageInfo();
 
 		//Deal damage to anyone in blast radius
@@ -104,6 +127,11 @@ public class DamageDealingComponent extends AbstractComponent {
 				result.add(myHealthSystem.dealDamageTo(p, getDamageTo(myPhysical, p)));
 		}
 		return result;
+	}
+
+	@Override
+	public void delete() {
+		myDamageSystem.detachComponent(this);
 	}
 
 }
