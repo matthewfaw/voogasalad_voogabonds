@@ -87,7 +87,7 @@ public class TerrainCell extends Rectangle {
 								System.out.println("Image Path is: " + toolBar.getSelectedImagePath());
 							}
 							else {
-								controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
+								controller.addTerrainData(new TerrainData(TerrainCell.this.getName(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
 								setFill(toolBar.getSelectedColor());
 							}
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());

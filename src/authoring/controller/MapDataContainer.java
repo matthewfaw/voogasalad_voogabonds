@@ -62,6 +62,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	public MapDataContainer(){
 		this.spawnPoints = new HashMap<String, ArrayList<Point>>();
 		this.sinkPoints = new HashMap<String, ArrayList<Point>>();
+		this.terrainList = new HashSet<TerrainData>();
 		this.validTerrain = new HashMap<String, String>();
 	}
 	
@@ -78,7 +79,6 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		try{
 			setNumXCells(x);
 			setNumYCells(y);
-			this.terrainList = new HashSet<TerrainData>();
 		}catch(Exception e){
 			//Show error to front-end here
 		}
