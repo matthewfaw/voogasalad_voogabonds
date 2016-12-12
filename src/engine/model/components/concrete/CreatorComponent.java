@@ -1,16 +1,21 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ICreator;
 import engine.model.entities.EntityFactory;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
+import engine.model.weapons.DamageInfo;
 
 /**
  * The purpose of this class is to manage the work necessary
@@ -41,6 +46,10 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	private TargetingSystem myTargeting;
 	@Hide
 	private MovementSystem myMovement;
+	@Hide
+	private List<IEntity> myChildren;
+	@Hide
+	private DamageInfo myStats;
 	
 	public CreatorComponent(SpawningSystem spawning,
 			PhysicalSystem physical,
@@ -57,6 +66,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 		myTimeBetweenSpawns = Integer.parseInt(data.getFields().get("myTimeBetweenSpawns"));
 		
 		myTimeSinceSpawning = 0;
+		myChildren = new ArrayList<IEntity>();
 		spawning.attachComponent(this);
 	}
 
@@ -67,11 +77,16 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	 */
 	public void spawnIfReady() {
 		if (myTimeSinceSpawning >= myTimeBetweenSpawns && myTarget != null && myPhysical.get(this) != null) {
-			mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this);
+			myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
 			myTimeSinceSpawning = 0;
 		} else
 			myTimeSinceSpawning++;
 		
+	}
+	
+	@Override
+	public boolean isParent(IEntity entity) {
+		return myChildren.contains(entity);
 	}
 
 	@Override
@@ -87,5 +102,15 @@ public class CreatorComponent extends AbstractComponent implements ICreator {
 	@Override
 	public String getSpawnName() {
 		return mySpawnName;
+	}
+
+	@Override
+	public void updateStats(DamageInfo data) {
+		myStats.add(data);
+	}
+	
+	@Override
+	public DamageInfo getStats() {
+		return myStats;
 	}
 }

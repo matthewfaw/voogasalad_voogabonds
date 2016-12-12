@@ -31,14 +31,16 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 				getResources().getString("NoMoneyLose"));
 		myContainer = container;
 		VBox menu;
-		if (myContainer.getPlayerData() == null)
+		if (myContainer.getPlayerData() == null){
 			menu = setUpMenu(getResources().getString("DefaultLives"), 
 					getResources().getString("DefaultCash"), null, null);
-		else
+		}
+		else{
 			menu = setUpMenu(String.valueOf(myContainer.getPlayerData().getStartingLives()), 
 					String.valueOf(myContainer.getPlayerData().getStartingCash()), 
 					myContainer.getPlayerData().getWinStrategyName(), 
 					myContainer.getPlayerData().getLoseStrategyName());
+		}
 		menu.setId("vbox");
 		setContent(menu);
 	}
@@ -46,12 +48,12 @@ public class RulesTab extends AuthoringTab implements ISubmittable {
 	private VBox setUpMenu(String lives, String cash, String win, String lose) {
 		VBox v = new VBox();
 		myLivesField = setUpTextInputWithLabel(getResources().getString("EnterLives"), 
-				getResources().getString("DefaultLives"), v);
+				lives, v);
 		myCashField = setUpTextInputWithLabel(getResources().getString("EnterCash"),
-				getResources().getString("DefaultCash"), v);
-		myWinBox = setUpStringComboBoxWithLabel(getResources().getString("EnterWin"), null, 
+				cash, v);
+		myWinBox = setUpStringComboBoxWithLabel(getResources().getString("EnterWin"), win, 
 				myWins, v);
-		myLoseBox = setUpStringComboBoxWithLabel(getResources().getString("EnterLose"), null,
+		myLoseBox = setUpStringComboBoxWithLabel(getResources().getString("EnterLose"), lose,
 				myLosses, v);
 		Button applyChanges = setUpSubmitButton();
 		v.getChildren().add(applyChanges);

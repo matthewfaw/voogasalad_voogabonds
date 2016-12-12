@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
@@ -67,6 +66,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
         retrieveEntityData(entityData);
         this.entityView = entityView;
         nameField = parent.setUpTextInputWithLabel(myTab.getResources().getString("EnterName"), entityName, this);
+        nameField.setId("textfield");
         setUpComponentBox(parent, fetcher);
         setUpComponentListView(fetcher, entityData.getComponents().keySet());
         HBox buttons = setUpButtonContainer(entityView);
