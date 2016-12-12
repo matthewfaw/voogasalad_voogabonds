@@ -46,7 +46,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	
 	@Override
 	public void checkCollision(CollidableComponent unmovedCollidable) {
-		if (intersects(unmovedCollidable))
+		if (!equals(unmovedCollidable) && intersects(unmovedCollidable))
 			collideInto(unmovedCollidable);
 	}
 	
