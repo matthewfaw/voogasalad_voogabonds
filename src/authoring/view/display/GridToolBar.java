@@ -117,15 +117,14 @@ public class GridToolBar {
 	private void importTerrains() {
 		HashMap<String, String> terrainList = controller.getValidTerrainMap();
 		for (String terrainName : terrainList.keySet()) {
-			File f = new File(terrainList.get(terrainName));
-			if (f.exists()) {
+			try {
+				boolToTerrain.put(terrainName, false);
+				colorToTerrain.put(terrainName, Color.valueOf(terrainList.get(terrainName)));
+			} catch (Exception e) {
 				boolToTerrain.put(terrainName, true);
 				imageToTerrain.put(terrainName, terrainList.get(terrainName));
 			}
-			else {
-				boolToTerrain.put(terrainName, false);
-				colorToTerrain.put(terrainName, Color.valueOf(terrainList.get(terrainName)));
-			}
+			terrainOptions.add(terrainName);
 		}
 	}
 	
