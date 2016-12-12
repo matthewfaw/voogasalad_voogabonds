@@ -1,6 +1,8 @@
 package engine.model.components.viewable_interfaces;
 
-public interface IViewableCollidable extends IViewable {
+import engine.IObservable;
+
+public interface IViewableCollidable extends IViewable, IObservable<IViewableCollidable> {
 	/**
 	 * Gets the collision radius for a collidable entity.
 	 * @return

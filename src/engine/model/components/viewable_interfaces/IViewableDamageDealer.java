@@ -1,6 +1,8 @@
 package engine.model.components.viewable_interfaces;
 
-public interface IViewableDamageDealer extends IViewable {
+import engine.IObservable;
+
+public interface IViewableDamageDealer extends IViewable, IObservable<IViewableDamageDealer> {
 	/**
 	 * @return damage dealt by this damage dealer.
 	 */

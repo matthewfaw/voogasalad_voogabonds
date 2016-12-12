@@ -1,5 +1,7 @@
 package engine.model.components.viewable_interfaces;
 
-public interface IViewableCreator extends IViewable {
+import engine.IObservable;
+
+public interface IViewableCreator extends IViewable, IObservable<IViewableCreator> {
 	public int getTimeBetweenSpawns();
 }
