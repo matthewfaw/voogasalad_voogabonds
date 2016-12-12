@@ -6,6 +6,8 @@ import java.util.Map;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -92,6 +94,34 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 boolCombo.setId("combobox");
                 myLabels.add(lbl);
                 this.getChildren().addAll(lbl, boolCombo);
+            } else if (attributeType.toLowerCase().equals("int")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces numeric input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d*")) {
+                            numericField.setText(newValue.replaceAll("[^\\d]",""));
+                        }
+                    }
+                });
+            } else if (attributeType.toLowerCase().equals("double")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces double input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d+\\.\\d+")) {
+                            numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
+                        }
+                    }
+                });
             }
             else {
                 if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
@@ -204,6 +234,35 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 boolCombo.setId("combobox");
                 myLabels.add(lbl);
                 this.getChildren().addAll(lbl, boolCombo);
+            } else if (attributeType.toLowerCase().equals("int")) {
+                System.out.println("NUMERIC FIELD");
+                TextField numericField = new TextField(retrievedData.get(uglyAttributeName));
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces numeric input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d*")) {
+                            numericField.setText(newValue.replaceAll("[^\\d]",""));
+                        }
+                    }
+                });
+            } else if (attributeType.toLowerCase().equals("double")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces double input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d+\\.\\d+")) {
+                            numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
+                        }
+                    }
+                });
             }
             else {
                 if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
