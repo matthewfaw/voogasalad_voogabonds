@@ -52,7 +52,8 @@ public class Router {
 	 * Create a new moveable component data using an iviewablephysical.
 	 * Should happen whenever a new PhysicalComponent is constructed.
 	 */
-	public void createNewViewableComponent(IViewablePhysical physicalComponent) {
+	public void createNewViewableComponent(IViewablePhysical physicalComponent) 
+	{
 		myGamePlayerScene.getMapDisplay().giveViewableComponent(physicalComponent);
 	}
 	
@@ -123,7 +124,7 @@ public class Router {
 	
 	public void distributeViewableComponent(IViewableDamageDealer aComponent)
 	{
-		//TODO: give all viewable components the new component
+		myGamePlayerScene.getBuilder().withDamageBox(aComponent);
 	}
 	
 	public void distributeViewableComponent(IViewableCollidable aComponent)
@@ -137,7 +138,7 @@ public class Router {
 	}
 	public void distributeViewableComponent(IViewablePhysical aComponent)
 	{
-		//myGamePlayerScene.getBuilder().withMachineInfo(aComponent);
+		myGamePlayerScene.getBuilder().withMachineInfo(aComponent);
 	}
 	public void distributeViewableComponent(IViewableMovable aComponent)
 	{
@@ -149,13 +150,22 @@ public class Router {
 	}
 	public void distributeViewableComponent(IViewableBounty aComponent)
 	{
-		//TODO: give all viewable components the new component
+		myGamePlayerScene.getBuilder().withBountyBox(aComponent);
 	}
 	public void distributeViewableComponent(IViewableHealth aComponent)
 	{
-		
+		myGamePlayerScene.getBuilder().withHealthBox(aComponent);
 	}
-	
+	/*
+	public void distributeViewableComponent(IViewableUpgrade aComponent)
+	{
+		myGamePlayerScene.getBuilder().withUpgrade(aComponent);
+	}
+	public void distributeViewableComponent(IViewableSell aComponent)
+	{
+		myGamePlayerScene.getBuilder().withSell(aComponent);
+	}
+	*/
 	/**
 	 * An example to follow for setting up the router
 	 * @param aResourceStore

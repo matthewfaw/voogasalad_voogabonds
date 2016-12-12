@@ -29,6 +29,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,6 +38,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import utility.BoomBox;
 import utility.ErrorBox;
 
 /**
@@ -71,7 +73,7 @@ public class GridToolBar {
 	private ToggleButton myDraw;
 	private ToggleButton mySpawn;
 	private ToggleButton mySink;
-	
+
 	public GridToolBar(VBox box, Scene sc, MapDataContainer controller) {
 		setUpScreenResolution();
 		this.scene = sc;
@@ -89,13 +91,13 @@ public class GridToolBar {
 		box.getChildren().add(toolBar);
 		toolBar.setAlignment(Pos.BOTTOM_CENTER);
 	}
-	
+
 	private void setUpScreenResolution() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		screenWidth = (int) screenSize.getWidth();
 		screenHeight = (int) screenSize.getHeight();
 	}
-	
+
 	private void createToolBar() {
 		ToggleGroup toggles = new ToggleGroup();
 		myDraw = new ToggleButton(myResources.getString("DrawMode"));
@@ -119,21 +121,21 @@ public class GridToolBar {
 		musicHandler(music);
 		toolBar.getChildren().addAll(mySink, mySpawn, myDraw, terrainChooser, music);
 	}
-	
+
 	private void musicHandler(Button music) {
 		music.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
 				FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"), new FileChooser.ExtensionFilter("WAV", "*.wav"));
-                File file = fileChooser.showOpenDialog(new Stage());
-                if (file != null){
-                	String fileName = file.getName();
-                	try {
+				fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("MP3", "*.mp3"), new FileChooser.ExtensionFilter("WAV", "*.wav"));
+				File file = fileChooser.showOpenDialog(new Stage());
+				if (file != null){
+					String fileName = file.getName();
+					try {
 						controller.setTune(fileName);
 					} catch (Exception e) {
 						ErrorBox.displayError(e.getMessage());
 					}
-                }
+				}
 			}
 		});
 	}
@@ -151,86 +153,86 @@ public class GridToolBar {
 			terrainOptions.add(terrainName);
 		}
 	}
-	
+
 	/**
 	 * Sets toggleStatus to true if the draw mode toggle button is selected, or false if not.
 	 * @param drawMode
 	 */
 	private void toggleHandler(ToggleGroup drawGroup)  {
 		drawGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-		    public void changed(ObservableValue<? extends Toggle> ov,
-		        Toggle toggle, Toggle new_toggle) {		 
-		    	if (new_toggle == null) {
-		            toggleStatus = false;
-		            myDraw.setId("button");
-		        }
-		        else {
-		        	if (drawGroup.getSelectedToggle().equals(myDraw)) {
-		        		myDraw.setId("button-selected");
-		        		mySpawn.setId("button");
-		        		mySink.setId("button");
-			            toggleStatus = true;
-			            spawnStatus = false;
-			            sinkStatus = false;
-			    		mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
-				        scene.setCursor(new ImageCursor(mouseCursor)); 
-		        	}
-		        }
-		    	if (!toggleStatus) {
-		    		scene.setCursor(Cursor.DEFAULT);
-		    	}
-		    }
+			public void changed(ObservableValue<? extends Toggle> ov,
+					Toggle toggle, Toggle new_toggle) {		 
+				if (new_toggle == null) {
+					toggleStatus = false;
+					myDraw.setId("button");
+				}
+				else {
+					if (drawGroup.getSelectedToggle().equals(myDraw)) {
+						myDraw.setId("button-selected");
+						mySpawn.setId("button");
+						mySink.setId("button");
+						toggleStatus = true;
+						spawnStatus = false;
+						sinkStatus = false;
+						mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
+						scene.setCursor(new ImageCursor(mouseCursor)); 
+					}
+				}
+				if (!toggleStatus) {
+					scene.setCursor(Cursor.DEFAULT);
+				}
+			}
 		});
 	}
-	
+
 	private void spawnHandler(ToggleGroup spawnGroup) {
 		spawnGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-		    public void changed(ObservableValue<? extends Toggle> ov,
-		        Toggle toggle, Toggle new_toggle) {		 
-		    	if (new_toggle == null) {
-		    		spawnStatus = false;
-		    		scene.setCursor(Cursor.DEFAULT);
-		    		mySpawn.setId("button");
-		        }
-		        else {
-		        	if (spawnGroup.getSelectedToggle().equals(mySpawn)) {
-		        		myDraw.setId("button");
-		        		mySpawn.setId("button-selected");
-		        		mySink.setId("button");
-			        	toggleStatus = false;
-			        	spawnStatus = true;
-			        	sinkStatus = false;
-			        	scene.setCursor(Cursor.CROSSHAIR); 
-		        	}
-		        }
-		    }
+			public void changed(ObservableValue<? extends Toggle> ov,
+					Toggle toggle, Toggle new_toggle) {		 
+				if (new_toggle == null) {
+					spawnStatus = false;
+					scene.setCursor(Cursor.DEFAULT);
+					mySpawn.setId("button");
+				}
+				else {
+					if (spawnGroup.getSelectedToggle().equals(mySpawn)) {
+						myDraw.setId("button");
+						mySpawn.setId("button-selected");
+						mySink.setId("button");
+						toggleStatus = false;
+						spawnStatus = true;
+						sinkStatus = false;
+						scene.setCursor(Cursor.CROSSHAIR); 
+					}
+				}
+			}
 		});
 	}
-	
+
 	private void sinkHandler(ToggleGroup sinksGroup) {
 		sinksGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-		    public void changed(ObservableValue<? extends Toggle> ov,
-		        Toggle toggle, Toggle new_toggle) {		 
-		    	if (new_toggle == null) {
-		    		sinkStatus = false;
-		    		scene.setCursor(Cursor.DEFAULT);
-		    		mySink.setId("button");
-		        }
-		        else {
-		        	if (sinksGroup.getSelectedToggle().equals(mySink)) {
-		        		myDraw.setId("button");
-		        		mySpawn.setId("button");
-		        		mySink.setId("button-selected");
-			        	toggleStatus = false;
-			        	spawnStatus = false;
-			        	sinkStatus = true;
-			        	scene.setCursor(Cursor.CROSSHAIR); 
-		        	}
-		        }
-		    }
+			public void changed(ObservableValue<? extends Toggle> ov,
+					Toggle toggle, Toggle new_toggle) {		 
+				if (new_toggle == null) {
+					sinkStatus = false;
+					scene.setCursor(Cursor.DEFAULT);
+					mySink.setId("button");
+				}
+				else {
+					if (sinksGroup.getSelectedToggle().equals(mySink)) {
+						myDraw.setId("button");
+						mySpawn.setId("button");
+						mySink.setId("button-selected");
+						toggleStatus = false;
+						spawnStatus = false;
+						sinkStatus = true;
+						scene.setCursor(Cursor.CROSSHAIR); 
+					}
+				}
+			}
 		});
 	}
-	
+
 	/**
 	 * Sets selectedTerrain to the terrain chosen by the user when using the terrain combo box from the toolbar.
 	 * @param terrains
@@ -295,23 +297,23 @@ public class GridToolBar {
 			}
 		});
 	}
-	
+
 	private void fillImageHandler(ToggleGroup group, ToggleButton button, TextField field) {
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-		    public void changed(ObservableValue<? extends Toggle> ov,
-		        Toggle toggle, Toggle new_toggle) {		 
-		    	if (new_toggle == null) {
-		    		button.setId("button");
-		    		imageStatus = false;
-		        }
-		        else {
-		        	button.setId("button-selected");
-		        	imageStatus = true;
-		        }
-		    }
+			public void changed(ObservableValue<? extends Toggle> ov,
+					Toggle toggle, Toggle new_toggle) {		 
+				if (new_toggle == null) {
+					button.setId("button");
+					imageStatus = false;
+				}
+				else {
+					button.setId("button-selected");
+					imageStatus = true;
+				}
+			}
 		});
 	}
-	
+
 	private void confirmImageHandler(Button chooseImage) {
 		chooseImage.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -320,7 +322,7 @@ public class GridToolBar {
 			}
 		});
 	}
-	
+
 	private void confirmTerrainHandler(Stage createTerrain, TextField field, Button b, ColorPicker colors, ComboBox<String> terrains) {
 		b.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle (ActionEvent event) {
@@ -347,37 +349,37 @@ public class GridToolBar {
 			}
 		});
 	}
-	
+
 	public boolean getSpawnStatus() {
 		return spawnStatus;
 	}
-	
+
 	public boolean getToggleStatus() {
 		return toggleStatus;
 	}
-	
+
 	public  boolean getSinkStatus() {
 		return sinkStatus;
 	}
-		
+
 	public Color getSelectedColor() {
 		return selectedColor;
 	}
-	
+
 	public String getSelectedTerrain() {
 		return selectedTerrain;
 	}
-	
+
 	public String getSelectedImagePath() {
 		return selectedImagePath;
 	}
-	
+
 	public void setSelectedImagePath(String newPath) {
 		selectedImagePath = newPath;
 	}
-	
+
 	public boolean getImageStatus() {
 		return imageStatus;
 	}
-	
+
 }

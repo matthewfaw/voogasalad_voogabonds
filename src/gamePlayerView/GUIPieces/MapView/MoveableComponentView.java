@@ -19,7 +19,6 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	
     public MoveableComponentView(
     		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane){
-
     	myAppController = aAppController;
     	myObservable = aObservable;
     	myPane = pane;

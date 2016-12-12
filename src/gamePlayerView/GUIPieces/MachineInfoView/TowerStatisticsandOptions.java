@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
  * @author Guhan Muruganandam
  * 
  */
+@Deprecated
 
 public class TowerStatisticsandOptions implements IGUIPiece {
 	private VBox myDisplay;
@@ -27,10 +28,10 @@ public class TowerStatisticsandOptions implements IGUIPiece {
 	private VBox makeDisplay() {
 		VBox vbox=new VBox();
 		TowerStatistics towerStats=new TowerStatistics();
-		TargetingButtons targetingButtons=new TargetingButtons();
+		//TargetingButtons targetingButtons=new TargetingButtons();
 		vbox.setSpacing(20);
 		vbox.getChildren().add(towerStats.getView());
-		vbox.getChildren().add(targetingButtons.getView());
+		//vbox.getChildren().add(targetingButtons.getView());
 		return vbox;
 		
 	}

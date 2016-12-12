@@ -6,7 +6,10 @@ import java.util.Map;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.view.tabs.ISubmittable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -83,10 +86,46 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 if (checkbox != null) {
                     this.getChildren().add(checkbox);
                 }
-            } else {
+            } else if (attributeType.toLowerCase().equals("boolean")) {
+                ObservableList<String> choices = FXCollections.observableArrayList("True", "False");
+                ComboBox<String> boolCombo = new ComboBox<>(choices);
+                lbl.setLabelFor(boolCombo);
+                lbl.setId("label");
+                boolCombo.setId("combobox");
+                myLabels.add(lbl);
+                this.getChildren().addAll(lbl, boolCombo);
+            } else if (attributeType.toLowerCase().equals("int")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces numeric input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d*")) {
+                            numericField.setText(newValue.replaceAll("[^\\d]",""));
+                        }
+                    }
+                });
+            } else if (attributeType.toLowerCase().equals("double")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces double input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d+\\.\\d+")) {
+                            numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
+                        }
+                    }
+                });
+            }
+            else {
                 if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
-                    // TODO: Make ComboBox for Strategies!
-                    
+                    // TODO: replace if/else
                     List<String> fileList = new ArrayList<String>();
                     FileRetriever fr;
                     
@@ -185,7 +224,47 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(lbl);
                     this.getChildren().add(checkbox);
                 }
-            } else {
+            } else if (attributeType.toLowerCase().equals("boolean")) {
+                // TODO: Set combo box for booleans
+                ObservableList<String> choices = FXCollections.observableArrayList("True", "False");
+                ComboBox<String> boolCombo = new ComboBox<>(choices);
+                lbl.setLabelFor(boolCombo);
+                lbl.setId("label");
+                boolCombo.setValue(retrievedData.get(uglyAttributeName));
+                boolCombo.setId("combobox");
+                myLabels.add(lbl);
+                this.getChildren().addAll(lbl, boolCombo);
+            } else if (attributeType.toLowerCase().equals("int")) {
+                System.out.println("NUMERIC FIELD");
+                TextField numericField = new TextField(retrievedData.get(uglyAttributeName));
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces numeric input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d*")) {
+                            numericField.setText(newValue.replaceAll("[^\\d]",""));
+                        }
+                    }
+                });
+            } else if (attributeType.toLowerCase().equals("double")) {
+                TextField numericField = new TextField();
+                setUpLabeledField(lbl, numericField);
+                numericField.textProperty().addListener(new ChangeListener<String>() {
+                    // Forces double input
+                    @Override
+                    public void changed (ObservableValue<? extends String> observable,
+                                         String oldValue,
+                                         String newValue) {
+                        if (!newValue.matches("\\d+\\.\\d+")) {
+                            numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
+                        }
+                    }
+                });
+            }
+            else {
                 if (uglyAttributeName.toLowerCase().contains(STRATEGY) || uglyAttributeName.toLowerCase().contains(CALC)) {
                     // TODO: Make ComboBox for Strategies!
                     
@@ -341,6 +420,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
 
     private ComponentData createDataFromInput () {
         ComponentData component = new ComponentData();
+        component.setComponentName(myName);
         for (int i = 0; i < myLabels.size(); i++) {
             Label lbl = myLabels.get(i);
             String attributeName = lbl.getText();
