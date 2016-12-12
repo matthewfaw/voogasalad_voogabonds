@@ -5,8 +5,8 @@ import authoring.model.ComponentData;
 public class PurchasableComponentData {
 	private int myPurchaseValue;
 	
-	public PurchasableComponentData(ComponentData componentData) {
-		myPurchaseValue = Integer.parseInt(componentData.getFields().get("myPurchaseValue"));
+	public PurchasableComponentData(/*ComponentData componentData*/) {
+//		myPurchaseValue = Integer.parseInt(componentData.getFields().get("myPurchaseValue"));
 	}
 	
 	public int getBuyPrice()
