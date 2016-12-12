@@ -29,6 +29,8 @@ public class DamageDealingSystem extends AbstractSystem<DamageDealingComponent> 
 		DamageDealingComponent dmg = get(c);
 		if(dmg != null)
 			dmg.explode();
-		//die()
+		else {
+		//c.getEntity().die();
+		}
 	}
 }
