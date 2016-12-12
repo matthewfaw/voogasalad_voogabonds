@@ -153,7 +153,7 @@ public abstract class AuthoringTab extends Tab {
     	return box;
     }
     
-    protected void showError (String message) {
+    public void showError (String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(myResources.getString("ErrorTitle"));
         alert.setContentText(message);

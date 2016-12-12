@@ -14,9 +14,11 @@ import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
+import engine.model.components.IComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.EntityManager;
+import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.playerinfo.Player;
@@ -76,6 +78,7 @@ public class BackendController {
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
 	private TeamSystem myTeamSystem;
+	private ControllableSystem myControllableSystem;
 	private MapDataContainer myMapData;
 	
 	// EntityManager
@@ -118,6 +121,24 @@ public class BackendController {
 		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
 		mySpawningSystem = new SpawningSystem();
 		
+		myControllableSystem = new ControllableSystem();
+		
+	}
+	
+	
+	public void moveControllables(String movement) {
+		myControllableSystem.move(movement);
+	}
+	
+	/**
+	 * Given an entity ID, will route entity component information back to front end for observing.
+	 * @param entityID
+	 */
+	public void onEntityClicked(Integer entityID) {
+		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+		for (IComponent component: clickedEntity.getComponents()) {
+			component.distributeInfo();
+		}
 	}
 	
 	//TODO
@@ -187,7 +208,7 @@ public class BackendController {
 		mySystems.add(mySpawningSystem);
 		mySystems.add(myTargetingSystem);
 		mySystems.add(myTeamSystem);
-		
+		mySystems.add(myControllableSystem);
 		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
 	}
 

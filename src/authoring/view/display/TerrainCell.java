@@ -149,11 +149,15 @@ public class TerrainCell extends Rectangle {
 	private void createSinkNameWindow() {
 		Stage sinkStage = new Stage();
 		VBox sinkBox = new VBox(screenHeight*0.01);
+		sinkBox.setId("vbox");
 		TextField setPointName = new TextField();
+		setPointName.setId("menu-textfield");
 		Button confirmName = new Button(myResources.getString("ApplyChanges"));
+		confirmName.setId("button");
 		sinkNameHandler(sinkStage, setPointName, confirmName);
 		sinkBox.getChildren().addAll(setPointName, confirmName);
-		Scene sinkNameScene = new Scene(sinkBox, screenWidth*0.2, screenHeight*0.08);
+		Scene sinkNameScene = new Scene(sinkBox);
+		sinkNameScene.getStylesheets().add("style.css");
 		sinkStage.setTitle(myResources.getString("SetSpawnName"));
 		sinkStage.setScene(sinkNameScene);
 		sinkStage.show();
@@ -187,11 +191,15 @@ public class TerrainCell extends Rectangle {
 	private void createSpawnNameWindow() {
 		Stage spawnStage = new Stage();
 		VBox spawnBox = new VBox(screenHeight*0.01);
+		spawnBox.setId("vbox");
 		TextField setPointName = new TextField();
+		setPointName.setId("menu-textfield");
 		Button confirmName = new Button(myResources.getString("ApplyChanges"));
+		confirmName.setId("button");
 		spawnNameHandler(spawnStage, setPointName, confirmName);
 		spawnBox.getChildren().addAll(setPointName, confirmName);
-		Scene spawnNameScene = new Scene(spawnBox, screenWidth*0.2, screenHeight*0.08);
+		Scene spawnNameScene = new Scene(spawnBox);
+		spawnNameScene.getStylesheets().add("style.css");
 		spawnStage.setTitle(myResources.getString("SetSpawnName"));
 		spawnStage.setScene(spawnNameScene);
 		spawnStage.show();

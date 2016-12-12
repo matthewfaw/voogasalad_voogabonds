@@ -1,8 +1,13 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewableMovable;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
@@ -12,6 +17,7 @@ import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TargetingSystem;
+import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -20,7 +26,7 @@ import utility.Point;
  * @author matthewfaw, Weston
  *
  */
-public class MoveableComponent extends AbstractComponent implements IMovable {
+public class MoveableComponent extends AbstractComponent implements IMovable, IViewableMovable {
 	@Hide
 	private MovementSystem myMovement;
 	@Hide
@@ -44,17 +50,23 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	private double myMaxDistance;
 	@Hide
 	private double myMovedDistance;
+	private boolean removeOnGoal;
+	private boolean explodesOnGoal;
 
 	
+	@Hide
+	private List<IObserver<IViewableMovable>> myObservers;
 
 	public MoveableComponent(
 			MovementSystem movement,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
+			Router router,
 			DamageDealingSystem damage,
 			ComponentData data
 			) throws ClassNotFoundException {
+		super(router);
 		
 		myMovement = movement;
 		myPhysical = physical;
@@ -66,15 +78,20 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
 		explodesAtMaxDistance = Boolean.parseBoolean(data.getFields().get("explodesAtMaxDistance"));
 		
+		explodesOnGoal = Boolean.parseBoolean(data.getFields().get("explodesOnGoal"));
+		removeOnGoal = Boolean.parseBoolean(data.getFields().get("removeOnGoal"));
+		
 		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
 		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
 		myMovementCalc = movement.getStrategyFactory().newStrategy(data.getFields().get("myMovementCalc"));
+		
+		myObservers = new ArrayList<IObserver<IViewableMovable>>();
 		
 		movement.attachComponent(this);
 	}
 	
 	private Pair<Double, Point> getMove(IPhysical p) {
-		if (myMovedDistance - myMaxDistance < myMoveSpeed)
+		if (myMaxDistance - myMovedDistance < myMoveSpeed)
 			myMoveSpeed = Math.max(0.0, myMovedDistance - myMaxDistance);
 		
 		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this, p);
@@ -105,17 +122,63 @@ public class MoveableComponent extends AbstractComponent implements IMovable {
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
 		PhysicalComponent p = myPhysical.get(this);
-		p.setPosition(getMove(p));
+		if (p != null)
+			p.setPosition(getMove(p));
+		
 		myCollision.checkCollision(p);
 		
-		if (myMovedDistance >= myMaxDistance && explodesAtMaxDistance) {
+		if ((myMovedDistance >= myMaxDistance && explodesAtMaxDistance) || (explodesOnGoal && atGoal())) {
 			myDamage.explode(this);
 		}
+		
+		if (removeOnGoal && atGoal()) {
+			//subtract player's lives
+			getEntity().delete();
+		}
+		
+	}
+	
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewableMovable> aObserver) {
+		myObservers.add(aObserver);
 	}
 
+	@Override
+	public void detach(IObserver<IViewableMovable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+
+	@Override
+	public IMovementStrategy getMovementStrategy() {
+		return myMovementCalc;
+	}
+
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
+	}
+	
 	@Override
 	public void delete() {
 		myMovement.detachComponent(this);
 	}
 
+	private boolean atGoal() {
+		IPhysical p = myPhysical.get(this);
+		if (p != null)
+			return myPhysical.get(this).getPosition().equals(getGoal());
+		else
+			return false;
+	}
 }

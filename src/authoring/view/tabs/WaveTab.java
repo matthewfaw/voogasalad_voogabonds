@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import authoring.controller.Container;
 import authoring.controller.WaveDataContainer;
 import authoring.model.WaveData;
+import authoring.view.tabs.entities.EntityListView;
+import authoring.view.tabs.entities.EntityTab;
 import authoring.controller.MapDataContainer;
 import authoring.controller.EntityDataContainer;
 import engine.IObserver;
@@ -16,6 +18,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -43,8 +47,26 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 	public WaveTab(String text, WaveDataContainer container){
 		super(text, COLS);
 		myContainer = container;
+		setKeyboardAction(handleKeyPress());
 	}
 	
+
+	private EventHandler<KeyEvent> handleKeyPress() {
+		return new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event) {
+				String selected = getListView().getSelectionModel().getSelectedItem();
+                if (selected != null && (event.getCode() == KeyCode.D || event.getCode() == KeyCode.BACK_SPACE)) {
+                    try {
+                        myContainer.removeWaveData(selected);
+                        getList().remove(selected);
+                    } catch (Exception e) {
+                        showError(e.getMessage());
+                    }
+                }
+			}
+		};
+	}
+
 
 	@Override
 	protected EventHandler handleAddNewObject() {
@@ -154,5 +176,11 @@ public class WaveTab extends ListTab<String> implements IObserver<Container>, IS
 			}
 		});
 		return finish;
+	}
+
+
+	@Override
+	public void remove(Container aRemovedObject) {
+		//Do nothing.
 	}
 }

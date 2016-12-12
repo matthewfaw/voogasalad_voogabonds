@@ -15,9 +15,11 @@ import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
 import engine.IObservable;
 import engine.IObserver;
-import engine.IViewable;
 import engine.controller.ApplicationController;
 import engine.model.components.concrete.MoveableComponent;
+import javafx.beans.property.DoubleProperty;
+import engine.model.components.viewable_interfaces.IViewable;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -62,22 +64,24 @@ public class MapGrid extends Node {
     	temp.setFill(Color.web(aHexValue));
     	temp.setStroke(Color.BLACK);
     	temp.setStrokeWidth(1);
-    	temp.widthProperty().bind(pane.widthProperty().divide(numRows));
-    	temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
-    	temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
-    	temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
+//    	temp.widthProperty().bind(pane.widthProperty().divide(numRows));
+//    	temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
+    	temp.setHeight(aCellSize);
+    	temp.setWidth(aCellSize);
+//    	temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
+//    	temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
+    	temp.setX(row*aCellSize);
+    	temp.setY(col*aCellSize);
+//    	loadTerrainData(temp, row, col, aMapData);
 
-    	temp.setOnDragDropped(new EventHandler<DragEvent>() {
+    	temp.setOnDragDropped(new EventHandler<DragEvent>(){
     		public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 //				TowerData data = myTowerColumn.getTowerData(db.getString());
 //				System.out.println(data.getBuyPrice());
-//    			if(!isFull(temp)){
 				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
-//    			}
-				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
+				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX() + myCellSize / 2, closestRectangle.getY() + myCellSize / 2));
 				setClickAction();
-
 				event.consume();
     		}
     	});
@@ -102,13 +106,14 @@ public class MapGrid extends Node {
     private void setClickForComponent(MoveableComponentView m) throws Exception {
         //get info to come up on click
         //m.getInfo();
-    	myAppController.DisplayStats();
-        //System.out.println("hi");
+    	//myAppController.DisplayStats();
+        myAppController.onEntityClicked();
+    	//System.out.println("hi");
     }
     
-    public void giveViewableComponent(IObservable<IViewable> aObservable)
+    public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable,myAppController);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myPane);
     	aObservable.attach(aComponent);
     	sprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
@@ -130,13 +135,14 @@ public class MapGrid extends Node {
     
     public Rectangle findDropLocation(double x, double y){
         closest = new Rectangle();
+                
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 Rectangle temp = actualGrid[i][j];
-                if(calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth()) < minDist)
-                        {
-                            minDist = calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth());
+                if(calculateDistance(x, y, temp.getX(), temp.getY()) < minDist)
+                        {                        
+                            minDist = calculateDistance(x, y, temp.getX(), temp.getY());
                             closest = temp;
                         }
                 else
@@ -147,9 +153,10 @@ public class MapGrid extends Node {
         return closest;
     }
     
-    private double calculateDistance (double x, double y, double x2, double y2, double tempHeight, double tempWidth) {
-        return Math.sqrt(Math.pow((x - (x2+tempWidth/2)), 2)
-                         + Math.pow((y - (y2 + tempWidth/2)), 2));
+    private double calculateDistance (double x, double y, double x2, double y2) {
+       
+        return Math.sqrt(Math.pow((x - (x2+myCellSize/2)), 2)
+                         + Math.pow((y - (y2 + myCellSize/2)), 2));
     }
    
 

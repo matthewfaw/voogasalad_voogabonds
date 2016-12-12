@@ -95,6 +95,7 @@ public class LoadAuthoringScreen {
 		boxRight.setId("vbox");
 		showSelectedTitle.setPromptText(myResources.getString("ShowSelectedProject"));
 		showSelectedTitle.setEditable(false);
+		showSelectedTitle.setId("textfield");
 		Button startAuthoring = new Button(myResources.getString("ConfirmAuthoringSetUp"));
 		startAuthoring.setId("button");
 		boxRight.getChildren().addAll(showSelectedTitle, startAuthoring);
@@ -124,9 +125,12 @@ public class LoadAuthoringScreen {
 			@Override
 			public void handle(ActionEvent e) {
 				GameStateLoader loader = new GameStateLoader();
+				router.clearContainers();
+				
 				loader.loadMapData(router, gameTitle);
 				loader.loadEntityData(router, gameTitle);
-				loader.loadLevelAndWaveData(router, gameTitle);
+				loader.loadLevelData(router, gameTitle);
+				loader.loadWaveData(router, gameTitle);
 				loader.loadPlayerData(router, gameTitle);
 				initAuthoring();
 			}
@@ -134,9 +138,13 @@ public class LoadAuthoringScreen {
 	}
 	
 	public void initAuthoring() {
-    AuthorDisplay authoring = new AuthorDisplay(pane, scene, router);
-//    this.AuthDisp = authoring;
-	stage.setScene(scene);
+		BorderPane bPane = new BorderPane();
+		Scene authorScene = new Scene(bPane, Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+				Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+		authorScene.getStylesheets().add("style.css");
+	    AuthorDisplay authoring = new AuthorDisplay(bPane, authorScene, router);
+	//    this.AuthDisp = authoring;
+		stage.setScene(authorScene);
 }
 	
 	private void setUpScreenResolution() {

@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -20,6 +21,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import utility.FileRetriever;
 import utility.ListStringManipulator;
 
 /**
@@ -29,7 +31,16 @@ import utility.ListStringManipulator;
  *
  */
 public class EditComponentBox extends VBox implements ISubmittable {
-    public static final String IMAGE_PATH = "Image Path";
+    private final String PACKAGE = "engine/model/strategies/";
+    private final String STRATEGY = "strategy";
+    private final String DAMAGE = "damage";
+    private final String MOVEMENT = "movement";
+    private final String SPAWNING = "spawning";
+    private final String TARGET = "target";
+    private final String WIN = "win";
+    private final String LOSE = "lose";
+    private final String EXTENSION = ".class";
+    public static final String IMAGE_PATH = "myImagePath";
     public static final String DONE = "Done";
     public static final String CANCEL = "Cancel";
     private static final int SPACING = 2;
@@ -58,9 +69,9 @@ public class EditComponentBox extends VBox implements ISubmittable {
         for (int i = 0; i < attributes.size(); i++) {
             String attributeType = attributeTypes.get(i);
             String uglyAttributeName = attributes.get(i);
-            String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
+            //String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
             //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
-            Label lbl = new Label(cleanedAttributeName);
+            Label lbl = new Label(uglyAttributeName);
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
                 MenuButton checkbox = null;
@@ -71,6 +82,30 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(checkbox);
                 }
             } else {
+                if (uglyAttributeName.toLowerCase().contains(STRATEGY)) {
+                    // TODO: Make ComboBox for Strategies!
+                    
+                    List<String> fileList = new ArrayList<String>();
+                    FileRetriever fr;
+                    
+                    if (uglyAttributeName.toLowerCase().contains(DAMAGE)) {
+                        fr = new FileRetriever(PACKAGE+DAMAGE);
+                    } else if (uglyAttributeName.toLowerCase().contains(MOVEMENT)) {
+                        fr = new FileRetriever(PACKAGE+MOVEMENT);
+                    } else if (uglyAttributeName.toLowerCase().contains(SPAWNING)) {
+                        fr = new FileRetriever(PACKAGE+SPAWNING);
+                    } else if (uglyAttributeName.toLowerCase().contains(TARGET)) {
+                        fr = new FileRetriever(PACKAGE+TARGET);
+                    } else if (uglyAttributeName.toLowerCase().contains(WIN) || uglyAttributeName.toLowerCase().contains(LOSE)) {
+                        fr = new FileRetriever(PACKAGE+WIN+LOSE);
+                    } else {
+                        fr = new FileRetriever(PACKAGE+MOVEMENT);
+                    }
+                    
+                    fileList = fr.getFileNames("/");
+                    ComboBox<String> strategyChoice = grandparent.setUpStringComboBoxWithLabel(lbl.getText(), null, FXCollections.observableArrayList(fileList), this);
+                    
+                }
                 TextField field = new TextField();
                 setUpLabeledField(lbl, field);
                 if (lbl.getText().equals(IMAGE_PATH)) {
@@ -103,15 +138,15 @@ public class EditComponentBox extends VBox implements ISubmittable {
         for (int i = 0; i < attributes.size(); i++) {
             String attributeType = attributeTypes.get(i);
             String uglyAttributeName = attributes.get(i);
-            String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
+            //String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
             //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
-            Label lbl = new Label(cleanedAttributeName);
+            Label lbl = new Label(uglyAttributeName);
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
                 MenuButton checkbox = null;
                 if (uglyAttributeName.toLowerCase().contains("terrains")) {
                     checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
-                    String terrainData = componentData.getFields().get(cleanedAttributeName);
+                    String terrainData = componentData.getFields().get(uglyAttributeName);
                     //System.out.println("Terrains: "+terrainData);
                     List<String> terrains;
                     try {
@@ -142,7 +177,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 }
             } else {
                 //System.out.println("Clean: "+retrievedData.get(cleanedAttributeName)+"\tUgly: "+retrievedData.get(uglyAttributeName));
-                TextField field = new TextField(retrievedData.get(cleanedAttributeName));
+                TextField field = new TextField(retrievedData.get(uglyAttributeName));
                 setUpLabeledField(lbl, field);
                 if (lbl.getText().equals(IMAGE_PATH)) {
                     Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
@@ -170,11 +205,17 @@ public class EditComponentBox extends VBox implements ISubmittable {
         String cleanedName = attribute;
         if (cleanedName.startsWith("my")) {
             cleanedName = cleanedName.substring(2);
+        } else {
+            cleanedName = capitalizeFirstLetter(cleanedName);
         }
         if (!attribute.contains(" ")) {
             cleanedName = this.separateCapitalizedWords(cleanedName);
         }
         return cleanedName;
+    }
+    
+    private String capitalizeFirstLetter(String str) {
+        return str.substring(0,1).toUpperCase() + str.substring(1);
     }
 
     /**

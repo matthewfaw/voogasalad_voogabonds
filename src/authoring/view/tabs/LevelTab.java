@@ -8,6 +8,8 @@ import authoring.controller.LevelDataContainer;
 import authoring.controller.WaveDataContainer;
 import authoring.model.LevelData;
 import authoring.model.WaveData;
+import authoring.view.tabs.entities.EntityListView;
+import authoring.view.tabs.entities.EntityTab;
 import engine.IObserver;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +18,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -28,16 +32,19 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 	private ArrayList<CheckBox> myWaveChecks;
 	private TextField myNameField;
 	private VBox myV;
+	private LevelData originalLevel;
 	
 	public LevelTab(String text, LevelDataContainer container) {
 		super(text, COLS);
 		myContainer = container;
+		setKeyboardAction(handleKeyPress());
 	}
 
 	@Override
 	protected EventHandler<ActionEvent> handleAddNewObject() {
 		return new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event){
+				originalLevel = null;
 				VBox menu = setUpMenu(getResources().getString("DefaultLevelName"), null);
 				getTilePane().getChildren().add(menu);
 			}
@@ -55,8 +62,12 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 		for (WaveData wave: myWaves){
 			CheckBox check = new CheckBox(wave.getName());
 			check.setId("checkbox");
-			if (selectedWaves != null && selectedWaves.contains(wave))
-				check.setSelected(true);
+			if (selectedWaves != null)
+				for (WaveData selectedWave: selectedWaves)
+					if (selectedWave.getName().equals(wave.getName())){
+						check.setSelected(true);
+						break;
+					}
 			myWaveChecks.add(check);
 			checkV.getChildren().add(check);
 		}
@@ -91,6 +102,7 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 	@Override
 	protected void edit(String name) {
 		LevelData level = myContainer.getLevelData(name);
+		originalLevel = level;
 		VBox menu = setUpMenu(level.getLevelName(), level.getWaveDataList());
 		getTilePane().getChildren().add(menu);
 	}
@@ -115,10 +127,34 @@ public class LevelTab extends ListTab<String> implements IObserver<Container>, I
 					showError(e.getMessage());
 					return;
 				}
-				myContainer.createNewLevelData(level);
+				if (originalLevel == null)
+					myContainer.createNewLevelData(level);
+				else
+					myContainer.updateLevel(level, originalLevel);
 				getTilePane().getChildren().remove(myV);
 			}
 		});
 		return finish;
+	}
+	
+	private EventHandler<KeyEvent> handleKeyPress(){
+		return new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event) {
+				String selected = getListView().getSelectionModel().getSelectedItem();
+                if (selected != null && (event.getCode() == KeyCode.D || event.getCode() == KeyCode.BACK_SPACE)) {
+                    try {
+                        myContainer.removeLevelData(selected);
+                        getList().remove(selected);
+                    } catch (Exception e) {
+                        showError(e.getMessage());
+                    }
+                }
+			}
+		};
+	}
+
+	@Override
+	public void remove(Container aRemovedObject) {
+		// Do nothing
 	}
 }
