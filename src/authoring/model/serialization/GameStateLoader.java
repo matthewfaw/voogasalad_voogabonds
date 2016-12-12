@@ -75,24 +75,36 @@ public class GameStateLoader {
 		}
 	}
 	
-	public void loadLevelAndWaveData(Router r, String gameTitle){
+	public void loadLevelData(Router r, String gameTitle){
 		String levelFilePath = myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("LevelDataFilePath");
 		LevelDataContainer routerLevelData = r.getLevelDataContainer();
-		WaveDataContainer routerWaveData = r.getWaveDataContainer();
 		try{
 			LevelDataContainer newLevelData = (LevelDataContainer) deserializer.deserializeFromFile(levelFilePath, LevelDataContainer.class);
 //			ArrayList<LevelData> listLevelData = (ArrayList<LevelData>) deserializer.deserializeFromFile(levelFilePath, ArrayList.class);
 			for (LevelData ld: newLevelData.finalizeLevelDataMap()){
 				routerLevelData.createNewLevelData(ld);
-				
-				//Load waves for each level
-				for (WaveData wd: ld.getWaveDataList()){
-					routerWaveData.createNewWave(wd.getName(), wd);
-				}
 			}
 		}catch(Exception e){
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
-			e.printStackTrace();
+			//e.printStackTrace();
+		}
+	}
+	
+	public void loadWaveData(Router r, String gameTitle){
+		String waveFilePath = myResources.getString("SourceFilePath") + myResources.getString("DefaultSerialPath") + gameTitle + myResources.getString("WaveDataFilePath");
+		WaveDataContainer routerWaveData = r.getWaveDataContainer();
+		File dir = new File(waveFilePath);
+		File[] waveFiles = dir.listFiles();
+		
+		try{
+			for (File f: waveFiles){
+				String waveDataPath = f.toString().substring(myResources.getString("SourceFilePath").length());
+				waveDataPath = waveDataPath.replace("\\", "/");
+				WaveData oldWaveData = (WaveData) deserializer.deserializeFromFile(waveDataPath, WaveData.class);
+				routerWaveData.createNewWave(oldWaveData.getName(), oldWaveData);
+			}
+		}catch(Exception e){
+			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
 		}
 	}
 	

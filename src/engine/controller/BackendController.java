@@ -76,6 +76,7 @@ public class BackendController {
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
 	private TeamSystem myTeamSystem;
+	private ControllableSystem myControllableSystem;
 	private MapDataContainer myMapData;
 	
 	// EntityManager
@@ -118,9 +119,15 @@ public class BackendController {
 		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
 		mySpawningSystem = new SpawningSystem();
 		
+		myControllableSystem = new ControllableSystem();
+		
 	}
 	
-	//TODO
+	
+	public void moveControllables(String movement) {
+		myControllableSystem.move(movement);
+	}
+	
 	/**
 	 * Places the tower, if it can
 	 * @param aTowerName
@@ -187,7 +194,7 @@ public class BackendController {
 		mySystems.add(mySpawningSystem);
 		mySystems.add(myTargetingSystem);
 		mySystems.add(myTeamSystem);
-		
+		mySystems.add(myControllableSystem);
 		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
 	}
 
