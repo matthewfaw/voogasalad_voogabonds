@@ -21,6 +21,7 @@ import utility.Point;
  * Physical components contain information relevant to existing on a grid, and being displayed
  * 
  * @author matthewfaw
+ * @author owenchung (edits)
  *
  */
 public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {

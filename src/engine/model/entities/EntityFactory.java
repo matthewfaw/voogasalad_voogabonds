@@ -21,7 +21,8 @@ import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 /**
  * Creates all the entities
- * @author owenchung and alanguo
+ * @author owenchung 
+ * @author alanguo
  *
  */
 public class EntityFactory {

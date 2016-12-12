@@ -8,7 +8,7 @@ import authoring.model.IReadableData;
 import authoring.model.WaveData;
 /**
  * This class stores the sequence of the waves
- * @author Owen Chung
+ * @author owenchung
  *
  */
 public class WaveOperationData implements IReadableData {
