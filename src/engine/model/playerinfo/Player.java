@@ -23,21 +23,21 @@ import engine.model.strategies.winlose.NeverWinStrategy;
 public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
-	private IMoney myMoney;
+	private Money myMoney;
 	
-	private List<ResourceStore> myResourceStores;
+	private transient List<ResourceStore> myResourceStores;
 	
-	private IWinLoseStrategy myWinCon;
-	private IWinLoseStrategy myLoseCon;
+	private transient IWinLoseStrategy myWinCon;
+	private transient IWinLoseStrategy myLoseCon;
 	
-	private List<IObserver<IViewablePlayer>> myObservers;
+	private transient List<IObserver<IViewablePlayer>> myObservers;
 	
 	public Player(PlayerData aPlayerData)
 	{
 		//TODO: Create Unique ID?
 		this(0,aPlayerData.getStartingLives(), new Money(aPlayerData.getStartingCash()));
 	}
-	private Player(int ID, int initLives, IMoney startingMoney) {
+	private Player(int ID, int initLives, Money startingMoney) {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;

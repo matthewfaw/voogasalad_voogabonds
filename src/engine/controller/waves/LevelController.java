@@ -16,9 +16,9 @@ import engine.model.systems.PhysicalSystem;
  */
 public class LevelController implements IObserver<TimelineController> {
 	private static final double DEFAULT_START_TIME = 0.0;
-	private LevelDataContainer myLevelDataContainer;
-	private WaveController myWaveController;
-	private DataStore<EntityData> myEntityDataStore;
+	private transient LevelDataContainer myLevelDataContainer;
+	private transient WaveController myWaveController;
+	private transient DataStore<EntityData> myEntityDataStore;
 	private int myCurrentLevel;
 
 	public LevelController(

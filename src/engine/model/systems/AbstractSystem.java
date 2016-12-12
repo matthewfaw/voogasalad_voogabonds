@@ -13,7 +13,7 @@ import engine.model.entities.IEntity;
  * @param <A> the type of component this system stores
  */
 public class AbstractSystem<A extends IComponent> implements ISystem {
-	private List<A> myComponents;
+	private transient List<A> myComponents;
 	
 	public AbstractSystem() {
 		myComponents = new ArrayList<A>();

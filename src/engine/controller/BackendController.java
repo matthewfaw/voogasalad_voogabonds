@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
+import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
@@ -42,39 +43,40 @@ public class BackendController {
 	private static final int DEFAULT_STARTING_LEVEL=0;
 
 	//Utilities
-	private ResourceBundle myGameDataRelativePaths;
-	private FileRetriever myFileRetriever;
-	private JSONDeserializer myJsonDeserializer;
+	private transient ResourceBundle myGameDataRelativePaths;
+	private transient FileRetriever myFileRetriever;
+	private transient JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-	private ResourceStore myResourceStore;
+	private transient ResourceStore myResourceStore;
 
 	//Data relevant to constructing objects
-	private DataStore<EntityData> myEntityDataStore;
-	private PlayerData myPlayerData;
-	private LevelDataContainer myLevelDataContainer;
-	private MapMediator myMapMediator;
+	private transient DataStore<EntityData> myEntityDataStore;
+	private transient PlayerData myPlayerData;
+	private transient LevelDataContainer myLevelDataContainer;
+	private transient MapDataContainer myMapData;
+	//TODO: Move this to a system??
+	private transient MapMediator myMapMediator;
 	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private PlayerController myPlayerController;
 	private LevelController myLevelController;
-	private Router myRouter;
+	private transient Router myRouter;
 	
 	//Factories
-	private EntityFactory myEntityFactory;
+	private transient EntityFactory myEntityFactory;
 	
 	//Systems
-	private CollisionDetectionSystem myCollisionDetectionSystem;
-	private DamageDealingSystem myDamageDealingSystem;
-	private HealthSystem myHealthSystem;
-	private MovementSystem myMovementSystem;
-	private PhysicalSystem myPhysicalSystem;
-	private BountySystem myBountySystem;
-	private SpawningSystem mySpawningSystem;
-	private TargetingSystem myTargetingSystem;
-	private TeamSystem myTeamSystem;
-	private MapDataContainer myMapData;
+	private transient CollisionDetectionSystem myCollisionDetectionSystem;
+	private transient DamageDealingSystem myDamageDealingSystem;
+	private transient HealthSystem myHealthSystem;
+	private transient MovementSystem myMovementSystem;
+	private transient PhysicalSystem myPhysicalSystem;
+	private transient BountySystem myBountySystem;
+	private transient SpawningSystem mySpawningSystem;
+	private transient TargetingSystem myTargetingSystem;
+	private transient TeamSystem myTeamSystem;
 	
 	public BackendController(String aGameDataPath, Router aRouter)
 	{
@@ -281,14 +283,18 @@ public class BackendController {
 		myTimelineController.pause();
 	}
 	
-	public void save()
+	public void save() 
 	{
 		JSONSerializer js = new JSONSerializer();
 		try {
-			js.serializeToFile(new String("hi"), "derp");
-			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
-			System.out.println(s);
-		} catch (Exception e) {
+			js.serializeToFile(this, "plswork");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			BackendController b = (BackendController)myJsonDeserializer.deserializeFromFile("SerializedFiles/plswork", BackendController.class);
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

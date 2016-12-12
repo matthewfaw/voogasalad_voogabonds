@@ -18,12 +18,12 @@ import gamePlayerView.interfaces.IWavesAcceptor;
  * @author Guhan Muruganandam
  */
 public class Router {
-	private GamePlayerScene  myGamePlayerScene;
+	private transient GamePlayerScene  myGamePlayerScene;
 	//TODO: Change these box objects to instead be acceptor interfaces
-	private List<ICashAcceptor> myCash;
-	private List<ILivesAcceptor> myLives; 
-	private List<IWavesAcceptor> myWaves;
-	private List<IResourceAcceptor> myResources;
+	private transient List<ICashAcceptor> myCash;
+	private transient List<ILivesAcceptor> myLives; 
+	private transient List<IWavesAcceptor> myWaves;
+	private transient List<IResourceAcceptor> myResources;
 	//List<ISprites> mySprites;
 	
 	

@@ -195,9 +195,9 @@ public class MockGameDataConstructor {
 			ser.serializeToFile(ed, "exampleGame/EntityData/"+ed.getClass().getSimpleName()+1);
 			ser.serializeToFile(ed2, "exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2);
 			
-			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+"MapData", MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+"LevelData", LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			

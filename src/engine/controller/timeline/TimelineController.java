@@ -19,8 +19,8 @@ import javafx.util.Duration;
  *
  */
 public class TimelineController implements IObservable<TimelineController> {
-	private Timeline myTimeline;
-	private List<IObserver<TimelineController>> myObservers;
+	private transient Timeline myTimeline;
+	private transient List<IObserver<TimelineController>> myObservers;
 	private long myStartTime;
 
 	public TimelineController()
