@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -196,8 +197,11 @@ public class GridToolBar {
 	private void terrainHandler(ComboBox<String> terrains) {
 		terrains.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(final ActionEvent e) {
+			public void handle(final ActionEvent event) {
 				String selectedItem = terrains.getSelectionModel().getSelectedItem();
+				if (selectedItem == null){
+					return;
+				}
 				if (selectedItem.equals(myResources.getString("DefaultTerrainOption"))) {
 					Stage createTerrain = new Stage();
 					createTerrain.initModality(Modality.APPLICATION_MODAL);
@@ -221,6 +225,7 @@ public class GridToolBar {
 					Scene terrainChoiceScene = new Scene(choiceContainer, screenWidth*0.3, screenHeight*0.1);
 					createTerrain.setScene(terrainChoiceScene);
 					createTerrain.show();
+					terrains.getSelectionModel().clearSelection();
 				}
 				else {
 					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
@@ -232,7 +237,6 @@ public class GridToolBar {
 						selectedColor = colorToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					}
 				}
-//				terrains.getSelectionModel().clearSelection();
 			}
 		});
 	}
