@@ -168,7 +168,7 @@ public class ApplicationController {
 	 * Given an entity ID, will route entity component information back to front end for observing.
 	 * @param entityID
 	 */
-	public void onEntityClicked(Integer entityID) {
+	public void onEntityClicked(String entityID) {
 		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
 		for (IComponent component: clickedEntity.getComponents()) {
 			component.distributeInfo();

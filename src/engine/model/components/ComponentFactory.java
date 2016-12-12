@@ -35,7 +35,7 @@ public class ComponentFactory {
 	 */
 	public IModifiableComponent constructComponent(ComponentData compdata, Point location) throws UnsupportedOperationException {
 		try {
-			System.out.println(compdata.getComponentName());
+			//System.out.println(compdata.getComponentName());
 			Class<?> tmpclass = Class.forName(COMPONENT_PATH+compdata.getComponentName());
 			Constructor<?>[] constructors = tmpclass.getConstructors();
 			// Note: Assuming only one constructor

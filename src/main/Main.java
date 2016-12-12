@@ -1,6 +1,8 @@
 package main;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * @author Christopher Lu
@@ -8,6 +10,8 @@ import java.io.IOException;
  */
 
 import javafx.application.Application;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 public class Main extends Application{

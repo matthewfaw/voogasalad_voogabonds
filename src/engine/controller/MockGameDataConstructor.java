@@ -109,24 +109,28 @@ public class MockGameDataConstructor {
 			cd3.addField("myCollisionRadius", "50");
 			cd3.addField("myTurnSpeed", "1");
 			cd3.addField("myMoveSpeed", "1");
-			cd3.addField("myMaxDistance", "100");
+			cd3.addField("myMaxDistance", "1000");
 			cd3.addField("myMovementCalc", "GreedyMovementStrategy");
+			cd3.addField("removeOnGoal", "true");
 			
 	
 			ComponentData cd4 = new ComponentData();
 			cd4.setComponentName("DamageDealingComponent");
 			cd4.addField("myDamage", "50");
 			cd4.addField("myDamageRadius", "2");
+			cd4.addField("myDamageCalc", "BinaryDamageStrategy");
 			
 			ComponentData cd5 = new ComponentData();
 			cd5.setComponentName("CreatorComponent");
-			cd5.addField("mySpawningStrategy", "BasicSpawningStrategy");
-			cd4.addField("myTimeBetweenSpawns", "10");
+			cd5.addField("mySpawningStrategy", "BasicSpawnStrategy");
+			cd5.addField("myTimeBetweenSpawns", "10");
+			cd5.addField("mySpawnName", "Awesome Tower2");
 			
 			
 			ed.addComponent("PhysicalComponent",cd1);
-			//ed.addComponent("CollidableComponent",cd2);
+			ed.addComponent("CollidableComponent",cd2);
 			ed.addComponent("MoveableComponent",cd3);
+			ed.addComponent("CreatorComponent",cd5);
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();

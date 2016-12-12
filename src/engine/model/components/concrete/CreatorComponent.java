@@ -20,6 +20,7 @@ import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
 import gamePlayerView.gamePlayerView.Router;
 import engine.model.weapons.DamageInfo;
+import utility.Point;
 
 /**
  * The purpose of this class is to manage the work necessary
@@ -56,8 +57,6 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	private List<IEntity> myChildren;
 	@Hide
 	private DamageInfo myStats;
-
-	
 	@Hide
 	private List<IObserver<IViewableCreator>> myObservers;
 	
@@ -65,21 +64,25 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			MovementSystem movement,
-			EntityFactory factory,
 			ComponentData data,
 			Router router) {
 		super(router);
+		
 		myObservers = new ArrayList<IObserver<IViewableCreator>>();
+		
+		mySpawning = spawning;
 		myPhysical = physical;
 		myTargeting = targeting;
 		myMovement = movement;
-		myEntityFactory = factory;
+		myEntityFactory = mySpawning.getFactory();
 		
 		mySpawnName = data.getFields().get("mySpawnName");
 		myTimeBetweenSpawns = Integer.parseInt(data.getFields().get("myTimeBetweenSpawns"));
+		mySpawningStrategy = mySpawning.newStrategy(data.getFields().get("mySpawningStrategy"));
 		
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<IEntity>();
+		myTarget = new Point(400, 400);
 		spawning.attachComponent(this);
 	}
 
@@ -92,8 +95,9 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		if (myTimeSinceSpawning >= myTimeBetweenSpawns && myTarget != null && myPhysical.get(this) != null) {
 			myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
 			myTimeSinceSpawning = 0;
-		} else
+		} else{
 			myTimeSinceSpawning++;
+		}
 		
 	}
 	

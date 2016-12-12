@@ -1,5 +1,9 @@
 package engine.model.systems;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.IComponent;
@@ -29,9 +33,12 @@ public class MovementSystem extends AbstractSystem<MoveableComponent> implements
 	/********* Observer interface ***********/
 	@Override
 	public void update(TimelineController aChangedObject) {
-		for (MoveableComponent mc: getComponents()) {
+		List<MoveableComponent> components = new ArrayList<MoveableComponent>();
+		components.addAll(getComponents());
+		for (MoveableComponent mc :components) {
 			mc.move();
 		}
+
 	}
 
 	public MoveableComponent get(IComponent c) {
