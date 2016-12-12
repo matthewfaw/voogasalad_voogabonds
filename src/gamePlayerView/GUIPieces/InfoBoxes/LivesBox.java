@@ -3,7 +3,7 @@ package gamePlayerView.GUIPieces.InfoBoxes;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
-import gamePlayerView.interfaces.ILivesAcceptor;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 
 /**
  * @author Guhan Muruganandam
@@ -13,14 +13,14 @@ import gamePlayerView.interfaces.ILivesAcceptor;
  * UI feature for Lives text box and Label
  */
 
-public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, ILivesAcceptor {
+public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, IPlayerAcceptor {
 	
 	public LivesBox(){
 		myDisplay=makeDisplay("Lives: ");
 	}
 
 	@Override
-	public void acceptLives(IObservable<IViewablePlayer> aPlayer) {
+	public void acceptPlayer(IObservable<IViewablePlayer> aPlayer) {
 		aPlayer.attach(this);
 		//update(aPlayer);
 	}
@@ -28,6 +28,11 @@ public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, ILi
 	@Override
 	public void update(IViewablePlayer aChangedObject) {
 		myOutput.setText(Integer.toString(aChangedObject.getLivesRemaining()));
+	}
+
+	@Override
+	public void remove(IViewablePlayer aRemovedObject) {
+		myOutput.setText("-");
 	}
 
 }

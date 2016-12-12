@@ -20,4 +20,6 @@ public interface IComponent {
 	 * @return
 	 */
 	public IEntity getEntity();
+
+	public void delete();
 }

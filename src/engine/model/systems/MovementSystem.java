@@ -5,14 +5,13 @@ import engine.controller.timeline.TimelineController;
 import engine.model.components.concrete.MoveableComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
-import engine.model.strategies.StrategyFactory;
+import engine.model.strategies.factories.MovementStrategyFactory;
 
 public class MovementSystem extends AbstractSystem<MoveableComponent> implements IObserver<TimelineController> {
-	private transient StrategyFactory myStrategyFactory;
-	
+	private transient MovementStrategyFactory myStrategyFactory;
 	
 	public MovementSystem (MapMediator map, TimelineController time) {
-		myStrategyFactory = new StrategyFactory(map);
+		myStrategyFactory = new MovementStrategyFactory(map);
 		time.attach(this);
 	}
 	
@@ -20,7 +19,7 @@ public class MovementSystem extends AbstractSystem<MoveableComponent> implements
 		return getComponent(entity);
 	}
 	
-	public StrategyFactory getStrategyFactory() {
+	public MovementStrategyFactory getStrategyFactory() {
 		return myStrategyFactory;
 	}
 	
@@ -30,5 +29,10 @@ public class MovementSystem extends AbstractSystem<MoveableComponent> implements
 		for (MoveableComponent mc: getComponents()) {
 			mc.move();
 		}
+	}
+
+	@Override
+	public void remove(TimelineController aRemovedObject) {
+		//Do nothing.
 	}
 }

@@ -1,6 +1,5 @@
 package engine.model.entities;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -8,36 +7,40 @@ import java.util.Map;
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
-import engine.controller.waves.PathFollowerData;
 import engine.model.components.ComponentFactory;
-import engine.model.components.IComponent;
 import engine.model.components.IModifiableComponent;
-import engine.model.components.concrete.PhysicalComponent;
 import engine.model.data_stores.DataStore;
 import engine.model.game_environment.MapMediator;
-import engine.model.strategies.IPosition;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 /**
  * Creates all the entities
- * @author owenchung and alanguo
+ * @author owenchung 
+ * @author alanguo
  *
  */
 public class EntityFactory {
 	private static final Point DEFAULT_LOCATION = new Point(0,0);
 	private ComponentFactory myComponentFactory;
+	@SuppressWarnings("unused")
 	private List<ISystem> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
 	private Router myRouter;
 	private MapMediator myMapMediator;
+	private IModifiableEntityManager myEntityManager;
 
-	public EntityFactory(List<ISystem> systems, DataStore<EntityData> entityDataStore, Router router, MapMediator mapMediator) {
+	public EntityFactory(List<ISystem> systems, 
+			DataStore<EntityData> entityDataStore, 
+			Router router, 
+			MapMediator mapMediator,
+			IModifiableEntityManager entityManager) {
 		mySystems = systems;
 		myEntityDataStore = entityDataStore;
 		myRouter = router;
 		myComponentFactory = new ComponentFactory(systems, myRouter); // depends on router initialization
 		myMapMediator = mapMediator;
+		myEntityManager = entityManager;
 	}
 	
 	/**
@@ -45,14 +48,9 @@ public class EntityFactory {
 	 * This way, you wan't need to know everything about an entity to make it, just the entity's name.
 	 * @param entityName
 	 * @return the constructed entity
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws NoSuchMethodException 
-	 * @throws ClassNotFoundException 
+	 * @throws ComponentCreationException  
 	 */
-	public IEntity constructEntity(String entityName) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public IEntity constructEntity(String entityName) throws UnsupportedOperationException {
 		IEntity entity = new ConcreteEntity();
 		EntityData entityData = myEntityDataStore.getData(entityName);
 		Collection<ComponentData> componentMap = entityData.getComponents().values();
@@ -60,30 +58,31 @@ public class EntityFactory {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, null);
 			entity.addComponent(component);	
 		}
+		
 		return entity;
 	}
 	
 	public IEntity constructEntity(EntityData aEntityData) 
-			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+			throws UnsupportedOperationException {
 		return constructEntity(aEntityData, DEFAULT_LOCATION);
 	}
 	
 	public IEntity constructEntity(EntityData aEntityData, Point aLocation) 
-			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, 
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException
+			throws UnsupportedOperationException
 	{
+		//1. Construct the entity object
+		//2. Construct each component using the component factory, and link this to the component object
+		//2.5 Attach components to relevant systems?
+		//3. return the fully constructed object
 		IEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
 			entity.addComponent(component);	
 		}
-		
-		//1. Construct the entity object
-		//2. Construct each component using the component factory, and link this to the component object
-		//2.5 Attach components to relevant systems?
-		//3. return the fully constructed object
+		// Adding the entity to the Entity Manager
+		myEntityManager.addEntity(entity.getId(), entity);
+	
 
 		return entity;
 	}
@@ -124,11 +123,9 @@ public class EntityFactory {
 			if (canPlace) {
 				try {
 					constructEntity(entityData, aLocation);
+					
 					return true;
-				} catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
-						| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (UnsupportedOperationException e) {
 					return false;
 				}
 //				deductCostFromPlayer(entityData.getBuyPrice());

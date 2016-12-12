@@ -107,10 +107,10 @@ public class MockGameDataConstructor {
 			ComponentData cd3 = new ComponentData();
 			cd3.setComponentName("MoveableComponent");
 			cd3.addField("myCollisionRadius", "50");
-			cd3.addField("myTurnSpeed", "10");
-			cd3.addField("myMoveSpeed", "100");
+			cd3.addField("myTurnSpeed", "1");
+			cd3.addField("myMoveSpeed", "1");
 			cd3.addField("myMaxDistance", "100");
-			cd3.addField("myMovementCalc", "PathMovementStrategy");
+			cd3.addField("myMovementCalc", "GreedyMovementStrategy");
 			
 	
 			ComponentData cd4 = new ComponentData();
@@ -118,8 +118,14 @@ public class MockGameDataConstructor {
 			cd4.addField("myDamage", "50");
 			cd4.addField("myDamageRadius", "2");
 			
+			ComponentData cd5 = new ComponentData();
+			cd5.setComponentName("CreatorComponent");
+			cd5.addField("mySpawningStrategy", "BasicSpawningStrategy");
+			cd4.addField("myTimeBetweenSpawns", "10");
+			
+			
 			ed.addComponent("PhysicalComponent",cd1);
-			ed.addComponent("CollidableComponent",cd2);
+			//ed.addComponent("CollidableComponent",cd2);
 			ed.addComponent("MoveableComponent",cd3);
 			
 			// 2nd entity data
@@ -142,11 +148,11 @@ public class MockGameDataConstructor {
 			
 			ComponentData CD3 = new ComponentData();
 			CD3.setComponentName("HealthComponent");
-			CD3.addField("myCurrentHealth", "9000");
+			CD3.addField("myCurrHealth", "9000");
 			CD3.addField("myMaxHealth", "9000");
 			
 			ed2.addComponent("PhysicalComponent",CD1);
-			ed2.addComponent("CollidableComponent",CD2);
+			//ed2.addComponent("CollidableComponent",CD2);
 			ed2.addComponent("HealthComponent",CD3);
 			
 			// Player Data
@@ -159,7 +165,7 @@ public class MockGameDataConstructor {
 			//Level data
 			WaveData wad1 = new WaveData();
 			wad1.setName("Cool wave");
-			wad1.setNumEnemies(10);
+			wad1.setNumEnemies(1);
 			wad1.setSpawnPointName("spawnPoint");
 			wad1.setSinkPointName("sinkPoint");
 			wad1.setTimeBetweenEnemy(20);
@@ -183,8 +189,8 @@ public class MockGameDataConstructor {
 			wad3.setWaveEntity("Awesome Tower2");
 			LevelData ld = new LevelData();
 			ld.addWaveDataListToList(wad1);
-			ld.addWaveDataListToList(wad2);
-			ld.addWaveDataListToList(wad3);
+			//ld.addWaveDataListToList(wad2);
+			//ld.addWaveDataListToList(wad3);
 			ld.setLevelName("0");
 			LevelDataContainer ldc = new LevelDataContainer();
 			ldc.createNewLevelData(ld);

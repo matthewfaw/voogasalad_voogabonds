@@ -15,7 +15,8 @@ import javafx.util.Duration;
  * A class used to encapsulate the Timeline object
  * Any object can observe the timeline, and perform it's updates accordingly
  * 
- * @author matthewfaw (owenchung edited)
+ * @author matthewfaw 
+ * @author owenchung 
  *
  */
 public class TimelineController implements IObservable<TimelineController> {
@@ -67,7 +68,6 @@ public class TimelineController implements IObservable<TimelineController> {
 	 * A method to get the total number of milliseconds elapsed by the timeline
 	 * @return
 	 */
-	//TODO: getTotalDuration will return INDEFINITE
 	public double getTotalTimeElapsed() {
 		return convertNanoToMill(System.nanoTime() - myStartTime );
 	}

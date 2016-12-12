@@ -31,42 +31,47 @@ public class ComponentFactory {
 	 * @param entity
 	 * @param compdata
 	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws NoSuchMethodException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
+	 * @throws UnsupportedOperationException
 	 */
-	public IModifiableComponent constructComponent(ComponentData compdata, Point location) 
-			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> tmpclass =  Class.forName(COMPONENT_PATH+compdata.getComponentName());
-		Constructor<?>[] constructors = tmpclass.getConstructors();
-		
-		// Note: Assuming only one constructor
-		Class<?> [] arguments = constructors[0].getParameterTypes();
-		List<Object> objectsToAttach = new ArrayList<Object>();
-		for (Class<?> arg : arguments) {
-			// attach appropriate system to argument
-			ISystem sysToAdd = getSystemToAttach(arg);
-			if (sysToAdd != null) {
-				objectsToAttach.add(getSystemToAttach(arg));
-				continue;
+	public IModifiableComponent constructComponent(ComponentData compdata, Point location) throws UnsupportedOperationException {
+		try {
+			System.out.println(compdata.getComponentName());
+			Class<?> tmpclass = Class.forName(COMPONENT_PATH+compdata.getComponentName());
+			Constructor<?>[] constructors = tmpclass.getConstructors();
+			// Note: Assuming only one constructor
+			Class<?> [] arguments = constructors[0].getParameterTypes();
+			List<Object> objectsToAttach = new ArrayList<Object>();
+			for (Class<?> arg : arguments) {
+				// attach appropriate system to argument
+				ISystem sysToAdd = getSystemToAttach(arg);
+				if (sysToAdd != null) {
+					objectsToAttach.add(getSystemToAttach(arg));
+					continue;
+				}
+				// check if arg is Router, if so, attach myRouter
+				Router routerToAdd = getRouterToAttach(arg);
+				if (routerToAdd != null) {
+					objectsToAttach.add(getRouterToAttach(arg));
+					continue;
+				}
+				if (Point.class.isAssignableFrom(arg)) {
+					objectsToAttach.add(getPointToAttach(arg, location));
+					continue;
+				}
+				objectsToAttach.add(compdata);
+				
 			}
-			// check if arg is Router, if so, attach myRouter
-			Router routerToAdd = getRouterToAttach(arg);
-			if (routerToAdd != null) {
-				objectsToAttach.add(getRouterToAttach(arg));
-				continue;
+			try {
+				return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException e) {
+				throw new UnsupportedOperationException(COMPONENT_PATH+compdata.getComponentName());
 			}
-			if (Point.class.isAssignableFrom(arg)) {
-				objectsToAttach.add(getPointToAttach(arg, location));
-				continue;
-			}
-			objectsToAttach.add(compdata);
-			
+		} catch (ClassNotFoundException e) {
+			throw new UnsupportedOperationException(COMPONENT_PATH+compdata.getComponentName());
 		}
-		return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
+		
+		
 		
 	}
 	
