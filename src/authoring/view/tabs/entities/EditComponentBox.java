@@ -71,6 +71,11 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     this.getChildren().add(checkbox);
                 }
             } else {
+                if (uglyAttributeName.toLowerCase().contains("strategy")) {
+                    if (uglyAttributeName.toLowerCase().contains("damage")) {
+                        // Damage 
+                    }
+                }
                 TextField field = new TextField();
                 setUpLabeledField(lbl, field);
                 if (lbl.getText().equals(IMAGE_PATH)) {
@@ -170,11 +175,17 @@ public class EditComponentBox extends VBox implements ISubmittable {
         String cleanedName = attribute;
         if (cleanedName.startsWith("my")) {
             cleanedName = cleanedName.substring(2);
+        } else {
+            cleanedName = capitalizeFirstLetter(cleanedName);
         }
         if (!attribute.contains(" ")) {
             cleanedName = this.separateCapitalizedWords(cleanedName);
         }
         return cleanedName;
+    }
+    
+    private String capitalizeFirstLetter(String str) {
+        return str.substring(0,1).toUpperCase() + str.substring(1);
     }
 
     /**
