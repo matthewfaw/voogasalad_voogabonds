@@ -105,7 +105,6 @@ public class GameStateLoader {
 			routerPlayerData.setStartingLives(newPlayerData.getStartingLives());
 			routerPlayerData.setWinStrategyName(newPlayerData.getWinStrategyName());
 		}catch(Exception e){
-			e.printStackTrace();
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
 		}
 	}
