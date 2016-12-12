@@ -11,5 +11,6 @@ public interface IPhysical extends IPosition {
 	public double getHeading();
 	public List<String> getValidTerrains();
 	public void setPosition(Pair<Double, Point> p);
+	public void setPosition(Point position);
 	
 }

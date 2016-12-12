@@ -65,10 +65,10 @@ public class ComponentFactory {
 				return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException e) {
-				throw new UnsupportedOperationException();
+				throw new UnsupportedOperationException(COMPONENT_PATH+compdata.getComponentName());
 			}
 		} catch (ClassNotFoundException e) {
-			throw new UnsupportedOperationException();
+			throw new UnsupportedOperationException(COMPONENT_PATH+compdata.getComponentName());
 		}
 		
 		

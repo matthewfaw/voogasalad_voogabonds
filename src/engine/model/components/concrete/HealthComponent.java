@@ -125,7 +125,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Override
 	public void delete() {
 		myHealthSystem.detachComponent(this);
-		//TODO: Notify observers
+		myObservers.forEach(observer -> observer.remove(this));
 	}
 
 	
