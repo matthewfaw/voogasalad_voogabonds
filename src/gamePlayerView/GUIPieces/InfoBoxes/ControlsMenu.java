@@ -37,7 +37,7 @@ public class ControlsMenu{
         myControls = new Controls();
         buttons = new VBox();
         labels = new VBox();
-        
+        myRoot.setStyle("-fx-base: #000000; -fx-stroke: #6de894;");
     }
     
     public void init(){
@@ -75,7 +75,7 @@ public class ControlsMenu{
             //System.out.println(resources.getString(e.nextElement()));
             Text functionText = new Text();
             functionText.setText(str + ": ");
-            functionText.setStyle(buttonCSS);
+            functionText.setStyle("-fx-fill: white; -fx-font: 22 arial;  ");
             labels.getChildren().add(functionText);
         }
         

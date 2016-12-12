@@ -18,6 +18,7 @@ import engine.IObserver;
 import engine.IViewable;
 import engine.controller.ApplicationController;
 import engine.model.components.concrete.MoveableComponent;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -60,25 +61,26 @@ public class MapGrid extends Node {
     	temp.setStrokeWidth(1);
     	temp.widthProperty().bind(pane.widthProperty().divide(numRows));
     	temp.heightProperty().bind(pane.heightProperty().divide(numColumns));
-    	//temp.setHeight(aCellSize);
-    	//temp.setWidth(aCellSize);
+//    	temp.setHeight(aCellSize);
+//    	temp.setWidth(aCellSize);
     	temp.layoutXProperty().bind(pane.widthProperty().divide(numRows).multiply(row));
     	temp.layoutYProperty().bind(pane.heightProperty().divide(numColumns).multiply(col));
-    	//temp.setX(row*aCellSize);
-    	//temp.setY(col*aCellSize);
+//    	temp.setX(row*aCellSize);
+//    	temp.setY(col*aCellSize);
 //    	loadTerrainData(temp, row, col, aMapData);
 
-    	temp.setOnDragDropped(new EventHandler<DragEvent>() {
+    	temp.setOnDragDropped(new EventHandler<DragEvent>(){
     		public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 //				TowerData data = myTowerColumn.getTowerData(db.getString());
 //				System.out.println(data.getBuyPrice());
 //    			if(!isFull(temp)){
-				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
-//    			}
-				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX(), closestRectangle.getY()));
-				setClickAction();
+	                        System.out.println("Event x, y: " + event.getSceneX() + ", " +  event.getSceneY());
+				Rectangle closestRectangle = findDropLocation(event.getSceneX()-100, event.getSceneY());
+//    			}      
 
+				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getLayoutX(), closestRectangle.getLayoutY()));
+				setClickAction();
 				event.consume();
     		}
     	});
@@ -131,14 +133,24 @@ public class MapGrid extends Node {
     
     public Rectangle findDropLocation(double x, double y){
         closest = new Rectangle();
+        System.out.println("Dropped here: " + x + ", " +  y);
+                
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 Rectangle temp = actualGrid[i][j];
-                if(calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth()) < minDist)
+                System.out.println("Checked rectangle: " + i + ", " + j);
+                System.out.println("Temp x, y: " + temp.getLayoutX() + ", " + temp.getLayoutY());
+                if(calculateDistance(x, y, temp.getLayoutX(), temp.getLayoutY(), temp.heightProperty(), temp.widthProperty()) < minDist)
                         {
-                            minDist = calculateDistance(x, y, temp.getX(), temp.getY(), temp.getHeight(), temp.getWidth());
+                           System.out.println("Old minDist: " + minDist);
+                           
+                            minDist = calculateDistance(x, y, temp.getLayoutX(), temp.getLayoutY(), temp.heightProperty(), temp.widthProperty());
+                            System.out.println("New minDist: " + minDist);
+
                             closest = temp;
+//                            System.out.println(closest.getLayoutX());
+//                            System.out.println(closest.getLayoutY());
                         }
                 else
                 {      
@@ -148,9 +160,13 @@ public class MapGrid extends Node {
         return closest;
     }
     
-    private double calculateDistance (double x, double y, double x2, double y2, double tempHeight, double tempWidth) {
-        return Math.sqrt(Math.pow((x - (x2+tempWidth/2)), 2)
-                         + Math.pow((y - (y2 + tempWidth/2)), 2));
+    private double calculateDistance (double x, double y, double x2, double y2, DoubleProperty height, DoubleProperty width) {
+        //System.out.println("Height and width: " + height.get() + ", " + width.get());
+        //System.out.println(Math.sqrt(Math.pow((x - (x2+width.getValue()/2)), 2)
+                       //  + Math.pow((y - (y2 + height.getValue()/2)), 2)));
+       
+        return Math.sqrt(Math.pow((x - (x2+width.getValue()/2)), 2)
+                         + Math.pow((y - (y2 + height.getValue()/2)), 2));
     }
    
 

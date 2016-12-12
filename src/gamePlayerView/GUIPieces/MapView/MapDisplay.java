@@ -75,7 +75,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         
         myRoot.getChildren().add(myPane);
         background.setRoot(myRoot);
-        myRoot.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+
     }
     
     //TODO: Use timeline controller instead
@@ -146,8 +146,17 @@ public class MapDisplay implements IObserver<TimelineController> {
     }
     
     public void handleKeyInput(KeyCode code){
-        if(code.getName() == myControls.getControlFor("UP")){
-            System.out.println("Up!");
+        System.out.println("hey");
+        System.out.println(myControls.getControlFor("Left"));
+        System.out.println(code);
+        switch (code)
+        {
+            case LEFT:
+                System.out.println("WOO!");
+            break;
+            default:
+                break;
+                
         }
     }
 

@@ -34,6 +34,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -85,6 +86,7 @@ public class GamePlayerScene {
 
 	public void init(Stage s) throws Exception {
 		Scene myScene=build(s);
+	        myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));               
 		setScene(s,myScene);
 	}
 
@@ -152,8 +154,8 @@ public class GamePlayerScene {
 	        myMap = new MapDisplay(myAppController);
 	        myMap.getControls(myControls);
 		//mySprites.add(myMap.getSprites());
-	    pause = new PauseMenu();
-        makePauseMenu();
+	        pause = new PauseMenu();
+	        makePauseMenu();
 		myBorderPane.setRight(myRightPane.getView());
 		myBorderPane.setBottom(myBottomPane.getView());
 		myBorderPane.setCenter(myMap.getView());
@@ -200,7 +202,8 @@ public class GamePlayerScene {
 
 	public void makePauseMenu(){ 
 	    pause.getControls(myControls);
-            myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
+	    pause.getStage(myStage);
+            //myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
     }
 	
 	public List<IPlayerAcceptor> getCash() {
@@ -221,6 +224,8 @@ public class GamePlayerScene {
 	
 	public void giveMapData(MapDataContainer aMapData){
 	        myMap.setMap(aMapData);
+	        //myScene.setOnKeyPressed(e -> myMap.handleKeyInput(e.getCode()));    
+
 	}
 	
 	public MapDisplay getMapDisplay()
@@ -241,6 +246,28 @@ public class GamePlayerScene {
 	//public List<ISprite> getSprites(){
 		//return mySprites;
 	//}
+	
+	    public void handleKeyInput(KeyCode code) {
+	       
+	        if(code.getName().equals(myControls.getControlFor("Up"))){
+	            System.out.println("Going up");
+	        }
+	        else if(code.getName().equals(myControls.getControlFor("Pause"))){
+	            pause.init();
+	        }
+	        else if(code.getName().equals(myControls.getControlFor("Down"))){
+                    System.out.println("Going down");
+                }
+	        else if(code.getName().equals(myControls.getControlFor("Left"))){
+                    System.out.println("Going left");
+                }
+	        else if(code.getName().equals(myControls.getControlFor("Right"))){
+                    System.out.println("Going right");
+                }
+	        else if(code.getName().equals("Space")){
+                    System.out.println("Firing");
+                }
+	    }
 	
 }
 
