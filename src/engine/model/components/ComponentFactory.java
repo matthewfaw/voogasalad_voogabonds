@@ -7,9 +7,9 @@ import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
-import engine.model.entities.IEntity;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
+import utility.Point;
 /**
  * Creates all the components
  * @author owenchung
@@ -17,7 +17,7 @@ import gamePlayerView.gamePlayerView.Router;
  */
 public class ComponentFactory {
         @Hide
-	private static final String COMPONENT_PATH = "engine.model.components.";
+	private static final String COMPONENT_PATH = "engine.model.components.concrete.";
 	private List<ISystem> mySystems;
 	private Router myRouter;
 
@@ -38,7 +38,7 @@ public class ComponentFactory {
 	 * @throws IllegalArgumentException
 	 * @throws InvocationTargetException
 	 */
-	public IModifiableComponent constructComponent(ComponentData compdata) 
+	public IModifiableComponent constructComponent(ComponentData compdata, Point location) 
 			throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> tmpclass =  Class.forName(COMPONENT_PATH+compdata.getComponentName());
 		Constructor<?>[] constructors = tmpclass.getConstructors();
@@ -59,11 +59,23 @@ public class ComponentFactory {
 				objectsToAttach.add(getRouterToAttach(arg));
 				continue;
 			}
+			if (Point.class.isAssignableFrom(arg)) {
+				objectsToAttach.add(getPointToAttach(arg, location));
+				continue;
+			}
 			objectsToAttach.add(compdata);
 			
 		}
 		return (IModifiableComponent) constructors[0].newInstance(objectsToAttach.toArray());
 		
+	}
+	
+	private Point getPointToAttach(Class<?> arg, Point location) {
+		if (arg.isInstance(location)) {
+			return location;
+		} else {
+			return null;
+		}
 	}
 
 

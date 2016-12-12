@@ -1,8 +1,10 @@
 package authoring.view.tabs.entities;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import authoring.model.AttributeFetcher;
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
@@ -140,9 +142,28 @@ public class EditEntityBox extends VBox implements ISubmittable{
     }
 
     private void setUpComponentBox(EntityTab parent, AttributeFetcher fetcher) {
-        ObservableList<String> componentList = FXCollections.observableArrayList(fetcher.getComponentList());
-        componentsBox = parent.setUpStringComboBoxWithLabel(myTab.getResources().getString("AddComponents"), null, componentList, this);
+        List<String> componentList = fetcher.getComponentList();
+        ObservableList<String> list = FXCollections.observableArrayList();
+        componentList.forEach((component) -> list.add(cleanUpComponentName(component)));
+        componentsBox = parent.setUpStringComboBoxWithLabel(myTab.getResources().getString("AddComponents"), null, list, this);
         componentsBox.setOnAction(handleAddComponent(fetcher));
+    }
+    
+    private String cleanUpComponentName(String component) {
+        // remove leading '.' and separate words
+        String cleanedName = component.substring(1);
+        cleanedName = this.separateCapitalizedWords(cleanedName);
+        return cleanedName;
+    }
+
+    /**
+     * Code based from stackoverflow.com
+     * 
+     * @param smooshed
+     * @return
+     */
+    private String separateCapitalizedWords(String smooshed) {
+            return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
     }
 
     private void setUpComponentListView(AttributeFetcher fetcher, Set<String> components) {
@@ -179,7 +200,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
                 if (!myComponents.contains(component)) {
                     myComponents.add(component);
                     ComponentData data = new ComponentData();
-                    for (String attribute : fetcher.getComponentAttributeList(component)) {
+                    for (String attribute : fetcher.getComponentAttributeList(convertBackToFieldName(component))) {
                         data.addField(attribute, "");
                     }
                     myComponentData.put(component, data);
@@ -187,6 +208,23 @@ public class EditEntityBox extends VBox implements ISubmittable{
             }
         };
         return addToListView;
+    }
+    
+    /**
+     * Converts name back into form stored in AttributeFetcher.
+     * 
+     * Converts from the form: 'Physical Component'
+     * To the form: '.PhysicalComponent'
+     * 
+     * @param cleanedName
+     * @return
+     */
+    private String convertBackToFieldName(String cleanedName) {
+        return "."+smoosh(cleanedName);
+    }
+    
+    private String smoosh(String spaced) {
+        return spaced.replaceAll("\\s", "");
     }
 
     private Optional<ButtonType> showNameChangeConfirmation() {
@@ -217,10 +255,10 @@ public class EditEntityBox extends VBox implements ISubmittable{
                     EditComponentBox editComponent;
                     if (myComponentData.containsKey(selectedAttribute)) {
                         //System.out.println("Entity contains this key! (edit)");
-                        editComponent = new EditComponentBox(EditEntityBox.this, myTab, selectedAttribute, myComponentData.get(selectedAttribute).getFields());
+                        editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, selectedAttribute, myComponentData.get(selectedAttribute));
                     } else {
                         //System.out.println("Entity does not contain this key yet! (new)");
-                        editComponent = new EditComponentBox(EditEntityBox.this, myTab, selectedAttribute, fetcher.getComponentAttributeList(selectedAttribute));
+                        editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, selectedAttribute);
                     }
 
                     myTab.getTilePane().getChildren().add(editComponent);

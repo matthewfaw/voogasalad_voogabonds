@@ -3,9 +3,11 @@ import java.awt.List;
 import java.util.ArrayList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 public class PauseMenu {
@@ -18,7 +20,8 @@ public class PauseMenu {
         myRoot = new Pane();
         myStage = new Stage();
         myStage.setTitle("Pause");
-        myWindow = new Scene(myRoot, 200,200);
+        myWindow = new Scene(myRoot, 220,200);
+        controls = new ControlsMenu();
         myWindow.setFill(Color.DODGERBLUE);
         myStage.setScene(myWindow);
     }
@@ -33,18 +36,23 @@ public class PauseMenu {
         }
     }
     
-    private ArrayList<Button> addButtons(){
-        ArrayList<Button> buttonList = new ArrayList<Button>();
-        buttonList.add(makeButton("RESUME", 78, 20));
-        buttonList.add(makeButton("CONTROLS", 78, 70));
-        buttonList.add(makeButton("HELP", 90, 120));
+    private VBox addButtons(){
+        VBox buttonList = new VBox();
+        buttonList.setSpacing(10);
+        buttonList.setLayoutX(10);
+        buttonList.setLayoutY(10);
+        buttonList.getChildren().add(makeButton("RESUME"));
+        buttonList.getChildren().add(makeButton("CONTROLS"));
+        buttonList.getChildren().add(makeButton("HELP"));
+        
         return buttonList;
     }
     
-    public Button makeButton(String text, double x, double y){
+    public Button makeButton(String text){
         Button newButton = new Button(text);
-        newButton.setTranslateX(x);
-        newButton.setTranslateY(y);
+        newButton.setPrefWidth(200);
+        newButton.setPrefHeight(50);
+        newButton.setStyle("-fx-font: 22 arial; -fx-base: #6de894;");
         newButton.setOnMouseClicked(e -> buttonFunction(text));
         return newButton;
     }
@@ -55,7 +63,7 @@ public class PauseMenu {
                 kill();
                 break;
             case "CONTROLS":
-                controls = new ControlsMenu();
+               
                 kill();
                 controls.init();
             default:
@@ -65,9 +73,11 @@ public class PauseMenu {
     public void init(){
         myRoot.getChildren().addAll(addButtons());
         myStage.show();
-        
     }
-    
+  
+    public void getControls(Controls cont){
+        controls.getControlsToDisplay(cont);
+    }
     //method to get controls
     
     public void kill(){

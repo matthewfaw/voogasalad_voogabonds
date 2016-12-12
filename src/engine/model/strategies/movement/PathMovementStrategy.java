@@ -20,7 +20,7 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	
 	public PathMovementStrategy(StrategyFactory creator) {
 		super(creator);
-		myMap = creator.getPhysicalSystem().getMap();
+		myMap = creator.getMap();
 	}
 	
 	@Override

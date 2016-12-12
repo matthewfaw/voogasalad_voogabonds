@@ -8,6 +8,7 @@ import authoring.controller.MapDataContainer;
 import authoring.controller.Router;
 import authoring.model.EntityList;
 import authoring.view.menus.FileMenuBar;
+import authoring.view.menus.TopMenuBar;
 import authoring.view.tabs.LevelTab;
 import authoring.view.tabs.MapTab;
 import authoring.view.tabs.RulesTab;
@@ -26,20 +27,16 @@ public class AuthorDisplay {
     
     private BorderPane root;
     private TabPane tabPane;
-    private FileMenuBar topMenuBar;
-    private Router r;
+    private TopMenuBar topMenuBar;
     private EntityList el;
     private Scene scene;
-    private int mapXDim;
-    private int mapYDim;
-    private MapDataContainer mapData;
+    private Router router;
     
-    public AuthorDisplay(MainInitializer mainInit, BorderPane pane, Scene scn, MapDataContainer container) {
+    public AuthorDisplay(BorderPane pane, Scene scn, Router r) {
         // set title
-        mainInit.setTitle(AUTHORING_TITLE);
+//        scn.setTitle(AUTHORING_TITLE);
         this.scene = scn;
-
-        this.mapData = container;
+        this.router = r;
         // Set up BorderPane
         root = pane;
         // bind to take available space
@@ -47,14 +44,12 @@ public class AuthorDisplay {
 //        root.prefWidthProperty().bind(pane.widthProperty());
         
         // Set up Top Toolbar
-        topMenuBar = new FileMenuBar(pane);
+        topMenuBar = new TopMenuBar(pane, router);
         
         // Set up TabPane
         tabPane = new TabPane();
         tabPane.setId("background");
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        // Set up Router
-        r = new Router();
         
         // Add Tabs
         try {
@@ -70,7 +65,7 @@ public class AuthorDisplay {
         }
 
         // Set regions of BorderPane
-        root.setTop(topMenuBar);
+//        root.setTop(topMenuBar);
         root.setCenter(tabPane);
     }
     
@@ -82,12 +77,13 @@ public class AuthorDisplay {
         List<Tab> tabs = new ArrayList<>();
         
         // Define Tabs
+        MapDataContainer mapData = router.getMapDataContainer();
         MapTab mapTab = new MapTab(tabPane, scene, mapData);
-        EntityTab entityTab = new EntityTab(r.getEntityDataContainer());
-        RulesTab rulesTab = new RulesTab("Rules", r.getPlayerDataContainer());
-        WaveTab waveTab = new WaveTab("Waves", r.getWaveDataContainer());
-        LevelTab levelTab = new LevelTab("Levels", r.getLevelDataContainer());
-        r.link(entityTab, levelTab, waveTab);
+        EntityTab entityTab = new EntityTab(router.getEntityDataContainer());
+        RulesTab rulesTab = new RulesTab("Rules", router.getPlayerDataContainer());
+        WaveTab waveTab = new WaveTab("Waves", router.getWaveDataContainer());
+        LevelTab levelTab = new LevelTab("Levels", router.getLevelDataContainer());
+        router.link(entityTab, levelTab, waveTab);
         // Add Tabs to list
         tabs.add(mapTab);
         tabs.add(entityTab);
@@ -100,7 +96,7 @@ public class AuthorDisplay {
     }
     
     public Router getRouter(){
-    	return r;
+    	return router;
     }
 
 }

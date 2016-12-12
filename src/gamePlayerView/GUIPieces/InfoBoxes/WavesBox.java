@@ -2,7 +2,8 @@ package gamePlayerView.GUIPieces.InfoBoxes;
 
 import engine.IObservable;
 import engine.IObserver;
-import gamePlayerView.interfaces.IWavesAcceptor;
+import engine.model.playerinfo.IViewablePlayer;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 
 /**
  * @author Guhan Muruganandam
@@ -12,19 +13,19 @@ import gamePlayerView.interfaces.IWavesAcceptor;
  * UI feature for Waves text box and Label
  */
 
-public class WavesBox extends InfoBox implements IObserver,IWavesAcceptor {
+public class WavesBox extends InfoBox implements IObserver<IViewablePlayer>,IPlayerAcceptor {
 	
 	public WavesBox(){
 		myDisplay=makeDisplay("Waves: ");
 	}
 
-	public void acceptWaves(IObservable aObservable) {
+	public void acceptPlayer(IObservable aObservable) {
 		aObservable.attach(this);
 	}
-
 	@Override
-	public void update(Object aChangedObject) {
-		myOutput.setText(aChangedObject.toString());
+	public void update(IViewablePlayer aChangedObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

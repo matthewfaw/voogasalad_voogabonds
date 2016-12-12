@@ -11,12 +11,14 @@ import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
+import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
 import engine.model.game_environment.distributor.MapDistributor;
+import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
@@ -51,7 +53,6 @@ public class BackendController {
 	private DataStore<EntityData> myEntityDataStore;
 	private PlayerData myPlayerData;
 	private LevelDataContainer myLevelDataContainer;
-	private MapDistributor myMapDistributor;
 	private MapMediator myMapMediator;
 	
 	//Controllers to manage events
@@ -69,7 +70,7 @@ public class BackendController {
 	private HealthSystem myHealthSystem;
 	private MovementSystem myMovementSystem;
 	private PhysicalSystem myPhysicalSystem;
-	private RewardSystem myRewardSystem;
+	private BountySystem myBountySystem;
 	private SpawningSystem mySpawningSystem;
 	private TargetingSystem myTargetingSystem;
 	private TeamSystem myTeamSystem;
@@ -95,17 +96,17 @@ public class BackendController {
 	private void constructSystems() {
 		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		myRewardSystem = new RewardSystem();
+		myBountySystem = new BountySystem();
 		myDamageDealingSystem = new DamageDealingSystem();
 		
 		// ORDERING MATTERS for physical -> targeting -> collision -> movement
 		myPhysicalSystem = new PhysicalSystem(myMapMediator);
 		
-		myTargetingSystem = new TargetingSystem(myPhysicalSystem, myTeamSystem);
-		myCollisionDetectionSystem = new CollisionDetectionSystem(myPhysicalSystem);
+		myTargetingSystem = new TargetingSystem();
+		myCollisionDetectionSystem = new CollisionDetectionSystem();
 		
-		myMovementSystem = new MovementSystem(myPhysicalSystem, myCollisionDetectionSystem, myTargetingSystem, myTimelineController);
-		mySpawningSystem = new SpawningSystem(myPhysicalSystem, myTargetingSystem);
+		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
+		mySpawningSystem = new SpawningSystem();
 		
 	}
 	
@@ -118,7 +119,25 @@ public class BackendController {
 	 */
 	public void attemptToPlaceEntity(String aEntityName, Point aLocation)
 	{
-//		myMapDistributor.distribute(aEntityName, aPlayerID, aLocation);
+		boolean success = myEntityFactory.distributeEntity(aEntityName, aLocation);
+		if (success) {
+			EntityData entityData = myEntityDataStore.getData(aEntityName);
+			if (entityData != null) {
+				int cost = entityData.getBuyPrice();
+				// TODO: change if implementing multiplayer
+				deductCostFromPlayer(cost, 0); // hard coded as 0th player
+			}
+			
+		}
+	}
+	
+	/**
+	 * Deducts the cost of an entity from a player.
+	 * @param buyPrice
+	 */
+	private void deductCostFromPlayer(int buyPrice, int playerID) {
+		Player myPlayer = myPlayerController.getPlayer(playerID);
+		myPlayer.updateAvailableMoney(-1*buyPrice);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -145,8 +164,6 @@ public class BackendController {
 		constructSystems();
 		
 		constructEntityFactory(); //depends on constructing systems first
-		
-		
 	}
 
 	private void constructEntityFactory() {
@@ -156,11 +173,12 @@ public class BackendController {
 		mySystems.add(myHealthSystem);
 		mySystems.add(myMovementSystem);
 		mySystems.add(myPhysicalSystem);
-		mySystems.add(myRewardSystem);
+		mySystems.add(myBountySystem);
 		mySystems.add(mySpawningSystem);
 		mySystems.add(myTargetingSystem);
+		mySystems.add(myTeamSystem);
 		
-		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter);
+		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator);
 	}
 
 	/**
@@ -178,7 +196,6 @@ public class BackendController {
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			myMapMediator = new MapMediator(mapData);
-			myMapDistributor = new MapDistributor(myMapMediator, myResourceStore, myEntityFactory, myPlayerController);
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);
@@ -264,13 +281,25 @@ public class BackendController {
 		myTimelineController.pause();
 	}
 	
+	public void save()
+	{
+		JSONSerializer js = new JSONSerializer();
+		try {
+			js.serializeToFile(new String("hi"), "derp");
+			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
+			System.out.println(s);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
-	/*
+	
 	public static void main(String[] args)
 	{
 		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
-		controller.getClass();
+//		controller.getClass();
+		controller.save();
 	}
-	*/
 	
 }

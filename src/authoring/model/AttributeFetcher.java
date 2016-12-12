@@ -9,23 +9,26 @@ import utility.FileRetriever;
 public class AttributeFetcher {
 
 	public Map<String, List<String>> componentAttributeMap = new HashMap<String, List<String>>();
+	public Map<String, List<String>> componentAttributeTypeMap = new HashMap<String, List<String>>();
 	public List<String> componentList;
 	public List<String> attributeList;
-	private final String PACKAGE = "engine/model/components";
+	public List<String> attributeTypeList;
+	private final String PACKAGE = "engine/model/components/concrete";
 	private final String EXTENSION = ".class";
 	private int index;
 
 	public void fetch() throws ClassNotFoundException {
 		componentList = new ArrayList<String>();
-//		File dir = new File(PATH);
+		//		File dir = new File(PATH);
 		List<String> fileList = new ArrayList<String>();
 		FileRetriever fr = new FileRetriever(PACKAGE);
 		fileList = fr.getFileNames("/");
-		
+
 
 		for (String fileName : fileList){
 
 			attributeList = new ArrayList<String>();
+			attributeTypeList = new ArrayList<String>();
 
 			String tempString = fileName;
 			tempString = fileName;
@@ -35,17 +38,19 @@ public class AttributeFetcher {
 			try{
 				Class<?> cls = Class.forName(tempString);
 				String newCompName = tempString.substring(PACKAGE.length(), tempString.length());
-				newCompName = newCompName.substring(1);
-				String componentName = separateCapitalizedWords(newCompName);
-				componentList.add(componentName);
-				
+				//newCompName = newCompName.substring(1); // remove leading '.'
+				//String componentName = separateCapitalizedWords(newCompName);
+				componentList.add(newCompName);
+
 				//if field does not have custom annotation, add to map
-					for (Field f : cls.getDeclaredFields()){
-					if (!f.isAnnotationPresent(Hide.class)){	
+				for (Field f : cls.getDeclaredFields()){
+					if (!f.isAnnotationPresent(Hide.class)){
 						attributeList.add(fieldManipulator(f));
+						attributeTypeList.add(f.getType().getSimpleName());
 					}
 				}
-				componentAttributeMap.put(componentName, attributeList);
+				componentAttributeMap.put(newCompName, attributeList);
+				componentAttributeTypeMap.put(newCompName, attributeTypeList);
 			}
 			catch(ClassNotFoundException | SecurityException | IllegalArgumentException e){
 				throw new ClassNotFoundException(String.format("No such class: %s", tempString));
@@ -53,18 +58,14 @@ public class AttributeFetcher {
 		}
 
 	}
-	
-	private String separateCapitalizedWords(String smooshed) {
-	    return smooshed.replaceAll("(\\p{Ll})(\\p{Lu})","$1 $2");
-	}
-	
+
 	private String fieldManipulator(Field f){	
 		String fieldString = f.toString();
 		fieldString = fieldString.substring(fieldString.lastIndexOf(".")+1, fieldString.length());
-		// Assuming all fields start with 'my'
-		fieldString = fieldString.substring(2);
-		String fieldStringSpaced = this.separateCapitalizedWords(fieldString);
-		return fieldStringSpaced;
+//		// Assuming all fields start with 'my'
+//		fieldString = fieldString.substring(2);
+//		String fieldStringSpaced = this.separateCapitalizedWords(fieldString);
+		return fieldString;
 	}
 
 	public List<String> getComponentList(){
@@ -73,6 +74,9 @@ public class AttributeFetcher {
 
 	public List<String> getComponentAttributeList(String component){
 		return componentAttributeMap.get(component);
+	}
+	public List<String> getComponentAttributeTypeList(String component){
+		return componentAttributeTypeMap.get(component);
 	}
 
 }

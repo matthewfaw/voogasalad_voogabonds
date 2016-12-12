@@ -13,4 +13,6 @@ public class Resources {
 	public static final double ELEVEN_SIXTEENTHS=0.6875;
 	public static final double THIRTEEN_SIXTEENTHS=0.8125;
 	public static final double ONE_SIXTEENTH=0.0625;
+	public static final double SCREEN_WIDTH=1000;
+	public static final double SCREEN_HEIGHT=700;
 }
