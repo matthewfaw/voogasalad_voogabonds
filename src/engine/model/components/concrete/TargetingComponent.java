@@ -1,11 +1,13 @@
 package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
+import authoring.model.Hide;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ITargeting;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.systems.PhysicalSystem;
+import engine.model.systems.TargetingSystem;
 import engine.model.systems.TeamSystem;
 
 public class TargetingComponent extends AbstractComponent implements ITargeting {
@@ -15,15 +17,21 @@ public class TargetingComponent extends AbstractComponent implements ITargeting 
 	private boolean myTargetsEnemies;
 	private ITargetingStrategy myTargetingStrategy;
 	
+	@Hide
 	private PhysicalSystem myPhysical;
+	@Hide
 	private TeamSystem myTeams;
 	
-	public TargetingComponent(PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
+	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
 		myPhysical = physical;
 		myTeams = teams;
+		
 		mySightRange = Double.parseDouble(componentData.getFields().get("mySightRange"));
 		mySightWidth = Double.parseDouble(componentData.getFields().get("mySightWidth"));
 		myTargetsEnemies = Boolean.parseBoolean(componentData.getFields().get("myTargestEnemies"));
+		myTargetingStrategy = target.newStrategy(componentData.getFields().get("myTargetingStrategy"));
+				
+		target.attachComponent(this);
 	}
 	
 	@Override

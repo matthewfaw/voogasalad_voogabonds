@@ -5,18 +5,14 @@ import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
-import engine.IObservable;
 import engine.IObserver;
-import engine.IViewable;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IViewableHealth;
-import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.HealthSystem;
 import engine.model.weapons.DamageInfo;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Damage;
-import utility.Point;
 
 /**
  * The purpose of this class is to manage the health information
@@ -24,18 +20,10 @@ import utility.Point;
  * manages how an entity should take damage
  * @author matthewfaw
  * @author Weston
-<<<<<<< HEAD
- * @author owenchung (edit)
- *
-||||||| merged common ancestors
- * @author owenchung (edits)
- *
-=======
  * @author owenchung (edits)
  * @author alanguo (edits)
->>>>>>> health
  */
-public class HealthComponent extends AbstractComponent implements IViewableHealth{
+public class HealthComponent extends AbstractComponent implements IViewableHealth {
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
@@ -47,24 +35,16 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private List<IObserver<IViewableHealth>> myObservers;
 	
-	@Hide
-	private Router myRouter;
-	
-	public HealthComponent(/*HealthSystem healthSystem, */BountySystem bounty,  ComponentData componentdata, Router router) {
-		myRouter = router;
+	public HealthComponent(HealthSystem healthSystem, BountySystem bounty,  ComponentData componentdata, Router router) {
 		myBounty = bounty;
 		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		
 		myObservers = new ArrayList<IObserver<IViewableHealth>>();
 		
-//		healthSystem.attachComponent(this);
+		healthSystem.attachComponent(this);
 		
-		myCurrHealth = DEFAULT_HEALTH;
-		myMaxHealth = DEFAULT_HEALTH;
-		
-		// TODO: distribute through the router
-//		myRouter.distributeViewableHealthComponent(this);
+		//myRouter.distributeViewableHealthComponent(this);
 	}
 		
 	public int getCurrentHealth() {

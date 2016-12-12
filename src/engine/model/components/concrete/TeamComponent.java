@@ -15,11 +15,9 @@ public class TeamComponent extends AbstractComponent {
 	
 	public TeamComponent(ComponentData componentData) {
 		myTeamID = componentData.getFields().get("myTeamID");
-		
 	}
 	
-	public String getTeamID()
-	{
+	public String getTeamID() {
 		return myTeamID;
 	}
 	
