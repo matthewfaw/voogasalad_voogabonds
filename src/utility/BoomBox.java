@@ -2,6 +2,7 @@ package utility;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -18,12 +19,30 @@ public class BoomBox {
 		Media hit = new Media(music);
 		mp = new MediaPlayer(hit);
 		
+		mp.play();
+	}
+	
+	public static void playMusicOnLoop(String mp3Name){
+		playMusic(mp3Name);
+		onRepeat(mp);
+	}
+	
+	public static void playMusicSet(List<String> mp3Names){
+		for (String song:mp3Names){
+			playMusic(song);
+			if (song.equals(mp3Names.get(mp3Names.size()))){
+				song = mp3Names.get(0);
+			}
+		}
+		
+	}
+	
+	private static void onRepeat(MediaPlayer mp){
 		mp.setOnEndOfMedia(new Runnable() {
 		       public void run() {
-		         mp.seek(Duration.ZERO);
-		       }
-		   });
-		  mp.play();
+			         mp.seek(Duration.ZERO);
+			       }
+			   });
 	}
 
 }
