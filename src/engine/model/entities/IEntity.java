@@ -3,6 +3,7 @@ package engine.model.entities;
 import java.util.List;
 
 import engine.IObservable;
+import engine.model.components.IComponent;
 import engine.model.components.IModifiableComponent;
 
 
