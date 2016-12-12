@@ -104,15 +104,18 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     
                     fileList = fr.getFileNames("/");
                     ComboBox<String> strategyChoice = new ComboBox<String>(FXCollections.observableArrayList(fileList));
-                    
-                    //ComboBox<String> strategyChoice = grandparent.setUpStringComboBoxWithLabel(lbl.getText(), null, FXCollections.observableArrayList(fileList), this);
-                    
+                    lbl.setLabelFor(strategyChoice);
+                    lbl.setId("label");
+                    strategyChoice.setId("combobox");
+                    this.getChildren().addAll(lbl, strategyChoice);
                 }
-                TextField field = new TextField();
-                setUpLabeledField(lbl, field);
-                if (lbl.getText().equals(IMAGE_PATH)) {
-                    Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
-                    this.getChildren().add(browse);
+                else {
+                    TextField field = new TextField();
+                    setUpLabeledField(lbl, field);
+                    if (lbl.getText().equals(IMAGE_PATH)) {
+                        Button browse = grandparent.setUpBrowseButton(field, "PNG", "*.png");
+                        this.getChildren().add(browse);
+                    }
                 }
             }
         }
