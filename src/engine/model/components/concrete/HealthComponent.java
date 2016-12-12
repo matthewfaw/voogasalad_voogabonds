@@ -21,7 +21,7 @@ import utility.Damage;
 public class HealthComponent extends AbstractComponent {
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
-
+	@Hide
 	private BountySystem myBounty;
 	//private HealthSystem myHealthSystem;
 	private Double myCurrHealth;

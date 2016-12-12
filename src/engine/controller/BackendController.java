@@ -11,11 +11,14 @@ import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
+import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
 import engine.model.game_environment.MapMediator;
+import engine.model.game_environment.distributor.MapDistributor;
+import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
 import gamePlayerView.gamePlayerView.Router;
@@ -116,7 +119,25 @@ public class BackendController {
 	 */
 	public void attemptToPlaceEntity(String aEntityName, Point aLocation)
 	{
-		myEntityFactory.distributeEntity(aEntityName, aLocation);
+		boolean success = myEntityFactory.distributeEntity(aEntityName, aLocation);
+		if (success) {
+			EntityData entityData = myEntityDataStore.getData(aEntityName);
+			if (entityData != null) {
+				int cost = entityData.getBuyPrice();
+				// TODO: change if implementing multiplayer
+				deductCostFromPlayer(cost, 0); // hard coded as 0th player
+			}
+			
+		}
+	}
+	
+	/**
+	 * Deducts the cost of an entity from a player.
+	 * @param buyPrice
+	 */
+	private void deductCostFromPlayer(int buyPrice, int playerID) {
+		Player myPlayer = myPlayerController.getPlayer(playerID);
+		myPlayer.updateAvailableMoney(-1*buyPrice);
 	}
 	
 	//TODO: Update when WaveData is ready from Authoring
@@ -143,8 +164,6 @@ public class BackendController {
 		constructSystems();
 		
 		constructEntityFactory(); //depends on constructing systems first
-		
-		
 	}
 
 	private void constructEntityFactory() {
@@ -262,13 +281,25 @@ public class BackendController {
 		myTimelineController.pause();
 	}
 	
+	public void save()
+	{
+		JSONSerializer js = new JSONSerializer();
+		try {
+			js.serializeToFile(new String("hi"), "derp");
+			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
+			System.out.println(s);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
-	/*
+	
 	public static void main(String[] args)
 	{
 		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
-		controller.getClass();
+//		controller.getClass();
+		controller.save();
 	}
-	*/
 	
 }
