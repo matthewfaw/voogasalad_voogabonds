@@ -17,6 +17,7 @@ import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * The purpose of this class is to manage the work necessary
@@ -56,7 +57,9 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 			TargetingSystem targeting,
 			MovementSystem movement,
 			EntityFactory factory,
-			ComponentData data) {
+			ComponentData data,
+			Router router) {
+		super(router);
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myPhysical = physical;
 		myTargeting = targeting;

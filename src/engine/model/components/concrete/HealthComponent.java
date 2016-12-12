@@ -40,11 +40,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	
-	@Hide
-	private Router myRouter;
-	
 	public HealthComponent(/*HealthSystem healthSystem, */BountySystem bounty,  ComponentData componentdata, Router router) {
-		myRouter = router;
+		super(router);
 		myBounty = bounty;
 		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
@@ -55,9 +52,6 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		
 		myCurrHealth = DEFAULT_HEALTH;
 		myMaxHealth = DEFAULT_HEALTH;
-		
-		// TODO: distribute through the router
-//		myRouter.distributeViewableHealthComponent(this);
 	}
 		
 	public int getCurrentHealth() {

@@ -17,6 +17,7 @@ import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TargetingSystem;
+import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
 import utility.Point;
 
@@ -53,8 +54,10 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
-			ComponentData data
+			ComponentData data,
+			Router router
 			) throws ClassNotFoundException {
+		super(router);
 		
 		myPhysical = physical;
 		myTargeting = targeting;

@@ -15,6 +15,7 @@ import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * The purpose of this class is to encapsulate the information relevant
@@ -41,7 +42,9 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			HealthSystem healthSystem,
 			DamageDealingSystem damageDealingSystem, 
 			BountySystem rewardSystem,
-			ComponentData data) {
+			ComponentData data,
+			Router router) {
+		super(router);
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;

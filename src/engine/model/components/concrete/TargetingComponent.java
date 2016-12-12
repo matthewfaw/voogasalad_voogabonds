@@ -14,6 +14,7 @@ import engine.model.strategies.IPosition;
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TeamSystem;
+import gamePlayerView.gamePlayerView.Router;
 
 public class TargetingComponent extends AbstractComponent implements ITargeting, IViewableTargeting {
 
@@ -30,7 +31,8 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	
-	public TargetingComponent(PhysicalSystem physical, TeamSystem teams, ComponentData componentData) {
+	public TargetingComponent(PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
+		super(router);
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myPhysical = physical;
 		myTeams = teams;

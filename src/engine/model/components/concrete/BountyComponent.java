@@ -10,6 +10,7 @@ import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewableBounty;
 import engine.model.systems.BountySystem;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * The purpose of this class is to manage the information
@@ -26,7 +27,8 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	@Hide
 	private List<IObserver<IViewable>> myObservers;
 	
-	public BountyComponent (BountySystem bountySystem, ComponentData data) {
+	public BountyComponent (BountySystem bountySystem, ComponentData data, Router router) {
+		super(router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		bountySystem.attachComponent(this);

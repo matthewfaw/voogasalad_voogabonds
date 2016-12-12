@@ -17,6 +17,7 @@ import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.weapons.DamageInfo;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Damage;
 
 /**
@@ -44,8 +45,10 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 			DamageDealingSystem damageDealingSystem,
 			HealthSystem healthSysytem,
 			PhysicalSystem physicalSystem,
-			ComponentData data
+			ComponentData data,
+			Router router
 			) {
+		super(router);
 		
 		myObservers = new ArrayList<IObserver<IViewable>>();
 		myHealthSystem = healthSysytem;
