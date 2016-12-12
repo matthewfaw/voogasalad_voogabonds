@@ -56,7 +56,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myHeading = 0;
 		
 		physical.attachComponent(this);
-		router.distributeViewableComponent(this);
+		router.createNewViewableComponent(this);
 		setPosition(position);
 	}
 	
@@ -133,7 +133,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	public void delete() {
 		mySystem.detachComponent(this);
 		myPosition = null;
-		myObservers.forEach(observer -> observer.update(this));
+		myObservers.forEach(observer -> observer.remove(this));
 	}
 	
 	@Override

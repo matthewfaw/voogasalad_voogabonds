@@ -48,6 +48,14 @@ public class Router {
 		//mySprites = myGamePlayerScene.getSprites();
 	}
 	
+	/**
+	 * Create a new moveable component data using an iviewablephysical.
+	 * Should happen whenever a new PhysicalComponent is constructed.
+	 */
+	public void createNewViewableComponent(IViewablePhysical physicalComponent) {
+		myGamePlayerScene.getMapDisplay().giveViewableComponent(physicalComponent, physicalComponent.getEntityID());
+	}
+	
 	public void distributeErrors(String aErrorMessage)
 	{
 	    ErrorPopup error = new ErrorPopup(aErrorMessage);
@@ -99,6 +107,7 @@ public class Router {
 	 * A method to distribute viewable game elements
 	 * @param aComponent
 	 */
+	
 	//public void distributeViewableComponent(IObservable<IViewable> aComponent)
 	//{
 		//TODO: give all viewable components the new component
@@ -145,10 +154,6 @@ public class Router {
 	public void distributeViewableComponent(IViewableHealth aComponent)
 	{
 		
-	}
-	public void distributeViewableComponent(IObservable<IViewablePhysical> aComponent)
-	{
-		//TODO: give all viewable components the new component
 	}
 	
 	/**
