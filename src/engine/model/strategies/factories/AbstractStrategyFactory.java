@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import utility.ResouceAccess;
 
 abstract public class AbstractStrategyFactory<A> {
-	private static final String STRATEGY_PATH = new String("src/engine/model/strategies/");
+	private static final String STRATEGY_PATH = "src/engine/model/strategies/";
 	private List<String> myAtypeStrategies;
 	private String myFolderPath;
 	

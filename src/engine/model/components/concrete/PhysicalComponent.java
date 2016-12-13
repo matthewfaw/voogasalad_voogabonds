@@ -30,13 +30,13 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private List<String> myValidTerrains;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private transient List<IObserver<IViewable>> myObservers;
 	@Hide
 	private Point myPosition;
 	@Hide
 	private double myHeading;
 	@Hide
-	private PhysicalSystem mySystem;
+	private transient PhysicalSystem mySystem;
 
 	
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
