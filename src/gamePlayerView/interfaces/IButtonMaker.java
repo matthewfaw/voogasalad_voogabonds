@@ -7,5 +7,5 @@ import javafx.scene.control.Button;
  */
 
 public interface IButtonMaker {
-	public Button makeButton();
+	public Button makeButton(String text);
 }

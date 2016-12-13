@@ -1,14 +1,20 @@
 package engine.model.components.concrete;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewableCollidable;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
 import engine.model.systems.PhysicalSystem;
+import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
 
 /**
@@ -19,7 +25,7 @@ import utility.Point;
  * @author matthewfaw
  *
  */
-public class CollidableComponent extends AbstractComponent implements ICollidable {
+public class CollidableComponent extends AbstractComponent implements ICollidable, IViewableCollidable {
 	private double myCollisionRadius;
 	
 	@Hide
@@ -29,14 +35,19 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	@Hide
 	private CollisionDetectionSystem myCollidable;
 	
+	@Hide
+	private List<IObserver<IViewableCollidable>> myObservers;
+	
 	public CollidableComponent (
 			CollisionDetectionSystem collisionDetectionSystem, 
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
 			DamageDealingSystem damageDealingSystem, 
 			BountySystem rewardSystem,
-			ComponentData data) {
-		
+			ComponentData data,
+			Router router) {
+		super(router);
+		myObservers = new ArrayList<IObserver<IViewableCollidable>>();
 		myCollidable = collisionDetectionSystem;
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
@@ -47,6 +58,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	}
 
 	//*******************ICollidable interface***********//
+	@Override
 	public double getCollisionRadius()
 	{
 		return myCollisionRadius;
@@ -88,9 +100,35 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 		myDamageDealingSystem.dealDamageToTarget(a, b);
 
 	}
-	
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
+
+	/******************IObservable interface********/
+	@Override
+	public void attach(IObserver<IViewableCollidable> aObserver) {
+		myObservers.add(aObserver);
+	}
+
+	@Override
+	public void detach(IObserver<IViewableCollidable> aObserver) {
+		myObservers.remove(aObserver);
+	}
+
+	@Override
+	public void notifyObservers() {
+		myObservers.forEach(observer -> observer.update(this));
+	}
+
 	@Override
 	public void delete() {
 		myCollidable.detachComponent(this);
+	}
+
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
 	}
 }

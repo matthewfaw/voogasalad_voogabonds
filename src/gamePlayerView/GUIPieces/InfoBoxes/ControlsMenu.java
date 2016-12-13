@@ -1,13 +1,6 @@
 package gamePlayerView.GUIPieces.InfoBoxes;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -30,14 +23,14 @@ public class ControlsMenu{
         myRoot = new Pane();
         myStage = new Stage();
         myStage.setTitle("Select Controls");
-        myWindow = new Scene(myRoot, 400,400);
+        myWindow = new Scene(myRoot, 400,450);
         myWindow.setFill(Color.DODGERBLUE);
         myStage.setScene(myWindow);
         //can't make a new controls here... have to get from gameplayer
         myControls = new Controls();
         buttons = new VBox();
         labels = new VBox();
-        
+        myRoot.setStyle("-fx-base: #000000; -fx-stroke: #6de894;");
     }
     
     public void init(){
@@ -51,7 +44,7 @@ public class ControlsMenu{
     private void addApplyButton () {
         Button apply = new Button();
         apply.setLayoutX(150);
-        apply.setLayoutY(330);
+        apply.setLayoutY(385);
         apply.setText("APPLY");
         apply.setStyle(buttonCSS);
         apply.setOnMouseClicked(e -> saveControls());
@@ -75,7 +68,7 @@ public class ControlsMenu{
             //System.out.println(resources.getString(e.nextElement()));
             Text functionText = new Text();
             functionText.setText(str + ": ");
-            functionText.setStyle(buttonCSS);
+            functionText.setStyle("-fx-fill: white; -fx-font: 22 arial;  ");
             labels.getChildren().add(functionText);
         }
         

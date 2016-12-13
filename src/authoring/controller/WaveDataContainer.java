@@ -80,4 +80,11 @@ public class WaveDataContainer extends Container implements IObservable<Containe
 			observer.update(this);
 		}
 	}
+
+	public void removeWaveData(String selected) throws Exception {
+		WaveData wave = myWaveMap.remove(selected);
+		if (wave == null){
+			throw new Exception("Wave does not exist.");
+		}
+	}
 }

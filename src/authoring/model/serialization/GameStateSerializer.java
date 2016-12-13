@@ -91,8 +91,8 @@ public class GameStateSerializer {
 			newDir.mkdir();
 		}
 		else{
-			//prompt user if they want to overwrite save data
-			System.out.println("File already exists.");
+			System.out.print("ASDFASDFASDFASDF");
+			OverwriteSaveDialog dialog = new OverwriteSaveDialog(newDir);
 		}
 
 	}

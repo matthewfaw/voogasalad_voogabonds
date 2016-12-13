@@ -1,14 +1,15 @@
 package engine.model.components.concrete;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.IObserver;
-import engine.IViewable;
 import engine.model.components.AbstractComponent;
+import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -24,13 +25,13 @@ import utility.Point;
  * @author owenchung (edits)
  *
  */
-public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewable {
+public class PhysicalComponent extends AbstractComponent implements IPhysical, IViewablePhysical {
 	private String myImagePath;
 	private double myImageSize;
 	private List<String> myValidTerrains;
 	
 	@Hide
-	private List<IObserver<IViewable>> myObservers;
+	private List<IObserver<IViewablePhysical>> myObservers;
 	@Hide
 	private Point myPosition;
 	@Hide
@@ -39,20 +40,24 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private PhysicalSystem mySystem;
 
 	
+
+		
 	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
+		super(router);
 		mySystem = physical;
 		
 		myImagePath = data.getFields().get("myImagePath");
 		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
 		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
 		
-		myObservers = new ArrayList<IObserver<IViewable>>();
+		myObservers = new ArrayList<IObserver<IViewablePhysical>>();
 
 		myPosition = new Point(0, 0);
 		myHeading = 0;
 		
 		physical.attachComponent(this);
-		router.distributeViewableComponent(this);
+		System.out.println("Routing a physical component.");
+		router.createNewViewableComponent(this);
 		setPosition(position);
 	}
 	
@@ -104,25 +109,37 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 
 	/******************IObservable interface********/
 	@Override
-	public void attach(IObserver<IViewable> aObserver) {
+	public void attach(IObserver<IViewablePhysical> aObserver) {
 		myObservers.add(aObserver);
 	}
 
 	@Override
-	public void detach(IObserver<IViewable> aObserver) {
+	public void detach(IObserver<IViewablePhysical> aObserver) {
 		myObservers.remove(aObserver);
 	}
 
 	@Override
 	public void notifyObservers() {
-		myObservers.forEach(observer -> observer.update(this));
+		for (IObserver<IViewablePhysical> o: myObservers)
+			o.update(this);
 	}
 
+	/***** Component interface ******/
+
+	@Override
+	public void distributeInfo() {
+		getRouter().distributeViewableComponent(this);
+	}
 
 	@Override
 	public void delete() {
 		mySystem.detachComponent(this);
 		myPosition = null;
-		myObservers.forEach(observer -> observer.update(this));
+		myObservers.forEach(observer -> observer.remove(this));
+	}
+	
+	@Override
+	public String getEntityID() {
+		return getEntity().getId();
 	}
 }
