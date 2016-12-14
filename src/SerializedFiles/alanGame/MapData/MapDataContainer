@@ -1,5 +1,5 @@
 {
-  "numXCells": 12,
+  "numXCells": 13,
   "numYCells": 12,
   "cellSize": 50,
   "spawnPoints": {
@@ -376,6 +376,126 @@
       "loc": {
         "myX": 2.0,
         "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x008000",
+      "mySize": 50
+    },
+    {
+      "type": "grass",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
         "myZ": 0.0
       },
       "myColor": "0x008000",

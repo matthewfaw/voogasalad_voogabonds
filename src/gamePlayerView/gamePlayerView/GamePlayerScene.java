@@ -123,12 +123,12 @@ public class GamePlayerScene {
 		createRightPane();
 		myLeftPane = new LeftPane();
 		createLeftPane();
-		
+	        myBorderPane.setCenter(myMap.getNode());
+
 		myBorderPane.setTop(myTopPane.getNode());
 		myBorderPane.setBottom(myBottomPane.getNode());
 		myBorderPane.setRight(myRightPane.getNode());
 		myBorderPane.setLeft(myLeftPane.getNode());
-		myBorderPane.setCenter(myMap.getNode());
 	}
 	
 	private void initMapDisplay() throws Exception {

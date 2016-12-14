@@ -245,7 +245,7 @@ public class BackendController {
 			MapDataContainer mapData = getMapData();
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-			myMapMediator = new MapMediator(mapData);
+			myMapMediator = new MapMediator(mapData, myRouter.getPixelWidth());
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);
