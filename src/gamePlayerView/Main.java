@@ -28,9 +28,9 @@ public class Main extends Application {
 		appController.init(s, "alanGame");
 //		appController.init(s, "AuthorGame");
 		//appController.init(s, "ExampleGame");
-		//GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
-		//gamePlayerScene.init(s);
-		//Router myRouter = new Router(gamePlayerScene);
+//		GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 
+//		gamePlayerScene.init(s);
+//		Router myRouter = new Router(gamePlayerScene);
   
 	}
 
