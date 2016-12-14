@@ -113,7 +113,8 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void lose() {
 		// TODO Auto-generated method stub
 		//Presumably delete anything that belongs to you and tell anyone who cares that you lost
-		myRouter.distributeErrors("You Lose!");
+		myRouter.distributeGameLost();
+//		myRouter.distributeErrors("You Lose!");
 		myWinCon.unsubscribe(this);
 		myLoseCon.unsubscribe(this);
 	}
