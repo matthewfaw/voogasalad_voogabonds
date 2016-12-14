@@ -48,7 +48,7 @@ public class CollisionDetectionSystem implements ISystem<CollidableComponent> {
 	}
 	@Override
 	public CollidableComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public CollidableComponent getComponent(IEntity entity) {

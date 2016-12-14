@@ -37,7 +37,7 @@ public class TeamSystem implements ISystem<TeamComponent> {
 	}
 	@Override
 	public TeamComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public TeamComponent getComponent(IEntity entity) {

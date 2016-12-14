@@ -68,7 +68,7 @@ public class SpawningSystem implements ISystem<CreatorComponent>, IObserver<Time
 	}
 	@Override
 	public CreatorComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public CreatorComponent getComponent(IEntity entity) {

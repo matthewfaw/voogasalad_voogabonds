@@ -41,7 +41,7 @@ public class MovementSystem implements ISystem<MoveableComponent>, IObserver<Tim
 	}
 
 	public MoveableComponent get(IComponent c) {
-		return getComponent(c);
+		return c == null ? null : getComponent(c.getEntity());
 	}
 	@Override
 	public void remove(TimelineController aRemovedObject) {

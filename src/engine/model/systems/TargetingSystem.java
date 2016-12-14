@@ -48,7 +48,7 @@ public class TargetingSystem implements ISystem<TargetingComponent> {
 	}
 	@Override
 	public TargetingComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public TargetingComponent getComponent(IEntity entity) {
