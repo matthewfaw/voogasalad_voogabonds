@@ -22,7 +22,7 @@
         "explodesAtMaxDistance": "False",
         "myMoveSpeed": "20",
         "myTurnSpeed": "20",
-        "myMovementCalc": "PathMovementStrategy"
+        "myMovementCalc": "GreedyMovementStrategy"
       },
       "myComponentName": "MoveableComponent"
     },
@@ -30,7 +30,7 @@
       "myFields": {
         "myImageSize": "10",
         "myValidTerrains": "blueish",
-        "myImagePath": "resources\\cow.png"
+        "myImagePath": "resources\\cookie.png"
       },
       "myComponentName": "PhysicalComponent"
     },
