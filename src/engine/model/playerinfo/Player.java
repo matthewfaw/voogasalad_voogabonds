@@ -14,6 +14,7 @@ import engine.model.strategies.AbstractWinStrategy;
 import engine.model.strategies.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
+import engine.model.strategies.winlose.PlayerHpLoseStrategy;
  
 /**
  * 
@@ -48,11 +49,14 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 		myPoints = 0;
 		
 		//TODO: Get win and lose conditions from PlayerData
-		myLoseCon = new NeverLoseStrategy(this);
+		PlayerHpLoseStrategy loseCon = new PlayerHpLoseStrategy(this);
+		myLoseCon = loseCon;
 		myWinCon = new NeverWinStrategy(this);
+		
 		
 		myResourceStores = new ArrayList<ResourceStore>();
 		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
+		myObservers.add(loseCon);
 	}
 	 
 	@Override
@@ -155,6 +159,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	}
 	@Override
 	public void notifyObservers() {
+		
 		myObservers.forEach(observer -> observer.update(this));
 	}
 

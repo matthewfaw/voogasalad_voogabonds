@@ -15,6 +15,4 @@ public class NeverLoseStrategy extends AbstractLoseStrategy<Object> {
 		//Therefore, nothing should call its update method.
 		return false;
 	}
-
-	
 }
