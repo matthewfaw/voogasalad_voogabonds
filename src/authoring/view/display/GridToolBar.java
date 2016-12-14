@@ -29,6 +29,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -175,7 +176,7 @@ public class GridToolBar {
 						toggleStatus = true;
 						spawnStatus = false;
 						sinkStatus = false;
-						mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/MousePenIcon.png"));   
+						mouseCursor = new Image(getClass().getClassLoader().getResourceAsStream("resources/rsz_mousepenicon.png"));  
 						scene.setCursor(new ImageCursor(mouseCursor)); 
 					}
 				}

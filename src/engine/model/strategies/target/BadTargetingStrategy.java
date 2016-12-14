@@ -19,10 +19,14 @@ public class BadTargetingStrategy extends AbstractTargetingStrategy {
 	@Override
 	public IPhysical target(PhysicalSystem map, TeamSystem teams, IPhysical location, TargetingComponent targeter) {
 		IPhysical result = null;
+		if (getTargets(map, location, targeter).size() != 0){
+			System.out.println("Has Targets");
+		}
 		for (PhysicalComponent target: getTargets(map, location, targeter)) {
 			if (
-					teams.areEnemies(targeter, target) && targeter.targetsEnemies() ||
-					teams.areAllies(targeter, target) && !targeter.targetsEnemies()) {
+					targeter.getEntity() != target.getEntity() && 
+					( teams.areEnemies(targeter, target) && targeter.targetsEnemies() ||
+					teams.areAllies(targeter, target) && !targeter.targetsEnemies())) {
 				result = target;
 				break;
 			}

@@ -1,0 +1,38 @@
+{
+  "myName": "enemy",
+  "myComponents": {
+    "TeamComponent": {
+      "myFields": {
+        "myTeamID": "them"
+      },
+      "myComponentName": "TeamComponent"
+    },
+    "PhysicalComponent": {
+      "myFields": {
+        "myImageSize": "50",
+        "myValidTerrains": "grass, water",
+        "myHeading": "0",
+        "myImagePath": "src/resources/boss.png"
+      },
+      "myComponentName": "PhysicalComponent"
+    },
+    "MoveableComponent": {
+      "myFields": {
+        "removeOnGoal": "false",
+        "explodesOnGoal": "false",
+        "myMaxDistance": "1000",
+        "explodesAtMaxDistance": "false",
+        "myMoveSpeed": "1",
+        "myTurnSpeed": "1",
+        "myMovementCalc": "GreedyMovementStrategy"
+      },
+      "myComponentName": "MoveableComponent"
+    },
+    "CollidableComponent": {
+      "myFields": {
+        "myCollisionRadius": "20"
+      },
+      "myComponentName": "CollidableComponent"
+    }
+  }
+}

@@ -106,6 +106,7 @@ public class NewAuthoringScreen {
 		startProjectButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				router.clearContainers();
 				try {
 					MapDataContainer container = router.getMapDataContainer();
 					container.setDimensions(Integer.parseInt(xSize.getText()), Integer.parseInt(ySize.getText()));

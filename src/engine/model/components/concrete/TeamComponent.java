@@ -32,7 +32,7 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam {
 	    super(router);
 		myTeamID = componentData.getFields().get("myTeamID");
 		myObservers = new ArrayList<IObserver<IViewableTeam>>();
-		
+		mySystem = teams;
 		teams.attachComponent(this);
 	}
 	
