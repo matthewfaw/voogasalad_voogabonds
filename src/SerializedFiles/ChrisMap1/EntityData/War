@@ -1,0 +1,11 @@
+{
+  "myName": "War",
+  "myComponents": {
+    "CollidableComponent": {
+      "myFields": {
+        "myCollisionRadius": "5"
+      },
+      "myComponentName": "CollidableComponent"
+    }
+  }
+}
