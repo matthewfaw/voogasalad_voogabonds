@@ -12,6 +12,7 @@ import javafx.scene.Node;
 public interface IViewPane extends IGUIPiece{
 	public void setUpPane();
 	public void add(Collection<Node> collection);
+	public void add(Node node);
 	public void clear();
 	
 }

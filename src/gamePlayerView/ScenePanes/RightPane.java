@@ -35,11 +35,6 @@ public class RightPane implements IViewPane {
 	}
 
 	@Override
-	public Node getView() {
-		return myNode;
-	}
-
-	@Override
 	public void add(Collection<Node> collection) {
 		myNode.getChildren().addAll(collection);
 	}
@@ -52,5 +47,10 @@ public class RightPane implements IViewPane {
 	@Override
 	public Node getNode() {
 		return myNode;
+	}
+
+	@Override
+	public void add(Node node) {
+		myNode.getChildren().add(node);
 	}
 }

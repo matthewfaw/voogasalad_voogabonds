@@ -31,6 +31,7 @@ import gamePlayerView.builders.EntityInfoBox;
 import gamePlayerView.builders.EntityInfoBoxBuilder;
 //import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
+import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.scene.Group;
@@ -97,17 +98,67 @@ public class GamePlayerScene {
 //		setScene(s, scene);
 	}
 	
+	public Scene build(Stage stage) throws Exception {
+		//myGamePlayer =new Pane();
+		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
+		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
+		myScene=new Scene(myBorderPane);
+		setScreen();
+		//myGamePlayer.getChildren().add(myBorderPane);
+		return myScene;
+	}
+	
 	public void setScreen() {
 		// Create and set panes
 		myTopPane = new TopPane();
+		createTopPane();
 		myBottomPane = new BottomPane();
+		createBottomPane();
 		myRightPane = new RightPane();
+		createRightPane();
 		myLeftPane = new LeftPane();
+		createLeftPane();
 		
 		myBorderPane.setTop(myTopPane.getNode());
 		myBorderPane.setBottom(myBottomPane.getNode());
 		myBorderPane.setRight(myRightPane.getNode());
 		myBorderPane.setLeft(myLeftPane.getNode());
+	}
+	
+	public void createTopPane() {
+		
+	}
+	
+	public void createBottomPane() {
+			
+		}
+	
+	public void createRightPane() {
+		
+	}
+
+	public void createLeftPane() {
+		
+		// Game play options
+		IGUIPiece gamePlayOptions = new GamePlayOptions(myAppController);
+		
+		// Player info
+		
+		myLeftPane.add(gamePlayOptions.getNode());
+//		myLeftPane.add(playerInfo);
+		
+//		LeftPane pane=new LeftPane();
+//		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
+//		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
+//		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
+//		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
+//		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
+//		Collection<Node> myCollection=new ArrayList<Node>();
+//		myCollection.add(myGamePlayOptions.getView());
+//		myCollection.add(myWallet.getView());
+//		myCollection.add(myLife.getView());
+//		pane.add(myCollection);
+//		return pane;
 	}
 	
 //	public void setScreen() throws Exception{
@@ -148,15 +199,7 @@ public class GamePlayerScene {
 	}
 	 */
 
-	public Scene build(Stage stage) throws Exception {
-		//myGamePlayer =new Pane();
-		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
-		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
-		myScene=new Scene(myBorderPane);
-		setScreen();
-		//myGamePlayer.getChildren().add(myBorderPane);
-		return myScene;
-	}
+	
 	//This might be called by controller
 	/*public void rebuild(Stage aStage,BorderPane aPane) {
 		myScene = new Scene(myGamePlayer, 1000, 700);
@@ -179,71 +222,71 @@ public class GamePlayerScene {
 		myCollection.add(myTowerOptions);
 		//myCollection.add(myUpgradeandSell.getView());
 		myBottomPane.add(myCollection);
-		myBorderPane.setBottom(myBottomPane.getView());
+		myBorderPane.setBottom(myBottomPane.getNode());
 	}
 
 
 
-	private void createPanes() {
-		myLeftPane=createLeftPane();
-		myRightPane=createRightPane();
-		myBottomPane=createBottomPane();
-		myTopPane = createTopPane();
-	}
-
-	private void setPanes() {
-		
-		myBorderPane.setCenter(myMap.getView());
-		myBorderPane.setRight(myRightPane.getView());
-		myBorderPane.setBottom(myBottomPane.getView());
-		myBorderPane.setTop(myTopPane.getView());
-		myBorderPane.setLeft(myLeftPane.getView());
-	}
-	private BottomPane createBottomPane() {
-		BottomPane pane=new BottomPane();
-		Label l =new Label("Bottom Pane label");
-		Collection<Node> myCollection=new ArrayList<Node>();
-		//MachineInfo myInfo=new MachineInfo();
-		//myCollection.add(myInfo.getView());
-		myCollection.add(l);
-		pane.add(myCollection);
-		return pane;
-	}
-	
-	private TopPane createTopPane() {
-		TopPane topPane= new TopPane();
-		Label l = new Label("Top Pane label");
-		Collection<Node> myCollection=new ArrayList<Node>();
-		myCollection.add(l);
-		topPane.add(myCollection);
-		return topPane;
-	}
-
-	private RightPane createRightPane() {
-		RightPane pane=new RightPane();
-		TowerColumn myTowerColumn=new TowerColumn();
-		Collection<Node> myCollection=new ArrayList<Node>();
-		myCollection.add(myTowerColumn.getView());
-		myResources.add(myTowerColumn);
-		pane.add(myCollection);
-
-		return pane;
-	}
-
-	private LeftPane createLeftPane() {
-		LeftPane pane=new LeftPane();
-		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
-		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
-		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
-		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
-		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
-		Collection<Node> myCollection=new ArrayList<Node>();
-		myCollection.add(myGamePlayOptions.getView());
-		myCollection.add(myWallet.getView());
-		myCollection.add(myLife.getView());
-		pane.add(myCollection);
-		return pane;
-	}
+//	private void createPanes() {
+//		myLeftPane=createLeftPane();
+//		myRightPane=createRightPane();
+//		myBottomPane=createBottomPane();
+//		myTopPane = createTopPane();
+//	}
+//
+//	private void setPanes() {
+//		
+//		myBorderPane.setCenter(myMap.getView());
+//		myBorderPane.setRight(myRightPane.getView());
+//		myBorderPane.setBottom(myBottomPane.getView());
+//		myBorderPane.setTop(myTopPane.getView());
+//		myBorderPane.setLeft(myLeftPane.getView());
+//	}
+//	private BottomPane createBottomPane() {
+//		BottomPane pane=new BottomPane();
+//		Label l =new Label("Bottom Pane label");
+//		Collection<Node> myCollection=new ArrayList<Node>();
+//		//MachineInfo myInfo=new MachineInfo();
+//		//myCollection.add(myInfo.getView());
+//		myCollection.add(l);
+//		pane.add(myCollection);
+//		return pane;
+//	}
+//	
+//	private TopPane createTopPane() {
+//		TopPane topPane= new TopPane();
+//		Label l = new Label("Top Pane label");
+//		Collection<Node> myCollection=new ArrayList<Node>();
+//		myCollection.add(l);
+//		topPane.add(myCollection);
+//		return topPane;
+//	}
+//
+//	private RightPane createRightPane() {
+//		RightPane pane=new RightPane();
+//		TowerColumn myTowerColumn=new TowerColumn();
+//		Collection<Node> myCollection=new ArrayList<Node>();
+//		myCollection.add(myTowerColumn.getView());
+//		myResources.add(myTowerColumn);
+//		pane.add(myCollection);
+//
+//		return pane;
+//	}
+//
+//	private LeftPane createLeftPane() {
+//		LeftPane pane=new LeftPane();
+//		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
+//		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
+//		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
+//		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
+//		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
+//		Collection<Node> myCollection=new ArrayList<Node>();
+//		myCollection.add(myGamePlayOptions.getView());
+//		myCollection.add(myWallet.getView());
+//		myCollection.add(myLife.getView());
+//		pane.add(myCollection);
+//		return pane;
+//	}
 
 
 	public void makePauseMenu() { 

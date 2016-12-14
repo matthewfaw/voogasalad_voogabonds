@@ -58,4 +58,9 @@ public class BottomPane implements IViewPane {
 	public Node getNode() {
 		return myNode;
 	}
+
+	@Override
+	public void add(Node node) {
+		myNode.getChildren().add(node);
+	}
 }

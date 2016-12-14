@@ -14,36 +14,35 @@ import javafx.scene.layout.VBox;
  */
 
 public class LeftPane implements IViewPane {
-	private VBox myVBox;
+	private VBox myNode;
 	
 	public LeftPane(){
-		myVBox = new VBox();
+		myNode = new VBox();
 	}
 	public void setUpPane() {
-		myVBox.setPrefWidth(100);
-		myVBox.setMaxHeight(700);
-		myVBox.setPadding(new Insets(10, 10,10, 10));
-		myVBox.setSpacing(10);
-		myVBox.setStyle("-fx-background-color: #336699;");
+		myNode.setPrefWidth(100);
+		myNode.setMaxHeight(700);
+		myNode.setPadding(new Insets(10, 10,10, 10));
+		myNode.setSpacing(10);
+		myNode.setStyle("-fx-background-color: #336699;");
 	}
 	
 	public void add(Collection<Node> collection){
-		myVBox.getChildren().addAll(collection);
-	}
-	
-	@Override
-	public Node getView() {
-		return myVBox;
+		myNode.getChildren().addAll(collection);
 	}
 	
 	@Override
 	public void clear() {
-		myVBox.getChildren().clear();
+		myNode.getChildren().clear();
 	}
 	
 	@Override
 	public Node getNode() {
-		return myVBox;
+		return myNode;
+	}
+	@Override
+	public void add(Node node) {
+		myNode.getChildren().add(node);		
 	}
 	
 }

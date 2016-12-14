@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 public class GamePlayOptions extends VBox implements IGUIPiece {
 	private ApplicationController myAppController;
 	private ButtonFactory myButtonFactory;
+	private Node myNode;
 	
 	public GamePlayOptions(ApplicationController applicationcontroller){
 		myAppController=applicationcontroller;
@@ -63,7 +64,7 @@ public class GamePlayOptions extends VBox implements IGUIPiece {
 	}
 
 	@Override
-	public Node getView() {
-		return this;
+	public Node getNode() {
+		return myNode;
 	}
 }
