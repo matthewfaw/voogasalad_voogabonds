@@ -9,7 +9,7 @@
     },
     "PhysicalComponent": {
       "myFields": {
-        "myImageSize": "50",
+        "myImageSize": "1",
         "myValidTerrains": "grass, water",
         "myHeading": "0",
         "myImagePath": "resources/boss.png"
