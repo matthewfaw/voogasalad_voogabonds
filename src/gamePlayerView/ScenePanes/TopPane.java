@@ -7,37 +7,41 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
-public class TopPane implements IGUIPiece, IViewPane{
-	private HBox myTopPane;
+public class TopPane implements IViewPane{
+	private HBox myHBox;
 	
 	public TopPane () {
-		myTopPane = new HBox();
+		myHBox = new HBox();
 	}
 	
 	@Override
 	public void setUpPane() {
-		myTopPane.setPrefWidth(900);
-		myTopPane.setPrefHeight(50);
-		myTopPane.setPadding(new Insets(10, 10,10, 10));
-		myTopPane.setSpacing(10);
-		myTopPane.setStyle("-fx-background-color: #914484;");
+		myHBox.setPrefWidth(900);
+		myHBox.setPrefHeight(50);
+		myHBox.setPadding(new Insets(10, 10,10, 10));
+		myHBox.setSpacing(10);
+		myHBox.setStyle("-fx-background-color: #914484;");
 	}
 
 	@Override
 	public void add(Collection<Node> collection) {
-		// TODO Auto-generated method stub
-		
+		myHBox.getChildren().addAll(collection);
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		myHBox.getChildren().clear();
+	}
+
+	@Deprecated
+	@Override
+	public Node getView() {
+		return myHBox;
 	}
 
 	@Override
-	public Node getView() {
-		return myTopPane;
+	public Node getNode() {
+		return myHBox;
 	}
 
 }

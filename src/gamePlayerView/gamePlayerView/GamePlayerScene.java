@@ -23,6 +23,7 @@ import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
+import gamePlayerView.ScenePanes.IViewPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
 import gamePlayerView.ScenePanes.TopPane;
@@ -51,10 +52,10 @@ import javafx.stage.Stage;
 public class GamePlayerScene {
 	private static final String GAME_PLAYER_PATH = "resources/textfiles";
 	private Stage myStage;
-	private BottomPane myBottomPane;
-	private LeftPane myLeftPane;
-	private RightPane myRightPane;
-	private TopPane myTopPane;
+	private IViewPane myBottomPane;
+	private IViewPane myLeftPane;
+	private IViewPane myRightPane;
+	private IViewPane myTopPane;
 	private MapDisplay myMap;
 	private Scene myScene;
 	private KeyInputHandler myKeyInputHandler;
@@ -68,7 +69,6 @@ public class GamePlayerScene {
 	private DisplayBoxFactory myBoxFactory;
 	private ResourceBundle myResourceBundle;
 	private EntityInfoBoxBuilder myBuilder;
-	//private List<MoveableComponentView> mySprites;
 	private ApplicationController myAppController;
 	private Controls myControls;
 	private PauseMenu myPauseMenu;
@@ -86,20 +86,54 @@ public class GamePlayerScene {
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
 		myBuilder=new EntityInfoBoxBuilder(this, myAppController);
-		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
 
 	public void init(Stage s) throws Exception {
 		Scene scene = build(s);
 		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));               
-		setScene(s, scene);
-	}
-
-	private void setScene(Stage s, Scene scene) { ///public or private
 		s.setScene(scene);
 		s.show();
+//		setScene(s, scene);
 	}
+	
+	public void setScreen() {
+		// Create and set panes
+		myTopPane = new TopPane();
+		myBottomPane = new BottomPane();
+		myRightPane = new RightPane();
+		myLeftPane = new LeftPane();
+		
+		myBorderPane.setTop(myTopPane.getNode());
+		myBorderPane.setBottom(myBottomPane.getNode());
+		myBorderPane.setRight(myRightPane.getNode());
+		myBorderPane.setLeft(myLeftPane.getNode());
+	}
+	
+//	public void setScreen() throws Exception{
+//		// Create panes for pane views
+//		createPanes();
+//		
+//		// Init map display
+//		myMap = new MapDisplay(myAppController);
+//		myMap.getControls(myControls);
+//		
+//		// Init pause menu
+//		myPauseMenu = new PauseMenu();
+//		makePauseMenu();
+//		
+//		// Set the panes that were created
+//		setPanes();
+//		
+//		// Set up dragging for things on map?
+//		myMap.setupDragging(myScene);
+//	}
+	
+
+//	private void setScene(Stage s, Scene scene) { ///public or private
+//		s.setScene(scene);
+//		s.show();
+//	}
 	/*
 	public List<ICashAcceptor> getCashAcceptors()
 	{
@@ -148,20 +182,7 @@ public class GamePlayerScene {
 		myBorderPane.setBottom(myBottomPane.getView());
 	}
 
-	public void setScreen() throws Exception{
-		//myTowerColumn   = new TowerColumn();
-		//myGamePlayOptions=new GamePlayOptions(myAppController);
-		createPanes();
-		myMap = new MapDisplay(myAppController);
-		myMap.getControls(myControls);
-		//mySprites.add(myMap.getSprites());
 
-		myPauseMenu = new PauseMenu();
-		makePauseMenu();
-		setPanes();
-		myMap.setupDragging(myScene);
-		//return borderpane;
-	}
 
 	private void createPanes() {
 		myLeftPane=createLeftPane();

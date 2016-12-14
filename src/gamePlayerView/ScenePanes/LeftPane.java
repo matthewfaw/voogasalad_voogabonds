@@ -2,64 +2,48 @@ package gamePlayerView.ScenePanes;
 
 import java.util.Collection;
 
-import engine.controller.ApplicationController;
-import gamePlayerView.GUIPieces.GamePlayOptions;
-import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
-import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
+
 //import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IGUIPiece;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
  * @author Guhan Muruganandam
  */
 
-public class LeftPane implements IGUIPiece,IViewPane {
-	private VBox myLeftPane=new VBox();
-	private CashBox myWallet;
-	private LivesBox myLives;
-	//private Pane myGamePlayer; 
+public class LeftPane implements IViewPane {
+	private VBox myVBox;
 	
 	public LeftPane(){
-		//myGamePlayer=gamePlayer;
-		setUpPane();
-	//	GamePlayOptions myGamePlayOptions=new GamePlayOptions(appcontrol);
-	//	myWallet=new CashBox();
-	//	myLives=new LivesBox();
-	//	myLeftPane.getChildren().addAll(myGamePlayOptions.getView(),myWallet.getView(),myLives.getView()); ///////////////////// 
+		myVBox = new VBox();
 	}
 	public void setUpPane() {
-		//myLeftPane.setPrefWidth(myGamePlayer.getWidth()*0.1);
-		//myLeftPane.setPrefHeight(myGamePlayer.getHeight());
-		myLeftPane.setPrefWidth(100);
-		myLeftPane.setMaxHeight(700);
-	    myLeftPane.setPadding(new Insets(10, 10,10, 10));
-	    myLeftPane.setSpacing(10);
-	    myLeftPane.setStyle("-fx-background-color: #336699;");
+		myVBox.setPrefWidth(100);
+		myVBox.setMaxHeight(700);
+		myVBox.setPadding(new Insets(10, 10,10, 10));
+		myVBox.setSpacing(10);
+		myVBox.setStyle("-fx-background-color: #336699;");
 	}
 	
 	public void add(Collection<Node> collection){
-		for(Node n:collection){
-			myLeftPane.getChildren().add(n);
-		}
+		myVBox.getChildren().addAll(collection);
 	}
+	
 	@Override
 	public Node getView() {
-		return myLeftPane;
+		return myVBox;
 	}
-	//public CashBox getCash() {
-		//return myWallet;
-	//}
-	//public LivesBox getLives() {
-		//return myLives;
-	//}
+	
 	@Override
 	public void clear() {
-		myLeftPane.getChildren().clear();
+		myVBox.getChildren().clear();
+	}
+	
+	@Override
+	public Node getNode() {
+		return myVBox;
 	}
 	
 }
