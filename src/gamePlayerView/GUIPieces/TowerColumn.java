@@ -65,14 +65,11 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 	    towerDataDisplay= new TextArea();
 	    myTowerInfo=new ListView<ImageView>(); 
 	    //populatetowerInfo(availableTowers,towerDataDisplay);
-	    
-	    Label heading = new Label("TOWERS");
-	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
-	    getChildren().addAll(heading,resourceTabs,towerDataDisplay);
+	    getChildren().addAll(resourceTabs,towerDataDisplay);
 	}
 	/*
 	 * Creates ListView for the selected towerData
@@ -96,21 +93,24 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 			if(!affordableTowers.contains(t)){
 				towerPicture.setOpacity(0.3);
 			}
+			towerPicture.setPreserveRatio(true);
+			towerPicture.setFitHeight(50);
+			towerPicture.setFitWidth(50);
 			towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
+		
+		myTowerInfo.setFixedCellSize(50);
         myTowerInfo.setItems(items);
         setDragFunctionality(myTowerInfo);
         setPopulateFunctionality(myTowerInfo,towerDataDisplay);
         getChildren().clear();
         
-        Label heading = new Label("TOWERS");
-	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         
-	    getChildren().addAll(heading,resourceTabs,towerDataDisplay);
+	    getChildren().addAll(resourceTabs,towerDataDisplay);
 	}
 	/*
 	 * Sets Mouse Click event for List View
@@ -133,7 +133,7 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 		String name= new String(tower.getName());
 		String cost=new String(Integer.toString(tower.getBuyPrice()));
 		
-		towerDataDisplay.setText(String.format("TOWER NAME: %s\nCOST: %s\n", name, cost));
+		towerDataDisplay.setText(String.format("Tower Name: %s\nCost: %s\n", name, cost));
 	}
 	
 	private void setDragFunctionality(ListView<ImageView> towerSet) {
