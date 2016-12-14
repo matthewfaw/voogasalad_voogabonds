@@ -12,6 +12,8 @@ import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.scene.Node;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
@@ -31,8 +33,17 @@ public class ResourceStoreView extends VBox implements IGUIPiece, IResourceAccep
 	}
 
 	private void constructNode() {
-		getChildren().add(myDraggables.getNode());
+		TabPane resourceTab = new TabPane();
+		resourceTab.getTabs().add(buildTab(myDraggables.getNode(), "Towers"));
+		getChildren().add(resourceTab);
 		getChildren().add(myResourceInfo.getNode());
+	}
+	
+	private Tab buildTab(Node list, String title) {
+		Tab tab= new Tab();
+		tab.setText(title);
+		tab.setContent(list);
+		return tab;
 	}
 
 	@Override

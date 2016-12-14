@@ -109,7 +109,7 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         
-	    getChildren().addAll(resourceTabs,myTowerDataDisplay);
+	    getChildren().addAll(resourceTabs, myTowerDataDisplay);
 	}
 	/*
 	 * Sets Mouse Click event for List View
