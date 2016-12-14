@@ -78,7 +78,6 @@ public class TerrainCell extends Rectangle {
 							relPath = "";
 							if (toolBar.getImageStatus() && splitPath.length > 1) {
 								relPath += splitPath[1] + "/";
-								System.out.println("THISISTHERELATIVEPATH: " + relPath);
 							}
 							
 							Image image = new Image(toolBar.getSelectedImagePath());
@@ -126,7 +125,6 @@ public class TerrainCell extends Rectangle {
 						}
 						ArrayList<Point> points = new ArrayList<Point>();
 						points.add(new Point(colLocation, rowLocation));
-//						controller.addSinkPoints(cellName, points);
 						setWidth(gameDisplay.getTileSize()*0.9);
 						setHeight(gameDisplay.getTileSize()*0.9);
 						setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
@@ -268,7 +266,6 @@ public class TerrainCell extends Rectangle {
 				relPath = "";
 				if (splitPath.length > 1)
 					relPath += splitPath[1]+"/";
-				System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				controller.addValidTerrain(terrainType, relPath);
 			}
 			else {

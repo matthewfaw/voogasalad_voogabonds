@@ -58,12 +58,11 @@ public class Draggables extends ListView<ImageView> implements IGUIPiece, IObser
 					.getFields()
 					.get("myImagePath");
 			
-			
 			if (imagePath.substring(0, 4).equals(SOURCE_PATH)) {
 				imagePath = imagePath.substring(4);
 			}
 			imagePath = imagePath.replace('\\', File.separatorChar);
-			
+
 			ImageView towerImageView = new ImageView();
 			towerImageView.setImage(new Image(
 							this
