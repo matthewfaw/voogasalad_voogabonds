@@ -269,7 +269,8 @@ public class TerrainCell extends Rectangle {
 			if (toolBar.getImageStatus()) {
 				String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 				relPath = "";
-				relPath += splitPath[1]+"/";
+				if (splitPath.length > 1)
+					relPath += splitPath[1]+"/";
 				System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				controller.addValidTerrain(terrainType, relPath);
 			}

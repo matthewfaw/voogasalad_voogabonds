@@ -16,6 +16,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import main.MainInitializer;
 import mainmenu.screens.LoadAuthoringScreen;
+import mainmenu.screens.LoadGameScreen;
 import mainmenu.screens.NewGameScreen;
 import utility.ErrorBox;
 
@@ -76,19 +77,23 @@ public class PlayerTab extends Tab {
 		loadGame.setMinHeight(screenWidth/5);
 		loadGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent e) {
-				handleOldGame();
+			public void handle(ActionEvent event) {
+				try {
+					handleOldGame();
+				} catch (IOException e){
+					ErrorBox.displayError(myResources.getString("NewPlayerError"));
+				}
 			}
 		});
 		playOptions.getChildren().addAll(newGame, loadGame);
 	}
 	
 	private void handleNewGame() throws IOException {
-		NewGameScreen newGameScreen = new NewGameScreen();
+		NewGameScreen newGameScreen = new NewGameScreen(myResources.getString("PlayNewGame"));
 	}
 	
-	private void handleOldGame() {
-		
+	private void handleOldGame() throws IOException {
+		LoadGameScreen loadGameScreen = new LoadGameScreen(myResources.getString("PlayOldGame"));
 	}
 	
 	private void setUpScreenResolution() {
