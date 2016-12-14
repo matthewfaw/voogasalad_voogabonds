@@ -10,6 +10,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -42,8 +43,8 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	
 
 		
-	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
-		super(router);
+	public PhysicalComponent(IEntity aEntity, PhysicalSystem physical, Router router, ComponentData data, Point position) {
+		super(aEntity, router);
 		mySystem = physical;
 		
 		myImagePath = data.getFields().get("myImagePath");

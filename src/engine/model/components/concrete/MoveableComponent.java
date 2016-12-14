@@ -8,6 +8,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableMovable;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
@@ -57,7 +58,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	@Hide
 	private List<IObserver<IViewableMovable>> myObservers;
 
-	public MoveableComponent(
+	public MoveableComponent(IEntity aEntity, 
 			MovementSystem movement,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
@@ -66,7 +67,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 			DamageDealingSystem damage,
 			ComponentData data
 			) throws ClassNotFoundException {
-		super(router);
+		super(aEntity, router);
 		
 		myMovement = movement;
 		myPhysical = physical;

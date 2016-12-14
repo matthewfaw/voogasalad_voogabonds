@@ -59,13 +59,13 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Hide
 	private List<IObserver<IViewableCreator>> myObservers;
 	
-	public CreatorComponent(SpawningSystem spawning,
+	public CreatorComponent(IEntity aEntity, SpawningSystem spawning,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			MovementSystem movement,
 			ComponentData data,
 			Router router) {
-		super(router);
+		super(aEntity, router);
 		
 		myObservers = new ArrayList<IObserver<IViewableCreator>>();
 		

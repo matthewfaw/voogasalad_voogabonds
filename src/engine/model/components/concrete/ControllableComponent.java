@@ -3,6 +3,7 @@ package engine.model.components.concrete;
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.components.AbstractComponent;
+import engine.model.entities.IEntity;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.ControllableSystem;
 //import engine.model.systems.DamageDealingSystem;
@@ -30,7 +31,7 @@ public class ControllableComponent extends AbstractComponent{
 	@Hide
 	private Router router;
 	
-	public ControllableComponent(ControllableSystem controllableSystem, 
+	public ControllableComponent(IEntity aEntity, ControllableSystem controllableSystem, 
 			CollisionDetectionSystem collisionDetectionSystem, 
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
@@ -38,7 +39,7 @@ public class ControllableComponent extends AbstractComponent{
 			/*DamageDealingSystem damageDealingSystem,*/ 
 			ComponentData componentData,
 			Router router) {
-		super(router);
+		super(aEntity, router);
 		myControllableSystem = controllableSystem;
 		myPhysicalSystem = physicalSystem;
 		myCollisionDetectionSystem = collisionDetectionSystem;

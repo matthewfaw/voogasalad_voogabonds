@@ -7,6 +7,7 @@ import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.model.entities.IEntity;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
@@ -33,7 +34,7 @@ public class ComponentFactory {
 	 * @return
 	 * @throws UnsupportedOperationException
 	 */
-	public IModifiableComponent constructComponent(ComponentData compdata, Point location) throws UnsupportedOperationException {
+	public IModifiableComponent constructComponent(IEntity aEntity, ComponentData compdata, Point location) throws UnsupportedOperationException {
 		try {
 			System.out.println(compdata.getComponentName());
 			Class<?> tmpclass = Class.forName(COMPONENT_PATH+compdata.getComponentName());
@@ -56,6 +57,10 @@ public class ComponentFactory {
 				}
 				if (Point.class.isAssignableFrom(arg)) {
 					objectsToAttach.add(getPointToAttach(arg, location));
+					continue;
+				}
+				if (arg.isInstance(aEntity)) {
+					objectsToAttach.add(aEntity);
 					continue;
 				}
 				objectsToAttach.add(compdata);
