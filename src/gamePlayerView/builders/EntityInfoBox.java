@@ -24,24 +24,25 @@ public class EntityInfoBox implements IGUIPiece {
 	private final DamageBox myDamageBox;
 	private final HealthBox myHealthBox;
 	private final BountyBox myBountyBox;
-	private HBox Hbox=new HBox();
+	private HBox myHbox;
 	
 	public EntityInfoBox(EntityInfoBoxBuilder builder){
-		this.myMachineInfo=builder.getMyMachineInfo();
-		this.myUpgradeUI=builder.getMyUpgradeUI();
-		this.myTargetingButtons=builder.getMyTargetingButtons();
-		this.mySellUI=builder.getMySellUI();
-		this.myDamageBox=builder.getMyDamageBox();
-		this.myHealthBox=builder.getMyHealthBox();
-		this.myBountyBox=builder.getMyBountyBox();
-		Hbox.setSpacing(10);
-		Hbox.getChildren().addAll(myMachineInfo.getView(),myTargetingButtons.getView(),myUpgradeUI.getView(),mySellUI.getView(),
+		myMachineInfo = builder.getMyMachineInfo();
+		myUpgradeUI = builder.getMyUpgradeUI();
+		myTargetingButtons = builder.getMyTargetingButtons();
+		mySellUI = builder.getMySellUI();
+		myDamageBox = builder.getMyDamageBox();
+		myHealthBox = builder.getMyHealthBox();
+		myBountyBox = builder.getMyBountyBox();
+		
+		myHbox=new HBox();
+		myHbox.setSpacing(10);
+		myHbox.getChildren().addAll(myMachineInfo.getView(),myTargetingButtons.getView(),myUpgradeUI.getView(),mySellUI.getView(),
 				myDamageBox.getView(),myHealthBox.getView(),myBountyBox.getView());
-		//Hbox.getChildren().
 	}
 	
 	@Override
 	public Node getView() {
-		return Hbox;
+		return myHbox;
 	}
 }
