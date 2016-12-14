@@ -28,10 +28,10 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	private int myPointValue;
 	
 	@Hide
-	private List<IObserver<IViewableBounty>> myObservers;
+	private transient List<IObserver<IViewableBounty>> myObservers;
 	
 	@Hide
-	private BountySystem myBountySystem;
+	private transient BountySystem myBountySystem;
 	
 	public BountyComponent(IEntity aEntity, BountySystem bountySystem, ComponentData data, Router router) {
 		super(aEntity, router);

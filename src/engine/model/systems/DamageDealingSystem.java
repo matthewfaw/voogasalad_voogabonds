@@ -11,7 +11,7 @@ import engine.model.strategies.factories.DamageStrategyFactory;
 
 public class DamageDealingSystem implements ISystem<DamageDealingComponent> {
 	private List<DamageDealingComponent> myComponents;
-	private DamageStrategyFactory myStrategyFactory;
+	private transient DamageStrategyFactory myStrategyFactory;
 
 	public DamageDealingSystem() {
 		myComponents = new ArrayList<DamageDealingComponent>();

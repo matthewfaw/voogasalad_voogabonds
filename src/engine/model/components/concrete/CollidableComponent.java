@@ -37,7 +37,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private transient CollisionDetectionSystem myCollidable;
 	
 	@Hide
-	private List<IObserver<IViewableCollidable>> myObservers;
+	private transient List<IObserver<IViewableCollidable>> myObservers;
 	
 	public CollidableComponent(IEntity aEntity,
 			CollisionDetectionSystem collisionDetectionSystem, 

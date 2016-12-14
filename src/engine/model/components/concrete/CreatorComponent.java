@@ -58,7 +58,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Hide
 	private DamageInfo myStats;
 	@Hide
-	private List<IObserver<IViewableCreator>> myObservers;
+	private transient List<IObserver<IViewableCreator>> myObservers;
 	
 	public CreatorComponent(IEntity aEntity, SpawningSystem spawning,
 			PhysicalSystem physical,

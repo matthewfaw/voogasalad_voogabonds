@@ -33,7 +33,7 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	private transient TeamSystem myTeams;
 	
 	@Hide
-	private List<IObserver<IViewableTargeting>> myObservers;
+	private transient List<IObserver<IViewableTargeting>> myObservers;
 	
 	public TargetingComponent(IEntity aEntity, TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
 		super(aEntity, router);

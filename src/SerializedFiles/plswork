@@ -3,66 +3,48 @@
     "myComponents": [
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       },
       {
         "myCollisionRadius": 20.0,
-        "myObservers": [],
         "myRouter": {}
       }
     ]
   },
   "myDamageDealingSystem": {
-    "myComponents": [],
-    "myStrategyFactory": {
-      "myAtypeStrategies": [
-        "BinaryDamageStrategy",
-        "ConstantDamageStrategy",
-        "ExponentialDamageStrategy"
-      ],
-      "myFolderPath": "src/engine/model/strategies/damage/"
-    }
+    "myComponents": []
   },
   "myHealthSystem": {
     "myComponents": []
@@ -74,7 +56,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 127.9999999999997,
+        "myMovedDistance": 68.99999999999989,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -85,7 +67,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 126.99999999999972,
+        "myMovedDistance": 67.99999999999989,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -96,7 +78,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 125.99999999999973,
+        "myMovedDistance": 66.99999999999989,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -107,7 +89,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 124.99999999999974,
+        "myMovedDistance": 65.99999999999989,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -118,7 +100,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 123.99999999999976,
+        "myMovedDistance": 64.99999999999989,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -129,7 +111,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 122.99999999999976,
+        "myMovedDistance": 63.99999999999989,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -140,7 +122,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 121.99999999999976,
+        "myMovedDistance": 62.9999999999999,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -151,7 +133,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 120.99999999999977,
+        "myMovedDistance": 61.99999999999991,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -162,7 +144,7 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 119.99999999999979,
+        "myMovedDistance": 60.999999999999915,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -173,7 +155,29 @@
         "myMoveSpeed": 1.0,
         "explodesAtMaxDistance": false,
         "myMaxDistance": 1000.0,
-        "myMovedDistance": 118.9999999999998,
+        "myMovedDistance": 59.99999999999992,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 0.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 0.0,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 0.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 0.0,
         "removeOnGoal": true,
         "explodesOnGoal": false,
         "myObservers": [],
@@ -191,11 +195,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 147.42284884342655,
-          "myY": 127.4139743759158,
+          "myX": 106.87011168448291,
+          "myY": 84.55985544998752,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.580517727662496,
         "myRouter": {}
       },
       {
@@ -206,11 +210,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 146.73551431530888,
-          "myY": 126.68763337717125,
+          "myX": 106.18277715636522,
+          "myY": 83.83351445124298,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.580517727662496,
         "myRouter": {}
       },
       {
@@ -221,11 +225,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 146.0481797871912,
-          "myY": 125.9612923784267,
+          "myX": 105.49544262824753,
+          "myY": 83.10717345249843,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.580517727662496,
         "myRouter": {}
       },
       {
@@ -236,11 +240,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 145.36084525907353,
-          "myY": 125.23495137968216,
+          "myX": 104.80810810012984,
+          "myY": 82.38083245375388,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.58051772766249,
         "myRouter": {}
       },
       {
@@ -251,11 +255,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 144.67351073095585,
-          "myY": 124.50861038093761,
+          "myX": 104.12077357201215,
+          "myY": 81.65449145500934,
           "myZ": 0.0
         },
-        "myHeading": 46.580517727662524,
+        "myHeading": 46.58051772766249,
         "myRouter": {}
       },
       {
@@ -266,11 +270,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 143.98617620283815,
-          "myY": 123.78226938219306,
+          "myX": 103.43343904389447,
+          "myY": 80.92815045626479,
           "myZ": 0.0
         },
-        "myHeading": 46.580517727662524,
+        "myHeading": 46.580517727662496,
         "myRouter": {}
       },
       {
@@ -281,11 +285,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 143.29884167472045,
-          "myY": 123.05592838344852,
+          "myX": 102.74610451577678,
+          "myY": 80.20180945752024,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.580517727662496,
         "myRouter": {}
       },
       {
@@ -296,11 +300,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 142.61150714660278,
-          "myY": 122.32958738470397,
+          "myX": 102.05876998765909,
+          "myY": 79.4754684587757,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.580517727662496,
         "myRouter": {}
       },
       {
@@ -311,11 +315,11 @@
           "water"
         ],
         "myPosition": {
-          "myX": 141.9241726184851,
-          "myY": 121.60324638595942,
+          "myX": 101.3714354595414,
+          "myY": 78.74912746003115,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.58051772766249,
         "myRouter": {}
       },
       {
@@ -326,11 +330,39 @@
           "water"
         ],
         "myPosition": {
-          "myX": 141.23683809036743,
-          "myY": 120.87690538721488,
+          "myX": 100.68410093142371,
+          "myY": 78.0227864612866,
           "myZ": 0.0
         },
-        "myHeading": 46.58051772766253,
+        "myHeading": 46.58051772766249,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/cow.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass"
+        ],
+        "myPosition": {
+          "myX": 325.0,
+          "myY": 125.0,
+          "myZ": 0.0
+        },
+        "myHeading": 0.0,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/cow.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass"
+        ],
+        "myPosition": {
+          "myX": 125.0,
+          "myY": 275.0,
+          "myZ": 0.0
+        },
+        "myHeading": 0.0,
         "myRouter": {}
       }
     ]
@@ -339,10 +371,38 @@
     "myComponents": []
   },
   "mySpawningSystem": {
-    "myComponents": []
+    "myComponents": [
+      {
+        "myTimeBetweenSpawns": 100,
+        "mySpawnName": "projectile",
+        "myTimeSinceSpawning": 0,
+        "myChildren": [],
+        "myRouter": {}
+      },
+      {
+        "myTimeBetweenSpawns": 100,
+        "mySpawnName": "projectile",
+        "myTimeSinceSpawning": 0,
+        "myChildren": [],
+        "myRouter": {}
+      }
+    ]
   },
   "myTargetingSystem": {
-    "myComponents": []
+    "myComponents": [
+      {
+        "mySightRange": 400.0,
+        "mySightWidth": 360.0,
+        "myTargetsEnemies": true,
+        "myRouter": {}
+      },
+      {
+        "mySightRange": 400.0,
+        "mySightWidth": 360.0,
+        "myTargetsEnemies": true,
+        "myRouter": {}
+      }
+    ]
   },
   "myTeamSystem": {
     "myComponents": [
@@ -385,6 +445,14 @@
       {
         "myTeamID": "them",
         "myRouter": {}
+      },
+      {
+        "myTeamID": "us",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "us",
+        "myRouter": {}
       }
     ]
   },
@@ -393,35 +461,41 @@
   },
   "myEntityManager": {
     "myEntityMap": {
-      "8d63e243-ea68-48c3-b3c7-4d46b7512608": {
-        "myID": "8d63e243-ea68-48c3-b3c7-4d46b7512608"
+      "3e36220b-6546-4f5c-9623-69b8fd9e8fcb": {
+        "myID": "3e36220b-6546-4f5c-9623-69b8fd9e8fcb"
       },
-      "301afe8e-f848-45b5-8341-18e4c6672bb8": {
-        "myID": "301afe8e-f848-45b5-8341-18e4c6672bb8"
+      "5d1b899f-eb8e-48de-b60a-f3dda0201e30": {
+        "myID": "5d1b899f-eb8e-48de-b60a-f3dda0201e30"
       },
-      "8e3f333f-d6d3-4c1b-814e-bdb537899eb5": {
-        "myID": "8e3f333f-d6d3-4c1b-814e-bdb537899eb5"
+      "ee6a8a06-0d51-41c2-9a7d-2ebbaa7f4cff": {
+        "myID": "ee6a8a06-0d51-41c2-9a7d-2ebbaa7f4cff"
       },
-      "863915cb-3231-4eac-9806-e0b9ee3f7811": {
-        "myID": "863915cb-3231-4eac-9806-e0b9ee3f7811"
+      "7dcc8d92-6b3f-4e6d-ac9b-c062bba80167": {
+        "myID": "7dcc8d92-6b3f-4e6d-ac9b-c062bba80167"
       },
-      "af072ef7-c862-44ce-a821-f209e878771a": {
-        "myID": "af072ef7-c862-44ce-a821-f209e878771a"
+      "f5043771-c197-4419-b4b3-c4d3a565d601": {
+        "myID": "f5043771-c197-4419-b4b3-c4d3a565d601"
       },
-      "ceeb5e79-ef34-4fa6-b65c-fce54af30c79": {
-        "myID": "ceeb5e79-ef34-4fa6-b65c-fce54af30c79"
+      "15b20daa-3240-4293-bcd7-37f8fff043cb": {
+        "myID": "15b20daa-3240-4293-bcd7-37f8fff043cb"
       },
-      "f752f091-87e6-43bd-896b-777f78ae61f2": {
-        "myID": "f752f091-87e6-43bd-896b-777f78ae61f2"
+      "d64f304e-ff86-4a8b-a0f2-cdde75e3c279": {
+        "myID": "d64f304e-ff86-4a8b-a0f2-cdde75e3c279"
       },
-      "c102356a-4a76-4aeb-95bd-d233ea8bedea": {
-        "myID": "c102356a-4a76-4aeb-95bd-d233ea8bedea"
+      "1d6eec89-629b-4495-bb84-c919757b463d": {
+        "myID": "1d6eec89-629b-4495-bb84-c919757b463d"
       },
-      "fd7c1034-e1ad-4729-be2a-4680cb3840b5": {
-        "myID": "fd7c1034-e1ad-4729-be2a-4680cb3840b5"
+      "9ea111fd-9f55-477f-a51f-8c1e6c7c88b9": {
+        "myID": "9ea111fd-9f55-477f-a51f-8c1e6c7c88b9"
       },
-      "444fc763-1895-4207-8386-d67d96e266b6": {
-        "myID": "444fc763-1895-4207-8386-d67d96e266b6"
+      "8b8b8d9a-ab77-4d85-9861-1b26ec4e1351": {
+        "myID": "8b8b8d9a-ab77-4d85-9861-1b26ec4e1351"
+      },
+      "e9c72066-124a-433a-b66a-63f1fd798fdf": {
+        "myID": "e9c72066-124a-433a-b66a-63f1fd798fdf"
+      },
+      "db17cb43-ae95-4e7d-ac88-d522d6ebc029": {
+        "myID": "db17cb43-ae95-4e7d-ac88-d522d6ebc029"
       }
     }
   }

@@ -20,16 +20,16 @@ import utility.Point;
  */
 public class ControllableComponent extends AbstractComponent{
 	@Hide
-	private ControllableSystem myControllableSystem;
+	private transient ControllableSystem myControllableSystem;
 	@Hide
-	private PhysicalSystem myPhysicalSystem;
+	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
-	private CollisionDetectionSystem myCollisionDetectionSystem;
+	private transient CollisionDetectionSystem myCollisionDetectionSystem;
 //	private DamageDealingSystem myDamageDealingSystem;
 	@Hide
-	private MovementSystem myMovementSystem;
+	private transient MovementSystem myMovementSystem;
 	@Hide
-	private Router router;
+	private transient Router router;
 	
 	public ControllableComponent(IEntity aEntity, ControllableSystem controllableSystem, 
 			CollisionDetectionSystem collisionDetectionSystem, 

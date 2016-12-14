@@ -36,7 +36,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private transient IDamageStrategy myDamageStrategy;
 	
 	@Hide
-	private List<IObserver<IViewableDamageDealer>> myObservers;
+	private transient List<IObserver<IViewableDamageDealer>> myObservers;
 	
 	private boolean explodesOnEnemies;
 	private boolean explodesOnAllies;

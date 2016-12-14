@@ -38,8 +38,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private transient HealthSystem myHealthSystem;
 
 	@Hide
-	private Double myCurrHealth;
-	private Double myMaxHealth;
+	private double myCurrHealth;
+	private double myMaxHealth;
 	private boolean explodeOnDeath;
 	
 	@Hide
@@ -66,7 +66,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	}
 		
 	public int getCurrentHealth() {
-		return myCurrHealth.intValue();
+		return (int) myCurrHealth;
 	}
 	
 	public void setCurrentHealth(double newHealthValue) {

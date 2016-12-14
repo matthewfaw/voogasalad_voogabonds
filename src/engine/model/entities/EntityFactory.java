@@ -25,8 +25,6 @@ import utility.Point;
 public class EntityFactory {
 	private static final Point DEFAULT_LOCATION = new Point(0,0);
 	private ComponentFactory myComponentFactory;
-//	@SuppressWarnings("unused")
-//	private List<ISystem<?>> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
 	private Router myRouter;
 	private MapMediator myMapMediator;
