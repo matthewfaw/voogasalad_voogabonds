@@ -1,0 +1,13 @@
+{
+  "myName": "Tank",
+  "myComponents": {
+    "BountyComponent": {
+      "myFields": {
+        "myBountyValue": "5",
+        "myLivesToDestroy": "5",
+        "myPointValue": "5"
+      },
+      "myComponentName": "BountyComponent"
+    }
+  }
+}
