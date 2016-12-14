@@ -16,8 +16,8 @@ import engine.model.strategies.factories.SpawningStrategyFactory;
 
 public class SpawningSystem implements ISystem<CreatorComponent>, IObserver<TimelineController>{
 	private List<CreatorComponent> myComponents;
-	private EntityFactory myEntityFactory;
-	private SpawningStrategyFactory myStrategyFactory;
+	private transient EntityFactory myEntityFactory;
+	private transient SpawningStrategyFactory myStrategyFactory;
 	
 	public SpawningSystem(TimelineController time)
 	{

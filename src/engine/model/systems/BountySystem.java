@@ -11,7 +11,7 @@ import engine.model.playerinfo.IModifiablePlayer;
 
 public class BountySystem implements ISystem<BountyComponent> {
 	private List<BountyComponent> myComponents;
-	private IModifiablePlayer myPlayer;
+	private transient IModifiablePlayer myPlayer;
 	
 	public BountySystem(PlayerController player) 
 	{

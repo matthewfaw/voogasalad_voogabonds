@@ -1,1 +1,428 @@
-{"myCollisionDetectionSystem":{"myComponents":[]},"myDamageDealingSystem":{"myComponents":[],"myStrategyFactory":{"myAtypeStrategies":["BinaryDamageStrategy","ConstantDamageStrategy","ExponentialDamageStrategy"],"myFolderPath":"src/engine/model/strategies/damage"}},"myHealthSystem":{"myComponents":[{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false},{"myCurrHealth":9000.0,"myMaxHealth":9000.0,"explodeOnDeath":false}]},"myMovementSystem":{"myComponents":[{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false},{"myTurnSpeed":1.0,"myMoveSpeed":0.0,"explodesAtMaxDistance":false,"myMaxDistance":100.0,"myMovedDistance":99.99999999999991,"removeOnGoal":false,"explodesOnGoal":false}]},"myPhysicalSystem":{"myComponents":[{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cookie.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark","fairy"],"myPosition":{"myX":125.48413895115233,"myY":109.45616368488538,"myZ":0.0},"myHeading":50.54626708024692},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0},{"myImagePath":"src/resources/cow.png","myImageSize":50.0,"myValidTerrains":["grass","ice","steel","dark"],"myPosition":{"myX":50.0,"myY":50.0,"myZ":0.0},"myHeading":0.0}]},"myBountySystem":{"myComponents":[]},"mySpawningSystem":{"myComponents":[]},"myTargetingSystem":{"myComponents":[]},"myTeamSystem":{"myComponents":[]},"myEntityManager":{"myEntityMap":{"1762655502":{},"1995906421":{},"959385125":{},"329432750":{},"827026118":{},"572198933":{},"7995624":{},"674768810":{},"985310639":{},"992148020":{},"1955255186":{},"452060779":{},"749979432":{},"1945626476":{},"1327626429":{},"1374304842":{},"299416831":{},"390103144":{},"1797880067":{},"20540435":{},"1869960286":{},"807141808":{},"522885382":{},"998336943":{},"377135573":{},"446509998":{},"1868081647":{},"222314872":{},"1700339426":{},"1805447389":{},"423021682":{},"1510866884":{},"1791728257":{},"21596419":{},"926765552":{},"238465784":{},"413738343":{},"558659843":{},"1743122357":{},"839447129":{},"233423800":{},"270447055":{},"667934743":{},"311699149":{},"230083158":{},"1325308316":{},"257627710":{},"1025066876":{},"1646973260":{},"1106524317":{},"2023202430":{},"1157082269":{},"985001561":{},"700742953":{},"1329551312":{},"1211998924":{},"145628637":{},"1556088503":{},"1902503580":{},"994719668":{}}}}
+{
+  "myCollisionDetectionSystem": {
+    "myComponents": [
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myCollisionRadius": 20.0,
+        "myObservers": [],
+        "myRouter": {}
+      }
+    ]
+  },
+  "myDamageDealingSystem": {
+    "myComponents": [],
+    "myStrategyFactory": {
+      "myAtypeStrategies": [
+        "BinaryDamageStrategy",
+        "ConstantDamageStrategy",
+        "ExponentialDamageStrategy"
+      ],
+      "myFolderPath": "src/engine/model/strategies/damage/"
+    }
+  },
+  "myHealthSystem": {
+    "myComponents": []
+  },
+  "myMovementSystem": {
+    "myComponents": [
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 127.9999999999997,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 126.99999999999972,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 125.99999999999973,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 124.99999999999974,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 123.99999999999976,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 122.99999999999976,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 121.99999999999976,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 120.99999999999977,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 119.99999999999979,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      },
+      {
+        "myTurnSpeed": 1.0,
+        "myMoveSpeed": 1.0,
+        "explodesAtMaxDistance": false,
+        "myMaxDistance": 1000.0,
+        "myMovedDistance": 118.9999999999998,
+        "removeOnGoal": true,
+        "explodesOnGoal": false,
+        "myObservers": [],
+        "myRouter": {}
+      }
+    ]
+  },
+  "myPhysicalSystem": {
+    "myComponents": [
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 147.42284884342655,
+          "myY": 127.4139743759158,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 146.73551431530888,
+          "myY": 126.68763337717125,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 146.0481797871912,
+          "myY": 125.9612923784267,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 145.36084525907353,
+          "myY": 125.23495137968216,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 144.67351073095585,
+          "myY": 124.50861038093761,
+          "myZ": 0.0
+        },
+        "myHeading": 46.580517727662524,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 143.98617620283815,
+          "myY": 123.78226938219306,
+          "myZ": 0.0
+        },
+        "myHeading": 46.580517727662524,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 143.29884167472045,
+          "myY": 123.05592838344852,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 142.61150714660278,
+          "myY": 122.32958738470397,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 141.9241726184851,
+          "myY": 121.60324638595942,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      },
+      {
+        "myImagePath": "src/resources/boss.png",
+        "myImageSize": 50.0,
+        "myValidTerrains": [
+          "grass",
+          "water"
+        ],
+        "myPosition": {
+          "myX": 141.23683809036743,
+          "myY": 120.87690538721488,
+          "myZ": 0.0
+        },
+        "myHeading": 46.58051772766253,
+        "myRouter": {}
+      }
+    ]
+  },
+  "myBountySystem": {
+    "myComponents": []
+  },
+  "mySpawningSystem": {
+    "myComponents": []
+  },
+  "myTargetingSystem": {
+    "myComponents": []
+  },
+  "myTeamSystem": {
+    "myComponents": [
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      },
+      {
+        "myTeamID": "them",
+        "myRouter": {}
+      }
+    ]
+  },
+  "myControllableSystem": {
+    "myComponents": []
+  },
+  "myEntityManager": {
+    "myEntityMap": {
+      "8d63e243-ea68-48c3-b3c7-4d46b7512608": {
+        "myID": "8d63e243-ea68-48c3-b3c7-4d46b7512608"
+      },
+      "301afe8e-f848-45b5-8341-18e4c6672bb8": {
+        "myID": "301afe8e-f848-45b5-8341-18e4c6672bb8"
+      },
+      "8e3f333f-d6d3-4c1b-814e-bdb537899eb5": {
+        "myID": "8e3f333f-d6d3-4c1b-814e-bdb537899eb5"
+      },
+      "863915cb-3231-4eac-9806-e0b9ee3f7811": {
+        "myID": "863915cb-3231-4eac-9806-e0b9ee3f7811"
+      },
+      "af072ef7-c862-44ce-a821-f209e878771a": {
+        "myID": "af072ef7-c862-44ce-a821-f209e878771a"
+      },
+      "ceeb5e79-ef34-4fa6-b65c-fce54af30c79": {
+        "myID": "ceeb5e79-ef34-4fa6-b65c-fce54af30c79"
+      },
+      "f752f091-87e6-43bd-896b-777f78ae61f2": {
+        "myID": "f752f091-87e6-43bd-896b-777f78ae61f2"
+      },
+      "c102356a-4a76-4aeb-95bd-d233ea8bedea": {
+        "myID": "c102356a-4a76-4aeb-95bd-d233ea8bedea"
+      },
+      "fd7c1034-e1ad-4729-be2a-4680cb3840b5": {
+        "myID": "fd7c1034-e1ad-4729-be2a-4680cb3840b5"
+      },
+      "444fc763-1895-4207-8386-d67d96e266b6": {
+        "myID": "444fc763-1895-4207-8386-d67d96e266b6"
+      }
+    }
+  }
+}

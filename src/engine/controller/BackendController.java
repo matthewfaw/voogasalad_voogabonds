@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
-import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
@@ -21,7 +20,6 @@ import engine.model.entities.EntityFactory;
 import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
-import engine.model.game_environment.distributor.MapDistributor;
 import engine.model.playerinfo.Player;
 import engine.model.resourcestore.ResourceStore;
 import engine.model.systems.*;
@@ -335,7 +333,6 @@ public class BackendController {
 			myRouter.distributeErrors(e.toString());
 		}
 	}
-	
 	/*
 	public static void main(String[] args)
 	{

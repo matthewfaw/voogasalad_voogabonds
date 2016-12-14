@@ -46,7 +46,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	private transient List<IObserver<IViewableHealth>> myObservers;
 	
 	@Hide
-	private Router myRouter;
+	private transient Router myRouter;
 	
 	public HealthComponent(IEntity aEntity, HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
 		super(aEntity, router);
