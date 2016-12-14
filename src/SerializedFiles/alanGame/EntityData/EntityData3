@@ -18,7 +18,7 @@
     },
     "MoveableComponent": {
       "myFields": {
-        "removeOnGoal": "false",
+        "removeOnGoal": "true",
         "explodesOnGoal": "false",
         "myMaxDistance": "1000",
         "explodesAtMaxDistance": "false",

@@ -31,7 +31,7 @@
       "myFields": {
         "mySpawnName": "projectile",
         "mySpawningStrategy": "BasicSpawnStrategy",
-        "myTimeBetweenSpawns": "2"
+        "myTimeBetweenSpawns": "100"
       },
       "myComponentName": "CreatorComponent"
     },
