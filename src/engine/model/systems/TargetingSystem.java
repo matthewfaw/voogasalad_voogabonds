@@ -1,5 +1,6 @@
 package engine.model.systems;
 
+import engine.model.components.IComponent;
 import engine.model.components.concrete.CreatorComponent;
 import engine.model.components.concrete.MoveableComponent;
 import engine.model.components.concrete.TargetingComponent;
@@ -26,6 +27,10 @@ public class TargetingSystem extends AbstractSystem<TargetingComponent> {
 		if (t != null)
 			return t.getTarget();
 		return c.getTarget();
+	}
+	
+	public boolean canTarget(IComponent c) {
+		return getComponent(c) != null;
 	}
 
 	public ITargetingStrategy newStrategy(String name) {

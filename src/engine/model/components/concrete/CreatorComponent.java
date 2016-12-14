@@ -19,6 +19,7 @@ import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
 import gamePlayerView.gamePlayerView.Router;
+import utility.Point;
 import engine.model.weapons.DamageInfo;
 
 /**
@@ -92,6 +93,8 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	 */
 	public void spawnIfReady() {
 		myTarget = myTargeting.getTarget(this);
+		if (myTarget instanceof Point)
+			System.out.println("there");
 		if (myPhysical.get(this) != null)
 			if (myTarget != null)
 				if (myTimeSinceSpawning >= myTimeBetweenSpawns) {
