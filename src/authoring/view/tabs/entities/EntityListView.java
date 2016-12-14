@@ -28,8 +28,9 @@ public class EntityListView {
         if (myImagePath == null || myImagePath.equals("")) {
             return null;
         }
-        String relativePath = myImagePath.substring(4); // remove leading 'src/'
-        Image img = new Image(getClass().getClassLoader().getResourceAsStream(relativePath));
+//        String relativePath = myImagePath.substring(4); // remove leading 'src/'
+        System.out.println(myImagePath);
+        Image img = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
         ImageView view = new ImageView(img);
         view.setPreserveRatio(true);
         view.setFitHeight(IMAGE_HEIGHT);
