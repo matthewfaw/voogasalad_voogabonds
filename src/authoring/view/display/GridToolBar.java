@@ -114,6 +114,7 @@ public class GridToolBar {
 		sinkHandler(toggles);
 		ComboBox<String> terrainChooser = new ComboBox<String>(terrainOptions);
 		terrainChooser.setId("menu-combobox");
+		terrainChooser.setPromptText(myResources.getString("Terrains"));
 		terrainChooser.setMinHeight(screenHeight*0.04);
 		terrainHandler(terrainChooser);
 		Button music = new Button(myResources.getString("SelectMusic"));
@@ -285,7 +286,7 @@ public class GridToolBar {
 					createTerrain.show();
 				}
 				else {
-					selectedTerrain = terrains.getSelectionModel().getSelectedItem();
+					selectedTerrain = terrains.getValue();
 					imageStatus = boolToTerrain.get(terrains.getSelectionModel().getSelectedItem());
 					if (imageStatus) {
 						selectedImagePath = imageToTerrain.get(terrains.getSelectionModel().getSelectedItem());

@@ -250,7 +250,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     }
                 });
             } else if (attributeType.toLowerCase().equals("double")) {
-                TextField numericField = new TextField();
+                TextField numericField = new TextField(retrievedData.get(uglyAttributeName));
                 setUpLabeledField(lbl, numericField);
                 numericField.textProperty().addListener(new ChangeListener<String>() {
                     // Forces double input
@@ -258,7 +258,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     public void changed (ObservableValue<? extends String> observable,
                                          String oldValue,
                                          String newValue) {
-                        if (!newValue.matches("\\d+\\.\\d+")) {
+                        if (!newValue.matches("\\d+\\.?\\d+")) {
                             numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
                         }
                     }
