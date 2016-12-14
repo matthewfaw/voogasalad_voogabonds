@@ -166,12 +166,13 @@ public class ApplicationController {
 	 * @param entityID
 	 */
 	public void onEntityClicked(String entityID) {
-		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
-		for (IComponent component: clickedEntity.getComponents()) {
-			component.distributeInfo();
-		}
+		myBackendController.sellEnemy(myEntityManager.getEntityMap().get(entityID));
+//		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+//		for (IComponent component: clickedEntity.getComponents()) {
+//			component.distributeInfo();
+//		}
 //		myScene.getMyBottomPane().clear();
-		myScene.buildEntityInfoBox();
+//		myScene.buildEntityInfoBox();
 	}
 	
 	public void DisplayStats() throws Exception {

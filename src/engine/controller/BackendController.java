@@ -16,7 +16,9 @@ import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.components.IComponent;
+import engine.model.components.concrete.BountyComponent;
 import engine.model.data_stores.DataStore;
+import engine.model.entities.ConcreteEntity;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
@@ -217,6 +219,18 @@ public class BackendController {
 		mySystems.add(myControllableSystem);
 		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
 		mySpawningSystem.setEntityFactory(myEntityFactory);
+	}
+	
+	public void sellEnemy(ConcreteEntity entity) {
+		
+		for (IComponent c: entity.getComponents()) {
+			if (c instanceof BountyComponent) {
+				myBountySystem.collectBounty(c);
+				entity.delete();
+				break;
+			}
+		}
+		
 	}
 
 	/**
