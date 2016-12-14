@@ -5,8 +5,8 @@
   "spawnPoints": {
     "over": [
       {
-        "myX": 3.0,
-        "myY": 3.0,
+        "myX": 0.0,
+        "myY": 0.0,
         "myZ": 0.0
       }
     ]
@@ -14,8 +14,8 @@
   "sinkPoints": {
     "noah": [
       {
-        "myX": 0.0,
-        "myY": 0.0,
+        "myX": 3.0,
+        "myY": 3.0,
         "myZ": 0.0
       }
     ]
@@ -79,7 +79,7 @@
         "myZ": 0.0
       },
       "myColor": "0x001a80ff",
-      "mySize": 139
+      "mySize": 155
     },
     {
       "type": "Ground",
@@ -149,7 +149,7 @@
         "myZ": 0.0
       },
       "myColor": "0x001a80ff",
-      "mySize": 139
+      "mySize": 155
     },
     {
       "type": "Ground",
