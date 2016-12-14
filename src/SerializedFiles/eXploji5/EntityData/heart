@@ -34,7 +34,7 @@
         "myMaxDistance": "10000",
         "explodesAtMaxDistance": "False",
         "myMoveSpeed": "1",
-        "myTurnSpeed": "1",
+        "myTurnSpeed": "10",
         "myMovementCalc": "GreedyMovementStrategy"
       },
       "myComponentName": "MoveableComponent"

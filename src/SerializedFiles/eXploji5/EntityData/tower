@@ -22,7 +22,7 @@
         "myMaxDistance": "1000",
         "explodesAtMaxDistance": "False",
         "myMoveSpeed": "0",
-        "myTurnSpeed": "1",
+        "myTurnSpeed": "10",
         "myMovementCalc": "GreedyMovementStrategy"
       },
       "myComponentName": "MoveableComponent"
@@ -32,7 +32,7 @@
         "mySpawnName": "heart",
         "mySpawningStrategy": "BasicSpawnStrategy",
         "homingProjectiles": "True",
-        "myTimeBetweenSpawns": "50"
+        "myTimeBetweenSpawns": "100"
       },
       "myComponentName": "CreatorComponent"
     },
