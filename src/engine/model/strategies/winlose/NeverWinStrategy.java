@@ -1,6 +1,7 @@
 package engine.model.strategies.winlose;
 
 import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.strategies.AbstractWinStrategy;
 
 public class NeverWinStrategy extends AbstractWinStrategy<Object> {
 
@@ -14,5 +15,4 @@ public class NeverWinStrategy extends AbstractWinStrategy<Object> {
 		//Therefore, nothing should call its update method.
 		return false;
 	}
-	
 }

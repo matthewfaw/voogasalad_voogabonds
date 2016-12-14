@@ -1,4 +1,4 @@
-package engine.model.strategies.winlose;
+package engine.model.strategies;
 
 import java.util.ArrayList;
 import java.util.List;

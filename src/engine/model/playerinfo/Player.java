@@ -9,7 +9,9 @@ import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
 import engine.model.resourcestore.ResourceStore;
-import engine.model.strategies.winlose.IWinLoseStrategy;
+import engine.model.strategies.AbstractLoseStrategy;
+import engine.model.strategies.AbstractWinStrategy;
+import engine.model.strategies.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
  
@@ -75,11 +77,15 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public int getLivesRemaining() {
 		return myLives;
 	}
-	
 	@Override
 	public int getAvailableMoney() {
 		return myMoney.getValue();
 	}
+	@Override
+	public int getPoints() {
+		return myPoints;
+	}
+	
 	@Override
 	public int getID(){
 		return myID;
@@ -89,6 +95,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void win() {
 		// TODO Auto-generated method stub
 		//Presumably tell anyone who cares that you won so they can end the game
+		System.out.println("You Win!");
 		
 	}
 
@@ -96,7 +103,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void lose() {
 		// TODO Auto-generated method stub
 		//Presumably delete anything that belongs to you and tell anyone who cares that you lost
-		
+		System.out.println("You Lose!");
 	}
 
 	@Override
