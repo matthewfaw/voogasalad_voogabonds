@@ -54,8 +54,7 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		
 		myBounty = bounty;
 		myDamage = damage;
-		
-		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
+		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
 		
