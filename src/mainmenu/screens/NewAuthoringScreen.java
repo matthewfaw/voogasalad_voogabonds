@@ -44,11 +44,11 @@ public class NewAuthoringScreen {
 	private String authoringName;
 	private Router router;
 	
-	public NewAuthoringScreen(Router r) throws IOException {
+	public NewAuthoringScreen() throws IOException {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.stage = new Stage();
-		this.router = r;
+		this.router = new Router();
 		stage.setTitle(myResources.getString("SetUpNewAuthoringTitle"));
 		this.pane = new BorderPane();
 		this.scene = new Scene(pane);
@@ -68,10 +68,10 @@ public class NewAuthoringScreen {
 		HBox mapDimensionContainer = new HBox(screenWidth*0.05);
 		TextField mapXField = new TextField();
 		mapXField.setId("menu-textfield");
-		mapXField.setPromptText(myResources.getString("SetMapX"));
+		mapXField.setText(myResources.getString("DefaultMapX"));
 		TextField mapYField = new TextField();
 		mapYField.setId("menu-textfield");
-		mapYField.setPromptText(myResources.getString("SetMapY"));
+		mapYField.setText(myResources.getString("DefaultMapY"));
 		Button startProject = new Button(myResources.getString("ConfirmAuthoringSetUp"));
 		startProject.setId("button");
 		startProjectHandler(startProject, mapXField, mapYField);
@@ -92,7 +92,7 @@ public class NewAuthoringScreen {
 						if (file != null) {
 							GameStateSerializer GSS = new GameStateSerializer(router);
 							try {
-								GSS.saveGameState(file.getName());
+								GSS.saveGameState(file.getName(), false);
 								setAuthoringName(file.getName());
 							} catch (Exception exception) {
 								System.out.println("Cannot create new game.");
@@ -139,6 +139,7 @@ public class NewAuthoringScreen {
 	}
 	
 	private void setAuthoringName(String newName) {
+		router.setGameTitle(newName);
 		authoringName = newName;
 	}
 	

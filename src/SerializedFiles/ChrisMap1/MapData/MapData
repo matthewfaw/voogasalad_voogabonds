@@ -5,15 +5,15 @@
   "spawnPoints": {
     "betaSpawn": [
       {
-        "myX": 15.0,
-        "myY": 3.0,
+        "myX": 12.0,
+        "myY": 14.0,
         "myZ": 0.0
       }
     ],
     "alphaSpawn": [
       {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 9.0,
+        "myY": 15.0,
         "myZ": 0.0
       }
     ]
@@ -21,65 +21,25 @@
   "sinkPoints": {
     "betaSink": [
       {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 12.0,
+        "myY": 1.0,
         "myZ": 0.0
       }
     ],
     "alphaSink": [
       {
-        "myX": 15.0,
-        "myY": 2.0,
+        "myX": 9.0,
+        "myY": 0.0,
         "myZ": 0.0
       }
     ]
   },
   "terrainList": [
     {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 19.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 19.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
       "type": "Red",
       "loc": {
-        "myX": 16.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -88,18 +48,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 0.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -108,8 +58,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 17.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 13.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -118,18 +68,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 17.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -138,8 +78,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 10.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -148,8 +88,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 16.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 11.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -158,8 +98,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 14.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -168,28 +108,48 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 1.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
       "mySize": 29
     },
     {
-      "type": "Ground",
+      "type": "Red",
       "loc": {
-        "myX": 15.0,
-        "myY": 3.0,
+        "myX": 12.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
-      "myColor": "resources/terrain_images/grass.png/",
+      "myColor": "0xb31a1aff",
       "mySize": 29
     },
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -198,8 +158,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 6.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -208,18 +168,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -228,28 +178,18 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 15.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
       "mySize": 29
     },
     {
-      "type": "Red",
-      "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
       "type": "Grass",
       "loc": {
-        "myX": 15.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 8.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -258,8 +198,8 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 15.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -268,38 +208,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 15.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 19.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 15.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -308,7 +218,27 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 21.0,
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -318,48 +248,18 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 5.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
       "mySize": 29
     },
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 3.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -368,18 +268,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 12.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -388,8 +278,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 14.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -398,8 +288,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 11.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -408,18 +298,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -428,48 +308,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 17.0,
+        "myX": 9.0,
         "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 19.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 15.0,
-        "myY": 3.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -478,28 +318,68 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 19.0,
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
         "myY": 3.0,
         "myZ": 0.0
       },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
+      "myColor": "0xb31a1aff",
       "mySize": 29
     },
     {
       "type": "Red",
       "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 15.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -508,68 +388,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 21.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 11.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -578,18 +398,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 17.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -598,27 +408,17 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 15.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
       "mySize": 29
     },
     {
-      "type": "Ground",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
       "type": "Red",
       "loc": {
-        "myX": 20.0,
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -628,158 +428,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 21.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 21.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 4.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -788,8 +438,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 1.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -798,28 +448,48 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 6.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 21.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
       "mySize": 29
     },
     {
       "type": "Red",
       "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -828,8 +498,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 15.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -838,17 +508,27 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 16.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 8.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
       "mySize": 29
     },
     {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
       "type": "Red",
       "loc": {
-        "myX": 15.0,
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -858,38 +538,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 21.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -898,7 +548,7 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 21.0,
+        "myX": 9.0,
         "myY": 3.0,
         "myZ": 0.0
       },
@@ -908,8 +558,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 5.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -918,48 +568,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -968,8 +578,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 1.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -978,8 +588,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -988,8 +598,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 8.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -998,8 +608,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 10.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1008,8 +618,18 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1018,8 +638,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 8.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1028,8 +648,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 17.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 6.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1038,8 +658,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1048,8 +668,28 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
+        "myX": 10.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1058,7 +698,7 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 18.0,
+        "myX": 9.0,
         "myY": 3.0,
         "myZ": 0.0
       },
@@ -1068,8 +708,18 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1078,8 +728,38 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
         "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1088,8 +768,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 7.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1098,8 +778,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 21.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 13.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1108,8 +788,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 5.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1118,8 +798,18 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 20.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1128,7 +818,7 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -1138,28 +828,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 17.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 19.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 8.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1168,8 +838,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
+        "myX": 11.0,
+        "myY": 10.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1178,8 +848,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 18.0,
-        "myY": 3.0,
+        "myX": 9.0,
+        "myY": 11.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1188,48 +858,8 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 18.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 19.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0xb31a1aff",
-      "mySize": 29
-    },
-    {
-      "type": "Red",
-      "loc": {
-        "myX": 22.0,
-        "myY": 2.0,
+        "myX": 12.0,
+        "myY": 12.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
@@ -1238,7 +868,267 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
         "myY": 3.0,
         "myZ": 0.0
       },
@@ -1248,7 +1138,1317 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 18.0,
+        "myX": 10.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -1258,8 +2458,58 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 21.0,
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 5.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1268,7 +2518,257 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 17.0,
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -1278,8 +2778,8 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 20.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 1.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1288,7 +2788,507 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 19.0,
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -1298,18 +3298,8 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 16.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 29
-    },
-    {
-      "type": "Grass",
-      "loc": {
-        "myX": 22.0,
-        "myY": 3.0,
+        "myX": 10.0,
+        "myY": 13.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/grass.png/",
@@ -1318,7 +3308,797 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 18.0,
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 2.0,
         "myZ": 0.0
       },
@@ -1328,7 +4108,2007 @@
     {
       "type": "Grass",
       "loc": {
-        "myX": 22.0,
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
         "myY": 3.0,
         "myZ": 0.0
       },
@@ -1338,8 +6118,3758 @@
     {
       "type": "Red",
       "loc": {
-        "myX": 22.0,
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
         "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 11.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 10.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 9.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 8.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 14.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 10.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 15.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 11.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 6.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 5.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 12.0,
+        "myY": 9.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 7.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Grass",
+      "loc": {
+        "myX": 9.0,
+        "myY": 12.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 13.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 29
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 11.0,
+        "myY": 10.0,
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",

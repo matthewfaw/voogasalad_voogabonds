@@ -8,8 +8,8 @@ import javafx.scene.control.Button;
 
 public class LoadGameScreen extends AbstractLoadScreen {
 
-	public LoadGameScreen(String title) throws IOException {
-		super(title);
+	public LoadGameScreen(String title, String files) throws IOException {
+		super(title, files);
 	}
 
 	@Override

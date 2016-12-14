@@ -89,11 +89,13 @@ public class PlayerTab extends Tab {
 	}
 	
 	private void handleNewGame() throws IOException {
-		NewGameScreen newGameScreen = new NewGameScreen(myResources.getString("PlayNewGame"));
+		NewGameScreen newGameScreen = new NewGameScreen(myResources.getString("PlayNewGame"), 
+				myResources.getString("ExistingAuthoringFiles"));
 	}
 	
 	private void handleOldGame() throws IOException {
-		LoadGameScreen loadGameScreen = new LoadGameScreen(myResources.getString("PlayOldGame"));
+		LoadGameScreen loadGameScreen = new LoadGameScreen(myResources.getString("PlayOldGame"),
+				myResources.getString("ExistingSavedGames"));
 	}
 	
 	private void setUpScreenResolution() {

@@ -33,7 +33,7 @@ public abstract class AbstractLoadScreen {
 	private int screenWidth;
 	private int screenHeight;
 	
-	public AbstractLoadScreen(String title) throws IOException {
+	public AbstractLoadScreen(String title, String files) throws IOException {
 		setUpScreenResolution();
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.stage = new Stage();
@@ -42,18 +42,18 @@ public abstract class AbstractLoadScreen {
 		Scene scene = new Scene(pane);
 		scene.getStylesheets().add("style.css");
 		pane.setId("background");
-		populatePane(pane);
+		populatePane(pane, files);
 		stage.setScene(scene);
 		stage.show();
 	}
 	
-	protected void populatePane(BorderPane pane) {
+	protected void populatePane(BorderPane pane, String files) {
 		HBox optionArea = new HBox();
 		TableView<MenuTableItem> chooseProjectTable = new TableView<MenuTableItem>();
 		chooseProjectTable.setPrefWidth(screenWidth*0.3);
 		TableColumn<MenuTableItem, String> firstCol = new TableColumn<MenuTableItem, String>(myResources.getString("ProjectTitle"));
 		TableColumn<MenuTableItem, Date> secondCol = new TableColumn<MenuTableItem, Date>(myResources.getString("LastModified"));
-		String path = myResources.getString("ExistingAuthoringFiles").substring(1);
+		String path = files.substring(1);
 		File file = new File(path);
 		File[] fileList = file.listFiles();
 		ObservableList<MenuTableItem> data = FXCollections.observableArrayList();
