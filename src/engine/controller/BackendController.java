@@ -45,6 +45,8 @@ public class BackendController {
 	private static final String GAME_DATA_PATH = "resources/game_data_relative_paths/relative_paths";
 	private static final int DEFAULT_STARTING_LEVEL=0;
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String DEFAULT_SAVE_LOCATION = "src/savedgame/";
+	private static final String SAVED_FILE_ENDING = "_SAVED";
 
 	//Utilities
 	private transient ResourceBundle myGameDataRelativePaths;
@@ -73,6 +75,7 @@ public class BackendController {
 	private SystemsController mySystemsController;
 	private EntityManager myEntityManager;
 	private transient Router myRouter;
+	private String myGameName;
 	
 	public BackendController()
 	{
@@ -104,6 +107,7 @@ public class BackendController {
 	public void reconstructGameData(String aGameDataPath)
 	{
 		myFileRetriever = new FileRetriever(aGameDataPath);
+		myGameName = aGameDataPath.substring(aGameDataPath.lastIndexOf('/')+1);
 		constructData();
 	}
 	
@@ -299,16 +303,10 @@ public class BackendController {
 	{
 		JSONSerializer js = new JSONSerializer();
 		try {
-			js.serializeToFile(this, "plswork");
+			js.serializeToFile(this, DEFAULT_SAVE_LOCATION, myGameName + SAVED_FILE_ENDING);
 		} catch (Exception e1) {
 			ErrorBox.displayError(myErrorMessages.getString("CannotSave"));
 			myRouter.distributeErrors(e1.toString());
-		}
-		try {
-			BackendController b = (BackendController)myJsonDeserializer.deserializeFromFile("SerializedFiles/plswork", BackendController.class);
-		} catch (FileNotFoundException e) {
-			ErrorBox.displayError(myErrorMessages.getString("CannotLoad"));
-			myRouter.distributeErrors(e.toString());
 		}
 	}
 	/*

@@ -1,5 +1,9 @@
 package engine.controller;
 
+import java.io.FileNotFoundException;
+
+import authoring.model.serialization.JSONDeserializer;
+
 //import java.util.ResourceBundle;
 
 import engine.controller.timeline.TimelineController;
@@ -9,6 +13,7 @@ import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.stage.Stage;
+import utility.ErrorBox;
 import utility.Point;
 
 /**
@@ -27,6 +32,7 @@ import utility.Point;
 public class ApplicationController {
 //	private static final String GAME_OPTIONS_PATH = "resources/game_options/GamePaths";
 	private static final String GAME_FOLDER = "SerializedFiles/";
+	private static final String SAVED_FOLDER = "savedgame/";
 
 //	private ResourceBundle myGameOptions;
 	private BackendController myBackendController;
@@ -55,6 +61,16 @@ public class ApplicationController {
 		myEntityManager = new EntityManager();
 		constructBackend(router,gameTitle);
 	}
+	
+	public void load(Stage aStage, String aGameTitle) throws Exception
+	{
+		myScene=constructGUI(aStage);
+		Router router = new Router(myScene);
+		JSONDeserializer deserializer = new JSONDeserializer();
+		BackendController b = (BackendController)deserializer.deserializeFromFile(SAVED_FOLDER + aGameTitle, BackendController.class);
+		b.reconstructEngineState(GAME_FOLDER + aGameTitle, router);
+	}
+	
 	/**
 	 * Helper method to create the view object
 	 * from the GameData file

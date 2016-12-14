@@ -2,20 +2,24 @@ package mainmenu.screens;
 
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
+import engine.controller.ApplicationController;
+import utility.ErrorBox;
 
 public class LoadGameScreen extends AbstractLoadScreen {
+	public ApplicationController myApplicationController;
 
 	public LoadGameScreen(String title) throws IOException {
 		super(title);
+		myApplicationController = new ApplicationController();
 	}
 
 	@Override
 	protected void start(String selectedGame) {
-		// TODO Matt, fill in here
-		
+		try {
+			myApplicationController.load(getStage(), selectedGame);
+		} catch (Exception e1) {
+			ErrorBox.displayError(getResources().getString("NewPlayerError"));
+		}
 	}
 
 	

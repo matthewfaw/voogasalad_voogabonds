@@ -22,6 +22,20 @@ public class JSONSerializer {
 			
 	}
 	
+	public void serializeToFile(Object obj, String aFileLocation, String fileName) throws Exception{
+		
+		String str = serialize(obj).toString();
+		
+		try{
+			PrintWriter out = new PrintWriter(aFileLocation+fileName);
+			out.println(str);
+			out.close();
+		}
+		catch(Exception e){
+			throw new Exception("File was unable to be serialized correctly.");
+		}
+		
+	}
 	public void serializeToFile(Object obj, String fileName) throws Exception{
 		
 		String str = serialize(obj).toString();
