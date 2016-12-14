@@ -1,0 +1,39 @@
+{
+  "myName": "badguy",
+  "myComponents": {
+    "PhysicalComponent": {
+      "myFields": {
+        "myImageSize": "1",
+        "myValidTerrains": "grass",
+        "myImagePath": "resources/devil.png"
+      },
+      "myComponentName": "PhysicalComponent"
+    },
+    "MoveableComponent": {
+      "myFields": {
+        "removeOnGoal": "True",
+        "explodesOnGoal": "False",
+        "myMaxDistance": "1000",
+        "explodesAtMaxDistance": "True",
+        "myMoveSpeed": "1",
+        "myTurnSpeed": "10",
+        "myMovementCalc": "PathMovementStrategy"
+      },
+      "myComponentName": "MoveableComponent"
+    },
+    "CollidableComponent": {
+      "myFields": {
+        "myCollisionRadius": "5"
+      },
+      "myComponentName": "CollidableComponent"
+    },
+    "BountyComponent": {
+      "myFields": {
+        "myBountyValue": "100",
+        "myLivesToDestroy": "3",
+        "myPointValue": "100"
+      },
+      "myComponentName": "BountyComponent"
+    }
+  }
+}

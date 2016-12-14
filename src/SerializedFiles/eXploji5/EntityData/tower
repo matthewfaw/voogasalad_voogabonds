@@ -1,52 +1,53 @@
 {
   "myName": "tower",
   "myComponents": {
-    "TeamComponent": {
-      "myFields": {
-        "myTeamID": "us"
-      },
-      "myComponentName": "TeamComponent"
-    },
     "PhysicalComponent": {
       "myFields": {
         "myImageSize": "1",
         "myValidTerrains": "grass",
-        "myHeading": "0",
-        "myImagePath": "resources/ninjamonkey.png"
+        "myImagePath": "resources/face-throwing-a-kiss.png"
       },
       "myComponentName": "PhysicalComponent"
     },
     "MoveableComponent": {
       "myFields": {
-        "removeOnGoal": "true",
-        "explodesOnGoal": "false",
-        "myMaxDistance": "400",
+        "removeOnGoal": "False",
+        "explodesOnGoal": "False",
+        "myMaxDistance": "1000",
+        "explodesAtMaxDistance": "False",
         "myMoveSpeed": "0",
         "myTurnSpeed": "1",
-        "myMovementCalc": "NoMovementStrategy"
+        "myMovementCalc": "GreedyMovementStrategy"
       },
       "myComponentName": "MoveableComponent"
     },
     "CreatorComponent": {
       "myFields": {
-        "mySpawnName": "projectile",
+        "mySpawnName": "heart",
         "mySpawningStrategy": "BasicSpawnStrategy",
-        "myTimeBetweenSpawns": "100"
+        "homingProjectiles": "True",
+        "myTimeBetweenSpawns": "2000"
       },
       "myComponentName": "CreatorComponent"
     },
     "TargetingComponent": {
       "myFields": {
-        "myTargetsEnemies": "true",
+        "myTargetsEnemies": "True",
         "myTargetingStrategy": "BadTargetingStrategy",
-        "mySightRange": "200",
+        "mySightRange": "2000",
         "mySightWidth": "360"
       },
       "myComponentName": "TargetingComponent"
     },
+    "SellableComponentData": {
+      "myFields": {
+        "mySellValue": "100"
+      },
+      "myComponentName": "SellableComponentData"
+    },
     "PurchasableComponentData": {
       "myFields": {
-        "myPurchaseValue": "100"
+        "myPurchaseValue": "200"
       },
       "myComponentName": "PurchasableComponentData"
     }
