@@ -25,6 +25,7 @@ import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.LeftPane;
 import gamePlayerView.ScenePanes.RightPane;
+import gamePlayerView.ScenePanes.TopPane;
 import gamePlayerView.builders.EntityInfoBox;
 import gamePlayerView.builders.EntityInfoBoxBuilder;
 //import gamePlayerView.interfaces.ICashAcceptor;
@@ -54,6 +55,7 @@ public class GamePlayerScene {
 	private BottomPane myBottomPane;
 	private LeftPane myLeftPane;
 	private RightPane myRightPane;
+	private TopPane myTopPane;
 	private MapDisplay myMap;
 	private PauseMenu myPauseMenu;
 	private Scene myScene;
@@ -149,22 +151,32 @@ public class GamePlayerScene {
 	public void setScreen() throws Exception{
 		//myTowerColumn   = new TowerColumn();
 		//myGamePlayOptions=new GamePlayOptions(myAppController);
-		myLeftPane=createLeftPane();
-		myRightPane=createRightPane();
-		myBottomPane=createBottomPane();
+		createPanes();
 		myMap = new MapDisplay(myAppController);
 		myMap.getControls(myControls);
 		//mySprites.add(myMap.getSprites());
 
 		myPauseMenu = new PauseMenu();
 		makePauseMenu();
+		setPanes();
+		myMap.setupDragging(myScene);
+		//return borderpane;
+	}
+
+	private void createPanes() {
+		myLeftPane=createLeftPane();
+		myRightPane=createRightPane();
+		myBottomPane=createBottomPane();
+		myTopPane = createTopPane();
+	}
+
+	private void setPanes() {
+		
 		myBorderPane.setCenter(myMap.getView());
 		myBorderPane.setRight(myRightPane.getView());
 		myBorderPane.setBottom(myBottomPane.getView());
-
+		myBorderPane.setTop(myTopPane.getView());
 		myBorderPane.setLeft(myLeftPane.getView());
-		myMap.setupDragging(myScene);
-		//return borderpane;
 	}
 	private BottomPane createBottomPane() {
 		BottomPane pane=new BottomPane();
@@ -175,6 +187,11 @@ public class GamePlayerScene {
 		myCollection.add(l);
 		pane.add(myCollection);
 		return pane;
+	}
+	
+	private TopPane createTopPane() {
+		TopPane topPane= new TopPane();
+		return topPane;
 	}
 
 	private RightPane createRightPane() {

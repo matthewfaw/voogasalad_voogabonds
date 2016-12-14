@@ -9,7 +9,6 @@ import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
 import gamePlayerView.interfaces.IGUIPiece;
-import gamePlayerView.interfaces.IViewPane;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

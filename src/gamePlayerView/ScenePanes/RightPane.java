@@ -6,7 +6,6 @@ import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
 import gamePlayerView.interfaces.IGUIPiece;
-import gamePlayerView.interfaces.IViewPane;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
