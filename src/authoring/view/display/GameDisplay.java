@@ -116,8 +116,7 @@ public class GameDisplay {
 		}
 	}
 	
-	private void makeSinkPoint(int row, int col, Point currentPoint) {
-		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
+	private void makeSinkPoint(int row, int col, Point currentPoint, TerrainCell  cell) {
 		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
 		cell.setWidth(tileSize*0.9);
 		cell.setHeight(tileSize*0.9);
@@ -130,11 +129,9 @@ public class GameDisplay {
 			ImagePattern pattern = new ImagePattern(image);
 			cell.setFill(pattern);
 		}
-		terrainGrid.getChildren().add(cell);
 	}
 	
-	private void makeSpawnPoint(int row, int col, Point currentPoint) {
-		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
+	private void makeSpawnPoint(int row, int col, Point currentPoint, TerrainCell cell) {
 		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
 		cell.setWidth(tileSize*0.9);
 		cell.setHeight(tileSize*0.9);
@@ -150,11 +147,9 @@ public class GameDisplay {
 //		for (String name: spawnNames) {
 //			if (spawnPoints.get(name).equals(o))
 //		}
-		terrainGrid.getChildren().add(cell);
 	}
 	
-	private void makeTerrainPoint(int row, int col, Point currentPoint) {
-		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
+	private void makeTerrainPoint(int row, int col, Point currentPoint, TerrainCell cell) {
 		cell.setWidth(tileSize);
 		cell.setHeight(tileSize);
 		int index = usefulTerrainPoints.indexOf(currentPoint);
@@ -165,7 +160,6 @@ public class GameDisplay {
 			ImagePattern pattern = new ImagePattern(image);
 			cell.setFill(pattern);
 		}
-		terrainGrid.getChildren().add(cell);
 	}
 	
 	private void populateGrid() {
@@ -175,23 +169,23 @@ public class GameDisplay {
 		terrainGrid.setPrefColumns(columns);
 		for (int r = 0; r < rows; r++) {
 			for (int col = 0; col < columns; col++) {
+				TerrainCell cell = new TerrainCell(mapData, toolBar, r, col, this);
 				Point currentPoint = new Point((double)col, (double)r);
 				if (usefulSinkPoints.contains(currentPoint)) {
-					makeSinkPoint(r, col, currentPoint);
+					makeSinkPoint(r, col, currentPoint, cell);
 				}
-				else if (usefulSpawnPoints.contains(currentPoint)) {
-					makeSpawnPoint(r, col, currentPoint);
+				if (usefulSpawnPoints.contains(currentPoint)) {
+					makeSpawnPoint(r, col, currentPoint, cell);
 				}
-				else if (usefulTerrainPoints.contains(currentPoint)) {
-					makeTerrainPoint(r, col, currentPoint);
+				if (usefulTerrainPoints.contains(currentPoint)) {
+					makeTerrainPoint(r, col, currentPoint, cell);
 				}
 				else {
-					TerrainCell cell = new TerrainCell(mapData, toolBar, r, col, this);
 					cell.setWidth(tileSize);
 					cell.setHeight(tileSize);
 					cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
-					terrainGrid.getChildren().add(cell);
 				}
+				terrainGrid.getChildren().add(cell);
 			}
 		}
 	}
