@@ -1,4 +1,4 @@
-package gamePlayerView.interfaces;
+package gamePlayerView.ScenePanes;
 
 import java.util.Collection;
 

@@ -38,8 +38,8 @@ public class MapDisplay implements IObserver<TimelineController> {
     private ApplicationController myAppController;
     private Pane myRoot;
     private Pane myPane;
-    private MapGrid background;
-    private ArrayList<MoveableComponentView> sprites;
+    private MapGrid myBackground;
+    private ArrayList<MoveableComponentView> mySprites;
     private Controls myControls;
     private static boolean isPlaying;
     private static final int FRAMES_PER_SECOND = 60;
@@ -51,7 +51,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     //register as observer of timeline
     public MapDisplay(ApplicationController aAppController) throws Exception{
     	myAppController = aAppController;
-        sprites = new ArrayList<MoveableComponentView>();
+        mySprites = new ArrayList<MoveableComponentView>();
         myRoot = new Pane();
         myPane = new Pane();
         myControls = new Controls();
@@ -65,14 +65,14 @@ public class MapDisplay implements IObserver<TimelineController> {
 //    }
     
     public void giveViewableComponent(IObservable<IViewablePhysical> aObservable) {
-    	background.giveViewableComponent(aObservable);
+    	myBackground.giveViewableComponent(aObservable);
     }
     
     public void setMap(MapDataContainer aMapData){
-        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
+        myBackground = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
-        	myPane.getChildren().add (background.fillCell((int)terrainData.getLoc().getX(), 
+        	myPane.getChildren().add (myBackground.fillCell((int)terrainData.getLoc().getX(), 
         	                                             (int)terrainData.getLoc().getY(), 
         						terrainData.getSize(), 
         						terrainData.getColor(),
@@ -80,7 +80,7 @@ public class MapDisplay implements IObserver<TimelineController> {
         }
         
         myRoot.getChildren().add(myPane);
-        background.setRoot(myRoot);
+        myBackground.setRoot(myRoot);
 
     }
     

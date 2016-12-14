@@ -8,7 +8,6 @@ import gamePlayerView.GUIPieces.InfoBoxes.CashBox;
 import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
 //import gamePlayerView.interfaces.ICashAcceptor;
 import gamePlayerView.interfaces.IGUIPiece;
-import gamePlayerView.interfaces.IViewPane;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;

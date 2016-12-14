@@ -16,7 +16,7 @@ import gamePlayerView.interfaces.IPlayerAcceptor;
 public class LivesBox extends InfoBox implements IObserver<IViewablePlayer>, IPlayerAcceptor {
 	
 	public LivesBox(){
-		myDisplay=makeDisplay("Lives: ");
+		myDisplay = makeDisplay("Lives: ");
 	}
 
 	@Override

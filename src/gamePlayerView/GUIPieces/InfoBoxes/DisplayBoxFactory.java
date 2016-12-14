@@ -20,13 +20,13 @@ public class DisplayBoxFactory {
 	public InfoBox createBox(String type){
 		InfoBox box = null;
 		if(type.equals("cash")){
-			box=new CashBox();
+			box = new CashBox();
 		}
 		else if(type.equals("lives")){
-			box=new LivesBox();
+			box = new LivesBox();
 		}
 		else if(type.equals("enemieskilled")){
-			box=new EnemiesKilledBox();
+			box = new EnemiesKilledBox();
 		}
 		return box;
 	}

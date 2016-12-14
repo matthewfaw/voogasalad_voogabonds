@@ -1,7 +1,10 @@
 package gamePlayerView.GUIPieces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.controller.ApplicationController;
-import gamePlayerView.interfaces.IButtonMaker;
+import gamePlayerView.GUIFactory.ButtonFactory;
 import gamePlayerView.interfaces.IGUIPiece;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -11,54 +14,56 @@ import javafx.scene.layout.VBox;
 /**
  * 
  * @author Guhan Muruganandam
- *
+ * @author owenchung (refactored)
  */
 
-public class GamePlayOptions implements IGUIPiece,IButtonMaker {
-	private VBox myGamePlayOptions;
+public class GamePlayOptions extends VBox implements IGUIPiece {
 	private ApplicationController myAppController;
+	private ButtonFactory myButtonFactory;
 	
 	public GamePlayOptions(ApplicationController applicationcontroller){
-		myGamePlayOptions=makeGamePlayButtons();
 		myAppController=applicationcontroller;
+		myButtonFactory = new ButtonFactory();
+		List<Button> buttons = createButtons();
+		setButtonStyle(buttons);
+		setConfiguration();
+		getChildren().addAll(buttons);
 	}
 	
-	private VBox buildVbox() {
-		VBox vbox=new VBox();
-		//
-		return vbox;
+	private void setConfiguration() {
+		setPrefWidth(100);
+		setMaxHeight(700);
+	    setPadding(new Insets(10, 10, 10, 10));
+	    setSpacing(10);
+	    setStyle("-fx-background-color: #336699;");
 	}
-	
-	private VBox makeGamePlayButtons() {
-		Button b1= makeButton("Play");
-		b1.setOnAction(e->myAppController.onPlayButtonPressed());
-		//b1.setOnAction(e->b1.setStyle("-fx-background-color: linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
-		Button b2= makeButton("Pause");
-		b2.setOnAction(e->myAppController.onPauseButtonPressed());
-		Button b3= makeButton("Fast-Forward");
-		b3.setOnAction(e->myAppController.onFastButtonPressed());
-		Button b4= makeButton("Save");
-		b4.setOnAction(e->myAppController.onSavePressed());
-		VBox vbox=new VBox();
-		vbox.setPrefWidth(100);
-		vbox.setMaxHeight(700);
-	    vbox.setPadding(new Insets(10, 10,10, 10));
-	    vbox.setSpacing(10);
-	    vbox.setStyle("-fx-background-color: #336699;");
-		vbox.getChildren().addAll(b1,b2,b3,b4);
-		return vbox;
+
+	private void setButtonStyle(List<Button> buttons) {
+		for (Button b : buttons) {
+			b.setMinSize(110, 30);
+			b.setStyle("-fx-background-color: linear-gradient(#f0ff35, #a9ff00), "
+					+ "radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
+		}
+		
 	}
-	
-	public Button makeButton(String string) {
-		Button b= new Button(string);
-		b.setPrefSize(80, 20);
-		//b.setId(value);
-		b.setStyle("-fx-background-color: linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
-		return b;
+
+	private List<Button> createButtons() {
+		Button playButton = myButtonFactory.getButton("Play", e -> myAppController.onPlayButtonPressed());
+		Button pauseButton = myButtonFactory.getButton("Pause", e -> myAppController.onPauseButtonPressed());
+		Button fastforwardButton = myButtonFactory.getButton("Fast-Forward", e -> myAppController.onFastButtonPressed());
+		Button saveButton = myButtonFactory.getButton("Save", e -> myAppController.onSavePressed());
+		Button refreshButton = myButtonFactory.getButton("Refresh", e -> myAppController.onRefreshPressed());
+		List<Button> buttons = new ArrayList<Button>(4);
+		buttons.add(playButton);
+		buttons.add(pauseButton);
+		buttons.add(fastforwardButton);		
+		buttons.add(saveButton);
+		buttons.add(refreshButton);
+		return buttons;
 	}
 
 	@Override
 	public Node getView() {
-		return myGamePlayOptions;
+		return this;
 	}
 }
