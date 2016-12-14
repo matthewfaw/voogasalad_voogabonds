@@ -19,7 +19,7 @@ import gamePlayerView.interfaces.IHealthAcceptor;
 public class DamageBox extends InfoBox implements IObserver<IViewableDamageDealer>, IDamageAcceptor {
 	
 	public DamageBox(){
-		myDisplay=makeDisplay("Damage: ");
+		myDisplay = makeDisplay("Damage: ");
 	}
 	
 	

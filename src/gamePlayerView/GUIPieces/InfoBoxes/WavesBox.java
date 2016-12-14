@@ -13,7 +13,7 @@ import gamePlayerView.interfaces.IPlayerAcceptor;
 public class WavesBox extends InfoBox implements IObserver<IViewablePlayer>,IPlayerAcceptor {
 	
 	public WavesBox(){
-		myDisplay=makeDisplay("Waves: ");
+		myDisplay = makeDisplay("Waves: ");
 	}
 
 	public void acceptPlayer(IObservable<IViewablePlayer> aObservable) {
