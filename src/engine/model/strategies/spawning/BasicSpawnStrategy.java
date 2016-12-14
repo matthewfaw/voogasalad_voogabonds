@@ -1,6 +1,7 @@
 package engine.model.strategies.spawning;
 
 import engine.model.components.concrete.CreatorComponent;
+import engine.model.entities.ConcreteEntity;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
@@ -17,11 +18,11 @@ public class BasicSpawnStrategy implements ISpawningStrategy {
 	}
 
 	@Override
-	public IEntity spawn(EntityFactory myEntityFactory, IPosition myTarget, MovementSystem myMovement,
+	public ConcreteEntity spawn(EntityFactory myEntityFactory, IPosition myTarget, MovementSystem myMovement,
 			PhysicalSystem myPhysical, CreatorComponent creatorComponent) {
 		try {
 			if (myPhysical.get(creatorComponent) != null) {
-				IEntity spawn = myEntityFactory.constructEntity(creatorComponent.getSpawnName(), myPhysical.get(creatorComponent).getPosition());
+				ConcreteEntity spawn = myEntityFactory.constructEntity(creatorComponent.getSpawnName(), myPhysical.get(creatorComponent).getPosition());
 				if (myMovement.get(spawn) != null)
 					myMovement.get(spawn).setGoal(myTarget);
 				return spawn;

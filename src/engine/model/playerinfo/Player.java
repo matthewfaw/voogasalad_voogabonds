@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
-import authoring.model.TowerData;
 import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
@@ -24,24 +23,27 @@ import engine.model.strategies.winlose.NeverWinStrategy;
 public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
-	private IMoney myMoney;
+	private Money myMoney;
+	private int myPoints;
 	
-	private List<ResourceStore> myResourceStores;
+	private transient List<ResourceStore> myResourceStores;
 	
-	private IWinLoseStrategy myWinCon;
-	private IWinLoseStrategy myLoseCon;
+	private transient IWinLoseStrategy myWinCon;
+	private transient IWinLoseStrategy myLoseCon;
 	
-	private List<IObserver<IViewablePlayer>> myObservers;
+	private transient List<IObserver<IViewablePlayer>> myObservers;
+	
 	
 	public Player(PlayerData aPlayerData)
 	{
 		//TODO: Create Unique ID?
 		this(0,aPlayerData.getStartingLives(), new Money(aPlayerData.getStartingCash()));
 	}
-	private Player(int ID, int initLives, IMoney startingMoney) {
+	private Player(int ID, int initLives, Money startingMoney) {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
+		myPoints = 0;
 		
 		//TODO: Get win and lose conditions from PlayerData
 		myLoseCon = new NeverLoseStrategy(this);
@@ -60,6 +62,12 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
+		notifyObservers();
+	}
+	
+	@Override
+	public void updatePoints(int deltaPoints) {
+		myPoints += deltaPoints;
 		notifyObservers();
 	}
 	

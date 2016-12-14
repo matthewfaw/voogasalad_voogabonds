@@ -16,7 +16,7 @@ import gamePlayerView.gamePlayerView.Router;
  */
 public class PlayerController {
 	private List<Player> myPlayers;
-	private Router myRouter;
+	private transient Router myRouter;
 	
 	public PlayerController(Router aRouter)
 	{

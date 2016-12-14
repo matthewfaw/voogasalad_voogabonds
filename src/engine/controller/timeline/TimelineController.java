@@ -20,13 +20,15 @@ import javafx.util.Duration;
  *
  */
 public class TimelineController implements IObservable<TimelineController> {
-	private Timeline myTimeline;
-	private List<IObserver<TimelineController>> myObservers;
+	private static final long NOT_STARTED = -1;
+	private transient Timeline myTimeline;
+	private transient List<IObserver<TimelineController>> myObservers;
 	private long myStartTime;
 
 	public TimelineController()
 	{
 		myObservers = new ArrayList<IObserver<TimelineController>>();
+		myStartTime = NOT_STARTED;
 		
 		myTimeline = new Timeline();
 		myTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -44,7 +46,10 @@ public class TimelineController implements IObservable<TimelineController> {
 	{
 		if (!myTimeline.getStatus().equals(Status.RUNNING)) {
 			myTimeline.play();
-			myStartTime = System.nanoTime();
+			System.out.println(myTimeline.getCurrentTime());
+			if (myStartTime == NOT_STARTED) {
+				myStartTime = System.nanoTime();
+			}
 		}
 	}
 	
