@@ -1,5 +1,7 @@
 package authoring.view.tabs.entities;
 
+import java.io.File;
+
 import authoring.model.EntityData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,6 +50,7 @@ public class EntityListView {
                 }
             }
         }
+        imagePath = imagePath.replace('\\', File.separatorChar);
         return imagePath;
     }
 
