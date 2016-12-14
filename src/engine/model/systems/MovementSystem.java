@@ -6,7 +6,6 @@ import java.util.List;
 import engine.IObserver;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.IComponent;
-import engine.model.components.concrete.HealthComponent;
 import engine.model.components.concrete.MoveableComponent;
 import engine.model.entities.IEntity;
 import engine.model.game_environment.MapMediator;
@@ -33,14 +32,21 @@ public class MovementSystem implements ISystem<MoveableComponent>, IObserver<Tim
 	/********* Observer interface ***********/
 	@Override
 	public void update(TimelineController aChangedObject) {
-		for (MoveableComponent mc: getComponents()) {
+		List<MoveableComponent> components = new ArrayList<MoveableComponent>();
+		components.addAll(getComponents());
+		for (MoveableComponent mc :components) {
 			mc.move();
 		}
+
 	}
 
+	public MoveableComponent get(IComponent c) {
+		return getComponent(c);
+	}
 	@Override
 	public void remove(TimelineController aRemovedObject) {
 		//Do nothing.
+
 	}
 	/***********ISystem interface*******/
 	@Override

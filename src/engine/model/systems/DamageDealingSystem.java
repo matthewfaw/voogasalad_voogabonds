@@ -36,7 +36,7 @@ public class DamageDealingSystem implements ISystem<DamageDealingComponent> {
 		if(dmg != null)
 			dmg.explode();
 		else {
-		c.getEntity().delete();
+			c.getEntity().delete();
 		}
 	}
 	/***********ISystem interface*******/

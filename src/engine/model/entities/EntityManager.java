@@ -10,25 +10,25 @@ import java.util.Map;
  *
  */
 public class EntityManager implements IModifiableEntityManager {
-	private Map<Integer,ConcreteEntity> myEntityMap;
+	private Map<String,ConcreteEntity> myEntityMap;
 
 	public EntityManager() {
-		myEntityMap = new HashMap<Integer, ConcreteEntity>();
+		myEntityMap = new HashMap<String, ConcreteEntity>();
 	}
 	
 	
 	
-	public Map<Integer, ConcreteEntity> getEntityMap() {
+	public Map<String, ConcreteEntity> getEntityMap() {
 		return myEntityMap;
 	}
 	
 	@Override
-	public void addEntity(Integer id, ConcreteEntity entity) {
+	public void addEntity(String id, ConcreteEntity entity) {
 		myEntityMap.put(id, entity);
 	}
 	
 	@Override
-	public void removeEntity(Integer id) {
+	public void removeEntity(String id) {
 		myEntityMap.remove(id);
 	}
 }

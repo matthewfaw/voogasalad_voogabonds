@@ -12,7 +12,7 @@ import engine.model.strategies.movement.GreedyMovementStrategy;
  *
  */
 public class MovementStrategyFactory extends AbstractStrategyFactory<IMovementStrategy> {
-	private static final String FOLDER_NAME = new String("movement");
+	private static final String FOLDER_NAME = "movement";
 	private MapMediator myMap;
 	
 	public MovementStrategyFactory(MapMediator map) {

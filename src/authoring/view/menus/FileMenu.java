@@ -94,7 +94,7 @@ public class FileMenu extends Menu {
 		saveProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
-				//TODO: Serialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
+//				GameStateSerializer GSS = new GameStateSerializer(router);
 			}
 		});
 	}

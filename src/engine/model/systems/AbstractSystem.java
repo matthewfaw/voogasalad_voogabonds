@@ -1,11 +1,5 @@
 package engine.model.systems;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import engine.model.components.IComponent;
-import engine.model.entities.IEntity;
-
 /**
  * 
  * @author Weston
@@ -24,7 +18,7 @@ import engine.model.entities.IEntity;
 //	}
 //	
 //	protected A getComponent(IComponent component) {
-//		return getComponent(component.getEntity());
+//		return (component != null) ? getComponent(component.getEntity()) : null;
 //	}
 //	
 //	protected A getComponent(IEntity entity) {

@@ -80,17 +80,19 @@ public class MockGameDataConstructor {
 			MapDataContainer md = this.getMockMapData();
 			
 			//Sell/Buy data
-			PurchasableComponentData pcd = new PurchasableComponentData();
-			pcd.setBuyPrice(50);
+			ComponentData pcd = new ComponentData();
+			pcd.setComponentName("PurchasableComponentData");
+			pcd.addField("myPurchaseValue", "50");
 			
-			SellableComponentData scd = new SellableComponentData();
-			scd.setSellPrice(25);
+			ComponentData scd = new ComponentData();
+			scd.setComponentName("SellableComponentData");
+			scd.addField("mySellValue", "50");
 			
 			// Entity data
 			EntityData ed  = new EntityData();
 			
-			ed.setPurchasableComponentData(pcd);
-			ed.setSellableComponentData(scd);
+			ed.addComponent("PurchasableComponentData", pcd);
+			ed.addComponent("SellableComponentData", scd);
 			
 			ed.setName("Awesome Tower1");
 			ComponentData cd1 = new ComponentData();
@@ -109,30 +111,34 @@ public class MockGameDataConstructor {
 			cd3.addField("myCollisionRadius", "50");
 			cd3.addField("myTurnSpeed", "1");
 			cd3.addField("myMoveSpeed", "1");
-			cd3.addField("myMaxDistance", "100");
+			cd3.addField("myMaxDistance", "1000");
 			cd3.addField("myMovementCalc", "GreedyMovementStrategy");
+			cd3.addField("removeOnGoal", "true");
 			
 	
 			ComponentData cd4 = new ComponentData();
 			cd4.setComponentName("DamageDealingComponent");
 			cd4.addField("myDamage", "50");
 			cd4.addField("myDamageRadius", "2");
+			cd4.addField("myDamageCalc", "BinaryDamageStrategy");
 			
 			ComponentData cd5 = new ComponentData();
 			cd5.setComponentName("CreatorComponent");
-			cd5.addField("mySpawningStrategy", "BasicSpawningStrategy");
-			cd4.addField("myTimeBetweenSpawns", "10");
+			cd5.addField("mySpawningStrategy", "BasicSpawnStrategy");
+			cd5.addField("myTimeBetweenSpawns", "10");
+			cd5.addField("mySpawnName", "Awesome Tower2");
 			
 			
 			ed.addComponent("PhysicalComponent",cd1);
-			//ed.addComponent("CollidableComponent",cd2);
+			ed.addComponent("CollidableComponent",cd2);
 			ed.addComponent("MoveableComponent",cd3);
+			ed.addComponent("CreatorComponent",cd5);
 			
 			// 2nd entity data
 			EntityData ed2  = new EntityData();
 			
-			ed2.setPurchasableComponentData(pcd);
-			ed2.setSellableComponentData(scd);
+			ed2.addComponent("PurchasableComponentData", pcd);
+			ed2.addComponent("SellableComponentData", scd);
 			
 			ed2.setName("Awesome Tower2");
 			ComponentData CD1 = new ComponentData();

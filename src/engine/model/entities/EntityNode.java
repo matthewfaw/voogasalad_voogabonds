@@ -79,10 +79,12 @@ public class EntityNode {
 	
 	public void addUpgradeTo(EntityNode aNode)
 	{
+		/*
 		myUpgradeTos.add(aNode);
 		int upgradeCost = myEntityData.getUpgrades().get(aNode.getName());
 		myUpgradeCostMap.put(aNode, new Money(upgradeCost));
 		aNode.addUpgradeFrom(this);
+		*/
 	}
 
 	private void addUpgradeFrom(EntityNode aNode)

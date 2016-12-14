@@ -12,7 +12,7 @@ import javafx.scene.control.MenuItem;
  * @author Christopher Lu
  * Creates the Edit submenu and implements all its buttons including: undo, revert to last save.
  */
-
+@Deprecated
 public class EditMenu extends Menu {
 
 	private ResourceBundle myResources;

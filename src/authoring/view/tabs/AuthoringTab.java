@@ -106,7 +106,7 @@ public abstract class AuthoringTab extends Tab {
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(extensionName, extension));
                 File file = fileChooser.showOpenDialog(new Stage());
                 if (file != null){
-                	int placeHolder = file.getPath().indexOf("src");
+                	int placeHolder = file.getPath().indexOf("resources");
                 	String simplePath = file.getPath().substring(placeHolder, file.getPath().length());
                     field.setText(simplePath);
                 }
@@ -153,7 +153,7 @@ public abstract class AuthoringTab extends Tab {
     	return box;
     }
     
-    protected void showError (String message) {
+    public void showError (String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(myResources.getString("ErrorTitle"));
         alert.setContentText(message);

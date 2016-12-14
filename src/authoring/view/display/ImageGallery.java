@@ -7,8 +7,10 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -28,7 +30,7 @@ public class ImageGallery {
 	private String selectedImagePath;
 	private GridToolBar toolBar;
 	private ScrollPane scrollPane;
-	private TilePane imagePane;
+	private ListView<TerrainImage> imagePane;
 	private int screenWidth;
 	private VBox container;
 	private Button confirmImage;
@@ -40,14 +42,19 @@ public class ImageGallery {
 		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "View");
 		this.scrollPane = new ScrollPane();
 		this.terrainStage = new Stage();
-		this.container = new VBox(screenWidth*0.01);
-		imagePane = new TilePane();
-		scrollPane.setContent(imagePane);
+		this.container = new VBox();
+		container.setId("vbox");
+		imagePane = new ListView<TerrainImage>();
+		imagePane.setOrientation(Orientation.HORIZONTAL);
+		imagePane.setId("background");
+		imagePane.setMaxHeight(Toolkit.getDefaultToolkit().getScreenSize().getHeight()/4);
+		imagePane.setMinWidth(Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2);
 		this.filePath = fPath;
 		this.confirmImage = new Button(myResources.getString("ApplyChanges"));
-		container.getChildren().addAll(scrollPane, confirmImage);
+		confirmImage.setId("button");
+		container.getChildren().addAll(imagePane, confirmImage);
 		this.scene = new Scene(container);
-		setUpPane();
+		scene.getStylesheets().add("style.css");
 		populatePane();
 		terrainStage.setScene(scene);
 		terrainStage.show();
@@ -64,21 +71,15 @@ public class ImageGallery {
 		screenWidth = (int) screenSize.getWidth();
 	}
 	
-	private void setUpPane() {
-		imagePane.setHgap(screenWidth*0.01);
-		imagePane.setPrefColumns(5);
-	}
-	
 	private void populatePane() {
-		String relativePath = new File("").getAbsolutePath();
-		String finalPath = relativePath.concat(filePath);
-		File file = new File(finalPath);
+		String path = myResources.getString("TerrainImageFilePath").substring(1);
+		File file = new File(path);
 		File[] fileList = file.listFiles();
 		for (int i = 0; i < fileList.length; i++) {
 			TerrainImage image  = new TerrainImage(fileList[i].toURI().toString(), this);
 			image.setFitWidth(screenWidth*0.1);
 			image.setFitHeight(screenWidth*0.1);
-			imagePane.getChildren().add(image);
+			imagePane.getItems().add(image);
 		}
 	}
 	
@@ -87,6 +88,7 @@ public class ImageGallery {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
+					selectedImagePath = imagePane.getSelectionModel().getSelectedItem().getImagePath();
 					toolBar.setSelectedImagePath(selectedImagePath);
 					terrainStage.close();
 					System.out.println("HELLO1");

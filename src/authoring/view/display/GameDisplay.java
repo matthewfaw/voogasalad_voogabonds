@@ -52,6 +52,7 @@ public class GameDisplay {
 	private ArrayList<Point> usefulSpawnPoints = new ArrayList<Point>();
 	private ArrayList<Point> usefulTerrainPoints = new ArrayList<Point>();
 	private ArrayList<String> usefulTerrainFills = new ArrayList<String>();
+	private Set<String> spawnNames;
 	
 	public GameDisplay(BorderPane root, Scene scene, MapDataContainer controller) {
 		setUpScreenResolution();
@@ -66,7 +67,6 @@ public class GameDisplay {
 		importMapData();
 		this.columns = mapData.getNumXCells();
 		this.rows = mapData.getNumYCells();
-		this.mapData.setDimensions(columns, rows);
 		if (screenWidth/columns < (screenHeight*0.82)/rows) {
 			this.tileSize = (int) (screenWidth/columns) - GAP;
 		}
@@ -103,7 +103,7 @@ public class GameDisplay {
 	}
 	
 	private void makeUsefulSpawn() {
-		Set<String> spawnNames = spawnPoints.keySet();
+		spawnNames = spawnPoints.keySet();
 		for (String s: spawnNames) {
 			usefulSpawnPoints.add(spawnPoints.get(s).get(0));
 		}
@@ -116,19 +116,40 @@ public class GameDisplay {
 		}
 	}
 	
-	private void makeSinkPoint(int row, int col) {
+	private void makeSinkPoint(int row, int col, Point currentPoint) {
 		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
-		cell.setWidth(tileSize/2);
-		cell.setHeight(tileSize/2);
-		cell.setFill(Paint.valueOf(myResources.getString("DefaultSinkColor")));
+		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
+		cell.setWidth(tileSize*0.9);
+		cell.setHeight(tileSize*0.9);
+		cell.setStrokeWidth(tileSize*0.1);
+		int index = usefulSinkPoints.indexOf(currentPoint);
+		try {
+			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
+		} catch (Exception e) {
+			Image image = new Image(usefulTerrainFills.get(index));
+			ImagePattern pattern = new ImagePattern(image);
+			cell.setFill(pattern);
+		}
 		terrainGrid.getChildren().add(cell);
 	}
 	
-	private void makeSpawnPoint(int row, int col) {
+	private void makeSpawnPoint(int row, int col, Point currentPoint) {
 		TerrainCell cell = new TerrainCell(mapData, toolBar, row, col, this);
-		cell.setWidth(tileSize/2);
-		cell.setHeight(tileSize/2);
-		cell.setFill(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
+		cell.setWidth(tileSize*0.9);
+		cell.setHeight(tileSize*0.9);
+		cell.setStrokeWidth(tileSize*0.1);
+		int index = usefulSpawnPoints.indexOf(currentPoint);
+		try {
+			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
+		} catch (Exception e) {
+			Image image = new Image(usefulTerrainFills.get(index));
+			ImagePattern pattern = new ImagePattern(image);
+			cell.setFill(pattern);
+		}
+//		for (String name: spawnNames) {
+//			if (spawnPoints.get(name).equals(o))
+//		}
 		terrainGrid.getChildren().add(cell);
 	}
 	
@@ -156,10 +177,10 @@ public class GameDisplay {
 			for (int col = 0; col < columns; col++) {
 				Point currentPoint = new Point((double)col, (double)r);
 				if (usefulSinkPoints.contains(currentPoint)) {
-					makeSinkPoint(r, col);
+					makeSinkPoint(r, col, currentPoint);
 				}
 				else if (usefulSpawnPoints.contains(currentPoint)) {
-					makeSpawnPoint(r, col);
+					makeSpawnPoint(r, col, currentPoint);
 				}
 				else if (usefulTerrainPoints.contains(currentPoint)) {
 					makeTerrainPoint(r, col, currentPoint);
@@ -174,6 +195,7 @@ public class GameDisplay {
 			}
 		}
 	}
+
 
 	public void setCols(int numCols) {
 		columns = numCols;

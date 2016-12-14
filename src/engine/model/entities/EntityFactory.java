@@ -1,9 +1,11 @@
 package engine.model.entities;
 
 import java.util.Arrays;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import authoring.model.ComponentData;
 import authoring.model.EntityData;
@@ -63,6 +65,7 @@ public class EntityFactory {
 	public ConcreteEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws UnsupportedOperationException
 	{
+		System.out.println("Contructing an entity.");
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?
@@ -71,11 +74,13 @@ public class EntityFactory {
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
+//			component.setEntity(entity);
 			entity.addComponent(component);	
 		}
+		entity.setId(UUID.randomUUID().toString());
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
-	
+
 
 		return entity;
 	}
