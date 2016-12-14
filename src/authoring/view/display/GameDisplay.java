@@ -85,6 +85,7 @@ public class GameDisplay {
 		else {
 			this.tileSize = (int) ((screenHeight*0.82)/rows) - GAP;
 		}
+		controller.cellSize(tileSize);
 		terrainArea.setContent(terrainGrid);
 		terrainContainer.getChildren().add(terrainArea);
 		root.setCenter(terrainContainer);
