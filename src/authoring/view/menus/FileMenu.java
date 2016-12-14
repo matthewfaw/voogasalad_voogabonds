@@ -74,7 +74,7 @@ public class FileMenu extends Menu {
 			public void handle(ActionEvent t) {
 				//TODO: Deserialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 				try {
-					LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router);
+					LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router, myResources.getString("AuthorOldProject"));
 				} catch (IOException e) {
 					ErrorBox.displayError(myResources.getString("MysteryError"));
 				}
