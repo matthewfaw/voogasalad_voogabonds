@@ -33,7 +33,8 @@ import utility.Point;
  *
  */
 public class ApplicationController {
-	private static final String GAME_OPTIONS_PATH = "resources/game_options/GamePaths";
+//	private static final String GAME_OPTIONS_PATH = "resources/game_options/GamePaths";
+	private static final String GAME_FOLDER = "SerializedFiles/";
 
 	private ResourceBundle myGameOptions;
 	private BackendController myBackendController;
@@ -46,7 +47,7 @@ public class ApplicationController {
 
 	public ApplicationController()
 	{
-		myGameOptions = ResourceBundle.getBundle(GAME_OPTIONS_PATH);
+//		myGameOptions = ResourceBundle.getBundle(GAME_OPTIONS_PATH);
 	}
 	
 	/**
@@ -84,7 +85,7 @@ public class ApplicationController {
 	private void constructBackend(Router aRouter, String gameTitle)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString(gameTitle), aRouter);
+		myBackendController = new BackendController(GAME_FOLDER + gameTitle, aRouter);
 	}
 	private BorderPane constructBorderPane(){
 		/*myPane= new BorderPane();
