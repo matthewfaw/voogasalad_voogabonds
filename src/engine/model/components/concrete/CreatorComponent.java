@@ -85,6 +85,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<ConcreteEntity>();
+		myStats = new DamageInfo();
 		spawning.attachComponent(this);
 	}
 

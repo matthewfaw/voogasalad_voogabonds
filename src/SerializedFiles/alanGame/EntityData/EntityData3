@@ -33,6 +33,14 @@
         "myCollisionRadius": "20"
       },
       "myComponentName": "CollidableComponent"
+    },
+    "HealthComponent": {
+      "myFields": {
+        "myCurrHealth": "5",
+        "myMaxHealth": "5",
+        "explodeOnDeath": "false"
+      },
+      "myComponentName": "HealthComponent"
     }
   }
 }

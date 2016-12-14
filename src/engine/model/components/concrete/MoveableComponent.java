@@ -137,7 +137,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		
 		//This means my target was deleted. (And I don't have any way to find a new one)
 		if ((myGoal != null && myGoal.getPosition() == null))
-			myGoal = null;
+			getEntity().delete();
 		
 		PhysicalComponent p = myPhysical.get(this);
 		if (p != null)
@@ -145,9 +145,11 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		
 		myCollision.checkCollision(p);
 		
-		if (myMovedDistance >= myMaxDistance)
-				if ( explodesAtMaxDistance) {
+		if (myMovedDistance + Math.exp(0) >= myMaxDistance) {
+				if (explodesAtMaxDistance)
 					myDamage.explode(this);
+				else
+					getEntity().delete();
 		}
 				
 		if (explodesOnGoal && atGoal())
