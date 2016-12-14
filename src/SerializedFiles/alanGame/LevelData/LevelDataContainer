@@ -8,7 +8,7 @@
           "waveEntity": "enemy",
           "timeBetweenEnemy": 2.0,
           "timeUntilNextWave": 0.0,
-          "numEnemies": 10,
+          "numEnemies": 1,
           "spawnPointName": "spawnPoint",
           "sinkPointName": "sinkPoint"
         }

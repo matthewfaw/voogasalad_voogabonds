@@ -79,16 +79,19 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	 * collision radii; false if not
 	 */
 	private boolean intersects(CollidableComponent c) {
+		if (myPhysicalSystem.get(this) != null && myPhysicalSystem.get(c) != null) {
 			Point a = myPhysicalSystem.get(this).getPosition();
 			Point b = myPhysicalSystem.get(c).getPosition();
 			
 			double a_r = getCollisionRadius();
 			double b_r = c.getCollisionRadius();
 	
-		if (myCollisionRadius > 0)
-			return (a_r + b_r) >= a.euclideanDistance(b);
-		else
-			return a.equals(b);
+			if (myCollisionRadius > 0)
+				return (a_r + b_r) >= a.euclideanDistance(b);
+			else
+				return a.equals(b);
+		} else
+			return false;
 	}
 	
 	private void collideInto(CollidableComponent unmovedCollidable) {

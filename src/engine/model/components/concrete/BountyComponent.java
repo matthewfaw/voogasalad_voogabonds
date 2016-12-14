@@ -36,7 +36,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	public BountyComponent(IEntity aEntity, BountySystem bountySystem, ComponentData data, Router router) {
 		super(aEntity, router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
-		myLivesToDestroy = Integer.parseInt(data.getFields().get("myLivesToDestroy"));
+		myLivesToDestroy = -Integer.parseInt(data.getFields().get("myLivesToDestroy"));
 		myPointValue = Integer.parseInt(data.getFields().get("myPointValue"));
 		
 		myObservers = new ArrayList<IObserver<IViewableBounty>>();
