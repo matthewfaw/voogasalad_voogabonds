@@ -21,8 +21,9 @@ public class BadTargetingStrategy extends AbstractTargetingStrategy {
 		IPhysical result = null;
 		for (PhysicalComponent target: getTargets(map, location, targeter)) {
 			if (
-					teams.areEnemies(targeter, target) && targeter.targetsEnemies() ||
-					teams.areAllies(targeter, target) && !targeter.targetsEnemies()) {
+					targeter.getEntity() != target.getEntity() && 
+					( teams.areEnemies(targeter, target) && targeter.targetsEnemies() ||
+					teams.areAllies(targeter, target) && !targeter.targetsEnemies())) {
 				result = target;
 				break;
 			}
