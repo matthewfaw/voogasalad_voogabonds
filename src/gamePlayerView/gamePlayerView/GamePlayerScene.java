@@ -180,7 +180,7 @@ public class GamePlayerScene {
 	}
 	private BottomPane createBottomPane() {
 		BottomPane pane=new BottomPane();
-		Label l =new Label("Wassup");
+		Label l =new Label("Bottom Pane label");
 		Collection<Node> myCollection=new ArrayList<Node>();
 		//MachineInfo myInfo=new MachineInfo();
 		//myCollection.add(myInfo.getView());
@@ -191,6 +191,10 @@ public class GamePlayerScene {
 	
 	private TopPane createTopPane() {
 		TopPane topPane= new TopPane();
+		Label l = new Label("Top Pane label");
+		Collection<Node> myCollection=new ArrayList<Node>();
+		myCollection.add(l);
+		topPane.add(myCollection);
 		return topPane;
 	}
 

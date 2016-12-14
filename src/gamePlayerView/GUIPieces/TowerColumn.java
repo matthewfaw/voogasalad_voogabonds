@@ -93,6 +93,7 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 			if(!affordableTowers.contains(t)){
 				towerPicture.setOpacity(0.3);
 			}
+			// TODO: Hardcoded, change asap
 			towerPicture.setPreserveRatio(true);
 			towerPicture.setFitHeight(50);
 			towerPicture.setFitWidth(50);
