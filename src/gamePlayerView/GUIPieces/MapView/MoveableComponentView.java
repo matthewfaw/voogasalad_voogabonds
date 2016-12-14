@@ -36,7 +36,6 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 
 	@Override
 	public void update(IViewablePhysical aChangedObject) {
-		System.out.println("Updating moveable component view.");
 		String imagePath = aChangedObject.getImagePath();
 		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
 		this.setImage(image);
