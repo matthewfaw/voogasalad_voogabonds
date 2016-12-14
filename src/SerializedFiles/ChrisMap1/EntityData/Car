@@ -1,0 +1,13 @@
+{
+  "myName": "Car",
+  "myComponents": {
+    "PhysicalComponent": {
+      "myFields": {
+        "myImageSize": "50",
+        "myValidTerrains": "Yellow, Blue",
+        "myImagePath": "resources\\cow.png"
+      },
+      "myComponentName": "PhysicalComponent"
+    }
+  }
+}

@@ -72,8 +72,8 @@ public class TerrainCell extends Rectangle {
 							ErrorBox.displayError("Please Choose a Valid Terrain to use.");
 							mouseEvent.consume();
 						}
-						
 						else if (toolBar.getImageStatus()){
+							controller.removeTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
 							String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 							relPath = "";
 							if (toolBar.getImageStatus() && splitPath.length > 1) {
@@ -83,11 +83,12 @@ public class TerrainCell extends Rectangle {
 							Image image = new Image(toolBar.getSelectedImagePath());
 							ImagePattern imagePattern = new ImagePattern(image);
 							setFill(imagePattern);
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), relPath));
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, gameDisplay.getTileSize(), relPath));
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
 							}
 						else {
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
+							controller.removeTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, gameDisplay.getTileSize(), toolBar.getSelectedColor().toString()));
 							setFill(toolBar.getSelectedColor());
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 						}

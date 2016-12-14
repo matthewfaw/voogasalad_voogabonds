@@ -1,0 +1,7376 @@
+{
+  "numXCells": 5,
+  "numYCells": 5,
+  "cellSize": 0,
+  "spawnPoints": {
+    "betaSpawn": [
+      {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      }
+    ],
+    "alphaSpawn": [
+      {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      }
+    ]
+  },
+  "sinkPoints": {
+    "betaSink": [
+      {
+        "myX": 2.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      }
+    ],
+    "alphaSink": [
+      {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      }
+    ]
+  },
+  "terrainList": [
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 4.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    },
+    {
+      "type": "Yellow",
+      "loc": {
+        "myX": 3.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xffff4dff",
+      "mySize": 123
+    },
+    {
+      "type": "Green",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x4d804dff",
+      "mySize": 123
+    }
+  ],
+  "validTerrain": {
+    "Red": "",
+    "Yellow": "",
+    "Blue": "",
+    "Orange": "0xcc6633ff",
+    "Green": ""
+  }
+}
