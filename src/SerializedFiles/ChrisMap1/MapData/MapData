@@ -5,12 +5,19 @@
   "spawnPoints": {
     "betaSpawn": [
       {
-        "myX": 0.0,
+        "myX": 3.0,
         "myY": 0.0,
         "myZ": 0.0
       }
     ],
     "alphaSpawn": [
+      {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      }
+    ],
+    "charlieSpawn": [
       {
         "myX": 4.0,
         "myY": 0.0,
@@ -19,10 +26,17 @@
     ]
   },
   "sinkPoints": {
+    "betaSink": [
+      {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      }
+    ],
     "alphaSink": [
       {
-        "myX": 4.0,
-        "myY": 4.0,
+        "myX": 0.0,
+        "myY": 0.0,
         "myZ": 0.0
       }
     ]
@@ -31,57 +45,7 @@
     {
       "type": "Ground",
       "loc": {
-        "myX": 0.0,
-        "myY": 1.0,
-        "myZ": 0.0
-      },
-      "myColor": "0x1a3399ff",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 4.0,
-        "myY": 1.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/water.jpg/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 2.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/duvall.gif/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 4.0,
-        "myY": 4.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/duvall.gif/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 0.0,
-        "myY": 4.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 1.0,
+        "myX": 3.0,
         "myY": 4.0,
         "myZ": 0.0
       },
@@ -92,66 +56,26 @@
       "type": "Ground",
       "loc": {
         "myX": 3.0,
-        "myY": 2.0,
+        "myY": 1.0,
         "myZ": 0.0
       },
-      "myColor": "resources/terrain_images/duvall.gif/",
+      "myColor": "resources/terrain_images/grass.png/",
       "mySize": 123
     },
     {
       "type": "Ground",
       "loc": {
-        "myX": 4.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/duvall.gif/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 1.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0x1a3399ff",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 0.0,
-        "myY": 2.0,
-        "myZ": 0.0
-      },
-      "myColor": "0x1a3399ff",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 4.0,
+        "myX": 3.0,
         "myY": 0.0,
         "myZ": 0.0
       },
-      "myColor": "resources/terrain_images/water.jpg/",
-      "mySize": 123
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 110
     },
     {
       "type": "Ground",
       "loc": {
-        "myX": 2.0,
-        "myY": 0.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/water.jpg/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 1.0,
+        "myX": 3.0,
         "myY": 3.0,
         "myZ": 0.0
       },
@@ -162,10 +86,170 @@
       "type": "Ground",
       "loc": {
         "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 110
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
         "myY": 1.0,
         "myZ": 0.0
       },
       "myColor": "resources/terrain_images/duvall.gif/",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xcccc33ff",
+      "mySize": 110
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/duvall.gif/",
+      "mySize": 110
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 3.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xcccc33ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/grass.png/",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xcccc33ff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 4.0,
+        "myY": 2.0,
+        "myZ": 0.0
+      },
+      "myColor": "resources/terrain_images/duvall.gif/",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 4.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 123
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 1.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xcccc33ff",
       "mySize": 123
     },
     {
@@ -186,65 +270,34 @@
         "myZ": 0.0
       },
       "myColor": "0xb31a1aff",
-      "mySize": 123
+      "mySize": 110
     },
     {
       "type": "Ground",
       "loc": {
         "myX": 1.0,
-        "myY": 1.0,
+        "myY": 2.0,
         "myZ": 0.0
       },
-      "myColor": "0xffff4dff",
+      "myColor": "0xcccc33ff",
       "mySize": 123
     },
     {
       "type": "Ground",
       "loc": {
-        "myX": 1.0,
-        "myY": 0.0,
+        "myX": 4.0,
+        "myY": 4.0,
         "myZ": 0.0
       },
-      "myColor": "0xffff4dff",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 0.0,
-        "myY": 3.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/grass.png/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 3.0,
-        "myY": 1.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/water.jpg/",
-      "mySize": 123
-    },
-    {
-      "type": "Ground",
-      "loc": {
-        "myX": 3.0,
-        "myY": 0.0,
-        "myZ": 0.0
-      },
-      "myColor": "resources/terrain_images/water.jpg/",
+      "myColor": "resources/terrain_images/duvall.gif/",
       "mySize": 123
     }
   ],
   "validTerrain": {
     "Red": "",
-    "Water": "resources/terrain_images/water.jpg/",
     "Yellow": "",
     "Blue": "",
-    "Duval": "resources/terrain_images/duvall.gif/",
-    "Grass": "resources/terrain_images/grass.png/"
+    "Grass": "resources/terrain_images/grass.png/",
+    "Duvall": "resources/terrain_images/duvall.gif/"
   }
 }

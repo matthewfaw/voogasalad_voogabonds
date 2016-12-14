@@ -24,6 +24,8 @@ import gamePlayerView.gamePlayerView.Router;
  */
 public class BountyComponent extends AbstractComponent implements IViewableBounty {
 	private int myBountyValue;
+	private int myLivesToDestroy;
+	private int myPointValue;
 	
 	@Hide
 	private List<IObserver<IViewableBounty>> myObservers;
@@ -34,8 +36,12 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	public BountyComponent(IEntity aEntity, BountySystem bountySystem, ComponentData data, Router router) {
 		super(aEntity, router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
+		myLivesToDestroy = Integer.parseInt(data.getFields().get("myLivesToDestroy"));
+		myPointValue = Integer.parseInt(data.getFields().get("myPointValue"));
+		
 		myObservers = new ArrayList<IObserver<IViewableBounty>>();
 		myBountySystem = bountySystem;
+		
 		myBountySystem.attachComponent(this);
 	}
 	/**
@@ -44,10 +50,18 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	 * @return the bounty value
 	 */
 	@Override
-	public int getBounty()
-	{
-
+	public int getBounty() {
 		return myBountyValue;
+	}
+	
+	@Override
+	public int getLivesTaken() {
+		return myLivesToDestroy;
+	}
+	
+	@Override
+	public int getPoints() {
+		return myPointValue;
 	}
 	
 	@Override
@@ -78,7 +92,4 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	public void delete() {
 		myBountySystem.detachComponent(this);
 	}
-	
-	
-
 }

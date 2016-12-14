@@ -99,17 +99,16 @@ public class BackendController {
 		myPlayerController = new PlayerController(myRouter);
 		
 		myEntityManager = new EntityManager();
+		
 		//Must construct static before dynamic.
 		constructStaticBackendObjects();
-		myPlayerController.addPlayer(myPlayerData);
-		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		constructDynamicBackendObjects();
 	}
 	
 	private void constructSystems() {
 		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		myBountySystem = new BountySystem();
+		myBountySystem = new BountySystem(myPlayerController);
 		myDamageDealingSystem = new DamageDealingSystem();
 		
 		// ORDERING MATTERS for physical -> targeting -> collision -> movement
@@ -190,6 +189,10 @@ public class BackendController {
 	{
 		constructEntityDataStore();
 		constructPlayerData();
+		
+		
+		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		
 		constructLevelData();
 		constructMap();

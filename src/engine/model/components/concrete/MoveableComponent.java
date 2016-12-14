@@ -13,6 +13,7 @@ import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
+import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.MovementSystem;
@@ -38,6 +39,8 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	private CollisionDetectionSystem myCollision;
 	@Hide
 	private DamageDealingSystem myDamage;
+	@Hide
+	private BountySystem myBounty;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -63,6 +66,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
+			BountySystem bounty,
 			Router router,
 			DamageDealingSystem damage,
 			ComponentData data
@@ -73,6 +77,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		myBounty = bounty;
 		myDamage = damage;
 		
 		myMovedDistance = 0;
@@ -123,7 +128,9 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
 		PhysicalComponent p = myPhysical.get(this);
-		if (p != null)
+		if (p != null && myGoal == null && myTargeting.getTarget(this) == null)
+			p.setPosition(getMove(p));
+		else if (p != null && (myGoal != null || myTargeting.getTarget(this) == null))
 			p.setPosition(getMove(p));
 		
 		myCollision.checkCollision(p);
@@ -133,7 +140,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		}
 		
 		if (removeOnGoal && atGoal()) {
-			//TODO: subtract player's lives
+			myBounty.pillagePlayerBase(this);
 			getEntity().delete();
 		}
 		
