@@ -25,9 +25,9 @@ public class MapMediator {
 	private TerrainMap myTerrainMap;
 	private MapDataContainer myMapData;
 	
-	public MapMediator(MapDataContainer mapData) {
+	public MapMediator(MapDataContainer mapData, int pixelWidth) {
 		myMapData = mapData;
-		myTerrainMap = new TerrainMap(mapData);
+		myTerrainMap = new TerrainMap(mapData, pixelWidth);
 
 	}
 	/**

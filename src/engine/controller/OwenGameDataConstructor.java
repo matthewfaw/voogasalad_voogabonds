@@ -200,7 +200,7 @@ public class OwenGameDataConstructor {
 //			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
 //			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			
-			TerrainMap terrainMap = new TerrainMap(md);
+			//TerrainMap terrainMap = new TerrainMap(md);
 //			terrainMap.getDestination();
 		} catch (Exception e) {
 			//TODO add more meaningful error message

@@ -1,10 +1,6 @@
 {
   "myName": "Awesome Tower1",
   "myComponents": {
-    "ControllableComponent": {
-      "myFields": {},
-      "myComponentName": "ControllableComponent"
-    },
     "PhysicalComponent": {
       "myFields": {
         "myImageSize": "50",
@@ -30,6 +26,14 @@
         "myCollisionRadius": "50"
       },
       "myComponentName": "CollidableComponent"
+    },
+    "CreatorComponent": {
+      "myFields": {
+        "mySpawnName": "Awesome Tower2",
+        "mySpawningStrategy": "BasicSpawnStrategy",
+        "myTimeBetweenSpawns": "10"
+      },
+      "myComponentName": "CreatorComponent"
     },
     "SellableComponentData": {
       "myFields": {
