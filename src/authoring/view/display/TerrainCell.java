@@ -46,7 +46,6 @@ public class TerrainCell extends Rectangle {
 	private int DEFAULT_TILE_SIZE;
 	private Point point;
 	private GameDisplay gameDisplay;
-	private String[] splitPath;
 	private String relPath = "";
 	
 	public TerrainCell(MapDataContainer c, GridToolBar tools, int row, int column, GameDisplay disp) {	
@@ -75,8 +74,7 @@ public class TerrainCell extends Rectangle {
 						}
 						
 						else if (toolBar.getImageStatus()){
-							
-							splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+							String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 							relPath = "";
 							if (toolBar.getImageStatus()) {
 								relPath += splitPath[1] + "/";
@@ -271,9 +269,9 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
-			splitPath = toolBar.getSelectedImagePath().toString().split("src/");
-			relPath = "";
 			if (toolBar.getImageStatus()) {
+				String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+				relPath = "";
 				relPath += splitPath[1]+"/";
 				System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				controller.addValidTerrain(terrainType, relPath);
