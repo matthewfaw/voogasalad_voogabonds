@@ -23,6 +23,7 @@ import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.GUIPieces.player_info.PlayerInfoBox;
+import gamePlayerView.GUIPieces.resource_store.ResourceStoreView;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.IViewPane;
 import gamePlayerView.ScenePanes.LeftPane;
@@ -136,6 +137,10 @@ public class GamePlayerScene {
 	
 	public void createRightPane() {
 		
+		// Resource Store
+		ResourceStoreView resourceStoreView = new ResourceStoreView();
+		
+		myRightPane.add(resourceStoreView);
 	}
 
 	public void createLeftPane() {
@@ -148,19 +153,6 @@ public class GamePlayerScene {
 		
 		myLeftPane.add(gamePlayOptions.getNode());
 		myLeftPane.add(playerInfoBox.getNode());
-		
-//		LeftPane pane=new LeftPane();
-//		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
-//		InfoBox myWallet=myDisplayBoxFactory.createBox(myResourceBundle.getString("Cash"));
-//		InfoBox myLife=myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
-//		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
-//		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
-//		Collection<Node> myCollection=new ArrayList<Node>();
-//		myCollection.add(myGamePlayOptions.getView());
-//		myCollection.add(myWallet.getView());
-//		myCollection.add(myLife.getView());
-//		pane.add(myCollection);
-//		return pane;
 	}
 	
 //	public void setScreen() throws Exception{

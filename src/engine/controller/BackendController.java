@@ -226,9 +226,7 @@ public class BackendController {
 	private void constructMap()
 	{
 		try {
-			List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
-			MapDataContainer mapData = data.get(0);
-			myMapData = mapData;
+			MapDataContainer mapData = getMapData();
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
 			myMapMediator = new MapMediator(mapData);
@@ -240,6 +238,13 @@ public class BackendController {
 			myRouter.distributeErrors("The file for MapDataContainer cannot be found!");
 		}
 		
+	}
+
+	private MapDataContainer getMapData() throws FileNotFoundException {
+		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
+		MapDataContainer mapData = data.get(0);
+		myMapData = mapData;
+		return mapData;
 	}
 	
 	/**

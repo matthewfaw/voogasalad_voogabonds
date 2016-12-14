@@ -179,6 +179,11 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Node getNode() {
+		return this;
+	}
 	
 	/*
 	 * 
