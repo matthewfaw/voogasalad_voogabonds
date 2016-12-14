@@ -15,6 +15,7 @@ import engine.model.strategies.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
 import engine.model.strategies.winlose.PlayerHpLoseStrategy;
+import gamePlayerView.gamePlayerView.Router;
  
 /**
  * 
@@ -36,11 +37,14 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	
 	private transient List<IObserver<IViewablePlayer>> myObservers;
 	
+	private Router myRouter;
 	
-	public Player(PlayerData aPlayerData)
+	
+	public Player(Router r, PlayerData aPlayerData)
 	{
 		//TODO: Create Unique ID?
 		this(0,aPlayerData.getStartingLives(), new Money(aPlayerData.getStartingCash()));
+		myRouter = r;
 	}
 	private Player(int ID, int initLives, Money startingMoney) {
 		myID = ID;
@@ -99,7 +103,9 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void win() {
 		// TODO Auto-generated method stub
 		//Presumably tell anyone who cares that you won so they can end the game
-		System.out.println("You Win!");
+		myRouter.distributeErrors("You Win!");
+		myWinCon.unsubscribe(this);
+		myLoseCon.unsubscribe(this);
 		
 	}
 
@@ -107,7 +113,9 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void lose() {
 		// TODO Auto-generated method stub
 		//Presumably delete anything that belongs to you and tell anyone who cares that you lost
-		System.out.println("You Lose!");
+		myRouter.distributeErrors("You Lose!");
+		myWinCon.unsubscribe(this);
+		myLoseCon.unsubscribe(this);
 	}
 
 	@Override
