@@ -10,9 +10,10 @@ public class PathManager {
 	
 	private List<Point> myPath;
 	
-	public PathManager(List<Terrain> aPathToFollow)
+	public PathManager(List<Terrain> aPathToFollow, Point goal)
 	{
 		myPath = aPathToFollow.stream().map(t -> t.getCenter()).collect(Collectors.toList());
+		myPath.add(goal);
 	}
 	
 	public Point getNextVertex(Point p) {

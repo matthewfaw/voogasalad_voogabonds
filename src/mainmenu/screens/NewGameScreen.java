@@ -25,6 +25,8 @@ public class NewGameScreen extends AbstractLoadScreen{
 		try {
 			initGamePlay(selectedGame);
 		} catch (Exception e1) {
+			System.out.println("NewGameScreen 28");
+			e1.printStackTrace();
 			ErrorBox.displayError(getResources().getString("NewPlayerError"));
 		}
 	}

@@ -2,5 +2,5 @@
   "startingLives": 5,
   "startingCash": 5,
   "winStrategyName": "Never Win",
-  "loseStrategyName": "PlayerHPLoseStrategy"
+  "loseStrategyName": "Never Lose"
 }

@@ -1,10 +1,11 @@
 package gamePlayerView.GUIPieces.MapView;
 
+import java.io.File;
+
 import engine.IObservable;
 
 import engine.IObserver;
 import engine.controller.ApplicationController;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	private IObservable<IViewablePhysical> myObservable;
 	private String entityID;
 	private boolean hasEntityID;
+	public static final String SOURCE_PATH = "src/";
 	
     public MoveableComponentView(
     		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane){
@@ -38,7 +40,11 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	public void update(IViewablePhysical aChangedObject) {
 		String imagePath = aChangedObject.getImagePath();
 		if (imagePath != null) {
-			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
+			if (imagePath.substring(0, 4).equals(SOURCE_PATH)) {
+				imagePath = imagePath.substring(4);
+			}
+			imagePath = imagePath.replace('\\', File.separatorChar);
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
 			this.setImage(image);
 			this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
 			this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);

@@ -2,7 +2,6 @@ package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 
-
 import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
@@ -10,6 +9,7 @@ import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.machine.IViewableMachine;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
+import gamePlayerView.interfaces.IGUIPiece;
 import engine.IObservable;
 import engine.IObserver;
 import engine.controller.ApplicationController;
@@ -33,7 +33,7 @@ import javafx.util.Duration;
  *
  */
 
-public class MapDisplay implements IObserver<TimelineController> {
+public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
     
     private ApplicationController myAppController;
     private Pane myRoot;
@@ -175,8 +175,14 @@ public class MapDisplay implements IObserver<TimelineController> {
         myControls = cont;
     }
 
+
 	@Override
 	public void remove(TimelineController aRemovedObject) {
-		//Do nothing.
+		// Do nothing.
+	}
+
+	@Override
+	public Node getNode() {
+		return myRoot;
 	}
 }

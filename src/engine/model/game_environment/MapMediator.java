@@ -104,7 +104,7 @@ public class MapMediator {
 		}
 		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoalPoint());
 		
-		PathManager pathManager = new PathManager(shortestPath);
+		PathManager pathManager = new PathManager(shortestPath, movement.getGoalPoint());
 		return pathManager;
 	}
 	
@@ -134,7 +134,7 @@ public class MapMediator {
 			}
 		}
 		//TODO: Throw error-->No path from source to destination!
-		return null;
+		return pathToFollow;
 	}
 	
 	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {

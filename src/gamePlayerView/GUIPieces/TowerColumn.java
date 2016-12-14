@@ -14,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -27,7 +26,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 
 /**
@@ -36,21 +34,21 @@ import javafx.scene.text.Font;
  */
 public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IViewablePlayer>, IGUIPiece {
 	
-	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
-	private ImageView towerToBeDragged;
-	private Map<ImageView,EntityData> towerSettings= new HashMap<ImageView,EntityData>();
-	private TextArea towerDataDisplay;
+	private ImageView myTowerToBeDragged;
+	private Map<ImageView,EntityData> myTowerSettings;
+	private TextArea myTowerDataDisplay;
 	private ListView<ImageView> myTowerInfo;
-	//private VBox myColumn;
 
 	
+	
 	public TowerColumn() {
+		myTowerSettings= new HashMap<ImageView,EntityData>();
 		buildTowerColumn();
 	}
 	
 	public EntityData getTowerData(String aTowerName)
 	{
-		for (EntityData data: towerSettings.values()) {
+		for (EntityData data: myTowerSettings.values()) {
 			if (data.getName().equals(aTowerName)) {
 				return data;
 			}
@@ -62,17 +60,14 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 	 * Builds object that will actually be returned
 	 */
 	private void buildTowerColumn() {
-	    towerDataDisplay= new TextArea();
+	    myTowerDataDisplay= new TextArea();
 	    myTowerInfo=new ListView<ImageView>(); 
 	    //populatetowerInfo(availableTowers,towerDataDisplay);
-	    
-	    Label heading = new Label("TOWERS");
-	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
-	    getChildren().addAll(heading,resourceTabs,towerDataDisplay);
+	    getChildren().addAll(resourceTabs,myTowerDataDisplay);
 	}
 	/*
 	 * Creates ListView for the selected towerData
@@ -82,7 +77,7 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 		List<EntityData> affordableTowers = aPlayer.getAffordableTowers();
 		
 		ObservableList<ImageView> items =FXCollections.observableArrayList();
-		towerSettings.clear();
+		myTowerSettings.clear();
 		for(EntityData t : availableTowers){
 			ImageView towerPicture = new ImageView();
 			//TODO: This is super hack-y.
@@ -96,21 +91,25 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 			if(!affordableTowers.contains(t)){
 				towerPicture.setOpacity(0.3);
 			}
-			towerSettings.put(towerPicture,t);
+			// TODO: Hardcoded, change asap
+			towerPicture.setPreserveRatio(true);
+			towerPicture.setFitHeight(50);
+			towerPicture.setFitWidth(50);
+			myTowerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
+		
+		myTowerInfo.setFixedCellSize(50);
         myTowerInfo.setItems(items);
         setDragFunctionality(myTowerInfo);
-        setPopulateFunctionality(myTowerInfo,towerDataDisplay);
+        setPopulateFunctionality(myTowerInfo,myTowerDataDisplay);
         getChildren().clear();
         
-        Label heading = new Label("TOWERS");
-	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
 	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         
-	    getChildren().addAll(heading,resourceTabs,towerDataDisplay);
+	    getChildren().addAll(resourceTabs, myTowerDataDisplay);
 	}
 	/*
 	 * Sets Mouse Click event for List View
@@ -119,7 +118,7 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 		towerSet.setOnMouseClicked(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent event) {
                 ImageView towerChosen = towerSet.getSelectionModel().getSelectedItem();
-                EntityData tower=towerSettings.get(towerChosen);
+                EntityData tower=myTowerSettings.get(towerChosen);
                 PopulateTowerDataDisplay(tower,towerDataDisplay);
             }  
         });
@@ -133,7 +132,7 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 		String name= new String(tower.getName());
 		String cost=new String(Integer.toString(tower.getBuyPrice()));
 		
-		towerDataDisplay.setText(String.format("TOWER NAME: %s\nCOST: %s\n", name, cost));
+		towerDataDisplay.setText(String.format("Tower Name: %s\nCost: %s\n", name, cost));
 	}
 	
 	private void setDragFunctionality(ListView<ImageView> towerSet) {
@@ -141,10 +140,10 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
             public void handle(MouseEvent event) {
                 Dragboard db = towerSet.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
-                towerToBeDragged = towerSet.getSelectionModel().getSelectedItem();
-                if(towerToBeDragged.getOpacity()>0.5){
-                	content.putImage(towerToBeDragged.getImage());
-                	content.putString(towerSettings.get(towerToBeDragged).getName());
+                myTowerToBeDragged = towerSet.getSelectionModel().getSelectedItem();
+                if(myTowerToBeDragged.getOpacity()>0.5){
+                	content.putImage(myTowerToBeDragged.getImage());
+                	content.putString(myTowerSettings.get(myTowerToBeDragged).getName());
                 	db.setContent(content);
                 	event.consume();
                 }
@@ -178,6 +177,12 @@ public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IV
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Node getNode() {
+		return this;
+	}
+
 	
 	/*
 	 * 
