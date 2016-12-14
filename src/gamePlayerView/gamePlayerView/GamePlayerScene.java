@@ -50,16 +50,14 @@ import javafx.stage.Stage;
 
 public class GamePlayerScene {
 	private static final String GAME_PLAYER_PATH = "resources/textfiles";
-	private ApplicationController myAppController;
 	private Stage myStage;
 	private BottomPane myBottomPane;
 	private LeftPane myLeftPane;
 	private RightPane myRightPane;
 	private TopPane myTopPane;
 	private MapDisplay myMap;
-	private PauseMenu myPauseMenu;
 	private Scene myScene;
-	private Controls myControls;
+	private KeyInputHandler myKeyInputHandler;
 	private Pane myGamePlayer;
 	private List<IPlayerAcceptor> myCash;
 	private List<IPlayerAcceptor> myLives; 
@@ -71,7 +69,9 @@ public class GamePlayerScene {
 	private ResourceBundle myResourceBundle;
 	private EntityInfoBoxBuilder myBuilder;
 	//private List<MoveableComponentView> mySprites;
-
+	private ApplicationController myAppController;
+	private Controls myControls;
+	private PauseMenu myPauseMenu;
 
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
 		myAppController = aAppController;
@@ -85,7 +85,7 @@ public class GamePlayerScene {
 		myBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
-		myBuilder=new EntityInfoBoxBuilder(this,myAppController);
+		myBuilder=new EntityInfoBoxBuilder(this, myAppController);
 		//mySprites=new ArrayList<ISprite>();
 		init(aStage);
 	}
@@ -221,7 +221,7 @@ public class GamePlayerScene {
 	}
 
 
-	public void makePauseMenu(){ 
+	public void makePauseMenu() { 
 		myPauseMenu.getControls(myControls);
 		myPauseMenu.getStage(myStage);
 		//myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
@@ -249,8 +249,7 @@ public class GamePlayerScene {
 
 	}
 
-	public MapDisplay getMapDisplay()
-	{
+	public MapDisplay getMapDisplay() {
 		return myMap;
 	}
 
@@ -271,16 +270,6 @@ public class GamePlayerScene {
 		updateDisplay(myStatisticsBox);
 	}
 
-	//public void buildEntityInfoBox() {
-	//EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(this) 
-	////myScene.makeEntityInfoBox()
-	//	   .withMachineInfo()
-	//	   .withTargetingMechanism()
-	// .withUpgradeButton()
-	//.build();
-	//updateDisplay(myStatisticsBox);
-	//}
-
 	public void updateDisplay(EntityInfoBox myStatisticsBox) {
 		myBottomPane.clear();
 		Collection<Node> myCollection = new ArrayList<Node>();
@@ -289,29 +278,7 @@ public class GamePlayerScene {
 	}
 
 	public void handleKeyInput(KeyCode code) {
-
-		if(code.getName().equals(myControls.getControlFor("Up"))){
-			System.out.println("Going up");
-			myAppController.onUpButtonPressed();
-		}
-		else if(code.getName().equals(myControls.getControlFor("Pause"))){
-			myPauseMenu.init();
-		}
-		else if(code.getName().equals(myControls.getControlFor("Down"))){
-			System.out.println("Going down");
-			myAppController.onDownButtonPressed();
-		}
-		else if(code.getName().equals(myControls.getControlFor("Left"))){
-			System.out.println("Going left");
-			myAppController.onLeftButtonPressed();
-		}
-		else if(code.getName().equals(myControls.getControlFor("Right"))){
-			System.out.println("Going right");
-			myAppController.onRightButtonPressed();
-		}
-		else if(code.getName().equals("Space")){
-			System.out.println("Firing");
-		}
+		myKeyInputHandler.handleKeyInput(code);
 	}
 
 }
