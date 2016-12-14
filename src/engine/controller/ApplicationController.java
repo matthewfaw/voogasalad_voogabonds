@@ -183,6 +183,10 @@ public class ApplicationController {
 	public void onLastPressed() {
 		// TODO Auto-generated method stub
 	}
+
+	public void onRefreshPressed() {
+		// TODO Auto-generated method stub
+	}
 	
 	/*
 	public static void main(String[] args)
