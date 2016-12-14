@@ -134,7 +134,7 @@ public class MapMediator {
 			}
 		}
 		//TODO: Throw error-->No path from source to destination!
-		return null;
+		return pathToFollow;
 	}
 	
 	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {
