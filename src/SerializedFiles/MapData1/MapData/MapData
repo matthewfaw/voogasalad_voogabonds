@@ -1,0 +1,1223 @@
+{
+  "numXCells": 4,
+  "numYCells": 1,
+  "cellSize": 0,
+  "spawnPoints": {},
+  "sinkPoints": {},
+  "terrainList": [
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 1.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Ground",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 2.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Blue",
+      "loc": {
+        "myX": 0.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0x1a3399ff",
+      "mySize": 339
+    },
+    {
+      "type": "Red",
+      "loc": {
+        "myX": 3.0,
+        "myY": 0.0,
+        "myZ": 0.0
+      },
+      "myColor": "0xb31a1aff",
+      "mySize": 339
+    }
+  ],
+  "validTerrain": {
+    "Red": "0xb31a1aff",
+    "Blue": "0x1a3399ff"
+  }
+}
