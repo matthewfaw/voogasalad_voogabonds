@@ -16,46 +16,41 @@ import javafx.scene.layout.VBox;
  * @author Guhan Muruganandam
  */
 
-public class RightPane implements IGUIPiece,IViewPane {
-	private VBox myRightPane=new VBox();
-	private TowerColumn myTowerColumn;
-	//private Pane myGamePlayer;
+public class RightPane implements IViewPane {
+	private VBox myNode;
+	
 	public RightPane(){
-		//myGamePlayer=gamePlayer;
+		myNode = new VBox();
 		setUpPane();
-		//myTowerColumn=new TowerColumn();
-		//myRightPane.getChildren().add(myTowerColumn.getView());
 	}
 
 	@Override
 	public void setUpPane() {
-		//myRightPane.setPrefWidth(myGamePlayer.getWidth()*0.4);
-		//myRightPane.setPrefHeight(myGamePlayer.getHeight()*0.857);
-		myRightPane.setPrefWidth(200);
-		myRightPane.setPrefHeight(600);
-		myRightPane.setPadding(new Insets(10));
-		myRightPane.setSpacing(8);
+		myNode.setPrefWidth(200);
+		myNode.setPrefHeight(600);
+		myNode.setPadding(new Insets(10));
+		myNode.setSpacing(8);
 	    //TODO:Export CSS to other part
-		myRightPane.setStyle("-fx-background-color: #778899;");
+		myNode.setStyle("-fx-background-color: #778899;");
 	}
-
-	@Override
-	public Node getView() {
-		return myRightPane;
-	}
-	//public TowerColumn getTowerColumn(){
-		//return myTowerColumn;
-	//}
 
 	@Override
 	public void add(Collection<Node> collection) {
-		for(Node n:collection){
-			myRightPane.getChildren().add(n);
-		}
+		myNode.getChildren().addAll(collection);
 	}
 
 	@Override
 	public void clear() {
-		myRightPane.getChildren().clear();
+		myNode.getChildren().clear();
+	}
+
+	@Override
+	public Node getNode() {
+		return myNode;
+	}
+
+	@Override
+	public void add(Node node) {
+		myNode.getChildren().add(node);
 	}
 }
