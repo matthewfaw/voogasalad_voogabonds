@@ -168,9 +168,9 @@ public class ApplicationController {
 	public void onEntityClicked(String entityID) {
 		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
 		for (IComponent component: clickedEntity.getComponents()) {
-			System.out.println("Trying to distribute info");
 			component.distributeInfo();
 		}
+//		myScene.getMyBottomPane().clear();
 		myScene.buildEntityInfoBox();
 	}
 	

@@ -41,7 +41,6 @@ public class EntityInfoBoxBuilder {
 		
 		public EntityInfoBoxBuilder withMachineInfo(IViewablePhysical aComponent)
 		{
-			System.out.println("Building a physical box");
 			//null check before constructing
 			//add upgrade button to  the info box
 			myMachineInfo = new MachineInfo(aComponent);
