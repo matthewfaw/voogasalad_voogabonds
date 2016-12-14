@@ -135,9 +135,9 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
 		
-		//This means my target was deleted, and I don't have any way to find a new one.
+		//This means my target was deleted. (And I don't have any way to find a new one)
 		if ((myGoal != null && myGoal.getPosition() == null))
-			getEntity().delete();
+			myGoal = null;
 		
 		PhysicalComponent p = myPhysical.get(this);
 		if (p != null)
