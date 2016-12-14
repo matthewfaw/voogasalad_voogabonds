@@ -17,8 +17,8 @@ import utility.ErrorBox;
 public class NewGameScreen extends AbstractLoadScreen{
 	
 	
-	public NewGameScreen(String title) throws IOException {
-		super(title);
+	public NewGameScreen(String title, String files) throws IOException {
+		super(title, files);
 	}
 	
 	protected void start(String selectedGame){
