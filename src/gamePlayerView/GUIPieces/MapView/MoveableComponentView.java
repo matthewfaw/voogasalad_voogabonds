@@ -19,6 +19,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	private IObservable<IViewablePhysical> myObservable;
 	private String entityID;
 	private boolean hasEntityID;
+	public static final String SOURCE_PATH = "src/";
 	
     public MoveableComponentView(
     		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane){
@@ -40,6 +41,9 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	public void update(IViewablePhysical aChangedObject) {
 		String imagePath = aChangedObject.getImagePath();
 		if (imagePath != null) {
+			if (imagePath.substring(0, 4).equals(SOURCE_PATH)) {
+				imagePath = imagePath.substring(4);
+			}
 			imagePath = imagePath.replace('\\', File.separatorChar);
 			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
 			this.setImage(image);
