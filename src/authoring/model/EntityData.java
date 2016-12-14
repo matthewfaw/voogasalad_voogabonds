@@ -45,6 +45,7 @@ public class EntityData implements IReadableData {
 	}
 
 	public int getBuyPrice() {
+		System.out.println(myComponents.get("PurchasableComponentData").getFields().get("myPurchaseValue"));
 		return myComponents.get("PurchasableComponentData") == null ? Integer.MAX_VALUE : Integer.parseInt(myComponents.get("PurchasableComponentData").getFields().get(("myPurchaseValue")));
 //		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
 	}

@@ -12,7 +12,7 @@ import engine.model.strategies.movement.GreedyMovementStrategy;
  *
  */
 public class MovementStrategyFactory extends AbstractStrategyFactory<IMovementStrategy> {
-	private static final String FOLDER_NAME = new String("movement");
+	private static final String FOLDER_NAME = "movement";
 	private MapMediator myMap;
 	
 	public MovementStrategyFactory(MapMediator map) {
@@ -28,7 +28,8 @@ public class MovementStrategyFactory extends AbstractStrategyFactory<IMovementSt
 	protected IMovementStrategy constructStrategy(String strategyName) {
 		IMovementStrategy result;
 		try {
-			Class<?> strategyType = Class.forName(strategyName);
+			//TODO: Remove this hack
+			Class<?> strategyType = Class.forName(strategyName.substring(4).replace('/', '.'));
 			Constructor<?> construct = strategyType.getConstructor(this.getClass());
 			result = (IMovementStrategy) construct.newInstance(this);
 		} catch (
