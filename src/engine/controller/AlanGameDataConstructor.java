@@ -217,6 +217,11 @@ public class AlanGameDataConstructor {
 			enemy_team_component.setComponentName("TeamComponent");
 			enemy_team_component.addField("myTeamID", "them");
 			
+			enemy.addComponent("PhysicalComponent", enemy_physical_component);
+			enemy.addComponent("MoveableComponent", enemy_moveable_component);
+			enemy.addComponent("CollidableComponent", enemy_collidable_component);
+			enemy.addComponent("TeamComponent", enemy_team_component);
+			
 			
 			// ********* Player Data ********** //
 			PlayerData pdd = new PlayerData();

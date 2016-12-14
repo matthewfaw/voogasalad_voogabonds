@@ -82,11 +82,11 @@ public class MockGameDataConstructor {
 			//Sell/Buy data
 			ComponentData pcd = new ComponentData();
 			pcd.setComponentName("PurchasableComponentData");
-			pcd.addField("myPurchacePrice", "50");
+			pcd.addField("myPurchaseValue", "50");
 			
 			ComponentData scd = new ComponentData();
 			scd.setComponentName("SellableComponentData");
-			scd.addField("mySellPrice", "50");
+			scd.addField("mySellValue", "50");
 			
 			// Entity data
 			EntityData ed  = new EntityData();
