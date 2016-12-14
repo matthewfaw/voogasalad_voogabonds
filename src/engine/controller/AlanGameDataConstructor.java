@@ -28,8 +28,8 @@ public class AlanGameDataConstructor {
 	
 	public MapDataContainer getMockMapData () {
 		MapDataContainer mapData = new MapDataContainer();
-		int x = 10;
-		int y = 10;
+		int x = 12;
+		int y = 12;
 		int xmin = x/3;
 		int xmax = 2*x/3;
 		int ymin = y/3;
@@ -69,26 +69,18 @@ public class AlanGameDataConstructor {
 			
 			//Map data
 			MapDataContainer md = this.getMockMapData();
-			
-			//Sell/Buy data
-			ComponentData pcd = new ComponentData();
-			pcd.setComponentName("PurchasableComponentData");
-			pcd.addField("myPurchasePrice", "100");
-			
-			ComponentData scd = new ComponentData();
-			scd.setComponentName("SellableComponentData");
-			scd.addField("mySellPrice", "50");
-			
-			
-			
+		
 			// ********* Tower Entity Data ********* //
 			EntityData tower  = new EntityData();
 			
-			tower.addComponent("PurchasableComponentData", pcd);
-			tower.addComponent("SellableComponentData", scd);
-			
 			// Name
 			tower.setName("tower");
+			
+			ComponentData tower_purchasable_component = new ComponentData();
+			tower_purchasable_component.setComponentName("PurchasableComponentData");
+			tower_purchasable_component.addField("myPurchaseValue", "100");
+			
+			
 			ComponentData tower_physical_component = new ComponentData();
 			tower_physical_component.setComponentName("PhysicalComponent");
 			tower_physical_component.addField("myHeading", "0");
@@ -140,7 +132,7 @@ public class AlanGameDataConstructor {
 			tower.addComponent("CreatorComponent", tower_creator_component);
 			tower.addComponent("TargetingComponent", tower_targeting_component);
 			tower.addComponent("TeamComponent", tower_team_component);
-			
+			tower.addComponent("PurchasableComponentData", tower_purchasable_component);
 //			ed.addComponent("PhysicalComponent",cd1);
 //			ed.addComponent("CollidableComponent",cd2);
 //			ed.addComponent("MoveableComponent",cd3);
@@ -194,7 +186,39 @@ public class AlanGameDataConstructor {
 			projectile.addComponent("MoveableComponent", projectile_moveable_component);
 
 			
-			// Player Data
+			// ********* Enemy Data ********** //
+			
+			EntityData enemy  = new EntityData();
+			
+			projectile.setName("enemy");
+			
+			ComponentData enemy_physical_component = new ComponentData();
+			enemy_physical_component.setComponentName("PhysicalComponent");
+			enemy_physical_component.addField("myHeading", "0");
+			enemy_physical_component.addField("myImagePath", "src/resources/boss.png");
+			enemy_physical_component.addField("myImageSize", "20");
+			enemy_physical_component.addField("myValidTerrains", "grass, ice");
+			
+			ComponentData enemy_moveable_component = new ComponentData();
+			enemy_moveable_component.setComponentName("MoveableComponent");
+			enemy_moveable_component.addField("myMovementCalc", "PathMovementStrategy");
+			enemy_moveable_component.addField("myTurnSpeed", "5");
+			enemy_moveable_component.addField("myMoveSpeed", "3");
+			enemy_moveable_component.addField("explodesAtMaxDistance", "false");
+			enemy_moveable_component.addField("myMaxDistance", "600");
+			enemy_moveable_component.addField("removeOnGoal", "true");
+			enemy_moveable_component.addField("explodesOnGoal", "false");
+			
+			ComponentData enemy_collidable_component = new ComponentData();
+			enemy_collidable_component.setComponentName("CollidableComponent");
+			enemy_collidable_component.addField("myCollisionRadius", "20");
+			
+			ComponentData enemy_team_component = new ComponentData();
+			enemy_team_component.setComponentName("TeamComponent");
+			enemy_team_component.addField("myTeamID", "them");
+			
+			
+			// ********* Player Data ********** //
 			PlayerData pdd = new PlayerData();
 			pdd.setLoseStrategyName("lose strategy 1");
 			pdd.setStartingCash(2000);
@@ -209,7 +233,7 @@ public class AlanGameDataConstructor {
 			wad1.setSinkPointName("sinkPoint");
 			wad1.setTimeBetweenEnemy(20);
 			wad1.setTimeForWave(0);
-			wad1.setWaveEntity("Awesome Tower1");
+			wad1.setWaveEntity("enemy");
 			WaveData wad2 = new WaveData();
 			wad2.setName("Awesome wave");
 			wad2.setNumEnemies(20);
@@ -217,7 +241,7 @@ public class AlanGameDataConstructor {
 			wad2.setSinkPointName("sinkPoint");
 			wad2.setTimeBetweenEnemy(50);
 			wad2.setTimeForWave(1);
-			wad2.setWaveEntity("Awesome Tower1");
+			wad2.setWaveEntity("enemy");
 			WaveData wad3 = new WaveData();
 			wad3.setName("Dumb wave");
 			wad3.setNumEnemies(30);
@@ -225,7 +249,7 @@ public class AlanGameDataConstructor {
 			wad3.setSinkPointName("sinkPoint");
 			wad3.setTimeBetweenEnemy(60);
 			wad3.setTimeForWave(6);
-			wad3.setWaveEntity("Awesome Tower2");
+			wad3.setWaveEntity("enemy");
 			LevelData ld = new LevelData();
 			ld.addWaveDataListToList(wad1);
 			//ld.addWaveDataListToList(wad2);
@@ -234,18 +258,20 @@ public class AlanGameDataConstructor {
 			LevelDataContainer ldc = new LevelDataContainer();
 			ldc.createNewLevelData(ld);
 
-			ser.serializeToFile(md, "exampleGame/MapData/"+md.getClass().getSimpleName());
-			ser.serializeToFile(pdd, "exampleGame/PlayerData/"+pdd.getClass().getSimpleName());
-			ser.serializeToFile(ldc, "exampleGame/LevelData/"+ldc.getClass().getSimpleName());
-			ser.serializeToFile(tower, "exampleGame/EntityData/"+tower.getClass().getSimpleName()+1);
-			ser.serializeToFile(projectile, "exampleGame/EntityData/"+projectile.getClass().getSimpleName()+2);
+			ser.serializeToFile(md, "alanGame/MapData/"+md.getClass().getSimpleName());
+			ser.serializeToFile(pdd, "alanGame/PlayerData/"+pdd.getClass().getSimpleName());
+			ser.serializeToFile(ldc, "alanGame/LevelData/"+ldc.getClass().getSimpleName());
+			ser.serializeToFile(tower, "alanGame/EntityData/"+tower.getClass().getSimpleName()+1);
+			ser.serializeToFile(projectile, "alanGame/EntityData/"+projectile.getClass().getSimpleName()+2);
+			ser.serializeToFile(projectile, "alanGame/EntityData/"+enemy.getClass().getSimpleName()+3);
 			
-			derp.deserializeFromFile("SerializedFiles/exampleGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+tower.getClass().getSimpleName()+1, EntityData.class);
-			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+projectile.getClass().getSimpleName()+2, EntityData.class);
-			
+			derp.deserializeFromFile("SerializedFiles/alanGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/alanGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);
+			derp.deserializeFromFile("SerializedFiles/alanGame/LevelData/"+ldc.getClass().getSimpleName(), LevelDataContainer.class);
+			derp.deserializeFromFile("SerializedFiles/alanGame/EntityData/"+tower.getClass().getSimpleName()+1, EntityData.class);
+			derp.deserializeFromFile("SerializedFiles/alanGame/EntityData/"+projectile.getClass().getSimpleName()+2, EntityData.class);
+			derp.deserializeFromFile("SerializedFiles/alanGame/EntityData/"+enemy.getClass().getSimpleName()+3, EntityData.class);
+
 			TerrainMap terrainMap = new TerrainMap(md);
 //			terrainMap.getDestination();
 		} catch (Exception e) {
@@ -257,7 +283,7 @@ public class AlanGameDataConstructor {
 	public static void main(String[] args) throws SerializationException
 	{
 		JSONSerializer ser = new JSONSerializer();
-		MockGameDataConstructor m = new MockGameDataConstructor();
+		AlanGameDataConstructor m = new AlanGameDataConstructor();
 		m.constructMockData();
 	}
 }

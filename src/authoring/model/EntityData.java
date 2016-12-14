@@ -45,15 +45,15 @@ public class EntityData implements IReadableData {
 	}
 
 	public int getBuyPrice() {
-		return myComponents.get("PurchasableComponentData") == null ? Integer.MAX_VALUE : Integer.parseInt(myComponents.get("PurchasableComponentData").getFields().get(("myPurchaseValue")));
+		return myComponents.get("PurchasableComponentData") == null ? Integer.MAX_VALUE : Integer.parseInt(myComponents.get("PurchasableComponentData").getFields().get("myPurchaseValue"));
 //		return myPurchaseData.isPresent() ? myPurchaseData.get().getBuyPrice() : Integer.MAX_VALUE;
 	}
 	public int getSellPrice() {
-		return myComponents.get("SellableComponentData") == null ? Integer.MAX_VALUE : Integer.parseInt(myComponents.get("SellableComponentData").getFields().get(("mySellValue")));
+		return myComponents.get("SellableComponentData") == null ? Integer.MAX_VALUE : Integer.parseInt(myComponents.get("SellableComponentData").getFields().get("mySellValue"));
 	}
 
 	public Map<String, Integer> getUpgrades() {
-		return myComponents.get("UpgradeComponentData") == null ? new HashMap<String, Integer>() : deserialize(myComponents.get("UpgradeComponentData").getFields().get(("myUpgradeMap")));
+		return myComponents.get("UpgradeComponentData") == null ? new HashMap<String, Integer>() : deserialize(myComponents.get("UpgradeComponentData").getFields().get("myUpgradeMap"));
 	}
 
 	private Map<String, Integer> deserialize(String s) {
