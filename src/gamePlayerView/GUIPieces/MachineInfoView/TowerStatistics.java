@@ -20,12 +20,12 @@ public class TowerStatistics implements IGUIPiece {
 		HBox towerStats=new HBox();
 		EnemiesKilledBox enemieskilled=new EnemiesKilledBox();
 		//OTHER STATS
-		towerStats.getChildren().addAll(enemieskilled.getView()/*,valueofTower*/);
+		towerStats.getChildren().addAll(enemieskilled.getNode()/*,valueofTower*/);
 		return towerStats;
 	}
 
 	@Override
-	public Node getView() {
+	public Node getNode() {
 		return myTowerStatistics;
 	}
 }

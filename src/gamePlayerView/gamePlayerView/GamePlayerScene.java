@@ -230,7 +230,7 @@ public class GamePlayerScene {
 		TargetingButtons myTargetingMechanism=new TargetingButtons(myAppController);
 		VBox myTowerOptions=new VBox();
 		myTowerOptions.setSpacing(10);
-		myTowerOptions.getChildren().addAll(myTowerStatistics.getView(),myTargetingMechanism.getView());
+		myTowerOptions.getChildren().addAll(myTowerStatistics.getNode(),myTargetingMechanism.getNode());
 		//UpgradeUI myUpgradeandSell=new UpgradeUI();
 		//MachineInfo myInfo=new MachineInfo();
 		// myCollection.add(myInfo.getView());
