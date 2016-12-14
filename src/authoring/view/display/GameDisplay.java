@@ -206,38 +206,47 @@ public class GameDisplay {
 	private void dragHandler() {
 		ObservableList <Node> entries = terrainGrid.getChildren();
 		for (Node elem : entries){
+			
 		    elem.setOnDragDetected(new EventHandler<MouseEvent>() {
 		        @Override public void handle(MouseEvent e) {
 		            Dragboard db = elem.startDragAndDrop(TransferMode.ANY);
 		            ClipboardContent cb = new ClipboardContent();
 		            cb.put(DataFormat.PLAIN_TEXT, "");
 		            db.setContent(cb);
-		            if (toolBar.getImageStatus()) {
-		            	Image image = new Image(toolBar.getSelectedImagePath());
-		    			ImagePattern pattern = new ImagePattern(image);
-		            	((TerrainCell)elem).setFill(pattern);
-		            }
-		            else {
-			            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
-		            }
+		            dragHandlerData(elem);
 		        }
 		    });
 		    elem.setOnDragOver(new EventHandler<DragEvent>() {
 		        @Override public void handle(DragEvent e) {
 		            e.acceptTransferModes(TransferMode.ANY);
-		            if (toolBar.getImageStatus()) {
-		            	Image image = new Image(toolBar.getSelectedImagePath());
-		    			ImagePattern pattern = new ImagePattern(image);
-		            	((TerrainCell)elem).setFill(pattern);
-		            }
-		            else {
-			            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
-		            }
+		            dragHandlerData(elem);
 		        }
 		    });
 		}
 	}
 	
+	private void dragHandlerData(Node elem) {
+		TerrainCell convertedElem = (TerrainCell) elem;
+		 if (toolBar.getImageStatus()) {
+         	Image image = new Image(toolBar.getSelectedImagePath());
+ 			ImagePattern pattern = new ImagePattern(image);
+         	((TerrainCell)elem).setFill(pattern);
+         	
+         	String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+				String relPath = "";
+				if (toolBar.getImageStatus() && splitPath.length > 1) {
+					relPath += splitPath[1] + "/";
+					System.out.println("THISISTHERELATIVEPATH: " + relPath);
+				}
+         	mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), relPath));
+				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
+         }
+         else {
+	            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+	            mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), toolBar.getSelectedColor().toString()));
+				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
+         }
+	}
 	
 	public void setCols(int numCols) {
 		columns = numCols;
