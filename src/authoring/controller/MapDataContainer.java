@@ -207,11 +207,6 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	 */
 	public void addTerrainData(TerrainData terrain) {
 		validatePoint(terrain.getLoc(), "terrain");
-		for (TerrainData terrain2: terrainList){
-			if (terrain.getLoc().equals(terrain2.getLoc())){
-				terrainList.remove(terrain2);
-			}
-		}
 		terrainList.add(terrain);
 	}
 
