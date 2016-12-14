@@ -18,13 +18,15 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	private IObservable<IViewablePhysical> myObservable;
 	private String entityID;
 	private boolean hasEntityID;
+	private int tileSize;
 	public static final String SOURCE_PATH = "src/";
 	
     public MoveableComponentView(
-    		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane){
+    		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane, int myCellSize){
     	myAppController = aAppController;
     	myObservable = aObservable;
     	myPane = pane;
+    	tileSize = myCellSize;
     	hasEntityID = false;
     }	
     
@@ -46,10 +48,10 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 			imagePath = imagePath.replace('\\', File.separatorChar);
 			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
 			this.setImage(image);
-			this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
-			this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);
-			this.setFitWidth(aChangedObject.getSize());
-			this.setFitHeight(aChangedObject.getSize());
+			this.setX(aChangedObject.getPosition().getX() - tileSize / 2);
+			this.setY(aChangedObject.getPosition().getY() - tileSize / 2);
+			this.setFitWidth(aChangedObject.getSize()*tileSize);
+			this.setFitHeight(aChangedObject.getSize()*tileSize);
 			//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
 			this.setRotate(aChangedObject.getHeading());
 			if (aChangedObject.getEntityID() != null && !hasEntityID){

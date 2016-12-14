@@ -111,7 +111,7 @@ public class MapGrid extends Node {
     
     public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane, myCellSize);
     	aObservable.attach(aComponent);
     	mySprites.add(aComponent);
     	myPane.getChildren().add(aComponent);

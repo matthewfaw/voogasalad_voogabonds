@@ -225,6 +225,7 @@ public class GameDisplay {
 	
 	private void dragHandlerData(Node elem) {
 		TerrainCell convertedElem = (TerrainCell) elem;
+		System.out.println(toolBar.getImageStatus());
 		 if (toolBar.getImageStatus()) {
          	Image image = new Image(toolBar.getSelectedImagePath());
  			ImagePattern pattern = new ImagePattern(image);
@@ -236,10 +237,12 @@ public class GameDisplay {
 					relPath += splitPath[1] + "/";
 					System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				}
+			mapData.removeTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), convertedElem.getFill().toString()));
          	mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), relPath));
 				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
          }
          else {
+        	 	mapData.removeTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), convertedElem.getFill().toString()));
 	            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
 	            mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), toolBar.getSelectedColor().toString()));
 				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());

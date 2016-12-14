@@ -5,12 +5,12 @@
       "waveDataList": [
         {
           "name": "Wave",
-          "waveEntity": "Car",
+          "waveEntity": "Enemy",
           "timeBetweenEnemy": 1.0,
           "timeUntilNextWave": 100.0,
           "numEnemies": 20,
-          "spawnPointName": "betaSpawn",
-          "sinkPointName": "alphaSink"
+          "spawnPointName": "over",
+          "sinkPointName": "noah"
         }
       ]
     }

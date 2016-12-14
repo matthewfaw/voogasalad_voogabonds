@@ -73,6 +73,7 @@ public class TerrainCell extends Rectangle {
 							mouseEvent.consume();
 						}
 						else if (toolBar.getImageStatus()){
+							System.out.println("REMOVED");
 							controller.removeTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
 							String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 							relPath = "";
@@ -87,6 +88,7 @@ public class TerrainCell extends Rectangle {
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
 							}
 						else {
+							System.out.println("REMOVED");
 							controller.removeTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
 							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, gameDisplay.getTileSize(), toolBar.getSelectedColor().toString()));
 							setFill(toolBar.getSelectedColor());
@@ -265,12 +267,13 @@ public class TerrainCell extends Rectangle {
 			if (toolBar.getImageStatus()) {
 				String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 				relPath = "";
-				if (splitPath.length > 1)
+				if (splitPath.length > 1) {
 					relPath += splitPath[1]+"/";
+				}
 				controller.addValidTerrain(terrainType, relPath);
 			}
 			else {
-				controller.addValidTerrain(terrainType, relPath);
+				controller.addValidTerrain(terrainType, color);
 			}
 		} catch (Exception e) {
 			ErrorBox.displayError(myResources.getString("TerrainError"));
