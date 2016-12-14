@@ -36,8 +36,8 @@ public class Router {
 	private List<IPlayerAcceptor> myWaves;
 	private List<IResourceAcceptor> myResources;
 	//List<ISprites> mySprites;
-	
-	
+
+
 	public Router(GamePlayerScene aGamePlayerScene)
 	{
 		myGamePlayerScene  = aGamePlayerScene;
@@ -47,7 +47,7 @@ public class Router {
 		myResources=myGamePlayerScene.getResources();
 		//mySprites = myGamePlayerScene.getSprites();
 	}
-	
+
 	/**
 	 * Create a new moveable component data using an iviewablephysical.
 	 * Should happen whenever a new PhysicalComponent is constructed.
@@ -56,24 +56,24 @@ public class Router {
 	{
 		myGamePlayerScene.getMapDisplay().giveViewableComponent(physicalComponent);
 	}
-	
+
 	public void distributeErrors(String aErrorMessage)
 	{
-	    ErrorPopup error = new ErrorPopup(aErrorMessage);
+		ErrorPopup error = new ErrorPopup(aErrorMessage);
 	}
-	
+
 	public void distributePlayer(IObservable<IViewablePlayer> aPlayer)
 	{
 		//This is where you'll get player specific info such as money and lives and Tower Data
 		distributeCash(aPlayer);
 		distributeLives(aPlayer);
 		distributeResourceStore(aPlayer);
-		
+
 	}
-	
+
 	//TODO:
-//	public void distributeGameState() //Will have wave stuff
-	
+	//	public void distributeGameState() //Will have wave stuff
+
 	private void distributeResourceStore(IObservable<IViewablePlayer> aPlayer) {
 		for(IResourceAcceptor r : myResources){
 			r.acceptResources(aPlayer);
@@ -94,44 +94,44 @@ public class Router {
 	//TODO: What is the input argument for this?
 	//public void distributeSprite(//Something){
 	//	for(ISprite s : mySprites){
-			//s.acceptSprite(//Something);
-		//}		
+	//s.acceptSprite(//Something);
+	//}		
 	//}
 
 	public void distributeMapData(MapDataContainer aMapData)
 	{
 		//TODO: distribute to all interested frontend objects
-	    myGamePlayerScene.giveMapData(aMapData);
+		myGamePlayerScene.giveMapData(aMapData);
 	}
-	
+
 	/**
 	 * A method to distribute viewable game elements
 	 * @param aComponent
 	 */
-	
+
 	//public void distributeViewableComponent(IObservable<IViewable> aComponent)
 	//{
-		//TODO: give all viewable components the new component
-		//myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
+	//TODO: give all viewable components the new component
+	//myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
 	//}
-	
+
 	public void distributeViewableComponent(IViewableTargeting aComponent)
 	{
 		//TODO: give all viewable components the new component
 		myGamePlayerScene.getBuilder().withTargetingMechanism(aComponent);
 		//myGamePlayerScene.getMapDisplay().giveViewableComponent(aComponent);
 	}
-	
+
 	public void distributeViewableComponent(IViewableDamageDealer aComponent)
 	{
 		myGamePlayerScene.getBuilder().withDamageBox(aComponent);
 	}
-	
+
 	public void distributeViewableComponent(IViewableCollidable aComponent)
 	{
 		//TODO: give all viewable components the new component
 	}
-	
+
 	public void distributeViewableComponent(IViewableCreator aComponent)
 	{
 		//TODO: give all viewable components the new component
@@ -165,7 +165,7 @@ public class Router {
 	{
 		myGamePlayerScene.getBuilder().withSell(aComponent);
 	}
-	*/
+	 */
 	/**
 	 * An example to follow for setting up the router
 	 * @param aResourceStore
@@ -175,8 +175,8 @@ public class Router {
 	{
 		myGamePlayerScene.getResourceStoreAcceptors().forEach(acceptor -> acceptor.acceptResourceStore(aResourceStore));
 	}
-	*/
-	
+	 */
+
 	/*
 	 * public void distributeTowerData(IViewableTowerData)// Stuff like EnemiesKilledInfo. Might not be necessary. As it is called by lcik events
 	 * {
@@ -185,8 +185,8 @@ public class Router {
 	 *  
 	 *  
 	 */
-	
-	
+
+
 	/*
 	 * void distributeEnemy(IViewableEnemy aEnemy)
 	 * {
@@ -211,5 +211,5 @@ public class Router {
 	 * 		//redraw the enemy
 	 * }
 	 */
-	
+
 }

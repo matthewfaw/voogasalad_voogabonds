@@ -12,6 +12,7 @@ import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
+import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.MovementSystem;
@@ -37,6 +38,8 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	private CollisionDetectionSystem myCollision;
 	@Hide
 	private DamageDealingSystem myDamage;
+	@Hide
+	private BountySystem myBountySystem;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -132,7 +135,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		}
 		
 		if (removeOnGoal && atGoal()) {
-			//TODO: subtract player's lives
+			myBountySystem.pillagePlayerBase(this);
 			getEntity().delete();
 		}
 		

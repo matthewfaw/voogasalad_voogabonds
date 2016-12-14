@@ -5,6 +5,7 @@ import engine.model.resourcestore.ResourceStore;
 public interface IModifiablePlayer extends IViewablePlayer {
 	public void updateLivesRemaining(int deltaLives);
 	public void updateAvailableMoney(int deltaFunds);
+	public void updatePoints(int deltaPoints);
 	
 	public void win();
 	public void lose();

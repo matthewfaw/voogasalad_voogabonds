@@ -55,7 +55,7 @@ public class GamePlayerScene {
 	private LeftPane myLeftPane;
 	private RightPane myRightPane;
 	private MapDisplay myMap;
-	private PauseMenu pause;
+	private PauseMenu myPauseMenu;
 	private Scene myScene;
 	private Controls myControls;
 	private Pane myGamePlayer;
@@ -69,11 +69,11 @@ public class GamePlayerScene {
 	private ResourceBundle myResourceBundle;
 	private EntityInfoBoxBuilder myBuilder;
 	//private List<MoveableComponentView> mySprites;
-	
+
 
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
-    	myAppController = aAppController;
-    	myControls = new Controls();
+		myAppController = aAppController;
+		myControls = new Controls();
 		myCash = new ArrayList<IPlayerAcceptor>();
 		myLives = new ArrayList<IPlayerAcceptor>();
 		myWaves = new ArrayList<IPlayerAcceptor>();
@@ -89,9 +89,9 @@ public class GamePlayerScene {
 	}
 
 	public void init(Stage s) throws Exception {
-		Scene myScene=build(s);
-	        myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));               
-		setScene(s,myScene);
+		Scene scene = build(s);
+		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));               
+		setScene(s, scene);
 	}
 
 	private void setScene(Stage s, Scene scene) { ///public or private
@@ -110,7 +110,7 @@ public class GamePlayerScene {
 		//TODO:
 		// get all frontend components that need info from the resource store (available towers, ect)
 	}
-	*/
+	 */
 
 	public Scene build(Stage stage) throws Exception {
 		//myGamePlayer =new Pane();
@@ -137,9 +137,9 @@ public class GamePlayerScene {
 		VBox myTowerOptions=new VBox();
 		myTowerOptions.setSpacing(10);
 		myTowerOptions.getChildren().addAll(myTowerStatistics.getView(),myTargetingMechanism.getView());
-	    //UpgradeUI myUpgradeandSell=new UpgradeUI();
-	    //MachineInfo myInfo=new MachineInfo();
-	   // myCollection.add(myInfo.getView());
+		//UpgradeUI myUpgradeandSell=new UpgradeUI();
+		//MachineInfo myInfo=new MachineInfo();
+		// myCollection.add(myInfo.getView());
 		myCollection.add(myTowerOptions);
 		//myCollection.add(myUpgradeandSell.getView());
 		myBottomPane.add(myCollection);
@@ -152,15 +152,16 @@ public class GamePlayerScene {
 		myLeftPane=createLeftPane();
 		myRightPane=createRightPane();
 		myBottomPane=createBottomPane();
-	        myMap = new MapDisplay(myAppController);
-	        myMap.getControls(myControls);
+		myMap = new MapDisplay(myAppController);
+		myMap.getControls(myControls);
 		//mySprites.add(myMap.getSprites());
-	        pause = new PauseMenu();
-	        makePauseMenu();
-	        myBorderPane.setCenter(myMap.getView());
+
+		myPauseMenu = new PauseMenu();
+		makePauseMenu();
+		myBorderPane.setCenter(myMap.getView());
 		myBorderPane.setRight(myRightPane.getView());
 		myBorderPane.setBottom(myBottomPane.getView());
-		
+
 		myBorderPane.setLeft(myLeftPane.getView());
 		myMap.setupDragging(myScene);
 		//return borderpane;
@@ -183,7 +184,7 @@ public class GamePlayerScene {
 		myCollection.add(myTowerColumn.getView());
 		myResources.add(myTowerColumn);
 		pane.add(myCollection);
-		
+
 		return pane;
 	}
 
@@ -204,11 +205,11 @@ public class GamePlayerScene {
 
 
 	public void makePauseMenu(){ 
-	    pause.getControls(myControls);
-	    pause.getStage(myStage);
-            //myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
-    }
-	
+		myPauseMenu.getControls(myControls);
+		myPauseMenu.getStage(myStage);
+		//myScene.setOnKeyPressed(e -> pause.handleKeyInput(e.getCode()));               
+	}
+
 	public List<IPlayerAcceptor> getCash() {
 		return myCash;
 	}
@@ -220,31 +221,31 @@ public class GamePlayerScene {
 	public List<IPlayerAcceptor> getWaves() {
 		return myWaves;
 	}
-	
+
 	public List<IEnemiesKilledAcceptor> getEnemiesKilled() {
 		return myEnemiesKilled;
 	}
-	
+
 	public void giveMapData(MapDataContainer aMapData){
-	        myMap.setMap(aMapData);
-	        //myScene.setOnKeyPressed(e -> myMap.handleKeyInput(e.getCode()));    
+		myMap.setMap(aMapData);
+		//myScene.setOnKeyPressed(e -> myMap.handleKeyInput(e.getCode()));    
 
 	}
-	
+
 	public MapDisplay getMapDisplay()
 	{
 		return myMap;
 	}
-	
+
 	public List<IResourceAcceptor> getResources() {
 		//TODO;Refactor later to seperate the Resource object from tower column. Not doing now so I don't screw with Grayson's stuff
 		return myResources;
 	}
 	//TODO:Uncomment
 	//public List<ISprite> getSprites(){
-		//return mySprites;
+	//return mySprites;
 	//}
-	
+
 	public EntityInfoBoxBuilder getBuilder(){
 		return myBuilder;
 	}
@@ -252,48 +253,48 @@ public class GamePlayerScene {
 		EntityInfoBox myStatisticsBox= myBuilder.build();
 		updateDisplay(myStatisticsBox);
 	}
-	
+
 	//public void buildEntityInfoBox() {
-		//EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(this) 
-				////myScene.makeEntityInfoBox()
-			//	   .withMachineInfo()
-			//	   .withTargetingMechanism()
-				  // .withUpgradeButton()
-				   //.build();
-			//updateDisplay(myStatisticsBox);
+	//EntityInfoBox myStatisticsBox= new EntityInfoBoxBuilder(this) 
+	////myScene.makeEntityInfoBox()
+	//	   .withMachineInfo()
+	//	   .withTargetingMechanism()
+	// .withUpgradeButton()
+	//.build();
+	//updateDisplay(myStatisticsBox);
 	//}
-	
+
 	public void updateDisplay(EntityInfoBox myStatisticsBox) {
 		myBottomPane.clear();
-		Collection<Node> myCollection=new ArrayList<Node>();
+		Collection<Node> myCollection = new ArrayList<Node>();
 		myCollection.add(myStatisticsBox.getView());
 		myBottomPane.add(myCollection);
 	}
-	
-	    public void handleKeyInput(KeyCode code) {
-	       
-	        if(code.getName().equals(myControls.getControlFor("Up"))){
-	            System.out.println("Going up");
-	            myAppController.onUpButtonPressed();
-	        }
-	        else if(code.getName().equals(myControls.getControlFor("Pause"))){
-	            pause.init();
-	        }
-	        else if(code.getName().equals(myControls.getControlFor("Down"))){
-                    System.out.println("Going down");
-                    myAppController.onDownButtonPressed();
-                }
-	        else if(code.getName().equals(myControls.getControlFor("Left"))){
-                    System.out.println("Going left");
-                    myAppController.onLeftButtonPressed();
-                }
-	        else if(code.getName().equals(myControls.getControlFor("Right"))){
-                    System.out.println("Going right");
-                    myAppController.onRightButtonPressed();
-                }
-	        else if(code.getName().equals("Space")){
-                    System.out.println("Firing");
-                }
-	    }
-	
+
+	public void handleKeyInput(KeyCode code) {
+
+		if(code.getName().equals(myControls.getControlFor("Up"))){
+			System.out.println("Going up");
+			myAppController.onUpButtonPressed();
+		}
+		else if(code.getName().equals(myControls.getControlFor("Pause"))){
+			myPauseMenu.init();
+		}
+		else if(code.getName().equals(myControls.getControlFor("Down"))){
+			System.out.println("Going down");
+			myAppController.onDownButtonPressed();
+		}
+		else if(code.getName().equals(myControls.getControlFor("Left"))){
+			System.out.println("Going left");
+			myAppController.onLeftButtonPressed();
+		}
+		else if(code.getName().equals(myControls.getControlFor("Right"))){
+			System.out.println("Going right");
+			myAppController.onRightButtonPressed();
+		}
+		else if(code.getName().equals("Space")){
+			System.out.println("Firing");
+		}
+	}
+
 }
