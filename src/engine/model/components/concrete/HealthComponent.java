@@ -76,18 +76,24 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	public DamageInfo takeDamage(Damage dmg) {
 		double newCurrHealth = myCurrHealth - dmg.getDamage();
 		
-		if (newCurrHealth < 0) {
+		if (newCurrHealth < 0)
 			setCurrentHealth(0);
-		}
-		if (newCurrHealth > myMaxHealth) {
+		else if (newCurrHealth > myMaxHealth)
 			setCurrentHealth(myMaxHealth);
-		}
+		else
+			setCurrentHealth(newCurrHealth);
 		
 		int died = myCurrHealth <= 0 ? 1 : 0;
-		int bounty = myBounty.collectBounty(this);
 		
-		if (died == 1 && explodeOnDeath)
-			myDamage.explode(this);
+		int bounty = 0;
+		if (died == 1) {
+			bounty = myBounty.collectBounty(this);
+			if (explodeOnDeath)
+				myDamage.explode(this);
+
+			else
+				getEntity().delete();
+		}
 		
 		return new DamageInfo(dmg.getDamage(), died, bounty);		
 	}

@@ -30,13 +30,14 @@ public class TowerStatisticsandOptions implements IGUIPiece {
 		TowerStatistics towerStats=new TowerStatistics();
 		//TargetingButtons targetingButtons=new TargetingButtons();
 		vbox.setSpacing(20);
-		vbox.getChildren().add(towerStats.getView());
+		vbox.getChildren().add(towerStats.getNode());
 		//vbox.getChildren().add(targetingButtons.getView());
 		return vbox;
 		
 	}
-
-	public Node getView() {
+	
+	@Override
+	public Node getNode() {
 		return myDisplay;
 	}
 }

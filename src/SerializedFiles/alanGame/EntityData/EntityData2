@@ -33,6 +33,18 @@
         "myCollisionRadius": "0"
       },
       "myComponentName": "CollidableComponent"
+    },
+    "DamageDealingComponent": {
+   	  "myFields": {
+		"myDamage": "2",
+		"myDamageArc": "360",
+		"myDamageRadius": "50",
+		"myDamageStrategy": "ExponentialDamageStrategy",
+		"explodesOnEnemies": "true",
+		"explodesOnAllies": "false",
+		"diesOnExplosion": "true"
+      },
+      "myComponentName": "DamageDealingComponent"
     }
   }
 }

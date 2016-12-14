@@ -16,17 +16,17 @@ public class SellUI implements IGUIPiece,IButtonMaker {
 	}
 
 	@Override
-	public Node getView() {
-		return mySellButton;
-	}
-
-	@Override
 	public Button makeButton(String text) {
 		Button b=new Button(text);
 		b.setPrefSize(100, 20);
 		b.setStyle("-fx-background-color: linear-gradient(#f0aa35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)");
 		b.setOnAction(e->myAppController.onSellButtonPressed());
 		return b;
+	}
+
+	@Override
+	public Node getNode() {
+		return mySellButton;
 	}
 
 }

@@ -59,6 +59,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 			HealthSystem healthSysytem,
 			TeamSystem teams,
 			PhysicalSystem physicalSystem,
+			SpawningSystem creators,
 			ComponentData data,
 			Router router
 			) {
@@ -68,6 +69,8 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
+		myCreators = creators;
+		myTeams = teams;
 		
 		myDamage = Integer.parseInt(data.getFields().get("myDamage"));
 		myDamageArc = Double.parseDouble(data.getFields().get("myDamageArc"));

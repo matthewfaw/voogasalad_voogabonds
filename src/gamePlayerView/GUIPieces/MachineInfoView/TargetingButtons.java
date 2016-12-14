@@ -43,7 +43,7 @@ public class TargetingButtons implements IGUIPiece {
 	}
 
 	@Override
-	public Node getView() {
+	public Node getNode() {
 		return targetOptions;
 	}
 }

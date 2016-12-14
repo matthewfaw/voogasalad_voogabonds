@@ -53,7 +53,8 @@ public abstract class InfoBox implements IGUIPiece {
 		return l;
 	}
 	
-	public Node getView(){
+	@Override
+	public Node getNode(){
 		return myDisplay;
 	}
 }
