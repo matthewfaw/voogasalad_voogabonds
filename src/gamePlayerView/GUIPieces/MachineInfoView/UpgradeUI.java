@@ -79,7 +79,7 @@ public class UpgradeUI implements IGUIPiece {
 	//}
 
 	@Override
-	public Node getView() {
+	public Node getNode() {
 		return myUpgradeSet;
 	}
 	
