@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
-import authoring.model.TowerData;
 import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
@@ -25,6 +24,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
 	private Money myMoney;
+	private int myPoints;
 	
 	private transient List<ResourceStore> myResourceStores;
 	
@@ -32,6 +32,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	private transient IWinLoseStrategy myLoseCon;
 	
 	private transient List<IObserver<IViewablePlayer>> myObservers;
+	
 	
 	public Player(PlayerData aPlayerData)
 	{
@@ -42,6 +43,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
+		myPoints = 0;
 		
 		//TODO: Get win and lose conditions from PlayerData
 		myLoseCon = new NeverLoseStrategy(this);
@@ -60,6 +62,12 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
+		notifyObservers();
+	}
+	
+	@Override
+	public void updatePoints(int deltaPoints) {
+		myPoints += deltaPoints;
 		notifyObservers();
 	}
 	

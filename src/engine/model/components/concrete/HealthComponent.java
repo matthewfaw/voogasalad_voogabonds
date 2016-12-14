@@ -10,6 +10,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableHealth;
+import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -47,8 +48,8 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private Router myRouter;
 	
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
-		super(router);
+	public HealthComponent(IEntity aEntity, HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
+		super(aEntity, router);
 		myHealthSystem = healthSystem;
 		
 		myBounty = bounty;

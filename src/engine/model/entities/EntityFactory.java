@@ -73,11 +73,10 @@ public class EntityFactory {
 		ConcreteEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
+			IModifiableComponent component = myComponentFactory.constructComponent(entity, compdata, aLocation);
 //			component.setEntity(entity);
 			entity.addComponent(component);	
 		}
-		entity.setId(UUID.randomUUID().toString());
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
 

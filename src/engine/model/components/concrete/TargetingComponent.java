@@ -10,6 +10,7 @@ import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ITargeting;
 import engine.model.components.viewable_interfaces.IViewableTargeting;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ITargetingStrategy;
 import engine.model.systems.PhysicalSystem;
@@ -34,8 +35,8 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	@Hide
 	private List<IObserver<IViewableTargeting>> myObservers;
 	
-	public TargetingComponent(TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
-		super(router);
+	public TargetingComponent(IEntity aEntity, TargetingSystem target, PhysicalSystem physical, TeamSystem teams, ComponentData componentData, Router router) {
+		super(aEntity, router);
 		myTargeting = target;
 		myObservers = new ArrayList<IObserver<IViewableTargeting>>();
 		

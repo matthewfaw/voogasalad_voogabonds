@@ -6,18 +6,35 @@ import java.util.List;
 import engine.model.components.IComponent;
 import engine.model.components.concrete.BountyComponent;
 import engine.model.entities.IEntity;
+import engine.controller.PlayerController;
+import engine.model.playerinfo.IModifiablePlayer;
 
 public class BountySystem implements ISystem<BountyComponent> {
 	private List<BountyComponent> myComponents;
+	private IModifiablePlayer myPlayer;
 	
-	public BountySystem()
+	public BountySystem(PlayerController player) 
 	{
 		myComponents = new ArrayList<BountyComponent>();
+		myPlayer = player.getPlayer(0);
+	}
+	
+	public int pillagePlayerBase(IComponent c) {
+		BountyComponent b = getComponent(c);
+		if (b == null)
+			return 0;
+		myPlayer.updateLivesRemaining(b.getLivesTaken());
+		return b.getLivesTaken();
 	}
 	
 	public int collectBounty(IComponent c) {
 		BountyComponent b = getComponent(c);
-		return (b == null) ? 0 : b.getBounty();
+		if (b == null)
+			return 0;
+		myPlayer.updateAvailableMoney(b.getBounty());
+		myPlayer.updatePoints(b.getPoints());
+		return b.getPoints();
+		
 	}
 
 	/***********ISystem interface*******/
