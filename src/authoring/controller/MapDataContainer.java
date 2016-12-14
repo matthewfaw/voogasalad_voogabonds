@@ -229,7 +229,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		notifyObservers();
 		System.out.println("Added Terrain: " + name);
 	}
-	public void removeValidTerrain(String name) throws Exception{
+	public void removeValidTerrain(String name) {
 		if (validTerrain.containsKey(name)){
 			validTerrain.remove(name);
 			notifyObservers();

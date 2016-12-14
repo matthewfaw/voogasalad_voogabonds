@@ -23,15 +23,17 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	private String myTeamID;
 	
 	@Hide
-	private List<IObserver<IViewableTeam>> myObservers;
+	private transient List<IObserver<IViewableTeam>> myObservers;
 
 	@Hide
-	private TeamSystem mySystem;
+	private transient TeamSystem mySystem;
 	
 	public TeamComponent(TeamSystem teams, ComponentData componentData, Router router) {
 	    super(router);
 		myTeamID = componentData.getFields().get("myTeamID");
 		myObservers = new ArrayList<IObserver<IViewableTeam>>();
+		
+		teams.attachComponent(this);
 	}
 	
 	@Override
