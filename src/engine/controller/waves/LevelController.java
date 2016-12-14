@@ -4,6 +4,7 @@ import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import engine.IObserver;
+import engine.controller.system.SystemsController;
 import engine.controller.timeline.TimelineController;
 import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
@@ -30,15 +31,15 @@ public class LevelController implements IObserver<TimelineController> {
 			int aStartingLevel,
 			DataStore<EntityData> aEntityDataStore,
 			EntityFactory aEntityFactory,
-			PhysicalSystem aPhysicalSystem,
-			MovementSystem aMovementSystem,
+			SystemsController aSystemsController,
 			MapDataContainer aMapDataContainer) {
 		myLevelDataContainer = aGameLevelsData;
 		myEntityDataStore = aEntityDataStore;
 		myCurrentLevel = aStartingLevel;
 		myEntityFactory = aEntityFactory;
-		myPhysicalSystem = aPhysicalSystem;
-		myMovementSystem = aMovementSystem;
+		//TODO: remove this hack
+		myPhysicalSystem = aSystemsController.getPhysicalSystem();
+		myMovementSystem = aSystemsController.getMovementSystem();
 		myMapDataContainer = aMapDataContainer;
 	
 	}

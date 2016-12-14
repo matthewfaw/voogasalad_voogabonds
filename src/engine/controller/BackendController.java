@@ -12,6 +12,7 @@ import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
 import authoring.model.serialization.JSONSerializer;
+import engine.controller.system.SystemsController;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.components.IComponent;
@@ -62,30 +63,19 @@ public class BackendController {
 	private transient MapMediator myMapMediator;
 	
 	//Controllers to manage events
-	private transient TimelineController myTimelineController;
-	private transient PlayerController myPlayerController;
-	private transient LevelController myLevelController;
+	private TimelineController myTimelineController;
+	private PlayerController myPlayerController;
+	private LevelController myLevelController;
+	private SystemsController mySystemsController;
 	private transient Router myRouter;
 	
 	//Factories
 	private transient EntityFactory myEntityFactory;
 	
-	//Systems
-	private CollisionDetectionSystem myCollisionDetectionSystem;
-	private DamageDealingSystem myDamageDealingSystem;
-	private HealthSystem myHealthSystem;
-	private MovementSystem myMovementSystem;
-	private PhysicalSystem myPhysicalSystem;
-	private BountySystem myBountySystem;
-	private SpawningSystem mySpawningSystem;
-	private TargetingSystem myTargetingSystem;
-	private TeamSystem myTeamSystem;
-	private ControllableSystem myControllableSystem;
-	
 	// EntityManager
 	private EntityManager myEntityManager;
 	
-	private transient ResourceBundle myResources;
+	private transient ResourceBundle myErrorMessages;
 	
 	public BackendController(String aGameDataPath, Router aRouter, EntityManager entityManager)
 	{
@@ -94,40 +84,45 @@ public class BackendController {
 		myFileRetriever = new FileRetriever(aGameDataPath);
 		myJsonDeserializer = new JSONDeserializer();
 
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
+		myErrorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
+		mySystemsController = new SystemsController();
 
 		myEntityManager = entityManager;
 		
 		//Must construct static before dynamic.
-		constructStaticBackendObjects();
+		constructData();
 		constructDynamicBackendObjects();
 	}
-	
-	private void constructSystems() {
-		myTeamSystem = new TeamSystem();
-		myHealthSystem = new HealthSystem();
-		myBountySystem = new BountySystem(myPlayerController);
-		myDamageDealingSystem = new DamageDealingSystem();
+
+	private void constructDynamicBackendObjects()
+	{
+		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		
-		// ORDERING MATTERS for physical -> targeting -> collision -> movement
-		myPhysicalSystem = new PhysicalSystem(myMapMediator);
-		
-		myTargetingSystem = new TargetingSystem();
-		myCollisionDetectionSystem = new CollisionDetectionSystem();
-		
-		myMovementSystem = new MovementSystem(myMapMediator, myTimelineController);
-		mySpawningSystem = new SpawningSystem(myTimelineController);
-		
-		myControllableSystem = new ControllableSystem();
-		
+		myEntityFactory = new EntityFactory(mySystemsController.getSystems(), myEntityDataStore, myRouter, myMapMediator, myEntityManager);
+
+		mySystemsController.initializeSystems(myPlayerController, myMapMediator, myTimelineController, myEntityFactory);
+
+		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore, myEntityFactory, mySystemsController, myMapData);
+		myTimelineController.attach(myLevelController);
 	}
 	
-	
-	public void moveControllables(String movement) {
-		System.out.println("moving at the back end");
-		myControllableSystem.move(movement);
+	/**
+	 * The primary dispatcher method for constructing objects from the GameDataFiles
+	 */
+	private void constructData()
+	{
+		constructEntityDataStore();
+		constructPlayerData();
+		constructLevelData();
+		constructMap();
+	}
+
+	public void moveControllables(String movement) 
+	{
+		mySystemsController.sendControlSignal(movement);
 	}
 	
 	/**
@@ -171,51 +166,6 @@ public class BackendController {
 		myPlayer.updateAvailableMoney(-1*buyPrice);
 	}
 	
-	//TODO: Update when WaveData is ready from Authoring
-	private void constructDynamicBackendObjects()
-	{
-		//List<DummyWaveOperationData> data = getData(myGameDataRelativePaths.getString("WavePath"), DummyWaveOperationData.class);
-		//XXX: This depends on the map distributor already being constructed
-		// we should refactor this to remove the depenency in calling
-//		myWaveController = new WaveController(myLevelDataContainer, myEntityDataStore, myPlayerController.getActivePlayer());
-		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore, myEntityFactory, myPhysicalSystem, myMovementSystem, myMapData);
-		myTimelineController.attach(myLevelController);
-	}
-	
-	/**
-	 * The primary dispatcher method for constructing objects from the GameDataFiles
-	 */
-	private void constructStaticBackendObjects()
-	{
-		constructEntityDataStore();
-		constructPlayerData();
-		
-		
-		myPlayerController.addPlayer(myPlayerData);
-		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
-		
-		constructLevelData();
-		constructMap();
-		constructSystems();
-		
-		constructEntityFactory(); //depends on constructing systems first
-	}
-
-	private void constructEntityFactory() {
-		List<ISystem<?>> mySystems = new ArrayList<ISystem<?>>();
-		mySystems.add(myCollisionDetectionSystem);
-		mySystems.add(myDamageDealingSystem);
-		mySystems.add(myHealthSystem);
-		mySystems.add(myMovementSystem);
-		mySystems.add(myPhysicalSystem);
-		mySystems.add(myBountySystem);
-		mySystems.add(mySpawningSystem);
-		mySystems.add(myTargetingSystem);
-		mySystems.add(myTeamSystem);
-		mySystems.add(myControllableSystem);
-		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
-		mySpawningSystem.setEntityFactory(myEntityFactory);
-	}
 
 	/**
 	 * Helper method to create the backend map object
@@ -323,13 +273,13 @@ public class BackendController {
 		try {
 			js.serializeToFile(this, "plswork");
 		} catch (Exception e1) {
-			ErrorBox.displayError(myResources.getString("CannotSave"));
+			ErrorBox.displayError(myErrorMessages.getString("CannotSave"));
 			myRouter.distributeErrors(e1.toString());
 		}
 		try {
 			BackendController b = (BackendController)myJsonDeserializer.deserializeFromFile("SerializedFiles/plswork", BackendController.class);
 		} catch (FileNotFoundException e) {
-			ErrorBox.displayError(myResources.getString("CannotLoad"));
+			ErrorBox.displayError(myErrorMessages.getString("CannotLoad"));
 			myRouter.distributeErrors(e.toString());
 		}
 	}

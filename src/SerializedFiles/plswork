@@ -1,501 +1,5161 @@
 {
-  "myCollisionDetectionSystem": {
-    "myComponents": [
+  "myTimelineController": {
+    "myStartTime": 103756588906879
+  },
+  "myPlayerController": {
+    "myPlayers": [
       {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
-      },
-      {
-        "myCollisionRadius": 20.0,
-        "myRouter": {}
+        "myID": 0,
+        "myLives": 5,
+        "myMoney": {
+          "myValue": 1900
+        },
+        "myPoints": 0
       }
     ]
   },
-  "myDamageDealingSystem": {
-    "myComponents": []
-  },
-  "myHealthSystem": {
-    "myComponents": []
-  },
-  "myMovementSystem": {
-    "myComponents": [
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 68.99999999999989,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
+  "myLevelController": {
+    "myCurrentLevel": 822,
+    "myEntityFactory": {
+      "myComponentFactory": {
+        "mySystems": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
         "myRouter": {}
       },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 67.99999999999989,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
+      "myEntityDataStore": {
+        "myData": {
+          "enemy": {
+            "myName": "enemy",
+            "myComponents": {
+              "TeamComponent": {
+                "myFields": {
+                  "myTeamID": "them"
+                },
+                "myComponentName": "TeamComponent"
+              },
+              "PhysicalComponent": {
+                "myFields": {
+                  "myImageSize": "50",
+                  "myValidTerrains": "grass, water",
+                  "myHeading": "0",
+                  "myImagePath": "src/resources/boss.png"
+                },
+                "myComponentName": "PhysicalComponent"
+              },
+              "MoveableComponent": {
+                "myFields": {
+                  "removeOnGoal": "true",
+                  "explodesOnGoal": "false",
+                  "myMaxDistance": "1000",
+                  "explodesAtMaxDistance": "false",
+                  "myMoveSpeed": "1",
+                  "myTurnSpeed": "1",
+                  "myMovementCalc": "GreedyMovementStrategy"
+                },
+                "myComponentName": "MoveableComponent"
+              },
+              "CollidableComponent": {
+                "myFields": {
+                  "myCollisionRadius": "20"
+                },
+                "myComponentName": "CollidableComponent"
+              }
+            }
+          },
+          "projectile": {
+            "myName": "projectile",
+            "myComponents": {
+              "TeamComponent": {
+                "myFields": {
+                  "myTeamID": "us"
+                },
+                "myComponentName": "TeamComponent"
+              },
+              "PhysicalComponent": {
+                "myFields": {
+                  "myImageSize": "10",
+                  "myValidTerrains": "grass, water",
+                  "myHeading": "0",
+                  "myImagePath": "src/resources/cookie.png"
+                },
+                "myComponentName": "PhysicalComponent"
+              },
+              "MoveableComponent": {
+                "myFields": {
+                  "removeOnGoal": "true",
+                  "explodesOnGoal": "true",
+                  "myMaxDistance": "300",
+                  "explodesAtMaxDistance": "true",
+                  "myMoveSpeed": "5",
+                  "myTurnSpeed": "45",
+                  "myMovementCalc": "GreedyMovementStrategy"
+                },
+                "myComponentName": "MoveableComponent"
+              },
+              "CollidableComponent": {
+                "myFields": {
+                  "myCollisionRadius": "0"
+                },
+                "myComponentName": "CollidableComponent"
+              }
+            }
+          },
+          "tower": {
+            "myName": "tower",
+            "myComponents": {
+              "TeamComponent": {
+                "myFields": {
+                  "myTeamID": "us"
+                },
+                "myComponentName": "TeamComponent"
+              },
+              "PhysicalComponent": {
+                "myFields": {
+                  "myImageSize": "50",
+                  "myValidTerrains": "grass",
+                  "myHeading": "0",
+                  "myImagePath": "src/resources/cow.png"
+                },
+                "myComponentName": "PhysicalComponent"
+              },
+              "MoveableComponent": {
+                "myFields": {
+                  "removeOnGoal": "true",
+                  "explodesOnGoal": "false",
+                  "myMaxDistance": "1000",
+                  "myMoveSpeed": "0",
+                  "myTurnSpeed": "1",
+                  "myMovementCalc": "NoMovementStrategy"
+                },
+                "myComponentName": "MoveableComponent"
+              },
+              "CreatorComponent": {
+                "myFields": {
+                  "mySpawnName": "projectile",
+                  "mySpawningStrategy": "BasicSpawnStrategy",
+                  "myTimeBetweenSpawns": "100"
+                },
+                "myComponentName": "CreatorComponent"
+              },
+              "TargetingComponent": {
+                "myFields": {
+                  "myTargetsEnemies": "true",
+                  "myTargetingStrategy": "BadTargetingStrategy",
+                  "mySightRange": "400",
+                  "mySightWidth": "360"
+                },
+                "myComponentName": "TargetingComponent"
+              },
+              "PurchasableComponentData": {
+                "myFields": {
+                  "myPurchaseValue": "100"
+                },
+                "myComponentName": "PurchasableComponentData"
+              }
+            }
+          }
+        }
       },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 66.99999999999989,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
+      "myRouter": {},
+      "myMapMediator": {
+        "myTerrainMap": {
+          "myMapFactory": {},
+          "myMap": [
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 0.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 1.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 2.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 3.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 4.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 5.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 6.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "water",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x0000ff",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 7.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 8.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 9.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 10.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ],
+            [
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 0.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 1.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 2.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 3.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 4.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 5.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 6.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 7.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 8.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 9.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 10.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              },
+              {
+                "myTerrainData": {
+                  "type": "grass",
+                  "loc": {
+                    "myX": 11.0,
+                    "myY": 11.0,
+                    "myZ": 0.0
+                  },
+                  "myColor": "0x008000",
+                  "mySize": 50
+                }
+              }
+            ]
+          ],
+          "myTerrainWidth": 50.0,
+          "myTerrainHeight": 50.0,
+          "myNeighborStrategy": {}
+        },
+        "myMapData": {
+          "numXCells": 12,
+          "numYCells": 12,
+          "cellSize": 50,
+          "spawnPoints": {
+            "spawnPoint": [
+              {
+                "myX": 1.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              }
+            ]
+          },
+          "sinkPoints": {
+            "sinkPoint": [
+              {
+                "myX": 10.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              }
+            ]
+          },
+          "terrainList": [
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 5.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 7.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 6.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 5.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 6.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 5.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 5.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 4.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 1.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 7.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 2.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 7.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 5.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 7.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 7.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 3.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 2.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 9.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 8.0,
+                "myY": 10.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "water",
+              "loc": {
+                "myX": 6.0,
+                "myY": 6.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x0000ff",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 4.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 0.0,
+                "myY": 0.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 10.0,
+                "myY": 3.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 11.0,
+                "myY": 11.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 1.0,
+                "myY": 8.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            },
+            {
+              "type": "grass",
+              "loc": {
+                "myX": 6.0,
+                "myY": 9.0,
+                "myZ": 0.0
+              },
+              "myColor": "0x008000",
+              "mySize": 50
+            }
+          ],
+          "validTerrain": {}
+        }
       },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 65.99999999999989,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 64.99999999999989,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 63.99999999999989,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 62.9999999999999,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 61.99999999999991,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 60.999999999999915,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 1.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 59.99999999999992,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 0.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 0.0,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
-      },
-      {
-        "myTurnSpeed": 1.0,
-        "myMoveSpeed": 0.0,
-        "explodesAtMaxDistance": false,
-        "myMaxDistance": 1000.0,
-        "myMovedDistance": 0.0,
-        "removeOnGoal": true,
-        "explodesOnGoal": false,
-        "myObservers": [],
-        "myRouter": {}
+      "myEntityManager": {
+        "myEntityMap": {
+          "3e7065f4-6545-4d54-94f0-dbe2fe3e1147": {
+            "myID": "3e7065f4-6545-4d54-94f0-dbe2fe3e1147"
+          },
+          "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e": {
+            "myID": "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e"
+          },
+          "82b22738-f997-4ba0-872d-25b57bd52024": {
+            "myID": "82b22738-f997-4ba0-872d-25b57bd52024"
+          },
+          "9b520016-d903-4f8e-a269-dd286b7527bb": {
+            "myID": "9b520016-d903-4f8e-a269-dd286b7527bb"
+          },
+          "f24d6bb1-166e-480e-96d4-cd2a5210af3d": {
+            "myID": "f24d6bb1-166e-480e-96d4-cd2a5210af3d"
+          },
+          "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a": {
+            "myID": "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a"
+          },
+          "5f398b11-e8fc-4885-8d3b-8d0367c83ef9": {
+            "myID": "5f398b11-e8fc-4885-8d3b-8d0367c83ef9"
+          },
+          "6723c639-d42c-4f6f-8699-bf4474a3933a": {
+            "myID": "6723c639-d42c-4f6f-8699-bf4474a3933a"
+          },
+          "6014797e-3cec-4e10-b353-7b275da148c2": {
+            "myID": "6014797e-3cec-4e10-b353-7b275da148c2"
+          },
+          "8b94969f-be65-4117-a597-8ffe594232c1": {
+            "myID": "8b94969f-be65-4117-a597-8ffe594232c1"
+          },
+          "23e33e7f-dffd-4da7-93f8-df5d788a9b6f": {
+            "myID": "23e33e7f-dffd-4da7-93f8-df5d788a9b6f"
+          },
+          "724fb125-674c-4299-955a-57c11ccea61e": {
+            "myID": "724fb125-674c-4299-955a-57c11ccea61e"
+          },
+          "e2584056-1cf7-437d-83f3-fa0463dafc7d": {
+            "myID": "e2584056-1cf7-437d-83f3-fa0463dafc7d"
+          },
+          "d17b4aee-3c9b-47bb-86ba-c566e4603ec5": {
+            "myID": "d17b4aee-3c9b-47bb-86ba-c566e4603ec5"
+          },
+          "f2ee1f4a-1b92-4d88-8869-6fffdd03678d": {
+            "myID": "f2ee1f4a-1b92-4d88-8869-6fffdd03678d"
+          }
+        }
       }
-    ]
+    },
+    "myPhysicalSystem": {
+      "myComponents": [
+        {
+          "myImagePath": "src/resources/cow.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass"
+          ],
+          "myPosition": {
+            "myX": 475.0,
+            "myY": 125.0,
+            "myZ": 0.0
+          },
+          "myHeading": 86.27969658187716,
+          "myRouter": {}
+        },
+        {
+          "myImagePath": "src/resources/cookie.png",
+          "myImageSize": 10.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 458.5466264331485,
+            "myY": 417.8336935518309,
+            "myZ": 0.0
+          },
+          "myHeading": 94.02182836365799,
+          "myRouter": {}
+        }
+      ]
+    },
+    "myMovementSystem": {
+      "myComponents": [
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 0.0,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myRouter": {}
+        },
+        {
+          "myTurnSpeed": 45.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": true,
+          "myMaxDistance": 300.0,
+          "myMovedDistance": 295.0000000000004,
+          "removeOnGoal": true,
+          "explodesOnGoal": true,
+          "myObservers": [],
+          "myRouter": {}
+        }
+      ]
+    },
+    "myMapDataContainer": {
+      "numXCells": 12,
+      "numYCells": 12,
+      "cellSize": 50,
+      "spawnPoints": {
+        "spawnPoint": [
+          {
+            "myX": 1.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          }
+        ]
+      },
+      "sinkPoints": {
+        "sinkPoint": [
+          {
+            "myX": 10.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          }
+        ]
+      },
+      "terrainList": [
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 5.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 7.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 6.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 5.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 6.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 5.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 5.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 4.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 1.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 7.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 2.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 7.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 5.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 7.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 7.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 3.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 2.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 9.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 8.0,
+            "myY": 10.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "water",
+          "loc": {
+            "myX": 6.0,
+            "myY": 6.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x0000ff",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 4.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 0.0,
+            "myY": 0.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 10.0,
+            "myY": 3.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 11.0,
+            "myY": 11.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 1.0,
+            "myY": 8.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        },
+        {
+          "type": "grass",
+          "loc": {
+            "myX": 6.0,
+            "myY": 9.0,
+            "myZ": 0.0
+          },
+          "myColor": "0x008000",
+          "mySize": 50
+        }
+      ],
+      "validTerrain": {}
+    }
   },
-  "myPhysicalSystem": {
-    "myComponents": [
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 106.87011168448291,
-          "myY": 84.55985544998752,
-          "myZ": 0.0
+  "mySystemsController": {
+    "mySystems": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "myCollisionDetectionSystem": {
+      "myComponents": [
+        {
+          "myCollisionRadius": 0.0,
+          "myRouter": {}
+        }
+      ]
+    },
+    "myDamageDealingSystem": {
+      "myComponents": []
+    },
+    "myHealthSystem": {
+      "myComponents": []
+    },
+    "myMovementSystem": {
+      "myComponents": [
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 0.0,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myRouter": {}
         },
-        "myHeading": 46.580517727662496,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 106.18277715636522,
-          "myY": 83.83351445124298,
-          "myZ": 0.0
+        {
+          "myTurnSpeed": 45.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": true,
+          "myMaxDistance": 300.0,
+          "myMovedDistance": 295.0000000000004,
+          "removeOnGoal": true,
+          "explodesOnGoal": true,
+          "myObservers": [],
+          "myRouter": {}
+        }
+      ]
+    },
+    "myPhysicalSystem": {
+      "myComponents": [
+        {
+          "myImagePath": "src/resources/cow.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass"
+          ],
+          "myPosition": {
+            "myX": 475.0,
+            "myY": 125.0,
+            "myZ": 0.0
+          },
+          "myHeading": 86.27969658187716,
+          "myRouter": {}
         },
-        "myHeading": 46.580517727662496,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 105.49544262824753,
-          "myY": 83.10717345249843,
-          "myZ": 0.0
+        {
+          "myImagePath": "src/resources/cookie.png",
+          "myImageSize": 10.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 458.5466264331485,
+            "myY": 417.8336935518309,
+            "myZ": 0.0
+          },
+          "myHeading": 94.02182836365799,
+          "myRouter": {}
+        }
+      ]
+    },
+    "myBountySystem": {
+      "myComponents": []
+    },
+    "mySpawningSystem": {
+      "myComponents": [
+        {
+          "myTimeBetweenSpawns": 100,
+          "mySpawnName": "projectile",
+          "myTimeSinceSpawning": 73,
+          "myChildren": [
+            {
+              "myID": "724fb125-674c-4299-955a-57c11ccea61e"
+            },
+            {
+              "myID": "6723c639-d42c-4f6f-8699-bf4474a3933a"
+            },
+            {
+              "myID": "d17b4aee-3c9b-47bb-86ba-c566e4603ec5"
+            },
+            {
+              "myID": "3e7065f4-6545-4d54-94f0-dbe2fe3e1147"
+            }
+          ],
+          "myRouter": {}
+        }
+      ]
+    },
+    "myTargetingSystem": {
+      "myComponents": [
+        {
+          "mySightRange": 400.0,
+          "mySightWidth": 360.0,
+          "myTargetsEnemies": true,
+          "myRouter": {}
+        }
+      ]
+    },
+    "myTeamSystem": {
+      "myComponents": [
+        {
+          "myTeamID": "us",
+          "myRouter": {}
         },
-        "myHeading": 46.580517727662496,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 104.80810810012984,
-          "myY": 82.38083245375388,
-          "myZ": 0.0
-        },
-        "myHeading": 46.58051772766249,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 104.12077357201215,
-          "myY": 81.65449145500934,
-          "myZ": 0.0
-        },
-        "myHeading": 46.58051772766249,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 103.43343904389447,
-          "myY": 80.92815045626479,
-          "myZ": 0.0
-        },
-        "myHeading": 46.580517727662496,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 102.74610451577678,
-          "myY": 80.20180945752024,
-          "myZ": 0.0
-        },
-        "myHeading": 46.580517727662496,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 102.05876998765909,
-          "myY": 79.4754684587757,
-          "myZ": 0.0
-        },
-        "myHeading": 46.580517727662496,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 101.3714354595414,
-          "myY": 78.74912746003115,
-          "myZ": 0.0
-        },
-        "myHeading": 46.58051772766249,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/boss.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass",
-          "water"
-        ],
-        "myPosition": {
-          "myX": 100.68410093142371,
-          "myY": 78.0227864612866,
-          "myZ": 0.0
-        },
-        "myHeading": 46.58051772766249,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/cow.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass"
-        ],
-        "myPosition": {
-          "myX": 325.0,
-          "myY": 125.0,
-          "myZ": 0.0
-        },
-        "myHeading": 0.0,
-        "myRouter": {}
-      },
-      {
-        "myImagePath": "src/resources/cow.png",
-        "myImageSize": 50.0,
-        "myValidTerrains": [
-          "grass"
-        ],
-        "myPosition": {
-          "myX": 125.0,
-          "myY": 275.0,
-          "myZ": 0.0
-        },
-        "myHeading": 0.0,
-        "myRouter": {}
-      }
-    ]
-  },
-  "myBountySystem": {
-    "myComponents": []
-  },
-  "mySpawningSystem": {
-    "myComponents": [
-      {
-        "myTimeBetweenSpawns": 100,
-        "mySpawnName": "projectile",
-        "myTimeSinceSpawning": 0,
-        "myChildren": [],
-        "myRouter": {}
-      },
-      {
-        "myTimeBetweenSpawns": 100,
-        "mySpawnName": "projectile",
-        "myTimeSinceSpawning": 0,
-        "myChildren": [],
-        "myRouter": {}
-      }
-    ]
-  },
-  "myTargetingSystem": {
-    "myComponents": [
-      {
-        "mySightRange": 400.0,
-        "mySightWidth": 360.0,
-        "myTargetsEnemies": true,
-        "myRouter": {}
-      },
-      {
-        "mySightRange": 400.0,
-        "mySightWidth": 360.0,
-        "myTargetsEnemies": true,
-        "myRouter": {}
-      }
-    ]
-  },
-  "myTeamSystem": {
-    "myComponents": [
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "them",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "us",
-        "myRouter": {}
-      },
-      {
-        "myTeamID": "us",
-        "myRouter": {}
-      }
-    ]
-  },
-  "myControllableSystem": {
-    "myComponents": []
+        {
+          "myTeamID": "us",
+          "myRouter": {}
+        }
+      ]
+    },
+    "myControllableSystem": {
+      "myComponents": []
+    }
   },
   "myEntityManager": {
     "myEntityMap": {
-      "3e36220b-6546-4f5c-9623-69b8fd9e8fcb": {
-        "myID": "3e36220b-6546-4f5c-9623-69b8fd9e8fcb"
+      "3e7065f4-6545-4d54-94f0-dbe2fe3e1147": {
+        "myID": "3e7065f4-6545-4d54-94f0-dbe2fe3e1147"
       },
-      "5d1b899f-eb8e-48de-b60a-f3dda0201e30": {
-        "myID": "5d1b899f-eb8e-48de-b60a-f3dda0201e30"
+      "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e": {
+        "myID": "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e"
       },
-      "ee6a8a06-0d51-41c2-9a7d-2ebbaa7f4cff": {
-        "myID": "ee6a8a06-0d51-41c2-9a7d-2ebbaa7f4cff"
+      "82b22738-f997-4ba0-872d-25b57bd52024": {
+        "myID": "82b22738-f997-4ba0-872d-25b57bd52024"
       },
-      "7dcc8d92-6b3f-4e6d-ac9b-c062bba80167": {
-        "myID": "7dcc8d92-6b3f-4e6d-ac9b-c062bba80167"
+      "9b520016-d903-4f8e-a269-dd286b7527bb": {
+        "myID": "9b520016-d903-4f8e-a269-dd286b7527bb"
       },
-      "f5043771-c197-4419-b4b3-c4d3a565d601": {
-        "myID": "f5043771-c197-4419-b4b3-c4d3a565d601"
+      "f24d6bb1-166e-480e-96d4-cd2a5210af3d": {
+        "myID": "f24d6bb1-166e-480e-96d4-cd2a5210af3d"
       },
-      "15b20daa-3240-4293-bcd7-37f8fff043cb": {
-        "myID": "15b20daa-3240-4293-bcd7-37f8fff043cb"
+      "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a": {
+        "myID": "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a"
       },
-      "d64f304e-ff86-4a8b-a0f2-cdde75e3c279": {
-        "myID": "d64f304e-ff86-4a8b-a0f2-cdde75e3c279"
+      "5f398b11-e8fc-4885-8d3b-8d0367c83ef9": {
+        "myID": "5f398b11-e8fc-4885-8d3b-8d0367c83ef9"
       },
-      "1d6eec89-629b-4495-bb84-c919757b463d": {
-        "myID": "1d6eec89-629b-4495-bb84-c919757b463d"
+      "6723c639-d42c-4f6f-8699-bf4474a3933a": {
+        "myID": "6723c639-d42c-4f6f-8699-bf4474a3933a"
       },
-      "9ea111fd-9f55-477f-a51f-8c1e6c7c88b9": {
-        "myID": "9ea111fd-9f55-477f-a51f-8c1e6c7c88b9"
+      "6014797e-3cec-4e10-b353-7b275da148c2": {
+        "myID": "6014797e-3cec-4e10-b353-7b275da148c2"
       },
-      "8b8b8d9a-ab77-4d85-9861-1b26ec4e1351": {
-        "myID": "8b8b8d9a-ab77-4d85-9861-1b26ec4e1351"
+      "8b94969f-be65-4117-a597-8ffe594232c1": {
+        "myID": "8b94969f-be65-4117-a597-8ffe594232c1"
       },
-      "e9c72066-124a-433a-b66a-63f1fd798fdf": {
-        "myID": "e9c72066-124a-433a-b66a-63f1fd798fdf"
+      "23e33e7f-dffd-4da7-93f8-df5d788a9b6f": {
+        "myID": "23e33e7f-dffd-4da7-93f8-df5d788a9b6f"
       },
-      "db17cb43-ae95-4e7d-ac88-d522d6ebc029": {
-        "myID": "db17cb43-ae95-4e7d-ac88-d522d6ebc029"
+      "724fb125-674c-4299-955a-57c11ccea61e": {
+        "myID": "724fb125-674c-4299-955a-57c11ccea61e"
+      },
+      "e2584056-1cf7-437d-83f3-fa0463dafc7d": {
+        "myID": "e2584056-1cf7-437d-83f3-fa0463dafc7d"
+      },
+      "d17b4aee-3c9b-47bb-86ba-c566e4603ec5": {
+        "myID": "d17b4aee-3c9b-47bb-86ba-c566e4603ec5"
+      },
+      "f2ee1f4a-1b92-4d88-8869-6fffdd03678d": {
+        "myID": "f2ee1f4a-1b92-4d88-8869-6fffdd03678d"
       }
     }
   }
