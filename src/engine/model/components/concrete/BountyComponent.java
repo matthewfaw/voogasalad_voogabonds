@@ -9,6 +9,7 @@ import engine.IObserver;
 
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableBounty;
+import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import gamePlayerView.gamePlayerView.Router;
 
@@ -32,9 +33,8 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	@Hide
 	private BountySystem myBountySystem;
 	
-	public BountyComponent (BountySystem bountySystem, ComponentData data, Router router) {
-		super(router);
-		
+	public BountyComponent(IEntity aEntity, BountySystem bountySystem, ComponentData data, Router router) {
+		super(aEntity, router);
 		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
 		myLivesToDestroy = Integer.parseInt(data.getFields().get("myLivesToDestroy"));
 		myPointValue = Integer.parseInt(data.getFields().get("myPointValue"));
@@ -83,10 +83,6 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	@Override
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
-	}
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
 	}
 
 	public void delete() {

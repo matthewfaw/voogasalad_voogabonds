@@ -9,6 +9,7 @@ import engine.IObserver;
 import engine.model.collision_detection.ICollidable;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableCollidable;
+import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
@@ -29,16 +30,16 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private double myCollisionRadius;
 	
 	@Hide
-	private PhysicalSystem myPhysicalSystem;
+	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
-	private DamageDealingSystem myDamageDealingSystem;
+	private transient DamageDealingSystem myDamageDealingSystem;
 	@Hide
-	private CollisionDetectionSystem myCollidable;
+	private transient CollisionDetectionSystem myCollidable;
 	
 	@Hide
 	private List<IObserver<IViewableCollidable>> myObservers;
 	
-	public CollidableComponent (
+	public CollidableComponent(IEntity aEntity,
 			CollisionDetectionSystem collisionDetectionSystem, 
 			PhysicalSystem physicalSystem,
 			HealthSystem healthSystem,
@@ -46,7 +47,7 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 			BountySystem rewardSystem,
 			ComponentData data,
 			Router router) {
-		super(router);
+		super(aEntity, router);
 		myObservers = new ArrayList<IObserver<IViewableCollidable>>();
 		myCollidable = collisionDetectionSystem;
 		myPhysicalSystem = physicalSystem;
@@ -125,10 +126,5 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	@Override
 	public void delete() {
 		myCollidable.detachComponent(this);
-	}
-
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
 	}
 }

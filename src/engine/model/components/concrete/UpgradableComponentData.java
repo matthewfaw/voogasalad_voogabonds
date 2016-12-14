@@ -5,14 +5,15 @@ import java.util.Map;
 
 import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
+import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.Router;
 
 public class UpgradableComponentData extends AbstractComponent {
 	private Map<String, Integer> myUpgradesMap;
 	
-	public UpgradableComponentData(ComponentData componentData, Router aRouter)
+	public UpgradableComponentData(IEntity aEntity, ComponentData componentData, Router aRouter)
 	{
-		super(aRouter);
+		super(aEntity, aRouter);
 		myUpgradesMap = new HashMap<String, Integer>();
 	}
 	

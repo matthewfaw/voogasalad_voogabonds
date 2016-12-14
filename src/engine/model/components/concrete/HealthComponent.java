@@ -10,6 +10,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableHealth;
+import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -30,24 +31,25 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
-	private BountySystem myBounty;
+	private transient BountySystem myBounty;
 	@Hide
-	private DamageDealingSystem myDamage;
+	private transient DamageDealingSystem myDamage;
 	@Hide
-	private HealthSystem myHealthSystem;
+	private transient HealthSystem myHealthSystem;
+
 	@Hide
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private boolean explodeOnDeath;
 	
 	@Hide
-	private List<IObserver<IViewableHealth>> myObservers;
+	private transient List<IObserver<IViewableHealth>> myObservers;
 	
 	@Hide
 	private Router myRouter;
 	
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
-		super(router);
+	public HealthComponent(IEntity aEntity, HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
+		super(aEntity, router);
 		myHealthSystem = healthSystem;
 		
 		myBounty = bounty;
@@ -131,11 +133,6 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		getRouter().distributeViewableComponent(this);
 	}
 	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
-
 	public void delete() {
 		myHealthSystem.detachComponent(this);
 		myObservers.forEach(observer -> observer.remove(this));

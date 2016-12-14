@@ -2,13 +2,14 @@ package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
+import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.Router;
 
 public class PurchasableComponentData extends AbstractComponent {
 	private int myPurchaseValue;
 	
-	public PurchasableComponentData(ComponentData componentData, Router aRouter) {
-		super(aRouter);
+	public PurchasableComponentData(IEntity aEntity, ComponentData componentData, Router aRouter) {
+		super(aEntity, aRouter);
 		myPurchaseValue = Integer.parseInt(componentData.getFields().get("myPurchaseValue"));
 	}
 	
