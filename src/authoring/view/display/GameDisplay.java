@@ -131,40 +131,15 @@ public class GameDisplay {
 	
 	private void makeSinkPoint(int row, int col, Point currentPoint, TerrainCell  cell) {
 		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
-		cell.setWidth(tileSize*0.9);
-		cell.setHeight(tileSize*0.9);
 		cell.setStrokeWidth(tileSize*0.1);
-		int index = usefulSinkPoints.indexOf(currentPoint);
-		try {
-			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
-		} catch (Exception e) {
-			Image image = new Image(usefulTerrainFills.get(index));
-			ImagePattern pattern = new ImagePattern(image);
-			cell.setFill(pattern);
-		}
 	}
 	
 	private void makeSpawnPoint(int row, int col, Point currentPoint, TerrainCell cell) {
 		cell.setStroke(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
-		cell.setWidth(tileSize*0.9);
-		cell.setHeight(tileSize*0.9);
 		cell.setStrokeWidth(tileSize*0.1);
-		int index = usefulSpawnPoints.indexOf(currentPoint);
-		try {
-			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
-		} catch (Exception e) {
-			Image image = new Image(usefulTerrainFills.get(index));
-			ImagePattern pattern = new ImagePattern(image);
-			cell.setFill(pattern);
-		}
-//		for (String name: spawnNames) {
-//			if (spawnPoints.get(name).equals(o))
-//		}
 	}
 	
 	private void makeTerrainPoint(int row, int col, Point currentPoint, TerrainCell cell) {
-		cell.setWidth(tileSize);
-		cell.setHeight(tileSize);
 		int index = usefulTerrainPoints.indexOf(currentPoint);
 		try {
 			cell.setFill(Paint.valueOf(usefulTerrainFills.get(index)));
@@ -184,14 +159,36 @@ public class GameDisplay {
 			for (int col = 0; col < columns; col++) {
 				TerrainCell cell = new TerrainCell(mapData, toolBar, r, col, this);
 				Point currentPoint = new Point((double)col, (double)r);
-				if (usefulSinkPoints.contains(currentPoint)) {
-					makeSinkPoint(r, col, currentPoint, cell);
-				}
-				if (usefulSpawnPoints.contains(currentPoint)) {
-					makeSpawnPoint(r, col, currentPoint, cell);
-				}
 				if (usefulTerrainPoints.contains(currentPoint)) {
-					makeTerrainPoint(r, col, currentPoint, cell);
+					if (usefulSinkPoints.contains(currentPoint)) {
+						makeSinkPoint(r, col, currentPoint, cell);
+						makeTerrainPoint(r, col, currentPoint, cell);
+						cell.setWidth(tileSize*0.9);
+						cell.setHeight(tileSize*0.9);
+					}
+					else if (usefulSpawnPoints.contains(currentPoint)) {
+						makeSpawnPoint(r, col, currentPoint, cell);
+						makeTerrainPoint(r, col, currentPoint, cell);
+						cell.setWidth(tileSize*0.9);
+						cell.setHeight(tileSize*0.9);
+					}
+					else {
+						makeTerrainPoint(r, col, currentPoint, cell);
+						cell.setWidth(tileSize);
+						cell.setHeight(tileSize);
+					}
+				}
+				else if (usefulSinkPoints.contains(currentPoint)) {
+					makeSinkPoint(r, col, currentPoint, cell);
+					cell.setWidth(tileSize*0.9);
+					cell.setHeight(tileSize*0.9);
+					cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
+				}
+				else if (usefulSpawnPoints.contains(currentPoint)) {
+					makeSpawnPoint(r, col, currentPoint, cell);
+					cell.setWidth(tileSize*0.9);
+					cell.setHeight(tileSize*0.9);
+					cell.setFill(Paint.valueOf(myResources.getString("DefaultCellColor")));
 				}
 				else {
 					cell.setWidth(tileSize);
@@ -206,24 +203,47 @@ public class GameDisplay {
 	private void dragHandler() {
 		ObservableList <Node> entries = terrainGrid.getChildren();
 		for (Node elem : entries){
+			
 		    elem.setOnDragDetected(new EventHandler<MouseEvent>() {
 		        @Override public void handle(MouseEvent e) {
 		            Dragboard db = elem.startDragAndDrop(TransferMode.ANY);
 		            ClipboardContent cb = new ClipboardContent();
 		            cb.put(DataFormat.PLAIN_TEXT, "");
 		            db.setContent(cb);
-		            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		            dragHandlerData(elem);
 		        }
 		    });
 		    elem.setOnDragOver(new EventHandler<DragEvent>() {
 		        @Override public void handle(DragEvent e) {
 		            e.acceptTransferModes(TransferMode.ANY);
-		            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		            dragHandlerData(elem);
 		        }
 		    });
 		}
 	}
 	
+	private void dragHandlerData(Node elem) {
+		TerrainCell convertedElem = (TerrainCell) elem;
+		 if (toolBar.getImageStatus()) {
+         	Image image = new Image(toolBar.getSelectedImagePath());
+ 			ImagePattern pattern = new ImagePattern(image);
+         	((TerrainCell)elem).setFill(pattern);
+         	
+         	String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+				String relPath = "";
+				if (toolBar.getImageStatus() && splitPath.length > 1) {
+					relPath += splitPath[1] + "/";
+					System.out.println("THISISTHERELATIVEPATH: " + relPath);
+				}
+         	mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), relPath));
+				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
+         }
+         else {
+	            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+	            mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), toolBar.getSelectedColor().toString()));
+				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
+         }
+	}
 	
 	public void setCols(int numCols) {
 		columns = numCols;

@@ -2,7 +2,6 @@ package engine.model.systems;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import engine.model.components.IComponent;
 import engine.model.components.concrete.CreatorComponent;
 import engine.model.components.concrete.MoveableComponent;
@@ -34,6 +33,10 @@ public class TargetingSystem implements ISystem<TargetingComponent> {
 			return t.getTarget();
 		return c.getTarget();
 	}
+	
+	public boolean canTarget(IComponent c) {
+		return getComponent(c) != null;
+	}
 
 	public ITargetingStrategy newStrategy(String name) {
 		return myStrategyFactory.newStrategy(name);
@@ -45,7 +48,7 @@ public class TargetingSystem implements ISystem<TargetingComponent> {
 	}
 	@Override
 	public TargetingComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public TargetingComponent getComponent(IEntity entity) {

@@ -4,7 +4,8 @@ import utility.Point;
 
 public interface IMovable {
 	
-	abstract public Point getGoal();
+	abstract public Point getGoalPoint();
+	abstract public IPosition getGoal();
 	abstract public double getTurnSpeed();
 	abstract public double getMoveSpeed();
 	
