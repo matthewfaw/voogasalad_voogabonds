@@ -212,13 +212,27 @@ public class GameDisplay {
 		            ClipboardContent cb = new ClipboardContent();
 		            cb.put(DataFormat.PLAIN_TEXT, "");
 		            db.setContent(cb);
-		            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		            if (toolBar.getImageStatus()) {
+		            	Image image = new Image(toolBar.getSelectedImagePath());
+		    			ImagePattern pattern = new ImagePattern(image);
+		            	((TerrainCell)elem).setFill(pattern);
+		            }
+		            else {
+			            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		            }
 		        }
 		    });
 		    elem.setOnDragOver(new EventHandler<DragEvent>() {
 		        @Override public void handle(DragEvent e) {
 		            e.acceptTransferModes(TransferMode.ANY);
-		            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		            if (toolBar.getImageStatus()) {
+		            	Image image = new Image(toolBar.getSelectedImagePath());
+		    			ImagePattern pattern = new ImagePattern(image);
+		            	((TerrainCell)elem).setFill(pattern);
+		            }
+		            else {
+			            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		            }
 		        }
 		    });
 		}
