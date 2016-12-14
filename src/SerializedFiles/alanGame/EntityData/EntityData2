@@ -12,7 +12,7 @@
         "myImageSize": "10",
         "myValidTerrains": "grass, water",
         "myHeading": "0",
-        "myImagePath": "src/resources/cookie.png"
+        "myImagePath": "resources/cookie.png"
       },
       "myComponentName": "PhysicalComponent"
     },
@@ -20,7 +20,7 @@
       "myFields": {
         "removeOnGoal": "true",
         "explodesOnGoal": "true",
-        "myMaxDistance": "300",
+        "myMaxDistance": "600",
         "explodesAtMaxDistance": "true",
         "myMoveSpeed": "5",
         "myTurnSpeed": "45",

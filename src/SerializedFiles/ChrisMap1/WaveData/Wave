@@ -1,6 +1,6 @@
 {
   "name": "Wave",
-  "waveEntity": "Tank",
+  "waveEntity": "Car",
   "timeBetweenEnemy": 1.0,
   "timeUntilNextWave": 100.0,
   "numEnemies": 20,

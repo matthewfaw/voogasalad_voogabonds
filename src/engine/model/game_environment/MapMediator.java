@@ -104,7 +104,7 @@ public class MapMediator {
 		}
 		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoalPoint());
 		
-		PathManager pathManager = new PathManager(shortestPath);
+		PathManager pathManager = new PathManager(shortestPath, movement.getGoalPoint());
 		return pathManager;
 	}
 	

@@ -6,7 +6,6 @@ import engine.IObservable;
 
 import engine.IObserver;
 import engine.controller.ApplicationController;
-import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
