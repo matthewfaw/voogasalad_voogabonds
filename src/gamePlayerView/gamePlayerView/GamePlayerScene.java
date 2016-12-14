@@ -22,6 +22,7 @@ import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
 import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
+import gamePlayerView.GUIPieces.player_info.PlayerInfoBox;
 import gamePlayerView.ScenePanes.BottomPane;
 import gamePlayerView.ScenePanes.IViewPane;
 import gamePlayerView.ScenePanes.LeftPane;
@@ -67,7 +68,7 @@ public class GamePlayerScene {
 	private List<IResourceAcceptor> myResources;
 	private List<IEnemiesKilledAcceptor> myEnemiesKilled;
 	private BorderPane myBorderPane;
-	private DisplayBoxFactory myBoxFactory;
+	private DisplayBoxFactory myDisplayBoxFactory;
 	private ResourceBundle myResourceBundle;
 	private EntityInfoBoxBuilder myBuilder;
 	private ApplicationController myAppController;
@@ -83,7 +84,7 @@ public class GamePlayerScene {
 		myResources = new ArrayList<IResourceAcceptor>();
 		myStage=aStage;
 		myStage.setResizable(false);
-		myBoxFactory=new DisplayBoxFactory();
+		myDisplayBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
 		myBuilder=new EntityInfoBoxBuilder(this, myAppController);
@@ -131,7 +132,7 @@ public class GamePlayerScene {
 	
 	public void createBottomPane() {
 			
-		}
+	}
 	
 	public void createRightPane() {
 		
@@ -143,14 +144,15 @@ public class GamePlayerScene {
 		IGUIPiece gamePlayOptions = new GamePlayOptions(myAppController);
 		
 		// Player info
+		IGUIPiece playerInfoBox = new PlayerInfoBox(myResourceBundle, myDisplayBoxFactory);
 		
 		myLeftPane.add(gamePlayOptions.getNode());
-//		myLeftPane.add(playerInfo);
+		myLeftPane.add(playerInfoBox.getNode());
 		
 //		LeftPane pane=new LeftPane();
 //		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
-//		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
-//		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
+//		InfoBox myWallet=myDisplayBoxFactory.createBox(myResourceBundle.getString("Cash"));
+//		InfoBox myLife=myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
 //		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
 //		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
 //		Collection<Node> myCollection=new ArrayList<Node>();
@@ -276,8 +278,8 @@ public class GamePlayerScene {
 //	private LeftPane createLeftPane() {
 //		LeftPane pane=new LeftPane();
 //		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
-//		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
-//		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
+//		InfoBox myWallet=myDisplayBoxFactory.createBox(myResourceBundle.getString("Cash"));
+//		InfoBox myLife=myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
 //		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER
 //		myLives.add((IPlayerAcceptor) myLife);//// FIX LATER
 //		Collection<Node> myCollection=new ArrayList<Node>();
