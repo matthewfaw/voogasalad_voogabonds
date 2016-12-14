@@ -1,0 +1,10 @@
+{
+  "myName": "Entity",
+  "myComponents": {
+    "BountyComponent": {
+      "myFields": {
+        "myBountyValue": ""
+      }
+    }
+  }
+}
