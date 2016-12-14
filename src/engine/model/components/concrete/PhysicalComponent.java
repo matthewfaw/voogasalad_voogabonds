@@ -139,9 +139,4 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myPosition = null;
 		myObservers.forEach(observer -> observer.remove(this));
 	}
-	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
 }

@@ -173,11 +173,6 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	}
 
 	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
-	
-	@Override
 	public void delete() {
 		myMovement.detachComponent(this);
 	}

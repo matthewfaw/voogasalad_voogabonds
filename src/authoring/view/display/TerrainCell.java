@@ -135,14 +135,12 @@ public class TerrainCell extends Rectangle {
 					}
 				}
 				else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-					System.out.println("GO");
 					if (getStroke().equals(Color.valueOf(myResources.getString("DefaultSpawnColor")))) {
 						controller.removeSpawnPoints(cellName);
 						setStrokeWidth(0);
 						setStroke(Paint.valueOf("White"));
 						setWidth(gameDisplay.getTileSize());
 						setHeight(gameDisplay.getTileSize());
-						System.out.println("AWAY");
 					}
 					else if (getStroke().equals(Color.valueOf(myResources.getString("DefaultSinkColor")))) {
 						controller.removeSinkPoint(cellName);
@@ -150,7 +148,6 @@ public class TerrainCell extends Rectangle {
 						setStroke(Paint.valueOf("White"));
 						setWidth(gameDisplay.getTileSize());
 						setHeight(gameDisplay.getTileSize());
-						System.out.println("PLEASE");
 					}
 				}
 			}
@@ -269,7 +266,8 @@ public class TerrainCell extends Rectangle {
 			if (toolBar.getImageStatus()) {
 				String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 				relPath = "";
-				relPath += splitPath[1]+"/";
+				if (splitPath.length > 1)
+					relPath += splitPath[1]+"/";
 				System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				controller.addValidTerrain(terrainType, relPath);
 			}

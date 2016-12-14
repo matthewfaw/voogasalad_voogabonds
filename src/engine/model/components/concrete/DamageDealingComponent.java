@@ -178,9 +178,4 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	public void delete() {
 		myDamageSystem.detachComponent(this);
 	}
-
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
 }

@@ -84,10 +84,6 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	public void notifyObservers() {
 		myObservers.forEach(observer -> observer.update(this));
 	}
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
 
 	public void delete() {
 		myBountySystem.detachComponent(this);

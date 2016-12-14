@@ -78,7 +78,6 @@ public class EntityFactory {
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
 
-
 		return entity;
 	}
 	

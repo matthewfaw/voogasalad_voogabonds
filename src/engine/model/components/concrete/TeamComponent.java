@@ -66,10 +66,4 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam {
 	public void delete() {
 		mySystem.detachComponent(this);
 	}
-	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
-
 }

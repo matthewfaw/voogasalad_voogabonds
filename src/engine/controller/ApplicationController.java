@@ -52,6 +52,7 @@ public class ApplicationController {
 		//GamePlayerScene scene = constructGUI(aStage);
 		myScene=constructGUI(aStage);
 		Router router = new Router(myScene);
+		myEntityManager = new EntityManager();
 		constructBackend(router,gameTitle);
 	}
 	/**
@@ -77,7 +78,7 @@ public class ApplicationController {
 	private void constructBackend(Router aRouter, String gameTitle)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(GAME_FOLDER + gameTitle, aRouter);
+		myBackendController = new BackendController(GAME_FOLDER + gameTitle, aRouter, myEntityManager);
 	}
 	/*
 	private BorderPane constructBorderPane(){
@@ -167,6 +168,7 @@ public class ApplicationController {
 	public void onEntityClicked(String entityID) {
 		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
 		for (IComponent component: clickedEntity.getComponents()) {
+			System.out.println("Trying to distribute info");
 			component.distributeInfo();
 		}
 		myScene.buildEntityInfoBox();

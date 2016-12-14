@@ -87,7 +87,7 @@ public class BackendController {
 	
 	private transient ResourceBundle myResources;
 	
-	public BackendController(String aGameDataPath, Router aRouter)
+	public BackendController(String aGameDataPath, Router aRouter, EntityManager entityManager)
 	{
 		myRouter = aRouter;
 		myGameDataRelativePaths = ResourceBundle.getBundle(GAME_DATA_PATH);
@@ -97,8 +97,8 @@ public class BackendController {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
-		
-		myEntityManager = new EntityManager();
+
+		myEntityManager = entityManager;
 		
 		//Must construct static before dynamic.
 		constructStaticBackendObjects();

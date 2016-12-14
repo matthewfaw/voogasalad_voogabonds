@@ -274,6 +274,7 @@ public class GridToolBar {
 					ToggleButton imageMode = new ToggleButton(myResources.getString("ImageMode"));
 					imageMode.setToggleGroup(toggles);
 					imageMode.setId("button");
+					imageStatus = false;
 					fillImageHandler(toggles, imageMode, terrainName);
 					Button confirmTerrain = new Button(myResources.getString("ApplyChanges"));
 					confirmTerrain.setId("button");
