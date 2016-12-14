@@ -15,9 +15,11 @@ abstract public class AbstractLoseStrategy<A> extends AbstractWinLoseStrategy<A>
 
 	@Override
 	public void update(A observed) {
-		if (checkCondition(observed))
-			for (IModifiablePlayer p: myPlayers)
-				p.lose();
+		if (checkCondition(observed)) {
+			for (int i = 0 ; i < myPlayers.size(); i++) {
+				myPlayers.get(i).lose();
+			}
+		}
 	}
 
 	abstract protected boolean checkCondition(A observed);
