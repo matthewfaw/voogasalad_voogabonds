@@ -48,6 +48,8 @@ public class GamePlayerScene {
 	private static final String GAME_PLAYER_PATH = "resources/textfiles";
 	private Stage myStage;
 	private IViewPane myBottomPane;
+
+
 	private IViewPane myLeftPane;
 	private IViewPane myRightPane;
 	private IViewPane myTopPane;
@@ -232,7 +234,10 @@ public class GamePlayerScene {
 		myBottomPane.add(myCollection);
 		myBorderPane.setBottom(myBottomPane.getNode());
 	}
-
+	
+	public IViewPane getMyBottomPane() {
+		return myBottomPane;
+	}
 
 
 //	private void createPanes() {
