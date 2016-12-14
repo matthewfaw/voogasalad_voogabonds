@@ -50,7 +50,7 @@ public class PhysicalSystem implements ISystem<PhysicalComponent> {
 	}
 	@Override
 	public PhysicalComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public PhysicalComponent getComponent(IEntity entity) {

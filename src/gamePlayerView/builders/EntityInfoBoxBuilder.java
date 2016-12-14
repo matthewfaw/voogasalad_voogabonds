@@ -45,7 +45,7 @@ public class EntityInfoBoxBuilder {
 			//null check before constructing
 			//add upgrade button to  the info box
 			myMachineInfo = new MachineInfo(aComponent);
-			myEntityInfoBox.getChildren().add(getMyMachineInfo().getView());
+			myEntityInfoBox.getChildren().add(getMyMachineInfo().getNode());
 			return this;
 		}
 		
@@ -55,42 +55,38 @@ public class EntityInfoBoxBuilder {
 			//null check before constructing
 			//add upgrade button to  the info box
 			myTargetingButtons = new TargetingButtons(myAppController);
-			myEntityInfoBox.getChildren().add(myTargetingButtons.getView());
+			myEntityInfoBox.getChildren().add(myTargetingButtons.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withHealthBox(IViewableHealth aComponent) {
-			System.out.println("Building a health box");
-			this.myHealthBox=new HealthBox();
-			myEntityInfoBox.getChildren().add(myHealthBox.getView());
+			this.myHealthBox = new HealthBox();
+			myEntityInfoBox.getChildren().add(myHealthBox.getNode());
+
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withBountyBox(IViewableBounty aComponent) {
-			System.out.println("Building a bounty box");
-			this.myBountyBox=new BountyBox();
-			myEntityInfoBox.getChildren().add(myBountyBox.getView());
+			myBountyBox = new BountyBox();
+			myEntityInfoBox.getChildren().add(myBountyBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withDamageBox(IViewableDamageDealer aComponent) {
-			System.out.println("Building a damage box");
-			this.myDamageBox=new DamageBox();
-			myEntityInfoBox.getChildren().add(myDamageBox.getView());
+			myDamageBox = new DamageBox();
+			myEntityInfoBox.getChildren().add(myDamageBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withUpgrade(IViewableUpgrade aComponent) {
-			System.out.println("Building a upgrade box");
-			this.myUpgradeUI=new UpgradeUI(aComponent);
-			myEntityInfoBox.getChildren().add(myUpgradeUI.getView());
+			myUpgradeUI = new UpgradeUI(aComponent);
+			myEntityInfoBox.getChildren().add(myUpgradeUI.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withSell(IViewableSell aComponent) {
-			System.out.println("Building a sell box");
-			this.mySellUI=new SellUI(myAppController);
-			myEntityInfoBox.getChildren().add(mySellUI.getView());
+			mySellUI = new SellUI(myAppController);
+			myEntityInfoBox.getChildren().add(mySellUI.getNode());
 			return this;
 		}
 		

@@ -30,7 +30,6 @@ public class AuthoringTab extends Tab {
 	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private HBox authorOptions;
 	private MainInitializer initializer;
-	private Router router;
 
 	public AuthoringTab(TabPane mainMenuTab, MainInitializer init) {
 		setUpScreenResolution();
@@ -40,7 +39,6 @@ public class AuthoringTab extends Tab {
 		this.authorOptions = new HBox(3);
 		authorOptions.setId("background");
 		this.initializer = init;
-		this.router = new Router();
 		populateTab();
 		root.getTabs().add(authorTab);
 	}
@@ -85,11 +83,12 @@ public class AuthoringTab extends Tab {
 	}
 	
 	private void handleNewProject() throws IOException {
-		NewAuthoringScreen newScreen = new NewAuthoringScreen(router);
+		NewAuthoringScreen newScreen = new NewAuthoringScreen();
 	}
 	
 	private void handleOldProject() throws IOException {
-		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router, myResources.getString("LoadExistingAuthoringTitle"));
+		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(myResources.getString("LoadExistingAuthoringTitle"), 
+				myResources.getString("ExistingAuthoringFiles"));
 	}
 	
 	private void setUpScreenResolution() {

@@ -21,9 +21,9 @@ public class GreedyMovementStrategy extends AbstractMovementStrategy {
 		if (p.getPosition().equals(m.getGoal()))
 			return new Pair<Double, Point>(p.getHeading(), p.getPosition());
 
-		double newHeading = newHeadingTowards(m.getGoal(), m, p);
+		double newHeading = newHeadingTowards(m.getGoalPoint(), m, p);
 
-		double distance = Math.min(m.getMoveSpeed(), p.getPosition().euclideanDistance(m.getGoal()));
+		double distance = Math.min(m.getMoveSpeed(), p.getPosition().euclideanDistance(m.getGoalPoint()));
 		
 		return new Pair<Double, Point>(newHeading, p.getPosition().moveAlongHeading(distance, newHeading));
 	}

@@ -22,15 +22,15 @@ public class LoadAuthoringScreen extends AbstractLoadScreen {
 
 	private Router router;
 	
-	public LoadAuthoringScreen(Router r, String title) throws IOException {
-		super(title);
-		this.router = r;
+	public LoadAuthoringScreen(String title, String files) throws IOException {
+		super(title, files);
+		this.router = new Router();
 	}
 	
 	protected void start(String selectedGame){
 		GameStateLoader loader = new GameStateLoader();
 		router.clearContainers();
-		
+		router.setGameTitle(selectedGame);
 		loader.loadMapData(router, selectedGame);
 		loader.loadEntityData(router, selectedGame);
 		loader.loadLevelData(router, selectedGame);

@@ -1,5 +1,7 @@
 package gamePlayerView.GUIPieces.MapView;
 
+import java.io.File;
+
 import engine.IObservable;
 
 import engine.IObserver;
@@ -37,19 +39,22 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	@Override
 	public void update(IViewablePhysical aChangedObject) {
 		String imagePath = aChangedObject.getImagePath();
-		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
-		this.setImage(image);
-		this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
-		this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);
-		this.setFitWidth(aChangedObject.getSize());
-		this.setFitHeight(aChangedObject.getSize());
-		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
-		this.setRotate(aChangedObject.getHeading());
-		if (aChangedObject.getEntityID() != null && !hasEntityID){
-			setEntityID(aChangedObject.getEntityID());
-			System.out.println("Setting entity ID");
-			this.setOnMouseClicked(e -> myAppController.onEntityClicked(aChangedObject.getEntityID()));
-			hasEntityID = true;
+		if (imagePath != null) {
+			imagePath = imagePath.replace('\\', File.separatorChar);
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
+			this.setImage(image);
+			this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
+			this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);
+			this.setFitWidth(aChangedObject.getSize());
+			this.setFitHeight(aChangedObject.getSize());
+			//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
+			this.setRotate(aChangedObject.getHeading());
+			if (aChangedObject.getEntityID() != null && !hasEntityID){
+				setEntityID(aChangedObject.getEntityID());
+				System.out.println("Setting entity ID");
+				this.setOnMouseClicked(e -> myAppController.onEntityClicked(aChangedObject.getEntityID()));
+				hasEntityID = true;
+			}
 		}
 	}
 

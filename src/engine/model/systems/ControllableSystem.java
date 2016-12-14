@@ -39,7 +39,7 @@ public class ControllableSystem implements ISystem<ControllableComponent> {
 
 	@Override
 	public ControllableComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 
 	@Override

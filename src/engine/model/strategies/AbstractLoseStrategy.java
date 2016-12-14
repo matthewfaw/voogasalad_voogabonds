@@ -1,4 +1,4 @@
-package engine.model.strategies.winlose;
+package engine.model.strategies;
 
 import engine.IObservable;
 import engine.model.playerinfo.IModifiablePlayer;

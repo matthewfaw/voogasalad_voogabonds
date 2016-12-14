@@ -10,6 +10,7 @@ public class Router {
 	private PlayerDataContainer pldc = new PlayerDataContainer();
 	private LevelDataContainer ldc = new LevelDataContainer();
 	private WaveDataContainer wadc = new WaveDataContainer();
+	private String gameTitle;
 	
 	public void link(EntityTab e, LevelTab l, WaveTab w){
 		//Listeners for EntityTab
@@ -37,6 +38,7 @@ public class Router {
 		pldc = new PlayerDataContainer();
 		ldc = new LevelDataContainer();
 		wadc = new WaveDataContainer();
+		gameTitle = null;
 	}
 	
 	
@@ -58,5 +60,13 @@ public class Router {
 	
 	public EntityDataContainer getEntityDataContainer(){
 		return edc;
+	}
+	
+	public void setGameTitle(String title){
+		gameTitle = title;
+	}
+	
+	public String getGameTitle(){
+		return gameTitle;
 	}
 }

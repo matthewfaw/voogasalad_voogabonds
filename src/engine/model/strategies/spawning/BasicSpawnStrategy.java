@@ -9,7 +9,7 @@ import engine.model.strategies.ISpawningStrategy;
 import engine.model.strategies.factories.AbstractStrategyFactory;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
-import utility.ResouceAccess;
+ import utility.ResouceAccess;
 
 public class BasicSpawnStrategy implements ISpawningStrategy {
 	
@@ -25,6 +25,7 @@ public class BasicSpawnStrategy implements ISpawningStrategy {
 				ConcreteEntity spawn = myEntityFactory.constructEntity(creatorComponent.getSpawnName(), myPhysical.get(creatorComponent).getPosition());
 				if (myMovement.get(spawn) != null)
 					myMovement.get(spawn).setGoal(myTarget);
+				
 				return spawn;
 			} else 
 				return null;

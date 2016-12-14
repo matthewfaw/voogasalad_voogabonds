@@ -66,6 +66,8 @@ public class PlayerTab extends Tab {
 				try {
 					handleNewGame();
 				} catch (IOException e1) {
+					System.out.println("playerTab 69");
+					e1.printStackTrace();
 					ErrorBox.displayError(myResources.getString("NewPlayerError"));
 				}
 			}
@@ -81,6 +83,8 @@ public class PlayerTab extends Tab {
 				try {
 					handleOldGame();
 				} catch (IOException e){
+					System.out.println("playerTab 86");
+					e.printStackTrace();
 					ErrorBox.displayError(myResources.getString("NewPlayerError"));
 				}
 			}
@@ -89,11 +93,13 @@ public class PlayerTab extends Tab {
 	}
 	
 	private void handleNewGame() throws IOException {
-		NewGameScreen newGameScreen = new NewGameScreen(myResources.getString("PlayNewGame"));
+		NewGameScreen newGameScreen = new NewGameScreen(myResources.getString("PlayNewGame"), 
+				myResources.getString("ExistingAuthoringFiles"));
 	}
 	
 	private void handleOldGame() throws IOException {
-		LoadGameScreen loadGameScreen = new LoadGameScreen(myResources.getString("PlayOldGame"));
+		LoadGameScreen loadGameScreen = new LoadGameScreen(myResources.getString("PlayOldGame"),
+				myResources.getString("ExistingSavedGames"));
 	}
 	
 	private void setUpScreenResolution() {
