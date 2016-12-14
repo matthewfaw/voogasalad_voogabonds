@@ -5,7 +5,6 @@ import java.util.List;
 
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
-import authoring.model.TowerData;
 import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
@@ -60,6 +59,12 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	@Override
 	public void updateAvailableMoney(int deltaValue) {
 		myMoney.updateValue(deltaValue);
+		notifyObservers();
+	}
+	
+	@Override
+	public void updatePoints(int deltaPoints) {
+		myMoney.updateValue(deltaPoints);
 		notifyObservers();
 	}
 	
