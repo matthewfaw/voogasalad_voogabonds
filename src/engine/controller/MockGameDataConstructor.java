@@ -70,7 +70,7 @@ public class MockGameDataConstructor {
 		JSONDeserializer derp = new JSONDeserializer(); 
 		
 //		TowerData data = (TowerData)derp.DeserializeFromFile("towers/ActualTower", TowerData.class);
-//		System.out.println(data.getBuyPrice());
+//		//System.out.println(data.getBuyPrice());
 
 		JSONSerializer ser = new JSONSerializer();
 		

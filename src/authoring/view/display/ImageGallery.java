@@ -91,10 +91,10 @@ public class ImageGallery {
 					selectedImagePath = imagePane.getSelectionModel().getSelectedItem().getImagePath();
 					toolBar.setSelectedImagePath(selectedImagePath);
 					terrainStage.close();
-					System.out.println("HELLO1");
+					//System.out.println("HELLO1");
 				} catch (Exception e1) {
 					//TODO: ImageSplitter stuff
-					System.out.println("HELLO2");
+					//System.out.println("HELLO2");
 					terrainStage.close();
 				}
 			}

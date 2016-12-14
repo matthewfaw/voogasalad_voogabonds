@@ -68,7 +68,7 @@ public class MapGrid extends Node {
     		public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 //				TowerData data = myTowerColumn.getTowerData(db.getString());
-//				System.out.println(data.getBuyPrice());
+//				//System.out.println(data.getBuyPrice());
 				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX() + myCellSize / 2, closestRectangle.getY() + myCellSize / 2));
 				setClickAction();
@@ -115,7 +115,7 @@ public class MapGrid extends Node {
     	aObservable.attach(aComponent);
     	mySprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
-    	System.out.println("Add a physical to the pane.");
+    	//System.out.println("Add a physical to the pane.");
     }
     
     

@@ -16,7 +16,7 @@ public class EntityListView {
     
     public EntityListView(EntityData entityData) {
         if (entityData == null) {
-            System.out.println("EntityData is null");
+            //System.out.println("EntityData is null");
         }
         myName = entityData.getName();
         myImagePath = getImagePath(entityData);

@@ -81,11 +81,11 @@ public class EditEntityBox extends VBox implements ISubmittable{
 
     private void tryAddNewEntity(EntityData entity) {
         if (myTab.addEntity(entity)) {
-            //System.out.println("Added Entity");
+            ////System.out.println("Added Entity");
             for (String component : entity.getComponents().keySet()) {
                 myComponentData.put(component, entity.getComponents().get(component));
             }
-            //System.out.println("Entity has "+myComponentData.size()+" Components");
+            ////System.out.println("Entity has "+myComponentData.size()+" Components");
             myTab.getTilePane().getChildren().remove(EditEntityBox.this); // this = reference of parent (i.e., this EditEntityBox class)
         }
     }
@@ -101,7 +101,7 @@ public class EditEntityBox extends VBox implements ISubmittable{
         EntityData entity = new EntityData();
         entity.setName(nameField.getCharacters().toString());
         for (String component : myComponentsView.getItems()) {
-            //System.out.println(component+" component created: "+myComponentData.get(component));
+            ////System.out.println(component+" component created: "+myComponentData.get(component));
             entity.addComponent(component, myComponentData.get(component));
         }
         return entity;
@@ -254,13 +254,13 @@ public class EditEntityBox extends VBox implements ISubmittable{
             public void handle(MouseEvent event) {
                 String selectedAttribute = myComponentsView.getSelectionModel().getSelectedItem();
                 if (event.getClickCount() == 2 && selectedAttribute!=null) {
-                    //System.out.println("Double Click: "+selectedAttribute);
+                    ////System.out.println("Double Click: "+selectedAttribute);
                     EditComponentBox editComponent;
                     if (myComponentData.containsKey(selectedAttribute)) {
-                        //System.out.println("Entity contains this key! (edit)");
+                        ////System.out.println("Entity contains this key! (edit)");
                         editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, selectedAttribute, myComponentData.get(selectedAttribute));
                     } else {
-                        //System.out.println("Entity does not contain this key yet! (new)");
+                        ////System.out.println("Entity does not contain this key yet! (new)");
                         editComponent = new EditComponentBox(EditEntityBox.this, myTab, fetcher, selectedAttribute);
                     }
 

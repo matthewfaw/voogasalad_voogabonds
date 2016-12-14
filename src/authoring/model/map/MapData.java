@@ -65,7 +65,7 @@ public class MapData implements IReadableData {
 			throw new Exception("The map must be wider than 0 cells.");
 		}
 		this.numXCells = x;
-		System.out.println("Total XCells: " + this.numXCells);
+		//System.out.println("Total XCells: " + this.numXCells);
 	}
 	public int getNumXCells(){
 		return numXCells;
@@ -87,7 +87,7 @@ public class MapData implements IReadableData {
 			throw new Exception("The map must be taller than 0 cells.");
 		}
 		this.numYCells = y;
-		System.out.println("Total YCells: " + this.numYCells);
+		//System.out.println("Total YCells: " + this.numYCells);
 	}
 	public int getNumYCells(){
 		return numYCells;
@@ -101,7 +101,7 @@ public class MapData implements IReadableData {
 			validatePoint(p, "spawn");
 		}
 		spawnPoints.put(name, newSpawnPoints);
-		System.out.println("Added Spawn Point " + name);
+		//System.out.println("Added Spawn Point " + name);
 	}
 	
 	public void addSpawnPointListener(MapChangeListener<String, ArrayList<Point>> listener){
@@ -111,7 +111,7 @@ public class MapData implements IReadableData {
 	public void removeSpawnPoints(String name){
 		if (spawnPoints.containsKey(name)){
 			spawnPoints.remove(name);
-			System.out.println("Removed Spawn Point " + name);
+			//System.out.println("Removed Spawn Point " + name);
 		}
 	}
 	
@@ -127,13 +127,13 @@ public class MapData implements IReadableData {
 			validatePoint(p, "sink");
 		}
 		sinkPoints.put(name, newSinkPoints);
-		System.out.println("Added Sink Point " + name);
+		//System.out.println("Added Sink Point " + name);
 	}
 	
 	public void removeSinkPoint(String name){
 		if (sinkPoints.containsKey(name)){
 			sinkPoints.remove(name);
-			System.out.println("Removed Sink Point " + name);
+			//System.out.println("Removed Sink Point " + name);
 		}
 	}
 	
@@ -167,7 +167,7 @@ public class MapData implements IReadableData {
 			throw new Exception("No terrain specified.");
 		}
 		validTerrain.put(name, color);
-		System.out.println("Added Terrain: " + name);
+		//System.out.println("Added Terrain: " + name);
 	}
 	
 	public void removeValidTerrain(String name) throws Exception{

@@ -12,7 +12,7 @@
         "myImageSize": "1",
         "myValidTerrains": "grass",
         "myHeading": "0",
-        "myImagePath": "resources/cow.png"
+        "myImagePath": "resources/ninjamonkey.png"
       },
       "myComponentName": "PhysicalComponent"
     },
@@ -39,7 +39,7 @@
       "myFields": {
         "myTargetsEnemies": "true",
         "myTargetingStrategy": "BadTargetingStrategy",
-        "mySightRange": "400",
+        "mySightRange": "200",
         "mySightWidth": "360"
       },
       "myComponentName": "TargetingComponent"

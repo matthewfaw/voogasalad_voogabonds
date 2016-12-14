@@ -12,6 +12,7 @@ import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utility.ErrorBox;
 import utility.Point;
@@ -34,12 +35,14 @@ public class ApplicationController {
 	private static final String GAME_FOLDER = "SerializedFiles/";
 	private static final String SAVED_FOLDER = "savedgame/";
 
+	private Stage myStage;
 //	private ResourceBundle myGameOptions;
 	private BackendController myBackendController;
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
 	private GamePlayerScene myScene;
 	private EntityManager myEntityManager; 
+	
 	//private Stage myStage; //////Guhan
 	//private Pane myPane=new BorderPane();
 
@@ -56,7 +59,8 @@ public class ApplicationController {
 	{
 		//myStage=aStage; ///Guhan 
 		//GamePlayerScene scene = constructGUI(aStage);
-		myScene=constructGUI(aStage);
+		myStage = aStage;
+		myScene = constructGUI(myStage);
 		Router router = new Router(myScene);
 		myEntityManager = new EntityManager();
 		constructBackend(router,gameTitle);
@@ -95,6 +99,10 @@ public class ApplicationController {
 	{
 		//TODO: Change this to make this dynamic--select different games
 		myBackendController = new BackendController(GAME_FOLDER + gameTitle, aRouter, myEntityManager);
+	}
+	
+	private void gameLost() {
+		
 	}
 	/*
 	private BorderPane constructBorderPane(){

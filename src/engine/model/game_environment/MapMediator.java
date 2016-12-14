@@ -24,10 +24,12 @@ public class MapMediator {
 	
 	private TerrainMap myTerrainMap;
 	private MapDataContainer myMapData;
+	private double myPixelWidth;
 	
 	public MapMediator(MapDataContainer mapData, int pixelWidth) {
 		myMapData = mapData;
 		myTerrainMap = new TerrainMap(mapData, pixelWidth);
+		myPixelWidth = pixelWidth;
 
 	}
 	/**
@@ -42,7 +44,7 @@ public class MapMediator {
 		
 //		for (TerrainData terrainData: myMapData.getTerrainList()) {
 //			if (terrainData.getLoc().equals(aLocation)) {
-//				System.out.println("The terrain at this point is: "+terrainData.getName());
+//				//System.out.println("The terrain at this point is: "+terrainData.getName());
 //				for (String validTerrain: validTerrains) {
 //					if (validTerrain.equals(terrainData.getName())) {
 //						return true;
@@ -90,19 +92,21 @@ public class MapMediator {
 	
 	public PathManager constructPaths(IPhysical physical, IMovable movement)
 	{
+		//Point goal = movement.getGoalPoint().scale();
 		Terrain source = myTerrainMap.getTerrain(physical.getPosition());
+		Terrain sink = myTerrainMap.getTerrain(movement.getGoalPoint());
 		
 		Queue<Terrain> terrainQueue = new LinkedList<Terrain>();
 		
 		terrainQueue.add(source);
 
-		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), movement.getGoalPoint());
+		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), sink);
 		
 		//TODO: Fix the algorithm so this doesn't occur
 		if (paths.containsKey(source)) {
 			paths.remove(source);
 		}
-		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoalPoint());
+		List<Terrain> shortestPath = constructShortestPath(paths, sink);
 		
 		PathManager pathManager = new PathManager(shortestPath, movement.getGoalPoint());
 		return pathManager;
@@ -116,7 +120,7 @@ public class MapMediator {
 	 */
 	//TODO: Refactor this pls
 
-	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, List<String> aValidTerrains, Point goal)
+	private HashMap<Terrain, Terrain> constructPathsInGraph(Queue<Terrain> aQueue, List<String> aValidTerrains, Terrain sink)
 	{
 		HashMap<Terrain, Terrain> pathToFollow = new HashMap<Terrain, Terrain>();
 		while (!aQueue.isEmpty()) {
@@ -126,7 +130,7 @@ public class MapMediator {
 					if (hasValidTerrainType(aValidTerrains, neighbor)) {
 						pathToFollow.put(neighbor, currentTerrain);
 						aQueue.add(neighbor);
-						if (neighbor.contains(goal)) { 
+						if (neighbor.equals(sink)) { 
 							return pathToFollow;
 						}
 					}
@@ -151,11 +155,11 @@ public class MapMediator {
 //		return aValidTerrains.stream().anyMatch(s -> s.equals(neighbor.getTerrainType()));
 	}
 	
-	private List<Terrain> constructShortestPath(Map<Terrain,Terrain> aPreviousPathMap, Point goal)
+	private List<Terrain> constructShortestPath(Map<Terrain,Terrain> aPreviousPathMap, Terrain sink)
 	{
 		List<Terrain> shortestPath = new ArrayList<Terrain>();
 		
-		Terrain currentTerrain = myTerrainMap.getTerrain(goal);
+		Terrain currentTerrain = sink;
 		while(aPreviousPathMap.containsKey(currentTerrain)) {
 //		while(true) {
 			shortestPath.add(0, currentTerrain);

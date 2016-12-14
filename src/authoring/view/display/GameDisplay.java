@@ -225,7 +225,7 @@ public class GameDisplay {
 	
 	private void dragHandlerData(Node elem) {
 		TerrainCell convertedElem = (TerrainCell) elem;
-		System.out.println(toolBar.getImageStatus());
+		//System.out.println(toolBar.getImageStatus());
 		 if (toolBar.getImageStatus()) {
          	Image image = new Image(toolBar.getSelectedImagePath());
  			ImagePattern pattern = new ImagePattern(image);
@@ -235,7 +235,7 @@ public class GameDisplay {
 				String relPath = "";
 				if (toolBar.getImageStatus() && splitPath.length > 1) {
 					relPath += splitPath[1] + "/";
-					System.out.println("THISISTHERELATIVEPATH: " + relPath);
+					//System.out.println("THISISTHERELATIVEPATH: " + relPath);
 				}
 			mapData.removeTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), convertedElem.getFill().toString()));
          	mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), relPath));

@@ -63,7 +63,7 @@ public class EntityFactory {
 	public ConcreteEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws UnsupportedOperationException
 	{
-		System.out.println("Contructing an entity.");
+		//System.out.println("Contructing an entity.");
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?

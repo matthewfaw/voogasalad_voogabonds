@@ -86,7 +86,7 @@ public abstract class AbstractLoadScreen {
 		        	GameStateDeserializer GSD = new GameStateDeserializer();
 		        	showSelectedTitle.setText(chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName());
 		        	String selectedGame = chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName();
-		    		System.out.println("Selected Game is: " + selectedGame);
+		    		//System.out.println("Selected Game is: " + selectedGame);
 		    		startHandler(startAuthoring, selectedGame);
 		        	try {
 						GSD.loadGameState("src/SerializedFiles/"+chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName().toString());

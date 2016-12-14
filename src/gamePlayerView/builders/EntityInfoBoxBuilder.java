@@ -50,7 +50,7 @@ public class EntityInfoBoxBuilder {
 		
 		public EntityInfoBoxBuilder withTargetingMechanism(IViewableTargeting aComponent)
 		{
-			System.out.println("Building a targeting box");
+			//System.out.println("Building a targeting box");
 			//null check before constructing
 			//add upgrade button to  the info box
 			myTargetingButtons = new TargetingButtons(myAppController);

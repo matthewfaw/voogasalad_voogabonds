@@ -95,7 +95,7 @@ public class NewAuthoringScreen {
 								GSS.saveGameState(file.getName(), false);
 								setAuthoringName(file.getName());
 							} catch (Exception exception) {
-								System.out.println("Cannot create new game.");
+								//System.out.println("Cannot create new game.");
 							}
 						}
 					}

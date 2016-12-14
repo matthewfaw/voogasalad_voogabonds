@@ -53,7 +53,7 @@ public class AuthorDisplay {
         	List<Tab> tabs = getTabs();
         	
             for (int i = 0; i < tabs.size(); i++) {
-                //System.out.println("Tab "+i+" Added");
+                ////System.out.println("Tab "+i+" Added");
                 tabPane.getTabs().add(tabs.get(i));
                 tabs.get(i).setId("tab");
             }
