@@ -16,7 +16,12 @@ public class PhysicalSystem implements ISystem<PhysicalComponent> {
 	
 	public PhysicalSystem(MapMediator map) {
 		myComponents = new ArrayList<PhysicalComponent>();
-		myMap = map;
+		setMapMediator(map);
+	}
+	
+	public void setMapMediator(MapMediator aMapMediator)
+	{
+		myMap = aMapMediator;
 	}
 	
 	public PhysicalComponent get(IEntity entity) {

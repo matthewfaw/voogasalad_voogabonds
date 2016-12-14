@@ -14,6 +14,7 @@ import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
+import engine.model.systems.ISystem;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
@@ -53,9 +54,8 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 		myPhysicalSystem = physicalSystem;
 		myDamageDealingSystem = damageDealingSystem;
 		
-		myCollisionRadius = Double.parseDouble(data.getFields().get("myCollisionRadius"));
-		
-		collisionDetectionSystem.attachComponent(this);
+		updateComponentData(data);
+		myCollidable.attachComponent(this);
 	}
 
 	//*******************ICollidable interface***********//
@@ -126,5 +126,29 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	@Override
 	public void delete() {
 		myCollidable.detachComponent(this);
+	}
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof PhysicalSystem) {
+				myPhysicalSystem = (PhysicalSystem) system;
+			} else if (system instanceof DamageDealingSystem) {
+				myDamageDealingSystem = (DamageDealingSystem) system;
+ 			} else if (system instanceof CollisionDetectionSystem){
+ 				myCollidable = (CollisionDetectionSystem) system;
+ 				myCollidable.attachComponent(this);
+ 			}
+ 		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableCollidable>>();
+		aRouter.distributeViewableComponent(this);
+	}
+
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myCollisionRadius = Double.parseDouble(aComponentData.getFields().get("myCollisionRadius"));
 	}
 }

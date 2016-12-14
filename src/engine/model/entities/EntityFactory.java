@@ -68,7 +68,7 @@ public class EntityFactory {
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?
 		//3. return the fully constructed object
-		ConcreteEntity entity = new ConcreteEntity();
+		ConcreteEntity entity = new ConcreteEntity(aEntityData.getName());
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(entity, compdata, aLocation);

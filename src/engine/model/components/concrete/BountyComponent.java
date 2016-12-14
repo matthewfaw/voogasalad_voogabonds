@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.model.ComponentData;
+import authoring.model.EntityData;
 import authoring.model.Hide;
 import engine.IObserver;
 
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableBounty;
+import engine.model.data_stores.DataStore;
 import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
+import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 
 /**
@@ -35,10 +38,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	
 	public BountyComponent(IEntity aEntity, BountySystem bountySystem, ComponentData data, Router router) {
 		super(aEntity, router);
-		myBountyValue = Integer.parseInt(data.getFields().get("myBountyValue"));
-		myLivesToDestroy = Integer.parseInt(data.getFields().get("myLivesToDestroy"));
-		myPointValue = Integer.parseInt(data.getFields().get("myPointValue"));
-		
+		updateComponentData(data);
 		myObservers = new ArrayList<IObserver<IViewableBounty>>();
 		myBountySystem = bountySystem;
 		
@@ -87,5 +87,28 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 
 	public void delete() {
 		myBountySystem.detachComponent(this);
+	}
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof BountySystem) {
+				myBountySystem = (BountySystem) system;
+				myBountySystem.attachComponent(this);
+				break;
+			}
+ 		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableBounty>>();
+		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myBountyValue = Integer.parseInt(aComponentData.getFields().get("myBountyValue"));
+		myLivesToDestroy = Integer.parseInt(aComponentData.getFields().get("myLivesToDestroy"));
+		myPointValue = Integer.parseInt(aComponentData.getFields().get("myPointValue"));
+		
 	}
 }

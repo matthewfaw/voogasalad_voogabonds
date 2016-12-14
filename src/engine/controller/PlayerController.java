@@ -24,6 +24,11 @@ public class PlayerController {
 		myRouter = aRouter;
 	}
 	
+	public void setRouter(Router aRouter)
+	{
+		myRouter = aRouter;
+	}
+	
 	/**
 	 * A method used to add a new player to the game
 	 * 

@@ -48,6 +48,7 @@ public class BackendController {
 
 	//Utilities
 	private transient ResourceBundle myGameDataRelativePaths;
+	private transient ResourceBundle myErrorMessages;
 	private transient FileRetriever myFileRetriever;
 	private transient JSONDeserializer myJsonDeserializer;
 	
@@ -62,29 +63,29 @@ public class BackendController {
 	//TODO: Move this to a system??
 	private transient MapMediator myMapMediator;
 	
+	//Factories
+	private transient EntityFactory myEntityFactory; //depends on the systems
+	
 	//Controllers to manage events
 	private TimelineController myTimelineController;
 	private PlayerController myPlayerController;
 	private LevelController myLevelController;
 	private SystemsController mySystemsController;
+	private EntityManager myEntityManager;
 	private transient Router myRouter;
 	
-	//Factories
-	private transient EntityFactory myEntityFactory;
-	
-	// EntityManager
-	private EntityManager myEntityManager;
-	
-	private transient ResourceBundle myErrorMessages;
+	public BackendController()
+	{
+		myGameDataRelativePaths = ResourceBundle.getBundle(GAME_DATA_PATH);
+		myErrorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
+		myJsonDeserializer = new JSONDeserializer();
+	}
 	
 	public BackendController(String aGameDataPath, Router aRouter, EntityManager entityManager)
 	{
-		myRouter = aRouter;
-		myGameDataRelativePaths = ResourceBundle.getBundle(GAME_DATA_PATH);
-		myFileRetriever = new FileRetriever(aGameDataPath);
-		myJsonDeserializer = new JSONDeserializer();
-
-		myErrorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
+		this();
+		reconstructRouter(aRouter);
+		reconstructGameData(aGameDataPath);
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
 		mySystemsController = new SystemsController();
@@ -92,18 +93,45 @@ public class BackendController {
 		myEntityManager = entityManager;
 		
 		//Must construct static before dynamic.
-		constructData();
 		constructDynamicBackendObjects();
 	}
-
+	
+	public void reconstructRouter(Router aRouter)
+	{
+		myRouter = aRouter;
+	}
+	
+	public void reconstructGameData(String aGameDataPath)
+	{
+		myFileRetriever = new FileRetriever(aGameDataPath);
+		constructData();
+	}
+	
+	public void reconstructEngineState(String aGameDataPath, Router aRouter)
+	{
+		myRouter = aRouter;
+		reconstructGameData(aGameDataPath);
+		myPlayerController.setRouter(myRouter);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
+		// TODO: set the win and lose conditions for players
+		mySystemsController.reinitializeSystems(myPlayerController, myMapMediator, myTimelineController);
+		myEntityFactory = new EntityFactory(mySystemsController.getSystems(), myEntityDataStore, myRouter, myMapMediator, myEntityManager);
+		mySystemsController.setEntityFactory(myEntityFactory);
+		myLevelController.reinitialize(myLevelDataContainer, myEntityDataStore, myEntityFactory, mySystemsController, myMapData);
+		myTimelineController.attach(myLevelController);
+		mySystemsController.reinitializeComponents(myRouter, myEntityManager, myEntityDataStore);
+	}
+	
 	private void constructDynamicBackendObjects()
 	{
 		myPlayerController.addPlayer(myPlayerData);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		
+		mySystemsController.initializeSystems(myPlayerController, myMapMediator, myTimelineController);
+
 		myEntityFactory = new EntityFactory(mySystemsController.getSystems(), myEntityDataStore, myRouter, myMapMediator, myEntityManager);
 
-		mySystemsController.initializeSystems(myPlayerController, myMapMediator, myTimelineController, myEntityFactory);
+		mySystemsController.setEntityFactory(myEntityFactory);
 
 		myLevelController = new LevelController(myLevelDataContainer, DEFAULT_STARTING_LEVEL, myEntityDataStore, myEntityFactory, mySystemsController, myMapData);
 		myTimelineController.attach(myLevelController);

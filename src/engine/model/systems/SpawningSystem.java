@@ -19,13 +19,17 @@ public class SpawningSystem implements ISystem<CreatorComponent>, IObserver<Time
 	private transient EntityFactory myEntityFactory;
 	private transient SpawningStrategyFactory myStrategyFactory;
 	
-	public SpawningSystem(TimelineController time, EntityFactory aEntityFactory)
+	public SpawningSystem(TimelineController time)
 	{
 		myComponents = new ArrayList<CreatorComponent>();
 		myStrategyFactory = new SpawningStrategyFactory();
-		myEntityFactory = aEntityFactory;
 
 		time.attach(this);	
+	}
+	
+	public void setEntityFactory(EntityFactory aEntityFactory)
+	{
+		myEntityFactory = aEntityFactory;
 	}
 	
 	public ICreator get(IComponent c) {

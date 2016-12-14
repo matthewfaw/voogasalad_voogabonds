@@ -16,17 +16,25 @@ public class ConcreteEntity implements IEntity {
 	private transient ArrayList<IObserver<IEntity>> myObservers;
 	private transient ArrayList<IComponent> myComponents;
 	private String myID;
+	private String myName;
 	
 	/**
 	 * This object should only be constructed in this
 	 * package, since components should be constructed 
 	 * in the Factory
 	 */
-	ConcreteEntity()
+	ConcreteEntity(String aName)
 	{
+		myName = aName;
 		myID = UUID.randomUUID().toString();
 		myComponents = new ArrayList<IComponent>();
 		myObservers = new ArrayList<IObserver<IEntity>>();
+	}
+	
+	@Override
+	public String getName()
+	{
+		return myName;
 	}
 
 	@Override

@@ -17,8 +17,13 @@ public class MovementSystem implements ISystem<MoveableComponent>, IObserver<Tim
 	
 	public MovementSystem (MapMediator map, TimelineController time) {
 		myComponents = new ArrayList<MoveableComponent>();
-		myStrategyFactory = new MovementStrategyFactory(map);
+		setStrategyFactory(map);
 		time.attach(this);
+	}
+	
+	public void setStrategyFactory(MapMediator aMapMediator)
+	{
+		myStrategyFactory = new MovementStrategyFactory(aMapMediator);
 	}
 	
 	public MoveableComponent get(IEntity entity) {

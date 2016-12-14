@@ -1,13 +1,17 @@
 package engine.model.components.concrete;
 
+import java.util.List;
+
 import authoring.model.ComponentData;
 import authoring.model.Hide;
 import engine.model.components.AbstractComponent;
 import engine.model.entities.IEntity;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.ControllableSystem;
+import engine.model.systems.DamageDealingSystem;
 //import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
+import engine.model.systems.ISystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -103,4 +107,28 @@ public class ControllableComponent extends AbstractComponent{
 		
 	}
 	
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof PhysicalSystem) {
+				myPhysicalSystem = (PhysicalSystem) system;
+			} else if (system instanceof ControllableSystem) {
+				myControllableSystem = (ControllableSystem) system;
+				myControllableSystem.attachComponent(this);
+ 			} else if (system instanceof CollisionDetectionSystem){
+ 				myCollisionDetectionSystem = (CollisionDetectionSystem) system;
+ 			} else if (system instanceof MovementSystem){
+ 				myMovementSystem = (MovementSystem) system;
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+//		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		// do nothing
+	}
 }

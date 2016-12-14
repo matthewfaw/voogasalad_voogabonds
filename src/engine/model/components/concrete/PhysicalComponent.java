@@ -12,6 +12,7 @@ import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
+import engine.model.systems.ISystem;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
 import javafx.util.Pair;
@@ -47,16 +48,13 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		super(aEntity, router);
 		mySystem = physical;
 		
-		myImagePath = data.getFields().get("myImagePath");
-		myImageSize = Double.parseDouble(data.getFields().get("myImageSize"));
-		myValidTerrains = Arrays.asList(data.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
-		
+		updateComponentData(data);
 		myObservers = new ArrayList<IObserver<IViewablePhysical>>();
 
 		myPosition = new Point(0, 0);
 		myHeading = 0;
 		
-		physical.attachComponent(this);
+		mySystem.attachComponent(this);
 		System.out.println("Routing a physical component.");
 		router.createNewViewableComponent(this);
 		setPosition(position);
@@ -138,5 +136,28 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		mySystem.detachComponent(this);
 		myPosition = null;
 		myObservers.forEach(observer -> observer.remove(this));
+	}
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof PhysicalSystem) {
+				mySystem = (PhysicalSystem) system;
+				mySystem.attachComponent(this);
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewablePhysical>>();
+		aRouter.createNewViewableComponent(this);
+//		aRouter.distributeViewableComponent(this);
+	}
+	
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myImagePath = aComponentData.getFields().get("myImagePath");
+		myImageSize = Double.parseDouble(aComponentData.getFields().get("myImageSize"));
+		myValidTerrains = Arrays.asList(aComponentData.getFields().get("myValidTerrains").trim().split("\\s*,\\s*"));
 	}
 }

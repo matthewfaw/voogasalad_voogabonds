@@ -15,6 +15,7 @@ import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ISpawningStrategy;
+import engine.model.systems.ISystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
@@ -76,13 +77,10 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		myMovement = movement;
 		myEntityFactory = mySpawning.getFactory();
 		
-		mySpawnName = data.getFields().get("mySpawnName");
-		myTimeBetweenSpawns = Integer.parseInt(data.getFields().get("myTimeBetweenSpawns"));
-		mySpawningStrategy = mySpawning.newStrategy(data.getFields().get("mySpawningStrategy"));
-		
+		updateComponentData(data);
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<ConcreteEntity>();
-		spawning.attachComponent(this);
+		mySpawning.attachComponent(this);
 	}
 
 	/**
@@ -162,5 +160,33 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Override
 	public void delete() {
 		mySpawning.detachComponent(this);
+	}
+	
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof TargetingSystem) {
+				myTargeting = (TargetingSystem) system;
+			} else if (system instanceof PhysicalSystem) {
+				myPhysical = (PhysicalSystem) system;
+ 			} else if (system instanceof SpawningSystem){
+ 				mySpawning = (SpawningSystem) system;
+				mySpawning.attachComponent(this);
+ 			} else if (system instanceof MovementSystem){
+ 				myMovement = (MovementSystem) system;
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableCreator>>();
+		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		mySpawnName = aComponentData.getFields().get("mySpawnName");
+		myTimeBetweenSpawns = Integer.parseInt(aComponentData.getFields().get("myTimeBetweenSpawns"));
+		mySpawningStrategy = mySpawning.newStrategy(aComponentData.getFields().get("mySpawningStrategy"));
 	}
 }

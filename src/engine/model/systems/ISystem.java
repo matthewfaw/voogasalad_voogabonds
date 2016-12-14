@@ -2,6 +2,7 @@ package engine.model.systems;
 
 import java.util.List;
 
+import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
 import engine.model.entities.IEntity;
 
@@ -20,7 +21,7 @@ import engine.model.entities.IEntity;
  *
  */
 //TODO: Add comments 
-public interface ISystem <T> {
+public interface ISystem <T extends AbstractComponent> {
 	public List<T> getComponents();
 	public T getComponent(IComponent component);
 	public T getComponent(IEntity entity);

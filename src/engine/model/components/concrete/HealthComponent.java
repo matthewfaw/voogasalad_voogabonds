@@ -14,6 +14,7 @@ import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
+import engine.model.systems.ISystem;
 import engine.model.weapons.DamageInfo;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Damage;
@@ -55,13 +56,10 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		myBounty = bounty;
 		myDamage = damage;
 		
-		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
-		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
-		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
-		
+		updateComponentData(componentdata);
 		myObservers = new ArrayList<IObserver<IViewableHealth>>();
 		
-		healthSystem.attachComponent(this);
+		myHealthSystem.attachComponent(this);
 		
 	}
 		
@@ -138,4 +136,30 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		myObservers.forEach(observer -> observer.remove(this));
 	}
 
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof HealthSystem) {
+				myHealthSystem = (HealthSystem) system;
+				myHealthSystem.attachComponent(this);
+			} else if (system instanceof DamageDealingSystem) {
+				myDamage = (DamageDealingSystem) system;
+ 			} else if (system instanceof BountySystem){
+ 				myBounty = (BountySystem) system;
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableHealth>>();
+		aRouter.distributeViewableComponent(this);
+	}
+
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myCurrHealth = Double.parseDouble(aComponentData.getFields().get("myCurrHealth"));
+		myMaxHealth = Double.parseDouble(aComponentData.getFields().get("myMaxHealth"));
+		explodeOnDeath = Boolean.parseBoolean(aComponentData.getFields().get("explodeOnDeath"));
+	}
 }

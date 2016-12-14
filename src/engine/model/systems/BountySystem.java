@@ -16,7 +16,12 @@ public class BountySystem implements ISystem<BountyComponent> {
 	public BountySystem(PlayerController player) 
 	{
 		myComponents = new ArrayList<BountyComponent>();
-		myPlayer = player.getPlayer(0);
+		setPlayerController(player);
+	}
+	
+	public void setPlayerController(PlayerController aPlayerController)
+	{
+		myPlayer = aPlayerController.getPlayer(0);
 	}
 	
 	public int pillagePlayerBase(IComponent c) {

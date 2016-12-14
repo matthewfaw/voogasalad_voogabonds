@@ -3,9 +3,16 @@ package engine.controller.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.model.EntityData;
 import engine.controller.PlayerController;
 import engine.controller.timeline.TimelineController;
+import engine.model.components.AbstractComponent;
+import engine.model.components.IComponent;
+import engine.model.components.concrete.CollidableComponent;
+import engine.model.components.concrete.PhysicalComponent;
+import engine.model.data_stores.DataStore;
 import engine.model.entities.EntityFactory;
+import engine.model.entities.EntityManager;
 import engine.model.game_environment.MapMediator;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
@@ -18,9 +25,10 @@ import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
 import engine.model.systems.TeamSystem;
+import gamePlayerView.gamePlayerView.Router;
 
 public class SystemsController {
-	List<ISystem<?>> mySystems;
+	private transient List<ISystem<?>> mySystems;
 
 	private CollisionDetectionSystem myCollisionDetectionSystem;
 	private DamageDealingSystem myDamageDealingSystem;
@@ -38,7 +46,7 @@ public class SystemsController {
 		mySystems = new ArrayList<ISystem<?>>();
 	}
 	
-	public void initializeSystems(PlayerController aPlayerController, MapMediator aMapMediator, TimelineController aTimelineController, EntityFactory aEntityFactory) 
+	public void initializeSystems(PlayerController aPlayerController, MapMediator aMapMediator, TimelineController aTimelineController) 
 	{
 		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
@@ -52,11 +60,43 @@ public class SystemsController {
 		myCollisionDetectionSystem = new CollisionDetectionSystem();
 		
 		myMovementSystem = new MovementSystem(aMapMediator, aTimelineController);
-		mySpawningSystem = new SpawningSystem(aTimelineController, aEntityFactory);
+		mySpawningSystem = new SpawningSystem(aTimelineController);
 		
 		myControllableSystem = new ControllableSystem();
 		
 		createSystemsList();
+	}
+	
+	public void reinitializeSystems(PlayerController aPlayerController, MapMediator aMapMediator, TimelineController aTimelineController)
+	{
+		myBountySystem.setPlayerController(aPlayerController);
+		myPhysicalSystem.setMapMediator(aMapMediator);
+		myMovementSystem.setStrategyFactory(aMapMediator);
+		aTimelineController.attach(myMovementSystem);
+		aTimelineController.attach(mySpawningSystem);
+		createSystemsList();
+	}
+	
+	private void reinitializeComponent(Router aRouter, List<? extends AbstractComponent> aComponentList, EntityManager aEntityManager, DataStore<EntityData> aEntityDataStore)
+	{
+		for (AbstractComponent c: aComponentList) {
+			c.setSystems(mySystems);
+			c.reconnectToEntity(aEntityManager);
+			c.updateComponentData(aEntityDataStore.getData(c.getEntity().getId()).getComponent(c.getClass().getName()));
+			c.redistributeThroughRouter(aRouter);
+		}
+	}
+	
+	public void reinitializeComponents(Router aRouter, EntityManager aEntityManager, DataStore<EntityData> aEntityDataStore)
+	{
+		for (ISystem<?> system: mySystems) {
+			reinitializeComponent(aRouter, system.getComponents(), aEntityManager, aEntityDataStore);
+		}
+	}
+	
+	public void setEntityFactory(EntityFactory aEntityFactory)
+	{
+		mySpawningSystem.setEntityFactory(aEntityFactory);
 	}
 	
 	private void createSystemsList()

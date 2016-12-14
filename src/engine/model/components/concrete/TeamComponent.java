@@ -11,6 +11,7 @@ import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableTeam;
 import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.Router;
+import engine.model.systems.ISystem;
 import engine.model.systems.TeamSystem;
 
 /**
@@ -31,10 +32,10 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam {
 	
 	public TeamComponent(IEntity aEntity, TeamSystem teams, ComponentData componentData, Router router) {
 	    super(aEntity, router);
-		myTeamID = componentData.getFields().get("myTeamID");
+	    updateComponentData(componentData);
 		myObservers = new ArrayList<IObserver<IViewableTeam>>();
 		mySystem = teams;
-		teams.attachComponent(this);
+		mySystem.attachComponent(this);
 	}
 	
 	@Override
@@ -65,5 +66,24 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam {
 	
 	public void delete() {
 		mySystem.detachComponent(this);
+	}
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof TeamSystem) {
+ 				mySystem = (TeamSystem) system;
+ 				mySystem.attachComponent(this);
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableTeam>>();
+		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myTeamID = aComponentData.getFields().get("myTeamID");
 	}
 }

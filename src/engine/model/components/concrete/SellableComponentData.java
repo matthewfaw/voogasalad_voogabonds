@@ -1,8 +1,11 @@
 package engine.model.components.concrete;
 
+import java.util.List;
+
 import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
 import engine.model.entities.IEntity;
+import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 
 /**
@@ -17,7 +20,7 @@ public class SellableComponentData extends AbstractComponent {
 	
 	public SellableComponentData(IEntity aEntity, ComponentData componentData, Router aRouter) {
 		super(aEntity, aRouter);
-		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
+		updateComponentData(componentData);
 	}
 	public int getSellValue()
 	{
@@ -35,5 +38,17 @@ public class SellableComponentData extends AbstractComponent {
 	@Override
 	public void delete() {
 		// Do nothing
+	}
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		// do nothing
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		mySellValue = Integer.parseInt(aComponentData.getFields().get("mySellValue"));
 	}
 }

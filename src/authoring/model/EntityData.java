@@ -40,6 +40,11 @@ public class EntityData implements IReadableData {
 		myComponents.put(aName, comp);
 	}
 	
+	public ComponentData getComponent(String aComponentName)
+	{
+		return myComponents.get(aComponentName);
+	}
+	
 	public Map<String, ComponentData> getComponents(){
 		return myComponents;
 	}

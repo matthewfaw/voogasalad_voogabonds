@@ -16,6 +16,7 @@ import engine.model.strategies.IPosition;
 import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
+import engine.model.systems.ISystem;
 import engine.model.systems.MovementSystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TargetingSystem;
@@ -81,19 +82,11 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		myDamage = damage;
 		
 		myMovedDistance = 0;
-		myMaxDistance = Double.parseDouble(data.getFields().get("myMaxDistance"));
-		explodesAtMaxDistance = Boolean.parseBoolean(data.getFields().get("explodesAtMaxDistance"));
-		
-		explodesOnGoal = Boolean.parseBoolean(data.getFields().get("explodesOnGoal"));
-		removeOnGoal = Boolean.parseBoolean(data.getFields().get("removeOnGoal"));
-		
-		myTurnSpeed = Double.parseDouble(data.getFields().get("myTurnSpeed"));
-		myMoveSpeed = Double.parseDouble(data.getFields().get("myMoveSpeed"));
-		myMovementCalc = movement.getStrategyFactory().newStrategy(data.getFields().get("myMovementCalc"));
+		updateComponentData(data);
 		
 		myObservers = new ArrayList<IObserver<IViewableMovable>>();
 		
-		movement.attachComponent(this);
+		myMovement.attachComponent(this);
 	}
 	
 	private Pair<Double, Point> getMove(IPhysical p) {
@@ -183,5 +176,42 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 			return myPhysical.get(this).getPosition().equals(getGoal());
 		else
 			return false;
+	}
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof MovementSystem) {
+				myMovement = (MovementSystem) system;
+				myMovement.attachComponent(this);
+			} else if (system instanceof DamageDealingSystem) {
+				myDamage = (DamageDealingSystem) system;
+ 			} else if (system instanceof BountySystem){
+ 				myBounty = (BountySystem) system;
+ 			} else if (system instanceof PhysicalSystem){
+ 				myPhysical = (PhysicalSystem) system;
+ 			} else if (system instanceof TargetingSystem){
+ 				myTargeting = (TargetingSystem) system;
+ 			} else if (system instanceof CollisionDetectionSystem){
+ 				myCollision = (CollisionDetectionSystem) system;
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableMovable>>();
+		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myMaxDistance = Double.parseDouble(aComponentData.getFields().get("myMaxDistance"));
+		explodesAtMaxDistance = Boolean.parseBoolean(aComponentData.getFields().get("explodesAtMaxDistance"));
+		
+		explodesOnGoal = Boolean.parseBoolean(aComponentData.getFields().get("explodesOnGoal"));
+		removeOnGoal = Boolean.parseBoolean(aComponentData.getFields().get("removeOnGoal"));
+		
+		myTurnSpeed = Double.parseDouble(aComponentData.getFields().get("myTurnSpeed"));
+		myMoveSpeed = Double.parseDouble(aComponentData.getFields().get("myMoveSpeed"));
+		myMovementCalc = myMovement.getStrategyFactory().newStrategy(aComponentData.getFields().get("myMovementCalc"));
 	}
 }

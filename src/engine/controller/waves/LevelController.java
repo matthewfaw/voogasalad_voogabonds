@@ -21,10 +21,10 @@ public class LevelController implements IObserver<TimelineController> {
 	private transient WaveController myWaveController;
 	private transient DataStore<EntityData> myEntityDataStore;
 	private int myCurrentLevel;
-	private EntityFactory myEntityFactory;
-	private PhysicalSystem myPhysicalSystem;
-	private MovementSystem myMovementSystem;
-	private MapDataContainer myMapDataContainer;
+	private transient EntityFactory myEntityFactory;
+	private transient PhysicalSystem myPhysicalSystem;
+	private transient MovementSystem myMovementSystem;
+	private transient MapDataContainer myMapDataContainer;
 	
 	public LevelController(
 			LevelDataContainer aGameLevelsData,
@@ -32,16 +32,22 @@ public class LevelController implements IObserver<TimelineController> {
 			DataStore<EntityData> aEntityDataStore,
 			EntityFactory aEntityFactory,
 			SystemsController aSystemsController,
-			MapDataContainer aMapDataContainer) {
+			MapDataContainer aMapDataContainer) 
+	{
+		myCurrentLevel = aStartingLevel;
+		reinitialize(aGameLevelsData, aEntityDataStore, aEntityFactory, aSystemsController, aMapDataContainer);
+	}
+	
+	public void reinitialize(LevelDataContainer aGameLevelsData, DataStore<EntityData> aEntityDataStore, EntityFactory aEntityFactory,
+							SystemsController aSystemsController, MapDataContainer aMapDataContainer)
+	{
 		myLevelDataContainer = aGameLevelsData;
 		myEntityDataStore = aEntityDataStore;
-		myCurrentLevel = aStartingLevel;
 		myEntityFactory = aEntityFactory;
 		//TODO: remove this hack
 		myPhysicalSystem = aSystemsController.getPhysicalSystem();
 		myMovementSystem = aSystemsController.getMovementSystem();
 		myMapDataContainer = aMapDataContainer;
-	
 	}
 
 	@Override

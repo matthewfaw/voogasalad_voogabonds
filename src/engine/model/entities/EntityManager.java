@@ -16,7 +16,10 @@ public class EntityManager implements IModifiableEntityManager {
 		myEntityMap = new HashMap<String, ConcreteEntity>();
 	}
 	
-	
+	public ConcreteEntity getEntity(String aEntityID)
+	{
+		return myEntityMap.get(aEntityID);
+	}
 	
 	public Map<String, ConcreteEntity> getEntityMap() {
 		return myEntityMap;

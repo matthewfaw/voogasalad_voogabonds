@@ -13,6 +13,7 @@ import engine.model.components.viewable_interfaces.IViewableTargeting;
 import engine.model.entities.IEntity;
 import engine.model.strategies.IPosition;
 import engine.model.strategies.ITargetingStrategy;
+import engine.model.systems.ISystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.TargetingSystem;
 import engine.model.systems.TeamSystem;
@@ -40,15 +41,12 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 		myTargeting = target;
 		myObservers = new ArrayList<IObserver<IViewableTargeting>>();
 		
+		updateComponentData(componentData);
+		
 		myPhysical = physical;
 		myTeams = teams;
 		
-		mySightRange = Double.parseDouble(componentData.getFields().get("mySightRange"));
-		mySightWidth = Double.parseDouble(componentData.getFields().get("mySightWidth"));
-		myTargetsEnemies = Boolean.parseBoolean(componentData.getFields().get("myTargetsEnemies"));
-		myTargetingStrategy = target.newStrategy(componentData.getFields().get("myTargetingStrategy"));
-				
-		target.attachComponent(this);
+		myTargeting.attachComponent(this);
 	}
 	
 	@Override
@@ -98,4 +96,30 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	public void delete() {
 		myTargeting.detachComponent(this);
 	}	
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof PhysicalSystem) {
+				myPhysical = (PhysicalSystem) system;
+ 			} else if (system instanceof TargetingSystem) {
+ 				myTargeting = (TargetingSystem) system;
+ 				myTargeting.attachComponent(this);
+ 			} else if (system instanceof TeamSystem) {
+ 				myTeams = (TeamSystem) system;
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableTargeting>>();
+		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		mySightRange = Double.parseDouble(aComponentData.getFields().get("mySightRange"));
+		mySightWidth = Double.parseDouble(aComponentData.getFields().get("mySightWidth"));
+		myTargetsEnemies = Boolean.parseBoolean(aComponentData.getFields().get("myTargetsEnemies"));
+		myTargetingStrategy = myTargeting.newStrategy(aComponentData.getFields().get("myTargetingStrategy"));
+	}
 }

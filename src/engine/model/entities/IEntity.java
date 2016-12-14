@@ -26,6 +26,7 @@ public interface IEntity extends IObservable<IEntity> {
 	 */
 	public String getId();
 
+	public String getName();
 	/**
 	 * Add a component to an entity
 	 * This is how entities are given new functionality

@@ -15,6 +15,7 @@ import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
+import engine.model.systems.ISystem;
 import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TeamSystem;
@@ -46,6 +47,9 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private transient HealthSystem myHealthSystem;
 	
 	@Hide
+	private transient DamageDealingSystem myDamageDealingSystem;
+	
+	@Hide
 	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
 	private transient DamageDealingSystem myDamageSystem;
@@ -68,17 +72,10 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
+		myDamageDealingSystem = damageDealingSystem;
 		
-		myDamage = Integer.parseInt(data.getFields().get("myDamage"));
-		myDamageArc = Double.parseDouble(data.getFields().get("myDamageArc"));
-		myDamageRadius = Double.parseDouble(data.getFields().get("myDamageRadius"));
-		myDamageStrategy = damageDealingSystem.newStrategy(data.getFields().get("myDamageStrategy"));
-		
-		explodesOnEnemies = Boolean.parseBoolean(data.getFields().get("explodesOnEnemies"));
-		explodesOnAllies = Boolean.parseBoolean(data.getFields().get("explodesOnAllies"));
-		diesOnExplosion = Boolean.parseBoolean(data.getFields().get("diesOnExplosion"));
-		
-		damageDealingSystem.attachComponent(this);
+		updateComponentData(data);
+		myDamageDealingSystem.attachComponent(this);
 	}
 	
 	/**
@@ -177,5 +174,41 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 
 	public void delete() {
 		myDamageSystem.detachComponent(this);
+	}
+	
+	@Override
+	public void setSystems(List<ISystem<?>> aSystemList) {
+		for (ISystem<?> system: aSystemList) {
+			if (system instanceof HealthSystem) {
+				myHealthSystem = (HealthSystem) system;
+			} else if (system instanceof PhysicalSystem) {
+				myPhysicalSystem = (PhysicalSystem) system;
+ 			} else if (system instanceof SpawningSystem){
+ 				myCreators = (SpawningSystem) system;
+ 			} else if (system instanceof TeamSystem){
+ 				myTeams = (TeamSystem) system;
+ 			} else if (system instanceof DamageDealingSystem) {
+ 				myDamageDealingSystem = (DamageDealingSystem) system;
+ 				myDamageDealingSystem.attachComponent(this);
+ 			}
+		}
+	}
+	@Override
+	public void redistributeThroughRouter(Router aRouter) {
+		super.setRouter(aRouter);
+		myObservers = new ArrayList<IObserver<IViewableDamageDealer>>();
+		aRouter.distributeViewableComponent(this);
+	}
+	@Override
+	public void updateComponentData(ComponentData aComponentData) {
+		myDamage = Integer.parseInt(aComponentData.getFields().get("myDamage"));
+		myDamageArc = Double.parseDouble(aComponentData.getFields().get("myDamageArc"));
+		myDamageRadius = Double.parseDouble(aComponentData.getFields().get("myDamageRadius"));
+		myDamageStrategy = myDamageDealingSystem.newStrategy(aComponentData.getFields().get("myDamageStrategy"));
+		
+		explodesOnEnemies = Boolean.parseBoolean(aComponentData.getFields().get("explodesOnEnemies"));
+		explodesOnAllies = Boolean.parseBoolean(aComponentData.getFields().get("explodesOnAllies"));
+		diesOnExplosion = Boolean.parseBoolean(aComponentData.getFields().get("diesOnExplosion"));
+		
 	}
 }

@@ -1,6 +1,6 @@
 {
   "myTimelineController": {
-    "myStartTime": 103756588906879
+    "myStartTime": 123588659348582
   },
   "myPlayerController": {
     "myPlayers": [
@@ -8,4987 +8,65 @@
         "myID": 0,
         "myLives": 5,
         "myMoney": {
-          "myValue": 1900
+          "myValue": 1800
         },
         "myPoints": 0
       }
     ]
   },
   "myLevelController": {
-    "myCurrentLevel": 822,
-    "myEntityFactory": {
-      "myComponentFactory": {
-        "mySystems": [
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {}
-        ],
-        "myRouter": {}
-      },
-      "myEntityDataStore": {
-        "myData": {
-          "enemy": {
-            "myName": "enemy",
-            "myComponents": {
-              "TeamComponent": {
-                "myFields": {
-                  "myTeamID": "them"
-                },
-                "myComponentName": "TeamComponent"
-              },
-              "PhysicalComponent": {
-                "myFields": {
-                  "myImageSize": "50",
-                  "myValidTerrains": "grass, water",
-                  "myHeading": "0",
-                  "myImagePath": "src/resources/boss.png"
-                },
-                "myComponentName": "PhysicalComponent"
-              },
-              "MoveableComponent": {
-                "myFields": {
-                  "removeOnGoal": "true",
-                  "explodesOnGoal": "false",
-                  "myMaxDistance": "1000",
-                  "explodesAtMaxDistance": "false",
-                  "myMoveSpeed": "1",
-                  "myTurnSpeed": "1",
-                  "myMovementCalc": "GreedyMovementStrategy"
-                },
-                "myComponentName": "MoveableComponent"
-              },
-              "CollidableComponent": {
-                "myFields": {
-                  "myCollisionRadius": "20"
-                },
-                "myComponentName": "CollidableComponent"
-              }
-            }
-          },
-          "projectile": {
-            "myName": "projectile",
-            "myComponents": {
-              "TeamComponent": {
-                "myFields": {
-                  "myTeamID": "us"
-                },
-                "myComponentName": "TeamComponent"
-              },
-              "PhysicalComponent": {
-                "myFields": {
-                  "myImageSize": "10",
-                  "myValidTerrains": "grass, water",
-                  "myHeading": "0",
-                  "myImagePath": "src/resources/cookie.png"
-                },
-                "myComponentName": "PhysicalComponent"
-              },
-              "MoveableComponent": {
-                "myFields": {
-                  "removeOnGoal": "true",
-                  "explodesOnGoal": "true",
-                  "myMaxDistance": "300",
-                  "explodesAtMaxDistance": "true",
-                  "myMoveSpeed": "5",
-                  "myTurnSpeed": "45",
-                  "myMovementCalc": "GreedyMovementStrategy"
-                },
-                "myComponentName": "MoveableComponent"
-              },
-              "CollidableComponent": {
-                "myFields": {
-                  "myCollisionRadius": "0"
-                },
-                "myComponentName": "CollidableComponent"
-              }
-            }
-          },
-          "tower": {
-            "myName": "tower",
-            "myComponents": {
-              "TeamComponent": {
-                "myFields": {
-                  "myTeamID": "us"
-                },
-                "myComponentName": "TeamComponent"
-              },
-              "PhysicalComponent": {
-                "myFields": {
-                  "myImageSize": "50",
-                  "myValidTerrains": "grass",
-                  "myHeading": "0",
-                  "myImagePath": "src/resources/cow.png"
-                },
-                "myComponentName": "PhysicalComponent"
-              },
-              "MoveableComponent": {
-                "myFields": {
-                  "removeOnGoal": "true",
-                  "explodesOnGoal": "false",
-                  "myMaxDistance": "1000",
-                  "myMoveSpeed": "0",
-                  "myTurnSpeed": "1",
-                  "myMovementCalc": "NoMovementStrategy"
-                },
-                "myComponentName": "MoveableComponent"
-              },
-              "CreatorComponent": {
-                "myFields": {
-                  "mySpawnName": "projectile",
-                  "mySpawningStrategy": "BasicSpawnStrategy",
-                  "myTimeBetweenSpawns": "100"
-                },
-                "myComponentName": "CreatorComponent"
-              },
-              "TargetingComponent": {
-                "myFields": {
-                  "myTargetsEnemies": "true",
-                  "myTargetingStrategy": "BadTargetingStrategy",
-                  "mySightRange": "400",
-                  "mySightWidth": "360"
-                },
-                "myComponentName": "TargetingComponent"
-              },
-              "PurchasableComponentData": {
-                "myFields": {
-                  "myPurchaseValue": "100"
-                },
-                "myComponentName": "PurchasableComponentData"
-              }
-            }
-          }
-        }
-      },
-      "myRouter": {},
-      "myMapMediator": {
-        "myTerrainMap": {
-          "myMapFactory": {},
-          "myMap": [
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 0.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 1.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 2.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 3.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 4.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 5.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 6.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "water",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x0000ff",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 7.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 8.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 9.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 10.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ],
-            [
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 0.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 1.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 2.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 3.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 4.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 5.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 6.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 7.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 8.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 9.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 10.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              },
-              {
-                "myTerrainData": {
-                  "type": "grass",
-                  "loc": {
-                    "myX": 11.0,
-                    "myY": 11.0,
-                    "myZ": 0.0
-                  },
-                  "myColor": "0x008000",
-                  "mySize": 50
-                }
-              }
-            ]
-          ],
-          "myTerrainWidth": 50.0,
-          "myTerrainHeight": 50.0,
-          "myNeighborStrategy": {}
-        },
-        "myMapData": {
-          "numXCells": 12,
-          "numYCells": 12,
-          "cellSize": 50,
-          "spawnPoints": {
-            "spawnPoint": [
-              {
-                "myX": 1.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              }
-            ]
-          },
-          "sinkPoints": {
-            "sinkPoint": [
-              {
-                "myX": 10.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              }
-            ]
-          },
-          "terrainList": [
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 5.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 7.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 6.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 5.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 6.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 5.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 5.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 4.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 1.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 7.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 2.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 7.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 5.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 7.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 7.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 3.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 2.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 9.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 8.0,
-                "myY": 10.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "water",
-              "loc": {
-                "myX": 6.0,
-                "myY": 6.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x0000ff",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 4.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 0.0,
-                "myY": 0.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 10.0,
-                "myY": 3.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 11.0,
-                "myY": 11.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 1.0,
-                "myY": 8.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            },
-            {
-              "type": "grass",
-              "loc": {
-                "myX": 6.0,
-                "myY": 9.0,
-                "myZ": 0.0
-              },
-              "myColor": "0x008000",
-              "mySize": 50
-            }
-          ],
-          "validTerrain": {}
-        }
-      },
-      "myEntityManager": {
-        "myEntityMap": {
-          "3e7065f4-6545-4d54-94f0-dbe2fe3e1147": {
-            "myID": "3e7065f4-6545-4d54-94f0-dbe2fe3e1147"
-          },
-          "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e": {
-            "myID": "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e"
-          },
-          "82b22738-f997-4ba0-872d-25b57bd52024": {
-            "myID": "82b22738-f997-4ba0-872d-25b57bd52024"
-          },
-          "9b520016-d903-4f8e-a269-dd286b7527bb": {
-            "myID": "9b520016-d903-4f8e-a269-dd286b7527bb"
-          },
-          "f24d6bb1-166e-480e-96d4-cd2a5210af3d": {
-            "myID": "f24d6bb1-166e-480e-96d4-cd2a5210af3d"
-          },
-          "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a": {
-            "myID": "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a"
-          },
-          "5f398b11-e8fc-4885-8d3b-8d0367c83ef9": {
-            "myID": "5f398b11-e8fc-4885-8d3b-8d0367c83ef9"
-          },
-          "6723c639-d42c-4f6f-8699-bf4474a3933a": {
-            "myID": "6723c639-d42c-4f6f-8699-bf4474a3933a"
-          },
-          "6014797e-3cec-4e10-b353-7b275da148c2": {
-            "myID": "6014797e-3cec-4e10-b353-7b275da148c2"
-          },
-          "8b94969f-be65-4117-a597-8ffe594232c1": {
-            "myID": "8b94969f-be65-4117-a597-8ffe594232c1"
-          },
-          "23e33e7f-dffd-4da7-93f8-df5d788a9b6f": {
-            "myID": "23e33e7f-dffd-4da7-93f8-df5d788a9b6f"
-          },
-          "724fb125-674c-4299-955a-57c11ccea61e": {
-            "myID": "724fb125-674c-4299-955a-57c11ccea61e"
-          },
-          "e2584056-1cf7-437d-83f3-fa0463dafc7d": {
-            "myID": "e2584056-1cf7-437d-83f3-fa0463dafc7d"
-          },
-          "d17b4aee-3c9b-47bb-86ba-c566e4603ec5": {
-            "myID": "d17b4aee-3c9b-47bb-86ba-c566e4603ec5"
-          },
-          "f2ee1f4a-1b92-4d88-8869-6fffdd03678d": {
-            "myID": "f2ee1f4a-1b92-4d88-8869-6fffdd03678d"
-          }
-        }
-      }
-    },
-    "myPhysicalSystem": {
-      "myComponents": [
-        {
-          "myImagePath": "src/resources/cow.png",
-          "myImageSize": 50.0,
-          "myValidTerrains": [
-            "grass"
-          ],
-          "myPosition": {
-            "myX": 475.0,
-            "myY": 125.0,
-            "myZ": 0.0
-          },
-          "myHeading": 86.27969658187716,
-          "myRouter": {}
-        },
-        {
-          "myImagePath": "src/resources/cookie.png",
-          "myImageSize": 10.0,
-          "myValidTerrains": [
-            "grass",
-            "water"
-          ],
-          "myPosition": {
-            "myX": 458.5466264331485,
-            "myY": 417.8336935518309,
-            "myZ": 0.0
-          },
-          "myHeading": 94.02182836365799,
-          "myRouter": {}
-        }
-      ]
-    },
-    "myMovementSystem": {
-      "myComponents": [
-        {
-          "myTurnSpeed": 1.0,
-          "myMoveSpeed": 0.0,
-          "explodesAtMaxDistance": false,
-          "myMaxDistance": 1000.0,
-          "myMovedDistance": 0.0,
-          "removeOnGoal": true,
-          "explodesOnGoal": false,
-          "myObservers": [],
-          "myRouter": {}
-        },
-        {
-          "myTurnSpeed": 45.0,
-          "myMoveSpeed": 0.0,
-          "explodesAtMaxDistance": true,
-          "myMaxDistance": 300.0,
-          "myMovedDistance": 295.0000000000004,
-          "removeOnGoal": true,
-          "explodesOnGoal": true,
-          "myObservers": [],
-          "myRouter": {}
-        }
-      ]
-    },
-    "myMapDataContainer": {
-      "numXCells": 12,
-      "numYCells": 12,
-      "cellSize": 50,
-      "spawnPoints": {
-        "spawnPoint": [
-          {
-            "myX": 1.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          }
-        ]
-      },
-      "sinkPoints": {
-        "sinkPoint": [
-          {
-            "myX": 10.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          }
-        ]
-      },
-      "terrainList": [
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 5.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 7.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 6.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 5.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 6.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 5.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 5.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 4.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 1.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 7.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 2.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 7.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 5.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 7.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 7.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 3.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 2.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 9.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 8.0,
-            "myY": 10.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "water",
-          "loc": {
-            "myX": 6.0,
-            "myY": 6.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x0000ff",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 4.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 0.0,
-            "myY": 0.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 10.0,
-            "myY": 3.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 11.0,
-            "myY": 11.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 1.0,
-            "myY": 8.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        },
-        {
-          "type": "grass",
-          "loc": {
-            "myX": 6.0,
-            "myY": 9.0,
-            "myZ": 0.0
-          },
-          "myColor": "0x008000",
-          "mySize": 50
-        }
-      ],
-      "validTerrain": {}
-    }
+    "myCurrentLevel": 337
   },
   "mySystemsController": {
-    "mySystems": [
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {}
-    ],
     "myCollisionDetectionSystem": {
       "myComponents": [
         {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "508e05ee-5ce2-401b-b79b-e1e09f8693e3"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "4095246a-6b31-4b5d-9284-b48420e2bd1b"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "fae6a341-51c7-4656-b8a3-3caeb25368e7"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "31889129-b984-4f43-9235-1f6340b646b1"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "d5f6b073-3cc2-45a1-9ed4-8348c7716d7c"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "a2594621-9401-412f-b650-f4a6e6a6763e"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "69840270-7ca7-44ad-a36d-68547e5a0cb0"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "3d33307e-03d7-4001-8091-cac99c1c4294"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "0376030b-5bb2-47e3-b01b-540cd580d1ba"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "133871cc-d8e8-43e4-bfe0-f9467373a87d"
+        },
+        {
           "myCollisionRadius": 0.0,
-          "myRouter": {}
+          "myEntityID": "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07"
+        },
+        {
+          "myCollisionRadius": 0.0,
+          "myEntityID": "14480a03-7751-490a-83e2-cc6dc388d11f"
         }
       ]
     },
@@ -5002,6 +80,116 @@
       "myComponents": [
         {
           "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 345.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "508e05ee-5ce2-401b-b79b-e1e09f8693e3"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 344.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "4095246a-6b31-4b5d-9284-b48420e2bd1b"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 343.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "fae6a341-51c7-4656-b8a3-3caeb25368e7"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 342.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "31889129-b984-4f43-9235-1f6340b646b1"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 341.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "d5f6b073-3cc2-45a1-9ed4-8348c7716d7c"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 340.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "a2594621-9401-412f-b650-f4a6e6a6763e"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 339.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "69840270-7ca7-44ad-a36d-68547e5a0cb0"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 338.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "3d33307e-03d7-4001-8091-cac99c1c4294"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 337.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "0376030b-5bb2-47e3-b01b-540cd580d1ba"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 336.9999999999997,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "133871cc-d8e8-43e4-bfe0-f9467373a87d"
+        },
+        {
+          "myTurnSpeed": 1.0,
           "myMoveSpeed": 0.0,
           "explodesAtMaxDistance": false,
           "myMaxDistance": 1000.0,
@@ -5009,23 +197,195 @@
           "removeOnGoal": true,
           "explodesOnGoal": false,
           "myObservers": [],
-          "myRouter": {}
+          "myEntityID": "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 0.0,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "1439bafb-37da-4822-961c-bbd6542083be"
         },
         {
           "myTurnSpeed": 45.0,
-          "myMoveSpeed": 0.0,
+          "myMoveSpeed": 5.0,
           "explodesAtMaxDistance": true,
           "myMaxDistance": 300.0,
-          "myMovedDistance": 295.0000000000004,
+          "myMovedDistance": 129.99999999999983,
           "removeOnGoal": true,
           "explodesOnGoal": true,
           "myObservers": [],
-          "myRouter": {}
+          "myEntityID": "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07"
+        },
+        {
+          "myTurnSpeed": 45.0,
+          "myMoveSpeed": 5.0,
+          "explodesAtMaxDistance": true,
+          "myMaxDistance": 300.0,
+          "myMovedDistance": 129.99999999999966,
+          "removeOnGoal": true,
+          "explodesOnGoal": true,
+          "myObservers": [],
+          "myEntityID": "14480a03-7751-490a-83e2-cc6dc388d11f"
         }
       ]
     },
     "myPhysicalSystem": {
       "myComponents": [
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 297.26177597308083,
+            "myY": 285.75631210222707,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766244,
+          "myEntityID": "508e05ee-5ce2-401b-b79b-e1e09f8693e3"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 296.57444144496316,
+            "myY": 285.0299711034825,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766245,
+          "myEntityID": "4095246a-6b31-4b5d-9284-b48420e2bd1b"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 295.8871069168455,
+            "myY": 284.303630104738,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766245,
+          "myEntityID": "fae6a341-51c7-4656-b8a3-3caeb25368e7"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 295.1997723887278,
+            "myY": 283.57728910599343,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766245,
+          "myEntityID": "31889129-b984-4f43-9235-1f6340b646b1"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 294.51243786061013,
+            "myY": 282.8509481072489,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766245,
+          "myEntityID": "d5f6b073-3cc2-45a1-9ed4-8348c7716d7c"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 293.82510333249246,
+            "myY": 282.12460710850434,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766246,
+          "myEntityID": "a2594621-9401-412f-b650-f4a6e6a6763e"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 293.1377688043748,
+            "myY": 281.3982661097598,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766246,
+          "myEntityID": "69840270-7ca7-44ad-a36d-68547e5a0cb0"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 292.4504342762571,
+            "myY": 280.67192511101524,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766246,
+          "myEntityID": "3d33307e-03d7-4001-8091-cac99c1c4294"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 291.76309974813944,
+            "myY": 279.9455841122707,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766246,
+          "myEntityID": "0376030b-5bb2-47e3-b01b-540cd580d1ba"
+        },
+        {
+          "myImagePath": "src/resources/boss.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 291.07576522002176,
+            "myY": 279.21924311352615,
+            "myZ": 0.0
+          },
+          "myHeading": 46.58051772766247,
+          "myEntityID": "133871cc-d8e8-43e4-bfe0-f9467373a87d"
+        },
         {
           "myImagePath": "src/resources/cow.png",
           "myImageSize": 50.0,
@@ -5033,12 +393,26 @@
             "grass"
           ],
           "myPosition": {
-            "myX": 475.0,
-            "myY": 125.0,
+            "myX": 225.0,
+            "myY": 75.0,
             "myZ": 0.0
           },
-          "myHeading": 86.27969658187716,
-          "myRouter": {}
+          "myHeading": 71.07475497978736,
+          "myEntityID": "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff"
+        },
+        {
+          "myImagePath": "src/resources/cow.png",
+          "myImageSize": 50.0,
+          "myValidTerrains": [
+            "grass"
+          ],
+          "myPosition": {
+            "myX": 175.0,
+            "myY": 175.0,
+            "myZ": 0.0
+          },
+          "myHeading": 42.17326842310458,
+          "myEntityID": "1439bafb-37da-4822-961c-bbd6542083be"
         },
         {
           "myImagePath": "src/resources/cookie.png",
@@ -5048,12 +422,27 @@
             "water"
           ],
           "myPosition": {
-            "myX": 458.5466264331485,
-            "myY": 417.8336935518309,
+            "myX": 261.41360003035516,
+            "myY": 199.1341772147116,
             "myZ": 0.0
           },
-          "myHeading": 94.02182836365799,
-          "myRouter": {}
+          "myHeading": 74.75039702887814,
+          "myEntityID": "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07"
+        },
+        {
+          "myImagePath": "src/resources/cookie.png",
+          "myImageSize": 10.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 272.53345059146613,
+            "myY": 260.948973325584,
+            "myZ": 0.0
+          },
+          "myHeading": 41.38732801257429,
+          "myEntityID": "14480a03-7751-490a-83e2-cc6dc388d11f"
         }
       ]
     },
@@ -5065,22 +454,34 @@
         {
           "myTimeBetweenSpawns": 100,
           "mySpawnName": "projectile",
-          "myTimeSinceSpawning": 73,
+          "myTimeSinceSpawning": 26,
           "myChildren": [
             {
-              "myID": "724fb125-674c-4299-955a-57c11ccea61e"
+              "myID": "0b85a701-26ee-49a0-a51e-7df86854001e",
+              "myName": "projectile"
             },
             {
-              "myID": "6723c639-d42c-4f6f-8699-bf4474a3933a"
-            },
-            {
-              "myID": "d17b4aee-3c9b-47bb-86ba-c566e4603ec5"
-            },
-            {
-              "myID": "3e7065f4-6545-4d54-94f0-dbe2fe3e1147"
+              "myID": "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07",
+              "myName": "projectile"
             }
           ],
-          "myRouter": {}
+          "myEntityID": "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff"
+        },
+        {
+          "myTimeBetweenSpawns": 100,
+          "mySpawnName": "projectile",
+          "myTimeSinceSpawning": 26,
+          "myChildren": [
+            {
+              "myID": "132e1e6a-f0d8-430e-b8fe-f2ee22f9fca1",
+              "myName": "projectile"
+            },
+            {
+              "myID": "14480a03-7751-490a-83e2-cc6dc388d11f",
+              "myName": "projectile"
+            }
+          ],
+          "myEntityID": "1439bafb-37da-4822-961c-bbd6542083be"
         }
       ]
     },
@@ -5090,19 +491,73 @@
           "mySightRange": 400.0,
           "mySightWidth": 360.0,
           "myTargetsEnemies": true,
-          "myRouter": {}
+          "myEntityID": "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff"
+        },
+        {
+          "mySightRange": 400.0,
+          "mySightWidth": 360.0,
+          "myTargetsEnemies": true,
+          "myEntityID": "1439bafb-37da-4822-961c-bbd6542083be"
         }
       ]
     },
     "myTeamSystem": {
       "myComponents": [
         {
-          "myTeamID": "us",
-          "myRouter": {}
+          "myTeamID": "them",
+          "myEntityID": "508e05ee-5ce2-401b-b79b-e1e09f8693e3"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "4095246a-6b31-4b5d-9284-b48420e2bd1b"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "fae6a341-51c7-4656-b8a3-3caeb25368e7"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "31889129-b984-4f43-9235-1f6340b646b1"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "d5f6b073-3cc2-45a1-9ed4-8348c7716d7c"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "a2594621-9401-412f-b650-f4a6e6a6763e"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "69840270-7ca7-44ad-a36d-68547e5a0cb0"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "3d33307e-03d7-4001-8091-cac99c1c4294"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "0376030b-5bb2-47e3-b01b-540cd580d1ba"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "133871cc-d8e8-43e4-bfe0-f9467373a87d"
         },
         {
           "myTeamID": "us",
-          "myRouter": {}
+          "myEntityID": "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "1439bafb-37da-4822-961c-bbd6542083be"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "14480a03-7751-490a-83e2-cc6dc388d11f"
         }
       ]
     },
@@ -5112,50 +567,69 @@
   },
   "myEntityManager": {
     "myEntityMap": {
-      "3e7065f4-6545-4d54-94f0-dbe2fe3e1147": {
-        "myID": "3e7065f4-6545-4d54-94f0-dbe2fe3e1147"
+      "133871cc-d8e8-43e4-bfe0-f9467373a87d": {
+        "myID": "133871cc-d8e8-43e4-bfe0-f9467373a87d",
+        "myName": "enemy"
       },
-      "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e": {
-        "myID": "b9dfa9a4-b18b-41f2-aa99-4d5136298c2e"
+      "69840270-7ca7-44ad-a36d-68547e5a0cb0": {
+        "myID": "69840270-7ca7-44ad-a36d-68547e5a0cb0",
+        "myName": "enemy"
       },
-      "82b22738-f997-4ba0-872d-25b57bd52024": {
-        "myID": "82b22738-f997-4ba0-872d-25b57bd52024"
+      "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff": {
+        "myID": "710dac8d-dcb0-4a31-97e4-0ed4c5d8cfff",
+        "myName": "tower"
       },
-      "9b520016-d903-4f8e-a269-dd286b7527bb": {
-        "myID": "9b520016-d903-4f8e-a269-dd286b7527bb"
+      "a2594621-9401-412f-b650-f4a6e6a6763e": {
+        "myID": "a2594621-9401-412f-b650-f4a6e6a6763e",
+        "myName": "enemy"
       },
-      "f24d6bb1-166e-480e-96d4-cd2a5210af3d": {
-        "myID": "f24d6bb1-166e-480e-96d4-cd2a5210af3d"
+      "0376030b-5bb2-47e3-b01b-540cd580d1ba": {
+        "myID": "0376030b-5bb2-47e3-b01b-540cd580d1ba",
+        "myName": "enemy"
       },
-      "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a": {
-        "myID": "a8f8f9b9-e3f6-4cf3-9c7c-3b47aea4a04a"
+      "0b85a701-26ee-49a0-a51e-7df86854001e": {
+        "myID": "0b85a701-26ee-49a0-a51e-7df86854001e",
+        "myName": "projectile"
       },
-      "5f398b11-e8fc-4885-8d3b-8d0367c83ef9": {
-        "myID": "5f398b11-e8fc-4885-8d3b-8d0367c83ef9"
+      "fae6a341-51c7-4656-b8a3-3caeb25368e7": {
+        "myID": "fae6a341-51c7-4656-b8a3-3caeb25368e7",
+        "myName": "enemy"
       },
-      "6723c639-d42c-4f6f-8699-bf4474a3933a": {
-        "myID": "6723c639-d42c-4f6f-8699-bf4474a3933a"
+      "3d33307e-03d7-4001-8091-cac99c1c4294": {
+        "myID": "3d33307e-03d7-4001-8091-cac99c1c4294",
+        "myName": "enemy"
       },
-      "6014797e-3cec-4e10-b353-7b275da148c2": {
-        "myID": "6014797e-3cec-4e10-b353-7b275da148c2"
+      "132e1e6a-f0d8-430e-b8fe-f2ee22f9fca1": {
+        "myID": "132e1e6a-f0d8-430e-b8fe-f2ee22f9fca1",
+        "myName": "projectile"
       },
-      "8b94969f-be65-4117-a597-8ffe594232c1": {
-        "myID": "8b94969f-be65-4117-a597-8ffe594232c1"
+      "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07": {
+        "myID": "6d3dbd6d-33a6-4d77-9712-3ace60ba0f07",
+        "myName": "projectile"
       },
-      "23e33e7f-dffd-4da7-93f8-df5d788a9b6f": {
-        "myID": "23e33e7f-dffd-4da7-93f8-df5d788a9b6f"
+      "4095246a-6b31-4b5d-9284-b48420e2bd1b": {
+        "myID": "4095246a-6b31-4b5d-9284-b48420e2bd1b",
+        "myName": "enemy"
       },
-      "724fb125-674c-4299-955a-57c11ccea61e": {
-        "myID": "724fb125-674c-4299-955a-57c11ccea61e"
+      "31889129-b984-4f43-9235-1f6340b646b1": {
+        "myID": "31889129-b984-4f43-9235-1f6340b646b1",
+        "myName": "enemy"
       },
-      "e2584056-1cf7-437d-83f3-fa0463dafc7d": {
-        "myID": "e2584056-1cf7-437d-83f3-fa0463dafc7d"
+      "14480a03-7751-490a-83e2-cc6dc388d11f": {
+        "myID": "14480a03-7751-490a-83e2-cc6dc388d11f",
+        "myName": "projectile"
       },
-      "d17b4aee-3c9b-47bb-86ba-c566e4603ec5": {
-        "myID": "d17b4aee-3c9b-47bb-86ba-c566e4603ec5"
+      "d5f6b073-3cc2-45a1-9ed4-8348c7716d7c": {
+        "myID": "d5f6b073-3cc2-45a1-9ed4-8348c7716d7c",
+        "myName": "enemy"
       },
-      "f2ee1f4a-1b92-4d88-8869-6fffdd03678d": {
-        "myID": "f2ee1f4a-1b92-4d88-8869-6fffdd03678d"
+      "508e05ee-5ce2-401b-b79b-e1e09f8693e3": {
+        "myID": "508e05ee-5ce2-401b-b79b-e1e09f8693e3",
+        "myName": "enemy"
+      },
+      "1439bafb-37da-4822-961c-bbd6542083be": {
+        "myID": "1439bafb-37da-4822-961c-bbd6542083be",
+        "myName": "tower"
       }
     }
   }
