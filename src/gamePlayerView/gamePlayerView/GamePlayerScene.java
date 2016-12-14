@@ -169,8 +169,8 @@ public class GamePlayerScene {
 		
 		// Player info
 		PlayerInfoBox playerInfoBox = new PlayerInfoBox(myResourceBundle, myDisplayBoxFactory);
-//		myCash.add((IPlayerAcceptor) playerInfoBox.getMyWallet()); ///FIX LATER
-//		myLives.add((IPlayerAcceptor) playerInfoBox.getMyLives());//// FIX LATER
+		myCash.add((IPlayerAcceptor) playerInfoBox.getMyWallet()); ///FIX LATER
+		myLives.add((IPlayerAcceptor) playerInfoBox.getMyLives());//// FIX LATER
 		
 		myLeftPane.add(gamePlayOptions.getNode());
 		myLeftPane.add(playerInfoBox.getNode());

@@ -37,11 +37,13 @@ public class PlayerInfoBox extends VBox implements IGUIPiece{
 	}
 
 	public InfoBox createWalletInfo() {
-		return myDisplayBoxFactory.createBox(myResourceBundle.getString("Cash"));
+		myWallet = myDisplayBoxFactory.createBox(myResourceBundle.getString("Cash"));
+		return myWallet;
 	}
 	
 	public InfoBox createLivesInfo() {
-		return myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
+		myLife = myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
+		return myLife;
 	}
 	
 	public InfoBox getMyWallet() {
