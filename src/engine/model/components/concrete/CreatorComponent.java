@@ -20,7 +20,6 @@ import engine.model.systems.PhysicalSystem;
 import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
 import gamePlayerView.gamePlayerView.Router;
-import utility.Point;
 import engine.model.weapons.DamageInfo;
 
 /**
@@ -36,6 +35,7 @@ import engine.model.weapons.DamageInfo;
 public class CreatorComponent extends AbstractComponent implements ICreator, IViewableCreator {
 
 	private transient ISpawningStrategy mySpawningStrategy;
+	private boolean homingProjectiles;
 	private int myTimeBetweenSpawns;
 	private String mySpawnName;
 
@@ -60,6 +60,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	private DamageInfo myStats;
 	@Hide
 	private List<IObserver<IViewableCreator>> myObservers;
+
 	
 	public CreatorComponent(IEntity aEntity, SpawningSystem spawning,
 			PhysicalSystem physical,
@@ -80,6 +81,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		mySpawnName = data.getFields().get("mySpawnName");
 		myTimeBetweenSpawns = Integer.parseInt(data.getFields().get("myTimeBetweenSpawns"));
 		mySpawningStrategy = mySpawning.newStrategy(data.getFields().get("mySpawningStrategy"));
+		homingProjectiles = Boolean.parseBoolean(data.getFields().get("homingProjectiles"));
 		
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<ConcreteEntity>();
@@ -93,13 +95,14 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	 */
 	public void spawnIfReady() {
 		myTarget = myTargeting.getTarget(this);
-		if (myTarget instanceof Point)
-			System.out.println("there");
 		if (myPhysical.get(this) != null)
-			if (myTarget != null)
-				if (myTimeSinceSpawning >= myTimeBetweenSpawns) {
+			if (myTarget != null && myTimeSinceSpawning >= myTimeBetweenSpawns) {
+				myTimeSinceSpawning = 0;
+				if (homingProjectiles)
 					myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
-					myTimeSinceSpawning = 0;
+				else
+					myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget.getPosition(), myMovement, myPhysical, this));
+					
 		} else{
 			myTimeSinceSpawning++;
 		}
