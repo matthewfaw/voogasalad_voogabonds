@@ -21,6 +21,7 @@ import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.playerinfo.IViewablePlayer;
 import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.GUIPieces.InfoBoxes.ErrorPopup;
+import gamePlayerView.GUIPieces.InfoBoxes.LostPopUp;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.scene.text.Text;
@@ -56,6 +57,9 @@ public class Router {
 	public void createNewViewableComponent(IViewablePhysical physicalComponent) 
 	{
 		myGamePlayerScene.getMapDisplay().giveViewableComponent(physicalComponent);
+	}
+	public void distributeGameLost() {
+		LostPopUp lostPopup= new LostPopUp();
 	}
 
 	public void distributeErrors(String aErrorMessage)
