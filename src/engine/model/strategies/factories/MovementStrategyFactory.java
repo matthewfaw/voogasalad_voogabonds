@@ -29,7 +29,7 @@ public class MovementStrategyFactory extends AbstractStrategyFactory<IMovementSt
 		IMovementStrategy result;
 		try {
 			//TODO: Remove this hack
-			Class<?> strategyType = Class.forName(strategyName.substring(4).replace('/', '.'));
+			Class<?> strategyType = Class.forName(strategyName);
 			Constructor<?> construct = strategyType.getConstructor(this.getClass());
 			result = (IMovementStrategy) construct.newInstance(this);
 		} catch (
