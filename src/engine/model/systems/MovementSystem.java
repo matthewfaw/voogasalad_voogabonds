@@ -34,9 +34,7 @@ public class MovementSystem implements ISystem<MoveableComponent>, IObserver<Tim
 	public void update(TimelineController aChangedObject) {
 		List<MoveableComponent> components = new ArrayList<MoveableComponent>();
 		components.addAll(getComponents());
-		System.out.println("moving components");
 		for (MoveableComponent mc :components) {
-			System.out.println("moving a component");
 			mc.move();
 		}
 
