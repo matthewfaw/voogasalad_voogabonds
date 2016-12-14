@@ -12,7 +12,7 @@
         "myImageSize": "1",
         "myValidTerrains": "grass, water",
         "myHeading": "0",
-        "myImagePath": "resources/boss.png"
+        "myImagePath": "resources/balloon.png"
       },
       "myComponentName": "PhysicalComponent"
     },

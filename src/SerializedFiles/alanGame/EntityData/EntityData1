@@ -9,10 +9,10 @@
     },
     "PhysicalComponent": {
       "myFields": {
-        "myImageSize": "50",
+        "myImageSize": "1",
         "myValidTerrains": "grass",
         "myHeading": "0",
-        "myImagePath": "resources/cow.png"
+        "myImagePath": "resources/ninjamonkey.png"
       },
       "myComponentName": "PhysicalComponent"
     },

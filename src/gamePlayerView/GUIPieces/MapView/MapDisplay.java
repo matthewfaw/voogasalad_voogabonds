@@ -84,6 +84,7 @@ public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
         						myRoot));
         }
         
+        
         myRoot.getChildren().add(myPane);
         myBackground.setRoot(myRoot);
 

@@ -74,7 +74,10 @@ public class Draggables extends ListView<ImageView> implements IGUIPiece, IObser
 				towerImageView.setOpacity(DEFAULT_UNAFFORDABLE_OPACITY);
 			}
 			myImageToDataMap.put(towerImageView, t);
+			towerImageView.setFitHeight(50);
+			towerImageView.setFitWidth(50);
 			towerImageViews.add(towerImageView);
+			this.setFixedCellSize(50);
 		
 		}
 		
