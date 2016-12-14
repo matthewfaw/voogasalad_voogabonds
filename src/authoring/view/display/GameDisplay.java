@@ -10,15 +10,27 @@ import java.util.Set;
 
 import authoring.controller.MapDataContainer;
 import authoring.model.map.TerrainData;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import utility.Point;
 
 /**
@@ -80,6 +92,7 @@ public class GameDisplay {
 		makeUsefulSpawn();
 		makeUsefulTerrain();
 		populateGrid();
+		dragHandler();
 	}
 	
 	private void setUpScreenResolution() {
@@ -190,7 +203,28 @@ public class GameDisplay {
 		}
 	}
 
-
+	private void dragHandler() {
+		ObservableList <Node> entries = terrainGrid.getChildren();
+		for (Node elem : entries){
+		    elem.setOnDragDetected(new EventHandler<MouseEvent>() {
+		        @Override public void handle(MouseEvent e) {
+		            Dragboard db = elem.startDragAndDrop(TransferMode.ANY);
+		            ClipboardContent cb = new ClipboardContent();
+		            cb.put(DataFormat.PLAIN_TEXT, "");
+		            db.setContent(cb);
+		            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		        }
+		    });
+		    elem.setOnDragOver(new EventHandler<DragEvent>() {
+		        @Override public void handle(DragEvent e) {
+		            e.acceptTransferModes(TransferMode.ANY);
+		            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+		        }
+		    });
+		}
+	}
+	
+	
 	public void setCols(int numCols) {
 		columns = numCols;
 		terrainGrid.setPrefColumns(columns);
