@@ -16,7 +16,7 @@
     "PhysicalComponent": {
       "myFields": {
         "myImageSize": "10",
-        "myValidTerrains": "grass",
+        "myValidTerrains": "Grass",
         "myImagePath": "resources\\cookie.png"
       },
       "myComponentName": "PhysicalComponent"
