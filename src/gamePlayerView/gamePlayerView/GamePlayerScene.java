@@ -151,20 +151,9 @@ public class GamePlayerScene {
 		myResources.add(towercolumn);
 		
 //		ResourceStoreView resourceStoreView = new ResourceStoreView();
-		
+//		myResources.add(resourceStoreView);
 //		myRightPane.add(resourceStoreView);
 	}
-	
-//	private RightPane createRightPane() {
-//		RightPane pane=new RightPane();
-//		TowerColumn myTowerColumn=new TowerColumn();
-//		Collection<Node> myCollection=new ArrayList<Node>();
-//		myCollection.add(myTowerColumn.getView());
-//		myResources.add(myTowerColumn);
-//		pane.add(myCollection);
-//
-//		return pane;
-//	}
 
 	public void createLeftPane() {
 		
