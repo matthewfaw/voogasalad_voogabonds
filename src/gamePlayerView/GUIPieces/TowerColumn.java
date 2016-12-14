@@ -32,21 +32,20 @@ import javafx.scene.text.Font;
 
 /**
  * @author Guhan Muruganandam & Grayson Wise
- * 
+ * @author owenchung(refactored)
  */
-public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>, IGUIPiece {
+public class TowerColumn extends VBox implements IResourceAcceptor, IObserver<IViewablePlayer>, IGUIPiece {
 	
 	//private ResourceBundle mytext=ResourceBundle.getBundle("Resources/textfiles");
-	private VBox myTowerColumn;
 	private ImageView towerToBeDragged;
 	private Map<ImageView,EntityData> towerSettings= new HashMap<ImageView,EntityData>();
 	private TextArea towerDataDisplay;
-	private ListView<ImageView> towerInfo;
+	private ListView<ImageView> myTowerInfo;
 	//private VBox myColumn;
 
 	
-	public TowerColumn(){
-		myTowerColumn= buildVBox();
+	public TowerColumn() {
+		buildTowerColumn();
 	}
 	
 	public EntityData getTowerData(String aTowerName)
@@ -62,21 +61,18 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	/**
 	 * Builds object that will actually be returned
 	 */
-	private VBox buildVBox() {
-	    VBox vbox=new VBox();
+	private void buildTowerColumn() {
 	    towerDataDisplay= new TextArea();
-	    towerInfo=new ListView<ImageView>(); 
+	    myTowerInfo=new ListView<ImageView>(); 
 	    //populatetowerInfo(availableTowers,towerDataDisplay);
 	    
 	    Label heading = new Label("TOWERS");
 	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
-	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
+	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 	    
-	    vbox.getChildren().addAll(heading,resourceTabs,towerDataDisplay);
-	    
-	    return vbox;
+	    getChildren().addAll(heading,resourceTabs,towerDataDisplay);
 	}
 	/*
 	 * Creates ListView for the selected towerData
@@ -103,18 +99,18 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 			towerSettings.put(towerPicture,t);
 			items.add(towerPicture);
 		}
-        towerInfo.setItems(items);
-        setDragFunctionality(towerInfo);
-        setPopulateFunctionality(towerInfo,towerDataDisplay);
-        myTowerColumn.getChildren().clear();
+        myTowerInfo.setItems(items);
+        setDragFunctionality(myTowerInfo);
+        setPopulateFunctionality(myTowerInfo,towerDataDisplay);
+        getChildren().clear();
         
         Label heading = new Label("TOWERS");
 	    heading.setFont(new Font("Cambria",18));
 	    TabPane resourceTabs= new TabPane();
-	    resourceTabs.getTabs().add(buildTab(towerInfo, "Towers"));
+	    resourceTabs.getTabs().add(buildTab(myTowerInfo, "Towers"));
 	    resourceTabs.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         
-	    myTowerColumn.getChildren().addAll(heading,resourceTabs,towerDataDisplay);
+	    getChildren().addAll(heading,resourceTabs,towerDataDisplay);
 	}
 	/*
 	 * Sets Mouse Click event for List View
@@ -164,7 +160,7 @@ public class TowerColumn implements IResourceAcceptor,IObserver<IViewablePlayer>
 	}
 
 	public Node getView() {
-		return myTowerColumn;
+		return this;
 	}
 	
 	public void acceptResources(IObservable<IViewablePlayer> aPlayer) {

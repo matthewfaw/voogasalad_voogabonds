@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 /**
  * 
  * @author Guhan Muruganandam
- *
+ * @author owenchung (refactored)
  */
 
 public class GamePlayOptions extends VBox implements IGUIPiece {
@@ -52,7 +52,7 @@ public class GamePlayOptions extends VBox implements IGUIPiece {
 		Button pauseButton = myButtonFactory.getButton("pause", e -> myAppController.onPauseButtonPressed());
 		Button fastforwardButton = myButtonFactory.getButton("Fast-Forward", e -> myAppController.onFastButtonPressed());
 		Button saveButton = myButtonFactory.getButton("Save", e -> myAppController.onSavePressed());
-		List<Button> buttons = new ArrayList<Button>();
+		List<Button> buttons = new ArrayList<Button>(4);
 		buttons.add(playButton);
 		buttons.add(pauseButton);
 		buttons.add(fastforwardButton);		
