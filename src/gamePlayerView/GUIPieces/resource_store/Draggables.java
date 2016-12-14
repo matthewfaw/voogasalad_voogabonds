@@ -1,7 +1,6 @@
 package gamePlayerView.GUIPieces.resource_store;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -26,7 +24,6 @@ import javafx.scene.input.TransferMode;
 public class Draggables extends ListView<ImageView> implements IGUIPiece, IObservable<Draggables>{
 	public static final double DEFAULT_UNAFFORDABLE_OPACITY = 0.3;
 	public static final String SOURCE_PATH = "src/";
-	private ListView<ImageView> myTowerImages;
 	private Map<ImageView,EntityData> myImageToDataMap;
 	private ImageView mySelectedImage;
 	private List<IObserver<Draggables>> myObservers;
