@@ -70,12 +70,12 @@ public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
     
     public void setMap(MapDataContainer aMapData){
        
-        
-        myBackground = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
+        int cellSizeToUse = (int) Math.min((myRoot.getHeight()/aMapData.getNumYCells()), (myRoot.getHeight()/aMapData.getNumXCells()));
+
+        myBackground = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), cellSizeToUse, myAppController);
         
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
-            int cellSizeToUse = (int) Math.min((myRoot.getHeight()/aMapData.getNumYCells()), (myRoot.getHeight()/aMapData.getNumXCells()));
             aMapData.cellSize(cellSizeToUse);
         	myPane.getChildren().add (myBackground.fillCell((int)terrainData.getLoc().getX(), 
         	                                             (int)terrainData.getLoc().getY(), 
@@ -185,4 +185,9 @@ public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
 	public Node getNode() {
 		return myRoot;
 	}
+
+    public Pane getPane () {
+        // TODO Auto-generated method stub
+        return myRoot;
+    }
 }

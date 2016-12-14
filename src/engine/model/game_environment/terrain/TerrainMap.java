@@ -18,12 +18,12 @@ public class TerrainMap {
 	
 	private INeighborStrategy<Terrain> myNeighborStrategy;
 	
-	public TerrainMap(MapDataContainer aTerrainMapData)
+	public TerrainMap(MapDataContainer aTerrainMapData, int pixelWidth)
 	{
 		myMapFactory = new TerrainGridFactory();
 		myMap = myMapFactory.constructTerrainMap(aTerrainMapData, aTerrainMapData.getCellSize());
 
-		myTerrainWidth = aTerrainMapData.getCellSize();
+		myTerrainWidth = pixelWidth / Math.max(aTerrainMapData.getNumXCells(),  aTerrainMapData.getNumYCells());
 		myTerrainHeight = myTerrainWidth;
 		
 		//TODO: Change this to be constructed in a factory, perhaps

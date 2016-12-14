@@ -3,7 +3,7 @@
   "myComponents": {
     "PhysicalComponent": {
       "myFields": {
-        "myImageSize": "10",
+        "myImageSize": "2",
         "myValidTerrains": "purp",
         "myImagePath": "resources/boss.png"
       },

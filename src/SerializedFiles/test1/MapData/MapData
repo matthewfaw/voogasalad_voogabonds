@@ -1,7 +1,7 @@
 {
   "numXCells": 2,
   "numYCells": 2,
-  "cellSize": 0,
+  "cellSize": 50,
   "spawnPoints": {
     "over": [
       {
@@ -22,7 +22,7 @@
   },
   "terrainList": [
     {
-      "type": "Ground",
+      "type": "purp",
       "loc": {
         "myX": 0.0,
         "myY": 0.0,
@@ -32,7 +32,7 @@
       "mySize": 293
     },
     {
-      "type": "Ground",
+      "type": "purp",
       "loc": {
         "myX": 0.0,
         "myY": 1.0,
@@ -42,7 +42,7 @@
       "mySize": 326
     },
     {
-      "type": "Ground",
+      "type": "purp",
       "loc": {
         "myX": 1.0,
         "myY": 1.0,
@@ -52,7 +52,7 @@
       "mySize": 293
     },
     {
-      "type": "Ground",
+      "type": "purp",
       "loc": {
         "myX": 1.0,
         "myY": 0.0,
