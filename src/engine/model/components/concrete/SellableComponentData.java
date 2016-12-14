@@ -2,7 +2,6 @@ package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
 import engine.model.components.AbstractComponent;
-import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.Router;
 
 /**

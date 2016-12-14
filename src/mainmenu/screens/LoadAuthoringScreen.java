@@ -104,7 +104,7 @@ public class LoadAuthoringScreen {
 		chooseProjectTable.setOnMousePressed(new EventHandler<MouseEvent>() {
 		    @Override 
 		    public void handle(MouseEvent event) {
-		        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+		        if (event.isPrimaryButtonDown() ){
 		        	GSD = new GameStateDeserializer();
 		        	showSelectedTitle.setText(chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName());
 		        	selectedGame = chooseProjectTable.getSelectionModel().getSelectedItem().getProjectName();

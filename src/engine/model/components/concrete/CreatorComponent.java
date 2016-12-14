@@ -21,7 +21,6 @@ import engine.model.systems.SpawningSystem;
 import engine.model.systems.TargetingSystem;
 import gamePlayerView.gamePlayerView.Router;
 import engine.model.weapons.DamageInfo;
-import utility.Point;
 
 /**
  * The purpose of this class is to manage the work necessary
@@ -83,7 +82,6 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<ConcreteEntity>();
-		myTarget = new Point(400, 400);
 		spawning.attachComponent(this);
 	}
 
@@ -93,9 +91,12 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	 * towards the target determined by the targeting strategy
 	 */
 	public void spawnIfReady() {
-		if (myTimeSinceSpawning >= myTimeBetweenSpawns && myTarget != null && myPhysical.get(this) != null) {
-			myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
-			myTimeSinceSpawning = 0;
+		myTarget = myTargeting.getTarget(this);
+		if (myPhysical.get(this) != null)
+			if (myTarget != null)
+				if (myTimeSinceSpawning >= myTimeBetweenSpawns) {
+					myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
+					myTimeSinceSpawning = 0;
 		} else{
 			myTimeSinceSpawning++;
 		}

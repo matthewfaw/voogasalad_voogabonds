@@ -11,8 +11,8 @@ abstract public class AbstractTargetingStrategy implements ITargetingStrategy{
 	protected List<PhysicalComponent> getTargets(PhysicalSystem map, IPhysical location, ITargeting targeter) {
 		List<PhysicalComponent> targets = map.withinRange(
 				location.getPosition(),
-				location.getHeading(),
 				targeter.getTargetWedgeRadius(),
+				location.getHeading(),
 				targeter.getTargetWedgeWidth());
 		
 		return targets;

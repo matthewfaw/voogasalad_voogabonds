@@ -105,7 +105,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	
 	private void setNumXCells(int x) throws Exception{
 		if (x <= 0){
-			throw new Exception("The map must be wider than 0 cells.");
+			throw new IllegalArgumentException("The map must be wider than 0 cells.");
 		}
 		this.numXCells = x;
 		System.out.println("Total XCells: " + this.numXCells);

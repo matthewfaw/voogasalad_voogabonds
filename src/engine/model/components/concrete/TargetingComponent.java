@@ -44,7 +44,7 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 		
 		mySightRange = Double.parseDouble(componentData.getFields().get("mySightRange"));
 		mySightWidth = Double.parseDouble(componentData.getFields().get("mySightWidth"));
-		myTargetsEnemies = Boolean.parseBoolean(componentData.getFields().get("myTargestEnemies"));
+		myTargetsEnemies = Boolean.parseBoolean(componentData.getFields().get("myTargetsEnemies"));
 		myTargetingStrategy = target.newStrategy(componentData.getFields().get("myTargetingStrategy"));
 				
 		target.attachComponent(this);

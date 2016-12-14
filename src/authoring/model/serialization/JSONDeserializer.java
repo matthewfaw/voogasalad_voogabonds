@@ -8,6 +8,7 @@ import java.util.Scanner;
 import authoring.model.TowerData;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 public class JSONDeserializer {
@@ -21,6 +22,7 @@ public class JSONDeserializer {
 	
 	public Object deserialize(String json, Class cls){
 		
+		// gson = new Gson();
 		gson = new Gson();
 		return (gson.fromJson(json, cls));
 		
