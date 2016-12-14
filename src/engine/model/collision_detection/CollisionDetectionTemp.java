@@ -6,6 +6,8 @@ import java.util.List;
 
 import engine.IObservable;
 import engine.IObserver;
+import engine.model.components.IComponent;
+import engine.model.entities.IEntity;
 import engine.model.systems.ISystem;
 
 /**
@@ -91,6 +93,36 @@ public class CollisionDetectionTemp implements IObserver<ICollidable>, IObservab
 
 	@Override
 	public void remove(ICollidable aRemovedObject) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List getComponents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getComponent(IComponent component) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getComponent(IEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void attachComponent(Object aComponet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void detachComponent(Object aComponent) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -91,7 +91,7 @@ public class AuthoringTab extends Tab {
 	}
 	
 	private void handleOldProject() throws IOException {
-		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router);
+		LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router, myResources.getString("LoadExistingAuthoringTitle"));
         System.out.println("NUMXCELLS: " + router.getMapDataContainer().getNumXCells());
         System.out.println("NUMYCELLS: " + router.getMapDataContainer().getNumYCells());
 	}

@@ -8,6 +8,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableMovable;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
@@ -29,24 +30,24 @@ import utility.Point;
  */
 public class MoveableComponent extends AbstractComponent implements IMovable, IViewableMovable {
 	@Hide
-	private MovementSystem myMovement;
+	private transient MovementSystem myMovement;
 	@Hide
-	private PhysicalSystem myPhysical;
+	private transient PhysicalSystem myPhysical;
 	@Hide
-	private TargetingSystem myTargeting;
+	private transient TargetingSystem myTargeting;
 	@Hide
-	private CollisionDetectionSystem myCollision;
+	private transient CollisionDetectionSystem myCollision;
 	@Hide
-	private DamageDealingSystem myDamage;
+	private transient DamageDealingSystem myDamage;
 	@Hide
-	private BountySystem myBounty;
+	private transient BountySystem myBounty;
 	
-	private IMovementStrategy myMovementCalc;
+	private transient IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
 	
 	@Hide
-	private IPosition myGoal;
+	private transient IPosition myGoal;
 	
 	//NOTE: So that entities can die after traveling a certain distance.
 	private boolean explodesAtMaxDistance;
@@ -60,7 +61,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	@Hide
 	private List<IObserver<IViewableMovable>> myObservers;
 
-	public MoveableComponent(
+	public MoveableComponent(IEntity aEntity, 
 			MovementSystem movement,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
@@ -70,7 +71,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 			DamageDealingSystem damage,
 			ComponentData data
 			) throws ClassNotFoundException {
-		super(router);
+		super(aEntity, router);
 		
 		myMovement = movement;
 		myPhysical = physical;
@@ -185,11 +186,6 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		return myMovementCalc;
 	}
 
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
-	
 	@Override
 	public void delete() {
 		myMovement.detachComponent(this);

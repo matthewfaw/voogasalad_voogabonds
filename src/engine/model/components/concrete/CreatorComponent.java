@@ -9,6 +9,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.ICreator;
+import engine.model.entities.ConcreteEntity;
 import engine.model.components.viewable_interfaces.IViewableCreator;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.IEntity;
@@ -34,39 +35,39 @@ import engine.model.weapons.DamageInfo;
  */
 public class CreatorComponent extends AbstractComponent implements ICreator, IViewableCreator {
 
-	private ISpawningStrategy mySpawningStrategy;
+	private transient ISpawningStrategy mySpawningStrategy;
 	private int myTimeBetweenSpawns;
 	private String mySpawnName;
 
 	@Hide
-	private IPosition myTarget;
+	private transient IPosition myTarget;
 	@Hide
 	private int myTimeSinceSpawning;
 	
 	@Hide
-	private EntityFactory myEntityFactory;
+	private transient EntityFactory myEntityFactory;
 	@Hide
-	private PhysicalSystem myPhysical;
+	private transient PhysicalSystem myPhysical;
 	@Hide
-	private TargetingSystem myTargeting;
+	private transient TargetingSystem myTargeting;
 	@Hide
-	private MovementSystem myMovement;
+	private transient MovementSystem myMovement;
 	@Hide
-	private SpawningSystem mySpawning;
+	private transient SpawningSystem mySpawning;
 	@Hide
-	private List<IEntity> myChildren;
+	private List<ConcreteEntity> myChildren;
 	@Hide
 	private DamageInfo myStats;
 	@Hide
 	private List<IObserver<IViewableCreator>> myObservers;
 	
-	public CreatorComponent(SpawningSystem spawning,
+	public CreatorComponent(IEntity aEntity, SpawningSystem spawning,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			MovementSystem movement,
 			ComponentData data,
 			Router router) {
-		super(router);
+		super(aEntity, router);
 		
 		myObservers = new ArrayList<IObserver<IViewableCreator>>();
 		
@@ -81,8 +82,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		mySpawningStrategy = mySpawning.newStrategy(data.getFields().get("mySpawningStrategy"));
 		
 		myTimeSinceSpawning = 0;
-		myChildren = new ArrayList<IEntity>();
-		
+		myChildren = new ArrayList<ConcreteEntity>();
 		spawning.attachComponent(this);
 	}
 
@@ -160,11 +160,6 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	@Override
 	public DamageInfo getStats() {
 		return myStats;
-	}
-	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
 	}
 
 	@Override

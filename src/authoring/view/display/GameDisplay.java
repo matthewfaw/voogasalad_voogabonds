@@ -10,15 +10,27 @@ import java.util.Set;
 
 import authoring.controller.MapDataContainer;
 import authoring.model.map.TerrainData;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import utility.Point;
 
 /**
@@ -80,6 +92,7 @@ public class GameDisplay {
 		makeUsefulSpawn();
 		makeUsefulTerrain();
 		populateGrid();
+		dragHandler();
 	}
 	
 	private void setUpScreenResolution() {
@@ -190,7 +203,51 @@ public class GameDisplay {
 		}
 	}
 
-
+	private void dragHandler() {
+		ObservableList <Node> entries = terrainGrid.getChildren();
+		for (Node elem : entries){
+			
+		    elem.setOnDragDetected(new EventHandler<MouseEvent>() {
+		        @Override public void handle(MouseEvent e) {
+		            Dragboard db = elem.startDragAndDrop(TransferMode.ANY);
+		            ClipboardContent cb = new ClipboardContent();
+		            cb.put(DataFormat.PLAIN_TEXT, "");
+		            db.setContent(cb);
+		            dragHandlerData(elem);
+		        }
+		    });
+		    elem.setOnDragOver(new EventHandler<DragEvent>() {
+		        @Override public void handle(DragEvent e) {
+		            e.acceptTransferModes(TransferMode.ANY);
+		            dragHandlerData(elem);
+		        }
+		    });
+		}
+	}
+	
+	private void dragHandlerData(Node elem) {
+		TerrainCell convertedElem = (TerrainCell) elem;
+		 if (toolBar.getImageStatus()) {
+         	Image image = new Image(toolBar.getSelectedImagePath());
+ 			ImagePattern pattern = new ImagePattern(image);
+         	((TerrainCell)elem).setFill(pattern);
+         	
+         	String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+				String relPath = "";
+				if (toolBar.getImageStatus() && splitPath.length > 1) {
+					relPath += splitPath[1] + "/";
+					System.out.println("THISISTHERELATIVEPATH: " + relPath);
+				}
+         	mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), relPath));
+				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
+         }
+         else {
+	            ((TerrainCell)elem).setFill(toolBar.getSelectedColor());
+	            mapData.addTerrainData(new TerrainData(convertedElem.getType(), convertedElem.getColumn(), convertedElem.getRow(), (int) convertedElem.getHeight(), toolBar.getSelectedColor().toString()));
+				((TerrainCell)elem).setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
+         }
+	}
+	
 	public void setCols(int numCols) {
 		columns = numCols;
 		terrainGrid.setPrefColumns(columns);

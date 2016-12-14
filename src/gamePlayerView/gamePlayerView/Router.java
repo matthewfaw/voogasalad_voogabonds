@@ -29,12 +29,12 @@ import gamePlayerView.interfaces.IResourceAcceptor;
  * @author Guhan Muruganandam
  */
 public class Router {
-	private GamePlayerScene  myGamePlayerScene;
+	private transient GamePlayerScene  myGamePlayerScene;
 	//TODO: Change these box objects to instead be acceptor interfaces
-	private List<IPlayerAcceptor> myCash;
-	private List<IPlayerAcceptor> myLives; 
-	private List<IPlayerAcceptor> myWaves;
-	private List<IResourceAcceptor> myResources;
+	private transient List<IPlayerAcceptor> myCash;
+	private transient List<IPlayerAcceptor> myLives; 
+	private transient List<IPlayerAcceptor> myWaves;
+	private transient List<IResourceAcceptor> myResources;
 	//List<ISprites> mySprites;
 
 
