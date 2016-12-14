@@ -329,11 +329,4 @@ public class BackendController {
 	}
 	
 	
-	public static void main(String[] args)
-	{
-		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
-//		controller.getClass();
-		controller.save();
-	}
-	
 }

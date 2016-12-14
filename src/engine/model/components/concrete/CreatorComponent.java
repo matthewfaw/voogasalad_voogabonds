@@ -82,7 +82,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<IEntity>();
-		myTarget = new Point(400, 400);
+		
 		spawning.attachComponent(this);
 	}
 
@@ -92,6 +92,7 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	 * towards the target determined by the targeting strategy
 	 */
 	public void spawnIfReady() {
+		myTarget = myTargeting.getTarget(this);
 		if (myTimeSinceSpawning >= myTimeBetweenSpawns && myTarget != null && myPhysical.get(this) != null) {
 			myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
 			myTimeSinceSpawning = 0;

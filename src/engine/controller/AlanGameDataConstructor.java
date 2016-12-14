@@ -267,7 +267,7 @@ public class AlanGameDataConstructor {
 			ser.serializeToFile(ldc, "alanGame/LevelData/"+ldc.getClass().getSimpleName());
 			ser.serializeToFile(tower, "alanGame/EntityData/"+tower.getClass().getSimpleName()+1);
 			ser.serializeToFile(projectile, "alanGame/EntityData/"+projectile.getClass().getSimpleName()+2);
-			ser.serializeToFile(projectile, "alanGame/EntityData/"+enemy.getClass().getSimpleName()+3);
+			ser.serializeToFile(enemy, "alanGame/EntityData/"+enemy.getClass().getSimpleName()+3);
 			
 			derp.deserializeFromFile("SerializedFiles/alanGame/MapData/"+md.getClass().getSimpleName(), MapDataContainer.class);
 			derp.deserializeFromFile("SerializedFiles/alanGame/PlayerData/"+pdd.getClass().getSimpleName(), PlayerData.class);

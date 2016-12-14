@@ -120,8 +120,9 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 
 	@Override
 	public void notifyObservers() {
-		for (IObserver<IViewablePhysical> o: myObservers)
-			o.update(this);
+		if (this != null)
+			for (IObserver<IViewablePhysical> o: myObservers)
+				o.update(this);
 	}
 
 	/***** Component interface ******/
