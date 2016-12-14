@@ -8,6 +8,7 @@ import authoring.model.EntityData;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
+import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.scene.Node;
@@ -18,12 +19,14 @@ public class ResourceStoreView extends VBox implements IGUIPiece, IResourceAccep
 	
 	Draggables myDraggables;
 	ResourceInfo myResourceInfo;
+	TowerColumn myTowerColumn;
 	private Map<ImageView,EntityData> myImageToDataMap;
 	
 	public ResourceStoreView () {
 		myImageToDataMap = new HashMap<ImageView,EntityData>();
 		myDraggables = new Draggables(myImageToDataMap);
 		myResourceInfo = new ResourceInfo(myImageToDataMap);
+		myDraggables.attach(myResourceInfo);
 		constructNode();
 	}
 

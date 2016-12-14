@@ -16,6 +16,7 @@ public class ResourceInfo extends Text implements IGUIPiece, IObserver<Draggable
 	
 	public ResourceInfo (Map<ImageView,EntityData> map) {
 		myImageToDataMap = map;
+		
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package gamePlayerView.GUIPieces.resource_store;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class Draggables extends ListView<ImageView> implements IGUIPiece, IObser
 	private List<IObserver<Draggables>> myObservers;
 	
 	public Draggables(Map<ImageView,EntityData> map) {
+		myObservers = new ArrayList<IObserver<Draggables>>();
 		myImageToDataMap = map;
 	}
 	
@@ -51,7 +53,7 @@ public class Draggables extends ListView<ImageView> implements IGUIPiece, IObser
 		List<EntityData> availableTowers = aPlayer.getAvailableTowers();
 		List<EntityData> affordableTowers = aPlayer.getAffordableTowers();
 		ObservableList<ImageView> towerImageViews = FXCollections.observableArrayList();
-		
+//		myImageToDataMap.clear();
 		for (EntityData t: availableTowers) {
 			String imagePath = t.getComponents()
 					.get("PhysicalComponent")
@@ -60,14 +62,13 @@ public class Draggables extends ListView<ImageView> implements IGUIPiece, IObser
 			if (imagePath.substring(0, 4).equals(SOURCE_PATH)) {
 				imagePath = imagePath.substring(4);
 			}
-			ImageView towerImageView = new ImageView( 
-					new Image(
+			ImageView towerImageView = new ImageView();
+			towerImageView.setImage(new Image(
 							this
 							.getClass()
 							.getClassLoader()
 							.getResourceAsStream(imagePath)
-							)
-					);
+							));
 			if (!affordableTowers.contains(t)) {
 				towerImageView.setOpacity(DEFAULT_UNAFFORDABLE_OPACITY);
 			}
