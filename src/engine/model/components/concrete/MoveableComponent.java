@@ -39,7 +39,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	@Hide
 	private DamageDealingSystem myDamage;
 	@Hide
-	private BountySystem myBountySystem;
+	private BountySystem myBounty;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -65,6 +65,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
+			BountySystem bounty,
 			Router router,
 			DamageDealingSystem damage,
 			ComponentData data
@@ -75,6 +76,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		myBounty = bounty;
 		myDamage = damage;
 		
 		myMovedDistance = 0;
@@ -125,7 +127,9 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
 		PhysicalComponent p = myPhysical.get(this);
-		if (p != null)
+		if (p != null && myGoal == null && myTargeting.getTarget(this) == null)
+			p.setPosition(getMove(p));
+		else if (p != null && (myGoal != null || myTargeting.getTarget(this) == null))
 			p.setPosition(getMove(p));
 		
 		myCollision.checkCollision(p);
@@ -135,7 +139,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		}
 		
 		if (removeOnGoal && atGoal()) {
-			myBountySystem.pillagePlayerBase(this);
+			myBounty.pillagePlayerBase(this);
 			getEntity().delete();
 		}
 		

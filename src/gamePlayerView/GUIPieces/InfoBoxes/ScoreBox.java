@@ -16,7 +16,7 @@ import gamePlayerView.interfaces.IPlayerAcceptor;
 public class ScoreBox extends InfoBox implements IObserver<IViewablePlayer>,IPlayerAcceptor {
 	
 	public ScoreBox(){
-		myDisplay=makeDisplay("Score:  ");
+		myDisplay = makeDisplay("Score:  ");
 	}
 
 	public void acceptPlayer(IObservable<IViewablePlayer> aPlayer) {

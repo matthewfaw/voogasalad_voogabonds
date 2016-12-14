@@ -207,7 +207,7 @@ public class GamePlayerScene {
 
 	private LeftPane createLeftPane() {
 		LeftPane pane=new LeftPane();
-		GamePlayOptions myGamePlayOptions=new GamePlayOptions(myAppController);
+		GamePlayOptions myGamePlayOptions = new GamePlayOptions(myAppController);
 		InfoBox myWallet=myBoxFactory.createBox(myResourceBundle.getString("Cash"));
 		InfoBox myLife=myBoxFactory.createBox(myResourceBundle.getString("Lives"));
 		myCash.add((IPlayerAcceptor) myWallet); ///FIX LATER

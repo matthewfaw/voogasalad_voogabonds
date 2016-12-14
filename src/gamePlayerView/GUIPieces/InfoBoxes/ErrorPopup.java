@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class ErrorPopup {
     private Pane myRoot;
     private Stage myStage;
-    private ControlsMenu controls;
+    private ControlsMenu myControlsMenu;
     private Scene myWindow;
     private String paneCSS = "-fx-font: 22 arial; -fx-base: #6de894;";
     
@@ -42,16 +42,16 @@ public class ErrorPopup {
     }
     
     public void addReturnButton(){
-        Button myButton = new Button();
-        myButton.setText("MAIN MENU");
-        myButton.setPrefWidth(200);
-        myButton.setPrefHeight(50);
-        myButton.setLayoutY(40);
-        myButton.setStyle(paneCSS);
-        myButton.setAlignment(Pos.CENTER);
-        myButton.layoutXProperty().bind(myWindow.widthProperty().divide(2).subtract(myButton.getPrefWidth()/2));
-        myButton.layoutYProperty().bind(myWindow.heightProperty().subtract(myButton.getPrefHeight()+10));
+        Button button = new Button();
+        button.setText("MAIN MENU");
+        button.setPrefWidth(200);
+        button.setPrefHeight(50);
+        button.setLayoutY(40);
+        button.setStyle(paneCSS);
+        button.setAlignment(Pos.CENTER);
+        button.layoutXProperty().bind(myWindow.widthProperty().divide(2).subtract(button.getPrefWidth()/2));
+        button.layoutYProperty().bind(myWindow.heightProperty().subtract(button.getPrefHeight()+10));
 
-        myRoot.getChildren().add(myButton);
+        myRoot.getChildren().add(button);
     }
 }

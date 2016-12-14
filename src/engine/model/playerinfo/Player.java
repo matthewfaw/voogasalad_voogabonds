@@ -24,6 +24,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
 	private IMoney myMoney;
+	private int myPoints;
 	
 	private List<ResourceStore> myResourceStores;
 	
@@ -31,6 +32,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	private IWinLoseStrategy myLoseCon;
 	
 	private List<IObserver<IViewablePlayer>> myObservers;
+	
 	
 	public Player(PlayerData aPlayerData)
 	{
@@ -41,6 +43,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
+		myPoints = 0;
 		
 		//TODO: Get win and lose conditions from PlayerData
 		myLoseCon = new NeverLoseStrategy(this);
@@ -64,7 +67,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	
 	@Override
 	public void updatePoints(int deltaPoints) {
-		myMoney.updateValue(deltaPoints);
+		myPoints += deltaPoints;
 		notifyObservers();
 	}
 	

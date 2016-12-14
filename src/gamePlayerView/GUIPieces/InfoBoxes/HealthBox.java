@@ -15,7 +15,7 @@ import gamePlayerView.interfaces.IHealthAcceptor;
 public class HealthBox extends InfoBox implements IObserver<IViewableHealth>, IHealthAcceptor {
 	
 	public HealthBox(){
-		myDisplay=makeDisplay("Health: ");
+		myDisplay = makeDisplay("Health: ");
 	}
 	
 	

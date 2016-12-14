@@ -41,10 +41,10 @@ public class Router {
 	public Router(GamePlayerScene aGamePlayerScene)
 	{
 		myGamePlayerScene  = aGamePlayerScene;
-		myCash=myGamePlayerScene.getCash();
-		myLives=myGamePlayerScene.getLives();
-		myWaves=myGamePlayerScene.getWaves();
-		myResources=myGamePlayerScene.getResources();
+		myCash = myGamePlayerScene.getCash();
+		myLives = myGamePlayerScene.getLives();
+		myWaves = myGamePlayerScene.getWaves();
+		myResources = myGamePlayerScene.getResources();
 		//mySprites = myGamePlayerScene.getSprites();
 	}
 

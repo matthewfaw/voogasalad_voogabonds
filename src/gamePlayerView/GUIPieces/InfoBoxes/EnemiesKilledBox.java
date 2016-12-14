@@ -13,7 +13,7 @@ import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
 public class EnemiesKilledBox extends InfoBox implements IObserver<IViewablePlayer>, IEnemiesKilledAcceptor {
 	
 	public EnemiesKilledBox(){
-		myDisplay=makeDisplay("Enemies Killed: ");
+		myDisplay = makeDisplay("Enemies Killed: ");
 	}
 
 	@Override
