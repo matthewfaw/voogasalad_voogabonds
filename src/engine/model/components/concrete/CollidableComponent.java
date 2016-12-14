@@ -30,11 +30,11 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	private double myCollisionRadius;
 	
 	@Hide
-	private PhysicalSystem myPhysicalSystem;
+	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
-	private DamageDealingSystem myDamageDealingSystem;
+	private transient DamageDealingSystem myDamageDealingSystem;
 	@Hide
-	private CollisionDetectionSystem myCollidable;
+	private transient CollisionDetectionSystem myCollidable;
 	
 	@Hide
 	private List<IObserver<IViewableCollidable>> myObservers;

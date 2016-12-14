@@ -1,5 +1,10 @@
 package engine.model.systems;
 
+import java.util.List;
+
+import engine.model.components.IComponent;
+import engine.model.entities.IEntity;
+
 /**
  * An interface to capture the commonalities between all systems 
  * 
@@ -14,7 +19,13 @@ package engine.model.systems;
  * Classes should be ISystems if they hold references to IRegisterables.
  *
  */
-public interface ISystem {
+//TODO: Add comments 
+public interface ISystem <T> {
+	public List<T> getComponents();
+	public T getComponent(IComponent component);
+	public T getComponent(IEntity entity);
+	public void attachComponent(T aComponet);
+	public void detachComponent(T aComponent);
 	/**
 	 * Adds aComonent to be registered with the system
 	 * @param aComponent

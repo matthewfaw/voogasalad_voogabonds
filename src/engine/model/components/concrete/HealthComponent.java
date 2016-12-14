@@ -31,18 +31,19 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
-	private BountySystem myBounty;
+	private transient BountySystem myBounty;
 	@Hide
-	private DamageDealingSystem myDamage;
+	private transient DamageDealingSystem myDamage;
 	@Hide
-	private HealthSystem myHealthSystem;
+	private transient HealthSystem myHealthSystem;
+
 	@Hide
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private boolean explodeOnDeath;
 	
 	@Hide
-	private List<IObserver<IViewableHealth>> myObservers;
+	private transient List<IObserver<IViewableHealth>> myObservers;
 	
 	@Hide
 	private Router myRouter;

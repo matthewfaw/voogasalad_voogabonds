@@ -30,24 +30,24 @@ import utility.Point;
  */
 public class MoveableComponent extends AbstractComponent implements IMovable, IViewableMovable {
 	@Hide
-	private MovementSystem myMovement;
+	private transient MovementSystem myMovement;
 	@Hide
-	private PhysicalSystem myPhysical;
+	private transient PhysicalSystem myPhysical;
 	@Hide
-	private TargetingSystem myTargeting;
+	private transient TargetingSystem myTargeting;
 	@Hide
-	private CollisionDetectionSystem myCollision;
+	private transient CollisionDetectionSystem myCollision;
 	@Hide
-	private DamageDealingSystem myDamage;
+	private transient DamageDealingSystem myDamage;
 	@Hide
-	private BountySystem myBounty;
+	private transient BountySystem myBounty;
 	
-	private IMovementStrategy myMovementCalc;
+	private transient IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
 	private double myMoveSpeed;
 	
 	@Hide
-	private IPosition myGoal;
+	private transient IPosition myGoal;
 	
 	//NOTE: So that entities can die after traveling a certain distance.
 	private boolean explodesAtMaxDistance;

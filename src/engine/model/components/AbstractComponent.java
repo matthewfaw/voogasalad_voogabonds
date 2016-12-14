@@ -6,7 +6,8 @@ import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.Router;
 
 abstract public class AbstractComponent implements IModifiableComponent, IViewable {
-	private IEntity myEntity;
+
+	private transient IEntity myEntity;
 	@Hide
 	private Router myRouter;
 

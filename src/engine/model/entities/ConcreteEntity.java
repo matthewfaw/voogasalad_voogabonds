@@ -13,8 +13,8 @@ import engine.model.components.IModifiableComponent;
  *
  */
 public class ConcreteEntity implements IEntity {
-	private List<IObserver<IEntity>> myObservers;
-	private List<IComponent> myComponents;
+	private transient ArrayList<IObserver<IEntity>> myObservers;
+	private transient ArrayList<IComponent> myComponents;
 	private String myID;
 	
 	/**

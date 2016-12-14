@@ -33,7 +33,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private int myDamage;
 	private double myDamageArc;
 	private double myDamageRadius;
-	private IDamageStrategy myDamageStrategy;
+	private transient IDamageStrategy myDamageStrategy;
 	
 	@Hide
 	private List<IObserver<IViewableDamageDealer>> myObservers;
@@ -43,16 +43,16 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private boolean diesOnExplosion;
 
 	@Hide
-	private HealthSystem myHealthSystem;
+	private transient HealthSystem myHealthSystem;
 	
 	@Hide
-	private PhysicalSystem myPhysicalSystem;
+	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
-	private DamageDealingSystem myDamageSystem;
+	private transient DamageDealingSystem myDamageSystem;
 	@Hide
-	private SpawningSystem myCreators;
+	private transient SpawningSystem myCreators;
 	@Hide
-	private TeamSystem myTeams;
+	private transient TeamSystem myTeams;
 	
 	public DamageDealingComponent(IEntity aEntity, 
 			DamageDealingSystem damageDealingSystem,
