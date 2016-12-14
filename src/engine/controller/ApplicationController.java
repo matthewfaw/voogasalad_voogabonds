@@ -67,8 +67,8 @@ public class ApplicationController {
 		myScene=constructGUI(aStage);
 		Router router = new Router(myScene);
 		JSONDeserializer deserializer = new JSONDeserializer();
-		BackendController b = (BackendController)deserializer.deserializeFromFile(SAVED_FOLDER + aGameTitle, BackendController.class);
-		b.reconstructEngineState(GAME_FOLDER + aGameTitle, router);
+		myBackendController = (BackendController)deserializer.deserializeFromFile(SAVED_FOLDER + aGameTitle, BackendController.class);
+		myBackendController.reconstructEngineState(GAME_FOLDER + aGameTitle, router);
 	}
 	
 	/**

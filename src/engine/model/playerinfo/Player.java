@@ -37,8 +37,19 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	
 	private transient List<IObserver<IViewablePlayer>> myObservers;
 	
-	private Router myRouter;
+	private transient Router myRouter;
 	
+	public Player()
+	{
+		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
+		//TODO: Get win and lose conditions from PlayerData
+		PlayerHpLoseStrategy loseCon = new PlayerHpLoseStrategy(this);
+		myLoseCon = loseCon;
+		myWinCon = new NeverWinStrategy(this);
+		
+		myResourceStores = new ArrayList<ResourceStore>();
+		myObservers.add(loseCon);
+	}
 	
 	public Player(Router r, PlayerData aPlayerData)
 	{
@@ -47,20 +58,18 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 		myRouter = r;
 	}
 	private Player(int ID, int initLives, Money startingMoney) {
+		this();
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
 		myPoints = 0;
 		
-		//TODO: Get win and lose conditions from PlayerData
-		PlayerHpLoseStrategy loseCon = new PlayerHpLoseStrategy(this);
-		myLoseCon = loseCon;
-		myWinCon = new NeverWinStrategy(this);
 		
-		
-		myResourceStores = new ArrayList<ResourceStore>();
-		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
-		myObservers.add(loseCon);
+	}
+	
+	public void setRouter(Router aRouter)
+	{
+		myRouter = aRouter;
 	}
 	 
 	@Override

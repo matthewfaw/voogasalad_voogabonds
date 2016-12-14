@@ -116,7 +116,7 @@ public class BackendController {
 	public void reconstructEngineState(String aGameDataPath, Router aRouter)
 	{
 		myRouter = aRouter;
-		reconstructGameData(aGameDataPath);
+		reconstructGameData(aGameDataPath.replace("_SAVED", ""));
 		myPlayerController.setRouter(myRouter);
 		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		// TODO: set the win and lose conditions for players

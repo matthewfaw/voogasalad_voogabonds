@@ -27,6 +27,9 @@ public class PlayerController {
 	public void setRouter(Router aRouter)
 	{
 		myRouter = aRouter;
+		for (Player player: myPlayers) {
+			player.setRouter(myRouter);
+		}
 	}
 	
 	/**
@@ -61,6 +64,9 @@ public class PlayerController {
 	
 	public void addResourceStoreForAllPlayers(ResourceStore aResourceStore)
 	{
-		myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
+		for (Player player: myPlayers) {
+			player.addResourceStore(aResourceStore);
+		}
+//		myPlayers.forEach(player -> player.addResourceStore(aResourceStore));
 	}
 }

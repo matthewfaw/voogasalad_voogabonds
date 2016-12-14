@@ -1,6 +1,6 @@
 {
   "myTimelineController": {
-    "myStartTime": 127422336243736
+    "myStartTime": 128045295058188
   },
   "myPlayerController": {
     "myPlayers": [
@@ -8,10 +8,9 @@
         "myID": 0,
         "myLives": 5,
         "myMoney": {
-          "myValue": 1700
+          "myValue": 1600
         },
-        "myPoints": 0,
-        "myRouter": {}
+        "myPoints": 0
       }
     ]
   },
@@ -23,19 +22,35 @@
       "myComponents": [
         {
           "myCollisionRadius": 20.0,
-          "myEntityID": "85f3b41b-84b6-47a1-af9a-3153ce25a555"
+          "myEntityID": "525f739d-4879-4915-88d5-366ff8925708"
         },
         {
           "myCollisionRadius": 20.0,
-          "myEntityID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1"
+          "myEntityID": "d9a1e9fa-aac5-4149-bd18-756112cf0949"
         },
         {
           "myCollisionRadius": 20.0,
-          "myEntityID": "c0732bd0-a2b2-4623-8fee-359a25538b6b"
+          "myEntityID": "13d28eaa-caf7-42c2-abd7-6371dab8de14"
+        },
+        {
+          "myCollisionRadius": 20.0,
+          "myEntityID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac"
         },
         {
           "myCollisionRadius": 0.0,
-          "myEntityID": "77639e01-d4f2-4b15-9bab-cbe5b090235b"
+          "myEntityID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9"
+        },
+        {
+          "myCollisionRadius": 0.0,
+          "myEntityID": "406d2580-5223-4b22-a4b3-99f17de90755"
+        },
+        {
+          "myCollisionRadius": 0.0,
+          "myEntityID": "04294145-5186-4c2d-a68f-ba24fc87f0e1"
+        },
+        {
+          "myCollisionRadius": 0.0,
+          "myEntityID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c"
         }
       ]
     },
@@ -48,29 +63,62 @@
           "explodesOnEnemies": true,
           "explodesOnAllies": false,
           "diesOnExplosion": true,
-          "myEntityID": "77639e01-d4f2-4b15-9bab-cbe5b090235b"
+          "myEntityID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9"
+        },
+        {
+          "myDamage": 2,
+          "myDamageArc": 360.0,
+          "myDamageRadius": 50.0,
+          "explodesOnEnemies": true,
+          "explodesOnAllies": false,
+          "diesOnExplosion": true,
+          "myEntityID": "406d2580-5223-4b22-a4b3-99f17de90755"
+        },
+        {
+          "myDamage": 2,
+          "myDamageArc": 360.0,
+          "myDamageRadius": 50.0,
+          "explodesOnEnemies": true,
+          "explodesOnAllies": false,
+          "diesOnExplosion": true,
+          "myEntityID": "04294145-5186-4c2d-a68f-ba24fc87f0e1"
+        },
+        {
+          "myDamage": 2,
+          "myDamageArc": 360.0,
+          "myDamageRadius": 50.0,
+          "explodesOnEnemies": true,
+          "explodesOnAllies": false,
+          "diesOnExplosion": true,
+          "myEntityID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c"
         }
       ]
     },
     "myHealthSystem": {
       "myComponents": [
         {
-          "myCurrHealth": 5.0,
+          "myCurrHealth": 1.0,
           "myMaxHealth": 5.0,
           "explodeOnDeath": false,
-          "myEntityID": "85f3b41b-84b6-47a1-af9a-3153ce25a555"
+          "myEntityID": "525f739d-4879-4915-88d5-366ff8925708"
         },
         {
           "myCurrHealth": 5.0,
           "myMaxHealth": 5.0,
           "explodeOnDeath": false,
-          "myEntityID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1"
+          "myEntityID": "d9a1e9fa-aac5-4149-bd18-756112cf0949"
         },
         {
           "myCurrHealth": 5.0,
           "myMaxHealth": 5.0,
           "explodeOnDeath": false,
-          "myEntityID": "c0732bd0-a2b2-4623-8fee-359a25538b6b"
+          "myEntityID": "13d28eaa-caf7-42c2-abd7-6371dab8de14"
+        },
+        {
+          "myCurrHealth": 5.0,
+          "myMaxHealth": 5.0,
+          "explodeOnDeath": false,
+          "myEntityID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac"
         }
       ]
     },
@@ -81,33 +129,22 @@
           "myMoveSpeed": 1.0,
           "explodesAtMaxDistance": false,
           "myMaxDistance": 1000.0,
-          "myMovedDistance": 387.000000000001,
+          "myMovedDistance": 337.000000000001,
           "removeOnGoal": true,
           "explodesOnGoal": false,
           "myObservers": [],
-          "myEntityID": "85f3b41b-84b6-47a1-af9a-3153ce25a555"
-        },
-        {
-          "myTurnSpeed": 1.0,
-          "myMoveSpeed": 0.0,
-          "explodesAtMaxDistance": false,
-          "myMaxDistance": 400.0,
-          "myMovedDistance": 0.0,
-          "removeOnGoal": true,
-          "explodesOnGoal": false,
-          "myObservers": [],
-          "myEntityID": "9809bb71-7cc2-4f70-be2a-cd6e75250552"
+          "myEntityID": "525f739d-4879-4915-88d5-366ff8925708"
         },
         {
           "myTurnSpeed": 1.0,
           "myMoveSpeed": 1.0,
           "explodesAtMaxDistance": false,
           "myMaxDistance": 1000.0,
-          "myMovedDistance": 237.00000000000108,
+          "myMovedDistance": 187.00000000000108,
           "removeOnGoal": true,
           "explodesOnGoal": false,
           "myObservers": [],
-          "myEntityID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1"
+          "myEntityID": "d9a1e9fa-aac5-4149-bd18-756112cf0949"
         },
         {
           "myTurnSpeed": 1.0,
@@ -118,7 +155,7 @@
           "removeOnGoal": true,
           "explodesOnGoal": false,
           "myObservers": [],
-          "myEntityID": "e95fb4be-cee7-4b1d-a50d-f54e798d246d"
+          "myEntityID": "410b2526-c83e-4dc1-9ac3-e8ffd80e9376"
         },
         {
           "myTurnSpeed": 1.0,
@@ -129,29 +166,95 @@
           "removeOnGoal": true,
           "explodesOnGoal": false,
           "myObservers": [],
-          "myEntityID": "f27336aa-17c3-4341-abd0-6dab434a4563"
+          "myEntityID": "6b274d63-4ba8-4fb2-9f73-037ae8c45b33"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 400.0,
+          "myMovedDistance": 0.0,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "b8150279-785f-4e94-875b-afd92d261f28"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 0.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 400.0,
+          "myMovedDistance": 0.0,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "78ee248b-866c-4096-a494-e682aad59e7d"
         },
         {
           "myTurnSpeed": 1.0,
           "myMoveSpeed": 1.0,
           "explodesAtMaxDistance": false,
           "myMaxDistance": 1000.0,
-          "myMovedDistance": 87.00000000000054,
+          "myMovedDistance": 174.00000000000108,
           "removeOnGoal": true,
           "explodesOnGoal": false,
           "myObservers": [],
-          "myEntityID": "c0732bd0-a2b2-4623-8fee-359a25538b6b"
+          "myEntityID": "13d28eaa-caf7-42c2-abd7-6371dab8de14"
+        },
+        {
+          "myTurnSpeed": 1.0,
+          "myMoveSpeed": 1.0,
+          "explodesAtMaxDistance": false,
+          "myMaxDistance": 1000.0,
+          "myMovedDistance": 39.00000000000003,
+          "removeOnGoal": true,
+          "explodesOnGoal": false,
+          "myObservers": [],
+          "myEntityID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac"
         },
         {
           "myTurnSpeed": 45.0,
           "myMoveSpeed": 5.0,
           "explodesAtMaxDistance": true,
           "myMaxDistance": 600.0,
-          "myMovedDistance": 169.99999999999977,
+          "myMovedDistance": 84.99999999999989,
           "removeOnGoal": true,
           "explodesOnGoal": true,
           "myObservers": [],
-          "myEntityID": "77639e01-d4f2-4b15-9bab-cbe5b090235b"
+          "myEntityID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9"
+        },
+        {
+          "myTurnSpeed": 45.0,
+          "myMoveSpeed": 5.0,
+          "explodesAtMaxDistance": true,
+          "myMaxDistance": 600.0,
+          "myMovedDistance": 84.99999999999989,
+          "removeOnGoal": true,
+          "explodesOnGoal": true,
+          "myObservers": [],
+          "myEntityID": "406d2580-5223-4b22-a4b3-99f17de90755"
+        },
+        {
+          "myTurnSpeed": 45.0,
+          "myMoveSpeed": 5.0,
+          "explodesAtMaxDistance": true,
+          "myMaxDistance": 600.0,
+          "myMovedDistance": 84.99999999999984,
+          "removeOnGoal": true,
+          "explodesOnGoal": true,
+          "myObservers": [],
+          "myEntityID": "04294145-5186-4c2d-a68f-ba24fc87f0e1"
+        },
+        {
+          "myTurnSpeed": 45.0,
+          "myMoveSpeed": 5.0,
+          "explodesAtMaxDistance": true,
+          "myMaxDistance": 600.0,
+          "myMovedDistance": 85.00000000000003,
+          "removeOnGoal": true,
+          "explodesOnGoal": true,
+          "myObservers": [],
+          "myEntityID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c"
         }
       ]
     },
@@ -165,26 +268,12 @@
             "water"
           ],
           "myPosition": {
-            "myX": 319.6503243191959,
-            "myY": 319.6503243191959,
+            "myX": 284.2949852598682,
+            "myY": 284.2949852598682,
             "myZ": 0.0
           },
           "myHeading": 45.0,
-          "myEntityID": "85f3b41b-84b6-47a1-af9a-3153ce25a555"
-        },
-        {
-          "myImagePath": "resources/cow.png",
-          "myImageSize": 1.0,
-          "myValidTerrains": [
-            "grass"
-          ],
-          "myPosition": {
-            "myX": 299.0,
-            "myY": 115.0,
-            "myZ": 0.0
-          },
-          "myHeading": 84.23804908994546,
-          "myEntityID": "9809bb71-7cc2-4f70-be2a-cd6e75250552"
+          "myEntityID": "525f739d-4879-4915-88d5-366ff8925708"
         },
         {
           "myImagePath": "resources/boss.png",
@@ -194,12 +283,40 @@
             "water"
           ],
           "myPosition": {
-            "myX": 213.58430714121292,
-            "myY": 213.58430714121292,
+            "myX": 178.22896808188526,
+            "myY": 178.22896808188526,
             "myZ": 0.0
           },
           "myHeading": 45.0,
-          "myEntityID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1"
+          "myEntityID": "d9a1e9fa-aac5-4149-bd18-756112cf0949"
+        },
+        {
+          "myImagePath": "resources/cow.png",
+          "myImageSize": 1.0,
+          "myValidTerrains": [
+            "grass"
+          ],
+          "myPosition": {
+            "myX": 207.0,
+            "myY": 115.0,
+            "myZ": 0.0
+          },
+          "myHeading": 65.45999064552598,
+          "myEntityID": "410b2526-c83e-4dc1-9ac3-e8ffd80e9376"
+        },
+        {
+          "myImagePath": "resources/cow.png",
+          "myImageSize": 1.0,
+          "myValidTerrains": [
+            "grass"
+          ],
+          "myPosition": {
+            "myX": 69.0,
+            "myY": 207.0,
+            "myZ": 0.0
+          },
+          "myHeading": 19.74910115147013,
+          "myEntityID": "6b274d63-4ba8-4fb2-9f73-037ae8c45b33"
         },
         {
           "myImagePath": "resources/cow.png",
@@ -209,11 +326,11 @@
           ],
           "myPosition": {
             "myX": 115.0,
-            "myY": 299.0,
+            "myY": 207.0,
             "myZ": 0.0
           },
-          "myHeading": 5.761950910054551,
-          "myEntityID": "e95fb4be-cee7-4b1d-a50d-f54e798d246d"
+          "myHeading": 24.540009354474027,
+          "myEntityID": "b8150279-785f-4e94-875b-afd92d261f28"
         },
         {
           "myImagePath": "resources/cow.png",
@@ -222,12 +339,12 @@
             "grass"
           ],
           "myPosition": {
-            "myX": 345.0,
-            "myY": 161.0,
+            "myX": 115.0,
+            "myY": 69.0,
             "myZ": 0.0
           },
-          "myHeading": 99.07817159934169,
-          "myEntityID": "f27336aa-17c3-4341-abd0-6dab434a4563"
+          "myHeading": 51.820625810462836,
+          "myEntityID": "78ee248b-866c-4096-a494-e682aad59e7d"
         },
         {
           "myImagePath": "resources/boss.png",
@@ -237,12 +354,27 @@
             "water"
           ],
           "myPosition": {
-            "myX": 107.51828996322995,
-            "myY": 107.51828996322995,
+            "myX": 169.03657992646006,
+            "myY": 169.03657992646006,
             "myZ": 0.0
           },
           "myHeading": 45.0,
-          "myEntityID": "c0732bd0-a2b2-4623-8fee-359a25538b6b"
+          "myEntityID": "13d28eaa-caf7-42c2-abd7-6371dab8de14"
+        },
+        {
+          "myImagePath": "resources/boss.png",
+          "myImageSize": 1.0,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 73.57716446627539,
+            "myY": 73.57716446627539,
+            "myZ": 0.0
+          },
+          "myHeading": 45.0,
+          "myEntityID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac"
         },
         {
           "myImagePath": "resources/cookie.png",
@@ -252,12 +384,57 @@
             "water"
           ],
           "myPosition": {
-            "myX": 296.0999135621865,
-            "myY": 283.40605273536255,
+            "myX": 240.34799142634063,
+            "myY": 192.7731077927042,
             "myZ": 0.0
           },
-          "myHeading": 92.30520864574119,
-          "myEntityID": "77639e01-d4f2-4b15-9bab-cbe5b090235b"
+          "myHeading": 68.12050412777198,
+          "myEntityID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9"
+        },
+        {
+          "myImagePath": "resources/cookie.png",
+          "myImageSize": 0.4,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 149.92984252039255,
+            "myY": 232.98770073754974,
+            "myZ": 0.0
+          },
+          "myHeading": 17.802548537924846,
+          "myEntityID": "406d2580-5223-4b22-a4b3-99f17de90755"
+        },
+        {
+          "myImagePath": "resources/cookie.png",
+          "myImageSize": 0.4,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 193.50696117677245,
+            "myY": 239.58307914836658,
+            "myZ": 0.0
+          },
+          "myHeading": 22.54012495467277,
+          "myEntityID": "04294145-5186-4c2d-a68f-ba24fc87f0e1"
+        },
+        {
+          "myImagePath": "resources/cookie.png",
+          "myImageSize": 0.4,
+          "myValidTerrains": [
+            "grass",
+            "water"
+          ],
+          "myPosition": {
+            "myX": 167.3310430875707,
+            "myY": 135.9311038119182,
+            "myZ": 0.0
+          },
+          "myHeading": 52.414555866924864,
+          "myEntityID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c"
         }
       ]
     },
@@ -267,19 +444,25 @@
           "myBountyValue": 7,
           "myLivesToDestroy": -1,
           "myPointValue": 90,
-          "myEntityID": "85f3b41b-84b6-47a1-af9a-3153ce25a555"
+          "myEntityID": "525f739d-4879-4915-88d5-366ff8925708"
         },
         {
           "myBountyValue": 7,
           "myLivesToDestroy": -1,
           "myPointValue": 90,
-          "myEntityID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1"
+          "myEntityID": "d9a1e9fa-aac5-4149-bd18-756112cf0949"
         },
         {
           "myBountyValue": 7,
           "myLivesToDestroy": -1,
           "myPointValue": 90,
-          "myEntityID": "c0732bd0-a2b2-4623-8fee-359a25538b6b"
+          "myEntityID": "13d28eaa-caf7-42c2-abd7-6371dab8de14"
+        },
+        {
+          "myBountyValue": 7,
+          "myLivesToDestroy": -1,
+          "myPointValue": 90,
+          "myEntityID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac"
         }
       ]
     },
@@ -289,18 +472,14 @@
           "homingProjectiles": false,
           "myTimeBetweenSpawns": 100,
           "mySpawnName": "projectile",
-          "myTimeSinceSpawning": 34,
+          "myTimeSinceSpawning": 17,
           "myChildren": [
             {
-              "myID": "20a63b68-5640-4a6d-879f-9f16b739d8a3",
+              "myID": "b891af83-7a7e-413e-9bee-8fcd9e2cb835",
               "myName": "projectile"
             },
             {
-              "myID": "2fe70840-bd55-423b-8042-8c244350cce0",
-              "myName": "projectile"
-            },
-            {
-              "myID": "77639e01-d4f2-4b15-9bab-cbe5b090235b",
+              "myID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9",
               "myName": "projectile"
             }
           ],
@@ -310,20 +489,20 @@
             "myMoney": 0,
             "myKills": 0
           },
-          "myEntityID": "9809bb71-7cc2-4f70-be2a-cd6e75250552"
+          "myEntityID": "410b2526-c83e-4dc1-9ac3-e8ffd80e9376"
         },
         {
           "homingProjectiles": false,
           "myTimeBetweenSpawns": 100,
           "mySpawnName": "projectile",
-          "myTimeSinceSpawning": 43,
+          "myTimeSinceSpawning": 17,
           "myChildren": [
             {
-              "myID": "db4e2141-9b32-45a8-9dce-2a5296a7f944",
+              "myID": "4c9a9ccf-c1b0-4342-ac94-4c46d0cbf4fb",
               "myName": "projectile"
             },
             {
-              "myID": "d97646dd-e3d9-4ed1-bd73-482259280711",
+              "myID": "406d2580-5223-4b22-a4b3-99f17de90755",
               "myName": "projectile"
             }
           ],
@@ -333,16 +512,20 @@
             "myMoney": 0,
             "myKills": 0
           },
-          "myEntityID": "e95fb4be-cee7-4b1d-a50d-f54e798d246d"
+          "myEntityID": "6b274d63-4ba8-4fb2-9f73-037ae8c45b33"
         },
         {
           "homingProjectiles": false,
           "myTimeBetweenSpawns": 100,
           "mySpawnName": "projectile",
-          "myTimeSinceSpawning": 36,
+          "myTimeSinceSpawning": 17,
           "myChildren": [
             {
-              "myID": "fd77cae6-7fff-4f58-b122-784f19fd110c",
+              "myID": "7d821244-3efe-4c67-b9fa-1985c700f5b8",
+              "myName": "projectile"
+            },
+            {
+              "myID": "04294145-5186-4c2d-a68f-ba24fc87f0e1",
               "myName": "projectile"
             }
           ],
@@ -352,7 +535,30 @@
             "myMoney": 0,
             "myKills": 0
           },
-          "myEntityID": "f27336aa-17c3-4341-abd0-6dab434a4563"
+          "myEntityID": "b8150279-785f-4e94-875b-afd92d261f28"
+        },
+        {
+          "homingProjectiles": false,
+          "myTimeBetweenSpawns": 100,
+          "mySpawnName": "projectile",
+          "myTimeSinceSpawning": 17,
+          "myChildren": [
+            {
+              "myID": "b5b30ec0-9650-4bd8-b4fe-7c9dedae1365",
+              "myName": "projectile"
+            },
+            {
+              "myID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c",
+              "myName": "projectile"
+            }
+          ],
+          "myStats": {
+            "myDamage": 0.0,
+            "myHealing": 0.0,
+            "myMoney": 0,
+            "myKills": 0
+          },
+          "myEntityID": "78ee248b-866c-4096-a494-e682aad59e7d"
         }
       ]
     },
@@ -362,19 +568,25 @@
           "mySightRange": 400.0,
           "mySightWidth": 360.0,
           "myTargetsEnemies": true,
-          "myEntityID": "9809bb71-7cc2-4f70-be2a-cd6e75250552"
+          "myEntityID": "410b2526-c83e-4dc1-9ac3-e8ffd80e9376"
         },
         {
           "mySightRange": 400.0,
           "mySightWidth": 360.0,
           "myTargetsEnemies": true,
-          "myEntityID": "e95fb4be-cee7-4b1d-a50d-f54e798d246d"
+          "myEntityID": "6b274d63-4ba8-4fb2-9f73-037ae8c45b33"
         },
         {
           "mySightRange": 400.0,
           "mySightWidth": 360.0,
           "myTargetsEnemies": true,
-          "myEntityID": "f27336aa-17c3-4341-abd0-6dab434a4563"
+          "myEntityID": "b8150279-785f-4e94-875b-afd92d261f28"
+        },
+        {
+          "mySightRange": 400.0,
+          "mySightWidth": 360.0,
+          "myTargetsEnemies": true,
+          "myEntityID": "78ee248b-866c-4096-a494-e682aad59e7d"
         }
       ]
     },
@@ -382,31 +594,51 @@
       "myComponents": [
         {
           "myTeamID": "them",
-          "myEntityID": "85f3b41b-84b6-47a1-af9a-3153ce25a555"
-        },
-        {
-          "myTeamID": "us",
-          "myEntityID": "9809bb71-7cc2-4f70-be2a-cd6e75250552"
+          "myEntityID": "525f739d-4879-4915-88d5-366ff8925708"
         },
         {
           "myTeamID": "them",
-          "myEntityID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1"
+          "myEntityID": "d9a1e9fa-aac5-4149-bd18-756112cf0949"
         },
         {
           "myTeamID": "us",
-          "myEntityID": "e95fb4be-cee7-4b1d-a50d-f54e798d246d"
+          "myEntityID": "410b2526-c83e-4dc1-9ac3-e8ffd80e9376"
         },
         {
           "myTeamID": "us",
-          "myEntityID": "f27336aa-17c3-4341-abd0-6dab434a4563"
+          "myEntityID": "6b274d63-4ba8-4fb2-9f73-037ae8c45b33"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "b8150279-785f-4e94-875b-afd92d261f28"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "78ee248b-866c-4096-a494-e682aad59e7d"
         },
         {
           "myTeamID": "them",
-          "myEntityID": "c0732bd0-a2b2-4623-8fee-359a25538b6b"
+          "myEntityID": "13d28eaa-caf7-42c2-abd7-6371dab8de14"
+        },
+        {
+          "myTeamID": "them",
+          "myEntityID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac"
         },
         {
           "myTeamID": "us",
-          "myEntityID": "77639e01-d4f2-4b15-9bab-cbe5b090235b"
+          "myEntityID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "406d2580-5223-4b22-a4b3-99f17de90755"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "04294145-5186-4c2d-a68f-ba24fc87f0e1"
+        },
+        {
+          "myTeamID": "us",
+          "myEntityID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c"
         }
       ]
     },
@@ -416,52 +648,68 @@
   },
   "myEntityManager": {
     "myEntityMap": {
-      "d97646dd-e3d9-4ed1-bd73-482259280711": {
-        "myID": "d97646dd-e3d9-4ed1-bd73-482259280711",
+      "b5b30ec0-9650-4bd8-b4fe-7c9dedae1365": {
+        "myID": "b5b30ec0-9650-4bd8-b4fe-7c9dedae1365",
         "myName": "projectile"
       },
-      "85f3b41b-84b6-47a1-af9a-3153ce25a555": {
-        "myID": "85f3b41b-84b6-47a1-af9a-3153ce25a555",
+      "b891af83-7a7e-413e-9bee-8fcd9e2cb835": {
+        "myID": "b891af83-7a7e-413e-9bee-8fcd9e2cb835",
+        "myName": "projectile"
+      },
+      "595c11ec-e14a-4c4b-82fc-77dda67e46ac": {
+        "myID": "595c11ec-e14a-4c4b-82fc-77dda67e46ac",
         "myName": "enemy"
       },
-      "f27336aa-17c3-4341-abd0-6dab434a4563": {
-        "myID": "f27336aa-17c3-4341-abd0-6dab434a4563",
-        "myName": "tower"
-      },
-      "c0732bd0-a2b2-4623-8fee-359a25538b6b": {
-        "myID": "c0732bd0-a2b2-4623-8fee-359a25538b6b",
+      "d9a1e9fa-aac5-4149-bd18-756112cf0949": {
+        "myID": "d9a1e9fa-aac5-4149-bd18-756112cf0949",
         "myName": "enemy"
       },
-      "20a63b68-5640-4a6d-879f-9f16b739d8a3": {
-        "myID": "20a63b68-5640-4a6d-879f-9f16b739d8a3",
+      "04294145-5186-4c2d-a68f-ba24fc87f0e1": {
+        "myID": "04294145-5186-4c2d-a68f-ba24fc87f0e1",
         "myName": "projectile"
       },
-      "db4e2141-9b32-45a8-9dce-2a5296a7f944": {
-        "myID": "db4e2141-9b32-45a8-9dce-2a5296a7f944",
-        "myName": "projectile"
-      },
-      "e95fb4be-cee7-4b1d-a50d-f54e798d246d": {
-        "myID": "e95fb4be-cee7-4b1d-a50d-f54e798d246d",
+      "78ee248b-866c-4096-a494-e682aad59e7d": {
+        "myID": "78ee248b-866c-4096-a494-e682aad59e7d",
         "myName": "tower"
       },
-      "fd77cae6-7fff-4f58-b122-784f19fd110c": {
-        "myID": "fd77cae6-7fff-4f58-b122-784f19fd110c",
+      "406d2580-5223-4b22-a4b3-99f17de90755": {
+        "myID": "406d2580-5223-4b22-a4b3-99f17de90755",
         "myName": "projectile"
       },
-      "77639e01-d4f2-4b15-9bab-cbe5b090235b": {
-        "myID": "77639e01-d4f2-4b15-9bab-cbe5b090235b",
-        "myName": "projectile"
-      },
-      "9809bb71-7cc2-4f70-be2a-cd6e75250552": {
-        "myID": "9809bb71-7cc2-4f70-be2a-cd6e75250552",
+      "b8150279-785f-4e94-875b-afd92d261f28": {
+        "myID": "b8150279-785f-4e94-875b-afd92d261f28",
         "myName": "tower"
       },
-      "56d9e928-eb1f-48b4-ae45-5ce6610e15f1": {
-        "myID": "56d9e928-eb1f-48b4-ae45-5ce6610e15f1",
+      "9f9ac332-31ce-4d4d-9813-63c99b394a5c": {
+        "myID": "9f9ac332-31ce-4d4d-9813-63c99b394a5c",
+        "myName": "projectile"
+      },
+      "410b2526-c83e-4dc1-9ac3-e8ffd80e9376": {
+        "myID": "410b2526-c83e-4dc1-9ac3-e8ffd80e9376",
+        "myName": "tower"
+      },
+      "13d28eaa-caf7-42c2-abd7-6371dab8de14": {
+        "myID": "13d28eaa-caf7-42c2-abd7-6371dab8de14",
         "myName": "enemy"
       },
-      "2fe70840-bd55-423b-8042-8c244350cce0": {
-        "myID": "2fe70840-bd55-423b-8042-8c244350cce0",
+      "525f739d-4879-4915-88d5-366ff8925708": {
+        "myID": "525f739d-4879-4915-88d5-366ff8925708",
+        "myName": "enemy"
+      },
+      "6b274d63-4ba8-4fb2-9f73-037ae8c45b33": {
+        "myID": "6b274d63-4ba8-4fb2-9f73-037ae8c45b33",
+        "myName": "tower"
+      },
+      "5b865e8c-fba5-44c9-b56f-efb8c97612c9": {
+        "myID": "5b865e8c-fba5-44c9-b56f-efb8c97612c9",
+        "myName": "projectile"
+      },
+      "4c9a9ccf-c1b0-4342-ac94-4c46d0cbf4fb": {
+        "myID": "4c9a9ccf-c1b0-4342-ac94-4c46d0cbf4fb",
+        "myName": "projectile"
+      },
+      "7d821244-3efe-4c67-b9fa-1985c700f5b8": {
+        "myID": "7d821244-3efe-4c67-b9fa-1985c700f5b8",
         "myName": "projectile"
       }
     }
