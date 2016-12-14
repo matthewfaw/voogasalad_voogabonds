@@ -2,6 +2,7 @@ package engine.model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import engine.IObserver;
 import engine.model.components.IComponent;
@@ -23,6 +24,7 @@ public class ConcreteEntity implements IEntity {
 	 */
 	ConcreteEntity()
 	{
+		myID = UUID.randomUUID().toString();
 		myComponents = new ArrayList<IComponent>();
 		myObservers = new ArrayList<IObserver<IEntity>>();
 	}

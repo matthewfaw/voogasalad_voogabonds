@@ -15,8 +15,8 @@ import gamePlayerView.gamePlayerView.Router;
 public class SellableComponentData extends AbstractComponent {
 	private int mySellValue;
 	
-	public SellableComponentData(ComponentData componentData, Router aRouter) {
-		super(aRouter);
+	public SellableComponentData(IEntity aEntity, ComponentData componentData, Router aRouter) {
+		super(aEntity, aRouter);
 		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
 	}
 	public int getSellValue()

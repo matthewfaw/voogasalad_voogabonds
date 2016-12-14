@@ -10,6 +10,7 @@ import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
 import engine.model.components.viewable_interfaces.IViewableDamageDealer;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
@@ -53,7 +54,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	@Hide
 	private TeamSystem myTeams;
 	
-	public DamageDealingComponent(
+	public DamageDealingComponent(IEntity aEntity, 
 			DamageDealingSystem damageDealingSystem,
 			HealthSystem healthSysytem,
 			TeamSystem teams,
@@ -61,7 +62,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 			ComponentData data,
 			Router router
 			) {
-		super(router);
+		super(aEntity, router);
 		
 		myObservers = new ArrayList<IObserver<IViewableDamageDealer>>();
 		myDamageSystem = damageDealingSystem;

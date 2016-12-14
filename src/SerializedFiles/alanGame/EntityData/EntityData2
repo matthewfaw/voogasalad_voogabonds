@@ -22,8 +22,8 @@
         "explodesOnGoal": "true",
         "myMaxDistance": "300",
         "explodesAtMaxDistance": "true",
-        "myMoveSpeed": "3",
-        "myTurnSpeed": "10",
+        "myMoveSpeed": "5",
+        "myTurnSpeed": "45",
         "myMovementCalc": "GreedyMovementStrategy"
       },
       "myComponentName": "MoveableComponent"
@@ -33,15 +33,6 @@
         "myCollisionRadius": "0"
       },
       "myComponentName": "CollidableComponent"
-    },
-    "TargetingComponent": {
-      "myFields": {
-        "myTargetsEnemies": "true",
-        "myTargetingStrategy": "BadTargetingStrategy",
-        "mySightRange": "200",
-        "mySightWidth": "360"
-      },
-      "myComponentName": "TargetingComponent"
     }
   }
 }

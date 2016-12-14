@@ -31,7 +31,6 @@ public class EntityListView {
             return null;
         }
 //        String relativePath = myImagePath.substring(4); // remove leading 'src/'
-        System.out.println(myImagePath);
         Image img = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
         ImageView view = new ImageView(img);
         view.setPreserveRatio(true);
@@ -50,7 +49,8 @@ public class EntityListView {
                 }
             }
         }
-        imagePath = imagePath.replace('\\', File.separatorChar);
+        if (imagePath != null)
+        	imagePath = imagePath.replace('\\', File.separatorChar);
         return imagePath;
     }
 

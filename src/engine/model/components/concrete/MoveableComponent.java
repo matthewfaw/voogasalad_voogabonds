@@ -8,10 +8,12 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableMovable;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IMovable;
 import engine.model.strategies.IMovementStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.strategies.IPosition;
+import engine.model.systems.BountySystem;
 import engine.model.systems.CollisionDetectionSystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.MovementSystem;
@@ -37,6 +39,8 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	private CollisionDetectionSystem myCollision;
 	@Hide
 	private DamageDealingSystem myDamage;
+	@Hide
+	private BountySystem myBounty;
 	
 	private IMovementStrategy myMovementCalc;
 	private double myTurnSpeed;
@@ -57,21 +61,23 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	@Hide
 	private List<IObserver<IViewableMovable>> myObservers;
 
-	public MoveableComponent(
+	public MoveableComponent(IEntity aEntity, 
 			MovementSystem movement,
 			PhysicalSystem physical,
 			TargetingSystem targeting,
 			CollisionDetectionSystem collision,
+			BountySystem bounty,
 			Router router,
 			DamageDealingSystem damage,
 			ComponentData data
 			) throws ClassNotFoundException {
-		super(router);
+		super(aEntity, router);
 		
 		myMovement = movement;
 		myPhysical = physical;
 		myTargeting = targeting;
 		myCollision = collision;
+		myBounty = bounty;
 		myDamage = damage;
 		
 		myMovedDistance = 0;
@@ -122,7 +128,9 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
 		PhysicalComponent p = myPhysical.get(this);
-		if (p != null)
+		if (p != null && myGoal == null && myTargeting.getTarget(this) == null)
+			p.setPosition(getMove(p));
+		else if (p != null && (myGoal != null || myTargeting.getTarget(this) == null))
 			p.setPosition(getMove(p));
 		
 		myCollision.checkCollision(p);
@@ -132,7 +140,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		}
 		
 		if (removeOnGoal && atGoal()) {
-			//TODO: subtract player's lives
+			myBounty.pillagePlayerBase(this);
 			getEntity().delete();
 		}
 		

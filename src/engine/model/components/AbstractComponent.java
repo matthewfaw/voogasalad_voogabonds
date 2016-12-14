@@ -10,7 +10,8 @@ abstract public class AbstractComponent implements IModifiableComponent, IViewab
 	@Hide
 	private Router myRouter;
 
-	public AbstractComponent(Router router) {
+	public AbstractComponent(IEntity aEntity, Router router) {
+		myEntity = aEntity;
 		myRouter = router;
 	}
 	

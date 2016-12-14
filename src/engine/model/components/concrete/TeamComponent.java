@@ -9,6 +9,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableTeam;
+import engine.model.entities.IEntity;
 import gamePlayerView.gamePlayerView.Router;
 import engine.model.systems.TeamSystem;
 
@@ -19,7 +20,7 @@ import engine.model.systems.TeamSystem;
  * @author matthewfaw
  *
  */
-public class TeamComponent extends AbstractComponent implements IViewableTeam{
+public class TeamComponent extends AbstractComponent implements IViewableTeam {
 	private String myTeamID;
 	
 	@Hide
@@ -28,8 +29,8 @@ public class TeamComponent extends AbstractComponent implements IViewableTeam{
 	@Hide
 	private transient TeamSystem mySystem;
 	
-	public TeamComponent(TeamSystem teams, ComponentData componentData, Router router) {
-	    super(router);
+	public TeamComponent(IEntity aEntity, TeamSystem teams, ComponentData componentData, Router router) {
+	    super(aEntity, router);
 		myTeamID = componentData.getFields().get("myTeamID");
 		myObservers = new ArrayList<IObserver<IViewableTeam>>();
 		mySystem = teams;

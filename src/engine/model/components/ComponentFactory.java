@@ -59,6 +59,10 @@ public class ComponentFactory {
 					objectsToAttach.add(getPointToAttach(arg, location));
 					continue;
 				}
+				if (arg.isInstance(aEntity)) {
+					objectsToAttach.add(aEntity);
+					continue;
+				}
 				objectsToAttach.add(compdata);
 				
 			}

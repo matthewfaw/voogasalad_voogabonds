@@ -71,18 +71,14 @@ public class EntityFactory {
 		//2.5 Attach components to relevant systems?
 		//3. return the fully constructed object
 		IEntity entity = new ConcreteEntity();
-		// Give new entity a unique string ID
-		entity.setId(UUID.randomUUID().toString());
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
 			IModifiableComponent component = myComponentFactory.constructComponent(entity, compdata, aLocation);
 //			component.setEntity(entity);
 			entity.addComponent(component);	
 		}
-		
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
-
 
 		return entity;
 	}

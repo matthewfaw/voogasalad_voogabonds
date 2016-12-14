@@ -29,14 +29,14 @@ public class EntityInfoBoxBuilder {
 		private UpgradeUI myUpgradeUI;
 		private SellUI mySellUI;
 		private ApplicationController myAppController;
-		//private final String temp;
+
 		
-		public EntityInfoBoxBuilder(GamePlayerScene aGamePlayerScene,ApplicationController appController)
+		public EntityInfoBoxBuilder(GamePlayerScene gamePlayerScene,ApplicationController appController)
 		{
 			//myEntityInfoBox = new EntityInfoBox();
-			myEntityInfoBox=new HBox();
-			myGamePlayerScene = aGamePlayerScene;
-			myAppController=appController;
+			myEntityInfoBox	= new HBox();
+			myGamePlayerScene = gamePlayerScene;
+			myAppController	= appController;
 		}
 		
 		public EntityInfoBoxBuilder withMachineInfo(IViewablePhysical aComponent)
@@ -44,7 +44,7 @@ public class EntityInfoBoxBuilder {
 			System.out.println("Building a physical box");
 			//null check before constructing
 			//add upgrade button to  the info box
-			this.myMachineInfo=new MachineInfo(aComponent);
+			myMachineInfo = new MachineInfo(aComponent);
 			myEntityInfoBox.getChildren().add(getMyMachineInfo().getView());
 			return this;
 		}
@@ -54,7 +54,7 @@ public class EntityInfoBoxBuilder {
 			System.out.println("Building a targeting box");
 			//null check before constructing
 			//add upgrade button to  the info box
-			this.myTargetingButtons=new TargetingButtons(myAppController);
+			myTargetingButtons = new TargetingButtons(myAppController);
 			myEntityInfoBox.getChildren().add(myTargetingButtons.getView());
 			return this;
 		}
@@ -103,21 +103,27 @@ public class EntityInfoBoxBuilder {
 		public MachineInfo getMyMachineInfo() {
 			return myMachineInfo;
 		}
+		
 		public TargetingButtons getMyTargetingButtons() {
 			return myTargetingButtons;
 		}
+		
 		public UpgradeUI getMyUpgradeUI() {
 			return myUpgradeUI;
 		}
+		
 		public SellUI getMySellUI(){
 			return mySellUI;
 		}
+		
 		public DamageBox getMyDamageBox(){
 			return myDamageBox;
 		}
+		
 		public BountyBox getMyBountyBox(){
 			return myBountyBox;
 		}
+		
 		public HealthBox getMyHealthBox(){
 			return myHealthBox;
 		}
