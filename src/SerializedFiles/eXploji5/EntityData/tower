@@ -1,6 +1,12 @@
 {
   "myName": "tower",
   "myComponents": {
+    "TeamComponent": {
+      "myFields": {
+        "myTeamID": "us"
+      },
+      "myComponentName": "TeamComponent"
+    },
     "PhysicalComponent": {
       "myFields": {
         "myImageSize": "1",
@@ -26,7 +32,7 @@
         "mySpawnName": "heart",
         "mySpawningStrategy": "BasicSpawnStrategy",
         "homingProjectiles": "True",
-        "myTimeBetweenSpawns": "2000"
+        "myTimeBetweenSpawns": "50"
       },
       "myComponentName": "CreatorComponent"
     },

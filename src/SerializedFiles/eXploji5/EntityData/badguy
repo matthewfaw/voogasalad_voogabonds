@@ -1,6 +1,19 @@
 {
   "myName": "badguy",
   "myComponents": {
+    "TeamComponent": {
+      "myFields": {
+        "myTeamID": "them"
+      },
+      "myComponentName": "TeamComponent"
+    },
+    "HealthComponent": {
+      "myFields": {
+        "myMaxHealth": "100",
+        "explodeOnDeath": ""
+      },
+      "myComponentName": "HealthComponent"
+    },
     "PhysicalComponent": {
       "myFields": {
         "myImageSize": "1",
@@ -14,8 +27,8 @@
         "removeOnGoal": "True",
         "explodesOnGoal": "False",
         "myMaxDistance": "1000",
-        "explodesAtMaxDistance": "True",
-        "myMoveSpeed": "1",
+        "explodesAtMaxDistance": "False",
+        "myMoveSpeed": "0.6",
         "myTurnSpeed": "10",
         "myMovementCalc": "PathMovementStrategy"
       },
@@ -30,7 +43,7 @@
     "BountyComponent": {
       "myFields": {
         "myBountyValue": "100",
-        "myLivesToDestroy": "3",
+        "myLivesToDestroy": "1",
         "myPointValue": "100"
       },
       "myComponentName": "BountyComponent"

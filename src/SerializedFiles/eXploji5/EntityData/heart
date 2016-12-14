@@ -8,18 +8,20 @@
         "explodesOnAllies": "False",
         "diesOnExplosion": "True",
         "myDamageArc": "100",
-        "myDamage": "50",
+        "myDamage": "100",
         "myDamageStrategy": "BinaryDamageStrategy"
       },
       "myComponentName": "DamageDealingComponent"
     },
-    "ControllableComponent": {
-      "myFields": {},
-      "myComponentName": "ControllableComponent"
+    "TeamComponent": {
+      "myFields": {
+        "myTeamID": "us"
+      },
+      "myComponentName": "TeamComponent"
     },
     "PhysicalComponent": {
       "myFields": {
-        "myImageSize": "1",
+        "myImageSize": "0.4",
         "myValidTerrains": "grass, water",
         "myImagePath": "resources/heart.png"
       },
@@ -30,8 +32,8 @@
         "removeOnGoal": "True",
         "explodesOnGoal": "False",
         "myMaxDistance": "10000",
-        "explodesAtMaxDistance": "True",
-        "myMoveSpeed": "5",
+        "explodesAtMaxDistance": "False",
+        "myMoveSpeed": "1",
         "myTurnSpeed": "1",
         "myMovementCalc": "GreedyMovementStrategy"
       },
