@@ -92,11 +92,6 @@ public class TargetingComponent extends AbstractComponent implements ITargeting,
 	public void distributeInfo() {
 		getRouter().distributeViewableComponent(this);
 	}
-
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
 	
 	@Override
 	public void delete() {

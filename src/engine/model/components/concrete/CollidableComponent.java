@@ -126,9 +126,4 @@ public class CollidableComponent extends AbstractComponent implements ICollidabl
 	public void delete() {
 		myCollidable.detachComponent(this);
 	}
-
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
 }

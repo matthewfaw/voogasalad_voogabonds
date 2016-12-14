@@ -16,21 +16,27 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	private ApplicationController myAppController;
 	private IObservable<IViewablePhysical> myObservable;
 	private String entityID;
+	private boolean hasEntityID;
 	
     public MoveableComponentView(
     		IObservable<IViewablePhysical> aObservable, ApplicationController aAppController, Pane pane){
     	myAppController = aAppController;
     	myObservable = aObservable;
     	myPane = pane;
+    	hasEntityID = false;
     }	
     
     public String getEntityID() {
     	return entityID;
     }
+    
+    public void setEntityID(String id) {
+    	entityID = id;
+    }
 
 	@Override
 	public void update(IViewablePhysical aChangedObject) {
-		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
+		System.out.println("Updating moveable component view.");
 		String imagePath = aChangedObject.getImagePath();
 		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath().substring(4)));
 		this.setImage(image);
@@ -40,6 +46,12 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 		this.setFitHeight(aChangedObject.getSize());
 		//this.setOnMouseClicked(e -> myAppController.onEntitySelected(aChangedObject.getEntity()));
 		this.setRotate(aChangedObject.getHeading());
+		if (aChangedObject.getEntityID() != null && !hasEntityID){
+			setEntityID(aChangedObject.getEntityID());
+			System.out.println("Setting entity ID");
+			this.setOnMouseClicked(e -> myAppController.onEntityClicked(aChangedObject.getEntityID()));
+			hasEntityID = true;
+		}
 	}
 
 	@Override

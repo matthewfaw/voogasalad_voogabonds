@@ -131,11 +131,6 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		getRouter().distributeViewableComponent(this);
 	}
 	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
-
 	public void delete() {
 		myHealthSystem.detachComponent(this);
 		myObservers.forEach(observer -> observer.remove(this));
