@@ -29,10 +29,10 @@
       "myFields": {
         "removeOnGoal": "True",
         "explodesOnGoal": "False",
-        "myMaxDistance": "10",
+        "myMaxDistance": "10000",
         "explodesAtMaxDistance": "True",
-        "myMoveSpeed": "10",
-        "myTurnSpeed": "10",
+        "myMoveSpeed": "5",
+        "myTurnSpeed": "1",
         "myMovementCalc": "GreedyMovementStrategy"
       },
       "myComponentName": "MoveableComponent"

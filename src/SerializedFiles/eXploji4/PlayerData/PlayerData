@@ -1,6 +1,0 @@
-{
-  "startingLives": 40,
-  "startingCash": 1000,
-  "winStrategyName": "Never Win",
-  "loseStrategyName": "PlayerHPLoseStrategy"
-}
