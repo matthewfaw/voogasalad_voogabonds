@@ -32,7 +32,8 @@ public class CollisionDetectionSystem implements ISystem<CollidableComponent> {
 	public void checkCollision(PhysicalComponent movedPhysical) {
 		CollidableComponent movedCollidable = get(movedPhysical);
 		if (movedCollidable != null) {
-			for (CollidableComponent unmovedCollidable: getComponents())	
+			List<CollidableComponent> iterate = new ArrayList<CollidableComponent>(getComponents());
+			for (CollidableComponent unmovedCollidable: iterate)	
 				movedCollidable.checkCollision(unmovedCollidable);
 		}
 	}

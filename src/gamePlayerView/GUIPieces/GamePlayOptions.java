@@ -63,7 +63,7 @@ public class GamePlayOptions extends VBox implements IGUIPiece {
 	}
 
 	@Override
-	public Node getView() {
+	public Node getNode() {
 		return this;
 	}
 }
