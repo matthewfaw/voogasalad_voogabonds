@@ -12,16 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ResourceInfo extends VBox implements IGUIPiece, IObserver<Draggables>{
-	private Text myText;
+public class ResourceInfo extends Text implements IGUIPiece, IObserver<Draggables>{
+	
 	private Map<ImageView,EntityData> myImageToDataMap;
 	
 	public ResourceInfo (Map<ImageView,EntityData> map) {
 		myImageToDataMap = map;
-		myText = new Text();
-//		this.setPadding(new Insets(10, 10, 10, 10));
-//		this.setHeight(value);
-		getChildren().add(myText);
 	}
 	
 	@Override
@@ -44,7 +40,7 @@ public class ResourceInfo extends VBox implements IGUIPiece, IObserver<Draggable
 		String name = data.getName();
 		String cost = Integer.toString(data.getBuyPrice());
 		String sellPrice = Integer.toString(data.getSellPrice());
-		myText.setText(String.format(
+		setText(String.format(
 				"Tower Name: %s\nCost: %s\nSell Price: %s\n"
 				, name
 				, cost
