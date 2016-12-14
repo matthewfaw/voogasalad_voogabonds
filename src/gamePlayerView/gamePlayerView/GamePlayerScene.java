@@ -6,20 +6,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.controller.MapDataContainer;
-import authoring.model.TowerData;
 import engine.controller.ApplicationController;
 import gamePlayerView.Resources;
 import gamePlayerView.GUIPieces.GamePlayOptions;
 import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
-import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
-import gamePlayerView.GUIPieces.InfoBoxes.LivesBox;
-import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
 import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
 import gamePlayerView.GUIPieces.MachineInfoView.TowerStatistics;
-import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
-import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
 import gamePlayerView.GUIPieces.InfoBoxes.PauseMenu;
 import gamePlayerView.GUIPieces.MapView.MapDisplay;
 import gamePlayerView.GUIPieces.player_info.PlayerInfoBox;
@@ -36,10 +30,8 @@ import gamePlayerView.interfaces.IEnemiesKilledAcceptor;
 import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -78,13 +70,15 @@ public class GamePlayerScene {
 
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
 		myAppController = aAppController;
+		
+		myStage=aStage;
+		myStage.setResizable(false);
+		
 		myControls = new Controls();
 		myCash = new ArrayList<IPlayerAcceptor>();
 		myLives = new ArrayList<IPlayerAcceptor>();
 		myWaves = new ArrayList<IPlayerAcceptor>();
 		myResources = new ArrayList<IResourceAcceptor>();
-		myStage=aStage;
-		myStage.setResizable(false);
 		myDisplayBoxFactory=new DisplayBoxFactory();
 		myBorderPane=new BorderPane();
 		myResourceBundle=ResourceBundle.getBundle(GAME_PLAYER_PATH);
@@ -101,16 +95,23 @@ public class GamePlayerScene {
 	}
 	
 	public Scene build(Stage stage) throws Exception {
-		//myGamePlayer =new Pane();
 		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
 		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
 		myScene=new Scene(myBorderPane);
-		setScreen();
-		//myGamePlayer.getChildren().add(myBorderPane);
+		
+		initMapDisplay();
+		initPauseMenu();
+		setPanes();
+		
 		return myScene;
 	}
 	
-	public void setScreen() {
+	private void initPauseMenu() {
+		myPauseMenu = new PauseMenu();
+		makePauseMenu();
+	}
+
+	public void setPanes() {
 		// Create and set panes
 		myTopPane = new TopPane();
 		createTopPane();
@@ -125,6 +126,13 @@ public class GamePlayerScene {
 		myBorderPane.setBottom(myBottomPane.getNode());
 		myBorderPane.setRight(myRightPane.getNode());
 		myBorderPane.setLeft(myLeftPane.getNode());
+		myBorderPane.setCenter(myMap.getNode());
+	}
+	
+	private void initMapDisplay() throws Exception {
+		myMap = new MapDisplay(myAppController);
+		myMap.getControls(myControls);
+		myMap.setupDragging(myScene);
 	}
 	
 	public void createTopPane() {
@@ -142,6 +150,17 @@ public class GamePlayerScene {
 		
 		myRightPane.add(resourceStoreView);
 	}
+	
+//	private RightPane createRightPane() {
+//		RightPane pane=new RightPane();
+//		TowerColumn myTowerColumn=new TowerColumn();
+//		Collection<Node> myCollection=new ArrayList<Node>();
+//		myCollection.add(myTowerColumn.getView());
+//		myResources.add(myTowerColumn);
+//		pane.add(myCollection);
+//
+//		return pane;
+//	}
 
 	public void createLeftPane() {
 		
@@ -149,7 +168,9 @@ public class GamePlayerScene {
 		IGUIPiece gamePlayOptions = new GamePlayOptions(myAppController);
 		
 		// Player info
-		IGUIPiece playerInfoBox = new PlayerInfoBox(myResourceBundle, myDisplayBoxFactory);
+		PlayerInfoBox playerInfoBox = new PlayerInfoBox(myResourceBundle, myDisplayBoxFactory);
+//		myCash.add((IPlayerAcceptor) playerInfoBox.getMyWallet()); ///FIX LATER
+//		myLives.add((IPlayerAcceptor) playerInfoBox.getMyLives());//// FIX LATER
 		
 		myLeftPane.add(gamePlayOptions.getNode());
 		myLeftPane.add(playerInfoBox.getNode());
@@ -256,16 +277,7 @@ public class GamePlayerScene {
 //		return topPane;
 //	}
 //
-//	private RightPane createRightPane() {
-//		RightPane pane=new RightPane();
-//		TowerColumn myTowerColumn=new TowerColumn();
-//		Collection<Node> myCollection=new ArrayList<Node>();
-//		myCollection.add(myTowerColumn.getView());
-//		myResources.add(myTowerColumn);
-//		pane.add(myCollection);
-//
-//		return pane;
-//	}
+
 //
 //	private LeftPane createLeftPane() {
 //		LeftPane pane=new LeftPane();
@@ -335,7 +347,7 @@ public class GamePlayerScene {
 	public void updateDisplay(EntityInfoBox myStatisticsBox) {
 		myBottomPane.clear();
 		Collection<Node> myCollection = new ArrayList<Node>();
-		myCollection.add(myStatisticsBox.getView());
+		myCollection.add(myStatisticsBox.getNode());
 		myBottomPane.add(myCollection);
 	}
 

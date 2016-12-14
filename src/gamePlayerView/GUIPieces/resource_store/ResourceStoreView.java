@@ -21,9 +21,9 @@ public class ResourceStoreView extends VBox implements IGUIPiece, IResourceAccep
 	private Map<ImageView,EntityData> myImageToDataMap;
 	
 	public ResourceStoreView () {
+		myImageToDataMap = new HashMap<ImageView,EntityData>();
 		myDraggables = new Draggables(myImageToDataMap);
 		myResourceInfo = new ResourceInfo(myImageToDataMap);
-		myImageToDataMap = new HashMap<ImageView,EntityData>();
 		constructNode();
 	}
 

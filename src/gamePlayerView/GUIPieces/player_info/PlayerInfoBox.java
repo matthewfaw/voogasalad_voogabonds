@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 import gamePlayerView.GUIPieces.InfoBoxes.DisplayBoxFactory;
 import gamePlayerView.GUIPieces.InfoBoxes.InfoBox;
 import gamePlayerView.interfaces.IGUIPiece;
+import gamePlayerView.interfaces.IPlayerAcceptor;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * This class will contain player info statistics such as
@@ -14,7 +16,7 @@ import javafx.scene.layout.HBox;
  * @author alanguo
  *
  */
-public class PlayerInfoBox extends HBox implements IGUIPiece{
+public class PlayerInfoBox extends VBox implements IGUIPiece{
 //	InfoBox myWallet=myDisplayBoxFactory.createBox(myResourceBundle.getString("Cash"));
 //	InfoBox myLife=myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
 	
@@ -40,6 +42,14 @@ public class PlayerInfoBox extends HBox implements IGUIPiece{
 	
 	public InfoBox createLivesInfo() {
 		return myDisplayBoxFactory.createBox(myResourceBundle.getString("Lives"));
+	}
+	
+	public InfoBox getMyWallet() {
+		return myWallet;
+	}
+	
+	public InfoBox getMyLives() {
+		return myLife;
 	}
 
 	@Override

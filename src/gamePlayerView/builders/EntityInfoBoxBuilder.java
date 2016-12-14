@@ -44,7 +44,7 @@ public class EntityInfoBoxBuilder {
 			//null check before constructing
 			//add upgrade button to  the info box
 			myMachineInfo = new MachineInfo(aComponent);
-			myEntityInfoBox.getChildren().add(getMyMachineInfo().getView());
+			myEntityInfoBox.getChildren().add(getMyMachineInfo().getNode());
 			return this;
 		}
 		
@@ -53,37 +53,37 @@ public class EntityInfoBoxBuilder {
 			//null check before constructing
 			//add upgrade button to  the info box
 			myTargetingButtons = new TargetingButtons(myAppController);
-			myEntityInfoBox.getChildren().add(myTargetingButtons.getView());
+			myEntityInfoBox.getChildren().add(myTargetingButtons.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withHealthBox(IViewableHealth aComponent) {
 			this.myHealthBox = new HealthBox();
-			myEntityInfoBox.getChildren().add(myHealthBox.getView());
+			myEntityInfoBox.getChildren().add(myHealthBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withBountyBox(IViewableBounty aComponent) {
 			myBountyBox = new BountyBox();
-			myEntityInfoBox.getChildren().add(myBountyBox.getView());
+			myEntityInfoBox.getChildren().add(myBountyBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withDamageBox(IViewableDamageDealer aComponent) {
 			myDamageBox = new DamageBox();
-			myEntityInfoBox.getChildren().add(myDamageBox.getView());
+			myEntityInfoBox.getChildren().add(myDamageBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withUpgrade(IViewableUpgrade aComponent) {
 			myUpgradeUI = new UpgradeUI(aComponent);
-			myEntityInfoBox.getChildren().add(myUpgradeUI.getView());
+			myEntityInfoBox.getChildren().add(myUpgradeUI.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withSell(IViewableSell aComponent) {
 			mySellUI = new SellUI(myAppController);
-			myEntityInfoBox.getChildren().add(mySellUI.getView());
+			myEntityInfoBox.getChildren().add(mySellUI.getNode());
 			return this;
 		}
 		
