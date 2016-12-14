@@ -1,0 +1,11 @@
+{
+  "myName": "Chris",
+  "myComponents": {
+    "BountyComponent": {
+      "myFields": {
+        "myBountyValue": "50"
+      },
+      "myComponentName": "BountyComponent"
+    }
+  }
+}
