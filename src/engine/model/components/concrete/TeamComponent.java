@@ -19,7 +19,7 @@ import engine.model.systems.TeamSystem;
  * @author matthewfaw
  *
  */
-public class TeamComponent extends AbstractComponent implements IViewableTeam{
+public class TeamComponent extends AbstractComponent implements IViewableTeam {
 	private String myTeamID;
 	
 	@Hide
