@@ -4,22 +4,20 @@ import java.util.Map;
 
 import authoring.model.EntityData;
 import engine.IObserver;
-import engine.model.playerinfo.IViewablePlayer;
 import gamePlayerView.interfaces.IGUIPiece;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ResourceInfo extends TextArea implements IGUIPiece, IObserver<Draggables>{
-	private Text myText;
+public class ResourceInfo extends Text implements IGUIPiece, IObserver<Draggables>{
+	
 	private Map<ImageView,EntityData> myImageToDataMap;
 	
 	public ResourceInfo (Map<ImageView,EntityData> map) {
 		myImageToDataMap = map;
-		myText = new Text();
-		getChildren().add(myText);
 	}
 	
 	@Override
@@ -42,8 +40,7 @@ public class ResourceInfo extends TextArea implements IGUIPiece, IObserver<Dragg
 		String name = data.getName();
 		String cost = Integer.toString(data.getBuyPrice());
 		String sellPrice = Integer.toString(data.getSellPrice());
-		
-		myText.setText(String.format(
+		setText(String.format(
 				"Tower Name: %s\nCost: %s\nSell Price: %s\n"
 				, name
 				, cost

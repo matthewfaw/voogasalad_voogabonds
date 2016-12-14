@@ -2,13 +2,10 @@ package gamePlayerView.GUIPieces.resource_store;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import authoring.controller.MapDataContainer;
 import authoring.model.EntityData;
 import engine.IObservable;
 import engine.IObserver;
 import engine.model.playerinfo.IViewablePlayer;
-import gamePlayerView.GUIPieces.TowerColumn;
 import gamePlayerView.interfaces.IGUIPiece;
 import gamePlayerView.interfaces.IResourceAcceptor;
 import javafx.scene.Node;
@@ -21,7 +18,6 @@ public class ResourceStoreView extends VBox implements IGUIPiece, IResourceAccep
 	
 	Draggables myDraggables;
 	ResourceInfo myResourceInfo;
-	TowerColumn myTowerColumn;
 	private Map<ImageView,EntityData> myImageToDataMap;
 	
 	public ResourceStoreView () {
@@ -34,9 +30,9 @@ public class ResourceStoreView extends VBox implements IGUIPiece, IResourceAccep
 
 	private void constructNode() {
 		TabPane resourceTab = new TabPane();
-		resourceTab.getTabs().add(buildTab(myDraggables.getNode(), "Towers"));
+		resourceTab.getTabs().add(buildTab(myDraggables, "Towers"));
 		getChildren().add(resourceTab);
-		getChildren().add(myResourceInfo.getNode());
+		getChildren().add(myResourceInfo);
 	}
 	
 	private Tab buildTab(Node list, String title) {

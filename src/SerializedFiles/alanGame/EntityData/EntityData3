@@ -12,7 +12,7 @@
         "myImageSize": "50",
         "myValidTerrains": "grass, water",
         "myHeading": "0",
-        "myImagePath": "src/resources/boss.png"
+        "myImagePath": "resources/boss.png"
       },
       "myComponentName": "PhysicalComponent"
     },
@@ -24,7 +24,7 @@
         "explodesAtMaxDistance": "false",
         "myMoveSpeed": "1",
         "myTurnSpeed": "1",
-        "myMovementCalc": "GreedyMovementStrategy"
+        "myMovementCalc": "PathMovementStrategy"
       },
       "myComponentName": "MoveableComponent"
     },
