@@ -274,18 +274,22 @@ public class GamePlayerScene {
 	       
 	        if(code.getName().equals(myControls.getControlFor("Up"))){
 	            System.out.println("Going up");
+	            myAppController.onUpButtonPressed();
 	        }
 	        else if(code.getName().equals(myControls.getControlFor("Pause"))){
 	            pause.init();
 	        }
 	        else if(code.getName().equals(myControls.getControlFor("Down"))){
                     System.out.println("Going down");
+                    myAppController.onDownButtonPressed();
                 }
 	        else if(code.getName().equals(myControls.getControlFor("Left"))){
                     System.out.println("Going left");
+                    myAppController.onLeftButtonPressed();
                 }
 	        else if(code.getName().equals(myControls.getControlFor("Right"))){
                     System.out.println("Going right");
+                    myAppController.onRightButtonPressed();
                 }
 	        else if(code.getName().equals("Space")){
                     System.out.println("Firing");

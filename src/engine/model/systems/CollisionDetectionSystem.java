@@ -15,6 +15,7 @@ import engine.model.components.concrete.PhysicalComponent;
  *
  */
 public class CollisionDetectionSystem extends AbstractSystem<CollidableComponent> {
+	
 	public CollisionDetectionSystem() {
 		
 	}
