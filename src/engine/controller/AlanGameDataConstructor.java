@@ -52,7 +52,7 @@ public class AlanGameDataConstructor {
 		mapData.addSpawnPoints("spawnPoint", spawnPoints);
 		
 		ArrayList<Point> sinkPoints = new ArrayList<Point>();
-		sinkPoints.add(new Point(4, 4));
+		sinkPoints.add(new Point(10, 10));
 		mapData.addSinkPoints("sinkPoint", sinkPoints);
 		
 		mapData.cellSize(50);
@@ -152,13 +152,13 @@ public class AlanGameDataConstructor {
 			projectile_physical_component.addField("myHeading", "0");
 			projectile_physical_component.addField("myImagePath", "src/resources/cookie.png");
 			projectile_physical_component.addField("myImageSize", "10");
-			projectile_physical_component.addField("myValidTerrains", "grass, ice");
+			projectile_physical_component.addField("myValidTerrains", "grass, water");
 			
 			ComponentData projectile_moveable_component = new ComponentData();
 			projectile_moveable_component.setComponentName("MoveableComponent");
 			projectile_moveable_component.addField("myMovementCalc", "GreedyMovementStrategy");
 			projectile_moveable_component.addField("myTurnSpeed", "10");
-			projectile_moveable_component.addField("myMoveSpeed", "20");
+			projectile_moveable_component.addField("myMoveSpeed", "3");
 			projectile_moveable_component.addField("explodesAtMaxDistance", "true");
 			projectile_moveable_component.addField("myMaxDistance", "300");
 			projectile_moveable_component.addField("removeOnGoal", "true");
@@ -190,23 +190,23 @@ public class AlanGameDataConstructor {
 			
 			EntityData enemy  = new EntityData();
 			
-			projectile.setName("enemy");
+			enemy.setName("enemy");
 			
 			ComponentData enemy_physical_component = new ComponentData();
 			enemy_physical_component.setComponentName("PhysicalComponent");
 			enemy_physical_component.addField("myHeading", "0");
 			enemy_physical_component.addField("myImagePath", "src/resources/boss.png");
-			enemy_physical_component.addField("myImageSize", "20");
-			enemy_physical_component.addField("myValidTerrains", "grass, ice");
+			enemy_physical_component.addField("myImageSize", "50");
+			enemy_physical_component.addField("myValidTerrains", "grass, water");
 			
 			ComponentData enemy_moveable_component = new ComponentData();
 			enemy_moveable_component.setComponentName("MoveableComponent");
-			enemy_moveable_component.addField("myMovementCalc", "PathMovementStrategy");
-			enemy_moveable_component.addField("myTurnSpeed", "5");
-			enemy_moveable_component.addField("myMoveSpeed", "3");
+			enemy_moveable_component.addField("myMovementCalc", "GreedyMovementStrategy");
+			enemy_moveable_component.addField("myTurnSpeed", "1");
+			enemy_moveable_component.addField("myMoveSpeed", "1");
 			enemy_moveable_component.addField("explodesAtMaxDistance", "false");
-			enemy_moveable_component.addField("myMaxDistance", "600");
-			enemy_moveable_component.addField("removeOnGoal", "true");
+			enemy_moveable_component.addField("myMaxDistance", "1000");
+			enemy_moveable_component.addField("removeOnGoal", "false");
 			enemy_moveable_component.addField("explodesOnGoal", "false");
 			
 			ComponentData enemy_collidable_component = new ComponentData();
@@ -216,12 +216,11 @@ public class AlanGameDataConstructor {
 			ComponentData enemy_team_component = new ComponentData();
 			enemy_team_component.setComponentName("TeamComponent");
 			enemy_team_component.addField("myTeamID", "them");
-			
+
 			enemy.addComponent("PhysicalComponent", enemy_physical_component);
 			enemy.addComponent("MoveableComponent", enemy_moveable_component);
 			enemy.addComponent("CollidableComponent", enemy_collidable_component);
 			enemy.addComponent("TeamComponent", enemy_team_component);
-			
 			
 			// ********* Player Data ********** //
 			PlayerData pdd = new PlayerData();
@@ -233,10 +232,10 @@ public class AlanGameDataConstructor {
 			//Level data
 			WaveData wad1 = new WaveData();
 			wad1.setName("Cool wave");
-			wad1.setNumEnemies(1);
+			wad1.setNumEnemies(10);
 			wad1.setSpawnPointName("spawnPoint");
 			wad1.setSinkPointName("sinkPoint");
-			wad1.setTimeBetweenEnemy(20);
+			wad1.setTimeBetweenEnemy(2);
 			wad1.setTimeForWave(0);
 			wad1.setWaveEntity("enemy");
 			WaveData wad2 = new WaveData();
