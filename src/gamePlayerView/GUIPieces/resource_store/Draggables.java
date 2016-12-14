@@ -1,5 +1,6 @@
 package gamePlayerView.GUIPieces.resource_store;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +57,12 @@ public class Draggables extends ListView<ImageView> implements IGUIPiece, IObser
 					.get("PhysicalComponent")
 					.getFields()
 					.get("myImagePath");
+			imagePath = imagePath.replace('\\', File.separatorChar);
+			/*
 			if (imagePath.substring(0, 4).equals(SOURCE_PATH)) {
 				imagePath = imagePath.substring(4);
 			}
+			*/
 			ImageView towerImageView = new ImageView();
 			towerImageView.setImage(new Image(
 							this

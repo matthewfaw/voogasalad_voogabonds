@@ -1,5 +1,7 @@
 package gamePlayerView.GUIPieces.MapView;
 
+import java.io.File;
+
 import engine.IObservable;
 
 import engine.IObserver;
@@ -38,7 +40,8 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 	public void update(IViewablePhysical aChangedObject) {
 		String imagePath = aChangedObject.getImagePath();
 		if (imagePath != null) {
-			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(aChangedObject.getImagePath()));
+			imagePath = imagePath.replace('\\', File.separatorChar);
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(imagePath));
 			this.setImage(image);
 			this.setX(aChangedObject.getPosition().getX() - aChangedObject.getSize() / 2);
 			this.setY(aChangedObject.getPosition().getY() - aChangedObject.getSize() / 2);
