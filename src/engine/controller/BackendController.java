@@ -130,7 +130,7 @@ public class BackendController {
 	
 	
 	public void moveControllables(String movement) {
-		System.out.println("moving at the back end");
+		//System.out.println("moving at the back end");
 		myControllableSystem.move(movement);
 	}
 	

@@ -42,7 +42,7 @@ public class MapMediator {
 		
 //		for (TerrainData terrainData: myMapData.getTerrainList()) {
 //			if (terrainData.getLoc().equals(aLocation)) {
-//				System.out.println("The terrain at this point is: "+terrainData.getName());
+//				//System.out.println("The terrain at this point is: "+terrainData.getName());
 //				for (String validTerrain: validTerrains) {
 //					if (validTerrain.equals(terrainData.getName())) {
 //						return true;

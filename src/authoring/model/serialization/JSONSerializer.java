@@ -16,7 +16,7 @@ public class JSONSerializer {
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		String jsonString = gson.toJson(obj);
 		JsonElement json = gson.toJsonTree(obj);
-		System.out.println(json);
+		//System.out.println(json);
 		return jsonString;
 		
 			

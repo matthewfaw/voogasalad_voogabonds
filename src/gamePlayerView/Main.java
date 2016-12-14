@@ -25,7 +25,7 @@ public class Main extends Application {
 		//TODO:
 		ApplicationController appController = new ApplicationController();
 
-		appController.init(s, "alanGame");
+		appController.init(s, "taptapgood");
 //		appController.init(s, "AuthorGame");
 		//appController.init(s, "ExampleGame");
 //		GamePlayerScene gamePlayerScene = new GamePlayerScene(s); 

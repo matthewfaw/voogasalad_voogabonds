@@ -56,7 +56,7 @@ public class MoveableComponentView extends ImageView implements IObserver<IViewa
 			this.setRotate(aChangedObject.getHeading());
 			if (aChangedObject.getEntityID() != null && !hasEntityID){
 				setEntityID(aChangedObject.getEntityID());
-				System.out.println("Setting entity ID");
+				//System.out.println("Setting entity ID");
 				this.setOnMouseClicked(e -> myAppController.onEntityClicked(aChangedObject.getEntityID()));
 				hasEntityID = true;
 			}

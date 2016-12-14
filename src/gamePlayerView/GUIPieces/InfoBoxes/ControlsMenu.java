@@ -58,15 +58,15 @@ public class ControlsMenu{
         
         myControls.setControls(myControls.getControls());
         kill();
-//        System.out.println(myControls.getFunctions());
-//        System.out.println(myControls.getControls());
+//        //System.out.println(myControls.getFunctions());
+//        //System.out.println(myControls.getControls());
     }
     
     public void displayFunctions(){
         ArrayList<String> functions = myControls.getFunctions();
         
         for(String str : functions){
-            //System.out.println(resources.getString(e.nextElement()));
+            ////System.out.println(resources.getString(e.nextElement()));
             Text functionText = new Text();
             functionText.setText(str + ": ");
             functionText.setStyle("-fx-fill: white; -fx-font: 22 arial;  ");
@@ -90,7 +90,7 @@ public class ControlsMenu{
         ArrayList<String> controls = myControls.getControls();
         
         for(String str : controls){
-            //System.out.println(resources.getString(e.nextElement()));
+            ////System.out.println(resources.getString(e.nextElement()));
             ToggleButton myButton = new ToggleButton();
             myButton.setText(str);
             myButton.setStyle(buttonCSS);
@@ -115,7 +115,7 @@ public class ControlsMenu{
            myControls.setControlFor(myControls.getFunctions()
                                  .get(myControls.getControls().
                                       indexOf(myButton.getText())), code.getName());
-//           System.out.println(myControls.getControlFor(myControls.getFunctions()
+//           //System.out.println(myControls.getControlFor(myControls.getFunctions()
 //                              .get(myControls.getControls()
 //                               .indexOf(myButton.getText()))));
            myButton.setText(code.getName());

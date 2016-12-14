@@ -158,13 +158,13 @@ public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
     }
     
     public void handleKeyInput(KeyCode code){
-        System.out.println("hey");
-        System.out.println(myControls.getControlFor("Left"));
-        System.out.println(code);
+        //System.out.println("hey");
+        //System.out.println(myControls.getControlFor("Left"));
+        //System.out.println(code);
         switch (code)
         {
             case LEFT:
-                System.out.println("WOO!");
+                //System.out.println("WOO!");
             break;
             default:
                 break;

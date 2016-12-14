@@ -66,7 +66,7 @@ public class PlayerTab extends Tab {
 				try {
 					handleNewGame();
 				} catch (IOException e1) {
-					System.out.println("playerTab 69");
+					//System.out.println("playerTab 69");
 					e1.printStackTrace();
 					ErrorBox.displayError(myResources.getString("NewPlayerError"));
 				}
@@ -83,7 +83,7 @@ public class PlayerTab extends Tab {
 				try {
 					handleOldGame();
 				} catch (IOException e){
-					System.out.println("playerTab 86");
+					//System.out.println("playerTab 86");
 					e.printStackTrace();
 					ErrorBox.displayError(myResources.getString("NewPlayerError"));
 				}

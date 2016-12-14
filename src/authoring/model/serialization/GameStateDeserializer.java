@@ -31,11 +31,11 @@ public class GameStateDeserializer {
 				for (Class c:classList){
 					try{
 						if (fsub.toString().contains(c.getSimpleName())){
-							System.out.println(fsub.toString());
-							System.out.println(c.getSimpleName());
+							//System.out.println(fsub.toString());
+							//System.out.println(c.getSimpleName());
 							// removes the "src/" portion
 							String fp = fsub.getPath().substring(4, fsub.getPath().length());
-							System.out.println(fp);
+							//System.out.println(fp);
 							Object obj = jdes.deserializeFromFile("src/"+fp, c);
 							if ( c == PlayerData.class){
 								pdd = (PlayerData) obj;
@@ -50,7 +50,7 @@ public class GameStateDeserializer {
 						}
 					}
 					catch(Exception e){
-//						System.out.println("fuck");
+//						//System.out.println("fuck");
 //						throw new Exception("Error in loading authoring environment.");
 					}
 				}
@@ -58,7 +58,7 @@ public class GameStateDeserializer {
 			}
 		}
 
-		System.out.println(objects.size());
+		//System.out.println(objects.size());
 
 	}
 	

@@ -46,7 +46,6 @@ public class TimelineController implements IObservable<TimelineController> {
 	{
 		if (!myTimeline.getStatus().equals(Status.RUNNING)) {
 			myTimeline.play();
-			System.out.println(myTimeline.getCurrentTime());
 			if (myStartTime == NOT_STARTED) {
 				myStartTime = System.nanoTime();
 			}

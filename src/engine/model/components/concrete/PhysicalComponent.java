@@ -57,7 +57,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myHeading = 0;
 		
 		physical.attachComponent(this);
-		System.out.println("Routing a physical component.");
+		//System.out.println("Routing a physical component.");
 		router.createNewViewableComponent(this);
 		setPosition(position);
 	}

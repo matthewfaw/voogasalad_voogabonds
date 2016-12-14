@@ -14,26 +14,26 @@ public class KeyInputHandler {
 	
 	public void handleKeyInput(KeyCode code) {
 		if(code.getName().equals(data.myControls.getControlFor("Up"))){
-			System.out.println("Going up");
+			//System.out.println("Going up");
 			data.myAppController.onUpButtonPressed();
 		}
 		else if(code.getName().equals(data.myControls.getControlFor("Pause"))){
 			data.myPauseMenu.init();
 		}
 		else if(code.getName().equals(data.myControls.getControlFor("Down"))){
-			System.out.println("Going down");
+			//System.out.println("Going down");
 			data.myAppController.onDownButtonPressed();
 		}
 		else if(code.getName().equals(data.myControls.getControlFor("Left"))){
-			System.out.println("Going left");
+			//System.out.println("Going left");
 			data.myAppController.onLeftButtonPressed();
 		}
 		else if(code.getName().equals(data.myControls.getControlFor("Right"))){
-			System.out.println("Going right");
+			//System.out.println("Going right");
 			data.myAppController.onRightButtonPressed();
 		}
 		else if(code.getName().equals("Space")){
-			System.out.println("Firing");
+			//System.out.println("Firing");
 		}
 	}
 }

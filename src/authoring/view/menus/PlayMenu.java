@@ -74,7 +74,7 @@ public class PlayMenu extends Menu {
 			playInstance.start(s);
 		}
 		catch(Exception e){
-			System.out.println("Unable to start new game.");
+			//System.out.println("Unable to start new game.");
 		}
 	}
 

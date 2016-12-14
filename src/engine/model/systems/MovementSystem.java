@@ -37,7 +37,6 @@ public class MovementSystem implements ISystem<MoveableComponent>, IObserver<Tim
 		for (MoveableComponent mc :components) {
 			mc.move();
 		}
-
 	}
 
 	public MoveableComponent get(IComponent c) {

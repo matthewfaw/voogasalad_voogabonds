@@ -39,14 +39,14 @@ public class Controls {
     }
     
     public void setControlFor(String function, String newControl){
-//        System.out.println(function + ": ");
-//        System.out.println(mappings.get(function));
+//        //System.out.println(function + ": ");
+//        //System.out.println(mappings.get(function));
         for(int i = 0; i < myControls.size(); i++){
             if(myMappings.get(function) == myControls.get(i)){
                 myControls.remove(i);
                 myControls.add(i, newControl);
-//                System.out.println("Replaced");
-//                System.out.println("controls size: " + controls.size());
+//                //System.out.println("Replaced");
+//                //System.out.println("controls size: " + controls.size());
             }
         }
         myMappings.replace(function, myMappings.get(function), newControl);

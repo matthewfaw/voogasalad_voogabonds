@@ -129,7 +129,7 @@ public class FileMenu extends Menu {
 		try {
 			GSS.saveGameState(name, overwrite);
 		} catch (Exception exception) {
-			System.out.println("Cannot save game.");
+			//System.out.println("Cannot save game.");
 		}
 	}
 	
