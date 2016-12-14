@@ -18,6 +18,11 @@ public interface IViewablePlayer extends IObservable<IViewablePlayer> {
 	 */
 	public int getAvailableMoney();
 	/**
+	 * Get the number of accumulated points
+	 * @return the number of points the player has
+	 */
+	int getPoints();
+	/**
 	 * XXX: What is this?
 	 * @return
 	 */
@@ -33,4 +38,5 @@ public interface IViewablePlayer extends IObservable<IViewablePlayer> {
 	 * @return all the affordable towers
 	 */
 	public List<EntityData> getAffordableTowers();
+
 }

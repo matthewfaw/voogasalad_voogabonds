@@ -10,6 +10,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.PhysicalSystem;
 import gamePlayerView.gamePlayerView.Router;
@@ -31,19 +32,19 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	private List<String> myValidTerrains;
 	
 	@Hide
-	private List<IObserver<IViewablePhysical>> myObservers;
+	private transient List<IObserver<IViewablePhysical>> myObservers;
 	@Hide
 	private Point myPosition;
 	@Hide
 	private double myHeading;
 	@Hide
-	private PhysicalSystem mySystem;
+	private transient PhysicalSystem mySystem;
 
 	
 
 		
-	public PhysicalComponent (PhysicalSystem physical, Router router, ComponentData data, Point position) {
-		super(router);
+	public PhysicalComponent(IEntity aEntity, PhysicalSystem physical, Router router, ComponentData data, Point position) {
+		super(aEntity, router);
 		mySystem = physical;
 		
 		myImagePath = data.getFields().get("myImagePath");
@@ -56,7 +57,7 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		myHeading = 0;
 		
 		physical.attachComponent(this);
-		System.out.println("Routing a physical component.");
+		//System.out.println("Routing a physical component.");
 		router.createNewViewableComponent(this);
 		setPosition(position);
 	}
@@ -121,7 +122,8 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 	@Override
 	public void notifyObservers() {
 		for (IObserver<IViewablePhysical> o: myObservers)
-			o.update(this);
+			if (this != null)
+				o.update(this);
 	}
 
 	/***** Component interface ******/
@@ -136,10 +138,5 @@ public class PhysicalComponent extends AbstractComponent implements IPhysical, I
 		mySystem.detachComponent(this);
 		myPosition = null;
 		myObservers.forEach(observer -> observer.remove(this));
-	}
-	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
 	}
 }

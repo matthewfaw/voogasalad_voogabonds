@@ -1,7 +1,9 @@
 package engine.model.components.concrete;
 
 import authoring.model.ComponentData;
+import engine.model.components.AbstractComponent;
 import engine.model.entities.IEntity;
+import gamePlayerView.gamePlayerView.Router;
 
 /**
  * The purpose of this class is to manage the information relevant
@@ -10,11 +12,12 @@ import engine.model.entities.IEntity;
  * @author matthewfaw
  *
  */
-public class SellableComponentData {
+public class SellableComponentData extends AbstractComponent {
 	private int mySellValue;
 	
-	public SellableComponentData(/*ComponentData componentData*/) {
-//		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
+	public SellableComponentData(IEntity aEntity, ComponentData componentData, Router aRouter) {
+		super(aEntity, aRouter);
+		mySellValue = Integer.parseInt(componentData.getFields().get("mySellValue"));
 	}
 	public int getSellValue()
 	{
@@ -24,5 +27,13 @@ public class SellableComponentData {
 	public void setSellPrice(int aPrice)
 	{
 		mySellValue = aPrice;
+	}
+	@Override
+	public void distributeInfo() {
+		// Do nothing
+	}
+	@Override
+	public void delete() {
+		// Do nothing
 	}
 }

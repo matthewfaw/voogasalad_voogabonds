@@ -10,6 +10,7 @@ import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.IComponent;
 import engine.model.components.viewable_interfaces.IViewableDamageDealer;
+import engine.model.entities.IEntity;
 import engine.model.strategies.IDamageStrategy;
 import engine.model.strategies.IPhysical;
 import engine.model.systems.DamageDealingSystem;
@@ -32,7 +33,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private int myDamage;
 	private double myDamageArc;
 	private double myDamageRadius;
-	private IDamageStrategy myDamageStrategy;
+	private transient IDamageStrategy myDamageStrategy;
 	
 	@Hide
 	private List<IObserver<IViewableDamageDealer>> myObservers;
@@ -42,31 +43,34 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private boolean diesOnExplosion;
 
 	@Hide
-	private HealthSystem myHealthSystem;
+	private transient HealthSystem myHealthSystem;
 	
 	@Hide
-	private PhysicalSystem myPhysicalSystem;
+	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
-	private DamageDealingSystem myDamageSystem;
+	private transient DamageDealingSystem myDamageSystem;
 	@Hide
-	private SpawningSystem myCreators;
+	private transient SpawningSystem myCreators;
 	@Hide
-	private TeamSystem myTeams;
+	private transient TeamSystem myTeams;
 	
-	public DamageDealingComponent(
+	public DamageDealingComponent(IEntity aEntity, 
 			DamageDealingSystem damageDealingSystem,
 			HealthSystem healthSysytem,
 			TeamSystem teams,
 			PhysicalSystem physicalSystem,
+			SpawningSystem creators,
 			ComponentData data,
 			Router router
 			) {
-		super(router);
+		super(aEntity, router);
 		
 		myObservers = new ArrayList<IObserver<IViewableDamageDealer>>();
 		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
+		myCreators = creators;
+		myTeams = teams;
 		
 		myDamage = Integer.parseInt(data.getFields().get("myDamage"));
 		myDamageArc = Double.parseDouble(data.getFields().get("myDamageArc"));
@@ -176,10 +180,5 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 
 	public void delete() {
 		myDamageSystem.detachComponent(this);
-	}
-
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
 	}
 }

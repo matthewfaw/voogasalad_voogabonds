@@ -67,7 +67,7 @@ public class NewGameTab {
 							try {
 								json.serializeToFile(file, file.getName());
 							} catch (Exception exception) {
-								System.out.println("Cannot create new game.");
+								//System.out.println("Cannot create new game.");
 							}
 						}
 					}

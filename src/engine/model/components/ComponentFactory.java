@@ -7,6 +7,7 @@ import java.util.List;
 
 import authoring.model.ComponentData;
 import authoring.model.Hide;
+import engine.model.entities.IEntity;
 import engine.model.systems.ISystem;
 import gamePlayerView.gamePlayerView.Router;
 import utility.Point;
@@ -18,10 +19,10 @@ import utility.Point;
 public class ComponentFactory {
         @Hide
 	private static final String COMPONENT_PATH = "engine.model.components.concrete.";
-	private List<ISystem> mySystems;
+	private List<ISystem<?>> mySystems;
 	private Router myRouter;
 
-	public ComponentFactory(List<ISystem> systems, Router router) {
+	public ComponentFactory(List<ISystem<?>> systems, Router router) {
 		mySystems = systems;
 		myRouter = router;
 	}
@@ -33,9 +34,9 @@ public class ComponentFactory {
 	 * @return
 	 * @throws UnsupportedOperationException
 	 */
-	public IModifiableComponent constructComponent(ComponentData compdata, Point location) throws UnsupportedOperationException {
+	public IModifiableComponent constructComponent(IEntity aEntity, ComponentData compdata, Point location) throws UnsupportedOperationException {
 		try {
-			System.out.println(compdata.getComponentName());
+//			//System.out.println(compdata.getComponentName());
 			Class<?> tmpclass = Class.forName(COMPONENT_PATH+compdata.getComponentName());
 			Constructor<?>[] constructors = tmpclass.getConstructors();
 			// Note: Assuming only one constructor
@@ -43,7 +44,7 @@ public class ComponentFactory {
 			List<Object> objectsToAttach = new ArrayList<Object>();
 			for (Class<?> arg : arguments) {
 				// attach appropriate system to argument
-				ISystem sysToAdd = getSystemToAttach(arg);
+				ISystem<?> sysToAdd = getSystemToAttach(arg);
 				if (sysToAdd != null) {
 					objectsToAttach.add(getSystemToAttach(arg));
 					continue;
@@ -56,6 +57,10 @@ public class ComponentFactory {
 				}
 				if (Point.class.isAssignableFrom(arg)) {
 					objectsToAttach.add(getPointToAttach(arg, location));
+					continue;
+				}
+				if (arg.isInstance(aEntity)) {
+					objectsToAttach.add(aEntity);
 					continue;
 				}
 				objectsToAttach.add(compdata);
@@ -84,8 +89,8 @@ public class ComponentFactory {
 	}
 
 
-	private ISystem getSystemToAttach(Class<?> arg) {
-		for (ISystem sys : mySystems) {
+	private ISystem<?> getSystemToAttach(Class<?> arg) {
+		for (ISystem<?> sys : mySystems) {
 			if ( arg.isInstance(sys) ) {
 				return sys;
 			}
@@ -101,7 +106,7 @@ public class ComponentFactory {
 		return null;
 	}
 	
-	public void addSystem(ISystem systemToAdd) {
+	public void addSystem(ISystem<?> systemToAdd) {
 		mySystems.add(systemToAdd);
 	}
 }

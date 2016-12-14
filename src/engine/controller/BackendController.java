@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import authoring.controller.LevelDataContainer;
 import authoring.controller.MapDataContainer;
+import authoring.model.EnemyData;
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
 import authoring.model.serialization.JSONDeserializer;
@@ -15,7 +16,9 @@ import authoring.model.serialization.JSONSerializer;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.components.IComponent;
+import engine.model.components.concrete.BountyComponent;
 import engine.model.data_stores.DataStore;
+import engine.model.entities.ConcreteEntity;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
@@ -46,29 +49,32 @@ import utility.file_io.FileRetriever;
 public class BackendController {
 	private static final String GAME_DATA_PATH = "resources/game_data_relative_paths/relative_paths";
 	private static final int DEFAULT_STARTING_LEVEL=0;
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 
 	//Utilities
-	private ResourceBundle myGameDataRelativePaths;
-	private FileRetriever myFileRetriever;
-	private JSONDeserializer myJsonDeserializer;
+	private transient ResourceBundle myGameDataRelativePaths;
+	private transient FileRetriever myFileRetriever;
+	private transient JSONDeserializer myJsonDeserializer;
 	
 	//Primary backend objects
-	private ResourceStore myResourceStore;
+	private transient ResourceStore myResourceStore;
 
 	//Data relevant to constructing objects
-	private DataStore<EntityData> myEntityDataStore;
-	private PlayerData myPlayerData;
-	private LevelDataContainer myLevelDataContainer;
-	private MapMediator myMapMediator;
+	private transient DataStore<EntityData> myEntityDataStore;
+	private transient PlayerData myPlayerData;
+	private transient LevelDataContainer myLevelDataContainer;
+	private transient MapDataContainer myMapData;
+	//TODO: Move this to a system??
+	private transient MapMediator myMapMediator;
 	
 	//Controllers to manage events
-	private TimelineController myTimelineController;
-	private PlayerController myPlayerController;
-	private LevelController myLevelController;
-	private Router myRouter;
+	private transient TimelineController myTimelineController;
+	private transient PlayerController myPlayerController;
+	private transient LevelController myLevelController;
+	private transient Router myRouter;
 	
 	//Factories
-	private EntityFactory myEntityFactory;
+	private transient EntityFactory myEntityFactory;
 	
 	//Systems
 	private CollisionDetectionSystem myCollisionDetectionSystem;
@@ -81,37 +87,34 @@ public class BackendController {
 	private TargetingSystem myTargetingSystem;
 	private TeamSystem myTeamSystem;
 	private ControllableSystem myControllableSystem;
-	private MapDataContainer myMapData;
 	
 	// EntityManager
 	private EntityManager myEntityManager;
 	
-	private ResourceBundle myResources;
-	private String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private transient ResourceBundle myResources;
 	
-	public BackendController(String aGameDataPath, Router aRouter)
+	public BackendController(String aGameDataPath, Router aRouter, EntityManager entityManager)
 	{
 		myRouter = aRouter;
 		myGameDataRelativePaths = ResourceBundle.getBundle(GAME_DATA_PATH);
 		myFileRetriever = new FileRetriever(aGameDataPath);
 		myJsonDeserializer = new JSONDeserializer();
 
-		this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
 		myTimelineController = new TimelineController();
 		myPlayerController = new PlayerController(myRouter);
+
+		myEntityManager = entityManager;
 		
-		myEntityManager = new EntityManager();
 		//Must construct static before dynamic.
 		constructStaticBackendObjects();
-		myPlayerController.addPlayer(myPlayerData);
-		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
 		constructDynamicBackendObjects();
 	}
 	
 	private void constructSystems() {
 		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		myBountySystem = new BountySystem();
+		myBountySystem = new BountySystem(myPlayerController);
 		myDamageDealingSystem = new DamageDealingSystem();
 		
 		// ORDERING MATTERS for physical -> targeting -> collision -> movement
@@ -129,6 +132,7 @@ public class BackendController {
 	
 	
 	public void moveControllables(String movement) {
+		//System.out.println("moving at the back end");
 		myControllableSystem.move(movement);
 	}
 	
@@ -192,6 +196,10 @@ public class BackendController {
 		constructEntityDataStore();
 		constructPlayerData();
 		
+		
+		myPlayerController.addPlayer(myPlayerData);
+		myPlayerController.addResourceStoreForAllPlayers(myResourceStore);
+		
 		constructLevelData();
 		constructMap();
 		constructSystems();
@@ -200,7 +208,7 @@ public class BackendController {
 	}
 
 	private void constructEntityFactory() {
-		List<ISystem> mySystems = new ArrayList<ISystem>();
+		List<ISystem<?>> mySystems = new ArrayList<ISystem<?>>();
 		mySystems.add(myCollisionDetectionSystem);
 		mySystems.add(myDamageDealingSystem);
 		mySystems.add(myHealthSystem);
@@ -214,6 +222,18 @@ public class BackendController {
 		myEntityFactory = new EntityFactory(mySystems, myEntityDataStore, myRouter, myMapMediator, myEntityManager);
 		mySpawningSystem.setEntityFactory(myEntityFactory);
 	}
+	
+	public void sellEnemy(ConcreteEntity entity) {
+		
+		for (IComponent c: entity.getComponents()) {
+			if (c instanceof BountyComponent) {
+				myBountySystem.collectBounty(c);
+				entity.delete();
+				break;
+			}
+		}
+		
+	}
 
 	/**
 	 * Helper method to create the backend map object
@@ -224,12 +244,10 @@ public class BackendController {
 	private void constructMap()
 	{
 		try {
-			List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
-			MapDataContainer mapData = data.get(0);
-			myMapData = mapData;
+			MapDataContainer mapData = getMapData();
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-			myMapMediator = new MapMediator(mapData);
+			myMapMediator = new MapMediator(mapData, myRouter.getPixelWidth());
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);
@@ -238,6 +256,13 @@ public class BackendController {
 			myRouter.distributeErrors("The file for MapDataContainer cannot be found!");
 		}
 		
+	}
+
+	private MapDataContainer getMapData() throws FileNotFoundException {
+		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
+		MapDataContainer mapData = data.get(0);
+		myMapData = mapData;
+		return mapData;
 	}
 	
 	/**
@@ -315,27 +340,30 @@ public class BackendController {
 		myTimelineController.pause();
 	}
 	
-	public void save()
+	public void save() 
 	{
 		JSONSerializer js = new JSONSerializer();
 		try {
-			js.serializeToFile(new String("hi"), "derp");
-			String s = (String)myJsonDeserializer.deserializeFromFile("derp", String.class);
-			//System.out.println(s);
-		} catch (Exception e) {
-
-			// TODO Auto-generated catch block
+			js.serializeToFile(this, "plswork");
+		} catch (Exception e1) {
 			ErrorBox.displayError(myResources.getString("CannotSave"));
+			myRouter.distributeErrors(e1.toString());
+		}
+		try {
+			BackendController b = (BackendController)myJsonDeserializer.deserializeFromFile("SerializedFiles/plswork", BackendController.class);
+		} catch (FileNotFoundException e) {
+			ErrorBox.displayError(myResources.getString("CannotLoad"));
 			myRouter.distributeErrors(e.toString());
 		}
 	}
 	
-	
+	/*
 	public static void main(String[] args)
 	{
 		BackendController controller = new BackendController("SerializedFiles/exampleGame",null);
 //		controller.getClass();
 		controller.save();
 	}
+	*/
 	
 }

@@ -75,7 +75,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
             String attributeType = attributeTypes.get(i);
             String uglyAttributeName = attributes.get(i);
             //String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
-            //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
+            ////System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
             Label lbl = new Label(uglyAttributeName);
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
@@ -188,7 +188,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
             String attributeType = attributeTypes.get(i);
             String uglyAttributeName = attributes.get(i);
             //String cleanedAttributeName = cleanUpAttributeName(uglyAttributeName);
-            //System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
+            ////System.out.println("Attribute: "+cleanedAttributeName+" ("+uglyAttributeName+")\nType: "+attributeType);
             Label lbl = new Label(uglyAttributeName);
             if (attributeType.toLowerCase().equals("list")) {
                 // TODO: set up combo box of choices
@@ -196,14 +196,14 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 if (uglyAttributeName.toLowerCase().contains("terrains")) {
                     checkbox = grandparent.setUpMenuButton("Terrains", FXCollections.observableArrayList(grandparent.getTerrains()));
                     String terrainData = componentData.getFields().get(uglyAttributeName);
-                    //System.out.println("Terrains: "+terrainData);
+                    ////System.out.println("Terrains: "+terrainData);
                     List<String> terrains;
                     try {
                         terrains = ListStringManipulator.stringToList(terrainData);
                     }
                     catch (Exception e) {
                         terrains = null;
-                        //System.out.println("Terrains is null");
+                        ////System.out.println("Terrains is null");
                     }
                     // Initialize valid terrains
                     if (terrains != null && terrains.size() > 0) {
@@ -235,7 +235,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                 myLabels.add(lbl);
                 this.getChildren().addAll(lbl, boolCombo);
             } else if (attributeType.toLowerCase().equals("int")) {
-                System.out.println("NUMERIC FIELD");
+                //System.out.println("NUMERIC FIELD");
                 TextField numericField = new TextField(retrievedData.get(uglyAttributeName));
                 setUpLabeledField(lbl, numericField);
                 numericField.textProperty().addListener(new ChangeListener<String>() {
@@ -250,7 +250,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     }
                 });
             } else if (attributeType.toLowerCase().equals("double")) {
-                TextField numericField = new TextField();
+                TextField numericField = new TextField(retrievedData.get(uglyAttributeName));
                 setUpLabeledField(lbl, numericField);
                 numericField.textProperty().addListener(new ChangeListener<String>() {
                     // Forces double input
@@ -258,7 +258,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
                     public void changed (ObservableValue<? extends String> observable,
                                          String oldValue,
                                          String newValue) {
-                        if (!newValue.matches("\\d+\\.\\d+")) {
+                        if (!newValue.matches("\\d+\\.?\\d+")) {
                             numericField.setText(newValue.replaceAll("[^-?\\d+(\\.\\d+)?]", ""));
                         }
                     }
@@ -401,7 +401,7 @@ public class EditComponentBox extends VBox implements ISubmittable {
             public void handle(ActionEvent event){
                 String name = getName();
                 ComponentData entity = createDataFromInput();
-                //System.out.println("Put Component ("+name+") in parent map");
+                ////System.out.println("Put Component ("+name+") in parent map");
                 parent.editComponent(name, entity);
                 grandparent.getTilePane().getChildren().remove(EditComponentBox.this); // this = reference of parent (i.e., this EditEntityBox class)
             }

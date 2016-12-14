@@ -16,7 +16,7 @@ import gamePlayerView.gamePlayerView.Router;
  */
 public class PlayerController {
 	private List<Player> myPlayers;
-	private Router myRouter;
+	private transient Router myRouter;
 	
 	public PlayerController(Router aRouter)
 	{
@@ -33,7 +33,7 @@ public class PlayerController {
 	{
 		//TODO: set up the infrastructure for a player
 		// initially, let's assume there's only one player
-		Player player = new Player(aPlayerData);
+		Player player = new Player(myRouter, aPlayerData);
 		myPlayers.add(player);
 		myRouter.distributePlayer(player);
 	}

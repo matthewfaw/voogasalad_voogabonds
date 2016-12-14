@@ -66,13 +66,13 @@ public class WaveController {
 				
 				Collections.shuffle(spawns);
 				Collections.shuffle(sinks);
-				//System.out.println("trying to spawn");
+//				//System.out.println("trying to spawn");
 				IEntity newEntity = myEntityFactory.constructEntity(entityData.getMyEntityData(), spawns.get(0));
-				//System.out.println("after");
+				////System.out.println("after");
 				MoveableComponent m = myMovementSystem.get(newEntity);
-				if (m != null)
+				if (m != null) {
 					m.setGoal(sinks.get(0));
-				
+				}
 			} catch (UnsupportedOperationException e) {
 				throw new UnsupportedOperationException(ResouceAccess.getError("NoEntity") + e.getMessage(), e);
 			}

@@ -75,14 +75,14 @@ public class TowerData extends MachineData {
 				result = false;
 				break;
 			} else {
-				System.out.println("Here!");
+				//System.out.println("Here!");
 			}
-			System.out.println(f.get(this).toString());
+			//System.out.println(f.get(this).toString());
 		}
 	}
 	
 	public void setImagePath(String imagePath) throws Exception{
-	    System.out.println("image path: "+imagePath);
+	    //System.out.println("image path: "+imagePath);
 		if (!imagePath.endsWith(".png") || !(new File(imagePath).exists())){
 			throw new Exception("Image file is invalid.");
 		}

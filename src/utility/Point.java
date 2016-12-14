@@ -296,7 +296,7 @@ public class Point implements IShape, IPosition {
 		Point e = new Point(5, 2);
 		Point f = new Point(6, 3);
 		
-		System.out.println(b.onLine(a, f));
+		//System.out.println(b.onLine(a, f));
 	}
 	*/
 }

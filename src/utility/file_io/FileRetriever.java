@@ -69,7 +69,7 @@ public class FileRetriever {
 	{
 		FileRetriever fr = new FileRetriever("engine/model/components");
 		List<String> l = fr.getFileNames("/");
-		System.out.println(l);
+		//System.out.println(l);
 	}
 	*/
 	

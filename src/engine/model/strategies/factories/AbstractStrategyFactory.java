@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 import utility.ResouceAccess;
 
 abstract public class AbstractStrategyFactory<A> {
-	private static final String STRATEGY_PATH = new String("src/engine/model/strategies/");
+	private static final String STRATEGY_PATH = "src/engine/model/strategies/";
 	private List<String> myAtypeStrategies;
 	private String myFolderPath;
 	
 	public AbstractStrategyFactory(String strategyType) {
-		myFolderPath = String.format("%s%s", STRATEGY_PATH, strategyType);
+		myFolderPath = String.format("%s%s/", STRATEGY_PATH, strategyType);
 
 		File[] folder = new File(myFolderPath).listFiles();
 		myAtypeStrategies = Arrays.stream(folder)
@@ -37,7 +37,7 @@ abstract public class AbstractStrategyFactory<A> {
 		}
 		
 		strategyName = String.format("%s%s", myFolderPath, strategyName);
-		A result = constructStrategy(strategyName);
+		A result = constructStrategy(strategyName.replace("/", ".").substring(4));
 		return result;
 	}
 

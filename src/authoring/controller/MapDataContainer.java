@@ -105,10 +105,10 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 	
 	private void setNumXCells(int x) throws Exception{
 		if (x <= 0){
-			throw new Exception("The map must be wider than 0 cells.");
+			throw new IllegalArgumentException("The map must be wider than 0 cells.");
 		}
 		this.numXCells = x;
-		System.out.println("Total XCells: " + this.numXCells);
+		//System.out.println("Total XCells: " + this.numXCells);
 	}
 	public int getNumXCells(){
 		return numXCells;
@@ -131,7 +131,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 			throw new Exception("The map must be taller than 0 cells.");
 		}
 		this.numYCells = y;
-		System.out.println("Total YCells: " + this.numYCells);
+		//System.out.println("Total YCells: " + this.numYCells);
 	}
 	public int getNumYCells(){
 		return numYCells;
@@ -150,14 +150,14 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		}
 		spawnPoints.put(name, newSpawnPoints);
 		notifyObservers();
-		System.out.println("Added Spawn Point " + name);
+		//System.out.println("Added Spawn Point " + name);
 	}
 	
 	
 	public void removeSpawnPoints(String name){
 			spawnPoints.remove(name);
 			notifyObservers();
-			System.out.println("Removed Spawn Point " + name);
+			//System.out.println("Removed Spawn Point " + name);
 	}
 	
 	public List<Point> getSpawnPoints(String name){
@@ -185,13 +185,13 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		}
 		sinkPoints.put(name, newSinkPoints);
 		notifyObservers();
-		System.out.println("Added Sink Point " + name);
+		//System.out.println("Added Sink Point " + name);
 	}
 	
 	public void removeSinkPoint(String name){
 			sinkPoints.remove(name);
 			notifyObservers();
-			System.out.println("Removed Sink Point " + name);
+			//System.out.println("Removed Sink Point " + name);
 	}
 	
 	public List<Point> getSinkPoints(String name){
@@ -227,9 +227,9 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 		}
 		validTerrain.put(name, color);
 		notifyObservers();
-		System.out.println("Added Terrain: " + name);
+		//System.out.println("Added Terrain: " + name);
 	}
-	public void removeValidTerrain(String name) throws Exception{
+	public void removeValidTerrain(String name) {
 		if (validTerrain.containsKey(name)){
 			validTerrain.remove(name);
 			notifyObservers();
@@ -272,7 +272,7 @@ public class MapDataContainer extends Container implements IReadableData, IObser
 //		for (TerrainData td : terrainList){
 //			myMapData.addTerrainData(td);
 //		}
-//		System.out.println("before terrain");
+//		//System.out.println("before terrain");
 //		for (String vt: validTerrain.keySet()){
 //			myMapData.addValidTerrain(vt, "color");
 //		}

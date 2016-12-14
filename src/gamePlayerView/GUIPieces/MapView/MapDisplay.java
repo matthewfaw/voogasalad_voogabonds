@@ -2,7 +2,6 @@ package gamePlayerView.GUIPieces.MapView;
 
 import java.util.ArrayList;
 
-
 import authoring.controller.MapDataContainer;
 import authoring.model.map.MapData;
 import authoring.model.map.TerrainData;
@@ -10,6 +9,7 @@ import engine.model.components.viewable_interfaces.IViewable;
 import engine.model.components.viewable_interfaces.IViewablePhysical;
 import engine.model.machine.IViewableMachine;
 import gamePlayerView.GUIPieces.InfoBoxes.Controls;
+import gamePlayerView.interfaces.IGUIPiece;
 import engine.IObservable;
 import engine.IObserver;
 import engine.controller.ApplicationController;
@@ -33,13 +33,13 @@ import javafx.util.Duration;
  *
  */
 
-public class MapDisplay implements IObserver<TimelineController> {
+public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
     
     private ApplicationController myAppController;
     private Pane myRoot;
     private Pane myPane;
-    private MapGrid background;
-    private ArrayList<MoveableComponentView> sprites;
+    private MapGrid myBackground;
+    private ArrayList<MoveableComponentView> mySprites;
     private Controls myControls;
     private static boolean isPlaying;
     private static final int FRAMES_PER_SECOND = 60;
@@ -51,7 +51,7 @@ public class MapDisplay implements IObserver<TimelineController> {
     //register as observer of timeline
     public MapDisplay(ApplicationController aAppController) throws Exception{
     	myAppController = aAppController;
-        sprites = new ArrayList<MoveableComponentView>();
+        mySprites = new ArrayList<MoveableComponentView>();
         myRoot = new Pane();
         myPane = new Pane();
         myControls = new Controls();
@@ -65,22 +65,28 @@ public class MapDisplay implements IObserver<TimelineController> {
 //    }
     
     public void giveViewableComponent(IObservable<IViewablePhysical> aObservable) {
-    	background.giveViewableComponent(aObservable);
+    	myBackground.giveViewableComponent(aObservable);
     }
     
     public void setMap(MapDataContainer aMapData){
-        background = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), aMapData.getCellSize(), myAppController);
+       
+        int cellSizeToUse = (int) Math.min((myRoot.getHeight()/aMapData.getNumYCells()), (myRoot.getHeight()/aMapData.getNumXCells()));
+
+        myBackground = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), cellSizeToUse, myAppController);
+        
         for (TerrainData terrainData: aMapData.getTerrainList()) {
         	//XXX: I don't like that we have to cast here
-        	myPane.getChildren().add (background.fillCell((int)terrainData.getLoc().getX(), 
+            aMapData.cellSize(cellSizeToUse);
+        	myPane.getChildren().add (myBackground.fillCell((int)terrainData.getLoc().getX(), 
         	                                             (int)terrainData.getLoc().getY(), 
-        						terrainData.getSize(), 
+        						aMapData.getCellSize(), 
         						terrainData.getColor(),
         						myRoot));
         }
         
+        
         myRoot.getChildren().add(myPane);
-        background.setRoot(myRoot);
+        myBackground.setRoot(myRoot);
 
     }
     
@@ -152,13 +158,13 @@ public class MapDisplay implements IObserver<TimelineController> {
     }
     
     public void handleKeyInput(KeyCode code){
-        System.out.println("hey");
-        System.out.println(myControls.getControlFor("Left"));
-        System.out.println(code);
+        //System.out.println("hey");
+        //System.out.println(myControls.getControlFor("Left"));
+        //System.out.println(code);
         switch (code)
         {
             case LEFT:
-                System.out.println("WOO!");
+                //System.out.println("WOO!");
             break;
             default:
                 break;
@@ -170,8 +176,19 @@ public class MapDisplay implements IObserver<TimelineController> {
         myControls = cont;
     }
 
+
 	@Override
 	public void remove(TimelineController aRemovedObject) {
-		//Do nothing.
+		// Do nothing.
 	}
+
+	@Override
+	public Node getNode() {
+		return myRoot;
+	}
+
+    public Pane getPane () {
+        // TODO Auto-generated method stub
+        return myRoot;
+    }
 }

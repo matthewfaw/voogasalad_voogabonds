@@ -69,10 +69,10 @@ public class SerializationTester {
 //		DeserializeJSON des = new DeserializeJSON();
 //		ser.SerializeToFile(new TowerData(), "Test.txt");
 //		Object obj = des.DeserializeFromFile("Test.txt", TowerData.class);
-//		System.out.println("TESTING");
-//		System.out.println(obj.toString());
+//		//System.out.println("TESTING");
+//		//System.out.println(obj.toString());
 //		TowerData d =  (TowerData) obj;
-//		System.out.println(d.getBuyPrice());
+//		//System.out.println(d.getBuyPrice());
 	}
 	
 	public String getFileName(){

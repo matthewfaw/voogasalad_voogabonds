@@ -10,6 +10,7 @@ import authoring.model.Hide;
 import engine.IObserver;
 import engine.model.components.AbstractComponent;
 import engine.model.components.viewable_interfaces.IViewableHealth;
+import engine.model.entities.IEntity;
 import engine.model.systems.BountySystem;
 import engine.model.systems.DamageDealingSystem;
 import engine.model.systems.HealthSystem;
@@ -30,30 +31,30 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	@Hide
 	private static double DEFAULT_HEALTH = 0.0;
 	@Hide
-	private BountySystem myBounty;
+	private transient BountySystem myBounty;
 	@Hide
-	private DamageDealingSystem myDamage;
+	private transient DamageDealingSystem myDamage;
 	@Hide
-	private HealthSystem myHealthSystem;
+	private transient HealthSystem myHealthSystem;
+
 	@Hide
 	private Double myCurrHealth;
 	private Double myMaxHealth;
 	private boolean explodeOnDeath;
 	
 	@Hide
-	private List<IObserver<IViewableHealth>> myObservers;
+	private transient List<IObserver<IViewableHealth>> myObservers;
 	
 	@Hide
 	private Router myRouter;
 	
-	public HealthComponent(HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
-		super(router);
+	public HealthComponent(IEntity aEntity, HealthSystem healthSystem, BountySystem bounty, DamageDealingSystem damage, ComponentData componentdata, Router router) {
+		super(aEntity, router);
 		myHealthSystem = healthSystem;
 		
 		myBounty = bounty;
 		myDamage = damage;
-		
-		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myCurrHealth"));
+		myCurrHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		myMaxHealth = Double.parseDouble(componentdata.getFields().get("myMaxHealth"));
 		explodeOnDeath = Boolean.parseBoolean(componentdata.getFields().get("explodeOnDeath"));
 		
@@ -75,18 +76,24 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 	public DamageInfo takeDamage(Damage dmg) {
 		double newCurrHealth = myCurrHealth - dmg.getDamage();
 		
-		if (newCurrHealth < 0) {
+		if (newCurrHealth < 0)
 			setCurrentHealth(0);
-		}
-		if (newCurrHealth > myMaxHealth) {
+		else if (newCurrHealth > myMaxHealth)
 			setCurrentHealth(myMaxHealth);
-		}
+		else
+			setCurrentHealth(newCurrHealth);
 		
 		int died = myCurrHealth <= 0 ? 1 : 0;
-		int bounty = myBounty.collectBounty(this);
 		
-		if (died == 1 && explodeOnDeath)
-			myDamage.explode(this);
+		int bounty = 0;
+		if (died == 1) {
+			bounty = myBounty.collectBounty(this);
+			if (explodeOnDeath)
+				myDamage.explode(this);
+
+			else
+				getEntity().delete();
+		}
 		
 		return new DamageInfo(dmg.getDamage(), died, bounty);		
 	}
@@ -131,11 +138,6 @@ public class HealthComponent extends AbstractComponent implements IViewableHealt
 		getRouter().distributeViewableComponent(this);
 	}
 	
-	@Override
-	public String getEntityID() {
-		return getEntity().getId();
-	}
-
 	public void delete() {
 		myHealthSystem.detachComponent(this);
 		myObservers.forEach(observer -> observer.remove(this));

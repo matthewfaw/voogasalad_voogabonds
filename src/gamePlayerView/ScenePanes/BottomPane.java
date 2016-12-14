@@ -2,41 +2,23 @@ package gamePlayerView.ScenePanes;
 
 import java.util.Collection;
 
-import engine.controller.ApplicationController;
-import gamePlayerView.Styles;
-import gamePlayerView.GUIPieces.MachineInfoView.UpgradeUI;
-import gamePlayerView.GUIPieces.MachineInfoView.MachineInfo;
-import gamePlayerView.GUIPieces.MachineInfoView.TargetingButtons;
-import gamePlayerView.GUIPieces.MachineInfoView.TowerStatisticsandOptions;
-import gamePlayerView.interfaces.IGUIPiece;
-import gamePlayerView.interfaces.IViewPane;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * @author Guhan Muruganandam
  * 
  */
 
-public class BottomPane implements IGUIPiece,IViewPane {
-	private ApplicationController myAppController;
-	private HBox myBottomPane=new HBox();
-	private ApplicationController myApplicationController;
+public class BottomPane implements IViewPane {
+	private HBox myNode;
 	//private Pane myGamePlayer;
 	
 	public BottomPane(){
-    	//myAppController = aAppController;
-		//myGamePlayer=gamePlayer;
+		myNode = new HBox();
     	setUpPane();
-		//myBottomPane.setPrefHeight(110);
-		//myApplicationController=applicationController;
 	}
 	
 	/**
@@ -45,11 +27,11 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	public void setUpPane() {
 		//myBottomPane.setPrefWidth(myGamePlayer.getWidth()*0.9);
 		//myBottomPane.setPrefHeight(myGamePlayer.getHeight()*0.14285);
-		myBottomPane.setPrefWidth(900);
-		myBottomPane.setPrefHeight(100);
-		myBottomPane.setPadding(new Insets(10, 10,10, 10));
-		myBottomPane.setSpacing(10);
-		myBottomPane.setStyle("-fx-background-color: #993384;");
+		myNode.setPrefWidth(900);
+		myNode.setPrefHeight(100);
+		myNode.setPadding(new Insets(10, 10,10, 10));
+		myNode.setSpacing(10);
+		myNode.setStyle("-fx-background-color: #993384;");
 	    //TowerStatisticsandOptions myTowerOptions=new TowerStatisticsandOptions();
 	    //UpgradeOrSell myUpgradeandSell=new UpgradeOrSell();
 	    //MachineInfo myMachineView=new MachineInfo();
@@ -57,18 +39,28 @@ public class BottomPane implements IGUIPiece,IViewPane {
 	}
 	
 	public Node getView() {
-		return myBottomPane;
+		return myNode;
 	}
 
 	@Override
 	public void add(Collection<Node> collection) {
-		for(Node n:collection){
-			myBottomPane.getChildren().add(n);
-		}
+		myNode.getChildren().addAll(collection);
+		
+	}
+	
+	@Deprecated
+	@Override
+	public void clear() {
+		myNode.getChildren().clear();
 	}
 
 	@Override
-	public void clear() {
-		myBottomPane.getChildren().clear();
+	public Node getNode() {
+		return myNode;
+	}
+
+	@Override
+	public void add(Node node) {
+		myNode.getChildren().add(node);
 	}
 }

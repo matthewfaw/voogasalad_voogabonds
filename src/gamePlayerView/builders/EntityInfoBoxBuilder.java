@@ -29,61 +29,63 @@ public class EntityInfoBoxBuilder {
 		private UpgradeUI myUpgradeUI;
 		private SellUI mySellUI;
 		private ApplicationController myAppController;
-		//private final String temp;
+
 		
-		public EntityInfoBoxBuilder(GamePlayerScene aGamePlayerScene,ApplicationController appController)
+		public EntityInfoBoxBuilder(GamePlayerScene gamePlayerScene,ApplicationController appController)
 		{
 			//myEntityInfoBox = new EntityInfoBox();
-			myEntityInfoBox=new HBox();
-			myGamePlayerScene = aGamePlayerScene;
-			myAppController=appController;
+			myEntityInfoBox	= new HBox();
+			myGamePlayerScene = gamePlayerScene;
+			myAppController	= appController;
 		}
 		
 		public EntityInfoBoxBuilder withMachineInfo(IViewablePhysical aComponent)
 		{
 			//null check before constructing
 			//add upgrade button to  the info box
-			this.myMachineInfo=new MachineInfo(aComponent);
-			myEntityInfoBox.getChildren().add(getMyMachineInfo().getView());
+			myMachineInfo = new MachineInfo(aComponent);
+			myEntityInfoBox.getChildren().add(getMyMachineInfo().getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withTargetingMechanism(IViewableTargeting aComponent)
 		{
+			//System.out.println("Building a targeting box");
 			//null check before constructing
 			//add upgrade button to  the info box
-			this.myTargetingButtons=new TargetingButtons(myAppController);
-			myEntityInfoBox.getChildren().add(myTargetingButtons.getView());
+			myTargetingButtons = new TargetingButtons(myAppController);
+			myEntityInfoBox.getChildren().add(myTargetingButtons.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withHealthBox(IViewableHealth aComponent) {
-			this.myHealthBox=new HealthBox();
-			myEntityInfoBox.getChildren().add(myHealthBox.getView());
+			this.myHealthBox = new HealthBox();
+			myEntityInfoBox.getChildren().add(myHealthBox.getNode());
+
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withBountyBox(IViewableBounty aComponent) {
-			this.myBountyBox=new BountyBox();
-			myEntityInfoBox.getChildren().add(myBountyBox.getView());
+			myBountyBox = new BountyBox();
+			myEntityInfoBox.getChildren().add(myBountyBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withDamageBox(IViewableDamageDealer aComponent) {
-			this.myDamageBox=new DamageBox();
-			myEntityInfoBox.getChildren().add(myDamageBox.getView());
+			myDamageBox = new DamageBox();
+			myEntityInfoBox.getChildren().add(myDamageBox.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withUpgrade(IViewableUpgrade aComponent) {
-			this.myUpgradeUI=new UpgradeUI(aComponent);
-			myEntityInfoBox.getChildren().add(myUpgradeUI.getView());
+			myUpgradeUI = new UpgradeUI(aComponent);
+			myEntityInfoBox.getChildren().add(myUpgradeUI.getNode());
 			return this;
 		}
 		
 		public EntityInfoBoxBuilder withSell(IViewableSell aComponent) {
-			this.mySellUI=new SellUI(myAppController);
-			myEntityInfoBox.getChildren().add(mySellUI.getView());
+			mySellUI = new SellUI(myAppController);
+			myEntityInfoBox.getChildren().add(mySellUI.getNode());
 			return this;
 		}
 		
@@ -96,21 +98,27 @@ public class EntityInfoBoxBuilder {
 		public MachineInfo getMyMachineInfo() {
 			return myMachineInfo;
 		}
+		
 		public TargetingButtons getMyTargetingButtons() {
 			return myTargetingButtons;
 		}
+		
 		public UpgradeUI getMyUpgradeUI() {
 			return myUpgradeUI;
 		}
+		
 		public SellUI getMySellUI(){
 			return mySellUI;
 		}
+		
 		public DamageBox getMyDamageBox(){
 			return myDamageBox;
 		}
+		
 		public BountyBox getMyBountyBox(){
 			return myBountyBox;
 		}
+		
 		public HealthBox getMyHealthBox(){
 			return myHealthBox;
 		}

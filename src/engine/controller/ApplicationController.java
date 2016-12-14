@@ -1,22 +1,14 @@
 package engine.controller;
 
-import java.util.ResourceBundle;
+//import java.util.ResourceBundle;
 
-import authoring.model.TowerData;
 import engine.controller.timeline.TimelineController;
 import engine.model.components.IComponent;
 import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
-import gamePlayerView.GUIPieces.MapView.MapDisplay;
-import gamePlayerView.ScenePanes.BottomPane;
-import gamePlayerView.ScenePanes.LeftPane;
-import gamePlayerView.ScenePanes.RightPane;
-import gamePlayerView.builders.EntityInfoBox;
-import gamePlayerView.builders.EntityInfoBoxBuilder;
 import gamePlayerView.gamePlayerView.GamePlayerScene;
 import gamePlayerView.gamePlayerView.Router;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utility.Point;
 
@@ -30,23 +22,26 @@ import utility.Point;
  * Observer/Observable pattern of communication
  * 
  * @author matthewfaw
+ * @author owenchung (edits)
  *
  */
 public class ApplicationController {
-	private static final String GAME_OPTIONS_PATH = "resources/game_options/GamePaths";
-
-	private ResourceBundle myGameOptions;
+//	private static final String GAME_OPTIONS_PATH = "resources/game_options/GamePaths";
+	private static final String GAME_FOLDER = "SerializedFiles/";
+	private Stage myStage;
+//	private ResourceBundle myGameOptions;
 	private BackendController myBackendController;
 	//XXX: maybe make a frontend controller, and move this there
 	private TimelineController myAnimationTimelineController;
 	private GamePlayerScene myScene;
 	private EntityManager myEntityManager; 
+	
 	//private Stage myStage; //////Guhan
 	//private Pane myPane=new BorderPane();
 
 	public ApplicationController()
 	{
-		myGameOptions = ResourceBundle.getBundle(GAME_OPTIONS_PATH);
+//		myGameOptions = ResourceBundle.getBundle(GAME_OPTIONS_PATH);
 	}
 	
 	/**
@@ -57,8 +52,10 @@ public class ApplicationController {
 	{
 		//myStage=aStage; ///Guhan 
 		//GamePlayerScene scene = constructGUI(aStage);
-		myScene=constructGUI(aStage);
+		myStage = aStage;
+		myScene = constructGUI(myStage);
 		Router router = new Router(myScene);
+		myEntityManager = new EntityManager();
 		constructBackend(router,gameTitle);
 	}
 	/**
@@ -84,10 +81,15 @@ public class ApplicationController {
 	private void constructBackend(Router aRouter, String gameTitle)
 	{
 		//TODO: Change this to make this dynamic--select different games
-		myBackendController = new BackendController(myGameOptions.getString(gameTitle), aRouter);
+		myBackendController = new BackendController(GAME_FOLDER + gameTitle, aRouter, myEntityManager);
 	}
+	
+	private void gameLost() {
+		
+	}
+	/*
 	private BorderPane constructBorderPane(){
-		/*myPane= new BorderPane();
+		myPane= new BorderPane();
 		LeftPane myLeftPane=new LeftPane(this);
 		RightPane myRightPane=new RightPane();
 	    MapDisplay myMap = new MapDisplay(this);
@@ -100,9 +102,10 @@ public class ApplicationController {
 		borderpane.setBottom(myBottomPane.getView());
 		borderpane.setCenter(myMap.getView());
 		borderpane.setLeft(myLeftPane.getView());
-		myMap.setupDragging(myScene);*/
+		myMap.setupDragging(myScene);
 		return null;
 	}
+	*/
 
 	public void onPlayButtonPressed() {
 		myBackendController.startTimeLine();
@@ -154,11 +157,12 @@ public class ApplicationController {
 	{
 		myBackendController.attemptToPlaceEntity(aTowerName, aDropLocation);
 	}
-
+/*
 	public void onSellButtonPressed(TowerData tower) {
 		// TODO Auto-generated method stub
 //		return null;
 	}
+	*/
 	
 	public void onSavePressed() {
 		myBackendController.save();
@@ -169,11 +173,13 @@ public class ApplicationController {
 	 * @param entityID
 	 */
 	public void onEntityClicked(String entityID) {
-		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
-		for (IComponent component: clickedEntity.getComponents()) {
-			component.distributeInfo();
-		}
-		myScene.buildEntityInfoBox();
+		myBackendController.sellEnemy(myEntityManager.getEntityMap().get(entityID));
+//		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+//		for (IComponent component: clickedEntity.getComponents()) {
+//			component.distributeInfo();
+//		}
+//		myScene.getMyBottomPane().clear();
+//		myScene.buildEntityInfoBox();
 	}
 	
 	public void DisplayStats() throws Exception {
@@ -185,6 +191,10 @@ public class ApplicationController {
 	}
 
 	public void onLastPressed() {
+		// TODO Auto-generated method stub
+	}
+
+	public void onRefreshPressed() {
 		// TODO Auto-generated method stub
 	}
 	

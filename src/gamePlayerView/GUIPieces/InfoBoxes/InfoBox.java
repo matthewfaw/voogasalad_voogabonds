@@ -23,9 +23,9 @@ import javafx.scene.text.Font;
  */
 
 public abstract class InfoBox implements IGUIPiece {
-	public HBox myDisplay= new HBox();
-	Label myLabel=new Label();
-	Label myOutput= new Label();
+	public HBox myDisplay = new HBox();
+	Label myLabel = new Label();
+	Label myOutput = new Label();
 	
 	public InfoBox(){
 		//
@@ -40,7 +40,7 @@ public abstract class InfoBox implements IGUIPiece {
 	}
 	
 	public TextArea makeTextArea() {
-		TextArea t= new TextArea();
+		TextArea t = new TextArea();
 		t.setEditable(false);
 		t.setMaxSize(5, 5);
 		return t;
@@ -53,7 +53,8 @@ public abstract class InfoBox implements IGUIPiece {
 		return l;
 	}
 	
-	public Node getView(){
+	@Override
+	public Node getNode(){
 		return myDisplay;
 	}
 }

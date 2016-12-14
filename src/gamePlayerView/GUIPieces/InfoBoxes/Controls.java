@@ -6,69 +6,72 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyEvent;
+
 public class Controls {
-    private ResourceBundle defaultControls;
-    private Enumeration<String> controlFunctions;
-    private ArrayList<String> controls;
-    private ArrayList<String> functions;
-    private Map<String, String> mappings;
+    private ResourceBundle myDefaultControls;
+    private Enumeration<String> myControlFunctions;
+    private ArrayList<String> myControls;
+    private ArrayList<String> myFunctions;
+    private Map<String, String> myMappings;
     
     public Controls(){
-        defaultControls =  ResourceBundle.getBundle("resources/defaultcontrols");
-        controlFunctions = defaultControls.getKeys();
-        controls = new ArrayList<String>();
-        functions = new ArrayList<String>();
-        while(controlFunctions.hasMoreElements()){
-            String str = controlFunctions.nextElement();
-            functions.add(str);
-            controls.add(defaultControls.getString(str));
+        myDefaultControls =  ResourceBundle.getBundle("resources/defaultcontrols");
+        myControlFunctions = myDefaultControls.getKeys();
+        myControls = new ArrayList<String>();
+        myFunctions = new ArrayList<String>();
+        
+        while(myControlFunctions.hasMoreElements()){
+            String str = myControlFunctions.nextElement();
+            myFunctions.add(str);
+            myControls.add(myDefaultControls.getString(str));
         }
-        mappings = new HashMap<String, String>();
+        
+        myMappings = new HashMap<String, String>();
         makeMap();
     }
     
     public void setDefaults(){
-        while(controlFunctions.hasMoreElements()){
-            String str = controlFunctions.nextElement();
-            controls.add(defaultControls.getString(str));
+        while(myControlFunctions.hasMoreElements()){
+            String str = myControlFunctions.nextElement();
+            myControls.add(myDefaultControls.getString(str));
         }
         
     }
     
     public void setControlFor(String function, String newControl){
-//        System.out.println(function + ": ");
-//        System.out.println(mappings.get(function));
-        for(int i = 0; i < controls.size(); i++){
-            if(mappings.get(function) == controls.get(i)){
-                controls.remove(i);
-                controls.add(i, newControl);
-//                System.out.println("Replaced");
-//                System.out.println("controls size: " + controls.size());
+//        //System.out.println(function + ": ");
+//        //System.out.println(mappings.get(function));
+        for(int i = 0; i < myControls.size(); i++){
+            if(myMappings.get(function) == myControls.get(i)){
+                myControls.remove(i);
+                myControls.add(i, newControl);
+//                //System.out.println("Replaced");
+//                //System.out.println("controls size: " + controls.size());
             }
         }
-        mappings.replace(function, mappings.get(function), newControl);
+        myMappings.replace(function, myMappings.get(function), newControl);
         
     }
     
     private void makeMap(){
-        for(int i = 0; i < functions.size(); i++){
-        mappings.put(functions.get(i), controls.get(i));
+        for(int i = 0; i < myFunctions.size(); i++){
+        myMappings.put(myFunctions.get(i), myControls.get(i));
         }
     }
     
     public String getControlFor(String function){
-        return mappings.get(function);
+        return myMappings.get(function);
     }
     
     public ArrayList<String> getControls(){
-        return controls;
+        return myControls;
     }
     
     public ArrayList<String> getFunctions(){
-        return functions;
+        return myFunctions;
     }
         
     public void setControls(ArrayList<String> newControls){
-        controls = newControls;
+        myControls = newControls;
     }
 }

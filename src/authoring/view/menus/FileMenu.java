@@ -12,6 +12,7 @@ import authoring.model.serialization.JSONSerializer;
 import main.MainInitializer;
 import main.MainMenu;
 import mainmenu.screens.LoadAuthoringScreen;
+import mainmenu.screens.NewAuthoringScreen;
 import utility.ErrorBox;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -60,10 +61,9 @@ public class FileMenu extends Menu {
 		newProject.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent t) {
 				try {
-					Stage s = new Stage();
-					MainMenu newInstance = new MainMenu(new MainInitializer(s), s);
-					newInstance.init();
+					NewAuthoringScreen newScreen = new NewAuthoringScreen();
 				} catch (IOException e) {
+					ErrorBox.displayError(e.getMessage());
 				}
 			}
 		});
@@ -74,7 +74,8 @@ public class FileMenu extends Menu {
 			public void handle(ActionEvent t) {
 				//TODO: Deserialize TowerData, EnemyData, WaveData, RulesData, WeaponsData, MapData, LevelsData here.
 				try {
-					LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(router);
+					LoadAuthoringScreen loadScreen = new LoadAuthoringScreen(myResources.getString("AuthorOldProject"),
+							myResources.getString("ExistingAuthoringFiles"));
 				} catch (IOException e) {
 					ErrorBox.displayError(myResources.getString("MysteryError"));
 				}
@@ -94,29 +95,42 @@ public class FileMenu extends Menu {
 		saveProject.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
-//				GameStateSerializer GSS = new GameStateSerializer(router);
+				if (router.getGameTitle() != null){
+					save(router.getGameTitle(), true);
+				}
+				else {
+					saveAs();
+				}
 			}
 		});
 	}
 	
 	private void performSaveAs(MenuItem saveAs) {
-		saveAs.setOnAction(
-				new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(final ActionEvent e) {
-						FileChooser newGameSave = new FileChooser();
-						Stage stage = new Stage();
-						File file = newGameSave.showSaveDialog(stage);
-						if (file != null) {
-							GameStateSerializer GSS = new GameStateSerializer(router);
-							try {
-								GSS.saveGameState(file.getName());
-							} catch (Exception exception) {
-								System.out.println("Cannot save game.");
-							}
-						}
-					}
-				});
+		saveAs.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(final ActionEvent e) {
+				saveAs();
+			}
+		});
+	}
+	
+	public void saveAs(){
+		FileChooser newGameSave = new FileChooser();
+		Stage stage = new Stage();
+		File file = newGameSave.showSaveDialog(stage);
+		if (file != null) {
+			router.setGameTitle(file.getName());
+			save(file.getName(), false);
+		}
+	}
+
+	private void save(String name, boolean overwrite) {
+		GameStateSerializer GSS = new GameStateSerializer(router);
+		try {
+			GSS.saveGameState(name, overwrite);
+		} catch (Exception exception) {
+			//System.out.println("Cannot save game.");
+		}
 	}
 	
 }

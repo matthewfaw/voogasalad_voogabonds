@@ -70,7 +70,7 @@ public class MockGameDataConstructor {
 		JSONDeserializer derp = new JSONDeserializer(); 
 		
 //		TowerData data = (TowerData)derp.DeserializeFromFile("towers/ActualTower", TowerData.class);
-//		System.out.println(data.getBuyPrice());
+//		//System.out.println(data.getBuyPrice());
 
 		JSONSerializer ser = new JSONSerializer();
 		
@@ -82,11 +82,11 @@ public class MockGameDataConstructor {
 			//Sell/Buy data
 			ComponentData pcd = new ComponentData();
 			pcd.setComponentName("PurchasableComponentData");
-			pcd.addField("myPurchacePrice", "50");
+			pcd.addField("myPurchaseValue", "50");
 			
 			ComponentData scd = new ComponentData();
 			scd.setComponentName("SellableComponentData");
-			scd.addField("mySellPrice", "50");
+			scd.addField("mySellValue", "50");
 			
 			// Entity data
 			EntityData ed  = new EntityData();
@@ -213,7 +213,7 @@ public class MockGameDataConstructor {
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed.getClass().getSimpleName()+1, EntityData.class);
 			derp.deserializeFromFile("SerializedFiles/exampleGame/EntityData/"+ed2.getClass().getSimpleName()+2, EntityData.class);
 			
-			TerrainMap terrainMap = new TerrainMap(md);
+			//TerrainMap terrainMap = new TerrainMap(md);
 //			terrainMap.getDestination();
 		} catch (Exception e) {
 			//TODO add more meaningful error message

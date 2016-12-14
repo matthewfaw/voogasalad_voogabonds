@@ -27,9 +27,9 @@ public class MapGrid extends Node {
     private ApplicationController myAppController;
     private int numColumns;
     private int numRows;
-    private Rectangle[][] actualGrid;
+    private Rectangle[][] myGrid;
     private Pane myPane;
-    private ArrayList<MoveableComponentView> sprites;
+    private ArrayList<MoveableComponentView> mySprites;
     private int myCellSize;
     private Rectangle closest; 
     private ResourceBundle myResources;
@@ -41,11 +41,11 @@ public class MapGrid extends Node {
     	this.myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "Error");
     	myPane = new Pane();
     	closest = new Rectangle();
-    	sprites = new ArrayList<MoveableComponentView>();
+    	mySprites = new ArrayList<MoveableComponentView>();
     	numColumns = cols;
     	numRows = rows;
     	myCellSize = aCellSize;
-    	actualGrid = new Rectangle[numRows][numColumns];
+    	myGrid = new Rectangle[numRows][numColumns];
     }
     
     public Rectangle fillCell(int row, int col, int aCellSize, String aHexValue,Pane pane) {
@@ -68,7 +68,7 @@ public class MapGrid extends Node {
     		public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 //				TowerData data = myTowerColumn.getTowerData(db.getString());
-//				System.out.println(data.getBuyPrice());
+//				//System.out.println(data.getBuyPrice());
 				Rectangle closestRectangle = findDropLocation(event.getX(), event.getY());
 				myAppController.onTowerDropped(db.getString(), new Point(closestRectangle.getX() + myCellSize / 2, closestRectangle.getY() + myCellSize / 2));
 				setClickAction();
@@ -76,12 +76,12 @@ public class MapGrid extends Node {
     		}
     	});
 
-    	actualGrid[row][col] = temp;
-    	return actualGrid[row][col];
+    	myGrid[row][col] = temp;
+    	return myGrid[row][col];
     }
     
     public void setClickAction(){
-        for(MoveableComponentView m : sprites){
+        for(MoveableComponentView m : mySprites){
             m.setOnMouseClicked(e -> {
 				try {
 					setClickForComponent(m);
@@ -111,11 +111,11 @@ public class MapGrid extends Node {
     
     public void giveViewableComponent(IObservable<IViewablePhysical> aObservable)
     {
-    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane);
+    	MoveableComponentView aComponent = new MoveableComponentView(aObservable, myAppController, myPane, myCellSize);
     	aObservable.attach(aComponent);
-    	sprites.add(aComponent);
+    	mySprites.add(aComponent);
     	myPane.getChildren().add(aComponent);
-    	System.out.println("Add a physical to the pane.");
+    	//System.out.println("Add a physical to the pane.");
     }
     
     
@@ -139,7 +139,7 @@ public class MapGrid extends Node {
         double minDist = Integer.MAX_VALUE;
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
-                Rectangle temp = actualGrid[i][j];
+                Rectangle temp = myGrid[i][j];
                 if(calculateDistance(x, y, temp.getX(), temp.getY()) < minDist)
                         {                        
                             minDist = calculateDistance(x, y, temp.getX(), temp.getY());

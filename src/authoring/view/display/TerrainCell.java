@@ -46,7 +46,6 @@ public class TerrainCell extends Rectangle {
 	private int DEFAULT_TILE_SIZE;
 	private Point point;
 	private GameDisplay gameDisplay;
-	private String[] splitPath;
 	private String relPath = "";
 	
 	public TerrainCell(MapDataContainer c, GridToolBar tools, int row, int column, GameDisplay disp) {	
@@ -73,26 +72,25 @@ public class TerrainCell extends Rectangle {
 							ErrorBox.displayError("Please Choose a Valid Terrain to use.");
 							mouseEvent.consume();
 						}
-						
 						else if (toolBar.getImageStatus()){
-							
-							splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+							//System.out.println("REMOVED");
+							controller.removeTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
+							String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
 							relPath = "";
-							if (toolBar.getImageStatus()) {
+							if (toolBar.getImageStatus() && splitPath.length > 1) {
 								relPath += splitPath[1] + "/";
-								System.out.println("THISISTHERELATIVEPATH: " + relPath);
 							}
 							
 							Image image = new Image(toolBar.getSelectedImagePath());
 							ImagePattern imagePattern = new ImagePattern(image);
 							setFill(imagePattern);
-							
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), relPath));
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, gameDisplay.getTileSize(), relPath));
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedImagePath().toString());
 							}
 						else {
-							
-							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), toolBar.getSelectedColor().toString()));
+							//System.out.println("REMOVED");
+							controller.removeTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, (int) TerrainCell.this.getHeight(), TerrainCell.this.getFill().toString()));
+							controller.addTerrainData(new TerrainData(TerrainCell.this.getType(), colLocation, rowLocation, gameDisplay.getTileSize(), toolBar.getSelectedColor().toString()));
 							setFill(toolBar.getSelectedColor());
 							setType(toolBar.getSelectedTerrain(), toolBar.getSelectedColor().toString());
 						}
@@ -115,7 +113,6 @@ public class TerrainCell extends Rectangle {
 						}
 						ArrayList<Point> points = new ArrayList<Point>();
 						points.add(new Point(colLocation, rowLocation));
-//						controller.addSpawnPoints(cellName, points);
 						setWidth(gameDisplay.getTileSize()*0.9);
 						setHeight(gameDisplay.getTileSize()*0.9);
 						setStroke(Paint.valueOf(myResources.getString("DefaultSpawnColor")));
@@ -131,7 +128,6 @@ public class TerrainCell extends Rectangle {
 						}
 						ArrayList<Point> points = new ArrayList<Point>();
 						points.add(new Point(colLocation, rowLocation));
-//						controller.addSinkPoints(cellName, points);
 						setWidth(gameDisplay.getTileSize()*0.9);
 						setHeight(gameDisplay.getTileSize()*0.9);
 						setStroke(Paint.valueOf(myResources.getString("DefaultSinkColor")));
@@ -140,14 +136,12 @@ public class TerrainCell extends Rectangle {
 					}
 				}
 				else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-					System.out.println("GO");
 					if (getStroke().equals(Color.valueOf(myResources.getString("DefaultSpawnColor")))) {
 						controller.removeSpawnPoints(cellName);
 						setStrokeWidth(0);
 						setStroke(Paint.valueOf("White"));
 						setWidth(gameDisplay.getTileSize());
 						setHeight(gameDisplay.getTileSize());
-						System.out.println("AWAY");
 					}
 					else if (getStroke().equals(Color.valueOf(myResources.getString("DefaultSinkColor")))) {
 						controller.removeSinkPoint(cellName);
@@ -155,7 +149,6 @@ public class TerrainCell extends Rectangle {
 						setStroke(Paint.valueOf("White"));
 						setWidth(gameDisplay.getTileSize());
 						setHeight(gameDisplay.getTileSize());
-						System.out.println("PLEASE");
 					}
 				}
 			}
@@ -271,15 +264,16 @@ public class TerrainCell extends Rectangle {
 	public void setType(String newType, String color) {
 		terrainType = newType;
 		try { 
-			splitPath = toolBar.getSelectedImagePath().toString().split("src/");
-			relPath = "";
 			if (toolBar.getImageStatus()) {
-				relPath += splitPath[1]+"/";
-				System.out.println("THISISTHERELATIVEPATH: " + relPath);
+				String[] splitPath = toolBar.getSelectedImagePath().toString().split("src/");
+				relPath = "";
+				if (splitPath.length > 1) {
+					relPath += splitPath[1]+"/";
+				}
 				controller.addValidTerrain(terrainType, relPath);
 			}
 			else {
-				controller.addValidTerrain(terrainType, relPath);
+				controller.addValidTerrain(terrainType, color);
 			}
 		} catch (Exception e) {
 			ErrorBox.displayError(myResources.getString("TerrainError"));

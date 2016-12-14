@@ -5,14 +5,17 @@ import java.util.List;
 
 import authoring.model.EntityData;
 import authoring.model.PlayerData;
-import authoring.model.TowerData;
 import engine.IObserver;
 import engine.model.resourcestore.IMoney;
 import engine.model.resourcestore.Money;
 import engine.model.resourcestore.ResourceStore;
-import engine.model.strategies.winlose.IWinLoseStrategy;
+import engine.model.strategies.AbstractLoseStrategy;
+import engine.model.strategies.AbstractWinStrategy;
+import engine.model.strategies.IWinLoseStrategy;
 import engine.model.strategies.winlose.NeverLoseStrategy;
 import engine.model.strategies.winlose.NeverWinStrategy;
+import engine.model.strategies.winlose.PlayerHpLoseStrategy;
+import gamePlayerView.gamePlayerView.Router;
  
 /**
  * 
@@ -24,31 +27,40 @@ import engine.model.strategies.winlose.NeverWinStrategy;
 public class Player implements IModifiablePlayer, IViewablePlayer {
 	private int myID;
 	private int myLives;
-	private IMoney myMoney;
+	private Money myMoney;
+	private int myPoints;
 	
-	private List<ResourceStore> myResourceStores;
+	private transient List<ResourceStore> myResourceStores;
 	
-	private IWinLoseStrategy myWinCon;
-	private IWinLoseStrategy myLoseCon;
+	private transient IWinLoseStrategy myWinCon;
+	private transient IWinLoseStrategy myLoseCon;
 	
-	private List<IObserver<IViewablePlayer>> myObservers;
+	private transient List<IObserver<IViewablePlayer>> myObservers;
 	
-	public Player(PlayerData aPlayerData)
+	private Router myRouter;
+	
+	
+	public Player(Router r, PlayerData aPlayerData)
 	{
 		//TODO: Create Unique ID?
 		this(0,aPlayerData.getStartingLives(), new Money(aPlayerData.getStartingCash()));
+		myRouter = r;
 	}
-	private Player(int ID, int initLives, IMoney startingMoney) {
+	private Player(int ID, int initLives, Money startingMoney) {
 		myID = ID;
 		myLives = initLives;
 		myMoney = startingMoney;
+		myPoints = 0;
 		
 		//TODO: Get win and lose conditions from PlayerData
-		myLoseCon = new NeverLoseStrategy(this);
+		PlayerHpLoseStrategy loseCon = new PlayerHpLoseStrategy(this);
+		myLoseCon = loseCon;
 		myWinCon = new NeverWinStrategy(this);
+		
 		
 		myResourceStores = new ArrayList<ResourceStore>();
 		myObservers = new ArrayList<IObserver<IViewablePlayer>>();
+		myObservers.add(loseCon);
 	}
 	 
 	@Override
@@ -64,14 +76,24 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	}
 	
 	@Override
+	public void updatePoints(int deltaPoints) {
+		myPoints += deltaPoints;
+		notifyObservers();
+	}
+	
+	@Override
 	public int getLivesRemaining() {
 		return myLives;
 	}
-	
 	@Override
 	public int getAvailableMoney() {
 		return myMoney.getValue();
 	}
+	@Override
+	public int getPoints() {
+		return myPoints;
+	}
+	
 	@Override
 	public int getID(){
 		return myID;
@@ -81,6 +103,9 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void win() {
 		// TODO Auto-generated method stub
 		//Presumably tell anyone who cares that you won so they can end the game
+		myRouter.distributeErrors("You Win!");
+		myWinCon.unsubscribe(this);
+		myLoseCon.unsubscribe(this);
 		
 	}
 
@@ -88,7 +113,10 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	public void lose() {
 		// TODO Auto-generated method stub
 		//Presumably delete anything that belongs to you and tell anyone who cares that you lost
-		
+		myRouter.distributeGameLost();
+//		myRouter.distributeErrors("You Lose!");
+		myWinCon.unsubscribe(this);
+		myLoseCon.unsubscribe(this);
 	}
 
 	@Override
@@ -140,6 +168,7 @@ public class Player implements IModifiablePlayer, IViewablePlayer {
 	}
 	@Override
 	public void notifyObservers() {
+		
 		myObservers.forEach(observer -> observer.update(this));
 	}
 

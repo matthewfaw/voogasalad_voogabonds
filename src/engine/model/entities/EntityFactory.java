@@ -25,19 +25,19 @@ import utility.Point;
 public class EntityFactory {
 	private static final Point DEFAULT_LOCATION = new Point(0,0);
 	private ComponentFactory myComponentFactory;
-	@SuppressWarnings("unused")
-	private List<ISystem> mySystems;
+//	@SuppressWarnings("unused")
+//	private List<ISystem<?>> mySystems;
 	private DataStore<EntityData> myEntityDataStore;
 	private Router myRouter;
 	private MapMediator myMapMediator;
 	private IModifiableEntityManager myEntityManager;
 
-	public EntityFactory(List<ISystem> systems, 
+	public EntityFactory(List<ISystem<?>> systems, 
 			DataStore<EntityData> entityDataStore, 
 			Router router, 
 			MapMediator mapMediator,
 			IModifiableEntityManager entityManager) {
-		mySystems = systems;
+//		mySystems = systems;
 		myEntityDataStore = entityDataStore;
 		myRouter = router;
 		myComponentFactory = new ComponentFactory(systems, myRouter); // depends on router initialization
@@ -52,9 +52,9 @@ public class EntityFactory {
 	 * @return the constructed entity
 	 * @throws ComponentCreationException  
 	 */
-	public IEntity constructEntity(String entityName, Point aLocation) throws UnsupportedOperationException {
+	public ConcreteEntity constructEntity(String entityName, Point p) throws UnsupportedOperationException {
 		EntityData entityData = myEntityDataStore.getData(entityName);
-		return constructEntity(entityData, aLocation);
+		return constructEntity(entityData, p);
 	}
 	
 	public IEntity constructEntity(EntityData aEntityData) 
@@ -62,25 +62,23 @@ public class EntityFactory {
 		return constructEntity(aEntityData, DEFAULT_LOCATION);
 	}
 	
-	public IEntity constructEntity(EntityData aEntityData, Point aLocation) 
+	public ConcreteEntity constructEntity(EntityData aEntityData, Point aLocation) 
 			throws UnsupportedOperationException
 	{
-		System.out.println("Contructing an entity.");
+		//System.out.println("Contructing an entity.");
 		//1. Construct the entity object
 		//2. Construct each component using the component factory, and link this to the component object
 		//2.5 Attach components to relevant systems?
 		//3. return the fully constructed object
-		IEntity entity = new ConcreteEntity();
+		ConcreteEntity entity = new ConcreteEntity();
 		Collection<ComponentData> componentMap = aEntityData.getComponents().values();
 		for (ComponentData compdata : componentMap) {
-			IModifiableComponent component = myComponentFactory.constructComponent(compdata, aLocation);
+			IModifiableComponent component = myComponentFactory.constructComponent(entity, compdata, aLocation);
 //			component.setEntity(entity);
 			entity.addComponent(component);	
 		}
-		entity.setId(UUID.randomUUID().toString());
 		// Adding the entity to the Entity Manager
 		myEntityManager.addEntity(entity.getId(), entity);
-
 
 		return entity;
 	}

@@ -1,5 +1,7 @@
 package authoring.view.tabs.entities;
 
+import java.io.File;
+
 import authoring.model.EntityData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +16,7 @@ public class EntityListView {
     
     public EntityListView(EntityData entityData) {
         if (entityData == null) {
-            System.out.println("EntityData is null");
+            //System.out.println("EntityData is null");
         }
         myName = entityData.getName();
         myImagePath = getImagePath(entityData);
@@ -28,8 +30,8 @@ public class EntityListView {
         if (myImagePath == null || myImagePath.equals("")) {
             return null;
         }
-        String relativePath = myImagePath.substring(4); // remove leading 'src/'
-        Image img = new Image(getClass().getClassLoader().getResourceAsStream(relativePath));
+//        String relativePath = myImagePath.substring(4); // remove leading 'src/'
+        Image img = new Image(getClass().getClassLoader().getResourceAsStream(myImagePath));
         ImageView view = new ImageView(img);
         view.setPreserveRatio(true);
         view.setFitHeight(IMAGE_HEIGHT);
@@ -47,6 +49,8 @@ public class EntityListView {
                 }
             }
         }
+        if (imagePath != null)
+        	imagePath = imagePath.replace('\\', File.separatorChar);
         return imagePath;
     }
 

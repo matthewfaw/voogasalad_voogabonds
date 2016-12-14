@@ -13,10 +13,10 @@ public class JSONSerializer {
 	public String serialize(Object obj){
 
 		//overly verbose for now, but easily changeable later, for whether we want a JsonElement or String
-		gson = new Gson();
+		gson = new GsonBuilder().setPrettyPrinting().create();
 		String jsonString = gson.toJson(obj);
 		JsonElement json = gson.toJsonTree(obj);
-		System.out.println(json);
+		//System.out.println(json);
 		return jsonString;
 		
 			

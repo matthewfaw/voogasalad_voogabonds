@@ -49,7 +49,9 @@ public class GameStateLoader {
 				routerMapData.addValidTerrain(terrainName, newMapData.getValidTerrainMap().get(terrainName));
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			
 		}
 	}
 	
@@ -64,14 +66,16 @@ public class GameStateLoader {
 				String entityDataPath = f.toString().substring(myResources.getString("SourceFilePath").length());
 				entityDataPath = entityDataPath.replace("\\", "/");
 				EntityData oldEntityData = (EntityData) deserializer.deserializeFromFile(entityDataPath, EntityData.class);
-//				System.out.println("\nLOADING...");
+//				//System.out.println("\nLOADING...");
 //				for (String component : oldEntityData.getComponents().keySet()) {
-//				    System.out.println(component);
+//				    //System.out.println(component);
 //				}
 				routerEntityData.createEntityData(oldEntityData);
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			
 		}
 	}
 	
@@ -85,7 +89,9 @@ public class GameStateLoader {
 				routerLevelData.createNewLevelData(ld);
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			
 		}
 	}
 	
@@ -103,7 +109,9 @@ public class GameStateLoader {
 				routerWaveData.createNewWave(oldWaveData.getName(), oldWaveData);
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			
 		}
 	}
 	
@@ -118,7 +126,9 @@ public class GameStateLoader {
 			routerPlayerData.setStartingLives(newPlayerData.getStartingLives());
 			routerPlayerData.setWinStrategyName(newPlayerData.getWinStrategyName());
 		}catch(Exception e){
+			e.printStackTrace();
 			ErrorBox.displayError(myResources.getString("LoadAuthoringError"));
+			
 		}
 	}
 }

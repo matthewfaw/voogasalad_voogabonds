@@ -18,16 +18,16 @@ import main.MainMenu;
 public class PauseMenu {
     private Pane myRoot;
     private Stage myStage;
-    private ControlsMenu controls;
+    private ControlsMenu myControlsMenu;
     private Scene myWindow;
-    private Stage stageToKill;
+    private Stage myStageToKill;
     
     public PauseMenu(){
         myRoot = new Pane();
         myStage = new Stage();
         myStage.setTitle("Pause");
         myWindow = new Scene(myRoot, 220,200);
-        controls = new ControlsMenu();
+        myControlsMenu = new ControlsMenu();
         myWindow.setFill(Color.DODGERBLUE);
         myStage.setScene(myWindow);
         myRoot.setStyle("-fx-base: #000000; -fx-stroke: #6de894;");
@@ -52,7 +52,7 @@ public class PauseMenu {
         b.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
-                stageToKill.close();
+                myStageToKill.close();
                 kill();
                 try {
                     MainMenu main = new MainMenu(new MainInitializer(myStage), myStage);
@@ -81,7 +81,7 @@ public class PauseMenu {
                 break;
             case "CONTROLS":
                 kill();
-                controls.init();
+                myControlsMenu.init();
 //            case "MAIN MENU":
 //                stageToKill.close();
 //                kill();
@@ -95,7 +95,7 @@ public class PauseMenu {
     }
   
     public void getControls(Controls cont){
-        controls.getControlsToDisplay(cont);
+        myControlsMenu.getControlsToDisplay(cont);
     }
     //method to get controls
     
@@ -106,6 +106,6 @@ public class PauseMenu {
 
 
     public void getStage(Stage myStage2) {
-        stageToKill = myStage2;
+        myStageToKill = myStage2;
     }
 }

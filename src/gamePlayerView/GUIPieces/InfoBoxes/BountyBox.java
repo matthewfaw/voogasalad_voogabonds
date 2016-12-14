@@ -17,7 +17,7 @@ import gamePlayerView.interfaces.IHealthAcceptor;
 public class BountyBox extends InfoBox implements IObserver<IViewableBounty>, IBountyAcceptor {
 	
 	public BountyBox(){
-		myDisplay=makeDisplay("Bounty: ");
+		myDisplay = makeDisplay("Bounty: ");
 	}
 	
 	
