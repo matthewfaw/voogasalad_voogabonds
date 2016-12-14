@@ -16,7 +16,9 @@ import engine.controller.system.SystemsController;
 import engine.controller.timeline.TimelineController;
 import engine.controller.waves.LevelController;
 import engine.model.components.IComponent;
+import engine.model.components.concrete.BountyComponent;
 import engine.model.data_stores.DataStore;
+import engine.model.entities.ConcreteEntity;
 import engine.model.entities.EntityFactory;
 import engine.model.entities.EntityManager;
 import engine.model.entities.IEntity;
@@ -197,7 +199,17 @@ public class BackendController {
 		Player myPlayer = myPlayerController.getPlayer(playerID);
 		myPlayer.updateAvailableMoney(-1*buyPrice);
 	}
-	
+	public void sellEnemy(ConcreteEntity entity) {
+		
+		for (IComponent c: entity.getComponents()) {
+			if (c instanceof BountyComponent) {
+				mySystemsController.getBountySystem().collectBounty(c);
+				entity.delete();
+				break;
+			}
+		}
+		
+	}
 
 	/**
 	 * Helper method to create the backend map object
@@ -208,12 +220,10 @@ public class BackendController {
 	private void constructMap()
 	{
 		try {
-			List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
-			MapDataContainer mapData = data.get(0);
-			myMapData = mapData;
+			MapDataContainer mapData = getMapData();
 			
 			//XXX: is the map mediator needed anywhere? Could we just keep the map distributor? this would be ideal
-			myMapMediator = new MapMediator(mapData);
+			myMapMediator = new MapMediator(mapData, myRouter.getPixelWidth());
 
 			//distribute to frontend
 			myRouter.distributeMapData(mapData);
@@ -222,6 +232,13 @@ public class BackendController {
 			myRouter.distributeErrors("The file for MapDataContainer cannot be found!");
 		}
 		
+	}
+
+	private MapDataContainer getMapData() throws FileNotFoundException {
+		List<MapDataContainer> data = getData(myGameDataRelativePaths.getString("MapPath"), MapDataContainer.class);
+		MapDataContainer mapData = data.get(0);
+		myMapData = mapData;
+		return mapData;
 	}
 	
 	/**

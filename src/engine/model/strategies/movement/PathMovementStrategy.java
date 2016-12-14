@@ -26,7 +26,7 @@ public class PathMovementStrategy extends AbstractMovementStrategy{
 	@Override
 	public  Pair<Double, Point> nextMove(IMovable m, IPhysical p) {
 		if (m.getGoal() != null && (myPath == null || myPreviousGoalLocation == null || !myPreviousGoalLocation.equals(m.getGoal()))) {
-			myPreviousGoalLocation = m.getGoal();
+			myPreviousGoalLocation = m.getGoalPoint();
 			myPath = myMap.constructPaths(p, m);
 		}
 		return super.nextMove(m, p);

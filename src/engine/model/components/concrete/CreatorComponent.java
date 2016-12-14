@@ -36,6 +36,7 @@ import engine.model.weapons.DamageInfo;
 public class CreatorComponent extends AbstractComponent implements ICreator, IViewableCreator {
 
 	private transient ISpawningStrategy mySpawningStrategy;
+	private boolean homingProjectiles;
 	private int myTimeBetweenSpawns;
 	private String mySpawnName;
 
@@ -80,7 +81,8 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		updateComponentData(data);
 		myTimeSinceSpawning = 0;
 		myChildren = new ArrayList<ConcreteEntity>();
-		mySpawning.attachComponent(this);
+		myStats = new DamageInfo();
+		spawning.attachComponent(this);
 	}
 
 	/**
@@ -91,10 +93,13 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 	public void spawnIfReady() {
 		myTarget = myTargeting.getTarget(this);
 		if (myPhysical.get(this) != null)
-			if (myTarget != null)
-				if (myTimeSinceSpawning >= myTimeBetweenSpawns) {
+			if (myTarget != null && myTimeSinceSpawning >= myTimeBetweenSpawns) {
+				myTimeSinceSpawning = 0;
+				if (homingProjectiles)
 					myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget, myMovement, myPhysical, this));
-					myTimeSinceSpawning = 0;
+				else
+					myChildren.add(mySpawningStrategy.spawn(myEntityFactory, myTarget.getPosition(), myMovement, myPhysical, this));
+					
 		} else{
 			myTimeSinceSpawning++;
 		}
@@ -188,5 +193,6 @@ public class CreatorComponent extends AbstractComponent implements ICreator, IVi
 		mySpawnName = aComponentData.getFields().get("mySpawnName");
 		myTimeBetweenSpawns = Integer.parseInt(aComponentData.getFields().get("myTimeBetweenSpawns"));
 		mySpawningStrategy = mySpawning.newStrategy(aComponentData.getFields().get("mySpawningStrategy"));
+		homingProjectiles = Boolean.parseBoolean(aComponentData.getFields().get("homingProjectiles"));
 	}
 }

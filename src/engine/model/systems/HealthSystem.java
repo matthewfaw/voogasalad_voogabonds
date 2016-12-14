@@ -43,7 +43,7 @@ public class HealthSystem implements ISystem<HealthComponent> {
 	}
 	@Override
 	public HealthComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public HealthComponent getComponent(IEntity entity) {

@@ -182,12 +182,13 @@ public class ApplicationController {
 	 * @param entityID
 	 */
 	public void onEntityClicked(String entityID) {
-		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
-		for (IComponent component: clickedEntity.getComponents()) {
-			System.out.println("Trying to distribute info");
-			component.distributeInfo();
-		}
-		myScene.buildEntityInfoBox();
+		myBackendController.sellEnemy(myEntityManager.getEntityMap().get(entityID));
+//		IEntity clickedEntity = myEntityManager.getEntityMap().get(entityID);
+//		for (IComponent component: clickedEntity.getComponents()) {
+//			component.distributeInfo();
+//		}
+//		myScene.getMyBottomPane().clear();
+//		myScene.buildEntityInfoBox();
 	}
 	
 	public void DisplayStats() throws Exception {
@@ -199,6 +200,10 @@ public class ApplicationController {
 	}
 
 	public void onLastPressed() {
+		// TODO Auto-generated method stub
+	}
+
+	public void onRefreshPressed() {
 		// TODO Auto-generated method stub
 	}
 	

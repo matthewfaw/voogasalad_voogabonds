@@ -77,6 +77,11 @@ public class SystemsController {
 		createSystemsList();
 	}
 	
+	public BountySystem getBountySystem()
+	{
+		return myBountySystem;
+	}
+	
 	private void reinitializeComponent(Router aRouter, List<? extends AbstractComponent> aComponentList, EntityManager aEntityManager, DataStore<EntityData> aEntityDataStore)
 	{
 		for (AbstractComponent c: aComponentList) {

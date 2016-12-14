@@ -1,6 +1,7 @@
 package engine.model.strategies.winlose;
 
 import engine.model.playerinfo.IModifiablePlayer;
+import engine.model.strategies.AbstractLoseStrategy;
 
 public class NeverLoseStrategy extends AbstractLoseStrategy<Object> {
 	
@@ -14,6 +15,4 @@ public class NeverLoseStrategy extends AbstractLoseStrategy<Object> {
 		//Therefore, nothing should call its update method.
 		return false;
 	}
-
-	
 }

@@ -6,7 +6,7 @@
         {
           "name": "Cool wave",
           "waveEntity": "enemy",
-          "timeBetweenEnemy": 2.0,
+          "timeBetweenEnemy": 3000.0,
           "timeUntilNextWave": 0.0,
           "numEnemies": 10,
           "spawnPointName": "spawnPoint",

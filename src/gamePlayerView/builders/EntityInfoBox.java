@@ -37,12 +37,12 @@ public class EntityInfoBox implements IGUIPiece {
 		
 		myHbox=new HBox();
 		myHbox.setSpacing(10);
-		myHbox.getChildren().addAll(myMachineInfo.getView(),myTargetingButtons.getView(),myUpgradeUI.getView(),mySellUI.getView(),
-				myDamageBox.getView(),myHealthBox.getView(),myBountyBox.getView());
+		myHbox.getChildren().addAll(myMachineInfo.getNode(),myTargetingButtons.getNode(),myUpgradeUI.getNode(),mySellUI.getNode(),
+				myDamageBox.getNode(),myHealthBox.getNode(),myBountyBox.getNode());
 	}
-	
+
 	@Override
-	public Node getView() {
+	public Node getNode() {
 		return myHbox;
 	}
 }

@@ -47,9 +47,6 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 	private transient HealthSystem myHealthSystem;
 	
 	@Hide
-	private transient DamageDealingSystem myDamageDealingSystem;
-	
-	@Hide
 	private transient PhysicalSystem myPhysicalSystem;
 	@Hide
 	private transient DamageDealingSystem myDamageSystem;
@@ -63,6 +60,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 			HealthSystem healthSysytem,
 			TeamSystem teams,
 			PhysicalSystem physicalSystem,
+			SpawningSystem creators,
 			ComponentData data,
 			Router router
 			) {
@@ -72,10 +70,11 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		myDamageSystem = damageDealingSystem;
 		myHealthSystem = healthSysytem;
 		myPhysicalSystem = physicalSystem;
-		myDamageDealingSystem = damageDealingSystem;
+		myCreators = creators;
+		myTeams = teams;
 		
 		updateComponentData(data);
-		myDamageDealingSystem.attachComponent(this);
+		myDamageSystem.attachComponent(this);
 	}
 	
 	/**
@@ -188,10 +187,11 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
  			} else if (system instanceof TeamSystem){
  				myTeams = (TeamSystem) system;
  			} else if (system instanceof DamageDealingSystem) {
- 				myDamageDealingSystem = (DamageDealingSystem) system;
- 				myDamageDealingSystem.attachComponent(this);
+ 				myDamageSystem = (DamageDealingSystem) system;
+ 				myDamageSystem.attachComponent(this);
  			}
 		}
+		
 	}
 	@Override
 	public void redistributeThroughRouter(Router aRouter) {
@@ -204,7 +204,7 @@ public class DamageDealingComponent extends AbstractComponent implements IViewab
 		myDamage = Integer.parseInt(aComponentData.getFields().get("myDamage"));
 		myDamageArc = Double.parseDouble(aComponentData.getFields().get("myDamageArc"));
 		myDamageRadius = Double.parseDouble(aComponentData.getFields().get("myDamageRadius"));
-		myDamageStrategy = myDamageDealingSystem.newStrategy(aComponentData.getFields().get("myDamageStrategy"));
+		myDamageStrategy = myDamageSystem.newStrategy(aComponentData.getFields().get("myDamageStrategy"));
 		
 		explodesOnEnemies = Boolean.parseBoolean(aComponentData.getFields().get("explodesOnEnemies"));
 		explodesOnAllies = Boolean.parseBoolean(aComponentData.getFields().get("explodesOnAllies"));

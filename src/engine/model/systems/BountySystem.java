@@ -49,7 +49,7 @@ public class BountySystem implements ISystem<BountyComponent> {
 	}
 	@Override
 	public BountyComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public BountyComponent getComponent(IEntity entity) {

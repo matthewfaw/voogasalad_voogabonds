@@ -23,6 +23,7 @@ import engine.model.resourcestore.IViewableStore;
 import gamePlayerView.GUIPieces.InfoBoxes.ErrorPopup;
 import gamePlayerView.interfaces.IPlayerAcceptor;
 import gamePlayerView.interfaces.IResourceAcceptor;
+import javafx.scene.text.Text;
 
 
 /**
@@ -41,10 +42,10 @@ public class Router {
 	public Router(GamePlayerScene aGamePlayerScene)
 	{
 		myGamePlayerScene  = aGamePlayerScene;
-		myCash=myGamePlayerScene.getCash();
-		myLives=myGamePlayerScene.getLives();
-		myWaves=myGamePlayerScene.getWaves();
-		myResources=myGamePlayerScene.getResources();
+		myCash = myGamePlayerScene.getCash();
+		myLives = myGamePlayerScene.getLives();
+		myWaves = myGamePlayerScene.getWaves();
+		myResources = myGamePlayerScene.getResources();
 		//mySprites = myGamePlayerScene.getSprites();
 	}
 
@@ -91,6 +92,11 @@ public class Router {
 			c.acceptPlayer(aPlayer);
 		}
 	}
+	
+	public int getPixelWidth(){
+	    return (int) myGamePlayerScene.getMapDisplay().getPane().getHeight();
+	}
+	
 	//TODO: What is the input argument for this?
 	//public void distributeSprite(//Something){
 	//	for(ISprite s : mySprites){
@@ -138,6 +144,7 @@ public class Router {
 	}
 	public void distributeViewableComponent(IViewablePhysical aComponent)
 	{
+
 		myGamePlayerScene.getBuilder().withMachineInfo(aComponent);
 	}
 	public void distributeViewableComponent(IViewableMovable aComponent)
@@ -150,10 +157,16 @@ public class Router {
 	}
 	public void distributeViewableComponent(IViewableBounty aComponent)
 	{
+		Text text = new Text();
+		text.setText("money given on death" + aComponent.getBounty() );
+		myGamePlayerScene.getMyBottomPane().add(text);
 		myGamePlayerScene.getBuilder().withBountyBox(aComponent);
 	}
 	public void distributeViewableComponent(IViewableHealth aComponent)
 	{
+		Text text = new Text();
+		text.setText("Current Health" + aComponent.getCurrHealth());
+		myGamePlayerScene.getMyBottomPane().add(text);
 		myGamePlayerScene.getBuilder().withHealthBox(aComponent);
 	}
 	/*

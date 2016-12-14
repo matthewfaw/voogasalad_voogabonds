@@ -89,19 +89,26 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 		myMovement.attachComponent(this);
 	}
 	
-	private Pair<Double, Point> getMove(IPhysical p) {
-		if (myMaxDistance - myMovedDistance < myMoveSpeed)
-			myMoveSpeed = Math.max(0.0, myMovedDistance - myMaxDistance);
+	private Pair<Double, Point> moveTowardsGoal(IPhysical p) {
+		if ((myMaxDistance - myMovedDistance) < myMoveSpeed)
+			myMoveSpeed = Math.max(0.0, myMovedDistance - myMaxDistance + Math.exp(-6));
 		
 		Pair<Double, Point> nextMove = myMovementCalc.nextMove(this, p);
 		myMovedDistance += nextMove.getValue().euclideanDistance(p.getPosition());
+
+		p.setPosition(nextMove);
 		return nextMove;
 	}
 
 	//********************IMovable interface***********//
 	@Override
-	public Point getGoal() {
+	public Point getGoalPoint() {
 		return (myGoal == null) ? null : myGoal.getPosition();
+	}
+	
+	@Override
+	public IPosition getGoal() {
+		return myGoal;
 	}
 
 	@Override
@@ -120,17 +127,26 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 
 	public void move() {
 		setGoal(myTargeting.getTarget(this));
+		
+		//This means my target was deleted. (And I don't have any way to find a new one)
+		if ((myGoal != null && myGoal.getPosition() == null))
+			getEntity().delete();
+		
 		PhysicalComponent p = myPhysical.get(this);
-		if (p != null && myGoal == null && myTargeting.getTarget(this) == null)
-			p.setPosition(getMove(p));
-		else if (p != null && (myGoal != null || myTargeting.getTarget(this) == null))
-			p.setPosition(getMove(p));
+		if (p != null)
+			moveTowardsGoal(p);
 		
 		myCollision.checkCollision(p);
 		
-		if ((myMovedDistance >= myMaxDistance && explodesAtMaxDistance) || (explodesOnGoal && atGoal())) {
-			myDamage.explode(this);
+		if (myMovedDistance + Math.exp(0) >= myMaxDistance) {
+				if (explodesAtMaxDistance)
+					myDamage.explode(this);
+				else
+					getEntity().delete();
 		}
+				
+		if (explodesOnGoal && atGoal())
+			myDamage.explode(this);
 		
 		if (removeOnGoal && atGoal()) {
 			myBounty.pillagePlayerBase(this);
@@ -173,7 +189,7 @@ public class MoveableComponent extends AbstractComponent implements IMovable, IV
 	private boolean atGoal() {
 		IPhysical p = myPhysical.get(this);
 		if (p != null)
-			return myPhysical.get(this).getPosition().equals(getGoal());
+			return myPhysical.get(this).getPosition().equals(getGoalPoint());
 		else
 			return false;
 	}

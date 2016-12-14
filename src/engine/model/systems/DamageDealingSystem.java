@@ -46,7 +46,7 @@ public class DamageDealingSystem implements ISystem<DamageDealingComponent> {
 	}
 	@Override
 	public DamageDealingComponent getComponent(IComponent component) {
-		return getComponent(component.getEntity());
+		return component == null ? null : getComponent(component.getEntity());
 	}
 	@Override
 	public DamageDealingComponent getComponent(IEntity entity) {

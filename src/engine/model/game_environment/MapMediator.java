@@ -25,9 +25,9 @@ public class MapMediator {
 	private TerrainMap myTerrainMap;
 	private MapDataContainer myMapData;
 	
-	public MapMediator(MapDataContainer mapData) {
+	public MapMediator(MapDataContainer mapData, int pixelWidth) {
 		myMapData = mapData;
-		myTerrainMap = new TerrainMap(mapData);
+		myTerrainMap = new TerrainMap(mapData, pixelWidth);
 
 	}
 	/**
@@ -96,15 +96,15 @@ public class MapMediator {
 		
 		terrainQueue.add(source);
 
-		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), movement.getGoal());
+		HashMap<Terrain,Terrain> paths = constructPathsInGraph(terrainQueue, physical.getValidTerrains(), movement.getGoalPoint());
 		
 		//TODO: Fix the algorithm so this doesn't occur
 		if (paths.containsKey(source)) {
 			paths.remove(source);
 		}
-		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoal());
+		List<Terrain> shortestPath = constructShortestPath(paths, movement.getGoalPoint());
 		
-		PathManager pathManager = new PathManager(shortestPath);
+		PathManager pathManager = new PathManager(shortestPath, movement.getGoalPoint());
 		return pathManager;
 	}
 	
@@ -134,7 +134,7 @@ public class MapMediator {
 			}
 		}
 		//TODO: Throw error-->No path from source to destination!
-		return null;
+		return pathToFollow;
 	}
 	
 	private boolean hasValidTerrainType(List<String> aValidTerrains, Terrain neighbor) {

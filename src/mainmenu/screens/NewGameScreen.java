@@ -17,14 +17,16 @@ import utility.ErrorBox;
 public class NewGameScreen extends AbstractLoadScreen{
 	
 	
-	public NewGameScreen(String title) throws IOException {
-		super(title);
+	public NewGameScreen(String title, String files) throws IOException {
+		super(title, files);
 	}
 	
 	protected void start(String selectedGame){
 		try {
 			initGamePlay(selectedGame);
 		} catch (Exception e1) {
+			System.out.println("NewGameScreen 28");
+			e1.printStackTrace();
 			ErrorBox.displayError(getResources().getString("NewPlayerError"));
 		}
 	}

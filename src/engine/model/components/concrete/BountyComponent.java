@@ -107,8 +107,7 @@ public class BountyComponent extends AbstractComponent implements IViewableBount
 	@Override
 	public void updateComponentData(ComponentData aComponentData) {
 		myBountyValue = Integer.parseInt(aComponentData.getFields().get("myBountyValue"));
-		myLivesToDestroy = Integer.parseInt(aComponentData.getFields().get("myLivesToDestroy"));
+		myLivesToDestroy = -Integer.parseInt(aComponentData.getFields().get("myLivesToDestroy"));
 		myPointValue = Integer.parseInt(aComponentData.getFields().get("myPointValue"));
-		
 	}
 }

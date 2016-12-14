@@ -9,10 +9,10 @@
     },
     "PhysicalComponent": {
       "myFields": {
-        "myImageSize": "50",
+        "myImageSize": "1",
         "myValidTerrains": "grass",
         "myHeading": "0",
-        "myImagePath": "src/resources/cow.png"
+        "myImagePath": "resources/cow.png"
       },
       "myComponentName": "PhysicalComponent"
     },
@@ -20,7 +20,7 @@
       "myFields": {
         "removeOnGoal": "true",
         "explodesOnGoal": "false",
-        "myMaxDistance": "1000",
+        "myMaxDistance": "400",
         "myMoveSpeed": "0",
         "myTurnSpeed": "1",
         "myMovementCalc": "NoMovementStrategy"

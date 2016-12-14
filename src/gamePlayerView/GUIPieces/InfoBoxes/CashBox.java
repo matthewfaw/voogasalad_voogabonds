@@ -16,7 +16,7 @@ import gamePlayerView.interfaces.IPlayerAcceptor;
 public class CashBox extends InfoBox implements IObserver<IViewablePlayer>,IPlayerAcceptor {
 	
 	public CashBox(){
-		myDisplay=makeDisplay("Cash:  ");
+		myDisplay = makeDisplay("Cash:  ");
 	}
 
 	public void acceptPlayer(IObservable<IViewablePlayer> aPlayer) {

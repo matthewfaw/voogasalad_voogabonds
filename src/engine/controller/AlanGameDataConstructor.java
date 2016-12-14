@@ -276,7 +276,7 @@ public class AlanGameDataConstructor {
 			derp.deserializeFromFile("SerializedFiles/alanGame/EntityData/"+projectile.getClass().getSimpleName()+2, EntityData.class);
 			derp.deserializeFromFile("SerializedFiles/alanGame/EntityData/"+enemy.getClass().getSimpleName()+3, EntityData.class);
 
-			TerrainMap terrainMap = new TerrainMap(md);
+			//TerrainMap terrainMap = new TerrainMap(md);
 //			terrainMap.getDestination();
 		} catch (Exception e) {
 			//TODO add more meaningful error message

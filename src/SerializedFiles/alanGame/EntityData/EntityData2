@@ -9,10 +9,10 @@
     },
     "PhysicalComponent": {
       "myFields": {
-        "myImageSize": "10",
+        "myImageSize": "0.4",
         "myValidTerrains": "grass, water",
         "myHeading": "0",
-        "myImagePath": "src/resources/cookie.png"
+        "myImagePath": "resources/cookie.png"
       },
       "myComponentName": "PhysicalComponent"
     },
@@ -20,7 +20,7 @@
       "myFields": {
         "removeOnGoal": "true",
         "explodesOnGoal": "true",
-        "myMaxDistance": "300",
+        "myMaxDistance": "600",
         "explodesAtMaxDistance": "true",
         "myMoveSpeed": "5",
         "myTurnSpeed": "45",
@@ -33,6 +33,18 @@
         "myCollisionRadius": "0"
       },
       "myComponentName": "CollidableComponent"
+    },
+    "DamageDealingComponent": {
+   	  "myFields": {
+		"myDamage": "2",
+		"myDamageArc": "360",
+		"myDamageRadius": "50",
+		"myDamageStrategy": "ExponentialDamageStrategy",
+		"explodesOnEnemies": "true",
+		"explodesOnAllies": "false",
+		"diesOnExplosion": "true"
+      },
+      "myComponentName": "DamageDealingComponent"
     }
   }
 }
