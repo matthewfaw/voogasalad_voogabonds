@@ -109,7 +109,7 @@ public class BackendController {
 	private void constructSystems() {
 		myTeamSystem = new TeamSystem();
 		myHealthSystem = new HealthSystem();
-		myBountySystem = new BountySystem();
+		myBountySystem = new BountySystem(myPlayerController);
 		myDamageDealingSystem = new DamageDealingSystem();
 		
 		// ORDERING MATTERS for physical -> targeting -> collision -> movement
