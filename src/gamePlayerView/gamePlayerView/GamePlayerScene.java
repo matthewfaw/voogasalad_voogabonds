@@ -36,6 +36,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -73,7 +74,7 @@ public class GamePlayerScene {
 	public GamePlayerScene(Stage aStage, ApplicationController aAppController) throws Exception{
 		myAppController = aAppController;
 		
-		myStage=aStage;
+		myStage = aStage;
 		myStage.setResizable(false);
 		
 		myControls = new Controls();
@@ -99,7 +100,7 @@ public class GamePlayerScene {
 	public Scene build(Stage stage) throws Exception {
 		myBorderPane.setPrefWidth(Resources.SCREEN_WIDTH);
 		myBorderPane.setPrefHeight(Resources.SCREEN_HEIGHT);
-		myScene=new Scene(myBorderPane);
+		myScene = new Scene(myBorderPane);
 		
 		initMapDisplay();
 		initPauseMenu();
@@ -351,6 +352,16 @@ public class GamePlayerScene {
 
 	public void handleKeyInput(KeyCode code) {
 		myKeyInputHandler.handleKeyInput(code);
+	}
+
+	public void gameLost() {
+		VBox vbox = new VBox();
+		Scene scene= new Scene(vbox);
+		vbox.getChildren().add(new Text("You Lose"));
+		myStage.setScene(scene);
+		myStage.show();
+		
+		
 	}
 
 }
