@@ -1,7 +1,7 @@
 {
   "numXCells": 14,
   "numYCells": 12,
-  "cellSize": 50,
+  "cellSize": 100,
   "spawnPoints": {
     "spawnPoint": [
       {

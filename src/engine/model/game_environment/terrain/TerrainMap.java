@@ -22,9 +22,9 @@ public class TerrainMap {
 	{
 		myMapFactory = new TerrainGridFactory();
 		myMap = myMapFactory.constructTerrainMap(aTerrainMapData, aTerrainMapData.getCellSize());
-		
+
 		myTerrainWidth = aTerrainMapData.getCellSize();
-		myTerrainHeight = aTerrainMapData.getCellSize();
+		myTerrainHeight = myTerrainWidth;
 		
 		//TODO: Change this to be constructed in a factory, perhaps
 		myNeighborStrategy = new AdjacentNeighborStrategy(this);
