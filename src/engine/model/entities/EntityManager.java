@@ -1,6 +1,7 @@
 package engine.model.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +23,17 @@ public class EntityManager implements IModifiableEntityManager {
 		return myEntityMap;
 	}
 	
+	public Collection<ConcreteEntity> getEntities()
+	{
+		return myEntityMap.values();
+	}
+	
 	@Override
-	public void addEntity(String id, ConcreteEntity entity) {
+	public void putEntity(String id, ConcreteEntity entity) {
 		myEntityMap.put(id, entity);
+	}
+	public void putEntity(String id, IEntity entity) {
+		myEntityMap.put(id, (ConcreteEntity)entity);
 	}
 	
 	@Override

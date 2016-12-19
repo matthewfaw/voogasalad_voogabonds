@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Matthew Faw
+
 package utility.file_io;
 
 import java.io.File;
@@ -12,10 +15,15 @@ import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
+import engine.IObservable;
+import engine.IObserver;
 
 /**
  * The purpose of this class is to provide a means of detecting file changes.
@@ -64,7 +72,9 @@ import java.util.function.Consumer;
  *
  */
 public class FileChangeNotifier implements IFileChangeNotifier {
+	private static final String ERROR_PATH = "resources.Error";
 	
+	private ResourceBundle myErrorMessageResource;
 	private Path myPath;
 	private List<Kind<?>> myWatchEventKindsList;
 	private Consumer<File> myOnFileChangeDetectedMethod;
@@ -78,16 +88,17 @@ public class FileChangeNotifier implements IFileChangeNotifier {
 	 */
 	public FileChangeNotifier(String aPath, Kind<?>...aEventKinds) throws IllegalArgumentException
 	{
+		myErrorMessageResource = ResourceBundle.getBundle(ERROR_PATH);
 		File path = new File(aPath);
 		if (!path.isDirectory()) {
-			throw new IllegalArgumentException("The specified path must be a directory");
+			throw new IllegalArgumentException(MessageFormat.format(myErrorMessageResource.getString("NotADirectory"), myPath));
 		}
 		myPath = path.toPath();
 		
 		myWatchEventKindsList = new ArrayList<Kind<?>>(Arrays.asList(aEventKinds));
 		
-		myOnFileChangeDetectedMethod = (file -> System.out.println("Change detected in: "+file.getAbsolutePath()));
-		myOnErrorDetectedMethod = (errorMessage -> System.out.println(errorMessage));
+		myOnFileChangeDetectedMethod = (file -> {});
+		myOnErrorDetectedMethod = (errorMessage -> {});
 	}
 	
 	@Override
@@ -123,9 +134,9 @@ public class FileChangeNotifier implements IFileChangeNotifier {
 			pollForFileChange(service);
 
 		} catch(IOException ioe) {
-			myOnErrorDetectedMethod.accept("IOException: an I/O Exception occurred while traversing the file tree specified by directory: " + myPath);
+			myOnErrorDetectedMethod.accept(MessageFormat.format(myErrorMessageResource.getString("CannotTraverseFileTree"), myPath));
 		} catch(InterruptedException ie) {
-			myOnErrorDetectedMethod.accept("InterruptedException: The watch service was interrupted while waiting for the WatchKey");
+			myOnErrorDetectedMethod.accept(myErrorMessageResource.getString("WatchServiceInterrupted"));
 		}
 	}
 	
@@ -144,13 +155,7 @@ public class FileChangeNotifier implements IFileChangeNotifier {
 		while(true) {
 			WatchKey key = aWatchService.take();
 			
-			for(WatchEvent<?> watchEvent : key.pollEvents()) {
-				Kind<?> polledEventKind = watchEvent.kind();
-				
-				for (Kind<?> specifiedKind: myWatchEventKindsList) {
-					handleWatchEvent(specifiedKind, polledEventKind, key, watchEvent);
-				}
-			}
+			key.pollEvents().forEach(watchEvent -> handleWatchEvent(watchEvent.kind(), key, watchEvent));
 
 			if(!key.reset()) {
 				break; 
@@ -162,17 +167,16 @@ public class FileChangeNotifier implements IFileChangeNotifier {
 	 * A method which manages calling the user-specified file change method if 
 	 * the polled event is the same as the user-specified event
 	 * 
-	 * @param aUserSpecifiedKind
 	 * @param aPollEventKind
 	 * @param aKey
 	 * @param aWatchEvent
 	 */
-	private void handleWatchEvent(Kind<?> aUserSpecifiedKind, Kind<?> aPollEventKind, WatchKey aKey, WatchEvent<?> aWatchEvent)
+	private void handleWatchEvent(Kind<?> aPollEventKind, WatchKey aKey, WatchEvent<?> aWatchEvent)
 	{
 		Path absolutePath = getAbsolutePath(aKey, aWatchEvent);
-		if (aUserSpecifiedKind == aPollEventKind && absolutePath.toFile().isFile()) {
-			myOnFileChangeDetectedMethod.accept(absolutePath.toFile());
-		}
+		myWatchEventKindsList.stream()
+							 .filter(specifiedKind -> specifiedKind == aPollEventKind && absolutePath.toFile().isFile())
+							 .forEach(specifiedKind -> myOnFileChangeDetectedMethod.accept(absolutePath.toFile()));
 	}
 	
 	/**

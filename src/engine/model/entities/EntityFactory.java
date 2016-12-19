@@ -78,7 +78,7 @@ public class EntityFactory {
 			entity.addComponent(component);	
 		}
 		// Adding the entity to the Entity Manager
-		myEntityManager.addEntity(entity.getId(), entity);
+		myEntityManager.putEntity(entity.getId(), entity);
 
 		return entity;
 	}
