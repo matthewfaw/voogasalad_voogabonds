@@ -49,6 +49,7 @@ public class BackendController {
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String DEFAULT_SAVE_LOCATION = "src/savedgame/";
 	private static final String SAVED_FILE_ENDING = "_SAVED";
+	private static final String GAME_FOLDER = "SerializedFiles/";
 
 	//Utilities
 	private transient ResourceBundle myGameDataRelativePaths;
@@ -99,6 +100,19 @@ public class BackendController {
 		
 		//Must construct static before dynamic.
 		constructDynamicBackendObjects();
+	}
+	
+	public void refreshData()
+	{
+//		reconstructGameData(GAME_FOLDER + myGameName);
+		String aGameDataPath = GAME_FOLDER + myGameName;
+		myFileRetriever = new FileRetriever(aGameDataPath);
+		myGameName = aGameDataPath.substring(aGameDataPath.lastIndexOf('/')+1);
+//		constructData();
+		constructEntityDataStore();
+		constructPlayerData();
+		constructLevelData();
+//		constructMap();
 	}
 	
 	public void reconstructRouter(Router aRouter)

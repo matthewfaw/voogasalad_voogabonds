@@ -71,7 +71,6 @@ public class MapDisplay implements IObserver<TimelineController>, IGUIPiece {
     public void setMap(MapDataContainer aMapData){
        
         int cellSizeToUse = (int) Math.min((myRoot.getHeight()/aMapData.getNumYCells()), (myRoot.getHeight()/aMapData.getNumXCells()));
-
         myBackground = new MapGrid(aMapData.getNumXCells(), aMapData.getNumYCells(), cellSizeToUse, myAppController);
         
         for (TerrainData terrainData: aMapData.getTerrainList()) {

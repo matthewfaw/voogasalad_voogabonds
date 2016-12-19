@@ -212,7 +212,7 @@ public class ApplicationController {
 	}
 
 	public void onRefreshPressed() {
-		// TODO Auto-generated method stub
+		myBackendController.refreshData();
 	}
 	
 	/*
